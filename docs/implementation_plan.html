@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation Plan: CMS & PDH</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2, h3 { color: #ffffff; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+        h2 { border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 30px; }
+        .note, .warning, .tip { padding: 15px; border-radius: 5px; margin: 20px 0; background-color: #1e1e1e; border-left: 5px solid; }
+        .note { border-color: #2196F3; }
+        .warning { border-color: #ff9800; }
+        .tip { border-color: #4CAF50; }
+        .tag { font-weight: bold; }
+        .note .tag { color: #2196F3; }
+        .warning .tag { color: #ff9800; }
+        .tip .tag { color: #4CAF50; }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        ul { margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        hr { border: 0; height: 1px; background: #333; margin: 30px 0; }
+    </style>
+</head>
+<body>
+    <h1>Chiến lược Hợp nhất Hệ thống: PDH -> CMS</h1>
+    <p>Dự án này nhằm mục đích hợp nhất chức năng quản lý Dữ liệu Sản phẩm (PDH) vào hệ thống Quản trị Nội dung (CMS) để tạo thành một nền tảng <strong>Unified E-commerce Admin Platform</strong> duy nhất.</p>
+
+    <h2>1. Đánh giá Hiện trạng & Bài toán (Problem Statement)</h2>
+    <p>Dựa trên thông tin đầu vào và <strong>kết quả quét thực tế giao diện CMS (staging.tongdaiwifi.vn)</strong>:</p>
+    <ul>
+        <li><strong>CMS (Content Management System):</strong> Quản lý UI/UX. Quét hệ thống ghi nhận các menu: <em>Danh sách trang, Danh sách sections, Danh sách blocks, Danh sách menu, Danh sách banner, Danh mục câu hỏi, Danh sách câu hỏi</em>.</li>
+        <li><strong>PDH (Product Data Hub):</strong> Định hướng về Core Business Data (Quản lý Giá, Đặc tính, SKU, Gói bán, Khu vực bán).</li>
+    </ul>
+    <p><strong>Vấn đề hiện tại (Pain points):</strong></p>
+    <ol>
+        <li><strong>Về Nghiệp vụ:</strong> Việc tách rời gây đứt gãy luồng vận hành (Operation). Đội Content/Marketing khó khăn khi liên kết chính xác Gói bán/SKU và giá tiền từ PDH lên Landing Page trên CMS.</li>
+        <li><strong>Về UI/UX (Dựa trên kết quả Audit CMS):</strong>
+            <ul>
+                <li>Sử dụng template mặc định (Bootstrap v4/v5) với Top-nav (Thanh điều hướng ngang) rất lãng phí không gian dọc, không phù hợp để mở rộng thêm hàng tá menu của PDH sau này.</li>
+                <li>Giao diện thiếu phân cấp thị giác (Visual hierarchy), form nhập liệu khó dùng, chỉ có filter tìm kiếm cơ bản (Global search).</li>
+                <li>Layout được build kiểu "Dev làm", thiếu tính Workflow-centric.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>2. Giá trị của việc Hợp nhất (Value Proposition)</h2>
+    <p>Khi đưa PDH vào trong CMS, chúng ta sẽ giải quyết được bài toán <strong>Seamless Workflow</strong>:</p>
+    <ul>
+        <li><strong>Tích hợp sâu (Deep Integration):</strong> Tại màn hình quản lý Block của CMS, người dùng có thể <em>chọn (select)</em> trực tiếp một SKU/Gói bán vừa được tạo từ module PDH. Giá và đặc tính sẽ tự động sync ra UI mà không cần nhập tay.</li>
+        <li><strong>Single Sign-On (SSO):</strong> Nhân sự chỉ cần đăng nhập 1 lần vào 1 đường link duy nhất để setup toàn bộ chiến dịch bán hàng từ A-Z.</li>
+        <li><strong>Giảm chi phí bảo trì:</strong> Đội Dev chỉ cần duy trì 1 source code Admin duy nhất.</li>
+    </ul>
+
+    <hr>
+
+    <h2>3. Đề xuất Kiến trúc Thông tin Mới (Proposed Information Architecture)</h2>
+    <p>Thay vì nhét bừa tính năng của PDH vào CMS, chúng ta cần quy hoạch hệ thống CMS mới thành <strong>2 Phân hệ (Modules) độc lập nhưng liên kết dữ liệu với nhau</strong>:</p>
+
+    <h3>Phân hệ 1: Content & UI Management (Từ CMS cũ)</h3>
+    <p><em>Dành cho đội Content, Marketing, Web Master</em></p>
+    <ul>
+        <li><strong>Quản lý Cấu trúc Web:</strong> Menu điều hướng, Footer.</li>
+        <li><strong>Quản lý Trang (Pages):</strong> Landing Page, Trang chủ, Trang tĩnh.</li>
+        <li><strong>Quản lý Khối giao diện (Sections & Blocks):</strong> Banners, Khối tính năng.</li>
+        <li><strong>Quản lý Nội dung:</strong> Q&A, Tin tức, Bài viết.</li>
+    </ul>
+
+    <h3>Phân hệ 2: Product Hub (Từ PDH chuyển sang)</h3>
+    <p><em>Dành cho đội Product, Sales, Điều hành kinh doanh để cấu hình sản phẩm bán</em></p>
+    <ul>
+        <li><strong>Danh mục:</strong> Quản lý danh mục sản phẩm tổng.</li>
+        <li><strong>Đặc tính & Nhóm đặc tính:</strong> Cấu hình các thông số kỹ thuật (vd: Tốc độ download, Tốc độ khung hình).</li>
+        <li><strong>Quản lý SKUs (Tích hợp 3rd Party):</strong> Hiển thị danh sách các mã SKU (vd: FTTH-Super80). <strong>Lưu ý:</strong> Dữ liệu này được lấy (Sync) từ hệ thống bên thứ 3, vì vậy trên CMS mới module này chỉ cấu hình hiển thị (Read-only hoặc mapping) chứ không tạo mới SKU vật lý.</li>
+        <li><strong>Nhóm SKU:</strong> Gom nhóm các thiết bị/dịch vụ (vd: Nhóm bộ accesspoint, Nhóm dịch vụ cloud).</li>
+        <li><strong>Quản lý Gói bán:</strong> Lắp ghép các SKU thành gói cước hoàn chỉnh, thêm các thông tin như RouteName, Kênh bán.</li>
+        <li><strong>Cấu hình giá bán:</strong> Thiết lập giá bán áp dụng theo Gói, theo Kênh bán và theo Khu vực.</li>
+        <li><strong>Bảng quản lý phí:</strong> Cấu hình các loại phí đi kèm (Phí lắp đặt, phí hòa mạng...).</li>
+        <li><strong>Khu vực bán:</strong> Quản lý danh sách các tỉnh thành/quận huyện áp dụng chính sách.</li>
+    </ul>
+
+    <div class="note">
+        <p><span class="tag">[!NOTE] Phát hiện quan trọng về sự phân mảnh (Fragmentation) dựa trên 2 ảnh bổ sung:</span></p>
+        <p>Menu <strong>"Quản lý nội dung"</strong> của PDH hiện tại đang chứa 2 chức năng bị đặt sai vị trí (Misplaced):</p>
+        <ol>
+            <li><strong>Nội dung gói bán (Marketing Content cho Package):</strong> Form này cho phép nhập <em>Mô tả ngắn/dài (WYSIWYG), Hình ảnh Banner, Đặc quyền</em> cho một gói cước. Đúng ra, những thứ mang tính chất "trang trí hiển thị" này phải do hệ thống CMS đảm nhận. Việc nhồi nhét nó vào PDH là nguyên nhân gốc rễ gây ra sự rời rạc.</li>
+            <li><strong>Đơn hàng tạm (Order Management):</strong> Chứa danh sách các đơn hàng đổ về từ trang tongdaiwifi.vn. Việc đặt quản lý Đơn hàng vào thư mục "Nội dung" là một lỗi nghiêm trọng về Information Architecture.</li>
+        </ol>
+        <p><strong>Giải pháp khi Hợp nhất:</strong></p>
+        <ul>
+            <li>Toàn bộ tính năng nhập <em>Mô tả/Banner/Đặc quyền</em> sẽ được gỡ bỏ khỏi PDH, và chuyển sang <strong>Phân hệ CMS (Blocks/Sections)</strong>. Khi đó, người làm Content chỉ cần gọi [Mã Gói Cước] ra, rồi dùng các Block của CMS để tùy biến hiển thị.</li>
+            <li>Tính năng <strong>Đơn hàng tạm</strong> sẽ được tách ra thành một <strong>Phân hệ thứ 3: Order Management (Quản lý Đơn hàng)</strong> nằm riêng biệt trên thanh menu ngang cấp với CMS và PDH.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <h2>4. User Review Required (Cần Chốt Về Mặt Hệ Thống)</h2>
+    <div class="warning">
+        <p><span class="tag">[!WARNING] Để mình có thể viết URD chi tiết và vẽ luồng tích hợp, bạn cần clarify (làm rõ) với team Dev/Tech Lead các vấn đề sau:</span></p>
+    </div>
+    <ol>
+        <li><strong>Dữ liệu (Database):</strong> Hiện tại CMS và PDH có đang dùng chung một Database không? Hay là 2 DB riêng biệt (gọi qua API)? Nếu riêng biệt, khi gộp UI trên Frontend thì Backend vẫn tách đôi hay cũng đập đi xây lại làm 1?</li>
+        <li><strong>Phân quyền (RBAC - Role Based Access Control):</strong> Khi gộp vào 1 trang, chắc chắn đội cấu hình Giá (Business) không được phép bấm nhầm vào sửa Giao diện (Web Master), và ngược lại. Chúng ta có cần làm lại Module Phân Quyền (Quản lý User & Role) cho hệ thống mới này không?</li>
+        <li><strong>Mức độ tích hợp:</strong> Trong Phase 1, bạn chỉ muốn đính kèm các menu của PDH sang CMS (gộp về mặt UI để tiện login), hay muốn tích hợp sâu dữ liệu (vd: Tạo Block ở CMS có thể query thẳng dữ liệu Giá từ PDH)?</li>
+    </ol>
+
+    <h2>5. UI/UX Revamp Strategy (Chiến lược tái thiết kế giao diện)</h2>
+    <p>Tình trạng Dev dựng UI "theo cảm tính" làm cho luồng thao tác bị đứt đoạn là rất phổ biến ở các công cụ nội bộ (Internal Tools). Khi đập đi xây lại, chúng ta sẽ áp dụng các nguyên tắc UX sau để nâng cấp nó thành một <strong>Premium Admin Dashboard</strong>:</p>
+    <ul>
+        <li><strong>Workflow-centric Design (Thiết kế theo luồng công việc):</strong> Không bắt user bấm qua lại quá nhiều tab. Các tác vụ liên quan như "Sửa giá" và "Hiển thị lên web" sẽ được đặt cạnh nhau (Split-view hoặc Drawer).</li>
+        <li><strong>Progressive Disclosure (Hiển thị lũy tiến):</strong> Ẩn các trường cấu hình nâng cao (vd: Cấu hình SEO, ID hệ thống) vào các Accordion, chỉ show những trường quan trọng nhất để Form không bị ngợp.</li>
+        <li><strong>Nhất quán Design System:</strong> Áp dụng bộ UI Components chuẩn mực để thống nhất toàn bộ Bảng biểu (Table), Form, Nút bấm.</li>
+    </ul>
+
+    <div class="tip">
+        <p><span class="tag">[!TIP]</span> Mình vừa tạo xong một <strong>bản vẽ phác thảo (Mockup Concept)</strong> cho giao diện hợp nhất này với phong cách Dark Mode hiện đại, trực quan. Bạn có thể xem trực tiếp hình ảnh bên dưới để hình dung!</p>
+    </div>
+    
+    <img src="images/mockup.png" alt="Unified Admin Dashboard Concept Mockup">
+
+    <h2>6. Next Steps (Kế hoạch hành động)</h2>
+    <ol>
+        <li>Đợi bạn Confirm các câu hỏi trên.</li>
+        <li>Mình sẽ tạo <strong>Sơ đồ luồng dữ liệu (Data Flow)</strong> giữa Block của CMS và Gói bán của PDH.</li>
+        <li>Viết User Story / URD cho module Phân quyền mới (cực kỳ quan trọng khi gộp app).</li>
+    </ol>
+</body>
+</html>
