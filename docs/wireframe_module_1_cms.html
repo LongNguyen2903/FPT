@@ -863,7 +863,7 @@
 
     <!-- Sidebar -->
     <div class="sidebar glass">
-        <div class="logo">FPT ECP-STAG</div>
+        <div class="logo">FPT CMS-STAG</div>
         <div class="menu">
 
             <div class="menu-item" onclick="switchModule('dashboards', 'primary')" id="menu-dashboards">📊 Dashboards
@@ -894,8 +894,10 @@
             <div class="menu-item" onclick="switchModule('faq', 'primary')" id="menu-faq">Quản lý Bài viết & FAQ</div>
             <div class="menu-item" onclick="switchModule('cms-package', 'primary')" id="menu-cms-package">Marketing Gói
                 Bán</div>
-            <div class="menu-item" onclick="switchModule('cms-display', 'primary')" id="menu-cms-display">Cài đặt Hiển thị</div>
-            <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup</div>
+            <div class="menu-item" onclick="switchModule('cms-display', 'primary')" id="menu-cms-display">Cài đặt Hiển
+                thị</div>
+            <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup
+            </div>
 
             <div class="menu-category" style="color: #a855f7;">HỢP ĐỒNG & ĐƠN HÀNG</div>
             <div class="menu-item order" onclick="switchModule('ord-draft', 'purple')" id="menu-ord-draft">Đơn hàng tạm
@@ -1010,7 +1012,8 @@
                                     <td>Đặc tính gói bán</td>
                                     <td><span class="badge" style="background:#333; color:#ccc;">Tốc độ download</span>
                                         <span class="badge" style="background:#333; color:#ccc;">Tốc độ upload</span>
-                                        <span style="font-size:12px; color:#aaa;">+ 12 more</span></td>
+                                        <span style="font-size:12px; color:#aaa;">+ 12 more</span>
+                                    </td>
                                     <td>13/04/2026 16:47</td>
                                     <td>Đỗ Liên Thảo</td>
                                     <td><button class="btn btn-secondary btn-sm">👁</button></td>
@@ -2945,74 +2948,99 @@
                     <!-- LDP List View -->
                     <div id="ldp-list">
                         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
-                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm tên trang / URL..."></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select">
-                                <option>Tất cả template</option>
-                                <option>LDP Internet</option>
-                                <option>LDP SA</option>
-                            </select></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select">
-                                <option>Tất cả trạng thái</option>
-                                <option>Đang chạy</option>
-                                <option>Hết hạn</option>
-                                <option>Nháp</option>
-                            </select></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select">
-                                <option>Tất cả mục tiêu</option>
-                                <option>Lead Gen</option>
-                                <option>Bán gói cước</option>
-                                <option>Sự kiện / Branding</option>
-                            </select></div>
+                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text"
+                                    class="form-input" placeholder="Tìm tên trang / URL..."></div>
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select
+                                    class="form-select">
+                                    <option>Tất cả template</option>
+                                    <option>LDP Internet</option>
+                                    <option>LDP SA</option>
+                                </select></div>
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select
+                                    class="form-select">
+                                    <option>Tất cả trạng thái</option>
+                                    <option>Đang chạy</option>
+                                    <option>Hết hạn</option>
+                                    <option>Nháp</option>
+                                </select></div>
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select
+                                    class="form-select">
+                                    <option>Tất cả mục tiêu</option>
+                                    <option>Lead Gen</option>
+                                    <option>Bán gói cước</option>
+                                    <option>Sự kiện / Branding</option>
+                                </select></div>
                             <button class="btn btn-primary" style="flex-shrink:0;">Tìm Kiếm</button>
                         </div>
                         <div style="overflow-x:auto;">
-                        <table class="data-table" style="min-width:960px;">
-                            <thead>
-                                <tr>
-                                    <th>Tên Trang (Campaign)</th>
-                                    <th>Template</th>
-                                    <th>URL</th>
-                                    <th>Thời gian hiệu lực</th>
-                                    <th>Lần sửa cuối</th>
-                                    <th>Trạng thái</th>
-                                    <th style="text-align:center; white-space:nowrap;">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Khuyến mãi Internet Tháng 5</strong>
-                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Lead Gen</div>
-                                    </td>
-                                    <td><span style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP Internet</span></td>
-                                    <td><a href="#" style="color:var(--primary);">/km-internet-t5</a></td>
-                                    <td style="white-space:nowrap;">01/05 – 31/05/26</td>
-                                    <td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">18/05/26 — Hà Linh</td>
-                                    <td><span class="badge" style="background:rgba(16,185,129,0.2); color:var(--success);">Đang chạy</span></td>
-                                    <td style="text-align:center; white-space:nowrap;">
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('ldp-form').style.display='block'; document.getElementById('ldp-list').style.display='none'; ldpStep(1);">✏ Sửa</button>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Nhân bản LDP này">⎘</button>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Xem trước">👁</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Sự kiện FPT Play 2026</strong>
-                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Sự kiện / Branding</div>
-                                    </td>
-                                    <td><span style="background:rgba(109,40,217,0.15); color:#a78bfa; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP SA</span></td>
-                                    <td><a href="#" style="color:var(--primary);">/fpt-play-2026</a></td>
-                                    <td style="white-space:nowrap;">01/01 – 31/01/26</td>
-                                    <td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">28/01/26 — Minh Tú</td>
-                                    <td><span class="badge" style="background:rgba(239,68,68,0.2); color:var(--danger);">Hết hạn</span></td>
-                                    <td style="text-align:center; white-space:nowrap;">
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">✏ Sửa</button>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Nhân bản LDP này">⎘</button>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Xem trước">👁</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <table class="data-table" style="min-width:960px;">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Trang (Campaign)</th>
+                                        <th>Template</th>
+                                        <th>URL</th>
+                                        <th>Thời gian hiệu lực</th>
+                                        <th>Lần sửa cuối</th>
+                                        <th>Trạng thái</th>
+                                        <th style="text-align:center; white-space:nowrap;">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <strong>Khuyến mãi Internet Tháng 5</strong>
+                                            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Lead
+                                                Gen</div>
+                                        </td>
+                                        <td><span
+                                                style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP
+                                                Internet</span></td>
+                                        <td><a href="#" style="color:var(--primary);">/km-internet-t5</a></td>
+                                        <td style="white-space:nowrap;">01/05 – 31/05/26</td>
+                                        <td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">
+                                            18/05/26 — Hà Linh</td>
+                                        <td><span class="badge"
+                                                style="background:rgba(16,185,129,0.2); color:var(--success);">Đang
+                                                chạy</span></td>
+                                        <td style="text-align:center; white-space:nowrap;">
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary);"
+                                                onclick="document.getElementById('ldp-form').style.display='block'; document.getElementById('ldp-list').style.display='none'; ldpStep(1);">✏
+                                                Sửa</button>
+                                            <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);"
+                                                title="Nhân bản LDP này">⎘</button>
+                                            <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);"
+                                                title="Xem trước">👁</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <strong>Sự kiện FPT Play 2026</strong>
+                                            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Sự
+                                                kiện / Branding</div>
+                                        </td>
+                                        <td><span
+                                                style="background:rgba(109,40,217,0.15); color:#a78bfa; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP
+                                                SA</span></td>
+                                        <td><a href="#" style="color:var(--primary);">/fpt-play-2026</a></td>
+                                        <td style="white-space:nowrap;">01/01 – 31/01/26</td>
+                                        <td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">
+                                            28/01/26 — Minh Tú</td>
+                                        <td><span class="badge"
+                                                style="background:rgba(239,68,68,0.2); color:var(--danger);">Hết
+                                                hạn</span></td>
+                                        <td style="text-align:center; white-space:nowrap;">
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary);">✏
+                                                Sửa</button>
+                                            <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);"
+                                                title="Nhân bản LDP này">⎘</button>
+                                            <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);"
+                                                title="Xem trước">👁</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -3020,37 +3048,58 @@
                     <div id="ldp-form" style="display:none; margin-top:20px;">
 
                         <!-- Step indicator -->
-                        <div style="display:flex; align-items:center; margin-bottom:28px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:10px; padding:14px 20px;">
-                            <div id="ldp-stepind-1" onclick="ldpStep(1)" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <div style="width:28px; height:28px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff;">1</div>
-                                <span style="font-size:13px; font-weight:600; color:#fff; white-space:nowrap;">Thông tin trang</span>
+                        <div
+                            style="display:flex; align-items:center; margin-bottom:28px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:10px; padding:14px 20px;">
+                            <div id="ldp-stepind-1" onclick="ldpStep(1)"
+                                style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <div
+                                    style="width:28px; height:28px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff;">
+                                    1</div>
+                                <span style="font-size:13px; font-weight:600; color:#fff; white-space:nowrap;">Thông tin
+                                    trang</span>
                             </div>
                             <div style="flex:1; height:1px; background:rgba(255,255,255,0.15); margin:0 16px;"></div>
-                            <div id="ldp-stepind-2" onclick="ldpStep(2)" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                                <div style="width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--text-muted);">2</div>
-                                <span style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Chọn Template</span>
+                            <div id="ldp-stepind-2" onclick="ldpStep(2)"
+                                style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <div
+                                    style="width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--text-muted);">
+                                    2</div>
+                                <span
+                                    style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Chọn
+                                    Template</span>
                             </div>
                             <div style="flex:1; height:1px; background:rgba(255,255,255,0.15); margin:0 16px;"></div>
                             <div id="ldp-stepind-3" style="display:flex; align-items:center; gap:8px;">
-                                <div style="width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--text-muted);">3</div>
-                                <span style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Nội dung sections</span>
+                                <div
+                                    style="width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--text-muted);">
+                                    3</div>
+                                <span
+                                    style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Nội
+                                    dung sections</span>
                             </div>
                         </div>
 
                         <!-- STEP 1: Metadata -->
                         <div id="ldp-step-1">
                             <div class="form-section">
-                                <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">Thông tin cơ bản</div>
-                                <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                                <div
+                                    style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">
+                                    Thông tin cơ bản</div>
+                                <div class="form-grid"
+                                    style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
                                     <div class="form-group">
                                         <label>Tên chiến dịch <span style="color:var(--danger)">*</span></label>
-                                        <input type="text" id="ldp-campaign-name" class="form-input" value="Khuyến mãi Internet Tháng 5">
+                                        <input type="text" id="ldp-campaign-name" class="form-input"
+                                            value="Khuyến mãi Internet Tháng 5">
                                     </div>
                                     <div class="form-group">
                                         <label>URL Slug <span style="color:var(--danger)">*</span></label>
                                         <div style="display:flex; align-items:center;">
-                                            <span style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); border-right:none; padding:8px 12px; color:var(--text-muted); border-radius:8px 0 0 8px; font-size:13px; white-space:nowrap;">fpt.vn/</span>
-                                            <input type="text" id="ldp-url-slug" class="form-input" value="km-internet-t5" style="border-radius:0 8px 8px 0; flex:1;" oninput="updateLdpSeoPreview(); updateLdpUtmPreview();">
+                                            <span
+                                                style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); border-right:none; padding:8px 12px; color:var(--text-muted); border-radius:8px 0 0 8px; font-size:13px; white-space:nowrap;">fpt.vn/</span>
+                                            <input type="text" id="ldp-url-slug" class="form-input"
+                                                value="km-internet-t5" style="border-radius:0 8px 8px 0; flex:1;"
+                                                oninput="updateLdpSeoPreview(); updateLdpUtmPreview();">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -3074,59 +3123,97 @@
                                     </div>
                                 </div>
 
-                                <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 14px;">SEO</div>
-                                <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                                <div
+                                    style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 14px;">
+                                    SEO</div>
+                                <div class="form-grid"
+                                    style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
                                     <div class="form-group">
                                         <label>Meta Title</label>
-                                        <input type="text" id="ldp-meta-title" class="form-input" value="Khuyến mãi Internet Tháng 5 - FPT Telecom" placeholder="Tiêu đề hiển thị trên Google (60 ký tự)" oninput="updateLdpSeoPreview()">
+                                        <input type="text" id="ldp-meta-title" class="form-input"
+                                            value="Khuyến mãi Internet Tháng 5 - FPT Telecom"
+                                            placeholder="Tiêu đề hiển thị trên Google (60 ký tự)"
+                                            oninput="updateLdpSeoPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>OG Image — ảnh share mạng xã hội</label>
-                                        <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
-                                            <input type="text" class="form-input media-url" placeholder="URL ảnh 1200×630px" style="flex:1;">
-                                            <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
-                                            <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
-                                            <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                                        <div class="media-upload-wrapper"
+                                            style="display:flex; gap:8px; align-items:center; width:100%;">
+                                            <input type="text" class="form-input media-url"
+                                                placeholder="URL ảnh 1200×630px" style="flex:1;">
+                                            <input type="file" class="media-file-input" style="display:none;"
+                                                accept="image/*" onchange="ldpHandleFileUpload(this)">
+                                            <button class="btn btn-secondary btn-sm"
+                                                onclick="this.previousElementSibling.click()">Upload</button>
+                                            <div class="media-preview"
+                                                style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
                                                 <img src="" style="width:100%; height:100%; object-fit:cover;">
-                                                <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                                                <span
+                                                    style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                                                    onclick="ldpRemoveUploadedFile(this)">✕</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group" style="grid-column:1/-1;">
                                         <label>Meta Description</label>
-                                        <textarea id="ldp-meta-desc" class="form-textarea" rows="2" placeholder="Mô tả ngắn hiển thị trên kết quả tìm kiếm (150–160 ký tự)" oninput="updateLdpSeoPreview()">Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu khỏe.</textarea>
+                                        <textarea id="ldp-meta-desc" class="form-textarea" rows="2"
+                                            placeholder="Mô tả ngắn hiển thị trên kết quả tìm kiếm (150–160 ký tự)"
+                                            oninput="updateLdpSeoPreview()">Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu khỏe.</textarea>
                                     </div>
                                     <div class="form-group" style="grid-column:1/-1; margin-top:8px;">
-                                        <label style="color:var(--text-muted); font-size:12px; font-weight:600; margin-bottom:8px; display:block;">XEM TRƯỚC HIỂN THỊ TÌM KIẾM GOOGLE (SEO SNIPPET MOCKUP)</label>
-                                        <div style="background:#1a1f2c; border:1px solid var(--border-glass); border-radius:8px; padding:16px; font-family:arial,sans-serif; max-width:600px;">
-                                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px; font-size:12px; color:#bdc1c6;">
-                                                <div style="background:#303134; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:#fff;">F</div>
+                                        <label
+                                            style="color:var(--text-muted); font-size:12px; font-weight:600; margin-bottom:8px; display:block;">XEM
+                                            TRƯỚC HIỂN THỊ TÌM KIẾM GOOGLE (SEO SNIPPET MOCKUP)</label>
+                                        <div
+                                            style="background:#1a1f2c; border:1px solid var(--border-glass); border-radius:8px; padding:16px; font-family:arial,sans-serif; max-width:600px;">
+                                            <div
+                                                style="display:flex; align-items:center; gap:8px; margin-bottom:4px; font-size:12px; color:#bdc1c6;">
+                                                <div
+                                                    style="background:#303134; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:#fff;">
+                                                    F</div>
                                                 <div>
-                                                    <span style="color:#e8eaed; display:block; font-weight:normal; line-height:16px;">FPT Telecom</span>
-                                                    <span style="color:#9aa0a6; display:block; font-size:11px; line-height:12px;">https://fpt.vn/<span id="ldp-seo-prev-slug">km-internet-t5</span></span>
+                                                    <span
+                                                        style="color:#e8eaed; display:block; font-weight:normal; line-height:16px;">FPT
+                                                        Telecom</span>
+                                                    <span
+                                                        style="color:#9aa0a6; display:block; font-size:11px; line-height:12px;">https://fpt.vn/<span
+                                                            id="ldp-seo-prev-slug">km-internet-t5</span></span>
                                                 </div>
                                             </div>
-                                            <div id="ldp-seo-prev-title" style="color:#8ab4f8; font-size:20px; line-height:26px; font-weight:normal; margin-bottom:4px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; cursor:pointer; text-decoration:none;">Khuyến mãi Internet Tháng 5 - FPT Telecom</div>
-                                            <div id="ldp-seo-prev-desc" style="color:#bdc1c6; font-size:14px; line-height:22px; word-wrap:break-word;">Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu khỏe.</div>
+                                            <div id="ldp-seo-prev-title"
+                                                style="color:#8ab4f8; font-size:20px; line-height:26px; font-weight:normal; margin-bottom:4px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; cursor:pointer; text-decoration:none;">
+                                                Khuyến mãi Internet Tháng 5 - FPT Telecom</div>
+                                            <div id="ldp-seo-prev-desc"
+                                                style="color:#bdc1c6; font-size:14px; line-height:22px; word-wrap:break-word;">
+                                                Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp
+                                                dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu
+                                                khỏe.</div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 14px;">Tracking & UTM</div>
-                                <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:8px;">
+                                <div
+                                    style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 14px;">
+                                    Tracking & UTM</div>
+                                <div class="form-grid"
+                                    style="grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:8px;">
                                     <div class="form-group">
                                         <label>UTM Source</label>
-                                        <input type="text" id="ldp-utm-source" class="form-input" value="facebook" placeholder="facebook / google / zalo" oninput="updateLdpUtmPreview()">
+                                        <input type="text" id="ldp-utm-source" class="form-input" value="facebook"
+                                            placeholder="facebook / google / zalo" oninput="updateLdpUtmPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>UTM Medium</label>
-                                        <input type="text" id="ldp-utm-medium" class="form-input" value="cpc" placeholder="cpc / banner / email" oninput="updateLdpUtmPreview()">
+                                        <input type="text" id="ldp-utm-medium" class="form-input" value="cpc"
+                                            placeholder="cpc / banner / email" oninput="updateLdpUtmPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>UTM Campaign</label>
                                         <div style="display:flex; gap:6px;">
-                                            <input type="text" id="ldp-utm-campaign" class="form-input" value="km-internet-t5" oninput="updateLdpUtmPreview()" style="flex:1;">
-                                            <button class="btn btn-secondary btn-sm" onclick="ldpGenerateUtm()" title="Tự động tạo UTM từ thông tin trang">Tạo nhanh</button>
+                                            <input type="text" id="ldp-utm-campaign" class="form-input"
+                                                value="km-internet-t5" oninput="updateLdpUtmPreview()" style="flex:1;">
+                                            <button class="btn btn-secondary btn-sm" onclick="ldpGenerateUtm()"
+                                                title="Tự động tạo UTM từ thông tin trang">Tạo nhanh</button>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -3138,13 +3225,18 @@
                                         <input type="text" class="form-input" placeholder="ldp_view">
                                     </div>
                                 </div>
-                                <div id="ldp-utm-preview-box" style="background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all;">
-                                    🔗 <strong style="color:var(--primary);">UTM Preview:</strong> <span id="ldp-utm-preview-text">fpt.vn/km-internet-t5?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
+                                <div id="ldp-utm-preview-box"
+                                    style="background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all;">
+                                    🔗 <strong style="color:var(--primary);">UTM Preview:</strong> <span
+                                        id="ldp-utm-preview-text">fpt.vn/km-internet-t5?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
                                 </div>
 
-                                <div style="display:flex; justify-content:flex-end; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
-                                    <button class="btn btn-secondary" onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Hủy</button>
-                                    <button class="btn btn-primary" onclick="ldpStep(2);">Tiếp theo: Chọn Template →</button>
+                                <div
+                                    style="display:flex; justify-content:flex-end; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
+                                    <button class="btn btn-secondary"
+                                        onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Hủy</button>
+                                    <button class="btn btn-primary" onclick="ldpStep(2);">Tiếp theo: Chọn Template
+                                        →</button>
                                 </div>
                             </div>
                         </div>
@@ -3152,57 +3244,101 @@
                         <!-- STEP 2: Template selection -->
                         <div id="ldp-step-2" style="display:none;">
                             <div class="form-section">
-                                <p style="color:var(--text-muted); font-size:14px; margin-top:0; margin-bottom:20px;">Dev đã tạo sẵn cấu trúc template — bạn chỉ cần chỉnh nội dung từng section ở bước tiếp theo.</p>
-                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:24px;">
+                                <p style="color:var(--text-muted); font-size:14px; margin-top:0; margin-bottom:20px;">
+                                    Dev đã tạo sẵn cấu trúc template — bạn chỉ cần chỉnh nội dung từng section ở bước
+                                    tiếp theo.</p>
+                                <div
+                                    style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:24px;">
 
                                     <!-- Template Internet -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff8c42'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                                        <div style="background:linear-gradient(135deg,#c45000,#ff8c42); padding:20px; text-align:center;">
+                                    <div style="border:1px solid var(--border-glass); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s;"
+                                        onmouseover="this.style.borderColor='#ff8c42'; this.style.transform='translateY(-3px)';"
+                                        onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+                                        <div
+                                            style="background:linear-gradient(135deg,#c45000,#ff8c42); padding:20px; text-align:center;">
                                             <div style="font-size:32px; margin-bottom:8px;">🌐</div>
                                             <div style="font-weight:700; color:#fff; font-size:15px;">LDP Internet</div>
                                         </div>
                                         <div style="padding:16px;">
-                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">6 sections · Lead Gen + Giới thiệu gói</div>
-                                            <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:14px;">
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">① Hero Banner + Form đăng ký</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">② Thanh số liệu nổi bật</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">③ Danh sách gói Internet</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">④ Video Review</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">⑤ Đánh giá khách hàng</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">⑥ Form đăng ký (cuối trang)</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">6
+                                                sections · Lead Gen + Giới thiệu gói</div>
+                                            <div
+                                                style="display:flex; flex-direction:column; gap:4px; margin-bottom:14px;">
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ① Hero Banner + Form đăng ký</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ② Thanh số liệu nổi bật</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ③ Danh sách gói Internet</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ④ Video Review</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ⑤ Đánh giá khách hàng</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ⑥ Form đăng ký (cuối trang)</div>
                                             </div>
-                                            <button class="btn btn-primary" style="width:100%;" onclick="ldpChooseTemplate('internet')">Chọn template này</button>
+                                            <button class="btn btn-primary" style="width:100%;"
+                                                onclick="ldpChooseTemplate('internet')">Chọn template này</button>
                                         </div>
                                     </div>
 
                                     <!-- Template SA -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.borderColor='#a78bfa'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-                                        <div style="background:linear-gradient(135deg,#4c1d95,#7c3aed); padding:20px; text-align:center;">
+                                    <div style="border:1px solid var(--border-glass); border-radius:12px; overflow:hidden; cursor:pointer; transition:all 0.2s;"
+                                        onmouseover="this.style.borderColor='#a78bfa'; this.style.transform='translateY(-3px)';"
+                                        onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
+                                        <div
+                                            style="background:linear-gradient(135deg,#4c1d95,#7c3aed); padding:20px; text-align:center;">
                                             <div style="font-size:32px; margin-bottom:8px;">📺</div>
-                                            <div style="font-weight:700; color:#fff; font-size:15px;">LDP SA — FPT Play</div>
+                                            <div style="font-weight:700; color:#fff; font-size:15px;">LDP SA — FPT Play
+                                            </div>
                                         </div>
                                         <div style="padding:16px;">
-                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">5 sections · Dịch vụ giải trí</div>
-                                            <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:14px;">
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">① Hero Banner khuyến mãi</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">② Highlight tính năng nổi bật</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">③ Danh mục nội dung giải trí</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">④ Bảng giá & Đăng ký</div>
-                                                <div style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">⑤ Footer CTA</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">5
+                                                sections · Dịch vụ giải trí</div>
+                                            <div
+                                                style="display:flex; flex-direction:column; gap:4px; margin-bottom:14px;">
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ① Hero Banner khuyến mãi</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ② Highlight tính năng nổi bật</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ③ Danh mục nội dung giải trí</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ④ Bảng giá & Đăng ký</div>
+                                                <div
+                                                    style="font-size:12px; padding:4px 8px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
+                                                    ⑤ Footer CTA</div>
                                             </div>
-                                            <button class="btn btn-primary" style="width:100%; background:linear-gradient(135deg,#6d28d9,#4c1d95); border-color:#6d28d9;" onclick="ldpChooseTemplate('sa')">Chọn template này</button>
+                                            <button class="btn btn-primary"
+                                                style="width:100%; background:linear-gradient(135deg,#6d28d9,#4c1d95); border-color:#6d28d9;"
+                                                onclick="ldpChooseTemplate('sa')">Chọn template này</button>
                                         </div>
                                     </div>
 
                                     <!-- Template mới (locked) -->
-                                    <div style="border:1px dashed rgba(255,255,255,0.15); border-radius:12px; overflow:hidden; opacity:0.45;">
-                                        <div style="background:rgba(255,255,255,0.03); padding:20px; text-align:center;">
+                                    <div
+                                        style="border:1px dashed rgba(255,255,255,0.15); border-radius:12px; overflow:hidden; opacity:0.45;">
+                                        <div
+                                            style="background:rgba(255,255,255,0.03); padding:20px; text-align:center;">
                                             <div style="font-size:32px; margin-bottom:8px;">➕</div>
-                                            <div style="font-weight:600; color:var(--text-muted); font-size:15px;">Template mới</div>
+                                            <div style="font-weight:600; color:var(--text-muted); font-size:15px;">
+                                                Template mới</div>
                                         </div>
                                         <div style="padding:16px;">
-                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">Yêu cầu Dev tạo thêm template</div>
-                                            <button class="btn btn-secondary" style="width:100%;" disabled>Liên hệ Dev</button>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
+                                                Yêu cầu Dev tạo thêm template</div>
+                                            <button class="btn btn-secondary" style="width:100%;" disabled>Liên hệ
+                                                Dev</button>
                                         </div>
                                     </div>
                                 </div>
@@ -3213,108 +3349,226 @@
                         <!-- STEP 3: Section canvas -->
                         <div id="ldp-step-3" style="display:none;">
                             <div class="form-section">
-                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                                <div
+                                    style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
                                     <div style="display:flex; align-items:center; gap:10px;">
                                         <span style="font-size:12px; color:var(--text-muted);">Template:</span>
-                                        <span id="ldp-tpl-name" style="font-weight:600; color:#ff8c42;">LDP Internet (6 sections)</span>
-                                        <button class="btn btn-secondary btn-sm" style="font-size:11px; color:var(--text-muted);" onclick="ldpStep(2);">Đổi template</button>
+                                        <span id="ldp-tpl-name" style="font-weight:600; color:#ff8c42;">LDP Internet (6
+                                            sections)</span>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="font-size:11px; color:var(--text-muted);" onclick="ldpStep(2);">Đổi
+                                            template</button>
                                     </div>
-                                    <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">👁 Preview LDP</button>
+                                    <button class="btn btn-secondary btn-sm"
+                                        style="color:var(--primary); border-color:var(--primary);">👁 Preview
+                                        LDP</button>
                                 </div>
-                                <p style="font-size:13px; color:var(--text-muted); margin-top:0; margin-bottom:16px;">Nhấn <strong style="color:#fff;">✏ Sửa nội dung</strong> để chỉnh text/ảnh/link từng section. Toggle hiển thị để bật/tắt section trên trang.</p>
+                                <p style="font-size:13px; color:var(--text-muted); margin-top:0; margin-bottom:16px;">
+                                    Nhấn <strong style="color:#fff;">✏ Sửa nội dung</strong> để chỉnh text/ảnh/link từng
+                                    section. Toggle hiển thị để bật/tắt section trên trang.</p>
 
                                 <!-- Internet sections -->
                                 <div class="ldp-sections-list" data-tpl="internet">
                                     <div style="display:flex; flex-direction:column; gap:8px;">
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(255,107,0,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🖼</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(255,107,0,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                🖼</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">① Hero Banner + Form đăng ký</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Background, Headline, Subheadline, CTA button, Tiêu đề form, Nút Submit</div>
+                                                <div style="font-weight:600; font-size:14px;">① Hero Banner + Form đăng
+                                                    ký</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Background, Headline, Subheadline, CTA button, Tiêu đề form, Nút
+                                                    Submit</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-hero')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-hero')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📊</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                📊</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">② Thanh số liệu nổi bật</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">6 chỉ số: icon + text (tốc độ, số khách hàng, đánh giá sao…)</div>
+                                                <div style="font-weight:600; font-size:14px;">② Thanh số liệu nổi bật
+                                                </div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">6
+                                                    chỉ số: icon + text (tốc độ, số khách hàng, đánh giá sao…)</div>
                                             </div>
-                                            <span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Stats</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-stats')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Stats</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-stats')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📦</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                📦</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">③ Danh sách gói Internet</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tiêu đề section, các card gói: tên, giá, tốc độ, specs, nút đăng ký</div>
+                                                <div style="font-weight:600; font-size:14px;">③ Danh sách gói Internet
+                                                </div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Tiêu đề section, các card gói: tên, giá, tốc độ, specs, nút đăng ký
+                                                </div>
                                             </div>
-                                            <span style="background:rgba(245,158,11,0.12); color:var(--warning); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Products</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-products')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(245,158,11,0.12); color:var(--warning); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Products</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-products')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎬</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                🎬</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">④ Video Review FPT Internet</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tiêu đề section, danh sách video (thumbnail + link YouTube)</div>
+                                                <div style="font-weight:600; font-size:14px;">④ Video Review FPT
+                                                    Internet</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Tiêu đề section, danh sách video (thumbnail + link YouTube)</div>
                                             </div>
-                                            <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Media</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-review')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(239,68,68,0.12); color:var(--danger); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Media</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-review')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⭐</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                ⭐</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑤ Đánh giá khách hàng</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tiêu đề, danh sách review: avatar, tên, rating, nội dung</div>
+                                                <div style="font-weight:600; font-size:14px;">⑤ Đánh giá khách hàng
+                                                </div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Tiêu đề, danh sách review: avatar, tên, rating, nội dung</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-testimonials')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-testimonials')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📝</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                📝</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑥ Form đăng ký (cuối trang)</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Background, tiêu đề, mô tả, nút submit, lời cảm ơn</div>
+                                                <div style="font-weight:600; font-size:14px;">⑥ Form đăng ký (cuối
+                                                    trang)</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Background, tiêu đề, mô tả, nút submit, lời cảm ơn</div>
                                             </div>
-                                            <span style="background:rgba(139,92,246,0.12); color:#a78bfa; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Form</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('inet-form')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(139,92,246,0.12); color:#a78bfa; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Form</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-form')">✏ Sửa</button>
                                         </div>
                                     </div>
                                 </div>
@@ -3322,89 +3576,185 @@
                                 <!-- SA sections -->
                                 <div class="ldp-sections-list" data-tpl="sa" style="display:none;">
                                     <div style="display:flex; flex-direction:column; gap:8px;">
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(109,40,217,0.2); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🖼</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(109,40,217,0.2); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                🖼</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">① Hero Banner khuyến mãi</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Background fullscreen, Badge KM (vd: MUA 6 TẶNG 2), Headline, Giá, CTA, Ảnh thiết bị</div>
+                                                <div style="font-weight:600; font-size:14px;">① Hero Banner khuyến mãi
+                                                </div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Background fullscreen, Badge KM (vd: MUA 6 TẶNG 2), Headline, Giá,
+                                                    CTA, Ảnh thiết bị</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('sa-hero')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('sa-hero')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">✨</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                ✨</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">② Highlight tính năng nổi bật</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Headline lớn, mô tả, danh sách tính năng (icon + text, tối đa 6)</div>
+                                                <div style="font-weight:600; font-size:14px;">② Highlight tính năng nổi
+                                                    bật</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Headline lớn, mô tả, danh sách tính năng (icon + text, tối đa 6)
+                                                </div>
                                             </div>
-                                            <span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Features</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('sa-features')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Features</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('sa-features')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎭</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                🎭</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">③ Danh mục nội dung giải trí</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tiêu đề, tabs danh mục (Thể thao / Phim / Game…), ảnh grid + mô tả mỗi tab</div>
+                                                <div style="font-weight:600; font-size:14px;">③ Danh mục nội dung giải
+                                                    trí</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Tiêu đề, tabs danh mục (Thể thao / Phim / Game…), ảnh grid + mô tả
+                                                    mỗi tab</div>
                                             </div>
-                                            <span style="background:rgba(245,158,11,0.12); color:var(--warning); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Categories</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('sa-categories')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(245,158,11,0.12); color:var(--warning); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Categories</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('sa-categories')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">💰</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                💰</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">④ Bảng giá & Đăng ký</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Giá gói, text khuyến mãi, điều kiện ưu đãi, nút đăng ký</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Giá gói, text khuyến mãi, điều kiện ưu đãi, nút đăng ký</div>
                                             </div>
-                                            <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Pricing</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('sa-pricing')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(239,68,68,0.12); color:var(--danger); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Pricing</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('sa-pricing')">✏ Sửa</button>
                                         </div>
-                                        <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
-                                            <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                        <div
+                                            style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🚀</div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                🚀</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Footer CTA</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Background, text kêu gọi hành động, nút đăng ký</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Background, text kêu gọi hành động, nút đăng ký</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">CTA</span>
-                                            <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('sa-footer')">✏ Sửa</button>
+                                            <span
+                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">CTA</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('sa-footer')">✏ Sửa</button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; padding-top:16px; border-top:1px solid var(--border-glass);">
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; padding-top:16px; border-top:1px solid var(--border-glass);">
                                     <button class="btn btn-secondary" onclick="ldpStep(2);">← Quay lại</button>
                                     <div style="display:flex; gap:10px;">
-                                        <button class="btn btn-secondary" onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Lưu nháp</button>
-                                        <button class="btn btn-primary" onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">✓ Lưu & Xuất bản</button>
+                                        <button class="btn btn-secondary"
+                                            onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Lưu
+                                            nháp</button>
+                                        <button class="btn btn-primary"
+                                            onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">✓
+                                            Lưu & Xuất bản</button>
                                     </div>
                                 </div>
                             </div>
@@ -4100,7 +4450,8 @@
                                                 style="padding:10px; margin-left:30px; background:rgba(0,0,0,0.2); border:1px solid var(--border-glass); border-radius:4px; color:var(--text-muted);">
                                                 <span
                                                     style="color:var(--warning); font-size:12px; margin-right:5px;">Phí
-                                                    đi kèm</span> Phí triển khai lắp đặt Camera</div>
+                                                    đi kèm</span> Phí triển khai lắp đặt Camera
+                                            </div>
                                         </td>
                                         <td><input type="text" class="form-input" value="Phí triển khai lắp đặt Camera">
                                         </td>
@@ -4286,7 +4637,8 @@
                                         <td style="text-align:center;">
                                             <div
                                                 style="width:40px; height:40px; border:1px solid var(--border-glass); border-radius:4px; margin: 0 auto; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-                                                <span style="color:var(--warning); font-size:20px;">🖼️</span></div>
+                                                <span style="color:var(--warning); font-size:20px;">🖼️</span>
+                                            </div>
                                         </td>
                                         <td style="text-align:center;">
                                             <div
@@ -4368,14 +4720,17 @@
 
                     <!-- Form tạo/sửa -->
                     <div class="form-section" style="margin-bottom:24px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                             <h3 style="margin:0;">Tạo / Chỉnh sửa Popup</h3>
                             <div style="display:flex; align-items:center; gap:10px;">
                                 <strong style="font-size:14px; color:var(--text-muted);">Trạng thái (On/Off):</strong>
                                 <label style="position:relative; display:inline-block; width:44px; height:24px;">
                                     <input type="checkbox" checked style="opacity:0; width:0; height:0;">
-                                    <span style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:var(--primary); border-radius:24px; transition:.4s;">
-                                        <span style="position:absolute; height:18px; width:18px; left:3px; bottom:3px; background-color:white; border-radius:50%; transition:.4s; transform:translateX(20px);"></span>
+                                    <span
+                                        style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:var(--primary); border-radius:24px; transition:.4s;">
+                                        <span
+                                            style="position:absolute; height:18px; width:18px; left:3px; bottom:3px; background-color:white; border-radius:50%; transition:.4s; transform:translateX(20px);"></span>
                                     </span>
                                 </label>
                             </div>
@@ -4407,29 +4762,45 @@
 
                         <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
                             <div>
-                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Desktop) <span style="color:var(--danger)">*</span></label>
-                                <div style="width:120px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">+</div>
-                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ lệ 16:9, tối đa 1MB</span>
+                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Desktop) <span
+                                        style="color:var(--danger)">*</span></label>
+                                <div
+                                    style="width:120px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">
+                                    +</div>
+                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ
+                                    lệ 16:9, tối đa 1MB</span>
                             </div>
                             <div>
-                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Mobile) - Bottom Sheet <span style="color:var(--danger)">*</span></label>
-                                <div style="width:80px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">+</div>
-                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ lệ 1:1 hoặc dọc, tối đa 1MB</span>
+                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Mobile) - Bottom Sheet
+                                    <span style="color:var(--danger)">*</span></label>
+                                <div
+                                    style="width:80px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">
+                                    +</div>
+                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ
+                                    lệ 1:1 hoặc dọc, tối đa 1MB</span>
                             </div>
                         </div>
 
                         <div class="form-group" style="margin-bottom:20px;">
-                            <label>Link chuyển hướng (URL đích) khi người dùng Click <span style="color:var(--danger)">*</span></label>
+                            <label>Link chuyển hướng (URL đích) khi người dùng Click <span
+                                    style="color:var(--danger)">*</span></label>
                             <input type="text" class="form-input" value="https://fpt.vn/khuyen-mai-thang-5">
                         </div>
 
-                        <h3 style="font-size:14px; border-top:1px solid var(--border-glass); padding-top:15px; margin-bottom:15px;">Tracking UTM</h3>
+                        <h3
+                            style="font-size:14px; border-top:1px solid var(--border-glass); padding-top:15px; margin-bottom:15px;">
+                            Tracking UTM</h3>
                         <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:12px;">
-                            <div class="form-group"><label>UTM Source</label><input type="text" class="form-input" value="popup_banner"></div>
-                            <div class="form-group"><label>UTM Medium</label><input type="text" class="form-input" value="homepage"></div>
-                            <div class="form-group"><label>UTM Campaign</label><input type="text" class="form-input" value="flashsale_t5"></div>
+                            <div class="form-group"><label>UTM Source</label><input type="text" class="form-input"
+                                    value="popup_banner"></div>
+                            <div class="form-group"><label>UTM Medium</label><input type="text" class="form-input"
+                                    value="homepage"></div>
+                            <div class="form-group"><label>UTM Campaign</label><input type="text" class="form-input"
+                                    value="flashsale_t5"></div>
                         </div>
-                        <p style="font-size:12px; color:var(--success); margin-bottom:20px;">Link cuối: https://fpt.vn/khuyen-mai-thang-5?utm_source=popup_banner&utm_medium=homepage&utm_campaign=flashsale_t5</p>
+                        <p style="font-size:12px; color:var(--success); margin-bottom:20px;">Link cuối:
+                            https://fpt.vn/khuyen-mai-thang-5?utm_source=popup_banner&utm_medium=homepage&utm_campaign=flashsale_t5
+                        </p>
 
                         <div style="display:flex; justify-content:flex-end; gap:10px;">
                             <button class="btn btn-secondary">Hủy</button>
@@ -4455,14 +4826,16 @@
                                 <td>Trang chủ</td>
                                 <td>15/05/2026 – 20/05/2026</td>
                                 <td><span class="badge active">Đang chạy</span></td>
-                                <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
+                                <td><button class="btn btn-secondary btn-sm"
+                                        style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
                             </tr>
                             <tr>
                                 <td>Khuyến mãi Camera</td>
                                 <td>Checkout (Gói Cam)</td>
                                 <td>01/05/2026 – 31/05/2026</td>
                                 <td><span class="badge active">Đang chạy</span></td>
-                                <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
+                                <td><button class="btn btn-secondary btn-sm"
+                                        style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -4893,7 +5266,7 @@
                 .replace(/đ/g, "d")
                 .replace(/[^a-z0-9\s]/g, "")
                 .replace(/\s+/g, "-");
-            
+
             var sourceEl = document.getElementById('ldp-utm-source');
             var mediumEl = document.getElementById('ldp-utm-medium');
             var campaignEl = document.getElementById('ldp-utm-campaign');
@@ -5118,7 +5491,8 @@
                         style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:5px; flex-wrap:wrap;">
                         <span
                             style="background:rgba(245,158,11,0.15); color:var(--warning); padding:2px 8px; border-radius:4px; font-size:12px; border:1px solid rgba(245,158,11,0.3);">Bán
-                            chạy</span></div>
+                            chạy</span>
+                    </div>
                 </div>
                 <div>
                     <div style="font-size:11px; color:#666; margin-bottom:4px;">Thông số kỹ thuật (link)</div>
@@ -5331,13 +5705,18 @@
     <!-- ============================================================ -->
     <!--          LDP SECTION EDIT DRAWER                             -->
     <!-- ============================================================ -->
-    <div id="ldp-section-overlay" onclick="ldpCloseSection()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999;"></div>
-    <div id="ldp-section-drawer" style="display:none; position:fixed; right:0; top:0; bottom:0; width:52%; background:#161b2a; border-left:1px solid rgba(255,255,255,0.1); z-index:1000; overflow-y:auto; transform:translateX(100%); transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);">
+    <div id="ldp-section-overlay" onclick="ldpCloseSection()"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999;"></div>
+    <div id="ldp-section-drawer"
+        style="display:none; position:fixed; right:0; top:0; bottom:0; width:52%; background:#161b2a; border-left:1px solid rgba(255,255,255,0.1); z-index:1000; overflow-y:auto; transform:translateX(100%); transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);">
 
         <!-- Drawer header -->
-        <div style="position:sticky; top:0; background:#161b2a; border-bottom:1px solid rgba(255,255,255,0.08); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; z-index:10;">
+        <div
+            style="position:sticky; top:0; background:#161b2a; border-bottom:1px solid rgba(255,255,255,0.08); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; z-index:10;">
             <div>
-                <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:3px;">Chỉnh sửa section</div>
+                <div
+                    style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:3px;">
+                    Chỉnh sửa section</div>
                 <div id="ldp-sec-title" style="font-weight:700; font-size:16px; color:#fff;">Hero Banner</div>
             </div>
             <div style="display:flex; gap:8px;">
@@ -5348,19 +5727,28 @@
 
         <!-- ① Hero Banner (Internet) -->
         <div id="ldpsec-inet-hero" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Background & Hình ảnh</div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">
+                Background & Hình ảnh</div>
             <div class="form-group"><label>Background image (1920×600px)</label>
                 <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
                     <input type="text" class="form-input media-url" placeholder="URL ảnh nền hero" style="flex:1;">
-                    <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
-                    <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
-                    <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                    <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                        onchange="ldpHandleFileUpload(this)">
+                    <button class="btn btn-secondary btn-sm"
+                        onclick="this.previousElementSibling.click()">Upload</button>
+                    <div class="media-preview"
+                        style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
                         <img src="" style="width:100%; height:100%; object-fit:cover;">
-                        <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        <span
+                            style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                            onclick="ldpRemoveUploadedFile(this)">✕</span>
                     </div>
                 </div>
             </div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Nội dung chính</div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Nội dung chính</div>
             <div class="form-group"><label>Headline (H1) <span style="color:var(--danger)">*</span></label>
                 <input type="text" class="form-input" value="Internet tốc độ 1 Gbps – Lắp đặt ngay trong ngày">
             </div>
@@ -5368,18 +5756,26 @@
                 <input type="text" class="form-input" value="Miễn phí lắp đặt. Tặng ngay Wifi miễn phí.">
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky"></div>
+                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                        value="Đăng ký ngay"></div>
+                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                        value="/dang-ky"></div>
             </div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Form đăng ký (bên phải hero)</div>
-            <div class="form-group"><label>Tiêu đề form</label><input type="text" class="form-input" value="Đăng ký tư vấn miễn phí"></div>
-            <div class="form-group"><label>Nút submit form</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-            <div class="form-group"><label>Lời cảm ơn (sau submit)</label><input type="text" class="form-input" value="Cảm ơn! Tư vấn viên sẽ liên hệ trong 30 phút."></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Form đăng ký (bên phải hero)</div>
+            <div class="form-group"><label>Tiêu đề form</label><input type="text" class="form-input"
+                    value="Đăng ký tư vấn miễn phí"></div>
+            <div class="form-group"><label>Nút submit form</label><input type="text" class="form-input"
+                    value="Đăng ký ngay"></div>
+            <div class="form-group"><label>Lời cảm ơn (sau submit)</label><input type="text" class="form-input"
+                    value="Cảm ơn! Tư vấn viên sẽ liên hệ trong 30 phút."></div>
         </div>
 
         <!-- ② Stats Bar (Internet) -->
         <div id="ldpsec-inet-stats" class="ldp-sec-form" style="padding:20px; display:none;">
-            <p style="color:var(--text-muted); font-size:13px; margin-top:0;">Điền nội dung cho 6 chỉ số nổi bật. Mỗi chỉ số gồm icon emoji và text ngắn.</p>
+            <p style="color:var(--text-muted); font-size:13px; margin-top:0;">Điền nội dung cho 6 chỉ số nổi bật. Mỗi
+                chỉ số gồm icon emoji và text ngắn.</p>
             <div style="display:flex; flex-direction:column; gap:10px;">
                 <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;">
                     <input type="text" class="form-input" value="⚡" style="text-align:center; font-size:18px;">
@@ -5410,16 +5806,23 @@
 
         <!-- ③ Product List (Internet) -->
         <div id="ldpsec-inet-products" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Chọn gói Internet phù hợp với bạn"></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Các gói cước (tối đa 4 gói)</div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Chọn gói Internet phù hợp với bạn"></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Các gói cước (tối đa 4 gói)</div>
             <!-- Gói 1 -->
             <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; margin-bottom:10px;">
                 <div style="font-size:12px; font-weight:600; color:var(--warning); margin-bottom:10px;">Gói 1</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div class="form-group"><label>Tên gói</label><input type="text" class="form-input" value="Internet GIGA"></div>
-                    <div class="form-group"><label>Giá (VNĐ/tháng)</label><input type="text" class="form-input" value="165.000"></div>
-                    <div class="form-group"><label>Tốc độ</label><input type="text" class="form-input" value="100 Mbps"></div>
-                    <div class="form-group"><label>Nút CTA</label><input type="text" class="form-input" value="Đăng ký"></div>
+                    <div class="form-group"><label>Tên gói</label><input type="text" class="form-input"
+                            value="Internet GIGA"></div>
+                    <div class="form-group"><label>Giá (VNĐ/tháng)</label><input type="text" class="form-input"
+                            value="165.000"></div>
+                    <div class="form-group"><label>Tốc độ</label><input type="text" class="form-input" value="100 Mbps">
+                    </div>
+                    <div class="form-group"><label>Nút CTA</label><input type="text" class="form-input" value="Đăng ký">
+                    </div>
                     <div class="form-group" style="grid-column:1/-1;"><label>Specs (mỗi dòng 1 thông số)</label>
                         <textarea class="form-textarea" rows="3">Tốc độ download: 100 Mbps
 Wifi Router miễn phí
@@ -5431,10 +5834,14 @@ Hỗ trợ 24/7</textarea>
             <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; margin-bottom:10px;">
                 <div style="font-size:12px; font-weight:600; color:var(--warning); margin-bottom:10px;">Gói 2</div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <div class="form-group"><label>Tên gói</label><input type="text" class="form-input" value="Internet SKY"></div>
-                    <div class="form-group"><label>Giá (VNĐ/tháng)</label><input type="text" class="form-input" value="195.000"></div>
-                    <div class="form-group"><label>Tốc độ</label><input type="text" class="form-input" value="200 Mbps"></div>
-                    <div class="form-group"><label>Nút CTA</label><input type="text" class="form-input" value="Đăng ký"></div>
+                    <div class="form-group"><label>Tên gói</label><input type="text" class="form-input"
+                            value="Internet SKY"></div>
+                    <div class="form-group"><label>Giá (VNĐ/tháng)</label><input type="text" class="form-input"
+                            value="195.000"></div>
+                    <div class="form-group"><label>Tốc độ</label><input type="text" class="form-input" value="200 Mbps">
+                    </div>
+                    <div class="form-group"><label>Nút CTA</label><input type="text" class="form-input" value="Đăng ký">
+                    </div>
                 </div>
             </div>
             <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed;">+ Thêm gói cước</button>
@@ -5442,249 +5849,396 @@ Hỗ trợ 24/7</textarea>
 
         <!-- ④ Video Review (Internet) -->
         <div id="ldpsec-inet-review" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Review FPT Internet — Thực tế từ khách hàng"></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Danh sách video</div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Review FPT Internet — Thực tế từ khách hàng"></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Danh sách video</div>
             <div style="display:flex; flex-direction:column; gap:10px;">
                 <div style="border:1px solid var(--border-glass); border-radius:8px; padding:12px;">
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div class="form-group"><label>Thumbnail (ảnh đại diện)</label>
-                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input"
+                                    placeholder="URL ảnh" style="flex:1;"><button
+                                    class="btn btn-secondary btn-sm">Upload</button></div>
                         </div>
-                        <div class="form-group"><label>Link YouTube</label><input type="text" class="form-input" placeholder="https://youtube.com/..."></div>
-                        <div class="form-group" style="grid-column:1/-1;"><label>Mô tả ngắn</label><input type="text" class="form-input" value="Review thực tế tốc độ Internet FPT tại nhà"></div>
+                        <div class="form-group"><label>Link YouTube</label><input type="text" class="form-input"
+                                placeholder="https://youtube.com/..."></div>
+                        <div class="form-group" style="grid-column:1/-1;"><label>Mô tả ngắn</label><input type="text"
+                                class="form-input" value="Review thực tế tốc độ Internet FPT tại nhà"></div>
                     </div>
                 </div>
                 <div style="border:1px solid var(--border-glass); border-radius:8px; padding:12px;">
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                         <div class="form-group"><label>Thumbnail</label>
-                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input"
+                                    placeholder="URL ảnh" style="flex:1;"><button
+                                    class="btn btn-secondary btn-sm">Upload</button></div>
                         </div>
-                        <div class="form-group"><label>Link YouTube</label><input type="text" class="form-input" placeholder="https://youtube.com/..."></div>
+                        <div class="form-group"><label>Link YouTube</label><input type="text" class="form-input"
+                                placeholder="https://youtube.com/..."></div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;">+ Thêm video</button>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;">+ Thêm
+                video</button>
         </div>
 
         <!-- ⑤ Testimonials (Internet) -->
         <div id="ldpsec-inet-testimonials" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Khách hàng nói gì về FPT Internet?"></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">Danh sách đánh giá</div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Khách hàng nói gì về FPT Internet?"></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">
+                Danh sách đánh giá</div>
             <div id="inet-testimonials-list" style="display:flex; flex-direction:column; gap:10px; margin-bottom:10px;">
                 <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative;">
-                    <button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
+                    <button class="btn btn-secondary btn-sm"
+                        style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;"
+                        onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
                     <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">
                         <div class="form-group">
                             <label>Avatar</label>
                             <div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">
                                 <input type="text" class="form-input media-url" value="/media/uploads/user1.jpg">
-                                <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
-                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>
-                                <div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
+                                <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                                    onchange="ldpHandleFileUpload(this)">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;"
+                                    onclick="this.previousElementSibling.click()">Upload</button>
+                                <div class="media-preview"
+                                    style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
                                     <img src="" style="width:100%; height:100%; object-fit:cover;">
-                                    <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                                    <span
+                                        style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                                        onclick="ldpRemoveUploadedFile(this)">✕</span>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input" value="Nguyễn Văn An"></div>
-                            <div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:80px;"></div>
-                            <div class="form-group"><label>Nội dung đánh giá</label><textarea class="form-textarea" rows="2">Internet FPT ổn định, tốc độ cực nhanh. Nhân viên hỗ trợ nhiệt tình.</textarea></div>
+                            <div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input"
+                                    value="Nguyễn Văn An"></div>
+                            <div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input"
+                                    value="5" min="1" max="5" style="width:80px;"></div>
+                            <div class="form-group"><label>Nội dung đánh giá</label><textarea class="form-textarea"
+                                    rows="2">Internet FPT ổn định, tốc độ cực nhanh. Nhân viên hỗ trợ nhiệt tình.</textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;" onclick="ldpAddTestimonial()">+ Thêm đánh giá</button>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;"
+                onclick="ldpAddTestimonial()">+ Thêm đánh giá</button>
         </div>
 
         <!-- ⑥ Lead Gen Form (Internet) -->
         <div id="ldpsec-inet-form" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Background image (cuối trang)</label>
-                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền"
+                        style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
             </div>
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Đăng ký ngay — Nhận ưu đãi tháng 5"></div>
-            <div class="form-group"><label>Mô tả ngắn</label><textarea class="form-textarea" rows="2">Điền thông tin để tư vấn viên liên hệ trong 30 phút.</textarea></div>
-            <div class="form-group"><label>Nút Submit</label><input type="text" class="form-input" value="Đăng ký nhận ưu đãi"></div>
-            <div class="form-group"><label>Thông báo sau khi gửi form</label><input type="text" class="form-input" value="Đã nhận thông tin! Chúng tôi sẽ gọi lại trong 30 phút."></div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Đăng ký ngay — Nhận ưu đãi tháng 5"></div>
+            <div class="form-group"><label>Mô tả ngắn</label><textarea class="form-textarea"
+                    rows="2">Điền thông tin để tư vấn viên liên hệ trong 30 phút.</textarea></div>
+            <div class="form-group"><label>Nút Submit</label><input type="text" class="form-input"
+                    value="Đăng ký nhận ưu đãi"></div>
+            <div class="form-group"><label>Thông báo sau khi gửi form</label><input type="text" class="form-input"
+                    value="Đã nhận thông tin! Chúng tôi sẽ gọi lại trong 30 phút."></div>
         </div>
 
         <!-- ① Hero Banner (SA) -->
         <div id="ldpsec-sa-hero" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Background fullscreen (1920×1080px)</label>
-                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền"
+                        style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
             </div>
-            <div class="form-group"><label>Badge khuyến mãi (vd: MUA 6 TẶNG 2)</label><input type="text" class="form-input" value="MUA 6 TẶNG 2"></div>
-            <div class="form-group"><label>Headline (H1)</label><input type="text" class="form-input" value="Đăng ký VIP – Xem ngay nội dung đỉnh cao NGT nhất"></div>
+            <div class="form-group"><label>Badge khuyến mãi (vd: MUA 6 TẶNG 2)</label><input type="text"
+                    class="form-input" value="MUA 6 TẶNG 2"></div>
+            <div class="form-group"><label>Headline (H1)</label><input type="text" class="form-input"
+                    value="Đăng ký VIP – Xem ngay nội dung đỉnh cao NGT nhất"></div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div class="form-group"><label>Giá gói (text hiển thị)</label><input type="text" class="form-input" value="120.000đ/tháng"></div>
-                <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input" value="150.000đ"></div>
-                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky-sa"></div>
+                <div class="form-group"><label>Giá gói (text hiển thị)</label><input type="text" class="form-input"
+                        value="120.000đ/tháng"></div>
+                <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input"
+                        value="150.000đ"></div>
+                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                        value="Đăng ký ngay"></div>
+                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                        value="/dang-ky-sa"></div>
             </div>
             <div class="form-group"><label>Ảnh thiết bị / sản phẩm (bên phải hero)</label>
-                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh thiết bị" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh thiết bị"
+                        style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
             </div>
         </div>
 
         <!-- ② Features (SA) -->
         <div id="ldpsec-sa-features" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Headline lớn</label><input type="text" class="form-input" value="Không bỏ lỡ một giây nào"></div>
-            <div class="form-group"><label>Mô tả</label><textarea class="form-textarea" rows="2">Trải nghiệm kho nội dung khổng lồ từ thể thao, phim, game đến giải trí gia đình.</textarea></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Danh sách tính năng (tối đa 6)</div>
+            <div class="form-group"><label>Headline lớn</label><input type="text" class="form-input"
+                    value="Không bỏ lỡ một giây nào"></div>
+            <div class="form-group"><label>Mô tả</label><textarea class="form-textarea"
+                    rows="2">Trải nghiệm kho nội dung khổng lồ từ thể thao, phim, game đến giải trí gia đình.</textarea>
+            </div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Danh sách tính năng (tối đa 6)</div>
             <div style="display:flex; flex-direction:column; gap:8px;">
-                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input type="text" class="form-input" value="🏆" style="text-align:center; font-size:18px;"><input type="text" class="form-input" value="Hơn 200 kênh thể thao trực tiếp"></div>
-                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input type="text" class="form-input" value="🎬" style="text-align:center; font-size:18px;"><input type="text" class="form-input" value="50.000+ bộ phim & series"></div>
-                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input type="text" class="form-input" value="🎮" style="text-align:center; font-size:18px;"><input type="text" class="form-input" value="Game online không giới hạn"></div>
-                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input type="text" class="form-input" value="📱" style="text-align:center; font-size:18px;"><input type="text" class="form-input" value="Xem trên mọi thiết bị"></div>
+                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input
+                        type="text" class="form-input" value="🏆" style="text-align:center; font-size:18px;"><input
+                        type="text" class="form-input" value="Hơn 200 kênh thể thao trực tiếp"></div>
+                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input
+                        type="text" class="form-input" value="🎬" style="text-align:center; font-size:18px;"><input
+                        type="text" class="form-input" value="50.000+ bộ phim & series"></div>
+                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input
+                        type="text" class="form-input" value="🎮" style="text-align:center; font-size:18px;"><input
+                        type="text" class="form-input" value="Game online không giới hạn"></div>
+                <div style="display:grid; grid-template-columns:60px 1fr; gap:10px; align-items:center;"><input
+                        type="text" class="form-input" value="📱" style="text-align:center; font-size:18px;"><input
+                        type="text" class="form-input" value="Xem trên mọi thiết bị"></div>
             </div>
         </div>
 
         <!-- ③ Categories (SA) -->
         <div id="ldpsec-sa-categories" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Kho nội dung đa dạng cho cả gia đình"></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Các tab danh mục</div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Kho nội dung đa dạng cho cả gia đình"></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">
+                Các tab danh mục</div>
             <div style="display:flex; flex-direction:column; gap:10px;">
                 <div style="border:1px solid var(--border-glass); border-radius:8px; padding:12px;">
-                    <div class="form-group"><label>Tên tab</label><input type="text" class="form-input" value="Thể thao"></div>
-                    <div class="form-group"><label>Mô tả tab</label><input type="text" class="form-input" value="Hơn 200 kênh thể thao, NBA, Ngoại hạng Anh..."></div>
-                    <div class="form-group"><label>Ảnh grid (tối đa 4 ảnh, mỗi dòng 1 URL)</label><textarea class="form-textarea" rows="3" placeholder="URL ảnh 1&#10;URL ảnh 2&#10;URL ảnh 3"></textarea></div>
+                    <div class="form-group"><label>Tên tab</label><input type="text" class="form-input"
+                            value="Thể thao"></div>
+                    <div class="form-group"><label>Mô tả tab</label><input type="text" class="form-input"
+                            value="Hơn 200 kênh thể thao, NBA, Ngoại hạng Anh..."></div>
+                    <div class="form-group"><label>Ảnh grid (tối đa 4 ảnh, mỗi dòng 1 URL)</label><textarea
+                            class="form-textarea" rows="3"
+                            placeholder="URL ảnh 1&#10;URL ảnh 2&#10;URL ảnh 3"></textarea></div>
                 </div>
                 <div style="border:1px solid var(--border-glass); border-radius:8px; padding:12px;">
-                    <div class="form-group"><label>Tên tab</label><input type="text" class="form-input" value="Phim & Series"></div>
-                    <div class="form-group"><label>Mô tả tab</label><input type="text" class="form-input" value="50.000+ bộ phim, series Hàn, Hollywood..."></div>
+                    <div class="form-group"><label>Tên tab</label><input type="text" class="form-input"
+                            value="Phim & Series"></div>
+                    <div class="form-group"><label>Mô tả tab</label><input type="text" class="form-input"
+                            value="50.000+ bộ phim, series Hàn, Hollywood..."></div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:8px;">+ Thêm tab danh mục</button>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:8px;">+ Thêm tab
+                danh mục</button>
         </div>
 
         <!-- ④ Pricing (SA) -->
         <div id="ldpsec-sa-pricing" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Tận hưởng không gian giá trị đỉnh cao"></div>
-            <div class="form-group"><label>Mô tả section</label><textarea class="form-textarea" rows="2" placeholder="Text phụ bên dưới tiêu đề (tuỳ chọn)"></textarea></div>
+            <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+                    value="Tận hưởng không gian giá trị đỉnh cao"></div>
+            <div class="form-group"><label>Mô tả section</label><textarea class="form-textarea" rows="2"
+                    placeholder="Text phụ bên dưới tiêu đề (tuỳ chọn)"></textarea></div>
 
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">
                 Danh sách gói cước
-                <span style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; font-size:12px; margin-left:6px;">— kéo ☰ để sắp xếp thứ tự hiển thị</span>
+                <span
+                    style="color:var(--text-muted); font-weight:400; text-transform:none; letter-spacing:0; font-size:12px; margin-left:6px;">—
+                    kéo ☰ để sắp xếp thứ tự hiển thị</span>
             </div>
 
             <div id="sa-pricing-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px;">
 
                 <!-- Gói 1 — collapsed by default, click header to expand -->
-                <div class="pricing-card-item" style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
-                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(255,255,255,0.04); cursor:pointer;" onclick="ldpTogglePricingCard(this)">
-                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;" onclick="event.stopPropagation()">☰</span>
+                <div class="pricing-card-item"
+                    style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
+                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(255,255,255,0.04); cursor:pointer;"
+                        onclick="ldpTogglePricingCard(this)">
+                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;"
+                            onclick="event.stopPropagation()">☰</span>
                         <div style="flex:1;">
                             <span style="font-weight:600; font-size:14px;">FPT Play Basic</span>
-                            <span style="margin-left:10px; font-size:12px; color:var(--text-muted);">90.000đ/tháng</span>
+                            <span
+                                style="margin-left:10px; font-size:12px; color:var(--text-muted);">90.000đ/tháng</span>
                         </div>
-                        <span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang hiển thị</span>
+                        <span
+                            style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang
+                            hiển thị</span>
                         <span style="color:var(--text-muted); font-size:12px; transition:0.2s;">▼</span>
                     </div>
-                    <div class="pricing-card-body" style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div class="pricing-card-body"
+                        style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Tên gói <span style="color:var(--danger)">*</span></label><input type="text" class="form-input" value="FPT Play Basic"></div>
-                            <div class="form-group"><label>Badge nhãn (vd: Phổ biến, Đề xuất)</label><input type="text" class="form-input" placeholder="Để trống nếu không có" value=""></div>
-                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input" value="90.000đ"></div>
-                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input" value="/tháng"></div>
-                            <div class="form-group"><label>Giá gốc (gạch ngang, tuỳ chọn)</label><input type="text" class="form-input" placeholder="vd: 120.000đ" value=""></div>
-                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input" value="1" min="1" style="width:80px;"></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea" rows="2">Gói cơ bản, phù hợp cá nhân. Áp dụng cho thuê bao mới.</textarea></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật (mỗi dòng 1 tính năng)</label><textarea class="form-textarea" rows="3">Xem trên 1 thiết bị
+                            <div class="form-group"><label>Tên gói <span
+                                        style="color:var(--danger)">*</span></label><input type="text"
+                                    class="form-input" value="FPT Play Basic"></div>
+                            <div class="form-group"><label>Badge nhãn (vd: Phổ biến, Đề xuất)</label><input type="text"
+                                    class="form-input" placeholder="Để trống nếu không có" value=""></div>
+                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input"
+                                    value="90.000đ"></div>
+                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input"
+                                    value="/tháng"></div>
+                            <div class="form-group"><label>Giá gốc (gạch ngang, tuỳ chọn)</label><input type="text"
+                                    class="form-input" placeholder="vd: 120.000đ" value=""></div>
+                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input"
+                                    value="1" min="1" style="width:80px;"></div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu
+                                    đãi</label><textarea class="form-textarea"
+                                    rows="2">Gói cơ bản, phù hợp cá nhân. Áp dụng cho thuê bao mới.</textarea></div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật (mỗi dòng 1 tính
+                                    năng)</label><textarea class="form-textarea" rows="3">Xem trên 1 thiết bị
 Kho phim & series
 Nội dung thể thao cơ bản</textarea></div>
-                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky-basic"></div>
+                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                                    value="Đăng ký ngay"></div>
+                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                                    value="/dang-ky-basic"></div>
                         </div>
-                        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
-                            <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói này</label>
-                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
+                        <div
+                            style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+                            <label
+                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input
+                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói
+                                này</label>
+                            <button class="btn btn-secondary btn-sm"
+                                style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Gói 2 -->
-                <div class="pricing-card-item" style="border:1px solid rgba(245,158,11,0.35); border-radius:8px; overflow:hidden;">
-                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(245,158,11,0.06); cursor:pointer;" onclick="ldpTogglePricingCard(this)">
-                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;" onclick="event.stopPropagation()">☰</span>
+                <div class="pricing-card-item"
+                    style="border:1px solid rgba(245,158,11,0.35); border-radius:8px; overflow:hidden;">
+                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(245,158,11,0.06); cursor:pointer;"
+                        onclick="ldpTogglePricingCard(this)">
+                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;"
+                            onclick="event.stopPropagation()">☰</span>
                         <div style="flex:1;">
                             <span style="font-weight:600; font-size:14px;">FPT Play Premium</span>
-                            <span style="margin-left:10px; font-size:12px; color:var(--text-muted);">120.000đ/tháng</span>
-                            <span style="margin-left:8px; background:rgba(245,158,11,0.2); color:var(--warning); padding:1px 7px; border-radius:8px; font-size:11px;">Đề xuất</span>
+                            <span
+                                style="margin-left:10px; font-size:12px; color:var(--text-muted);">120.000đ/tháng</span>
+                            <span
+                                style="margin-left:8px; background:rgba(245,158,11,0.2); color:var(--warning); padding:1px 7px; border-radius:8px; font-size:11px;">Đề
+                                xuất</span>
                         </div>
-                        <span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang hiển thị</span>
+                        <span
+                            style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang
+                            hiển thị</span>
                         <span style="color:var(--text-muted); font-size:12px;">▼</span>
                     </div>
-                    <div class="pricing-card-body" style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div class="pricing-card-body"
+                        style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Tên gói <span style="color:var(--danger)">*</span></label><input type="text" class="form-input" value="FPT Play Premium"></div>
-                            <div class="form-group"><label>Badge nhãn</label><input type="text" class="form-input" value="Đề xuất"></div>
-                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input" value="120.000đ"></div>
-                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input" value="/tháng"></div>
-                            <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input" value="150.000đ"></div>
-                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input" value="2" min="1" style="width:80px;"></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea" rows="2">Gói Premium — ưu đãi MUA 6 TẶNG 2. Áp dụng cho thuê bao mới và gia hạn.</textarea></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật (mỗi dòng 1 tính năng)</label><textarea class="form-textarea" rows="3">Xem đồng thời trên 2 thiết bị
+                            <div class="form-group"><label>Tên gói <span
+                                        style="color:var(--danger)">*</span></label><input type="text"
+                                    class="form-input" value="FPT Play Premium"></div>
+                            <div class="form-group"><label>Badge nhãn</label><input type="text" class="form-input"
+                                    value="Đề xuất"></div>
+                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input"
+                                    value="120.000đ"></div>
+                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input"
+                                    value="/tháng"></div>
+                            <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
+                                    class="form-input" value="150.000đ"></div>
+                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input"
+                                    value="2" min="1" style="width:80px;"></div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu
+                                    đãi</label><textarea class="form-textarea"
+                                    rows="2">Gói Premium — ưu đãi MUA 6 TẶNG 2. Áp dụng cho thuê bao mới và gia hạn.</textarea>
+                            </div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật (mỗi dòng 1 tính
+                                    năng)</label><textarea class="form-textarea" rows="3">Xem đồng thời trên 2 thiết bị
 200+ kênh thể thao trực tiếp
 50.000+ phim & series 4K
 Nội dung độc quyền FPT Play</textarea></div>
-                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky-premium"></div>
+                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                                    value="Đăng ký ngay"></div>
+                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                                    value="/dang-ky-premium"></div>
                         </div>
-                        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
-                            <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói này</label>
-                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
+                        <div
+                            style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+                            <label
+                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input
+                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói
+                                này</label>
+                            <button class="btn btn-secondary btn-sm"
+                                style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Gói 3 -->
-                <div class="pricing-card-item" style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
-                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(255,255,255,0.04); cursor:pointer;" onclick="ldpTogglePricingCard(this)">
-                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;" onclick="event.stopPropagation()">☰</span>
+                <div class="pricing-card-item"
+                    style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
+                    <div style="display:flex; align-items:center; gap:10px; padding:12px 14px; background:rgba(255,255,255,0.04); cursor:pointer;"
+                        onclick="ldpTogglePricingCard(this)">
+                        <span style="color:var(--text-muted); font-size:16px; cursor:grab;"
+                            onclick="event.stopPropagation()">☰</span>
                         <div style="flex:1;">
                             <span style="font-weight:600; font-size:14px;">FPT Play VIP</span>
-                            <span style="margin-left:10px; font-size:12px; color:var(--text-muted);">180.000đ/tháng</span>
+                            <span
+                                style="margin-left:10px; font-size:12px; color:var(--text-muted);">180.000đ/tháng</span>
                         </div>
-                        <span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang hiển thị</span>
+                        <span
+                            style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:10px; font-size:11px;">Đang
+                            hiển thị</span>
                         <span style="color:var(--text-muted); font-size:12px;">▼</span>
                     </div>
-                    <div class="pricing-card-body" style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div class="pricing-card-body"
+                        style="padding:14px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div class="form-group"><label>Tên gói <span style="color:var(--danger)">*</span></label><input type="text" class="form-input" value="FPT Play VIP"></div>
-                            <div class="form-group"><label>Badge nhãn</label><input type="text" class="form-input" placeholder="Để trống nếu không có" value=""></div>
-                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input" value="180.000đ"></div>
-                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input" value="/tháng"></div>
-                            <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input" placeholder="vd: 220.000đ" value=""></div>
-                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input" value="3" min="1" style="width:80px;"></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea" rows="2">Gói cao cấp nhất. Không giới hạn thiết bị trong gia đình.</textarea></div>
-                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật</label><textarea class="form-textarea" rows="3">Xem không giới hạn thiết bị
+                            <div class="form-group"><label>Tên gói <span
+                                        style="color:var(--danger)">*</span></label><input type="text"
+                                    class="form-input" value="FPT Play VIP"></div>
+                            <div class="form-group"><label>Badge nhãn</label><input type="text" class="form-input"
+                                    placeholder="Để trống nếu không có" value=""></div>
+                            <div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input"
+                                    value="180.000đ"></div>
+                            <div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input"
+                                    value="/tháng"></div>
+                            <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
+                                    class="form-input" placeholder="vd: 220.000đ" value=""></div>
+                            <div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input"
+                                    value="3" min="1" style="width:80px;"></div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu
+                                    đãi</label><textarea class="form-textarea"
+                                    rows="2">Gói cao cấp nhất. Không giới hạn thiết bị trong gia đình.</textarea></div>
+                            <div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật</label><textarea
+                                    class="form-textarea" rows="3">Xem không giới hạn thiết bị
 Tất cả nội dung Premium
 Download xem offline
 Hỗ trợ 24/7 ưu tiên</textarea></div>
-                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky-vip"></div>
+                            <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                                    value="Đăng ký ngay"></div>
+                            <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                                    value="/dang-ky-vip"></div>
                         </div>
-                        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
-                            <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói này</label>
-                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
+                        <div
+                            style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+                            <label
+                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input
+                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển thị gói
+                                này</label>
+                            <button class="btn btn-secondary btn-sm"
+                                style="color:var(--danger); border-color:rgba(239,68,68,0.3);">🗑 Xoá gói</button>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed;" onclick="ldpAddPricingCard()">+ Thêm gói cước</button>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed;"
+                onclick="ldpAddPricingCard()">+ Thêm gói cước</button>
         </div>
 
         <!-- ⑤ Footer CTA (SA) -->
         <div id="ldpsec-sa-footer" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Background image</label>
-                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền"
+                        style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
             </div>
-            <div class="form-group"><label>Text kêu gọi hành động</label><textarea class="form-textarea" rows="2">Đừng bỏ lỡ — Ưu đãi chỉ còn đến hết tháng 5!</textarea></div>
+            <div class="form-group"><label>Text kêu gọi hành động</label><textarea class="form-textarea"
+                    rows="2">Đừng bỏ lỡ — Ưu đãi chỉ còn đến hết tháng 5!</textarea></div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
-                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" value="/dang-ky-sa"></div>
+                <div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input"
+                        value="Đăng ký ngay"></div>
+                <div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input"
+                        value="/dang-ky-sa"></div>
             </div>
         </div>
 
