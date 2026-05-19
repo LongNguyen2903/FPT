@@ -3044,13 +3044,13 @@
                                 <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
                                     <div class="form-group">
                                         <label>Tên chiến dịch <span style="color:var(--danger)">*</span></label>
-                                        <input type="text" class="form-input" value="Khuyến mãi Internet Tháng 5">
+                                        <input type="text" id="ldp-campaign-name" class="form-input" value="Khuyến mãi Internet Tháng 5">
                                     </div>
                                     <div class="form-group">
                                         <label>URL Slug <span style="color:var(--danger)">*</span></label>
                                         <div style="display:flex; align-items:center;">
                                             <span style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); border-right:none; padding:8px 12px; color:var(--text-muted); border-radius:8px 0 0 8px; font-size:13px; white-space:nowrap;">fpt.vn/</span>
-                                            <input type="text" class="form-input" value="km-internet-t5" style="border-radius:0 8px 8px 0; flex:1;">
+                                            <input type="text" id="ldp-url-slug" class="form-input" value="km-internet-t5" style="border-radius:0 8px 8px 0; flex:1;" oninput="updateLdpSeoPreview(); updateLdpUtmPreview();">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -3078,18 +3078,37 @@
                                 <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
                                     <div class="form-group">
                                         <label>Meta Title</label>
-                                        <input type="text" class="form-input" placeholder="Tiêu đề hiển thị trên Google (60 ký tự)">
+                                        <input type="text" id="ldp-meta-title" class="form-input" value="Khuyến mãi Internet Tháng 5 - FPT Telecom" placeholder="Tiêu đề hiển thị trên Google (60 ký tự)" oninput="updateLdpSeoPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>OG Image — ảnh share mạng xã hội</label>
-                                        <div style="display:flex; gap:8px;">
-                                            <input type="text" class="form-input" placeholder="URL ảnh 1200×630px" style="flex:1;">
-                                            <button class="btn btn-secondary btn-sm">Upload</button>
+                                        <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                                            <input type="text" class="form-input media-url" placeholder="URL ảnh 1200×630px" style="flex:1;">
+                                            <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                                            <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                                            <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                                                <img src="" style="width:100%; height:100%; object-fit:cover;">
+                                                <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group" style="grid-column:1/-1;">
                                         <label>Meta Description</label>
-                                        <textarea class="form-textarea" rows="2" placeholder="Mô tả ngắn hiển thị trên kết quả tìm kiếm (150–160 ký tự)"></textarea>
+                                        <textarea id="ldp-meta-desc" class="form-textarea" rows="2" placeholder="Mô tả ngắn hiển thị trên kết quả tìm kiếm (150–160 ký tự)" oninput="updateLdpSeoPreview()">Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu khỏe.</textarea>
+                                    </div>
+                                    <div class="form-group" style="grid-column:1/-1; margin-top:8px;">
+                                        <label style="color:var(--text-muted); font-size:12px; font-weight:600; margin-bottom:8px; display:block;">XEM TRƯỚC HIỂN THỊ TÌM KIẾM GOOGLE (SEO SNIPPET MOCKUP)</label>
+                                        <div style="background:#1a1f2c; border:1px solid var(--border-glass); border-radius:8px; padding:16px; font-family:arial,sans-serif; max-width:600px;">
+                                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px; font-size:12px; color:#bdc1c6;">
+                                                <div style="background:#303134; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:bold; color:#fff;">F</div>
+                                                <div>
+                                                    <span style="color:#e8eaed; display:block; font-weight:normal; line-height:16px;">FPT Telecom</span>
+                                                    <span style="color:#9aa0a6; display:block; font-size:11px; line-height:12px;">https://fpt.vn/<span id="ldp-seo-prev-slug">km-internet-t5</span></span>
+                                                </div>
+                                            </div>
+                                            <div id="ldp-seo-prev-title" style="color:#8ab4f8; font-size:20px; line-height:26px; font-weight:normal; margin-bottom:4px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; cursor:pointer; text-decoration:none;">Khuyến mãi Internet Tháng 5 - FPT Telecom</div>
+                                            <div id="ldp-seo-prev-desc" style="color:#bdc1c6; font-size:14px; line-height:22px; word-wrap:break-word;">Đăng ký lắp đặt cáp quang FPT tốc độ cao ngay hôm nay để nhận ưu đãi hấp dẫn tháng 5: Miễn phí lắp đặt, tặng kèm Modem Wifi 6 thế hệ mới siêu khỏe.</div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -3097,15 +3116,18 @@
                                 <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:8px;">
                                     <div class="form-group">
                                         <label>UTM Source</label>
-                                        <input type="text" class="form-input" value="facebook" placeholder="facebook / google / zalo">
+                                        <input type="text" id="ldp-utm-source" class="form-input" value="facebook" placeholder="facebook / google / zalo" oninput="updateLdpUtmPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>UTM Medium</label>
-                                        <input type="text" class="form-input" value="cpc" placeholder="cpc / banner / email">
+                                        <input type="text" id="ldp-utm-medium" class="form-input" value="cpc" placeholder="cpc / banner / email" oninput="updateLdpUtmPreview()">
                                     </div>
                                     <div class="form-group">
                                         <label>UTM Campaign</label>
-                                        <input type="text" class="form-input" value="km-internet-t5">
+                                        <div style="display:flex; gap:6px;">
+                                            <input type="text" id="ldp-utm-campaign" class="form-input" value="km-internet-t5" oninput="updateLdpUtmPreview()" style="flex:1;">
+                                            <button class="btn btn-secondary btn-sm" onclick="ldpGenerateUtm()" title="Tự động tạo UTM từ thông tin trang">Tạo nhanh</button>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Facebook Pixel ID</label>
@@ -3116,8 +3138,8 @@
                                         <input type="text" class="form-input" placeholder="ldp_view">
                                     </div>
                                 </div>
-                                <div style="background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px;">
-                                    🔗 <strong style="color:var(--primary);">UTM Preview:</strong> fpt.vn/km-internet-t5<span style="color:var(--primary);">?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
+                                <div id="ldp-utm-preview-box" style="background:rgba(59,130,246,0.07); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all;">
+                                    🔗 <strong style="color:var(--primary);">UTM Preview:</strong> <span id="ldp-utm-preview-text">fpt.vn/km-internet-t5?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
                                 </div>
 
                                 <div style="display:flex; justify-content:flex-end; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
@@ -3206,6 +3228,10 @@
                                     <div style="display:flex; flex-direction:column; gap:8px;">
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(255,107,0,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🖼</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">① Hero Banner + Form đăng ký</div>
@@ -3217,6 +3243,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📊</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">② Thanh số liệu nổi bật</div>
@@ -3228,6 +3258,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📦</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">③ Danh sách gói Internet</div>
@@ -3239,6 +3273,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎬</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">④ Video Review FPT Internet</div>
@@ -3250,6 +3288,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⭐</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Đánh giá khách hàng</div>
@@ -3261,6 +3303,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📝</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑥ Form đăng ký (cuối trang)</div>
@@ -3278,6 +3324,10 @@
                                     <div style="display:flex; flex-direction:column; gap:8px;">
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(109,40,217,0.2); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🖼</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">① Hero Banner khuyến mãi</div>
@@ -3289,6 +3339,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">✨</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">② Highlight tính năng nổi bật</div>
@@ -3300,6 +3354,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎭</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">③ Danh mục nội dung giải trí</div>
@@ -3311,6 +3369,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">💰</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">④ Bảng giá & Đăng ký</div>
@@ -3322,6 +3384,10 @@
                                         </div>
                                         <div style="display:flex; align-items:center; gap:12px; padding:14px 16px; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:8px;">
                                             <span style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
+                                            </div>
                                             <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🚀</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Footer CTA</div>
@@ -4779,6 +4845,131 @@
             if (drawer) { drawer.style.transform = 'translateX(100%)'; setTimeout(function () { drawer.style.display = 'none'; }, 260); }
             if (overlay) { setTimeout(function () { overlay.style.display = 'none'; }, 260); }
         }
+
+        // Realtime SEO Preview
+        function updateLdpSeoPreview() {
+            var titleInput = document.getElementById('ldp-meta-title');
+            var descInput = document.getElementById('ldp-meta-desc');
+            var slugInput = document.getElementById('ldp-url-slug');
+
+            var prevTitle = document.getElementById('ldp-seo-prev-title');
+            var prevDesc = document.getElementById('ldp-seo-prev-desc');
+            var prevSlug = document.getElementById('ldp-seo-prev-slug');
+
+            if (titleInput && prevTitle) prevTitle.textContent = titleInput.value || 'Khuyến mãi Internet Tháng 5 - FPT Telecom';
+            if (descInput && prevDesc) prevDesc.textContent = descInput.value || 'Đăng ký lắp đặt cáp quang FPT...';
+            if (slugInput && prevSlug) prevSlug.textContent = slugInput.value || 'km-internet-t5';
+        }
+
+        // Realtime UTM Preview
+        function updateLdpUtmPreview() {
+            var slug = document.getElementById('ldp-url-slug') ? document.getElementById('ldp-url-slug').value : 'km-internet-t5';
+            var source = document.getElementById('ldp-utm-source') ? document.getElementById('ldp-utm-source').value : '';
+            var medium = document.getElementById('ldp-utm-medium') ? document.getElementById('ldp-utm-medium').value : '';
+            var campaign = document.getElementById('ldp-utm-campaign') ? document.getElementById('ldp-utm-campaign').value : '';
+
+            var url = 'fpt.vn/' + slug;
+            var params = [];
+            if (source) params.push('utm_source=' + encodeURIComponent(source));
+            if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
+            if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
+
+            var fullUrl = url + (params.length > 0 ? '?' + params.join('&') : '');
+            var previewText = document.getElementById('ldp-utm-preview-text');
+            if (previewText) previewText.textContent = fullUrl;
+        }
+
+        // Generate UTM automatically
+        function ldpGenerateUtm() {
+            var campaignName = document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '';
+            if (!campaignName) return;
+            var slug = campaignName.toLowerCase()
+                .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+                .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+                .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+                .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+                .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+                .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+                .replace(/đ/g, "d")
+                .replace(/[^a-z0-9\s]/g, "")
+                .replace(/\s+/g, "-");
+            
+            var sourceEl = document.getElementById('ldp-utm-source');
+            var mediumEl = document.getElementById('ldp-utm-medium');
+            var campaignEl = document.getElementById('ldp-utm-campaign');
+            if (sourceEl) sourceEl.value = 'direct';
+            if (mediumEl) mediumEl.value = 'referral';
+            if (campaignEl) campaignEl.value = slug;
+            updateLdpUtmPreview();
+        }
+
+        // Move section up/down
+        function ldpMoveSection(btn, dir) {
+            var item = btn.closest('.ldp-sections-list > div > div') || btn.parentElement.parentElement;
+            if (!item) return;
+            var parent = item.parentElement;
+            if (dir === 'up') {
+                var prev = item.previousElementSibling;
+                if (prev) parent.insertBefore(item, prev);
+            } else {
+                var next = item.nextElementSibling;
+                if (next) parent.insertBefore(next, item);
+            }
+        }
+
+        // File upload mockup
+        function ldpHandleFileUpload(input) {
+            var file = input.files[0];
+            if (!file) return;
+            var url = URL.createObjectURL(file);
+            var wrapper = input.closest('.media-upload-wrapper');
+            if (wrapper) {
+                var urlInput = wrapper.querySelector('.media-url');
+                if (urlInput) urlInput.value = '/media/uploads/' + file.name;
+                var preview = wrapper.querySelector('.media-preview');
+                if (preview) {
+                    preview.style.display = 'flex';
+                    var img = preview.querySelector('img');
+                    if (img) img.src = url;
+                }
+            }
+        }
+
+        function ldpRemoveUploadedFile(crossBtn) {
+            event.stopPropagation();
+            var wrapper = crossBtn.closest('.media-upload-wrapper');
+            if (wrapper) {
+                var urlInput = wrapper.querySelector('.media-url');
+                if (urlInput) urlInput.value = '';
+                var fileInput = wrapper.querySelector('.media-file-input');
+                if (fileInput) fileInput.value = '';
+                var preview = wrapper.querySelector('.media-preview');
+                if (preview) preview.style.display = 'none';
+            }
+        }
+
+        // Dynamic Testimonials
+        function ldpAddTestimonial() {
+            var list = document.getElementById('inet-testimonials-list');
+            if (!list) return;
+            var idx = list.children.length + 1;
+            var div = document.createElement('div');
+            div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-bottom:10px;';
+            div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>'
+                + '<div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">'
+                + '<div class="form-group"><label>Avatar</label>'
+                + '<div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">'
+                + '<input type="text" class="form-input media-url" placeholder="URL">'
+                + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+                + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>'
+                + '<div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">'
+                + '<img src="" style="width:100%; height:100%; object-fit:cover;"><span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span></div></div></div>'
+                + '<div><div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input" placeholder="Tên khách hàng ' + idx + '"></div>'
+                + '<div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:80px;"></div>'
+                + '<div class="form-group"><label>Nội dung đánh giá</label><textarea class="form-textarea" rows="2" placeholder="Nội dung đánh giá..."></textarea></div>'
+                + '</div></div>';
+            list.appendChild(div);
+        }
     </script>
 
     <!-- SKU Preview Drawer -->
@@ -5159,7 +5350,15 @@
         <div id="ldpsec-inet-hero" class="ldp-sec-form" style="padding:20px; display:none;">
             <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Background & Hình ảnh</div>
             <div class="form-group"><label>Background image (1920×600px)</label>
-                <div style="display:flex; gap:8px;"><input type="text" class="form-input" placeholder="URL ảnh nền hero" style="flex:1;"><button class="btn btn-secondary btn-sm">Upload</button></div>
+                <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                    <input type="text" class="form-input media-url" placeholder="URL ảnh nền hero" style="flex:1;">
+                    <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                    <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                    <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                        <img src="" style="width:100%; height:100%; object-fit:cover;">
+                        <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                    </div>
+                </div>
             </div>
             <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Nội dung chính</div>
             <div class="form-group"><label>Headline (H1) <span style="color:var(--danger)">*</span></label>
@@ -5270,11 +5469,23 @@ Hỗ trợ 24/7</textarea>
         <!-- ⑤ Testimonials (Internet) -->
         <div id="ldpsec-inet-testimonials" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input" value="Khách hàng nói gì về FPT Internet?"></div>
-            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Danh sách đánh giá</div>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <div style="border:1px solid var(--border-glass); border-radius:8px; padding:12px;">
-                    <div style="display:grid; grid-template-columns:80px 1fr; gap:10px;">
-                        <div class="form-group"><label>Avatar</label><div style="display:flex; flex-direction:column; gap:4px;"><input type="text" class="form-input" placeholder="URL ảnh"><button class="btn btn-secondary btn-sm">Upload</button></div></div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">Danh sách đánh giá</div>
+            <div id="inet-testimonials-list" style="display:flex; flex-direction:column; gap:10px; margin-bottom:10px;">
+                <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative;">
+                    <button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
+                    <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">
+                                <input type="text" class="form-input media-url" value="/media/uploads/user1.jpg">
+                                <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>
+                                <div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
+                                    <img src="" style="width:100%; height:100%; object-fit:cover;">
+                                    <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input" value="Nguyễn Văn An"></div>
                             <div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:80px;"></div>
@@ -5283,7 +5494,7 @@ Hỗ trợ 24/7</textarea>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;">+ Thêm đánh giá</button>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;" onclick="ldpAddTestimonial()">+ Thêm đánh giá</button>
         </div>
 
         <!-- ⑥ Lead Gen Form (Internet) -->
