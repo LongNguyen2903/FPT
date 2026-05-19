@@ -379,6 +379,21 @@
         }
 
         /* Badges */
+        /* Read-only tab from QLCS */
+        #sku-tab-chung .form-input,
+        #sku-tab-chung .form-select,
+        #sku-tab-chung .form-textarea {
+            background: rgba(255,255,255,0.03) !important;
+            color: var(--text-secondary) !important;
+            border-color: rgba(255,255,255,0.06) !important;
+            pointer-events: none;
+            cursor: default;
+        }
+        #sku-tab-chung .form-group label { color: var(--text-muted); font-size: 12px; }
+        #sku-tab-chung .upload-box,
+        #sku-tab-chung button:not(.btn-primary):not([style*="Mở QLCS"]) { pointer-events: none; opacity: 0.4; }
+        #sku-tab-chung .switch-toggle { pointer-events: none; opacity: 0.6; }
+
         .badge {
             padding: 3px 10px;
             border-radius: 20px;
@@ -1147,11 +1162,10 @@
                     <div id="sku-list">
                         <div class="page-header">
                             <h2>Danh sách mã SKU</h2>
-                            <div style="display:flex; gap:10px;">
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <span style="font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); padding:5px 12px; border-radius:8px;">🔗 Dữ liệu đồng bộ từ hệ thống QLCS</span>
                                 <button class="btn btn-secondary" style="font-size:13px;">📥 Export</button>
-                                <button class="btn btn-secondary" style="font-size:13px;">🔄 Sync Data</button>
-                                <button class="btn btn-warning" onclick="skuOpenDetail('NEW','Tạo SKU mới','','')">+ Tạo
-                                    SKU</button>
+                                <button class="btn btn-secondary" style="font-size:13px;">🔄 Sync</button>
                             </div>
                         </div>
 
@@ -1427,7 +1441,7 @@
                                 Đặc tính kỹ thuật</div>
                             <div onclick="skuSwitchTab('banhang')" id="sku-tab-btn-banhang"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
-                                Bán hàng & Giá</div>
+                                Gói bán</div>
                             <div onclick="skuSwitchTab('media')" id="sku-tab-btn-media"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Media & Mô tả</div>
@@ -1446,9 +1460,17 @@
                                     style="color:var(--warning); text-decoration:underline; cursor:pointer;">MODEM-AX1800GZ</a></span>
                         </div>
 
-                        <!-- TAB 1: Thông tin chung -->
+                        <!-- TAB 1: Thông tin chung (read-only từ QLCS) -->
                         <div id="sku-tab-chung">
                             <div class="form-section">
+                                <div style="display:flex; align-items:center; gap:10px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
+                                    <span style="font-size:18px;">🔗</span>
+                                    <div>
+                                        <div style="font-weight:600; font-size:13px; color:var(--primary);">Dữ liệu đồng bộ từ hệ thống QLCS</div>
+                                        <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Thông tin cơ bản của SKU được quản lý tập trung tại QLCS. Chỉ xem — không chỉnh sửa trực tiếp trên CMS.</div>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm" style="margin-left:auto; color:var(--primary); border-color:var(--primary); flex-shrink:0;">↗ Mở QLCS</button>
+                                </div>
                                 <h3>▾ 1. Thông tin chung</h3>
                                 <div
                                     style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px;">
@@ -1615,10 +1637,10 @@
                             </div>
                         </div>
 
-                        <!-- TAB 3: Bán hàng & Giá -->
+                        <!-- TAB 3: Gói bán -->
                         <div id="sku-tab-banhang" style="display:none;">
                             <div class="form-section">
-                                <h3>▾ 3. Bán hàng &amp; Giá</h3>
+                                <h3>▾ 3. Gói bán</h3>
                                 <div
                                     style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:20px;">
                                     <div class="form-group">
@@ -5385,7 +5407,7 @@
                 Đặc tính kỹ thuật</div>
             <div onclick="skuPrevTab(this,'tab-banhang')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
-                Bán hàng &amp; Giá</div>
+                Gói bán</div>
             <div onclick="skuPrevTab(this,'tab-media')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Media &amp; Mô tả</div>
@@ -5578,7 +5600,7 @@
             </table>
         </div>
 
-        <!-- Tab: Bán hàng & Giá -->
+        <!-- Tab: Gói bán -->
         <div id="tab-banhang" style="display:none; padding:20px;">
             <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">VẬN HÀNH
                 & KÊNH BÁN</div>
