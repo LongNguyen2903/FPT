@@ -1438,7 +1438,7 @@
                                 Thông tin chung</div>
                             <div onclick="skuSwitchTab('dactinh')" id="sku-tab-btn-dactinh"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
-                                Đặc tính kỹ thuật</div>
+                                Đặc tính & TB đi kèm</div>
                             <div onclick="skuSwitchTab('banhang')" id="sku-tab-btn-banhang"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Gói bán</div>
@@ -1580,10 +1580,10 @@
                             </div>
                         </div>
 
-                        <!-- TAB 2: Đặc tính kỹ thuật -->
+                        <!-- TAB 2: Đặc tính & TB đi kèm -->
                         <div id="sku-tab-dactinh" style="display:none;">
                             <div class="form-section">
-                                <h3>▾ 2. Đặc tính kỹ thuật</h3>
+                                <h3>▾ 2. Đặc tính & TB đi kèm</h3>
                                 <div class="form-group" style="max-width:340px; margin-bottom:18px;"><label>Nhóm đặc
                                         tính áp dụng</label><select class="form-select">
                                         <option>Thông số Router/Modem</option>
@@ -1634,6 +1634,47 @@
                                 <button class="btn btn-secondary btn-sm"
                                     style="margin-top:12px; border:1px dashed var(--primary); background:transparent; color:var(--primary);">+
                                     Thêm Đặc Tính</button>
+                            </div>
+
+                            <!-- Thiết bị đi kèm -->
+                            <div class="form-section" style="margin-top:0; border-top:1px solid var(--border-glass); padding-top:20px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+                                    <h3 style="margin:0;">▾ Thiết bị đi kèm</h3>
+                                    <span style="font-size:12px; color:var(--text-muted);">Các SKU được bán / lắp đặt kèm theo SKU này</span>
+                                </div>
+                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Tương đương trường <strong style="color:var(--text-secondary);">Sản phẩm đi kèm</strong> trong PDH. Chọn từ danh sách SKU đang hoạt động.</p>
+
+                                <!-- Tag display (existing items) -->
+                                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; min-height:36px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px;">
+                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        1D FPT Camera Only
+                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
+                                    </span>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        1D FPT Camera
+                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
+                                    </span>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        14D - Motion
+                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
+                                    </span>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
+                                        Đầu thu HD FPT
+                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
+                                    </span>
+                                </div>
+
+                                <!-- Add new device -->
+                                <div style="display:flex; gap:10px; align-items:center;">
+                                    <select class="form-select" style="flex:1; max-width:400px;">
+                                        <option value="">-- Tìm và chọn SKU thiết bị đi kèm --</option>
+                                        <option>CAM-FPT-D1 — Camera FPT D1</option>
+                                        <option>MODEM-AX1800GZ — Modem Wifi 6 AX1800GZ</option>
+                                        <option>STB-HD01 — Đầu thu HD FPT</option>
+                                        <option>CAM-FPT-360 — Camera FPT 360°</option>
+                                    </select>
+                                    <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--warning); color:var(--warning); background:transparent; white-space:nowrap;">+ Thêm thiết bị</button>
+                                </div>
                             </div>
                         </div>
 
@@ -5404,7 +5445,7 @@
                 Thông tin chung</div>
             <div onclick="skuPrevTab(this,'tab-dactinh')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
-                Đặc tính kỹ thuật</div>
+                Đặc tính & TB đi kèm</div>
             <div onclick="skuPrevTab(this,'tab-banhang')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Gói bán</div>
@@ -5556,7 +5597,7 @@
 
             </div>
         </div>
-        <!-- Tab: Đặc tính kỹ thuật -->
+        <!-- Tab: Đặc tính & TB đi kèm -->
         <div id="tab-dactinh" style="display:none; padding:20px;">
             <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:12px;">NHÓM ĐẶC
                 TÍNH ÁP DỤNG</div>
@@ -5598,6 +5639,18 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Thiết bị đi kèm (drawer - read-only view) -->
+            <div style="margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.07);">
+                <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:12px;">THIẾT BỊ ĐI KÈM</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500;">📦 1D FPT Camera Only</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500;">📦 1D FPT Camera</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500;">📦 14D - Motion</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.25); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:500;">📦 Đầu thu HD FPT</span>
+                </div>
+                <div style="margin-top:10px; font-size:12px; color:#555;">Chỉnh sửa danh sách thiết bị đi kèm trong trang chi tiết SKU.</div>
+            </div>
         </div>
 
         <!-- Tab: Gói bán -->
