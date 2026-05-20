@@ -1767,45 +1767,83 @@
                                     Thêm Đặc Tính</button>
                             </div>
 
-                            <!-- Thiết bị đi kèm -->
+                            <!-- Thiết bị đi kèm — Read-only, sync từ QLCS/PDH -->
                             <div class="form-section" style="margin-top:0; border-top:1px solid var(--border-glass); padding-top:20px;">
                                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
                                     <h3 style="margin:0;">▾ Thiết bị đi kèm</h3>
-                                    <span style="font-size:12px; color:var(--text-muted);">Các SKU được bán / lắp đặt kèm theo SKU này</span>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:6px; padding:4px 10px;">
+                                        🔒 Dữ liệu đồng bộ từ QLCS · Read-only
+                                    </span>
                                 </div>
-                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Tương đương trường <strong style="color:var(--text-secondary);">Sản phẩm đi kèm</strong> trong PDH. Chọn từ danh sách SKU đang hoạt động.</p>
+                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Danh sách thiết bị được bán / lắp đặt kèm theo SKU này. Dữ liệu được đồng bộ tự động từ hệ thống PDH/QLCS — không chỉnh sửa trực tiếp tại đây.</p>
 
-                                <!-- Tag display (existing items) -->
-                                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; min-height:36px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px;">
-                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                        1D FPT Camera Only
-                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
-                                    </span>
-                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                        1D FPT Camera
-                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
-                                    </span>
-                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                        14D - Motion
-                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
-                                    </span>
-                                    <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:var(--warning); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                        Đầu thu HD FPT
-                                        <span style="cursor:pointer; opacity:0.7; font-size:16px; line-height:1;" title="Xóa">×</span>
-                                    </span>
+                                <!-- Read-only table — style tham khảo UI Gói bán & Giá & Phí -->
+                                <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass);">
+                                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                                        <thead>
+                                            <tr style="background:rgba(0,0,0,0.25);">
+                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; width:48px; border-bottom:1px solid var(--border-glass);">STT</th>
+                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Mã SKU thiết bị</th>
+                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Tên thiết bị đi kèm</th>
+                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Hình thức quản lý</th>
+                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Main / Extra</th>
+                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL mặc định</th>
+                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối thiểu</th>
+                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối đa</th>
+                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Bắt buộc</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-1D-ONLY</span></td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">1D FPT Camera Only</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Main</span></td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">2</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-1D</span></td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">1D FPT Camera</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Extra</span></td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">2</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">3</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-14D-MOT</span></td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">14D - Motion</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Extra</span></td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted);">4</td>
+                                                <td style="padding:12px 14px;"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">STB-HD01</span></td>
+                                                <td style="padding:12px 14px; font-weight:500;">Đầu thu HD FPT</td>
+                                                <td style="padding:12px 14px; color:var(--text-muted);">Sản phẩm đi kèm</td>
+                                                <td style="padding:12px 14px;"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Main</span></td>
+                                                <td style="padding:12px 14px; text-align:center;">1</td>
+                                                <td style="padding:12px 14px; text-align:center;">1</td>
+                                                <td style="padding:12px 14px; text-align:center;">1</td>
+                                                <td style="padding:12px 14px; text-align:center;"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-
-                                <!-- Add new device -->
-                                <div style="display:flex; gap:10px; align-items:center;">
-                                    <select class="form-select" style="flex:1; max-width:400px;">
-                                        <option value="">-- Tìm và chọn SKU thiết bị đi kèm --</option>
-                                        <option>CAM-FPT-D1 — Camera FPT D1</option>
-                                        <option>MODEM-AX1800GZ — Modem Wifi 6 AX1800GZ</option>
-                                        <option>STB-HD01 — Đầu thu HD FPT</option>
-                                        <option>CAM-FPT-360 — Camera FPT 360°</option>
-                                    </select>
-                                    <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--warning); color:var(--warning); background:transparent; white-space:nowrap;">+ Thêm thiết bị</button>
-                                </div>
+                                <p style="font-size:11px; color:var(--text-muted); margin:10px 0 0; display:flex; align-items:center; gap:6px;">
+                                    ℹ️ Để thêm / sửa / xoá thiết bị đi kèm, vui lòng thao tác trực tiếp trên hệ thống <strong>PDH / QLCS</strong>. Dữ liệu sẽ tự đồng bộ về đây.
+                                </p>
                             </div>
                         </div>
 
