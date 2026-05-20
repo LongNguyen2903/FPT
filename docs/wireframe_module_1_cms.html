@@ -4659,12 +4659,22 @@
                                     <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">26/03/2026 11:34</td>
                                     <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
                                 </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">8</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">block-sa-fpt-play</td>
+                                    <td><strong>Block Dịch vụ số (SA)</strong></td>
+                                    <td style="font-size:13px; color:var(--text-muted);">Bảng giá &amp; Đăng ký</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">Block Dịch vụ số (SA)</td>
+                                    <td style="text-align:center; color:var(--text-muted);">1</td>
+                                    <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">09/04/2026 11:10</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
                             </tbody>
                         </table>
                         </div>
                         <!-- Pagination -->
                         <div style="display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px;">
-                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–7 / 18 bản ghi</span>
+                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–8 / 18 bản ghi</span>
                             <div style="display:flex; gap:4px;">
                                 <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4;">« Trước</button>
                                 <button class="btn btn-primary btn-sm">1</button>
@@ -4691,6 +4701,7 @@
                                             style="color:var(--danger)">*</span></label><select class="form-select">
                                         <option>Block Sản phẩm</option>
                                         <option>Block Lưới (Grid)</option>
+                                        <option selected>Block Dịch vụ số (SA)</option>
                                     </select></div>
                                 <div class="form-group"><label>Thứ tự hiển thị</label><input type="number"
                                         class="form-input" value="1"></div>
@@ -4698,12 +4709,37 @@
 
                             <h4
                                 style="margin-top:30px; color:var(--primary); border-bottom:1px solid var(--border-glass); padding-bottom:10px;">
-                                Nút Xem Thêm (Call-to-Action)</h4>
+                                🖼️ Cấu hình Banner Dọc (Dành cho Block SA / Grid)</h4>
+                            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label>Hình ảnh Banner (Desktop)</label>
+                                    <div style="display:flex; gap:6px;">
+                                        <input type="text" class="form-input media-url" placeholder="VD: /media/banner-doc-sa-desktop.png" value="/media/banner-doc-sa-desktop.png">
+                                        <button class="btn btn-secondary btn-sm" style="white-space:nowrap;">Upload</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hình ảnh Banner (Mobile)</label>
+                                    <div style="display:flex; gap:6px;">
+                                        <input type="text" class="form-input media-url" placeholder="VD: /media/banner-doc-sa-mobile.png" value="">
+                                        <button class="btn btn-secondary btn-sm" style="white-space:nowrap;">Upload</button>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="grid-column: span 2;">
+                                    <label>Link URL đích của Banner Dọc</label>
+                                    <input type="text" class="form-input" placeholder="VD: /uu-dai-fpt-play" value="/uu-dai-fpt-play">
+                                    <small style="color:var(--text-muted); display:block; margin-top:4px;">VH có thể cấu hình URL đích riêng cho Banner Dọc độc lập với nút Xem Thêm.</small>
+                                </div>
+                            </div>
+
+                            <h4
+                                style="margin-top:30px; color:var(--primary); border-bottom:1px solid var(--border-glass); padding-bottom:10px;">
+                                Cấu hình Nút Xem Thêm (Call-to-Action)</h4>
                             <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
                                 <div class="form-group"><label>Text hiển thị</label><input type="text"
-                                        class="form-input" placeholder="VD: Mua ngay"></div>
-                                <div class="form-group"><label>Link URL đích</label><input type="text"
-                                        class="form-input" placeholder="VD: /checkout"></div>
+                                        class="form-input" placeholder="VD: Mua ngay" value="Xem thêm"></div>
+                                <div class="form-group"><label>Link URL đích của nút Xem Thêm</label><input type="text"
+                                        class="form-input" placeholder="VD: /danh-sach-sa" value="/danh-sach-sa"></div>
                             </div>
 
                             <h4
