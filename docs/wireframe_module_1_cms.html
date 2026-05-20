@@ -1678,35 +1678,35 @@
                                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
                                     <div class="form-group">
                                         <label>Dịch vụ</label>
-                                        <input type="text" class="form-input" value="Internet" readonly>
+                                        <input type="text" id="qlcs-dichvu" class="form-input" value="Internet" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Nhóm dịch vụ</label>
-                                        <input type="text" class="form-input" value="Basic Net" readonly>
+                                        <input type="text" id="qlcs-nhom" class="form-input" value="Basic Net" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Loại sản phẩm</label>
-                                        <input type="text" class="form-input" value="Thiết bị" readonly>
+                                        <input type="text" id="qlcs-loai" class="form-input" value="Thiết bị" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên SKU</label>
-                                        <input type="text" class="form-input" value="Modem Wifi 6 AX1800GZ" readonly>
+                                        <label>Tên SKU <span style="font-size:11px; color:var(--text-muted);">(tên raw từ QLCS)</span></label>
+                                        <input type="text" id="qlcs-tensku" class="form-input" value="Modem Wifi 6 AX1800GZ" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Giá tối thiểu</label>
-                                        <input type="text" class="form-input" value="500.000 đ" readonly>
+                                        <input type="text" id="qlcs-gia" class="form-input" value="500.000 đ" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Hình thức quản lý</label>
-                                        <input type="text" class="form-input" value="Thiết bị lẻ" readonly>
+                                        <input type="text" id="qlcs-hinhthuc" class="form-input" value="Thiết bị lẻ" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Gói tính cước</label>
-                                        <input type="text" class="form-input" value="Trả 1 lần" readonly>
+                                        <input type="text" id="qlcs-goicuoc" class="form-input" value="Trả 1 lần" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Đơn vị tính</label>
-                                        <input type="text" class="form-input" value="Cái" readonly>
+                                        <input type="text" id="qlcs-dvt" class="form-input" value="Cái" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -5384,6 +5384,34 @@
         }
 
         // ===== -Style SKU Detail Functions =====
+        // Data QLCS (Tab 1) theo từng SKU code
+        var qlcsData = {
+            'MODEM-AX1800GZ': {
+                dichvu: 'Internet', nhom: 'Basic Net', loai: 'Thiết bị',
+                tensku: 'ModemWifi6AX1800GZ', gia: '500.000 đ',
+                hinhthuc: 'Thiết bị lẻ', goicuoc: 'Trả 1 lần', dvt: 'Cái'
+            },
+            'CAM-FPT-D1': {
+                dichvu: 'Camera An Ninh', nhom: 'Camera Basic', loai: 'Thiết bị',
+                tensku: 'CameraAnNinhFPTD1-2MP', gia: '1.200.000 đ',
+                hinhthuc: 'Thiết bị lẻ', goicuoc: 'Trả 1 lần', dvt: 'Cái'
+            },
+            'SRV-IP-STATIC': {
+                dichvu: 'Internet', nhom: 'Add-on Dịch vụ', loai: 'Dịch vụ',
+                tensku: 'IPTinh1Thang_Static', gia: '50.000 đ / tháng',
+                hinhthuc: 'Dịch vụ cộng thêm', goicuoc: 'Thuê bao tháng', dvt: 'Tháng'
+            }
+        };
+
+        function skuFillQlcs(code) {
+            var d = qlcsData[code] || qlcsData['MODEM-AX1800GZ'];
+            var fields = ['dichvu','nhom','loai','tensku','gia','hinhthuc','goicuoc','dvt'];
+            fields.forEach(function(f) {
+                var el = document.getElementById('qlcs-' + f);
+                if (el) el.value = d[f] || '';
+            });
+        }
+
         // Data đặc tính theo từng loại SKU
         var dactinhData = {
             'camera': [
@@ -5445,6 +5473,9 @@
             document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
             document.getElementById('sku-bc-cat').innerText = category || '—';
             document.getElementById('sku-bc-code').innerText = code;
+
+            // Fill Tab 1 — QLCS data theo SKU code
+            skuFillQlcs(code);
 
             // Swap đặc tính data theo category
             var cat = (category || '').toLowerCase();
