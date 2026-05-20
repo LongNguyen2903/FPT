@@ -1715,7 +1715,7 @@
                         <div id="sku-tab-dactinh" style="display:none;">
                             <div class="form-section">
                                 <h3>▾ 2. Đặc tính & TB đi kèm</h3>
-                                <div class="form-group" style="max-width:340px; margin-bottom:18px;"><label>Nhóm đặc
+                                <div class="form-group" style="max-width:340px; margin-bottom:18px;"><label>Đặc
                                         tính áp dụng</label><select class="form-select">
                                         <option>Thông số Router/Modem</option>
                                         <option>Thông số Camera</option>
@@ -1777,72 +1777,81 @@
                                 </div>
                                 <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Danh sách thiết bị được bán / lắp đặt kèm theo SKU này. Dữ liệu được đồng bộ tự động từ hệ thống PDH/QLCS — không chỉnh sửa trực tiếp tại đây.</p>
 
-                                <!-- Read-only table — style tham khảo UI Gói bán & Giá & Phí -->
+                                <!-- Read-only table — data sync từ QLCS, VH tự điền Tên hiển thị web -->
+                                <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:8px; padding:10px 14px; margin-bottom:14px; font-size:12px; color:var(--text-muted); display:flex; align-items:flex-start; gap:8px;">
+                                    <span style="flex-shrink:0;">💡</span>
+                                    <span>Cột <strong style="color:var(--text-main);">Tên QLCS (raw)</strong> là dữ liệu gốc đồng bộ từ hệ thống — không chỉnh sửa được. Cột <strong style="color:var(--primary);">Tên hiển thị web</strong> do VH tự nhập để hiển thị đúng tên thân thiện lên website mà không cần order dev.</span>
+                                </div>
                                 <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass);">
                                     <table style="width:100%; border-collapse:collapse; font-size:13px;">
                                         <thead>
                                             <tr style="background:rgba(0,0,0,0.25);">
-                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; width:48px; border-bottom:1px solid var(--border-glass);">STT</th>
-                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Mã SKU thiết bị</th>
-                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Tên thiết bị đi kèm</th>
-                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Hình thức quản lý</th>
-                                                <th style="padding:10px 14px; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Main / Extra</th>
-                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL mặc định</th>
-                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối thiểu</th>
-                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối đa</th>
-                                                <th style="padding:10px 14px; text-align:center; color:var(--text-muted); font-size:12px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Bắt buộc</th>
+                                                <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; width:44px; border-bottom:1px solid var(--border-glass);">STT</th>
+                                                <th style="padding:10px 12px; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Mã SKU</th>
+                                                <th style="padding:10px 12px; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Tên QLCS <span style="color:rgba(255,255,255,0.3); font-size:10px;">(raw)</span></th>
+                                                <th style="padding:10px 12px; color:var(--primary); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.06);">Tên hiển thị web ✏️</th>
+                                                <th style="padding:10px 12px; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Hình thức</th>
+                                                <th style="padding:10px 12px; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Main/Extra</th>
+                                                <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL mặc định</th>
+                                                <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối thiểu</th>
+                                                <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">SL tối đa</th>
+                                                <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Bắt buộc</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-1D-ONLY</span></td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">1D FPT Camera Only</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Main</span></td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                                <td style="padding:10px 12px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D-ONLY</span></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">1D FPT Camera Only</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.04);"><input type="text" class="form-input" value="Camera FPT 1 ngày" style="font-size:12px; padding:6px 10px; height:32px;"></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">Sản phẩm đi kèm</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600;">Main</span></td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:15px; height:15px;"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">2</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-1D</span></td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">1D FPT Camera</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Extra</span></td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">2</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                                <td style="padding:10px 12px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">2</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D</span></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">1D FPT Camera</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.04);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:6px 10px; height:32px; border-style:dashed;"></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">Sản phẩm đi kèm</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600;">Extra</span></td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">2</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:15px; height:15px;"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">3</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">CAM-14D-MOT</span></td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); font-weight:500;">14D - Motion</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:var(--text-muted);">Sản phẩm đi kèm</td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Extra</span></td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                                <td style="padding:10px 12px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">3</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-14D-MOT</span></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">14D - Motion</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.04);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:6px 10px; height:32px; border-style:dashed;"></td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">Sản phẩm đi kèm</td>
+                                                <td style="padding:10px 12px; border-bottom:1px solid var(--border-glass);"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600;">Extra</span></td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">0</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);">1</td>
+                                                <td style="padding:10px 12px; text-align:center; border-bottom:1px solid var(--border-glass);"><input type="checkbox" disabled style="accent-color:var(--primary); width:15px; height:15px;"></td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:12px 14px; text-align:center; color:var(--text-muted);">4</td>
-                                                <td style="padding:12px 14px;"><span style="font-family:monospace; font-size:12px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px;">STB-HD01</span></td>
-                                                <td style="padding:12px 14px; font-weight:500;">Đầu thu HD FPT</td>
-                                                <td style="padding:12px 14px; color:var(--text-muted);">Sản phẩm đi kèm</td>
-                                                <td style="padding:12px 14px;"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 10px; border-radius:20px; font-size:12px; font-weight:600;">Main</span></td>
-                                                <td style="padding:12px 14px; text-align:center;">1</td>
-                                                <td style="padding:12px 14px; text-align:center;">1</td>
-                                                <td style="padding:12px 14px; text-align:center;">1</td>
-                                                <td style="padding:12px 14px; text-align:center;"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px;"></td>
+                                                <td style="padding:10px 12px; text-align:center; color:var(--text-muted);">4</td>
+                                                <td style="padding:10px 12px;"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">STB-HD01</span></td>
+                                                <td style="padding:10px 12px; color:var(--text-muted); font-size:12px;">Đầu thu HD FPT</td>
+                                                <td style="padding:10px 12px; background:rgba(69,100,237,0.04);"><input type="text" class="form-input" value="Đầu thu HD FPT" style="font-size:12px; padding:6px 10px; height:32px;"></td>
+                                                <td style="padding:10px 12px; color:var(--text-muted); font-size:12px;">Sản phẩm đi kèm</td>
+                                                <td style="padding:10px 12px;"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600;">Main</span></td>
+                                                <td style="padding:10px 12px; text-align:center;">1</td>
+                                                <td style="padding:10px 12px; text-align:center;">1</td>
+                                                <td style="padding:10px 12px; text-align:center;">1</td>
+                                                <td style="padding:10px 12px; text-align:center;"><input type="checkbox" checked disabled style="accent-color:var(--primary); width:15px; height:15px;"></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <p style="font-size:11px; color:var(--text-muted); margin:10px 0 0; display:flex; align-items:center; gap:6px;">
-                                    ℹ️ Để thêm / sửa / xoá thiết bị đi kèm, vui lòng thao tác trực tiếp trên hệ thống <strong>PDH / QLCS</strong>. Dữ liệu sẽ tự đồng bộ về đây.
+                                    🔒 Để thêm / sửa / xoá hàng, thao tác trực tiếp trên <strong>PDH / QLCS</strong>. Chỉ cột <strong style="color:var(--primary);">Tên hiển thị web</strong> được lưu bởi CMS.
                                 </p>
                             </div>
                         </div>
@@ -1867,18 +1876,6 @@
                                     <div class="form-group">
                                         <label>URL slug <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-input" placeholder="modem-wifi-6-ax1800gz">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Giá hiển thị</label>
-                                        <input type="number" class="form-input" placeholder="0">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Giá gốc (gạch ngang)</label>
-                                        <input type="number" class="form-input" placeholder="0">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>% Giảm giá <span style="font-size:11px; color:var(--text-muted);">(tự tính)</span></label>
-                                        <input type="text" class="form-input" value="—" readonly style="color:var(--success);">
                                     </div>
                                     <div class="form-group" style="grid-column:2 / span 2;">
                                         <label>Tag nổi bật</label>
