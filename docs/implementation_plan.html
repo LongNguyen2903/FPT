@@ -69,7 +69,7 @@
         <p><span class="tag">[!NOTE] Tinh chỉnh phạm vi hệ thống (Scope Reduction) — Đã áp dụng vào wireframe:</span></p>
         <p>Theo định hướng mới, các module quản lý dữ liệu gốc và nghiệp vụ giao dịch đã được bóc tách hoàn toàn khỏi giao diện CMS:</p>
         <ul>
-            <li>✅ <strong>Quản lý Sản phẩm (PDH) — Đã xoá:</strong> SKUs, Gói bán & Giá & Phí đã bị gỡ hoàn toàn khỏi sidebar. Thông tin sản phẩm được quản trị tập trung tại ERP/QLCS của FPT Telecom; CMS chỉ gọi API read-only khi cần hiển thị lên LDP.</li>
+            <li>✅ <strong>Quản lý Sản phẩm — Giữ lại SKUs:</strong> Mục <strong>SKUs</strong> vẫn được giữ nguyên trong sidebar để quản lý danh sách sản phẩm. Chỉ xoá "Gói bán & Giá & Phí" (nghiệp vụ giá thuộc ERP/QLCS chuyên biệt của FPT Telecom).</li>
             <li>✅ <strong>Master Data — Đã xoá:</strong> Danh mục, Đặc tính, Khu vực bán đã bị gỡ hoàn toàn. Dữ liệu gốc thuộc hệ thống ERP chuyên biệt.</li>
             <li>✅ <strong>Hợp đồng & Đơn hàng — Đã xoá:</strong> Toàn bộ phân hệ Đơn hàng tạm & Danh sách hợp đồng đã bị gỡ. Luồng đơn hàng xử lý tại OMS/CRM trung tâm.</li>
             <li>✅ <strong>Marketing Gói Bán — Tạm ẩn (Commented out):</strong> Mục này vẫn tồn tại trong source code dưới dạng comment HTML, có thể bật lại nhanh khi cần mà không cần viết lại.</li>
