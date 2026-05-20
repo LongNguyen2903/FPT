@@ -3,285 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Implementation Plan: CMS & PDH</title>
+    <title>Kế hoạch Triển khai & Change Log - CMS & LDP Builder</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 900px; margin: 0 auto; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; color: #e0e0e0; background-color: #121212; max-width: 950px; margin: 0 auto; padding: 20px; }
         h1, h2, h3 { color: #ffffff; }
-        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-        h2 { border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 30px; }
-        .note, .warning, .tip { padding: 15px; border-radius: 5px; margin: 20px 0; background-color: #1e1e1e; border-left: 5px solid; }
-        .note { border-color: #2196F3; }
-        .warning { border-color: #ff9800; }
-        .tip { border-color: #4CAF50; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; font-size: 24px; }
+        h2 { border-bottom: 1px solid #4f46e5; padding-bottom: 5px; margin-top: 25px; font-size: 18px; color: #818cf8; }
+        h3 { font-size: 15px; margin-top: 15px; color: #fbbf24; }
+        .note, .warning, .tip { padding: 12px 15px; border-radius: 6px; margin: 15px 0; background-color: #1e1e1e; border-left: 4px solid; font-size: 13px; }
+        .note { border-color: #3b82f6; }
+        .warning { border-color: #ef4444; }
+        .tip { border-color: #10b981; }
         .tag { font-weight: bold; }
-        .note .tag { color: #2196F3; }
-        .warning .tag { color: #ff9800; }
-        .tip .tag { color: #4CAF50; }
-        img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
-        ul { margin-bottom: 15px; }
-        li { margin-bottom: 8px; }
-        hr { border: 0; height: 1px; background: #333; margin: 30px 0; }
+        .note .tag { color: #3b82f6; }
+        .warning .tag { color: #ef4444; }
+        .tip .tag { color: #10b981; }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
+        ul, ol { margin-bottom: 10px; padding-left: 20px; }
+        li { margin-bottom: 6px; font-size: 13px; }
+        hr { border: 0; height: 1px; background: #333; margin: 25px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #1e1e1e; border-radius: 6px; overflow: hidden; font-size: 13px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #2d2d2d; vertical-align: top; }
+        th { background: #252525; color: #fff; font-weight: 600; font-size: 13px; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        .badge { display: inline-block; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: bold; }
+        .badge-success { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .badge-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .badge-danger { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .badge-info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        code { background: rgba(255,255,255,0.08); padding: 2px 4px; border-radius: 4px; font-family: monospace; font-size: 12px; }
     </style>
 </head>
 <body>
-    <h1>Chiến lược Phát triển Hệ thống CMS & Landing Page Builder (Cập nhật mới)</h1>
-    <p>Tài liệu này trình bày chiến lược phát triển hệ thống Quản trị Nội dung (CMS) & bộ dựng Landing Page (LDP) dành cho FPT Telecom. Phân hệ quản lý sản phẩm được tinh gọn, chỉ giữ lại chức năng quản lý <strong>SKUs</strong> phục vụ cho mục đích cấu hình hiển thị và nội dung tiếp thị sản phẩm, trong khi Master Data và Đơn hàng sẽ được quản lý trên các hệ thống chuyên biệt khác và lược bỏ khỏi hệ thống này để tối ưu hóa hiệu năng và trải nghiệm người dùng.</p>
+    <h1>Chiến lược Phát triển & Nhật ký Thay đổi CMS (Tối ưu hóa)</h1>
+    <p>Tài liệu này tóm tắt kế hoạch phát triển hệ thống Quản trị Nội dung (CMS) & bộ dựng Landing Page (LDP) dành cho FPT Telecom. Phân hệ quản lý sản phẩm được tinh gọn chỉ giữ lại chức năng biên tập thông tin marketing cho <strong>SKUs</strong>; toàn bộ Master Data, Hợp đồng & Đơn hàng đã được lược bỏ để đưa về hệ thống chuyên biệt ERP/OMS/QLCS.</p>
 
-    <h2>1. Đánh giá Hiện trạng & Bài toán (Problem Statement)</h2>
-    <p>Dựa trên thông tin đầu vào và định hướng mới của dự án:</p>
+    <h2>1. Đánh giá Hiện trạng & Phạm vi Tinh giản (Scope Reduction)</h2>
     <ul>
-        <li><strong>CMS (Content Management System) & LDP (Landing Page):</strong> Tập trung hoàn toàn vào việc quản lý giao diện, các trang Landing Page chiến dịch, Sections, Blocks, Banner, Câu hỏi FAQ và Popups để phục vụ tối đa cho đội ngũ Marketing và Vận hành.</li>
-        <li><strong>Quản lý Sản phẩm (SKUs):</strong> Giữ lại trang danh sách và trang chi tiết của SKU để người vận hành cấu hình mô tả, banner, thiết bị tặng kèm và đặc quyền hiển thị trên Web. Các phần Gói bán, Giá bán, Phí và Master Data được lược bỏ khỏi hệ thống này.</li>
-        <li><strong>Master Data & Đơn hàng (Orders):</strong> Đã được lược bỏ khỏi hệ thống này do nghiệp vụ được quản lý tập trung ở hệ thống chuyên biệt khác. Việc này giúp giảm tải độ phức tạp của UI/UX và tối ưu hóa luồng công việc cho nhân sự làm nội dung.</li>
-    </ul>
-
-    <h2>2. Giá trị cốt lõi của Hệ thống (Value Proposition)</h2>
-    <p>Hệ thống tập trung giải quyết bài toán <strong>Seamless Content Workflow</strong>:</p>
-    <ul>
-        <li><strong>Bộ dựng Landing Page chuyên nghiệp (LDP Builder):</strong> Cho phép Vận hành tự do kéo thả, tùy biến các trang đích cho chiến dịch Internet và FPT Play theo các template chuẩn hóa mà không phụ thuộc vào đội ngũ IT.</li>
-        <li><strong>Quản lý Cấu trúc Giao diện Linh hoạt:</strong> Tổ chức các khối nội dung dưới dạng Sections/Blocks tái sử dụng được, giúp dễ dàng nhân bản và thay đổi giao diện hàng loạt trang web vệ tinh.</li>
-        <li><strong>Tối ưu hóa SEO & UTM tự động:</strong> Tích hợp các công cụ hỗ trợ Marketing trực tiếp như Google Snippet Preview và Auto UTM Generator ngay trên luồng tạo LDP.</li>
-    </ul>
-
-    <hr>
-
-    <h2>3. Đề xuất Kiến trúc Thông tin Mới (Proposed Information Architecture)</h2>
-    <p>Hệ thống CMS mới được quy hoạch thành các phân hệ quản trị rõ ràng, sắp xếp thứ tự hiển thị menu điều hướng trực quan theo luồng nghiệp vụ:</p>
-
-    <h3>Phân hệ Quản lý Sản phẩm (Product Hub)</h3>
-    <ul>
-        <li><strong>SKUs:</strong> Quản lý danh sách SKU, xem thông tin chung (Read-only từ QLCS) và biên tập nội dung marketing của SKU (Mô tả, banner, thiết bị đính kèm, đặc quyền và FAQ của SKU).</li>
-    </ul>
-
-    <h3>Phân hệ Quản trị Nội dung (CMS) & Landing Page Builder</h3>
-    <p>Thứ tự hiển thị các chức năng trên Menu Sidebar được tối ưu hóa như sau:</p>
-    <ol>
-        <li><strong>Quản lý Trang (Pages):</strong> Quản lý danh sách các trang chủ, trang tĩnh, trang tin tức chính thức.</li>
-        <li><strong>Quản lý Sections:</strong> Quản lý các phân đoạn giao diện lớn (Hero banner, Countdown, Bảng giá...).</li>
-        <li><strong>Quản lý Blocks:</strong> Quản lý các khối nội dung nhỏ, chi tiết cấu thành nên các Sections.</li>
-        <li><strong>Landing Page (LDP) Builder:</strong> Nơi dựng các trang đích chiến dịch (LDP Internet, LDP SA FPT Play) với cấu trúc kéo thả nhanh chóng.
+        <li><strong>Giữ lại & Tối ưu:</strong>
             <ul>
-                <li><strong>Cấu hình Tab LDP Wizard:</strong> Tab <strong>"Chọn Template"</strong> được đưa lên lựa chọn <strong>đầu tiên</strong> để định hình phong cách thiết kế ngay từ bước khởi tạo, sau đó mới đến các cấu hình khác (Thông tin chung, SEO, Cấu hình Section...).</li>
+                <li><strong>CMS & LDP Builder:</strong> Cho phép Vận hành (VH) tự dựng Landing Page chiến dịch theo cấu trúc Section/Block linh hoạt, tối ưu SEO và UTM tự động.</li>
+                <li><strong>Quản lý SKUs:</strong> Nhận thông tin read-only từ QLCS và hỗ trợ VH biên tập mô tả marketing, đặc quyền, FAQ sản phẩm.</li>
             </ul>
         </li>
-        <li><strong>Quản lý Banner:</strong> Quản lý các hình ảnh, slide biểu ngữ hiển thị đầu trang hoặc các khu vực quảng cáo.</li>
-        <li><strong>Quản lý Bài viết & FAQ:</strong> Quản lý danh mục bài viết tin tức và hệ thống câu hỏi thường gặp.</li>
-        <li style="color:#64748b; font-style:italic;"><s>Marketing Gói Bán</s> — <em>Tạm ẩn khỏi menu (Commented out trong wireframe). Sẽ mở lại khi có yêu cầu.</em></li>
-        <li><strong>Cài đặt Hiển thị:</strong> Cấu hình các tham số hiển thị giao diện chung (Font chữ, màu sắc chủ đạo, logo...).</li>
-        <li><strong>Quản lý Popup:</strong> Cấu hình hiển thị các popup quảng cáo, popup nhận tư vấn theo thời gian hoặc hành vi của user.</li>
-    </ol>
-
-    <div class="note">
-        <p><span class="tag">[!NOTE] Tinh chỉnh phạm vi hệ thống (Scope Reduction) — Đã áp dụng vào wireframe:</span></p>
-        <p>Theo định hướng mới, các module quản lý dữ liệu gốc và nghiệp vụ giao dịch đã được bóc tách hoàn toàn khỏi giao diện CMS:</p>
-        <ul>
-            <li>✅ <strong>Quản lý Sản phẩm — Giữ lại SKUs:</strong> Mục <strong>SKUs</strong> vẫn được giữ nguyên trong sidebar để quản lý danh sách sản phẩm. Chỉ xoá "Gói bán & Giá & Phí" (nghiệp vụ giá thuộc ERP/QLCS chuyên biệt của FPT Telecom).</li>
-            <li>✅ <strong>Master Data — Đã xoá:</strong> Danh mục, Đặc tính, Khu vực bán đã bị gỡ hoàn toàn. Dữ liệu gốc thuộc hệ thống ERP chuyên biệt.</li>
-            <li>✅ <strong>Hợp đồng & Đơn hàng — Đã xoá:</strong> Toàn bộ phân hệ Đơn hàng tạm & Danh sách hợp đồng đã bị gỡ. Luồng đơn hàng xử lý tại OMS/CRM trung tâm.</li>
-            <li>✅ <strong>Marketing Gói Bán — Tạm ẩn (Commented out):</strong> Mục này vẫn tồn tại trong source code dưới dạng comment HTML, có thể bật lại nhanh khi cần mà không cần viết lại.</li>
-        </ul>
-    </div>
-
-    <hr>
-
-    <h2>4. Câu hỏi thảo luận và định hướng tích hợp (Key Alignment Questions)</h2>
-    <div class="warning">
-        <p><span class="tag">[!WARNING] Để chuẩn bị tốt nhất cho giai đoạn tích hợp backend và phát hành LDP Builder:</span></p>
-    </div>
-    <ol>
-        <li><strong>API Query Sản phẩm & Giá bán:</strong> Khi dựng Landing Page, CMS cần tích hợp các API nào từ hệ thống PDH/QLCS bên thứ 3 để lấy thông tin SKU, Giá bán và Khuyến mãi tương ứng theo Tỉnh thành/Kênh bán? Có cần cơ chế cache dữ liệu sản phẩm tại CMS để đảm bảo tốc độ tải trang (Page Load Time) dưới 1.5s hay không?</li>
-        <li><strong>Tích hợp Form Đăng ký:</strong> Luồng gửi dữ liệu từ Form Constructor trên các Landing Page sẽ gọi trực tiếp đến API của CRM/OMS, hay đi qua một Middleware trung gian? Cần cơ chế lưu trữ tạm (Database log) của CMS khi API đầu cuối gặp sự cố để tránh mất lead khách hàng không?</li>
-        <li><strong>Phân quyền người dùng (RBAC):</strong> Phân chia vai trò rõ ràng giữa:
+        <li style="color: #ef4444;"><strong>Đã lược bỏ khỏi CMS (Đưa về hệ thống chuyên biệt):</strong>
             <ul>
-                <li><strong>Content Editor:</strong> Chỉ tạo/sửa bài viết, FAQ, banner.</li>
-                <li><strong>Marketing Campaign Manager:</strong> Có quyền tạo Landing Page, tùy chỉnh Form đăng ký và liên kết với template chiến dịch.</li>
-                <li><strong>Super Admin:</strong> Quản lý cấu trúc chung của web (Pages, Sections, Blocks) và cấu hình hiển thị hệ thống.</li>
+                <li><strong>Hợp đồng & Đơn hàng:</strong> Xử lý tập trung tại OMS/CRM trung tâm.</li>
+                <li><strong>Master Data:</strong> Danh mục, đặc tính, khu vực bán và giá gốc được đồng bộ qua API.</li>
+                <li><strong>Marketing Gói Bán:</strong> Tạm ẩn khỏi sidebar menu (đã comment trong code).</li>
             </ul>
         </li>
-    </ol>
-
-    <h2>5. UI/UX Revamp Strategy (Chiến lược tái thiết kế giao diện)</h2>
-    <p>Tình trạng Dev dựng UI "theo cảm tính" làm cho luồng thao tác bị đứt đoạn là rất phổ biến ở các công cụ nội bộ (Internal Tools). Khi đập đi xây lại, chúng ta sẽ áp dụng các nguyên tắc UX sau để nâng cấp nó thành một <strong>Premium Admin Dashboard</strong>:</p>
-    <ul>
-        <li><strong>Workflow-centric Design (Thiết kế theo luồng công việc):</strong> Không bắt user bấm qua lại quá nhiều tab. Các tác vụ liên quan như "Sửa giá" và "Hiển thị lên web" sẽ được đặt cạnh nhau (Split-view hoặc Drawer).</li>
-        <li><strong>Progressive Disclosure (Hiển thị lũy tiến):</strong> Ẩn các trường cấu hình nâng cao (vd: Cấu hình SEO, ID hệ thống) vào các Accordion, chỉ show những trường quan trọng nhất để Form không bị ngợp.</li>
-        <li><strong>Nhất quán Design System:</strong> Áp dụng bộ UI Components chuẩn mực để thống nhất toàn bộ Bảng biểu (Table), Form, Nút bấm.</li>
     </ul>
 
-    <div class="tip">
-        <p><span class="tag">[!TIP]</span> Mình vừa tạo xong một <strong>bản vẽ phác thảo (Mockup Concept)</strong> cho giao diện hợp nhất này với phong cách Dark Mode hiện đại, trực quan. Bạn có thể xem trực tiếp hình ảnh bên dưới để hình dung!</p>
-    </div>
-    
-    <img src="images/mockup.png" alt="Unified Admin Dashboard Concept Mockup">
-
-    <h2>6. Kết Quả Triển Khai Thực Tế (Actual Implementation Results)</h2>
-    <p>Hệ thống đã thực hiện tái cấu trúc giao diện module Quản trị nội dung, tối ưu hóa bộ dựng Landing Page và tích hợp tinh gọn phân hệ Quản lý SKU:</p>
-    
-    <h3>6.1. Tái Thiết Kế Trang Danh Sách SKU (SKU List View) - Giữ lại</h3>
-    <ul>
-        <li><strong>Bổ sung Stats Cards:</strong> Trực quan hóa số liệu bao gồm <em>Tổng mã SKU</em> (12.847), <em>Hoạt động</em> (11.203) và <em>Không hoạt động</em> (1.644) bằng các block màu phân cấp rõ ràng.</li>
-        <li><strong>Bộ lọc Nâng cao (Filter Bar):</strong> Tích hợp ô tìm kiếm nhanh (F1) cùng các dropdown lọc theo <em>Ngành hàng, Loại hàng, Nhãn hàng, Trạng thái</em>.</li>
-        <li><strong>Thao tác Bulk Action:</strong> Hỗ trợ kích hoạt (F12) và hủy kích hoạt nhanh (Shift+F12) cho nhiều SKU cùng lúc bằng checkbox đầu dòng.</li>
-        <li><strong>Bảng Dữ liệu Chuẩn CMS:</strong> Thiết kế độ giãn dòng tối ưu, thêm các trường quan trọng như <em>Ngày cập nhật, Người cập nhật</em> và bộ nút thao tác nhanh (Toggle Switch hoạt động, nút Copy nhanh SKU, nút Sửa nhanh ✏️).</li>
-        <li><strong>Phân trang (Pagination):</strong> Tích hợp bộ phân trang chuẩn ngay dưới bảng dữ liệu.</li>
-    </ul>
-
-    <h3>6.2. Nâng Cấp Trang Chi Tiết SKU (SKU Detail - Tabbed Interface)</h3>
-    <p>Thay thế hoàn toàn cấu trúc Form Wizard cũ bằng <strong>Tabbed Interface</strong> với 4 tab điều hướng ngang mượt mà, tích hợp <strong>Document Header</strong> cố định (chứa mã SKU, tên SKU, badge trạng thái và nút Lưu/Hủy nhanh F4/F8) kèm dòng <strong>Breadcrumb</strong> định danh động.</p>
-    
-    <p>Đặc biệt, <strong>Tab 1: Thông tin chung</strong> (Read-only từ QLCS) và các tab biên tập nội dung Marketing đã được thiết kế dạng lưới 3 cột để VH dễ dàng thiết lập:</p>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #1e1e1e; border-radius: 6px; overflow: hidden;">
+    <h2>2. Đề xuất Kiến trúc Thông tin Sidebar Menu mới</h2>
+    <p>Thứ tự hiển thị các chức năng trên Menu Sidebar được tối ưu hóa theo luồng nghiệp vụ thực tế:</p>
+    <table style="max-width: 600px;">
         <thead>
-            <tr style="border-bottom: 2px solid #333; background: #2a2a2a;">
-                <th style="padding: 10px; text-align: left;">Nhóm trường</th>
-                <th style="padding: 10px; text-align: left;">Các Field nghiệp vụ chi tiết đã Map</th>
+            <tr>
+                <th style="width: 80px;">Thứ tự</th>
+                <th>Menu Item</th>
+                <th>Nhiệm vụ chính</th>
             </tr>
         </thead>
         <tbody>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Thông tin phân loại (Read-only)</td>
-                <td style="padding: 10px;">Loại sản phẩm (Hàng bán/Dịch vụ), Tên SKU *, Tên hiển thị Web *</td>
+            <tr><td>1</td><td><strong>Quản lý Trang (Pages)</strong></td><td>Các trang tĩnh, trang chủ, tin tức hệ thống.</td></tr>
+            <tr><td>2</td><td><strong>Quản lý Sections</strong></td><td>Các phân đoạn giao diện lớn (Hero banner, Countdown, Bảng giá...).</td></tr>
+            <tr><td>3</td><td><strong>Quản lý Blocks</strong></td><td>Các khối nội dung nhỏ cấu thành nên các Sections.</td></tr>
+            <tr><td>4</td><td><strong>LDP Builder</strong></td><td>Dựng Landing Page chiến dịch (Tab <em>Chọn Template</em> đưa lên đầu tiên).</td></tr>
+            <tr><td>5</td><td><strong>Quản lý Banner</strong></td><td>Hình ảnh, slide biểu ngữ đầu trang.</td></tr>
+            <tr><td>6</td><td><strong>Bài viết & FAQ</strong></td><td>Danh mục bài viết tin tức và hệ thống câu hỏi thường gặp.</td></tr>
+            <tr><td>7</td><td><strong>Cài đặt Hiển thị</strong></td><td>Cài đặt cấu hình hiển thị chung và nội dung Checkout đa kênh.</td></tr>
+            <tr><td>8</td><td><strong>Quản lý Popup</strong></td><td>Popup quảng cáo, popup nhận tư vấn theo thời gian/hành vi.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>3. UI/UX Revamp Strategy (Chiến lược Thiết kế Giao diện)</h2>
+    <ul>
+        <li><strong>Workflow-centric Design:</strong> Giảm chuyển đổi tab lồng nhau. Các nút lưu nhanh F4/F8 và các tab nghiệp vụ được hiển thị trên một bố cục thống nhất.</li>
+        <li><strong>Progressive Disclosure:</strong> Ẩn các cấu hình chi tiết (SEO, UTM) vào các Accordion, chỉ hiển thị thông tin cơ bản để tránh làm ngợp người dùng.</li>
+        <li><strong>Kế thừa thông minh:</strong> Các kênh bán con tự động kế thừa cấu hình từ Global nếu để trống (giảm tải 80% thao tác nhập liệu lặp lại cho VH).</li>
+    </ul>
+    
+    <div class="tip">
+        <span class="tag">[!TIP] Mockup Concept:</span> Dưới đây là bản vẽ phác thảo phong cách Dark Mode hiện đại của Dashboard.
+    </div>
+    <img src="images/mockup.png" alt="Unified Admin Dashboard Concept Mockup">
+
+    <h2>4. Câu hỏi thảo luận và định hướng tích hợp</h2>
+    <ol>
+        <li><strong>API Query Sản phẩm & Giá bán:</strong> CMS cần API kết nối PDH/QLCS để lấy thông tin SKU, Giá bán & Khuyến mãi theo Tỉnh thành/Kênh bán realtime.</li>
+        <li><strong>Luồng gửi dữ liệu Lead:</strong> Dữ liệu từ Form đăng ký trên LDP sẽ gửi trực tiếp đến API CRM/OMS hay đi qua Middleware?</li>
+        <li><strong>Phân quyền người dùng (RBAC):</strong> Phân cấp rõ ràng 3 vai trò: <em>Editor</em> (viết bài, FAQ, banner), <em>Campaign Manager</em> (dựng LDP, form đăng ký), và <em>Super Admin</em> (quản trị hệ thống, Pages/Sections/Blocks).</li>
+    </ol>
+
+    <h2>5. Kết Quả Triển Khai Thực Tế trên Wireframe</h2>
+    <ul>
+        <li><strong>Trang Danh Sách & Chi Tiết SKU:</strong> Thêm Stats Cards (Tổng SKU, Hoạt động), bộ lọc nhanh, thao tác hàng loạt; trang chi tiết SKU tổ chức dạng 4 Tab ngang mượt mà (Thông tin chung, Đặc tính, Media, FAQ).</li>
+        <li><strong>LDP Wizard tối ưu:</strong> Chuyển tab <em>Chọn Template</em> lên đầu tiên. Tích hợp bộ xem trước Google Snippet Preview và bộ tạo UTM tracking tự động.</li>
+        <li><strong>Cài đặt Hiển thị & Checkout:</strong> Loại bỏ các tab lồng nhau. Toàn bộ các kênh bán được quản trị qua hệ thống Accordion đóng/mở, tự động báo trạng thái kế thừa (badge <code>🌐 Dùng Global</code> hoặc <code>✏️ Tùy chỉnh riêng</code>) trực quan.</li>
+    </ul>
+
+    <h2>6. Danh sách Yêu cầu Thay đổi từ Vận hành (VH Change Log)</h2>
+    <p>Dưới đây là nhật ký theo dõi và xử lý các yêu cầu thay đổi phát sinh từ đội ngũ Vận hành (VH):</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 120px;">ID & Nguồn</th>
+                <th style="width: 200px;">Vấn đề phát sinh</th>
+                <th>Giải pháp UI/UX đã thực hiện trên Wireframe</th>
+                <th style="width: 140px;">Trạng thái</th>
             </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Nội dung & Media (VH Biên tập)</td>
-                <td style="padding: 10px;">Mô tả ngắn, Mô tả dài, Thumb Image, Ảnh mô tả, Banner đầu trang, Banner giữa trang (có vùng drag & drop ảnh chuyên nghiệp)</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>[Yêu cầu #1]<br>Vận hành (VH)</strong></td>
+                <td>Tên file ảnh tải lên quá dài làm tràn viền ô nhập liệu/bảng, mất phần mở rộng (đuôi <code>.png/.jpg</code>) gây khó khăn khi quản trị.</td>
+                <td>
+                    <ul>
+                        <li>Áp dụng <strong>Middle Truncation</strong> (rút gọn ở giữa, ví dụ: <code>banner_khuyen_mai_..._optimized.png</code>).</li>
+                        <li>Hover hiển thị Tooltip đầy đủ tên file và metadata ảnh.</li>
+                        <li>Bổ sung nút Copy nhanh URL và nút xem ảnh gốc (Lightbox) bên cạnh tên file.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
             </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Marketing & Đặc quyền</td>
-                <td style="padding: 10px;">Tag nổi bật, Link Thông số kỹ thuật, Thiết bị nhận thêm trong gói (multiselect), Đặc quyền, Ưu đãi đặc biệt theo Phương thức thanh toán (COD/Online)</td>
+            <tr>
+                <td><strong>[Yêu cầu #2]<br>BA / PO</strong></td>
+                <td>Hệ thống CMS hiện tại còn một số điểm nghẽn nghiệp vụ cần khắc phục để tăng tính tự động hóa.</td>
+                <td>
+                    <ul>
+                        <li><strong>Hover preview:</strong> Hiển thị thumbnail trực quan của Section/Block khi rê chuột.</li>
+                        <li><strong>Lên lịch hiển thị:</strong> Thêm trường chọn thời gian áp dụng <code>[Từ ngày - Đến ngày]</code> cho Banner/Popup.</li>
+                        <li><strong>Cá nhân hóa vị trí:</strong> Thêm cấu hình chọn <code>Khu vực áp dụng</code> (Toàn quốc hoặc các Tỉnh/Thành cụ thể).</li>
+                        <li><strong>Form Constructor:</strong> Cho phép VH tự dựng form thu thập lead linh hoạt theo từng chiến dịch.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-warning">Lên kế hoạch</span></td>
             </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">FAQ & Flags đặc tính</td>
-                <td style="padding: 10px;">Khối câu hỏi FAQ (câu hỏi & đáp chi tiết); Các flag Có tính tồn kho, Hàng EOL (End of Life)</td>
+            <tr>
+                <td><strong>[Yêu cầu #3]<br>Vận hành (VH)</strong></td>
+                <td>Trong Block SA, không thể cấu hình URL đích riêng biệt cho Banner Dọc và nút Xem Thêm (bị bắt dùng chung một URL).</td>
+                <td>
+                    <ul>
+                        <li>Tách biệt hoàn toàn cấu hình **Banner Dọc** (Ảnh Desktop/Mobile, Link đích riêng) và **Nút Xem Thêm** (Text hiển thị, Link đích riêng).</li>
+                        <li>Thêm bản ghi mẫu <code>Block Dịch vụ số (SA)</code> (mã: <code>block-sa-fpt-play</code>) trong bảng danh sách Block để VH dễ dàng bấm sửa và kiểm tra giao diện.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
             </tr>
         </tbody>
     </table>
 
-    <div class="tip">
-        <p><span class="tag">[!TIP] Tối ưu hóa UX:</span> Các trường nhập nội dung dài như Mô tả ngắn, Mô tả dài, FAQ được thiết kế chiếm trọn 3 cột (grid-column: 1 / span 3) giúp người quản trị dễ dàng nhập liệu, chỉnh sửa mà không bị gò bó không gian.</p>
-    </div>
-
-    <h3>6.2.1. Master Data & Đơn hàng (Lưu ý: Đã lược bỏ)</h3>
-    <p style="color: #ef4444; font-weight: bold; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">[ĐÃ GỠ BỎ] Giao diện quản trị danh mục, đặc tính, khu vực bán và danh sách đơn hàng tạm/hợp đồng đã được gỡ bỏ khỏi dự án để đảm bảo tính tinh gọn của hệ thống CMS.</p>
-
-    <h3>6.3. Định Hướng Thiết Kế Landing Page Builder (Phân tích từ Canva Design)</h3>
-    <p>Dựa trên rà soát thiết kế giao diện từ Canva <code>https://canva.link/ijg6d24oqyau8fs</code>, hệ thống CMS Module 1 sẽ bổ sung định hướng xây dựng phân hệ <strong>Landing Page Builder (Low-code/No-code)</strong> để đội ngũ Vận hành (VH) có thể tự thiết lập các trang đích cho 2 nhóm chiến dịch chủ lực:</p>
-    
-    <h4>1. Trang đích dịch vụ Internet & Combo (LDP Internet)</h4>
-    <ul>
-        <li><strong>Cấu trúc các Section:</strong> Hero Banner (Hook tiêu đề, icon cam kết nhanh) -> Dải Countdown đếm ngược khuyến mãi khẩn cấp -> Marquee chạy thông tin khách hàng đăng ký thành công (Social Proof) -> Bảng so sánh các gói cước Pricing Grid (Tích hợp sâu từ PDH) -> Lợi ích & Feedback khách hàng -> Form đăng ký tư vấn tích hợp Popup chúc mừng.</li>
-        <li><strong>CMS Settings:</strong> Cho phép Bật/Tắt, Kéo/Thả sắp xếp thứ tự hiển thị của từng Section. Tự động đồng bộ giá bán tối thiểu từ module PDH lên Pricing Grid hoặc cho phép ghi đè (override) text khuyến mãi đặc biệt.</li>
-    </ul>
-
-    <h4>2. Trang đích giải trí FPT Play VVIP (LDP SA)</h4>
-    <ul>
-        <li><strong>Phong cách UI:</strong> Tone màu tím đậm, xanh đen huyền bí cao cấp phong cách rạp phim.</li>
-        <li><strong>Khối nội dung tương tác (Interactive Media Tabs) - Key UX:</strong> 
-            <ul>
-                <li>Thiết lập Tab <strong>"Thể thao trực tiếp"</strong>: Hỗ trợ tính năng <em>Hover/Click phát video tự động (Autoplay trailer/highlight)</em>. Cho phép VH tải trực tiếp file video (mp4) lên CMS hoặc dán link nhúng YouTube.</li>
-                <li>Thiết lập Tab <strong>"Giải trí toàn diện"</strong>: Người dùng di chuột để chuyển đổi linh hoạt qua lại giữa các nhóm nội dung con (Phim bộ & Phim lẻ, Kênh truyền hình, Anime...).</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h4>3. Bộ tạo Form Đăng ký (Form Constructor)</h4>
-    <p>CMS sẽ cung cấp bộ tạo form cho phép cấu hình linh hoạt các trường nhập liệu cần thu thập (Họ tên, SĐT, Địa chỉ, Email) và đặt trạng thái bắt buộc (Required).</p>
-
-    <h3>6.4. Tối Ưu Hóa UI/UX Module Landing Page (LDP) Wizard</h3>
-    <ul>
-        <li>✅ <strong>Chọn Template Đầu Tiên (Đã triển khai):</strong> Tab "Chọn Template" đã được đưa lên vị trí <strong>Step 1</strong> trong Wizard. Luồng mới: <strong>① Chọn Template → ② Thông tin trang (SEO, UTM, metadata) → ③ Nội dung sections</strong>. Sau khi chọn template, hệ thống tự động chuyển sang bước Thông tin trang để hoàn thiện cấu hình trước khi vào Section Builder.</li>
-        <li><strong>Google Search Snippet Preview (SEO Mockup):</strong> Tích hợp khung xem trước giao diện kết quả tìm kiếm Google thay đổi realtime theo tiêu đề, mô tả và đường dẫn slug giúp VH chủ động kiểm soát chiều dài văn bản tránh bị cắt chữ.</li>
-        <li><strong>Auto UTM Generator (Tạo UTM Nhanh):</strong> Bổ sung nút bấm "Tạo nhanh" UTM tracking từ tên chiến dịch giúp VH thiết lập UTM Source, Medium, Campaign chuẩn hóa chỉ bằng một cú click, hiển thị preview URL đầy đủ bên dưới.</li>
-        <li><strong>Nút Di Chuyển Lên/Xuống (▲/▼) Cho Section:</strong> Hỗ trợ thêm nút mũi tên điều khiển nhanh thứ tự các Section bên cạnh biểu tượng kéo thả ☰, giúp VH thao tác cực kỳ mượt mà ngay cả trên thiết bị di động/tablet cảm ứng.</li>
-        <li><strong>Dynamic Testimonial Repeater & Upload Mockup:</strong> Nâng cấp form đánh giá khách hàng thành danh sách lặp động (cho phép thêm mới không giới hạn, xóa nhanh bằng nút 🗑). Tích hợp khung Upload ảnh giả lập hiển thị thumbnail preview thu nhỏ kèm nút xóa ảnh ✕.</li>
-    </ul>
-
-    <h3>6.5. Tái Thiết Kế Trang Cài Đặt Hiển Thị & Checkout (Mới cập nhật trong Wireframe)</h3>
-    <p>Thay đổi cấu trúc màn hình cấu hình theo phong cách hiện đại và trực quan hơn:</p>
-    <ul>
-        <li>✅ <strong>Loại bỏ Tab lồng nhau (Tabless Layout):</strong> Bỏ phân tách Tab "Cấu hình trang Checkout" và "Quản lý Popup". Tác vụ quản lý Popup được bóc tách riêng, đưa toàn bộ cấu hình ghi chú Checkout hiển thị làm nội dung chính của trang.</li>
-        <li>✅ <strong>Accordion đa kênh hiển thị (Multi-channel Accordion):</strong> Cấu trúc danh sách các kênh bán dưới dạng Accordion đóng/mở mượt mà bằng JavaScript (hàm <code>toggleChannel</code>).</li>
-        <li>✅ <strong>Logic kế thừa thông minh & Badge trạng thái:</strong>
-            <ul>
-                <li><strong>Cấu hình gốc (Global):</strong> Đóng vai trò là cấu hình mặc định ban đầu áp dụng cho toàn bộ kênh bán.</li>
-                <li><strong>Dùng Global:</strong> Các kênh con để trống thông tin sẽ tự động thừa hưởng dữ liệu từ Global, hiển thị badge màu xám <code>🌐 Dùng Global</code>.</li>
-                <li><strong>Tùy chỉnh riêng:</strong> Khi người vận hành nhập nội dung riêng cho kênh và nhấn lưu (hàm <code>saveChannel</code>), hệ thống sẽ cập nhật trạng thái sang badge màu xanh <code>✏️ Tùy chỉnh riêng</code>, đồng thời đổi màu viền Accordion để báo hiệu trạng thái ghi đè.</li>
-                <li><strong>Khôi phục mặc định:</strong> Bổ sung nút "Xóa cấu hình riêng -> về Global" (hàm <code>resetChannel</code>) giúp xóa dữ liệu tùy chỉnh và trả kênh con về trạng thái kế thừa Global ban đầu.</li>
-            </ul>
-        </li>
-        <li>✅ <strong>Trải nghiệm tương tác mượt mà (Micro-interactions):</strong> Tích hợp các thông báo Toast bay lên realtime ở góc dưới bên phải màn hình khi người dùng thực hiện Lưu thành công hoặc Reset cấu hình của kênh bán.</li>
-    </ul>
-
-    <hr>
-
-    <h2>7. Next Steps (Kế hoạch hành động tiếp theo)</h2>
+    <h2>7. Kế hoạch Hành động Tiếp theo (Next Steps)</h2>
     <ol>
-        <li><strong>Tập trung tối ưu hóa các Block & Section:</strong> Thiết lập các block hiển thị dữ liệu giá cước động kết nối với API bên thứ 3 (PDH) để đồng bộ thông tin gói cước lên Landing Page tự động.</li>
-        <li><strong>Xây dựng Engine Kéo Thả cho Landing Page Builder:</strong> Phát triển thử nghiệm luồng dựng trang bằng cách kéo thả sắp xếp thứ tự các Section (Hero Banner, Countdown, Bảng giá, Testimonials, Form Đăng ký) và cho phép Bật/Tắt từng phần.</li>
-        <li><strong>Cấu hình bộ tạo Form Constructor:</strong> Hoàn thiện giao diện cho phép cấu hình linh hoạt các trường thông tin khách hàng (Họ tên, SĐT, Địa chỉ, Email) và gửi thông tin lead về CRM.</li>
-        <li><strong>Kiểm thử khả năng tương thích hiển thị (Responsive Design):</strong> Đảm bảo tất cả các trang Landing Page tạo ra từ CMS đều hiển thị mượt mà trên cả Desktop, Tablet và Mobile.</li>
+        <li>Phát triển các Block hiển thị dữ liệu giá cước và gói cước kết nối API động với hệ thống PDH.</li>
+        <li>Xây dựng công cụ kéo thả trực quan cho LDP Builder.</li>
+        <li>Tích hợp Form Constructor thu thập lead đăng ký chuyển tiếp về CRM.</li>
+        <li>Kiểm thử khả năng tương thích Responsive hiển thị trên Mobile và Tablet.</li>
     </ol>
-
-    <hr>
-
-    <h2>8. Danh sách Yêu cầu Thay đổi từ Vận hành (VH Request Changes - Change Log)</h2>
-    <p>Phần này ghi nhận các yêu cầu thay đổi phát sinh từ đội ngũ Vận hành (VH) trong quá trình sử dụng hệ thống thực tế để tiếp tục tối ưu hóa UI/UX và luồng nghiệp vụ.</p>
-    
-    <div class="note">
-        <p><span class="tag">[Yêu cầu #1] Xử lý hiển thị Tên ảnh/File quá dài trong CMS</span></p>
-        <p><strong>Nguồn yêu cầu:</strong> Đội ngũ Vận hành (VH) - Phản ánh qua tài liệu hình ảnh yêu cầu <code>tên ảnh quá dài trong cms.png</code>.</p>
-        <p><strong>Mô tả vấn đề:</strong> Khi tải ảnh lên hệ thống (ví dụ: ảnh OG Image, Banner, Avatar Testimonial), VH có xu hướng đặt tên file rất dài để tối ưu hóa SEO và quản lý phiên bản (ví dụ: <code>banner_khuyen_mai_internet_fpt_telecom_may_2026_cuoi_thang_v2_final_optimized.png</code>). Tên file dài này khi đưa vào các trường Input URL hoặc hiển thị trên bảng danh sách sẽ bị tràn viền, mất phần mở rộng file (đuôi <code>.png</code>, <code>.jpg</code>) hoặc gây mất thẩm mỹ cho bố cục giao diện.</p>
-        <p><strong>Giải pháp tối ưu hóa UI/UX đề xuất:</strong></p>
-        <ul>
-            <li><strong>Rút gọn tên file ở giữa (Middle Truncation):</strong> Thay vì cắt đuôi file bằng dấu ba chấm thông thường ở cuối (End Truncation) làm mất định dạng file, hệ thống sẽ tự động giữ lại phần đầu và phần cuối của tên file. Ví dụ: Rút gọn thành <code>banner_khuyen_mai_..._optimized.png</code> (Hiển thị 18 ký tự đầu + "..." + 12 ký tự cuối bao gồm cả định dạng file).</li>
-            <li><strong>Tooltip hiển thị đầy đủ:</strong> Rê chuột vào tên file rút gọn sẽ xuất hiện Tooltip hiển thị tên đầy đủ của file và các thông số metadata (độ phân giải pixel, dung lượng tệp tin).</li>
-            <li><strong>Nút Copy nhanh và Xem ảnh gốc:</strong> Tích hợp nút Copy URL nhanh và nút xem trước ảnh phóng to (Lightbox) bên cạnh tên file.</li>
-            <li><strong>CSS text-overflow cho bảng dữ liệu:</strong> Cấu hình class CSS cho các cột tên file trong bảng: <code>max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;</code>.</li>
-        </ul>
-    </div>
-
-    <div class="warning">
-        <p><span class="tag">[Yêu cầu #2] Các vấn đề tồn tại của Menu Quản trị Nội dung (CMS) hiện tại cần khắc phục</span></p>
-        <p>Qua phân tích giao diện và nghiệp vụ CMS hiện tại, dưới góc độ BA/PO, chúng tôi xác định các điểm nghẽn và đề xuất cải tiến như sau:</p>
-        <ol>
-            <li><strong>Thiếu tính năng Xem trước khối (Block/Section Visual Preview):</strong>
-                <ul>
-                    <li><em>Vấn đề:</em> Khi Vận hành dựng Landing Page hoặc cấu hình Trang, họ phải chọn các Section/Block từ danh sách tên thuần văn bản (ví dụ: <code>sec_hero_combo_01</code>). Việc này buộc họ phải ghi nhớ tên hoặc đoán giao diện, rất dễ nhầm lẫn.</li>
-                    <li><em>Đề xuất:</em> Bổ sung popover hiển thị hình ảnh thumbnail thực tế của Section/Block khi rê chuột (hover preview) hoặc chọn trong LDP Builder.</li>
-                </ul>
-            </li>
-            <li><strong>Thiếu cấu hình Lên lịch hiển thị (Scheduling & Auto-publish):</strong>
-                <ul>
-                    <li><em>Vấn đề:</em> Các banner khuyến mại hoặc popup chiến dịch thường phải lên sóng chính xác vào lúc 00:00 ngày khuyến mại và hạ lúc 23:59 ngày kết thúc. Hiện tại VH phải thao tác thủ công vào các khung giờ đêm muộn.</li>
-                    <li><em>Đề xuất:</em> Bổ sung trường cấu hình thời gian áp dụng <code>[Từ ngày - Đến ngày]</code> (chọn ngày giờ chi tiết) cho Banner và Popup, hệ thống sẽ tự động Bật/Tắt dựa trên thời gian thực.</li>
-                </ul>
-            </li>
-            <li><strong>Thiếu công cụ phân nhóm Banner/Popup theo Tỉnh thành (Geotargeting):</strong>
-                <ul>
-                    <li><em>Vấn đề:</em> FPT Telecom có chính sách khuyến mại cáp quang khác nhau giữa các tỉnh thành (ví dụ: Hà Nội/TP.HCM so với các tỉnh miền Trung). Hiện chưa thể cấu hình hiển thị banner/popup đích danh cho từng khu vực địa lý.</li>
-                    <li><em>Đề xuất:</em> Thêm thuộc tính <code>Khu vực áp dụng</code> (được chọn Toàn quốc hoặc đa chọn các Tỉnh/Thành phố cụ thể) trong cấu hình Banner và Popup.</li>
-                </ul>
-            </li>
-            <li><strong>Cải tiến Form Constructor (Trình tạo Form đăng ký):</strong>
-                <ul>
-                    <li><em>Vấn đề:</em> Biểu mẫu thu thập thông tin khách hàng trên các LDP cần linh hoạt theo từng chiến dịch (ví dụ: đăng ký gói Internet chỉ cần Họ tên, SĐT, Địa chỉ; nhưng đăng ký FPT Play Playbox cần thêm trường Số CMND/CCCD hoặc Email).</li>
-                    <li><em>Đề xuất:</em> Thiết lập giao diện kéo thả quản lý danh sách trường thông tin (Field list picker), cho phép đặt nhãn hiển thị (Label), placeholder, trạng thái Bắt buộc (Required) và thứ tự hiển thị của từng trường.</li>
-                </ul>
-            </li>
-        </ol>
-    </div>
-
-    <div class="note">
-        <p><span class="tag">[Yêu cầu #3] Tách biệt URL đích của nút Xem thêm và Banner dọc trong cấu hình Block SA</span></p>
-        <p><strong>Nguồn yêu cầu:</strong> Đội ngũ Vận hành (VH) - Yêu cầu qua hình ảnh <code>tách URL đích của nút xem thêm và banner dọc block SA.png</code>.</p>
-        <p><strong>Mô tả vấn đề:</strong> Trong cấu hình của Block SA, nút "Xem thêm" và "Banner dọc" trước đây có thể chia sẻ chung một URL đích hoặc thiếu tuỳ chọn cấu hình riêng lẻ cho banner dọc. Điều này làm hạn chế khả năng điều hướng của chiến dịch Marketing khi VH muốn khách hàng click vào banner dọc thì dẫn tới trang thông tin khuyến mãi chi tiết của FPT Play (ví dụ: <code>/dang-ky-premium</code>), còn click vào nút Xem thêm ở chân block thì chuyển hướng về trang danh mục tất cả sản phẩm SA (ví dụ: <code>/danh-sach-sa</code>).</p>
-        <p><strong>Giải pháp tối ưu hóa UI/UX đã triển khai vào wireframe:</strong></p>
-        <ul>
-            <li><strong>Tách biệt cấu hình:</strong> Bổ sung phân khu cấu hình riêng biệt dành riêng cho <strong>Banner Dọc</strong> trong biểu mẫu chỉnh sửa Block (<code>#blk-form</code>), đặc biệt khi chọn Loại Block là <code>Block Dịch vụ số (SA)</code>.</li>
-            <li><strong>Cấu hình chi tiết của Banner Dọc:</strong> Thêm các trường nhập đường dẫn hình ảnh <em>Hình ảnh Banner (Desktop)</em>, <em>Hình ảnh Banner (Mobile)</em> kèm nút giả lập Upload và trường nhập <em>Link URL đích của Banner Dọc</em> riêng.</li>
-            <li><strong>Cấu hình chi tiết của Nút Xem Thêm:</strong> Đổi tên phân khu cũ thành <em>Cấu hình Nút Xem Thêm (Call-to-Action)</em> và cập nhật nhãn trường nhập thành <em>Link URL đích của nút Xem Thêm</em> để làm rõ mục tiêu điều hướng khác nhau, tránh gây nhầm lẫn cho người vận hành.</li>
-            <li><strong>Dữ liệu mẫu trực quan:</strong> Bổ sung bản ghi mẫu <code>Block Dịch vụ số (SA)</code> (mã <code>block-sa-fpt-play</code>) trong bảng danh sách Block để VH có thể click Sửa ✏️ và trải nghiệm trực tiếp giao diện cấu hình tách biệt.</li>
-        </ul>
-    </div>
 </body>
 </html>
