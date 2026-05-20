@@ -1079,41 +1079,24 @@
             <div class="menu-item" onclick="switchModule('dashboards', 'primary')" id="menu-dashboards">📊 Dashboards
             </div>
 
-            <div class="menu-category" style="color: #fbbf24;">QUẢN LÝ SẢN PHẨM</div>
-            <div class="menu-item pdh" onclick="switchModule('pdh-sku', 'warning')" id="menu-pdh-sku">SKUs</div>
-            <div class="menu-item pdh" onclick="switchModule('pdh-package', 'warning')" id="menu-pdh-package">Gói bán &
-                Giá & Phí</div>
-
-            <div class="menu-category" style="color: #10b981;">MASTER DATA</div>
-            <div class="menu-item settings" onclick="switchModule('pdh-category', 'success')" id="menu-pdh-category">
-                Danh mục</div>
-            <div class="menu-item settings" onclick="switchModule('pdh-attribute', 'success')" id="menu-pdh-attribute">
-                Đặc tính</div>
-            <div class="menu-item settings" onclick="switchModule('set-area', 'success')" id="menu-set-area">Khu vực bán
-            </div>
-
             <div class="menu-category" style="color: #60a5fa;">QUẢN LÝ NỘI DUNG (CMS)</div>
             <div class="menu-item active" onclick="switchModule('pages', 'primary')" id="menu-pages">Quản lý Trang
                 (Pages)</div>
-            <div class="menu-item" onclick="switchModule('landing', 'primary')" id="menu-landing">Landing Page (LDP)
-            </div>
             <div class="menu-item" onclick="switchModule('sections', 'primary')" id="menu-sections">Quản lý Sections
             </div>
             <div class="menu-item" onclick="switchModule('blocks', 'primary')" id="menu-blocks">Quản lý Blocks</div>
+            <div class="menu-item" onclick="switchModule('landing', 'primary')" id="menu-landing">Landing Page (LDP)
+            </div>
             <div class="menu-item" onclick="switchModule('banner', 'primary')" id="menu-banner">Quản lý Banner</div>
             <div class="menu-item" onclick="switchModule('faq', 'primary')" id="menu-faq">Quản lý Bài viết & FAQ</div>
+            <!-- Marketing Gói Bán — tạm ẩn theo yêu cầu
             <div class="menu-item" onclick="switchModule('cms-package', 'primary')" id="menu-cms-package">Marketing Gói
                 Bán</div>
+            -->
             <div class="menu-item" onclick="switchModule('cms-display', 'primary')" id="menu-cms-display">Cài đặt Hiển
                 thị</div>
             <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup
             </div>
-
-            <div class="menu-category" style="color: #a855f7;">HỢP ĐỒNG & ĐƠN HÀNG</div>
-            <div class="menu-item order" onclick="switchModule('ord-draft', 'purple')" id="menu-ord-draft">Đơn hàng tạm
-            </div>
-            <div class="menu-item order" onclick="switchModule('ord-contract', 'purple')" id="menu-ord-contract">Danh
-                sách hợp đồng</div>
         </div>
     </div>
 
@@ -3389,8 +3372,8 @@
                                 <div
                                     style="width:28px; height:28px; border-radius:50%; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff;">
                                     1</div>
-                                <span style="font-size:13px; font-weight:600; color:#fff; white-space:nowrap;">Thông tin
-                                    trang</span>
+                                <span style="font-size:13px; font-weight:600; color:#fff; white-space:nowrap;">Chọn
+                                    Template</span>
                             </div>
                             <div style="flex:1; height:1px; background:rgba(255,255,255,0.15); margin:0 16px;"></div>
                             <div id="ldp-stepind-2" onclick="ldpStep(2)"
@@ -3399,8 +3382,8 @@
                                     style="width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:var(--text-muted);">
                                     2</div>
                                 <span
-                                    style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Chọn
-                                    Template</span>
+                                    style="font-size:13px; font-weight:500; color:var(--text-muted); white-space:nowrap;">Thông
+                                    tin trang</span>
                             </div>
                             <div style="flex:1; height:1px; background:rgba(255,255,255,0.15); margin:0 16px;"></div>
                             <div id="ldp-stepind-3" style="display:flex; align-items:center; gap:8px;">
@@ -3413,8 +3396,8 @@
                             </div>
                         </div>
 
-                        <!-- STEP 1: Metadata -->
-                        <div id="ldp-step-1">
+                        <!-- STEP 2: Thông tin trang -->
+                        <div id="ldp-step-2" style="display:none;">
                             <div class="form-section">
                                 <div
                                     style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:14px;">
@@ -3567,17 +3550,20 @@
                                  </div>
 
                                 <div
-                                    style="display:flex; justify-content:flex-end; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
-                                    <button class="btn btn-secondary"
-                                        onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Hủy</button>
-                                    <button class="btn btn-primary" onclick="ldpStep(2);">Tiếp theo: Chọn Template
-                                        →</button>
+                                    style="display:flex; justify-content:space-between; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
+                                    <button class="btn btn-secondary" onclick="ldpStep(1);">← Quay lại Template</button>
+                                    <div style="display:flex; gap:10px;">
+                                        <button class="btn btn-secondary"
+                                            onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">Hủy</button>
+                                        <button class="btn btn-primary" onclick="ldpStep(3);">Tiếp theo: Nội dung
+                                            →</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- STEP 2: Template selection -->
-                        <div id="ldp-step-2" style="display:none;">
+                        <!-- STEP 1: Chọn Template (bước đầu tiên) -->
+                        <div id="ldp-step-1">
                             <div class="form-section" data-matched="true">
                                 <p style="color:var(--text-muted); font-size:14px; margin-top:0; margin-bottom:20px;">
                                     Dev đã tạo sẵn cấu trúc template — bạn chỉ cần chỉnh nội dung từng section ở bước
@@ -3677,7 +3663,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-secondary" onclick="ldpStep(1);">← Quay lại</button>
+                                <button class="btn btn-secondary" onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">← Hủy / Về danh sách</button>
                             </div>
                         </div>
 
@@ -5532,7 +5518,7 @@
             document.querySelectorAll('.ldp-sections-list').forEach(function (el) {
                 el.style.display = el.dataset.tpl === tplId ? 'block' : 'none';
             });
-            ldpStep(3);
+            ldpStep(2);
         }
 
         var currentLdpSectionId = '';

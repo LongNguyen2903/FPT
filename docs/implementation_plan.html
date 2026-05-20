@@ -24,94 +24,74 @@
     </style>
 </head>
 <body>
-    <h1>Chiến lược Hợp nhất Hệ thống: PDH -> CMS</h1>
-    <p>Dự án này nhằm mục đích hợp nhất chức năng quản lý Dữ liệu Sản phẩm (PDH) vào hệ thống Quản trị Nội dung (CMS) để tạo thành một nền tảng <strong>Unified E-commerce Admin Platform</strong> duy nhất.</p>
+    <h1>Chiến lược Phát triển Hệ thống CMS & Landing Page Builder (Cập nhật mới)</h1>
+    <p>Tài liệu này trình bày chiến lược phát triển hệ thống Quản trị Nội dung (CMS) & bộ dựng Landing Page (LDP) dành cho FPT Telecom. Các phân hệ về quản lý sản phẩm (PDH), Master Data và Đơn hàng sẽ được quản lý trên các hệ thống chuyên biệt khác và được lược bỏ khỏi phạm vi quản trị trực tiếp của hệ thống này để tối ưu hóa hiệu năng và trải nghiệm người dùng.</p>
 
     <h2>1. Đánh giá Hiện trạng & Bài toán (Problem Statement)</h2>
-    <p>Dựa trên thông tin đầu vào và <strong>kết quả quét thực tế giao diện CMS (staging.tongdaiwifi.vn)</strong>:</p>
+    <p>Dựa trên thông tin đầu vào và định hướng mới của dự án:</p>
     <ul>
-        <li><strong>CMS (Content Management System):</strong> Quản lý UI/UX. Quét hệ thống ghi nhận các menu: <em>Danh sách trang, Danh sách sections, Danh sách blocks, Danh sách menu, Danh sách banner, Danh mục câu hỏi, Danh sách câu hỏi</em>.</li>
-        <li><strong>PDH (Product Data Hub):</strong> Định hướng về Core Business Data (Quản lý Giá, Đặc tính, SKU, Gói bán, Khu vực bán).</li>
+        <li><strong>CMS (Content Management System) & LDP (Landing Page):</strong> Tập trung hoàn toàn vào việc quản lý giao diện, các trang Landing Page chiến dịch, Sections, Blocks, Banner, Câu hỏi FAQ và Popups để phục vụ tối đa cho đội ngũ Marketing và Vận hành.</li>
+        <li><strong>PDH & Orders (Quản lý Sản phẩm & Đơn hàng):</strong> Đã được lược bỏ khỏi hệ thống này do nghiệp vụ được quản lý tập trung ở hệ thống chuyên biệt khác. Việc này giúp giảm tải độ phức tạp của UI/UX và tối ưu hóa luồng công việc cho nhân sự làm nội dung.</li>
     </ul>
-    <p><strong>Vấn đề hiện tại (Pain points):</strong></p>
-    <ol>
-        <li><strong>Về Nghiệp vụ:</strong> Việc tách rời gây đứt gãy luồng vận hành (Operation). Đội Content/Marketing khó khăn khi liên kết chính xác Gói bán/SKU và giá tiền từ PDH lên Landing Page trên CMS.</li>
-        <li><strong>Về UI/UX (Dựa trên kết quả Audit CMS):</strong>
-            <ul>
-                <li>Sử dụng template mặc định (Bootstrap v4/v5) với Top-nav (Thanh điều hướng ngang) rất lãng phí không gian dọc, không phù hợp để mở rộng thêm hàng tá menu của PDH sau này.</li>
-                <li>Giao diện thiếu phân cấp thị giác (Visual hierarchy), form nhập liệu khó dùng, chỉ có filter tìm kiếm cơ bản (Global search).</li>
-                <li>Layout được build kiểu "Dev làm", thiếu tính Workflow-centric.</li>
-            </ul>
-        </li>
-    </ol>
 
-    <h2>2. Giá trị của việc Hợp nhất (Value Proposition)</h2>
-    <p>Khi đưa PDH vào trong CMS, chúng ta sẽ giải quyết được bài toán <strong>Seamless Workflow</strong>:</p>
+    <h2>2. Giá trị cốt lõi của Hệ thống (Value Proposition)</h2>
+    <p>Hệ thống tập trung giải quyết bài toán <strong>Seamless Content Workflow</strong>:</p>
     <ul>
-        <li><strong>Tích hợp sâu (Deep Integration):</strong> Tại màn hình quản lý Block của CMS, người dùng có thể <em>chọn (select)</em> trực tiếp một SKU/Gói bán vừa được tạo từ module PDH. Giá và đặc tính sẽ tự động sync ra UI mà không cần nhập tay.</li>
-        <li><strong>Single Sign-On (SSO):</strong> Nhân sự chỉ cần đăng nhập 1 lần vào 1 đường link duy nhất để setup toàn bộ chiến dịch bán hàng từ A-Z.</li>
-        <li><strong>Giảm chi phí bảo trì:</strong> Đội Dev chỉ cần duy trì 1 source code Admin duy nhất.</li>
+        <li><strong>Bộ dựng Landing Page chuyên nghiệp (LDP Builder):</strong> Cho phép Vận hành tự do kéo thả, tùy biến các trang đích cho chiến dịch Internet và FPT Play theo các template chuẩn hóa mà không phụ thuộc vào đội ngũ IT.</li>
+        <li><strong>Quản lý Cấu trúc Giao diện Linh hoạt:</strong> Tổ chức các khối nội dung dưới dạng Sections/Blocks tái sử dụng được, giúp dễ dàng nhân bản và thay đổi giao diện hàng loạt trang web vệ tinh.</li>
+        <li><strong>Tối ưu hóa SEO & UTM tự động:</strong> Tích hợp các công cụ hỗ trợ Marketing trực tiếp như Google Snippet Preview và Auto UTM Generator ngay trên luồng tạo LDP.</li>
     </ul>
 
     <hr>
 
     <h2>3. Đề xuất Kiến trúc Thông tin Mới (Proposed Information Architecture)</h2>
-    <p>Thay vì nhét bừa tính năng của PDH vào CMS, chúng ta cần quy hoạch hệ thống CMS mới thành <strong>2 Phân hệ (Modules) độc lập nhưng liên kết dữ liệu với nhau</strong>:</p>
+    <p>Hệ thống CMS mới được quy hoạch thành một phân hệ quản trị tập trung, sắp xếp thứ tự hiển thị menu điều hướng trực quan theo luồng nghiệp vụ:</p>
 
-    <h3>Phân hệ 1: Content & UI Management (Từ CMS cũ)</h3>
-    <p><em>Dành cho đội Content, Marketing, Web Master</em></p>
-    <ul>
-        <li><strong>Quản lý Cấu trúc Web:</strong> Menu điều hướng, Footer.</li>
-        <li><strong>Quản lý Trang (Pages):</strong> Landing Page, Trang chủ, Trang tĩnh.</li>
-        <li><strong>Quản lý Khối giao diện (Sections & Blocks):</strong> Banners, Khối tính năng.</li>
-        <li><strong>Quản lý Nội dung:</strong> Q&A, Tin tức, Bài viết.</li>
-    </ul>
-
-    <h3>Phân hệ 3: Landing Page Builder (Cấu hình kéo thả từ Canva Mockup)</h3>
-    <p><em>Dành cho đội Marketing & Vận hành (VH) để tự thiết lập trang Landing Page cho các chiến dịch kinh doanh</em></p>
-    <ul>
-        <li><strong>LDP Internet (Lắp đặt mạng & Combo):</strong> Tone màu cam/trắng FPT. Cấu hình Hero Banner (USP lắp đặt nhanh, modem Wifi 6), Thanh đếm ngược Countdown ưu đãi, Marquee chạy thông tin khách hàng đăng ký thành công, Bảng so sánh gói cước Pricing Grid, Khối feedback đánh giá của khách hàng, khối Combo Internet + Truyền hình và Popup Form đăng ký tư vấn.</li>
-        <li><strong>LDP SA (FPT Play VVIP):</strong> Tone màu tím/xanh đậm cao cấp phong cách rạp phim. Cấu hình Hero Banner phim hoành tráng kèm thông điệp khuyến mãi (Vòng quay xe máy điện), Khối box USP đặc quyền, và <strong>Khối nội dung tương tác (Interactive Media Tabs)</strong> hỗ trợ người dùng di chuột phát video (Autoplay mp4/YouTube) trailer thể thao độc quyền, tab Phim rạp Việt/Drama Hàn/Anime.</li>
-        <li><strong>Form Constructor (Bộ dựng form đăng ký):</strong> Tùy chỉnh linh hoạt hiển thị các trường dữ liệu (Họ tên, SĐT, Địa chỉ, Email) và cấu hình thuộc tính bắt buộc nhập (Required).</li>
-    </ul>
-
-    <h3>Phân hệ 2: Product Hub (Từ PDH chuyển sang)</h3>
-    <p><em>Dành cho đội Product, Sales, Điều hành kinh doanh để cấu hình sản phẩm bán</em></p>
-    <ul>
-        <li><strong>Danh mục:</strong> Quản lý danh mục sản phẩm tổng.</li>
-        <li><strong>Đặc tính & Nhóm đặc tính:</strong> Cấu hình các thông số kỹ thuật (vd: Tốc độ download, Tốc độ khung hình).</li>
-        <li><strong>Quản lý SKUs (Tích hợp 3rd Party):</strong> Hiển thị danh sách các mã SKU (vd: FTTH-Super80). <strong>Lưu ý:</strong> Dữ liệu này được lấy (Sync) từ hệ thống bên thứ 3, vì vậy trên CMS mới module này chỉ cấu hình hiển thị (Read-only hoặc mapping) chứ không tạo mới SKU vật lý.</li>
-        <li><strong>Nhóm SKU:</strong> Gom nhóm các thiết bị/dịch vụ (vd: Nhóm bộ accesspoint, Nhóm dịch vụ cloud).</li>
-        <li><strong>Quản lý Gói bán:</strong> Lắp ghép các SKU thành gói cước hoàn chỉnh, thêm các thông tin như RouteName, Kênh bán.</li>
-        <li><strong>Cấu hình giá bán:</strong> Thiết lập giá bán áp dụng theo Gói, theo Kênh bán và theo Khu vực.</li>
-        <li><strong>Bảng quản lý phí:</strong> Cấu hình các loại phí đi kèm (Phí lắp đặt, phí hòa mạng...).</li>
-        <li><strong>Khu vực bán:</strong> Quản lý danh sách các tỉnh thành/quận huyện áp dụng chính sách.</li>
-    </ul>
+    <h3>Phân hệ Quản trị Nội dung (CMS) & Landing Page Builder</h3>
+    <p>Thứ tự hiển thị các chức năng trên Menu Sidebar được tối ưu hóa như sau:</p>
+    <ol>
+        <li><strong>Quản lý Trang (Pages):</strong> Quản lý danh sách các trang chủ, trang tĩnh, trang tin tức chính thức.</li>
+        <li><strong>Quản lý Sections:</strong> Quản lý các phân đoạn giao diện lớn (Hero banner, Countdown, Bảng giá...).</li>
+        <li><strong>Quản lý Blocks:</strong> Quản lý các khối nội dung nhỏ, chi tiết cấu thành nên các Sections.</li>
+        <li><strong>Landing Page (LDP) Builder:</strong> Nơi dựng các trang đích chiến dịch (LDP Internet, LDP SA FPT Play) với cấu trúc kéo thả nhanh chóng.
+            <ul>
+                <li><strong>Cấu hình Tab LDP Wizard:</strong> Tab <strong>"Chọn Template"</strong> được đưa lên lựa chọn <strong>đầu tiên</strong> để định hình phong cách thiết kế ngay từ bước khởi tạo, sau đó mới đến các cấu hình khác (Thông tin chung, SEO, Cấu hình Section...).</li>
+            </ul>
+        </li>
+        <li><strong>Quản lý Banner:</strong> Quản lý các hình ảnh, slide biểu ngữ hiển thị đầu trang hoặc các khu vực quảng cáo.</li>
+        <li><strong>Quản lý Bài viết & FAQ:</strong> Quản lý danh mục bài viết tin tức và hệ thống câu hỏi thường gặp.</li>
+        <li style="color:#64748b; font-style:italic;"><s>Marketing Gói Bán</s> — <em>Tạm ẩn khỏi menu (Commented out trong wireframe). Sẽ mở lại khi có yêu cầu.</em></li>
+        <li><strong>Cài đặt Hiển thị:</strong> Cấu hình các tham số hiển thị giao diện chung (Font chữ, màu sắc chủ đạo, logo...).</li>
+        <li><strong>Quản lý Popup:</strong> Cấu hình hiển thị các popup quảng cáo, popup nhận tư vấn theo thời gian hoặc hành vi của user.</li>
+    </ol>
 
     <div class="note">
-        <p><span class="tag">[!NOTE] Phát hiện quan trọng về sự phân mảnh (Fragmentation) dựa trên 2 ảnh bổ sung:</span></p>
-        <p>Menu <strong>"Quản lý nội dung"</strong> của PDH hiện tại đang chứa 2 chức năng bị đặt sai vị trí (Misplaced):</p>
-        <ol>
-            <li><strong>Nội dung gói bán (Marketing Content cho Package):</strong> Form này cho phép nhập <em>Mô tả ngắn/dài (WYSIWYG), Hình ảnh Banner, Đặc quyền</em> cho một gói cước. Đúng ra, những thứ mang tính chất "trang trí hiển thị" này phải do hệ thống CMS đảm nhận. Việc nhồi nhét nó vào PDH là nguyên nhân gốc rễ gây ra sự rời rạc.</li>
-            <li><strong>Đơn hàng tạm (Order Management):</strong> Chứa danh sách các đơn hàng đổ về từ trang tongdaiwifi.vn. Việc đặt quản lý Đơn hàng vào thư mục "Nội dung" là một lỗi nghiêm trọng về Information Architecture.</li>
-        </ol>
-        <p><strong>Giải pháp khi Hợp nhất:</strong></p>
+        <p><span class="tag">[!NOTE] Tinh chỉnh phạm vi hệ thống (Scope Reduction) — Đã áp dụng vào wireframe:</span></p>
+        <p>Theo định hướng mới, các module quản lý dữ liệu gốc và nghiệp vụ giao dịch đã được bóc tách hoàn toàn khỏi giao diện CMS:</p>
         <ul>
-            <li>Toàn bộ tính năng nhập <em>Mô tả/Banner/Đặc quyền</em> sẽ được gỡ bỏ khỏi PDH, và chuyển sang <strong>Phân hệ CMS (Blocks/Sections)</strong>. Khi đó, người làm Content chỉ cần gọi [Mã Gói Cước] ra, rồi dùng các Block của CMS để tùy biến hiển thị.</li>
-            <li>Tính năng <strong>Đơn hàng tạm</strong> sẽ được tách ra thành một <strong>Phân hệ thứ 3: Order Management (Quản lý Đơn hàng)</strong> nằm riêng biệt trên thanh menu ngang cấp với CMS và PDH.</li>
+            <li>✅ <strong>Quản lý Sản phẩm (PDH) — Đã xoá:</strong> SKUs, Gói bán & Giá & Phí đã bị gỡ hoàn toàn khỏi sidebar. Thông tin sản phẩm được quản trị tập trung tại ERP/QLCS của FPT Telecom; CMS chỉ gọi API read-only khi cần hiển thị lên LDP.</li>
+            <li>✅ <strong>Master Data — Đã xoá:</strong> Danh mục, Đặc tính, Khu vực bán đã bị gỡ hoàn toàn. Dữ liệu gốc thuộc hệ thống ERP chuyên biệt.</li>
+            <li>✅ <strong>Hợp đồng & Đơn hàng — Đã xoá:</strong> Toàn bộ phân hệ Đơn hàng tạm & Danh sách hợp đồng đã bị gỡ. Luồng đơn hàng xử lý tại OMS/CRM trung tâm.</li>
+            <li>✅ <strong>Marketing Gói Bán — Tạm ẩn (Commented out):</strong> Mục này vẫn tồn tại trong source code dưới dạng comment HTML, có thể bật lại nhanh khi cần mà không cần viết lại.</li>
         </ul>
     </div>
 
     <hr>
 
-    <h2>4. User Review Required (Cần Chốt Về Mặt Hệ Thống)</h2>
+    <h2>4. Câu hỏi thảo luận và định hướng tích hợp (Key Alignment Questions)</h2>
     <div class="warning">
-        <p><span class="tag">[!WARNING] Để mình có thể viết URD chi tiết và vẽ luồng tích hợp, bạn cần clarify (làm rõ) với team Dev/Tech Lead các vấn đề sau:</span></p>
+        <p><span class="tag">[!WARNING] Để chuẩn bị tốt nhất cho giai đoạn tích hợp backend và phát hành LDP Builder:</span></p>
     </div>
     <ol>
-        <li><strong>Dữ liệu (Database):</strong> Hiện tại CMS và PDH có đang dùng chung một Database không? Hay là 2 DB riêng biệt (gọi qua API)? Nếu riêng biệt, khi gộp UI trên Frontend thì Backend vẫn tách đôi hay cũng đập đi xây lại làm 1?</li>
-        <li><strong>Phân quyền (RBAC - Role Based Access Control):</strong> Khi gộp vào 1 trang, chắc chắn đội cấu hình Giá (Business) không được phép bấm nhầm vào sửa Giao diện (Web Master), và ngược lại. Chúng ta có cần làm lại Module Phân Quyền (Quản lý User & Role) cho hệ thống mới này không?</li>
-        <li><strong>Mức độ tích hợp:</strong> Trong Phase 1, bạn chỉ muốn đính kèm các menu của PDH sang CMS (gộp về mặt UI để tiện login), hay muốn tích hợp sâu dữ liệu (vd: Tạo Block ở CMS có thể query thẳng dữ liệu Giá từ PDH)?</li>
+        <li><strong>API Query Sản phẩm & Giá bán:</strong> Khi dựng Landing Page, CMS cần tích hợp các API nào từ hệ thống PDH/QLCS bên thứ 3 để lấy thông tin SKU, Giá bán và Khuyến mãi tương ứng theo Tỉnh thành/Kênh bán? Có cần cơ chế cache dữ liệu sản phẩm tại CMS để đảm bảo tốc độ tải trang (Page Load Time) dưới 1.5s hay không?</li>
+        <li><strong>Tích hợp Form Đăng ký:</strong> Luồng gửi dữ liệu từ Form Constructor trên các Landing Page sẽ gọi trực tiếp đến API của CRM/OMS, hay đi qua một Middleware trung gian? Cần cơ chế lưu trữ tạm (Database log) của CMS khi API đầu cuối gặp sự cố để tránh mất lead khách hàng không?</li>
+        <li><strong>Phân quyền người dùng (RBAC):</strong> Phân chia vai trò rõ ràng giữa:
+            <ul>
+                <li><strong>Content Editor:</strong> Chỉ tạo/sửa bài viết, FAQ, banner.</li>
+                <li><strong>Marketing Campaign Manager:</strong> Có quyền tạo Landing Page, tùy chỉnh Form đăng ký và liên kết với template chiến dịch.</li>
+                <li><strong>Super Admin:</strong> Quản lý cấu trúc chung của web (Pages, Sections, Blocks) và cấu hình hiển thị hệ thống.</li>
+            </ul>
+        </li>
     </ol>
 
     <h2>5. UI/UX Revamp Strategy (Chiến lược tái thiết kế giao diện)</h2>
@@ -129,59 +109,13 @@
     <img src="images/mockup.png" alt="Unified Admin Dashboard Concept Mockup">
 
     <h2>6. Kết Quả Triển Khai Thực Tế (Actual Implementation Results)</h2>
-    <p>Chúng ta đã hiện thực hóa việc tái cấu trúc giao diện module <strong>Product Hub (PDH) - Quản lý SKU</strong> theo chuẩn <strong>FRT-Style CMS</strong> với các tính năng vượt trội:</p>
+    <p>Hệ thống đã triển khai các cập nhật quan trọng tập trung toàn diện vào mô hình Quản trị nội dung và tối ưu hóa luồng xây dựng Landing Page:</p>
     
-    <h3>6.1. Tái Thiết Kế Trang Danh Sách SKU (SKU List View)</h3>
-    <ul>
-        <li><strong>Bổ sung Stats Cards:</strong> Trực quan hóa số liệu bao gồm <em>Tổng mã SKU</em> (12.847), <em>Hoạt động</em> (11.203) và <em>Không hoạt động</em> (1.644) bằng các block màu phân cấp rõ ràng.</li>
-        <li><strong>Bộ lọc Nâng cao (Filter Bar):</strong> Tích hợp ô tìm kiếm nhanh (F1) cùng các dropdown lọc theo <em>Ngành hàng, Loại hàng, Nhãn hàng, Trạng thái</em>.</li>
-        <li><strong>Thao tác Bulk Action:</strong> Hỗ trợ kích hoạt (F12) và hủy kích hoạt nhanh (Shift+F12) cho nhiều SKU cùng lúc bằng checkbox đầu dòng.</li>
-        <li><strong>Bảng Dữ liệu Chuẩn CMS:</strong> Thiết kế độ giãn dòng tối ưu, thêm các trường quan trọng như <em>Ngày cập nhật, Người cập nhật</em> và bộ nút thao tác nhanh (Toggle Switch hoạt động, nút Copy nhanh SKU, nút Sửa nhanh ✏️).</li>
-        <li><strong>Phân trang (Pagination):</strong> Tích hợp bộ phân trang chuẩn ngay dưới bảng dữ liệu.</li>
-    </ul>
+    <h3>6.1. Quản lý SKU & Sản phẩm (Lưu ý: Đã lược bỏ)</h3>
+    <p style="color: #ef4444; font-weight: bold; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">[ĐÃ GỠ BỎ] Giao diện quản lý danh sách SKU, thuộc tính và giá cả đã được lược bỏ hoàn toàn khỏi giao diện quản trị CMS này, vì nghiệp vụ quản lý sản phẩm gốc được thực hiện trên hệ thống ERP/QLCS chuyên biệt của FPT Telecom.</p>
 
-    <h3>6.2. Nâng Cấp Trang Chi Tiết SKU (SKU Detail - Tabbed Interface)</h3>
-    <p>Thay thế hoàn toàn cấu trúc Form Wizard cũ bằng <strong>Tabbed Interface</strong> với 4 tab điều hướng ngang mượt mà, tích hợp <strong>Document Header</strong> cố định (chứa mã SKU, tên SKU, badge trạng thái và nút Lưu/Hủy nhanh F4/F8) kèm dòng <strong>Breadcrumb</strong> định danh động.</p>
-    
-    <p>Đặc biệt, <strong>Tab 1: Thông tin chung</strong> đã được thiết kế lại theo dạng lưới 3 cột, map toàn bộ các trường nghiệp vụ từ <code>image copy 4</code> và các yêu cầu Marketing chi tiết của VH:</p>
-    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #1e1e1e; border-radius: 6px; overflow: hidden;">
-        <thead>
-            <tr style="border-bottom: 2px solid #333; background: #2a2a2a;">
-                <th style="padding: 10px; text-align: left;">Nhóm trường</th>
-                <th style="padding: 10px; text-align: left;">Các Field nghiệp vụ chi tiết đã Map</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Thông tin phân loại</td>
-                <td style="padding: 10px;">Loại sản phẩm (Hàng bán/Dịch vụ), Tên SKU *, Tên hiển thị Web *</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Vận hành & Kênh bán</td>
-                <td style="padding: 10px;">Tình trạng ON/OFF (Switch), Tên Gói, URL thân thiện, Giá tối thiểu (Min Price)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Nội dung & Media (VH)</td>
-                <td style="padding: 10px;">Mô tả ngắn (Mô tắt), Mô tả dài, Thumb Image, Ảnh mô tả, Banner đầu trang, Banner giữa trang (có vùng drag & drop ảnh chuyên nghiệp)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Marketing & Đặc quyền</td>
-                <td style="padding: 10px;">Tag nổi bật, Link Thông số kỹ thuật, Thiết bị nhận thêm trong gói (multiselect), Đặc quyền, Ưu đãi đặc biệt theo Phương thức thanh toán (COD/Online)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Hỗ trợ khách hàng</td>
-                <td style="padding: 10px;">Khối câu hỏi FAQ (câu hỏi & đáp chi tiết)</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #333;">
-                <td style="padding: 10px; font-weight: bold; color: #ff9800;">Flags đặc tính (Bottom)</td>
-                <td style="padding: 10px;">Sản phẩm quản lý HCHQ, Quản lý Serial/Imei, Có tính tồn kho, Hàng EOL (End of Life)</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="tip">
-        <p><span class="tag">[!TIP] Tối ưu hóa UX:</span> Các trường nhập nội dung dài như Mô tả ngắn, Mô tả dài, FAQ được thiết kế chiếm trọn 3 cột (grid-column: 1 / span 3) giúp người quản trị dễ dàng nhập liệu, chỉnh sửa mà không bị gò bó không gian.</p>
-    </div>
+    <h3>6.2. Master Data & Đơn hàng (Lưu ý: Đã lược bỏ)</h3>
+    <p style="color: #ef4444; font-weight: bold; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">[ĐÃ GỠ BỎ] Giao diện quản trị danh mục, đặc tính, khu vực bán và danh sách đơn hàng tạm/hợp đồng đã được gỡ bỏ khỏi dự án để đảm bảo tính tinh gọn của hệ thống CMS.</p>
 
     <h3>6.3. Định Hướng Thiết Kế Landing Page Builder (Phân tích từ Canva Design)</h3>
     <p>Dựa trên rà soát thiết kế giao diện từ Canva <code>https://canva.link/ijg6d24oqyau8fs</code>, hệ thống CMS Module 1 sẽ bổ sung định hướng xây dựng phân hệ <strong>Landing Page Builder (Low-code/No-code)</strong> để đội ngũ Vận hành (VH) có thể tự thiết lập các trang đích cho 2 nhóm chiến dịch chủ lực:</p>
@@ -208,6 +142,7 @@
 
     <h3>6.4. Tối Ưu Hóa UI/UX Module Landing Page (LDP) Wizard</h3>
     <ul>
+        <li>✅ <strong>Chọn Template Đầu Tiên (Đã triển khai):</strong> Tab "Chọn Template" đã được đưa lên vị trí <strong>Step 1</strong> trong Wizard. Luồng mới: <strong>① Chọn Template → ② Thông tin trang (SEO, UTM, metadata) → ③ Nội dung sections</strong>. Sau khi chọn template, hệ thống tự động chuyển sang bước Thông tin trang để hoàn thiện cấu hình trước khi vào Section Builder.</li>
         <li><strong>Google Search Snippet Preview (SEO Mockup):</strong> Tích hợp khung xem trước giao diện kết quả tìm kiếm Google thay đổi realtime theo tiêu đề, mô tả và đường dẫn slug giúp VH chủ động kiểm soát chiều dài văn bản tránh bị cắt chữ.</li>
         <li><strong>Auto UTM Generator (Tạo UTM Nhanh):</strong> Bổ sung nút bấm "Tạo nhanh" UTM tracking từ tên chiến dịch giúp VH thiết lập UTM Source, Medium, Campaign chuẩn hóa chỉ bằng một cú click, hiển thị preview URL đầy đủ bên dưới.</li>
         <li><strong>Nút Di Chuyển Lên/Xuống (▲/▼) Cho Section:</strong> Hỗ trợ thêm nút mũi tên điều khiển nhanh thứ tự các Section bên cạnh biểu tượng kéo thả ☰, giúp VH thao tác cực kỳ mượt mà ngay cả trên thiết bị di động/tablet cảm ứng.</li>
@@ -218,9 +153,10 @@
 
     <h2>7. Next Steps (Kế hoạch hành động tiếp theo)</h2>
     <ol>
-        <li><strong>Đồng bộ hóa giao diện cho Gói bán & Cấu hình Giá bán:</strong> Áp dụng layout tabbed tương tự cho các module còn lại của Product Hub để đạt sự nhất quán 100% trải nghiệm.</li>
-        <li><strong>Kết nối API/Mock Data:</strong> Gán các thuộc tính <code>id</code> và <code>name</code> vào các form input mới tạo để chuẩn bị cho việc binding data thực tế từ backend hoặc mock service.</li>
-        <li><strong>Tích hợp sâu sang CMS:</strong> Xây dựng cơ chế liên kết khi tạo Block trong CMS để chọn trực tiếp cấu hình SKU/Gói bán đã thiết lập ở PDH.</li>
+        <li><strong>Tập trung tối ưu hóa các Block & Section:</strong> Thiết lập các block hiển thị dữ liệu giá cước động kết nối với API bên thứ 3 (PDH) để đồng bộ thông tin gói cước lên Landing Page tự động.</li>
+        <li><strong>Xây dựng Engine Kéo Thả cho Landing Page Builder:</strong> Phát triển thử nghiệm luồng dựng trang bằng cách kéo thả sắp xếp thứ tự các Section (Hero Banner, Countdown, Bảng giá, Testimonials, Form Đăng ký) và cho phép Bật/Tắt từng phần.</li>
+        <li><strong>Cấu hình bộ tạo Form Constructor:</strong> Hoàn thiện giao diện cho phép cấu hình linh hoạt các trường thông tin khách hàng (Họ tên, SĐT, Địa chỉ, Email) và gửi thông tin lead về CRM.</li>
+        <li><strong>Kiểm thử khả năng tương thích hiển thị (Responsive Design):</strong> Đảm bảo tất cả các trang Landing Page tạo ra từ CMS đều hiển thị mượt mà trên cả Desktop, Tablet và Mobile.</li>
     </ol>
 </body>
 </html>
