@@ -1714,57 +1714,72 @@
                         <!-- TAB 2: Đặc tính & TB đi kèm -->
                         <div id="sku-tab-dactinh" style="display:none;">
                             <div class="form-section">
-                                <h3>▾ 2. Đặc tính & TB đi kèm</h3>
-                                <div class="form-group" style="max-width:340px; margin-bottom:18px;"><label>Đặc
-                                        tính áp dụng</label><select class="form-select">
-                                        <option>Thông số Router/Modem</option>
-                                        <option>Thông số Camera</option>
-                                    </select></div>
+                                <h3>▾ Đặc tính sản phẩm</h3>
+                                <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap;">
+                                    <div class="form-group" style="margin:0; flex:1; max-width:340px;"><label>Nhóm đặc tính áp dụng</label>
+                                        <select class="form-select" id="dactinh-select">
+                                            <option value="modem">Thông số Router/Modem</option>
+                                            <option value="camera">Thông số Camera</option>
+                                            <option value="service">Thông số Dịch vụ</option>
+                                        </select>
+                                    </div>
+                                    <div style="font-size:12px; color:var(--text-muted); padding-top:20px;">
+                                        ☆ Tick <strong style="color:var(--primary);">Nổi bật</strong> → thông số đó hiển thị dưới gallery ảnh trên web
+                                    </div>
+                                </div>
                                 <table class="data-table">
                                     <thead>
                                         <tr>
-                                            <th>Đặc tính</th>
+                                            <th style="width:30%;">Đặc tính</th>
                                             <th>Giá trị</th>
-                                            <th>Đơn vị</th>
-                                            <th></th>
+                                            <th style="width:90px;">Đơn vị</th>
+                                            <th style="text-align:center; width:100px; color:var(--primary);">
+                                                Nổi bật ☆
+                                                <div style="font-size:10px; font-weight:400; color:var(--text-muted); margin-top:2px;">hiện dưới gallery</div>
+                                            </th>
+                                            <th style="width:44px;"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="dactinh-tbody">
                                         <tr>
                                             <td>Tốc độ WiFi</td>
-                                            <td><input type="text" class="form-input" value="1800" style="width:110px;">
+                                            <td><input type="text" class="form-input" value="1800" style="width:110px;"></td>
+                                            <td><input type="text" class="form-input" value="Mbps" style="width:80px;"></td>
+                                            <td style="text-align:center;">
+                                                <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                    <span style="font-size:11px; color:var(--primary);">Nổi bật</span>
+                                                </label>
                                             </td>
-                                            <td><input type="text" class="form-input" value="Mbps" style="width:80px;">
-                                            </td>
-                                            <td><button class="btn btn-sm"
-                                                    style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button>
-                                            </td>
+                                            <td><button class="btn btn-sm" style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button></td>
                                         </tr>
                                         <tr>
                                             <td>Chuẩn WiFi</td>
-                                            <td><select class="form-select" style="width:160px;">
-                                                    <option>WiFi 6 (802.11ax)</option>
-                                                </select></td>
+                                            <td><select class="form-select" style="width:160px;"><option>WiFi 6 (802.11ax)</option></select></td>
                                             <td></td>
-                                            <td><button class="btn btn-sm"
-                                                    style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button>
+                                            <td style="text-align:center;">
+                                                <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                    <span style="font-size:11px; color:var(--primary);">Nổi bật</span>
+                                                </label>
                                             </td>
+                                            <td><button class="btn btn-sm" style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button></td>
                                         </tr>
                                         <tr>
                                             <td>Số cổng LAN</td>
-                                            <td><input type="text" class="form-input" value="4" style="width:110px;">
+                                            <td><input type="text" class="form-input" value="4" style="width:110px;"></td>
+                                            <td><input type="text" class="form-input" value="cổng" style="width:80px;"></td>
+                                            <td style="text-align:center;">
+                                                <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                                    <span style="font-size:11px; color:var(--text-muted);">Nổi bật</span>
+                                                </label>
                                             </td>
-                                            <td><input type="text" class="form-input" value="cổng" style="width:80px;">
-                                            </td>
-                                            <td><button class="btn btn-sm"
-                                                    style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button>
-                                            </td>
+                                            <td><button class="btn btn-sm" style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button class="btn btn-secondary btn-sm"
-                                    style="margin-top:12px; border:1px dashed var(--primary); background:transparent; color:var(--primary);">+
-                                    Thêm Đặc Tính</button>
+                                <button class="btn btn-secondary btn-sm" style="margin-top:12px; border:1px dashed var(--primary); background:transparent; color:var(--primary);">+ Thêm Đặc Tính</button>
                             </div>
 
                             <!-- Thiết bị đi kèm — Read-only, sync từ QLCS/PDH -->
@@ -1926,26 +1941,10 @@
                             <!-- Phần 3: Mô tả -->
                             <div class="form-section" style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
                                 <h3>▾ Mô tả sản phẩm</h3>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                                <div style="display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:16px;">
                                     <div class="form-group">
                                         <label>Mô tả ngắn</label>
                                         <textarea class="form-textarea" style="min-height:80px;" placeholder="Tóm tắt điểm nổi bật..."></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Link thông số kỹ thuật</label>
-                                        <input type="text" class="form-input" placeholder="URL tới trang thông số chi tiết">
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:16px;">
-                                    <label>Thông số nổi bật <span style="font-size:11px; color:var(--text-muted);">ghim từ Tab Đặc tính — hiển thị dưới gallery ảnh</span></label>
-                                    <div style="display:flex; flex-wrap:wrap; gap:8px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px;">
-                                        <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); color:var(--primary); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                            📌 Tốc độ WiFi: 1800 Mbps<span style="cursor:pointer; opacity:0.7; font-size:16px;" title="Bỏ ghim">×</span>
-                                        </span>
-                                        <span style="display:inline-flex; align-items:center; gap:6px; background:rgba(59,130,246,0.12); border:1px solid rgba(59,130,246,0.3); color:var(--primary); padding:4px 10px; border-radius:20px; font-size:13px; font-weight:500;">
-                                            📌 Chuẩn WiFi: WiFi 6<span style="cursor:pointer; opacity:0.7; font-size:16px;" title="Bỏ ghim">×</span>
-                                        </span>
-                                        <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--primary); color:var(--primary); background:transparent;">+ Ghim thông số</button>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -5385,6 +5384,54 @@
         }
 
         // ===== -Style SKU Detail Functions =====
+        // Data đặc tính theo từng loại SKU
+        var dactinhData = {
+            'camera': [
+                { name: 'Độ phân giải', value: '2MP (1920×1080)', unit: '', highlight: true },
+                { name: 'Góc quan sát', value: '110', unit: '°', highlight: true },
+                { name: 'Hỗ trợ ban đêm', value: 'Có (IR 30m)', unit: '', highlight: true },
+                { name: 'Loại kết nối', value: 'WiFi / LAN', unit: '', highlight: false },
+                { name: 'Chống nước', value: 'IP67', unit: '', highlight: false },
+                { name: 'Lưu trữ', value: 'Cloud + Thẻ nhớ tối đa 128GB', unit: '', highlight: false }
+            ],
+            'modem': [
+                { name: 'Tốc độ WiFi', value: '1800', unit: 'Mbps', highlight: true },
+                { name: 'Chuẩn WiFi', value: 'WiFi 6 (802.11ax)', unit: '', highlight: true },
+                { name: 'Số cổng LAN', value: '4', unit: 'cổng', highlight: false },
+                { name: 'Băng tần', value: 'Dual Band 2.4GHz + 5GHz', unit: '', highlight: false }
+            ],
+            'service': [
+                { name: 'Tốc độ download', value: '100', unit: 'Mbps', highlight: true },
+                { name: 'Tốc độ upload', value: '50', unit: 'Mbps', highlight: true },
+                { name: 'Loại đường truyền', value: 'Cáp quang FTTH', unit: '', highlight: false },
+                { name: 'IP tĩnh', value: 'Không', unit: '', highlight: false }
+            ]
+        };
+
+        function skuRenderDactinh(dataKey) {
+            var tbody = document.getElementById('dactinh-tbody');
+            var sel = document.getElementById('dactinh-select');
+            if (!tbody) return;
+            var rows = dactinhData[dataKey] || dactinhData['modem'];
+            tbody.innerHTML = rows.map(function(r) {
+                var valCell = r.unit !== ''
+                    ? '<input type="text" class="form-input" value="' + r.value + '" style="width:110px;">'
+                    : '<input type="text" class="form-input" value="' + r.value + '" style="width:200px;">';
+                var unitCell = r.unit ? '<input type="text" class="form-input" value="' + r.unit + '" style="width:80px;">' : '';
+                var chk = r.highlight
+                    ? '<input type="checkbox" checked style="accent-color:var(--primary);width:16px;height:16px;"> <span style="font-size:11px;color:var(--primary);">Nổi bật</span>'
+                    : '<input type="checkbox" style="accent-color:var(--primary);width:16px;height:16px;"> <span style="font-size:11px;color:var(--text-muted);">Nổi bật</span>';
+                return '<tr>'
+                    + '<td>' + r.name + '</td>'
+                    + '<td>' + valCell + '</td>'
+                    + '<td>' + unitCell + '</td>'
+                    + '<td style="text-align:center;"><label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">' + chk + '</label></td>'
+                    + '<td><button class="btn btn-sm" style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button></td>'
+                    + '</tr>';
+            }).join('');
+            if (sel) sel.value = dataKey;
+        }
+
         function skuOpenDetail(code, name, type, category) {
             // Show detail, hide list
             document.getElementById('sku-list').style.display = 'none';
@@ -5398,6 +5445,13 @@
             document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
             document.getElementById('sku-bc-cat').innerText = category || '—';
             document.getElementById('sku-bc-code').innerText = code;
+
+            // Swap đặc tính data theo category
+            var cat = (category || '').toLowerCase();
+            var dataKey = cat.indexOf('camera') >= 0 ? 'camera'
+                        : cat.indexOf('internet') >= 0 || cat.indexOf('dịch vụ') >= 0 ? 'service'
+                        : 'modem';
+            skuRenderDactinh(dataKey);
 
             // Always start on Tab 1
             skuSwitchTab('chung');
