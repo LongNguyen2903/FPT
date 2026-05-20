@@ -3336,107 +3336,87 @@
                     <div id="page-list">
                         <!-- Filters -->
                         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
-                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm tên trang / URL..."></div>
+                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm kiếm theo tên, mã trang..."></div>
                             <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select"><option>Tất cả trạng thái</option><option>Hoạt động</option><option>Tạm ẩn</option></select></div>
                             <button class="btn btn-primary" style="flex-shrink:0;">Tìm Kiếm</button>
                         </div>
-
-                        <!-- Tree: Trang → Sections -->
-                        <div style="display:flex; flex-direction:column; gap:10px;">
-
-                            <!-- PAGE 1: Trang chủ -->
-                            <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
-                                <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.04);">
-                                    <span style="font-size:16px;">📄</span>
-                                    <div style="flex:1;">
-                                        <div style="font-weight:700; font-size:14px;">Trang chủ</div>
-                                        <div style="font-size:12px; color:var(--text-muted);">/home · 3 sections</div>
-                                    </div>
-                                    <span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span>
-                                    <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">Sửa</button>
-                                </div>
-                                <div style="padding:10px 16px 14px 20px; border-top:1px solid var(--border-glass); background:rgba(255,255,255,0.01); display:flex; flex-direction:column; gap:6px;">
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">├──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Hero Banner Khuyến Mãi</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Hero Banner</span>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">├──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Danh sách Gói Internet</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Product List</span>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">└──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Lợi ích nổi bật FPT</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Features</span>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- PAGE 2: Khuyến mãi Tháng 5 -->
-                            <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
-                                <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.04);">
-                                    <span style="font-size:16px;">📄</span>
-                                    <div style="flex:1;">
-                                        <div style="font-weight:700; font-size:14px;">Khuyến mãi Tháng 5</div>
-                                        <div style="font-size:12px; color:var(--text-muted);">/khuyen-mai-t5 · 2 sections</div>
-                                    </div>
-                                    <span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span>
-                                    <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">Sửa</button>
-                                </div>
-                                <div style="padding:10px 16px 14px 20px; border-top:1px solid var(--border-glass); background:rgba(255,255,255,0.01); display:flex; flex-direction:column; gap:6px;">
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">├──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Banner Nổi Bật Tháng 5</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Hero Banner</span>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">└──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Danh sách gói khuyến mãi</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Product List</span>
-                                        <span style="font-size:11px; color:var(--warning);">● Tạm ẩn</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- PAGE 3: Camera An Ninh -->
-                            <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
-                                <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(255,255,255,0.04);">
-                                    <span style="font-size:16px;">📄</span>
-                                    <div style="flex:1;">
-                                        <div style="font-weight:700; font-size:14px;">Camera An Ninh FPT</div>
-                                        <div style="font-size:12px; color:var(--text-muted);">/camera-an-ninh · 1 section</div>
-                                    </div>
-                                    <span style="background:rgba(245,158,11,0.15); color:var(--warning); padding:3px 10px; border-radius:10px; font-size:12px;">Tạm ẩn</span>
-                                    <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">Sửa</button>
-                                </div>
-                                <div style="padding:10px 16px 14px 20px; border-top:1px solid var(--border-glass); background:rgba(255,255,255,0.01); display:flex; flex-direction:column; gap:6px;">
-                                    <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; border-radius:6px; background:rgba(255,255,255,0.03);">
-                                        <span style="color:var(--text-muted); font-size:11px; min-width:20px;">└──</span>
-                                        <span style="font-size:13px;">📑</span>
-                                        <span style="font-size:13px; font-weight:500; flex:1;">Giới thiệu Camera FPT D1</span>
-                                        <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:8px;">Product Detail</span>
-                                        <span style="font-size:11px; color:var(--warning);">● Tạm ẩn</span>
-                                        <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none; white-space:nowrap;">↗ Xem Section</a>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div style="overflow-x:auto;">
+                        <table class="data-table" style="min-width:900px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px;">#</th>
+                                    <th>Tên trang</th>
+                                    <th>Mã trang</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Ngày chỉnh sửa</th>
+                                    <th style="width:80px;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color:var(--text-muted);">1</td>
+                                    <td><strong>FPT Play detail</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">truyen-hinh-fpt-play/detail</td>
+                                    <td>FPT Play detail</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">05/04/2026 23:19</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">05/04/2026 23:19</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">2</td>
+                                    <td><strong>SA detail</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">dich-vu-so/detail</td>
+                                    <td>SA detail</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">27/03/2026 10:13</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">27/03/2026 10:13</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">3</td>
+                                    <td><strong>Internet detail sections2</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">internet-detail/sections2</td>
+                                    <td>Internet detail sections2</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 08:26</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 08:26</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">4</td>
+                                    <td><strong>Internet - Wifi 2</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">internet/detail2</td>
+                                    <td>Internet - Wifi</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 08:25</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 08:26</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">5</td>
+                                    <td><strong>Dịch vụ F-Safe</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">dich-vu-f-safe</td>
+                                    <td>F-Safe FPT bảo mật Internet toàn diện cho cả gia đình</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">03/02/2026 16:40</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">18/03/2026 17:54</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">6</td>
+                                    <td><strong>Camera An Ninh FPT</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">camera-an-ninh</td>
+                                    <td>Camera An Ninh FPT – Giám sát mọi lúc mọi nơi</td>
+                                    <td><span style="background:rgba(245,158,11,0.15); color:var(--warning); padding:3px 10px; border-radius:10px; font-size:12px;">Tạm ẩn</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">03/02/2026 16:33</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">10/05/2026 09:00</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('page-form').style.display='block'; document.getElementById('page-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
 
@@ -4339,13 +4319,106 @@
                     <div id="sec-list">
                         <!-- Filters -->
                         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
-                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm kiếm section..."></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select"><option>Tất cả trang</option><option>Trang chủ</option><option>Khuyến mãi Tháng 5</option><option>Camera An Ninh FPT</option></select></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select"><option>Loại Section (Tất cả)</option><option>Hero Banner</option><option>Product List</option><option>Features</option></select></div>
+                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm kiếm theo tên section..."></div>
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select"><option>-- Chọn trang --</option><option>FPT Play detail</option><option>SA detail</option><option>Internet detail sections2</option><option>Camera An Ninh FPT</option></select></div>
                             <button class="btn btn-primary" style="flex-shrink:0;">Tìm Kiếm</button>
                         </div>
-
-                        <!-- Tree: Trang → Sections → Blocks -->
+                        <div style="overflow-x:auto;">
+                        <table class="data-table" style="min-width:1100px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px;">#</th>
+                                    <th>Tên trang</th>
+                                    <th>Tên section</th>
+                                    <th>Mã section</th>
+                                    <th>Block</th>
+                                    <th>Loại</th>
+                                    <th>Trạng thái</th>
+                                    <th style="width:60px;">Thứ tự</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width:80px;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color:var(--text-muted);">1</td>
+                                    <td style="font-size:13px;">Thiết bị thông minh</td>
+                                    <td><strong>best but 2</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">best-but-2</td>
+                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Camera Only</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">row_vat</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">23/04/2026 15:26</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">2</td>
+                                    <td style="font-size:13px;">Thiết bị thông minh</td>
+                                    <td><strong>best-dvi</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">best-sellers-dvi</td>
+                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Ultrafast</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">row_vat</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">23/04/2026 09:50</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">3</td>
+                                    <td style="font-size:13px;">SA detail</td>
+                                    <td><strong>Article SA</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">article-sa</td>
+                                    <td style="color:var(--text-muted); font-size:12px;">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">html_article</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">09/04/2026 11:09</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">4</td>
+                                    <td style="font-size:13px;">FPT Play detail</td>
+                                    <td><strong>Faqs</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">faqs</td>
+                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">question</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">05/04/2026 23:20</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">5</td>
+                                    <td style="font-size:13px;">Dịch vụ số</td>
+                                    <td><strong>Faqs</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">faqs</td>
+                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
+                                    <td style="font-size:12px; color:var(--text-muted);">question</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 12:02</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">6</td>
+                                    <td style="font-size:13px;">Dịch vụ số</td>
+                                    <td><strong>Article</strong></td>
+                                    <td style="color:var(--text-muted); font-size:12px;">article</td>
+                                    <td style="display:flex; flex-wrap:wrap; gap:4px; padding:8px 0;">
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Internet siêu tiết kiệm</span>
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Combo thể thao</span>
+                                    </td>
+                                    <td style="font-size:12px; color:var(--text-muted);">html_article</td>
+                                    <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 12:01</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('sec-form').style.display='block'; document.getElementById('sec-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
                         <div style="display:flex; flex-direction:column; gap:14px;">
 
                             <!-- GROUP: Trang chủ -->
@@ -4591,102 +4664,96 @@
                     <div id="blk-list">
                         <!-- Filters -->
                         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
-                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm kiếm block..."></div>
-                            <div class="form-group" style="margin:0; flex:1; min-width:140px;"><select class="form-select"><option>Tất cả Section</option><option>Hero Banner Khuyến Mãi</option><option>Danh sách Gói Internet</option><option>Lợi ích nổi bật FPT</option></select></div>
+                            <div class="form-group" style="margin:0; flex:2; min-width:180px;"><input type="text" class="form-input" placeholder="Tìm kiếm theo tên block..."></div>
                             <button class="btn btn-primary" style="flex-shrink:0;">Tìm Kiếm</button>
                         </div>
-
-                        <!-- Tree: Section → Blocks -->
-                        <div style="display:flex; flex-direction:column; gap:14px;">
-
-                            <!-- GROUP: Section "Hero Banner Khuyến Mãi" -->
-                            <div>
-                                <!-- Section label (kèm trang cha) -->
-                                <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; margin-bottom:6px;">
-                                    <span style="font-size:13px;">📑</span>
-                                    <span style="font-weight:700; font-size:13px; color:var(--primary);">Hero Banner Khuyến Mãi</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">thuộc</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">📄 Trang chủ</span>
-                                    <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--text-muted); text-decoration:none; margin-left:4px;">↗ Xem Section</a>
-                                </div>
-                                <div style="margin-left:20px; display:flex; flex-direction:column; gap:6px;">
-                                    <!-- Block 1 -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:8px; border-left:3px solid #6366f1; display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.02);">
-                                        <span style="font-size:14px;">🧩</span>
-                                        <div style="flex:1;">
-                                            <div style="font-weight:600; font-size:13px;">Card Gói cước Chuẩn</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">blk-card-internet · Hiển thị tên, giá và icon tốc độ · 14/05/2026</div>
-                                        </div>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">Sửa</button>
-                                    </div>
-                                    <!-- Block 2 -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:8px; border-left:3px solid #6366f1; display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.02);">
-                                        <span style="font-size:14px;">🧩</span>
-                                        <div style="flex:1;">
-                                            <div style="font-weight:600; font-size:13px;">Banner Dọc Giới thiệu</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">blk-banner-vertical · Banner dọc kèm CTA button · 12/05/2026</div>
-                                        </div>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">Sửa</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- GROUP: Section "Danh sách Gói Internet" -->
-                            <div>
-                                <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; margin-bottom:6px;">
-                                    <span style="font-size:13px;">📑</span>
-                                    <span style="font-weight:700; font-size:13px; color:var(--primary);">Danh sách Gói Internet</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">thuộc</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">📄 Trang chủ</span>
-                                    <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--text-muted); text-decoration:none; margin-left:4px;">↗ Xem Section</a>
-                                </div>
-                                <div style="margin-left:20px; display:flex; flex-direction:column; gap:6px;">
-                                    <div style="border:1px solid var(--border-glass); border-radius:8px; border-left:3px solid #6366f1; display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.02);">
-                                        <span style="font-size:14px;">🧩</span>
-                                        <div style="flex:1;">
-                                            <div style="font-weight:600; font-size:13px;">Card Gói cước Chuẩn</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">blk-card-internet · Dùng chung với Hero section · 14/05/2026</div>
-                                        </div>
-                                        <span style="font-size:11px; background:rgba(99,102,241,0.15); color:#818cf8; padding:2px 8px; border-radius:8px;">Dùng lại</span>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">Sửa</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- GROUP: Section "Lợi ích nổi bật FPT" -->
-                            <div>
-                                <div style="display:flex; align-items:center; gap:8px; padding:6px 10px; margin-bottom:6px;">
-                                    <span style="font-size:13px;">📑</span>
-                                    <span style="font-weight:700; font-size:13px; color:var(--primary);">Lợi ích nổi bật FPT</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">thuộc</span>
-                                    <span style="font-size:11px; color:var(--text-muted);">📄 Trang chủ</span>
-                                    <a href="#" onclick="switchModule('sections','primary'); return false;" style="font-size:11px; color:var(--text-muted); text-decoration:none; margin-left:4px;">↗ Xem Section</a>
-                                </div>
-                                <div style="margin-left:20px; display:flex; flex-direction:column; gap:6px;">
-                                    <div style="border:1px solid var(--border-glass); border-radius:8px; border-left:3px solid #6366f1; display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.02);">
-                                        <span style="font-size:14px;">🧩</span>
-                                        <div style="flex:1;">
-                                            <div style="font-weight:600; font-size:13px;">Icon Lợi ích Tốc độ</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">blk-icon-speed · Icon + text mô tả tốc độ · 08/05/2026</div>
-                                        </div>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">Sửa</button>
-                                    </div>
-                                    <div style="border:1px solid var(--border-glass); border-radius:8px; border-left:3px solid #6366f1; display:flex; align-items:center; gap:10px; padding:10px 14px; background:rgba(255,255,255,0.02);">
-                                        <span style="font-size:14px;">🧩</span>
-                                        <div style="flex:1;">
-                                            <div style="font-weight:600; font-size:13px;">Icon Lợi ích Bảo hành</div>
-                                            <div style="font-size:11px; color:var(--text-muted);">blk-icon-warranty · Icon + text bảo hành 24 tháng · 08/05/2026</div>
-                                        </div>
-                                        <span style="font-size:11px; color:var(--success);">● Active</span>
-                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">Sửa</button>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div style="overflow-x:auto;">
+                        <table class="data-table" style="min-width:1000px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px;">#</th>
+                                    <th>Mã block</th>
+                                    <th>Tên block</th>
+                                    <th>Tên section</th>
+                                    <th>Loại</th>
+                                    <th style="width:70px;">Thứ tự</th>
+                                    <th>Ngày tạo</th>
+                                    <th style="width:80px;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color:var(--text-muted);">1</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">internet-ca-nhan-trang-danh-muc</td>
+                                    <td><strong>Internet cá nhân trang danh mục</strong></td>
+                                    <td style="font-size:13px;">Các gói nổi bật</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">slider</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">23/04/2026 14:31</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">2</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">camera-only</td>
+                                    <td><strong>Camera Only</strong></td>
+                                    <td style="font-size:13px;">best but 2</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">slider</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">15/04/2026 09:46</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">3</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">internet-fam-test</td>
+                                    <td><strong>Internet Fam Test</strong></td>
+                                    <td style="font-size:13px;">Internet gia đình</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">slider</td>
+                                    <td style="text-align:center; color:var(--text-muted);">1</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">15/04/2026 09:07</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">4</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">cau-hoi-thuong-gap-fpt-play</td>
+                                    <td><strong>Câu hỏi thường gặp - FPT Play</strong></td>
+                                    <td style="font-size:13px;">Câu hỏi thường gặp</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">row</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">14/04/2026 15:26</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">5</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">fpl</td>
+                                    <td><strong>FPL</strong></td>
+                                    <td style="font-size:13px; color:var(--text-muted);">FPTPlay, Best sellers</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">slider</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">05/04/2026 23:08</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">6</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">ultrafast</td>
+                                    <td><strong>Ultrafast</strong></td>
+                                    <td style="font-size:13px; color:var(--text-muted);">Ultra Fast, best-dvi, Best medicare sellers, —</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">row</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 11:37</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">7</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">hyperfast</td>
+                                    <td><strong>Hyperfast</strong></td>
+                                    <td style="font-size:13px; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">slider</td>
+                                    <td style="text-align:center; color:var(--text-muted);">—</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">26/03/2026 11:34</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
 
