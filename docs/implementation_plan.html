@@ -152,6 +152,19 @@
                 </td>
                 <td><span class="badge badge-success">Đã cập nhật</span></td>
             </tr>
+            <tr>
+                <td><strong>[Yêu cầu #4]<br>BA / PO</strong></td>
+                <td>Khi một Block hiển thị danh sách nhiều Card Gói cước (như Giga, Sky, F1 đứng cạnh nhau), cấu hình gộp chung không đáp ứng được việc quản lý động nhiều card khác nhau trong cùng một Block.</td>
+                <td>
+                    <ul>
+                        <li><strong>Kiến trúc Đa Card (Multi-Card Container):</strong> Nâng cấp loại block <code>Block Gói cước (Internet)</code> thành một block chứa danh sách các Card.</li>
+                        <li><strong>Bảng quản lý Card trong Block:</strong> Bổ sung bảng danh sách các Card nằm trong Block cho phép: Thêm mới, Sửa từng Card, Xóa và Sắp xếp thứ tự (Reorder bằng thao tác kéo thả).</li>
+                        <li><strong>Modal/Popup Chi tiết Card độc lập:</strong> Khi bấm Thêm/Sửa Card, hệ thống mở một Modal độc lập để cấu hình chi tiết cho Card đó: *Badge nổi bật, Tên gói, Giá bán, Tốc độ Download/Upload, Vòng quay tốc độ (Độ xoay kim dial gauge), Thiết bị đi kèm, Mô tả phụ, URL Đăng ký và URL Xem chi tiết*.</li>
+                        <li><strong>Dữ liệu mẫu thực tế:</strong> Khởi tạo block mẫu <code>block-goi-internet-giga</code> chứa sẵn danh sách 4 card Internet (Giga, Sky, Giga F1, Sky F1) đồng bộ trực quan với trang chủ fpt.vn để Vận hành dễ dàng bấm dùng thử.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
+            </tr>
         </tbody>
     </table>
 

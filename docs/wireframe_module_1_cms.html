@@ -4660,12 +4660,22 @@
                                     <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">26/03/2026 11:34</td>
                                     <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
                                 </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">8</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">block-goi-internet-giga</td>
+                                    <td><strong>Block Gói cước Internet Giga</strong></td>
+                                    <td style="font-size:13px; color:var(--text-muted);">Danh sách gói Internet (LDP)</td>
+                                    <td style="font-size:12px; color:var(--text-muted);">Block Gói cước (Internet)</td>
+                                    <td style="text-align:center; color:var(--text-muted);">1</td>
+                                    <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">12/04/2026 15:45</td>
+                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
+                                </tr>
                             </tbody>
                         </table>
                         </div>
                         <!-- Pagination -->
                         <div style="display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px;">
-                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–7 / 18 bản ghi</span>
+                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–8 / 18 bản ghi</span>
                             <div style="display:flex; gap:4px;">
                                 <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4;">« Trước</button>
                                 <button class="btn btn-primary btn-sm">1</button>
@@ -4689,14 +4699,92 @@
                                             style="color:var(--danger)">*</span></label><input type="text"
                                         class="form-input" placeholder="VD: Card Chuẩn"></div>
                                 <div class="form-group"><label>Loại Block <span
-                                            style="color:var(--danger)">*</span></label><select class="form-select">
-                                        <option>Block Sản phẩm</option>
-                                        <option>Block Lưới (Grid)</option>
-                                        <option selected>Block Dịch vụ số (SA)</option>
+                                            style="color:var(--danger)">*</span></label><select id="blk-type-select" class="form-select" onchange="onBlockTypeChange()">
+                                        <option value="product">Block Sản phẩm</option>
+                                        <option value="grid">Block Lưới (Grid)</option>
+                                        <option value="sa">Block Dịch vụ số (SA)</option>
+                                        <option value="goi-cuoc" selected>Block Gói cước (Internet)</option>
                                     </select></div>
                                 <div class="form-group"><label>Thứ tự hiển thị</label><input type="number"
                                         class="form-input" value="1"></div>
                             </div>
+
+                            <!-- Cấu hình Card Gói Cước (Dành cho Block Gói cước Internet) -->
+                            <div id="blk-goi-cuoc-section" style="display: block;">
+                            <h4
+                                style="margin-top:30px; color:var(--success); border-bottom:1px solid var(--border-glass); padding-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                                <span>🏷️ Danh sách các Card Gói Cước trong Block</span>
+                                <button class="btn btn-success btn-sm" onclick="showAddCardModal()">+ Thêm Card Gói Mới</button>
+                            </h4>
+                            
+                            <!-- Bảng quản lý danh sách các Card trong Block -->
+                            <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass); margin-bottom: 20px;">
+                                <table class="data-table" style="width:100%; border-collapse:collapse; font-size:13px; background:rgba(0,0,0,0.2);">
+                                    <thead>
+                                        <tr style="background:rgba(0,0,0,0.25);">
+                                            <th style="width:70px; text-align:center; padding:10px;">Sắp xếp</th>
+                                            <th style="padding:10px;">Tên Gói hiển thị</th>
+                                            <th style="padding:10px;">Nhãn Badge</th>
+                                            <th style="padding:10px;">Giá bán</th>
+                                            <th style="padding:10px;">Tốc độ Download</th>
+                                            <th style="padding:10px;">Thiết bị kèm</th>
+                                            <th style="width:140px; text-align:center; padding:10px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                                            <td style="padding:10px;"><strong>Internet Giga</strong></td>
+                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
+                                            <td style="padding:10px; color:var(--success); font-weight:600;">195.000đ/tháng</td>
+                                            <td style="padding:10px;">300 Mbps</td>
+                                            <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6</td>
+                                            <td style="text-align:center; padding:10px;">
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); padding:2px 6px; font-size:11px;" onclick="showEditCardForm('giga')">✏️ Sửa</button>
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;">🗑️ Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                                            <td style="padding:10px;"><strong>Internet Sky</strong></td>
+                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp gia đình nhỏ</span></td>
+                                            <td style="padding:10px; color:var(--success); font-weight:600;">195.000đ/tháng</td>
+                                            <td style="padding:10px;">1 Gbps</td>
+                                            <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6</td>
+                                            <td style="text-align:center; padding:10px;">
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); padding:2px 6px; font-size:11px;" onclick="showEditCardForm('sky')">✏️ Sửa</button>
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;">🗑️ Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                                            <td style="padding:10px;"><strong>Internet Giga F1</strong></td>
+                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, hộ gia đình</span></td>
+                                            <td style="padding:10px; color:var(--success); font-weight:600;">205.000đ/tháng</td>
+                                            <td style="padding:10px;">300 Mbps</td>
+                                            <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6 & 01 AP</td>
+                                            <td style="text-align:center; padding:10px;">
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); padding:2px 6px; font-size:11px;" onclick="showEditCardForm('gigaf1')">✏️ Sửa</button>
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;">🗑️ Xóa</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                                            <td style="padding:10px;"><strong>Internet Sky F1</strong></td>
+                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
+                                            <td style="padding:10px; color:var(--success); font-weight:600;">210.000đ/tháng</td>
+                                            <td style="padding:10px;">1 Gbps</td>
+                                            <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6 & 01 AP</td>
+                                            <td style="text-align:center; padding:10px;">
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); padding:2px 6px; font-size:11px;" onclick="showEditCardForm('skyf1')">✏️ Sửa</button>
+                                                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;">🗑️ Xóa</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            </div> <!-- End of blk-goi-cuoc-section -->
 
                             <h4
                                 style="margin-top:30px; color:var(--primary); border-bottom:1px solid var(--border-glass); padding-bottom:10px;">
@@ -4733,6 +4821,7 @@
                                         class="form-input" placeholder="VD: /danh-sach-sa" value="/danh-sach-sa"></div>
                             </div>
 
+                            <div id="blk-pdh-assign-section" style="display: none;">
                             <h4
                                 style="margin-top:30px; color:var(--warning); border-bottom:1px solid var(--border-glass); padding-bottom:10px;">
                                 📦 Gán Sản phẩm (Package từ Product Hub)</h4>
@@ -4767,6 +4856,8 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            </div> <!-- End of blk-pdh-assign-section -->
 
                             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px;">
                                 <button class="btn btn-secondary"
@@ -6066,6 +6157,121 @@
         function closeModals() {
             document.getElementById('modal-attr-group').style.display = 'none';
             document.getElementById('modal-attr-single').style.display = 'none';
+        }
+
+        const mockCardsData = {
+            giga: {
+                pdh: 'PKG-GIGA-01',
+                badge: 'Phù hợp cá nhân, gia đình nhỏ',
+                name: 'Internet Giga',
+                price: '195.000đ',
+                download: '300 Mbps',
+                upload: '300 Mbps',
+                gauge: '50',
+                devices: 'Modem Wi-Fi 6\nKết nối lên đến 10 thiết bị',
+                note: '',
+                btn1Text: 'Đăng ký ngay',
+                btn1Url: '/checkout?pkg=giga',
+                btn2Url: '/internet-ca-nhan/giga'
+            },
+            sky: {
+                pdh: 'PKG-SKY-01',
+                badge: 'Phù hợp gia đình nhỏ',
+                name: 'Internet Sky',
+                price: '195.000đ',
+                download: '1 Gbps',
+                upload: '300 Mbps',
+                gauge: '75',
+                devices: 'Modem Wi-Fi 6\nKết nối lên đến 15 thiết bị',
+                note: '',
+                btn1Text: 'Đăng ký ngay',
+                btn1Url: '/checkout?pkg=sky',
+                btn2Url: '/internet-ca-nhan/sky'
+            },
+            gigaf1: {
+                pdh: 'PKG-F1-GIGA',
+                badge: 'Phù hợp cá nhân, hộ gia đình',
+                name: 'Internet Giga F1',
+                price: '205.000đ',
+                download: '300 Mbps',
+                upload: '300 Mbps',
+                gauge: '50',
+                devices: 'Modem Wi-Fi 6 & 01 Access Point\nKết nối lên đến 10 thiết bị',
+                note: 'Phủ sóng ổn định cho nhà ít tầng, diện tích trung bình',
+                btn1Text: 'Đăng ký ngay',
+                btn1Url: '/checkout?pkg=gigaf1',
+                btn2Url: '/internet-ca-nhan/gigaf1'
+            },
+            skyf1: {
+                pdh: 'PKG-F1-SKY',
+                badge: 'Phù hợp cá nhân, gia đình nhỏ',
+                name: 'Internet Sky F1',
+                price: '210.000đ',
+                download: '1 Gbps',
+                upload: '300 Mbps',
+                gauge: '75',
+                devices: 'Modem Wi-Fi 6 và 01 Access Point\nKết nối lên đến 15 thiết bị',
+                note: 'Phủ sóng ổn định cho nhà ít tầng, diện tích lớn',
+                btn1Text: 'Đăng ký ngay',
+                btn1Url: '/checkout?pkg=skyf1',
+                btn2Url: '/internet-ca-nhan/skyf1'
+            }
+        };
+
+        function showEditCardForm(cardId) {
+            const data = mockCardsData[cardId] || {
+                pdh: '', badge: '', name: '', price: '', download: '', upload: '', gauge: '50', devices: '', note: '', btn1Text: 'Đăng ký ngay', btn1Url: '', btn2Url: ''
+            };
+            document.getElementById('card-modal-title').innerText = '✏️ Chỉnh sửa Card Gói Cước';
+            document.getElementById('m-card-pdh').value = data.pdh;
+            document.getElementById('m-card-badge').value = data.badge;
+            document.getElementById('m-card-name').value = data.name;
+            document.getElementById('m-card-price').value = data.price;
+            document.getElementById('m-card-download').value = data.download;
+            document.getElementById('m-card-upload').value = data.upload;
+            document.getElementById('m-card-gauge').value = data.gauge;
+            document.getElementById('m-card-devices').value = data.devices;
+            document.getElementById('m-card-note').value = data.note;
+            document.getElementById('m-card-btn1-text').value = data.btn1Text;
+            document.getElementById('m-card-btn1-url').value = data.btn1Url;
+            document.getElementById('m-card-btn2-url').value = data.btn2Url;
+            document.getElementById('blk-card-modal').style.display = 'flex';
+        }
+
+        function showAddCardModal() {
+            document.getElementById('card-modal-title').innerText = '➕ Thêm Card Gói Mới';
+            document.getElementById('m-card-pdh').value = '';
+            document.getElementById('m-card-badge').value = '';
+            document.getElementById('m-card-name').value = '';
+            document.getElementById('m-card-price').value = '';
+            document.getElementById('m-card-download').value = '';
+            document.getElementById('m-card-upload').value = '';
+            document.getElementById('m-card-gauge').value = '50';
+            document.getElementById('m-card-devices').value = '';
+            document.getElementById('m-card-note').value = '';
+            document.getElementById('m-card-btn1-text').value = 'Đăng ký ngay';
+            document.getElementById('m-card-btn1-url').value = '';
+            document.getElementById('m-card-btn2-url').value = '';
+            document.getElementById('blk-card-modal').style.display = 'flex';
+        }
+
+        function saveCardData() {
+            alert('Đã cập nhật cấu hình Card Gói Cước thành công!');
+            document.getElementById('blk-card-modal').style.display = 'none';
+        }
+
+        function onBlockTypeChange() {
+            const selectVal = document.getElementById('blk-type-select').value;
+            const goiCuocSec = document.getElementById('blk-goi-cuoc-section');
+            const pdhAssignSec = document.getElementById('blk-pdh-assign-section');
+            
+            if (selectVal === 'goi-cuoc') {
+                if (goiCuocSec) goiCuocSec.style.display = 'block';
+                if (pdhAssignSec) pdhAssignSec.style.display = 'none';
+            } else {
+                if (goiCuocSec) goiCuocSec.style.display = 'none';
+                if (pdhAssignSec) pdhAssignSec.style.display = 'block';
+            }
         }
         function toggleForm(modPrefix, isFormOpen) {
             if (isFormOpen) {
@@ -7641,6 +7847,86 @@ Hỗ trợ 24/7 ưu tiên</textarea></div>
             </div>
         </div>
 
+    </div>
+
+    <!-- Modal Chi tiết Card Gói Cước -->
+    <div id="blk-card-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#18181b; border:1px solid rgba(255,255,255,0.1); border-radius:12px; width:750px; max-width:95%; padding:24px; box-shadow:0 20px 40px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:20px; color:#f4f4f5;">
+            <h3 style="margin:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; color:var(--primary); display:flex; justify-content:space-between; align-items:center; font-size:18px;">
+                <span id="card-modal-title">✏️ Cấu hình Chi tiết Card Gói Cước</span>
+                <span style="cursor:pointer; font-size:24px; line-height:1; color:#a1a1aa;" onclick="document.getElementById('blk-card-modal').style.display='none';">&times;</span>
+            </h3>
+            
+            <div style="max-height:480px; overflow-y:auto; padding-right:8px; display:flex; flex-direction:column; gap:16px;">
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                    <div class="form-group" style="grid-column: span 3;">
+                        <label>Liên kết Package gốc (từ Product Hub - PDH)</label>
+                        <select id="m-card-pdh" class="form-select">
+                            <option value="">-- Không liên kết (Nhập tay thủ công) --</option>
+                            <option value="PKG-GIGA-01" selected>PKG-GIGA-01 - Gói Internet Giga 300Mbps</option>
+                            <option value="PKG-SKY-01">PKG-SKY-01 - Gói Internet Sky 1Gbps</option>
+                            <option value="PKG-META-01">PKG-META-01 - Gói Internet Meta 1Gbps</option>
+                            <option value="PKG-F1-GIGA">PKG-F1-GIGA - Gói Internet Giga F1</option>
+                            <option value="PKG-F1-SKY">PKG-F1-SKY - Gói Internet Sky F1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nhãn nổi bật (Badge)</label>
+                        <input type="text" id="m-card-badge" class="form-input" placeholder="VD: Phù hợp cá nhân, gia đình nhỏ">
+                    </div>
+                    <div class="form-group">
+                        <label>Tên gói hiển thị</label>
+                        <input type="text" id="m-card-name" class="form-input" placeholder="VD: Internet Giga">
+                    </div>
+                    <div class="form-group">
+                        <label>Giá bán hiển thị (đ/tháng)</label>
+                        <input type="text" id="m-card-price" class="form-input" placeholder="VD: 195.000đ">
+                    </div>
+                    <div class="form-group">
+                        <label>Tốc độ Download</label>
+                        <input type="text" id="m-card-download" class="form-input" placeholder="VD: 300 Mbps">
+                    </div>
+                    <div class="form-group">
+                        <label>Tốc độ Upload</label>
+                        <input type="text" id="m-card-upload" class="form-input" placeholder="VD: 300 Mbps">
+                    </div>
+                    <div class="form-group">
+                        <label>Vòng quay tốc độ (Độ xoay kim)</label>
+                        <select id="m-card-gauge" class="form-select">
+                            <option value="30">Thấp (30%)</option>
+                            <option value="50">Trung bình (50%)</option>
+                            <option value="75">Cao (75%)</option>
+                            <option value="100">Tối đa (100% - 1Gbps)</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="grid-column: span 3;">
+                        <label>Thiết bị đi kèm & Đặc tính (Mỗi dòng 1 ý)</label>
+                        <textarea id="m-card-devices" class="form-textarea" rows="3" placeholder="VD: Modem Wi-Fi 6&#10;Kết nối lên đến 10 thiết bị"></textarea>
+                    </div>
+                    <div class="form-group" style="grid-column: span 3;">
+                        <label>Mô tả bổ sung dưới thiết bị (Tùy chọn)</label>
+                        <input type="text" id="m-card-note" class="form-input" placeholder="VD: Phủ sóng ổn định cho nhà ít tầng">
+                    </div>
+                    <div class="form-group">
+                        <label>Text nút Đăng ký ngay</label>
+                        <input type="text" id="m-card-btn1-text" class="form-input" value="Đăng ký ngay">
+                    </div>
+                    <div class="form-group">
+                        <label>URL nút Đăng ký ngay</label>
+                        <input type="text" id="m-card-btn1-url" class="form-input" placeholder="VD: /checkout?pkg=giga">
+                    </div>
+                    <div class="form-group">
+                        <label>URL nút Xem chi tiết</label>
+                        <input type="text" id="m-card-btn2-url" class="form-input" placeholder="VD: /internet-ca-nhan/giga">
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:12px; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
+                <button class="btn btn-secondary" onclick="document.getElementById('blk-card-modal').style.display='none';">Hủy</button>
+                <button class="btn btn-primary" onclick="saveCardData()">Lưu Card</button>
+            </div>
+        </div>
     </div>
 </body>
 
