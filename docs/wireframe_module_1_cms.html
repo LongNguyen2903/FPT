@@ -1648,6 +1648,9 @@
                             <div onclick="skuSwitchTab('banhang')" id="sku-tab-btn-banhang"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Gói bán</div>
+                            <div onclick="skuSwitchTab('faq')" id="sku-tab-btn-faq"
+                                style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
+                                FAQ</div>
                         </div>
 
                         <!-- Breadcrumb -->
@@ -2015,194 +2018,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Phần 5: FAQ — Linked từ thư viện Quản lý Bài viết & FAQ -->
-                            <div class="form-section" style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
-                                    <h3 style="margin:0;">▾ FAQ</h3>
-                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--success); background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:6px; padding:4px 10px;">
-                                        🔄 Đồng bộ 2 chiều với <strong>Quản lý Bài viết & FAQ</strong> — chỉnh sửa ở đây sẽ cập nhật thư viện
-                                    </span>
-                                </div>
-
-                                <div style="display:flex; flex-direction:column; gap:16px;" id="sku-faq-groups">
-
-                                    <!-- GROUP 1: Câu hỏi thường gặp về Thiết bị -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
-                                        <!-- Group header -->
-                                        <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
-                                            <span style="font-size:14px;">📂</span>
-                                            <span style="font-weight:600; font-size:13px; flex:1;">Câu hỏi thường gặp về Thiết bị</span>
-                                            <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">2 câu hỏi</span>
-                                            <a href="#" onclick="switchModule('faq','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none;">↗ Mở thư viện</a>
-                                        </div>
-
-                                        <!-- Q1 -->
-                                        <div style="border-bottom:1px solid var(--border-glass);">
-                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
-                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">1</span>
-                                                <input type="text" class="form-input" value="Modem có hỗ trợ WiFi 6 không?" style="flex:1; font-weight:500;">
-                                                <span style="font-size:10px; color:var(--success); white-space:nowrap;">✓ Đã sync</span>
-                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
-                                            </div>
-                                            <div style="padding:0 16px 12px 44px;">
-                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Có, modem hỗ trợ chuẩn WiFi 6 (802.11ax) với tốc độ lên đến 1800 Mbps.</textarea>
-                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 14/05/2026 · Admin User</div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Q2 -->
-                                        <div>
-                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
-                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">2</span>
-                                                <input type="text" class="form-input" value="Bảo hành bao lâu?" style="flex:1; font-weight:500;">
-                                                <span style="font-size:10px; color:var(--warning); white-space:nowrap;">⏳ Chưa lưu</span>
-                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
-                                            </div>
-                                            <div style="padding:0 16px 12px 44px;">
-                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Modem được bảo hành 24 tháng tại trung tâm bảo hành FPT.</textarea>
-                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 10/05/2026 · Admin User</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- GROUP 2: Khắc phục sự cố -->
-                                    <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
-                                        <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
-                                            <span style="font-size:14px;">📂</span>
-                                            <span style="font-weight:600; font-size:13px; flex:1;">Khắc phục sự cố</span>
-                                            <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">1 câu hỏi</span>
-                                            <a href="#" onclick="switchModule('faq','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none;">↗ Mở thư viện</a>
-                                        </div>
-                                        <div>
-                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
-                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">1</span>
-                                                <input type="text" class="form-input" value="WiFi bị mất kết nối thỉnh thoảng, phải làm gì?" style="flex:1; font-weight:500;">
-                                                <span style="font-size:10px; color:var(--success); white-space:nowrap;">✓ Đã sync</span>
-                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
-                                            </div>
-                                            <div style="padding:0 16px 12px 44px;">
-                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Vui lòng khởi động lại modem bằng cách rút nguồn 30 giây rồi cắm lại. Nếu vẫn xảy ra, liên hệ hotline 19006600.</textarea>
-                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 08/05/2026 · Đỗ Liên Thảo</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Action buttons -->
-                                <div style="display:flex; gap:10px; margin-top:14px;">
-                                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('faq-picker-modal').style.display='flex';" style="border:1px dashed var(--primary); color:var(--primary); background:transparent;">
-                                        + Thêm câu hỏi từ thư viện
-                                    </button>
-                                    <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--text-muted); color:var(--text-muted); background:transparent;">
-                                        ✏️ Tạo câu hỏi mới & thêm vào thư viện
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- ===== MODAL: FAQ Picker ===== -->
-                            <div id="faq-picker-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
-                                <div style="background:var(--bg-panel); border:1px solid var(--border-glass); border-radius:14px; width:100%; max-width:640px; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-                                    <!-- Modal header -->
-                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border-glass);">
-                                        <div>
-                                            <div style="font-size:16px; font-weight:700;">Thêm câu hỏi từ thư viện FAQ</div>
-                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Chọn câu hỏi theo danh mục để gắn vào SKU này</div>
-                                        </div>
-                                        <button onclick="document.getElementById('faq-picker-modal').style.display='none';" style="background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer; line-height:1;">✕</button>
-                                    </div>
-
-                                    <!-- Search -->
-                                    <div style="padding:14px 20px; border-bottom:1px solid var(--border-glass);">
-                                        <input type="text" class="form-input" placeholder="🔍 Tìm câu hỏi theo từ khoá..." style="width:100%;">
-                                    </div>
-
-                                    <!-- Grouped list -->
-                                    <div style="overflow-y:auto; flex:1; padding:14px 20px; display:flex; flex-direction:column; gap:14px;">
-
-                                        <!-- Danh mục 1 -->
-                                        <div>
-                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px;">
-                                                📂 Câu hỏi thường gặp về Thiết bị
-                                            </div>
-                                            <div style="display:flex; flex-direction:column; gap:6px;">
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
-                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">Modem có hỗ trợ WiFi 6 không?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Có, modem hỗ trợ chuẩn WiFi 6...</div>
-                                                    </div>
-                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
-                                                </label>
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
-                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">Bảo hành bao lâu?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Modem được bảo hành 24 tháng...</div>
-                                                    </div>
-                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
-                                                </label>
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
-                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">Cách kết nối modem với thiết bị khác?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Kết nối qua WiFi hoặc dây LAN...</div>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- Danh mục 2 -->
-                                        <div>
-                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">
-                                                📂 Khắc phục sự cố
-                                            </div>
-                                            <div style="display:flex; flex-direction:column; gap:6px;">
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
-                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">WiFi bị mất kết nối thỉnh thoảng, phải làm gì?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Vui lòng khởi động lại modem...</div>
-                                                    </div>
-                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
-                                                </label>
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
-                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">Làm sao đổi mật khẩu WiFi?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Truy cập 192.168.1.1 trên trình duyệt...</div>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <!-- Danh mục 3 -->
-                                        <div>
-                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">
-                                                📂 Thanh toán cước
-                                            </div>
-                                            <div style="display:flex; flex-direction:column; gap:6px;">
-                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
-                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
-                                                    <div style="flex:1;">
-                                                        <div style="font-size:13px; font-weight:500;">Làm thế nào để thanh toán cước online?</div>
-                                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Bạn có thể thanh toán qua App FPT Play, MoMo, ZaloPay...</div>
-                                                    </div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-top:1px solid var(--border-glass);">
-                                        <span style="font-size:12px; color:var(--text-muted);">1 câu hỏi được chọn thêm</span>
-                                        <div style="display:flex; gap:10px;">
-                                            <button class="btn btn-secondary" onclick="document.getElementById('faq-picker-modal').style.display='none';">Hủy</button>
-                                            <button class="btn btn-primary" onclick="document.getElementById('faq-picker-modal').style.display='none';">Thêm vào SKU →</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <!-- TAB 4: Gói bán -->
                         <div id="sku-tab-banhang" style="display:none;">
@@ -2272,6 +2087,164 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- TAB 5: FAQ -->
+                        <div id="sku-tab-faq" style="display:none;">
+                            <div class="form-section">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+                                    <div>
+                                        <h3 style="margin:0 0 4px 0;">▾ FAQ đính kèm SKU</h3>
+                                        <div style="font-size:12px; color:var(--text-muted);">Câu hỏi thường gặp hiển thị trên trang sản phẩm của SKU này</div>
+                                    </div>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--success); background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.25); border-radius:6px; padding:4px 10px;">
+                                        🔄 Đồng bộ 2 chiều với <strong>Quản lý Bài viết & FAQ</strong> — chỉnh sửa ở đây sẽ cập nhật thư viện
+                                    </span>
+                                </div>
+
+                                <div style="display:flex; flex-direction:column; gap:16px;" id="sku-faq-groups">
+
+                                    <!-- GROUP 1: Câu hỏi thường gặp về Thiết bị -->
+                                    <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
+                                        <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
+                                            <span style="font-size:14px;">📂</span>
+                                            <span style="font-weight:600; font-size:13px; flex:1;">Câu hỏi thường gặp về Thiết bị</span>
+                                            <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">2 câu hỏi</span>
+                                            <a href="#" onclick="switchModule('faq','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none;">↗ Mở thư viện</a>
+                                        </div>
+                                        <!-- Q1 -->
+                                        <div style="border-bottom:1px solid var(--border-glass);">
+                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
+                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">1</span>
+                                                <input type="text" class="form-input" value="Modem có hỗ trợ WiFi 6 không?" style="flex:1; font-weight:500;">
+                                                <span style="font-size:10px; color:var(--success); white-space:nowrap;">✓ Đã sync</span>
+                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
+                                            </div>
+                                            <div style="padding:0 16px 12px 44px;">
+                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Có, modem hỗ trợ chuẩn WiFi 6 (802.11ax) với tốc độ lên đến 1800 Mbps.</textarea>
+                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 14/05/2026 · Admin User</div>
+                                            </div>
+                                        </div>
+                                        <!-- Q2 -->
+                                        <div>
+                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
+                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">2</span>
+                                                <input type="text" class="form-input" value="Bảo hành bao lâu?" style="flex:1; font-weight:500;">
+                                                <span style="font-size:10px; color:var(--warning); white-space:nowrap;">⏳ Chưa lưu</span>
+                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
+                                            </div>
+                                            <div style="padding:0 16px 12px 44px;">
+                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Modem được bảo hành 24 tháng tại trung tâm bảo hành FPT.</textarea>
+                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 10/05/2026 · Admin User</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- GROUP 2: Khắc phục sự cố -->
+                                    <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
+                                        <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
+                                            <span style="font-size:14px;">📂</span>
+                                            <span style="font-weight:600; font-size:13px; flex:1;">Khắc phục sự cố</span>
+                                            <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">1 câu hỏi</span>
+                                            <a href="#" onclick="switchModule('faq','primary'); return false;" style="font-size:11px; color:var(--primary); text-decoration:none;">↗ Mở thư viện</a>
+                                        </div>
+                                        <div>
+                                            <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.02);">
+                                                <span style="font-size:12px; color:var(--text-muted); min-width:18px; text-align:center; font-weight:600;">1</span>
+                                                <input type="text" class="form-input" value="WiFi bị mất kết nối thỉnh thoảng, phải làm gì?" style="flex:1; font-weight:500;">
+                                                <span style="font-size:10px; color:var(--success); white-space:nowrap;">✓ Đã sync</span>
+                                                <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; border:none;" title="Gỡ khỏi SKU này">🗑</button>
+                                            </div>
+                                            <div style="padding:0 16px 12px 44px;">
+                                                <textarea class="form-textarea" style="min-height:54px; margin:0; font-size:13px;">Vui lòng khởi động lại modem bằng cách rút nguồn 30 giây rồi cắm lại. Nếu vẫn xảy ra, liên hệ hotline 19006600.</textarea>
+                                                <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">Cập nhật lần cuối: 08/05/2026 · Đỗ Liên Thảo</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Action buttons -->
+                                <div style="display:flex; gap:10px; margin-top:14px;">
+                                    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('faq-picker-modal').style.display='flex';" style="border:1px dashed var(--primary); color:var(--primary); background:transparent;">
+                                        + Thêm câu hỏi từ thư viện
+                                    </button>
+                                    <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--text-muted); color:var(--text-muted); background:transparent;">
+                                        ✏️ Tạo câu hỏi mới & thêm vào thư viện
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- ===== MODAL: FAQ Picker ===== -->
+                            <div id="faq-picker-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+                                <div style="background:var(--bg-panel); border:1px solid var(--border-glass); border-radius:14px; width:100%; max-width:640px; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border-glass);">
+                                        <div>
+                                            <div style="font-size:16px; font-weight:700;">Thêm câu hỏi từ thư viện FAQ</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Chọn câu hỏi theo danh mục để gắn vào SKU này</div>
+                                        </div>
+                                        <button onclick="document.getElementById('faq-picker-modal').style.display='none';" style="background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer; line-height:1;">✕</button>
+                                    </div>
+                                    <div style="padding:14px 20px; border-bottom:1px solid var(--border-glass);">
+                                        <input type="text" class="form-input" placeholder="🔍 Tìm câu hỏi theo từ khoá..." style="width:100%;">
+                                    </div>
+                                    <div style="overflow-y:auto; flex:1; padding:14px 20px; display:flex; flex-direction:column; gap:14px;">
+                                        <!-- Danh mục 1 -->
+                                        <div>
+                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px;">📂 Câu hỏi thường gặp về Thiết bị</div>
+                                            <div style="display:flex; flex-direction:column; gap:6px;">
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
+                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">Modem có hỗ trợ WiFi 6 không?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Có, modem hỗ trợ chuẩn WiFi 6...</div></div>
+                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
+                                                </label>
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
+                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">Bảo hành bao lâu?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Modem được bảo hành 24 tháng...</div></div>
+                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
+                                                </label>
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">Cách kết nối modem với thiết bị khác?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Kết nối qua WiFi hoặc dây LAN...</div></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- Danh mục 2 -->
+                                        <div>
+                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">📂 Khắc phục sự cố</div>
+                                            <div style="display:flex; flex-direction:column; gap:6px;">
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(16,185,129,0.05); opacity:0.6;">
+                                                    <input type="checkbox" checked disabled style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">WiFi bị mất kết nối thỉnh thoảng, phải làm gì?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Vui lòng khởi động lại modem...</div></div>
+                                                    <span style="font-size:10px; color:var(--success); white-space:nowrap; padding-top:2px;">✓ Đã thêm</span>
+                                                </label>
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">Làm sao đổi mật khẩu WiFi?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Truy cập 192.168.1.1 trên trình duyệt...</div></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- Danh mục 3 -->
+                                        <div>
+                                            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted); font-weight:700; margin-bottom:8px;">📂 Thanh toán cước</div>
+                                            <div style="display:flex; flex-direction:column; gap:6px;">
+                                                <label style="display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px; margin-top:1px; flex-shrink:0;">
+                                                    <div style="flex:1;"><div style="font-size:13px; font-weight:500;">Làm thế nào để thanh toán cước online?</div><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Bạn có thể thanh toán qua App FPT Play, MoMo, ZaloPay...</div></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-top:1px solid var(--border-glass);">
+                                        <span style="font-size:12px; color:var(--text-muted);">1 câu hỏi được chọn thêm</span>
+                                        <div style="display:flex; gap:10px;">
+                                            <button class="btn btn-secondary" onclick="document.getElementById('faq-picker-modal').style.display='none';">Hủy</button>
+                                            <button class="btn btn-primary" onclick="document.getElementById('faq-picker-modal').style.display='none';">Thêm vào SKU →</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Bottom bar -->
                         <div
                             style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-top:1px solid var(--border-glass); margin-top:8px;">
@@ -5667,7 +5640,7 @@
         }
 
         function skuSwitchTab(tabName) {
-            const tabs = ['chung', 'dactinh', 'content', 'banhang'];
+            const tabs = ['chung', 'dactinh', 'content', 'banhang', 'faq'];
             tabs.forEach(t => {
                 const content = document.getElementById('sku-tab-' + t);
                 const btn = document.getElementById('sku-tab-btn-' + t);
