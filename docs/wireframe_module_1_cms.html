@@ -1091,6 +1091,8 @@
             <div class="menu-item" onclick="switchModule('landing', 'primary')" id="menu-landing">Landing Page (LDP)
             </div>
             <div class="menu-item" onclick="switchModule('banner', 'primary')" id="menu-banner">Quản lý Banner</div>
+             <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup
+            </div>
             <div class="menu-item" onclick="switchModule('faq', 'primary')" id="menu-faq">Quản lý Bài viết & FAQ</div>
             <!-- Marketing Gói Bán — tạm ẩn theo yêu cầu
             <div class="menu-item" onclick="switchModule('cms-package', 'primary')" id="menu-cms-package">Marketing Gói
@@ -1098,8 +1100,7 @@
             -->
             <div class="menu-item" onclick="switchModule('cms-display', 'primary')" id="menu-cms-display">Cài đặt Hiển
                 thị</div>
-            <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup
-            </div>
+           
         </div>
     </div>
 
@@ -4659,22 +4660,12 @@
                                     <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">26/03/2026 11:34</td>
                                     <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
                                 </tr>
-                                <tr>
-                                    <td style="color:var(--text-muted);">8</td>
-                                    <td style="font-size:12px; color:var(--text-muted);">block-sa-fpt-play</td>
-                                    <td><strong>Block Dịch vụ số (SA)</strong></td>
-                                    <td style="font-size:13px; color:var(--text-muted);">Bảng giá &amp; Đăng ký</td>
-                                    <td style="font-size:12px; color:var(--text-muted);">Block Dịch vụ số (SA)</td>
-                                    <td style="text-align:center; color:var(--text-muted);">1</td>
-                                    <td style="font-size:12px; color:var(--text-muted); white-space:nowrap;">09/04/2026 11:10</td>
-                                    <td><button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('blk-form').style.display='block'; document.getElementById('blk-list').style.display='none';">✏️ Sửa</button></td>
-                                </tr>
                             </tbody>
                         </table>
                         </div>
                         <!-- Pagination -->
                         <div style="display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px;">
-                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–8 / 18 bản ghi</span>
+                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–7 / 18 bản ghi</span>
                             <div style="display:flex; gap:4px;">
                                 <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4;">« Trước</button>
                                 <button class="btn btn-primary btn-sm">1</button>
@@ -5679,135 +5670,242 @@
             }
             </script>
 
-            <!-- QUẢN LÝ POPUP (module riêng) -->
+            <!-- QUẢN LÝ POPUP -->
             <div id="mod-cms-popup" class="module-view">
                 <div class="card">
-                    <div class="page-header">
-                        <h2>Quản lý Popup</h2>
-                        <button class="btn btn-primary">+ Tạo Popup mới</button>
-                    </div>
 
-                    <!-- Form tạo/sửa -->
-                    <div class="form-section" style="margin-bottom:24px;">
-                        <div
-                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                            <h3 style="margin:0;">Tạo / Chỉnh sửa Popup</h3>
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <strong style="font-size:14px; color:var(--text-muted);">Trạng thái (On/Off):</strong>
-                                <label style="position:relative; display:inline-block; width:44px; height:24px;">
-                                    <input type="checkbox" checked style="opacity:0; width:0; height:0;">
-                                    <span
-                                        style="position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:var(--primary); border-radius:24px; transition:.4s;">
-                                        <span
-                                            style="position:absolute; height:18px; width:18px; left:3px; bottom:3px; background-color:white; border-radius:50%; transition:.4s; transform:translateX(20px);"></span>
-                                    </span>
-                                </label>
-                            </div>
+                    <!-- LIST VIEW -->
+                    <div id="popup-list">
+                        <div class="page-header">
+                            <h2>Quản lý Popup</h2>
+                            <button class="btn btn-primary" onclick="document.getElementById('popup-form').style.display='block'; document.getElementById('popup-list').style.display='none'; document.getElementById('popup-form-title').textContent='Tạo Popup mới';">+ Tạo Popup mới</button>
                         </div>
 
-                        <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
-                            <div class="form-group">
-                                <label>Tên Popup <span style="color:var(--danger)">*</span></label>
-                                <input type="text" class="form-input" value="Flash Sale T5">
+                        <!-- Filters -->
+                        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px;">
+                            <div class="form-group" style="margin:0; flex:2; min-width:200px;">
+                                <input type="text" class="form-input" placeholder="Tìm theo tên popup...">
                             </div>
-                            <div class="form-group">
-                                <label>Vị trí hiển thị <span style="color:var(--danger)">*</span></label>
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;">
                                 <select class="form-select">
-                                    <option>Trang chủ (Homepage)</option>
-                                    <option>Theo URL chỉ định</option>
-                                    <option>Theo Gói bán cụ thể (Trang Checkout)</option>
-                                    <option>Toàn trang (Global)</option>
+                                    <option>Tất cả vị trí</option>
+                                    <option>Trang chủ</option>
+                                    <option>Checkout</option>
+                                    <option>Toàn trang</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label>Thời gian bắt đầu <span style="color:var(--danger)">*</span></label>
-                                <input type="datetime-local" class="form-input" value="2026-05-15T00:00">
+                            <div class="form-group" style="margin:0; flex:1; min-width:140px;">
+                                <select class="form-select">
+                                    <option>Tất cả trạng thái</option>
+                                    <option>Đang chạy</option>
+                                    <option>Đã tắt</option>
+                                    <option>Hết hạn</option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label>Thời gian kết thúc <span style="color:var(--danger)">*</span></label>
-                                <input type="datetime-local" class="form-input" value="2026-05-20T23:59">
-                            </div>
+                            <button class="btn btn-primary" style="flex-shrink:0;">Tìm Kiếm</button>
                         </div>
 
-                        <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
-                            <div>
-                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Desktop) <span
-                                        style="color:var(--danger)">*</span></label>
-                                <div
-                                    style="width:120px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">
-                                    +</div>
-                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ
-                                    lệ 16:9, tối đa 1MB</span>
+                        <!-- Page size -->
+                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị</span>
+                            <select class="form-select" style="width:70px; padding:4px 8px; font-size:12px;">
+                                <option>10</option><option>25</option><option>50</option>
+                            </select>
+                            <span style="font-size:12px; color:var(--text-muted);">bản ghi / trang · Tổng: <strong>4</strong></span>
+                        </div>
+
+                        <div style="overflow-x:auto;">
+                        <table class="data-table" style="min-width:900px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px;">#</th>
+                                    <th>Tên Popup</th>
+                                    <th>Vị trí hiển thị</th>
+                                    <th>Kênh áp dụng</th>
+                                    <th>Thời gian</th>
+                                    <th style="width:110px;">Trạng thái</th>
+                                    <th style="width:120px;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color:var(--text-muted);">1</td>
+                                    <td><strong>Flash Sale T5</strong></td>
+                                    <td style="font-size:13px;">Trang chủ (Homepage)</td>
+                                    <td>
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">hifpt</span>
+                                    </td>
+                                    <td style="font-size:12px; white-space:nowrap;">15/05/2026 – 20/05/2026</td>
+                                    <td><span class="badge active" style="white-space:nowrap;">🟢 Đang chạy</span></td>
+                                    <td style="white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('popup-form').style.display='block'; document.getElementById('popup-list').style.display='none'; document.getElementById('popup-form-title').textContent='Chỉnh sửa Popup';">✏️ Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.4);">🗑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">2</td>
+                                    <td>Khuyến mãi Camera</td>
+                                    <td style="font-size:13px;">Checkout (Gói Cam)</td>
+                                    <td>
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
+                                    </td>
+                                    <td style="font-size:12px; white-space:nowrap;">01/05/2026 – 31/05/2026</td>
+                                    <td><span class="badge active" style="white-space:nowrap;">🟢 Đang chạy</span></td>
+                                    <td style="white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('popup-form').style.display='block'; document.getElementById('popup-list').style.display='none'; document.getElementById('popup-form-title').textContent='Chỉnh sửa Popup';">✏️ Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.4);">🗑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">3</td>
+                                    <td>Ưu đãi lắp mới Internet</td>
+                                    <td style="font-size:13px;">Toàn trang (Global)</td>
+                                    <td>
+                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">fpt.vn</span>
+                                    </td>
+                                    <td style="font-size:12px; white-space:nowrap;">10/04/2026 – 10/05/2026</td>
+                                    <td><span class="badge inactive" style="white-space:nowrap;">⚪ Hết hạn</span></td>
+                                    <td style="white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('popup-form').style.display='block'; document.getElementById('popup-list').style.display='none'; document.getElementById('popup-form-title').textContent='Chỉnh sửa Popup';">✏️ Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.4);">🗑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-muted);">4</td>
+                                    <td style="color:var(--text-muted);">Popup Tết 2026</td>
+                                    <td style="font-size:13px; color:var(--text-muted);">Trang chủ (Homepage)</td>
+                                    <td>
+                                        <span style="background:rgba(255,255,255,0.07); color:var(--text-muted); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">hifpt</span>
+                                    </td>
+                                    <td style="font-size:12px; white-space:nowrap; color:var(--text-muted);">20/01/2026 – 05/02/2026</td>
+                                    <td><span class="badge" style="background:rgba(255,255,255,0.07); color:var(--text-muted); white-space:nowrap;">⚫ Đã tắt</span></td>
+                                    <td style="white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('popup-form').style.display='block'; document.getElementById('popup-list').style.display='none'; document.getElementById('popup-form-title').textContent='Chỉnh sửa Popup';">✏️ Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.4);">🗑</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-top:16px; flex-wrap:wrap; gap:10px;">
+                            <span style="font-size:12px; color:var(--text-muted);">Hiển thị 1–4 / 4 bản ghi</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4;">« Trước</button>
+                                <button class="btn btn-primary btn-sm">1</button>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4;">Sau »</button>
                             </div>
-                            <div>
-                                <label style="display:block; margin-bottom:10px;">Hình ảnh Popup (Mobile) - Bottom Sheet
-                                    <span style="color:var(--danger)">*</span></label>
-                                <div
-                                    style="width:80px; height:80px; border:1px dashed var(--primary); color:var(--primary); display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; font-size:24px;">
-                                    +</div>
-                                <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:5px;">Tỷ
-                                    lệ 1:1 hoặc dọc, tối đa 1MB</span>
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom:20px;">
-                            <label>Link chuyển hướng (URL đích) khi người dùng Click <span
-                                    style="color:var(--danger)">*</span></label>
-                            <input type="text" class="form-input" value="https://fpt.vn/khuyen-mai-thang-5">
-                        </div>
-
-                        <h3
-                            style="font-size:14px; border-top:1px solid var(--border-glass); padding-top:15px; margin-bottom:15px;">
-                            Tracking UTM</h3>
-                        <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:12px;">
-                            <div class="form-group"><label>UTM Source</label><input type="text" class="form-input"
-                                    value="popup_banner"></div>
-                            <div class="form-group"><label>UTM Medium</label><input type="text" class="form-input"
-                                    value="homepage"></div>
-                            <div class="form-group"><label>UTM Campaign</label><input type="text" class="form-input"
-                                    value="flashsale_t5"></div>
-                        </div>
-                        <p style="font-size:12px; color:var(--success); margin-bottom:20px;">Link cuối:
-                            https://fpt.vn/khuyen-mai-thang-5?utm_source=popup_banner&utm_medium=homepage&utm_campaign=flashsale_t5
-                        </p>
-
-                        <div style="display:flex; justify-content:flex-end; gap:10px;">
-                            <button class="btn btn-secondary">Hủy</button>
-                            <button class="btn btn-primary">Lưu Popup</button>
                         </div>
                     </div>
 
-                    <!-- Danh sách -->
-                    <h3 style="margin-bottom:15px;">Danh sách Popup</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Tên Popup</th>
-                                <th>Vị trí</th>
-                                <th>Thời gian</th>
-                                <th>Trạng thái</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Flash Sale T5</strong></td>
-                                <td>Trang chủ</td>
-                                <td>15/05/2026 – 20/05/2026</td>
-                                <td><span class="badge active">Đang chạy</span></td>
-                                <td><button class="btn btn-secondary btn-sm"
-                                        style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
-                            </tr>
-                            <tr>
-                                <td>Khuyến mãi Camera</td>
-                                <td>Checkout (Gói Cam)</td>
-                                <td>01/05/2026 – 31/05/2026</td>
-                                <td><span class="badge active">Đang chạy</span></td>
-                                <td><button class="btn btn-secondary btn-sm"
-                                        style="color:var(--primary); border-color:var(--primary);">Sửa</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- FORM VIEW (ẩn mặc định) -->
+                    <div id="popup-form" style="display:none;">
+                        <div class="page-header">
+                            <h2 id="popup-form-title">Tạo Popup mới</h2>
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-size:13px; color:var(--text-muted);">Trạng thái:</span>
+                                <label style="position:relative; display:inline-block; width:44px; height:24px; cursor:pointer;">
+                                    <input type="checkbox" checked style="opacity:0; width:0; height:0;">
+                                    <span style="position:absolute; top:0; left:0; right:0; bottom:0; background:var(--primary); border-radius:24px;">
+                                        <span style="position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transform:translateX(20px);"></span>
+                                    </span>
+                                </label>
+                                <span style="font-size:13px; color:var(--success);">Bật</span>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <!-- Thông tin cơ bản -->
+                            <h4 style="margin:0 0 16px; color:var(--primary); font-size:13px; text-transform:uppercase; letter-spacing:0.5px;">Thông tin cơ bản</h4>
+                            <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+                                <div class="form-group" style="margin:0;">
+                                    <label>Tên Popup <span style="color:var(--danger)">*</span></label>
+                                    <input type="text" class="form-input" value="Flash Sale T5">
+                                </div>
+                                <div class="form-group" style="margin:0;">
+                                    <label>Vị trí hiển thị <span style="color:var(--danger)">*</span></label>
+                                    <select class="form-select">
+                                        <option>Trang chủ (Homepage)</option>
+                                        <option>Theo URL chỉ định</option>
+                                        <option>Theo Gói bán cụ thể (Trang Checkout)</option>
+                                        <option>Toàn trang (Global)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin:0;">
+                                    <label>Thời gian bắt đầu <span style="color:var(--danger)">*</span></label>
+                                    <input type="datetime-local" class="form-input" value="2026-05-15T00:00">
+                                </div>
+                                <div class="form-group" style="margin:0;">
+                                    <label>Thời gian kết thúc <span style="color:var(--danger)">*</span></label>
+                                    <input type="datetime-local" class="form-input" value="2026-05-20T23:59">
+                                </div>
+                            </div>
+
+                            <!-- Kênh áp dụng -->
+                            <div class="form-group" style="margin-bottom:20px;">
+                                <label>Kênh áp dụng <span style="color:var(--danger)">*</span></label>
+                                <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;">
+                                    <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px;">
+                                        <input type="checkbox" checked style="accent-color:var(--primary);"> tongdaiwifi
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px;">
+                                        <input type="checkbox" checked style="accent-color:var(--primary);"> hifpt
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px;">
+                                        <input type="checkbox" style="accent-color:var(--primary);"> fpt.vn
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:13px;">
+                                        <input type="checkbox" style="accent-color:var(--primary);"> fptshop
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Hình ảnh -->
+                            <h4 style="margin:0 0 16px; color:var(--primary); font-size:13px; text-transform:uppercase; letter-spacing:0.5px; border-top:1px solid var(--border-glass); padding-top:16px;">Hình ảnh</h4>
+                            <div class="form-grid" style="grid-template-columns:1fr 1fr; gap:24px; margin-bottom:20px;">
+                                <div>
+                                    <label style="display:block; margin-bottom:10px; font-size:13px;">Desktop <span style="color:var(--danger)">*</span>
+                                        <span style="color:var(--text-muted); font-size:11px;">(Tỷ lệ 16:9, tối đa 1MB)</span>
+                                    </label>
+                                    <div style="width:200px; height:120px; border:2px dashed rgba(69,100,237,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
+                                        <span style="font-size:28px;">🖼</span> Tải ảnh lên
+                                    </div>
+                                </div>
+                                <div>
+                                    <label style="display:block; margin-bottom:10px; font-size:13px;">Mobile / Bottom Sheet <span style="color:var(--danger)">*</span>
+                                        <span style="color:var(--text-muted); font-size:11px;">(Tỷ lệ 1:1 hoặc dọc, tối đa 1MB)</span>
+                                    </label>
+                                    <div style="width:100px; height:120px; border:2px dashed rgba(69,100,237,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
+                                        <span style="font-size:28px;">📱</span> Tải ảnh
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Link & UTM -->
+                            <h4 style="margin:0 0 16px; color:var(--primary); font-size:13px; text-transform:uppercase; letter-spacing:0.5px; border-top:1px solid var(--border-glass); padding-top:16px;">Link & Tracking</h4>
+                            <div class="form-group" style="margin-bottom:16px;">
+                                <label>URL đích khi người dùng click <span style="color:var(--danger)">*</span></label>
+                                <input type="text" class="form-input" value="https://fpt.vn/khuyen-mai-thang-5">
+                            </div>
+                            <div class="form-grid" style="grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:8px;">
+                                <div class="form-group" style="margin:0;"><label>UTM Source</label><input type="text" class="form-input" value="popup_banner"></div>
+                                <div class="form-group" style="margin:0;"><label>UTM Medium</label><input type="text" class="form-input" value="homepage"></div>
+                                <div class="form-group" style="margin:0;"><label>UTM Campaign</label><input type="text" class="form-input" value="flashsale_t5"></div>
+                            </div>
+                            <p style="font-size:12px; color:var(--success); margin-bottom:24px;">
+                                🔗 URL cuối: https://fpt.vn/khuyen-mai-thang-5?utm_source=popup_banner&utm_medium=homepage&utm_campaign=flashsale_t5
+                            </p>
+
+                            <!-- Actions -->
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:20px;">
+                                <button class="btn btn-secondary" onclick="document.getElementById('popup-form').style.display='none'; document.getElementById('popup-list').style.display='block';">← Hủy / Quay lại</button>
+                                <button class="btn btn-primary">Lưu Popup</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
