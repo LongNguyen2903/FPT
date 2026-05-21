@@ -6494,41 +6494,41 @@
         };
 
         function skuRenderDactinh(dataKey) {
-            var tbody = document.getElementById('dactinh-tbody');
-            var sel = document.getElementById('dactinh-select');
-            if (!tbody) return;
+            var list = document.getElementById('dactinh-attr-list');
+            var sel  = document.getElementById('dactinh-nhom-select');
+            if (!list) return;
 
             var isService = (dataKey === 'service');
 
-            // Toggle cột Nổi bật + notes theo loại
-            var thNoibat = document.getElementById('dactinh-th-noibat');
-            var hintEl   = document.getElementById('dactinh-noibat-hint');
-            var noteEl   = document.getElementById('dactinh-service-note');
-            if (thNoibat) thNoibat.style.display = isService ? 'none' : '';
-            if (hintEl)   hintEl.style.display   = isService ? 'none' : '';
-            if (noteEl)   noteEl.style.display    = isService ? 'block' : 'none';
+            // Sync select value
+            if (sel) sel.value = isService ? 'dichvu' : (dataKey === 'camera' ? 'camera' : 'thietbi');
+
+            // Toggle Nổi bật column visibility
+            toggleDactinhNoibat(isService ? 'dichvu' : 'thietbi');
+
+            // Render rows (remove old dynamic rows first, keep header)
+            var header = document.getElementById('dactinh-header-row');
+            list.querySelectorAll('.dactinh-row').forEach(function(el){ el.remove(); });
 
             var rows = dactinhData[dataKey] || dactinhData['modem'];
-            tbody.innerHTML = rows.map(function(r) {
-                var valCell = r.unit !== ''
-                    ? '<input type="text" class="form-input" value="' + r.value + '" style="width:110px;">'
-                    : '<input type="text" class="form-input" value="' + r.value + '" style="width:200px;">';
-                var unitCell = r.unit ? '<input type="text" class="form-input" value="' + r.unit + '" style="width:80px;">' : '';
-                var chkCell = isService ? '<td style="display:none;"></td>'
-                    : '<td style="text-align:center;"><label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;">'
-                        + (r.highlight
-                            ? '<input type="checkbox" checked style="accent-color:var(--primary);width:16px;height:16px;"> <span style="font-size:11px;color:var(--primary);">Nổi bật</span>'
-                            : '<input type="checkbox" style="accent-color:var(--primary);width:16px;height:16px;"> <span style="font-size:11px;color:var(--text-muted);">Nổi bật</span>')
-                        + '</label></td>';
-                return '<tr>'
-                    + '<td>' + r.name + '</td>'
-                    + '<td>' + valCell + '</td>'
-                    + '<td>' + unitCell + '</td>'
-                    + chkCell
-                    + '<td><button class="btn btn-sm" style="background:rgba(239,68,68,0.2);color:#ef4444;">🗑</button></td>'
-                    + '</tr>';
-            }).join('');
-            if (sel) sel.value = dataKey;
+            rows.forEach(function(r, i) {
+                var div = document.createElement('div');
+                div.className = 'dactinh-row';
+                var isLast = i === rows.length - 1;
+                div.style.cssText = 'display:flex;align-items:center;gap:0;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
+
+                var valText = r.value + (r.unit ? ' <span style="font-size:11px;color:var(--text-muted);font-weight:400;">' + r.unit + '</span>' : '');
+                var noibatCol = isService ? '' :
+                    '<label class="col-noibat" style="width:100px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
+                    + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;">'
+                    + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
+                    + '</label>';
+
+                div.innerHTML = '<span style="font-size:13px;color:var(--text-muted);min-width:180px;flex-shrink:0;">' + r.name + '</span>'
+                    + '<span style="font-size:13px;color:#e0e0e0;font-weight:500;flex:1;">' + valText + '</span>'
+                    + noibatCol;
+                list.appendChild(div);
+            });
         }
 
         function skuOpenDetail(code, name, type, category) {
