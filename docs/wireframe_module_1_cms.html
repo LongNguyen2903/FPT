@@ -1646,9 +1646,6 @@
                             <div onclick="skuSwitchTab('content')" id="sku-tab-btn-content"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Quản lý Content</div>
-                            <div onclick="skuSwitchTab('banhang')" id="sku-tab-btn-banhang"
-                                style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
-                                Gói bán</div>
                             <div onclick="skuSwitchTab('faq')" id="sku-tab-btn-faq"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 FAQ</div>
@@ -2020,8 +2017,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- TAB 4: Gói bán -->
-                        <div id="sku-tab-banhang" style="display:none;">
+                        <!-- TAB 4: Gói bán (ẩn theo yêu cầu) -->
+                        <div id="sku-tab-banhang" style="display:none !important;">
                             <div class="form-section">
                                 <h3>▾ 4. Gói bán</h3>
                                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:20px;">
@@ -6420,7 +6417,7 @@
         }
 
         function skuSwitchTab(tabName) {
-            const tabs = ['chung', 'dactinh', 'content', 'banhang', 'faq'];
+            const tabs = ['chung', 'dactinh', 'content', 'faq'];
             tabs.forEach(t => {
                 const content = document.getElementById('sku-tab-' + t);
                 const btn = document.getElementById('sku-tab-btn-' + t);
