@@ -5248,8 +5248,8 @@
                         Quản lý tập trung các tag liên kết để tự động hiển thị bài viết tin tức & FAQ tại trang chi tiết SKU sản phẩm. Hệ thống sẽ truy vấn các bài viết có tag trùng khớp với tag sản phẩm để hiển thị tự động.
                     </p>
 
-                    <div style="display:grid; grid-template-columns: 1.25fr 1fr; gap:24px;">
-                        <!-- Cột Trái: Bảng quản lý Mapping -->
+                    <div style="display:flex; flex-direction:column; gap:16px;">
+                        <!-- Bảng quản lý Mapping -->
                         <div style="display:flex; flex-direction:column; gap:16px;">
                             <div class="form-grid filters" style="grid-template-columns: 2fr 1fr; gap:12px; margin-bottom: 0; display:flex;">
                                 <input type="text" id="tag-mapping-search" class="form-input" placeholder="Tìm kiếm Tag..." oninput="filterTagMappingTable()" style="flex:1;">
@@ -5262,8 +5262,8 @@
                                         <tr>
                                             <th>Tag</th>
                                             <th>SKUs Liên Kết</th>
-                                            <th>Fallback</th>
-                                            <th>Bài trùng</th>
+                                            <th>Trạng thái Fallback</th>
+                                            <th>Bài viết khớp Tag</th>
                                             <th style="text-align:right;">Thao tác</th>
                                         </tr>
                                     </thead>
@@ -5273,68 +5273,80 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- Cột Phải: Cấu hình chi tiết & Live Preview -->
-                        <div style="display:flex; flex-direction:column; gap:20px; background:rgba(255,255,255,0.015); border:1px solid var(--border-glass); border-radius:10px; padding:20px;">
-                            <!-- Form Chỉnh sửa Cấu hình Tag -->
-                            <div id="tag-config-panel" style="border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:20px;">
-                                <h3 id="tag-config-title" style="margin-top:0; margin-bottom:12px; color:var(--primary);">Chọn một Tag để cấu hình</h3>
-                                <input type="hidden" id="selected-tag-name" value="">
-                                
-                                <div class="form-group" style="margin-bottom:16px;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                        <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
-                                        <button type="button" class="btn btn-secondary btn-sm" onclick="openSkuSelectorModal()" style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
-                                            <span>✏️ Quản lý SKUs</span>
-                                        </button>
-                                    </div>
-                                    <div id="tag-selected-skus-preview" style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.2); border:1px solid rgba(255,255,255,0.05); padding:10px; border-radius:8px; min-height:48px; max-height:120px; overflow-y:auto;">
-                                        <span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>
-                                    </div>
+            <!-- Modal Cấu hình Tag Mapping (Tag Config Modal) -->
+            <div id="tag-config-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+                <div class="card" style="width:820px; max-width:92%; padding:24px; margin: 4% auto; position:relative; box-shadow: 0 10px 30px rgba(0,0,0,0.6); background: var(--bg-panel); border: 1px solid var(--border-glass); display:flex; flex-direction:column; gap:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+                        <h3 id="tag-config-title" style="margin:0; color:#fff; font-size:16px; display:flex; align-items:center; gap:8px;">
+                            <span>⚙️ Cấu hình Tag Mapping</span>
+                        </h3>
+                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);" onclick="resetTagConfig()">✕</span>
+                    </div>
+
+                    <input type="hidden" id="selected-tag-name" value="">
+
+                    <!-- Layout 2 cột bên trong Modal -->
+                    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap:20px;">
+                        <!-- Cột Trái: Các trường cấu hình -->
+                        <div style="display:flex; flex-direction:column; gap:16px; border-right: 1px solid rgba(255,255,255,0.08); padding-right:20px;">
+                            <div class="form-group" style="margin-bottom:0;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                    <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="openSkuSelectorModal()" style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
+                                        <span>✏️ Quản lý SKUs</span>
+                                    </button>
                                 </div>
-
-                                <div class="form-group" style="margin-bottom:16px;">
-                                    <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:10px 12px; border-radius:6px;">
-                                        <div style="display:flex; flex-direction:column; gap:2px; flex:1; padding-right:10px;">
-                                            <span style="font-size:12.5px; font-weight:500;">Quy tắc Fallback khi không khớp</span>
-                                            <span style="font-size:11px; color:var(--text-muted);">Hiển thị Bài viết Khuyến mãi Hot khi không khớp bài trùng tag.</span>
-                                        </div>
-                                        <label class="switch"><input type="checkbox" id="tag-fallback-toggle" onchange="updateTagMappingPreview()"><span class="slider"></span></label>
-                                    </div>
-                                </div>
-
-                                <div style="display:flex; justify-content:flex-end; gap:8px;">
-                                    <button class="btn btn-secondary btn-sm" onclick="resetTagConfig()">Hủy</button>
-                                    <button class="btn btn-primary btn-sm" id="btn-save-tag-config" onclick="saveTagConfig()">Lưu cấu hình</button>
+                                <div id="tag-selected-skus-preview" style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.25); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px; min-height:100px; max-height:160px; overflow-y:auto;">
+                                    <span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>
                                 </div>
                             </div>
 
-                            <!-- Live Preview khối "Thông tin hay" -->
-                            <div style="display:flex; flex-direction:column; gap:12px; flex:1;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                    <span style="font-size:13px; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:6px;">
-                                        👁️ Live Preview: Khối "Thông tin hay" của Tag
-                                    </span>
-                                    <span id="tag-preview-status" class="badge" style="font-size:10px;">Vui lòng chọn Tag</span>
-                                </div>
-
-                                <div style="display:flex; gap:12px; background:rgba(0,0,0,0.2); border:1px dashed rgba(255,255,255,0.05); border-radius:8px; padding:12px; min-height:180px;">
-                                    <!-- Cột trái: Mockup Content SKU -->
-                                    <div style="flex:1; background:rgba(255,255,255,0.01); border:1px dashed rgba(255,255,255,0.06); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:6px; opacity:0.3; pointer-events:none;">
-                                        <div style="width:60%; height:8px; background:#fff; border-radius:2px;"></div>
-                                        <div style="width:100%; height:60px; background:rgba(255,255,255,0.03); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">[ Nội dung trang chi tiết sản phẩm ]</div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:10px 12px; border-radius:6px;">
+                                    <div style="display:flex; flex-direction:column; gap:2px; flex:1; padding-right:10px;">
+                                        <span style="font-size:12.5px; font-weight:500;">Quy tắc Fallback khi không khớp</span>
+                                        <span style="font-size:11px; color:var(--text-muted);">Hiển thị Bài viết Khuyến mãi Hot khi không khớp bài trùng tag.</span>
                                     </div>
-                                    
-                                    <!-- Cột phải: Live Preview thực tế Sticky Sidebar -->
-                                    <div style="flex:1.5; border-left:1px solid rgba(255,255,255,0.06); padding-left:12px; display:flex; flex-direction:column; gap:8px;">
-                                        <div style="font-size:9.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px;">💡 THÔNG TIN HAY</div>
-                                        <div id="tag-article-preview-list" style="display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:130px; padding-right:4px;">
-                                            <!-- Render bài viết preview động -->
-                                        </div>
+                                    <label class="switch"><input type="checkbox" id="tag-fallback-toggle" onchange="updateTagMappingPreview()"><span class="slider"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cột Phải: Live Preview -->
+                        <div style="display:flex; flex-direction:column; gap:12px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:13px; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                    👁️ Live Preview: Khối "Thông tin hay" của Tag
+                                </span>
+                                <span id="tag-preview-status" class="badge" style="font-size:10px;">Vui lòng chọn Tag</span>
+                            </div>
+
+                            <div style="display:flex; gap:12px; background:rgba(0,0,0,0.25); border:1px dashed rgba(255,255,255,0.08); border-radius:8px; padding:12px; min-height:180px; flex:1;">
+                                <!-- Cột trái: Mockup Content SKU -->
+                                <div style="flex:1; background:rgba(255,255,255,0.01); border:1px dashed rgba(255,255,255,0.06); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:6px; opacity:0.3; pointer-events:none;">
+                                    <div style="width:60%; height:8px; background:#fff; border-radius:2px;"></div>
+                                    <div style="width:100%; height:60px; background:rgba(255,255,255,0.03); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">[ Nội dung trang chi tiết sản phẩm ]</div>
+                                </div>
+                                
+                                <!-- Cột phải: Live Preview thực tế Sticky Sidebar -->
+                                <div style="flex:1.5; border-left:1px solid rgba(255,255,255,0.06); padding-left:12px; display:flex; flex-direction:column; gap:8px;">
+                                    <div style="font-size:9.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px;">💡 THÔNG TIN HAY</div>
+                                    <div id="tag-article-preview-list" style="display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:140px; padding-right:4px;">
+                                        <!-- Render bài viết preview động -->
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Footer Modal -->
+                    <div style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid rgba(255,255,255,0.08); padding-top:16px; margin-top:8px;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="resetTagConfig()">Hủy</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="btn-save-tag-config" onclick="saveTagConfig()">Lưu cấu hình</button>
                     </div>
                 </div>
             </div>
@@ -7367,6 +7379,9 @@
             document.getElementById('tag-preview-status').innerText = 'Đang Preview Tag: #' + tag;
             
             updateTagMappingPreview();
+
+            // Mở modal cấu hình
+            document.getElementById('tag-config-modal').style.display = 'flex';
         }
 
         function renderSelectedSkusPreview() {
@@ -7648,6 +7663,9 @@
             document.getElementById('tag-preview-status').innerText = 'Vui lòng chọn Tag';
             
             updateTagMappingPreview();
+
+            // Đóng modal cấu hình
+            document.getElementById('tag-config-modal').style.display = 'none';
         }
 
         function showAddTagModal() {
