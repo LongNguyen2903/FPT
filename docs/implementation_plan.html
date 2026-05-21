@@ -72,8 +72,9 @@
             <tr><td>4</td><td><strong>LDP Builder</strong></td><td>Dựng Landing Page chiến dịch (Tab <em>Chọn Template</em> đưa lên đầu tiên).</td></tr>
             <tr><td>5</td><td><strong>Quản lý Banner</strong></td><td>Hình ảnh, slide biểu ngữ đầu trang.</td></tr>
             <tr><td>6</td><td><strong>Bài viết & FAQ</strong></td><td>Danh mục bài viết tin tức và hệ thống câu hỏi thường gặp.</td></tr>
-            <tr><td>7</td><td><strong>Cài đặt Hiển thị</strong></td><td>Cài đặt cấu hình hiển thị chung và nội dung Checkout đa kênh.</td></tr>
-            <tr><td>8</td><td><strong>Quản lý Popup</strong></td><td>Popup quảng cáo, popup nhận tư vấn theo thời gian/hành vi.</td></tr>
+            <tr><td>7</td><td><strong>Cấu hình Thông tin hay</strong></td><td>Quản lý tập trung Tag-based Mapping liên kết SKU và bài viết liên quan/FAQ.</td></tr>
+            <tr><td>8</td><td><strong>Cài đặt Hiển thị</strong></td><td>Cài đặt cấu hình hiển thị chung và nội dung Checkout đa kênh.</td></tr>
+            <tr><td>9</td><td><strong>Quản lý Popup</strong></td><td>Popup quảng cáo, popup nhận tư vấn theo thời gian/hành vi.</td></tr>
         </tbody>
     </table>
 
@@ -161,6 +162,21 @@
                         <li><strong>Bảng quản lý Card trong Block:</strong> Bổ sung bảng danh sách các Card nằm trong Block cho phép: Thêm mới, Sửa từng Card, Xóa và Sắp xếp thứ tự (Reorder bằng thao tác kéo thả).</li>
                         <li><strong>Modal/Popup Chi tiết Card độc lập:</strong> Khi bấm Thêm/Sửa Card, hệ thống mở một Modal độc lập để cấu hình chi tiết cho Card đó: *Badge nổi bật, Tên gói, Giá bán, Tốc độ Download/Upload, Vòng quay tốc độ (Độ xoay kim dial gauge), Thiết bị đi kèm, Mô tả phụ, URL Đăng ký và URL Xem chi tiết*.</li>
                         <li><strong>Dữ liệu mẫu thực tế:</strong> Khởi tạo block mẫu <code>block-goi-internet-giga</code> chứa sẵn danh sách 4 card Internet (Giga, Sky, Giga F1, Sky F1) đồng bộ trực quan với trang chủ fpt.vn để Vận hành dễ dàng bấm dùng thử.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
+            </tr>
+            <tr>
+                <td><strong>[Yêu cầu #5]<br>BA / PO</strong></td>
+                <td>Cần cơ chế tự động hiển thị nội dung, bài viết liên quan (Thông tin hay) để tăng tỷ lệ giữ chân (Retention) và hỗ trợ Cross-sell trên trang Chi tiết sản phẩm, thay vì Vận hành phải chọn/gắn bài viết thủ công cho từng SKU rất mất thời gian.</td>
+                <td>
+                    <ul>
+                        <li><strong>Cơ chế Tag-based Mapping:</strong> Xây dựng luồng liên kết động: Vận hành gắn Tag (ví dụ: <code>"camera"</code>) cho Bài viết/FAQ và gắn Tag tương ứng cho SKU. CMS API tự động Query tối đa 5 bài viết mới nhất trùng Tag để trả về cho Frontend.</li>
+                        <li><strong>Quản lý tập trung độc lập:</strong> Tách biệt cấu hình Tag khỏi màn hình SKU Detail cũ thành một menu riêng biệt trong CMS. Admin dễ dàng gán SKU - Tag hai chiều tại một nơi, xem Live Preview danh sách bài viết/FAQ theo thời gian thực và quản trị logic Fallback trực quan. SKU Detail cũ chỉ hiển thị danh sách tag ở chế độ chỉ đọc.</li>
+                        <li><strong>Kiến trúc UI hiển thị:</strong> Khối "Thông tin hay" được thiết kế dạng Sticky Block bám dọc trang chi tiết (Desktop) hoặc dạng danh sách vuốt ngang (Mobile) giúp tối ưu không gian hiển thị mà không ngắt quãng luồng đọc.</li>
+                        <li><strong>Fallback Logic (Quy tắc hiển thị phụ):</strong> Nếu SKU không có Tag hoặc chưa có bài viết nào trùng Tag, hệ thống tự động ẩn Block này hoặc fallback về việc hiển thị bài viết Khuyến mãi hot nhất để tránh giao diện trống (Blank State).</li>
+                        <li><a href="../diagrams/fpt-article-tag-seq.md" style="color:#818cf8; text-decoration:underline;">🔗 Xem Sơ đồ luồng Sequence Diagram chi tiết tại đây</a></li>
+                        <li><a href="wireframe_fpt_detail.html" style="color:#818cf8; text-decoration:underline;">🔗 Trải nghiệm Wireframe Website FE (Trang chi tiết sản phẩm & block "Thông tin hay")</a></li>
                     </ul>
                 </td>
                 <td><span class="badge badge-success">Đã cập nhật</span></td>

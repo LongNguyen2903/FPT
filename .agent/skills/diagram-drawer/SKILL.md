@@ -41,12 +41,21 @@ Admin->>Portal: "1. Tạo/Sửa bài viết (Gán tag: 'camera')"
 
 ## 2. Template Cấu Trúc File Trình Bày Sơ Đồ
 
-Mỗi sơ đồ khi tạo ra sẽ bao gồm 3 file chính nằm trong thư mục `diagrams/`:
-1.  **File nguồn Mermaid (`[tên-sơ-đồ].mermaid`):** Chứa mã nguồn Mermaid nguyên bản bọc trong khối code block.
-2.  **File tài liệu Markdown (`[tên-sơ-đồ].md`):** File trình bày tích hợp ảnh PNG thành phẩm và mô tả luồng nghiệp vụ chi tiết.
-3.  **File ảnh PNG/SVG (`[tên-sơ-đồ].png`, `[tên-sơ-đồ].svg`):** Các file ảnh sơ đồ được biên dịch ra từ file nguồn.
+Mỗi sơ đồ khi tạo ra sẽ chỉ bao gồm **2 file duy nhất** nằm trong thư mục `diagrams/`:
+1.  **File tài liệu Markdown (`[tên-sơ-đồ].md`):** File trình bày, chứa cả mã nguồn Mermaid (trong khối code block) và hình ảnh hiển thị kèm mô tả nghiệp vụ chi tiết.
+2.  **File ảnh PNG (`[tên-sơ-đồ].png`):** File ảnh được biên dịch ra từ khối code Mermaid nằm trong file Markdown để nhúng hiển thị trực tiếp.
 
-### A. Template File `.mermaid` (`diagrams/[tên-sơ-đồ].mermaid`)
+Tuyệt đối **KHÔNG** tạo thêm các file nguồn riêng lẻ `.mermaid`, file vector `.svg` hoặc script `.ps1` riêng cho từng sơ đồ để tránh làm rác thư mục.
+
+### Template File `.md` chuẩn (`diagrams/[tên-sơ-đồ].md`)
+```markdown
+# Sơ đồ Sequence Diagram: [TÊN SƠ ĐỒ]
+
+Dưới đây là sơ đồ trực quan luồng [MÔ TẢ NGẮN GỌN LUỒNG HOẠT ĐỘNG].
+
+![Sơ đồ Sequence Diagram](./[tên-sơ-đồ].png)
+
+## Mã nguồn Mermaid (Dùng để render ảnh)
 ```mermaid
 %%{init: { 'theme': 'dark' } }%%
 sequenceDiagram
@@ -59,14 +68,6 @@ sequenceDiagram
     [Thực thể 2]-->>[Thực thể 1]: "2. [Mô tả phản hồi]"
 ```
 
-### B. Template File `.md` (`diagrams/[tên-sơ-đồ].md`)
-```markdown
-# Sơ đồ Sequence Diagram: [TÊN SƠ ĐỒ]
-
-Dưới đây là sơ đồ trực quan luồng [MÔ TẢ NGẮN GỌN LUỒNG HOẠT ĐỘNG].
-
-![Sơ đồ Sequence Diagram](file:///c:/Users/Admin/OneDrive/Desktop/FPT/diagrams/[tên-sơ-đồ].png)
-
 ## Giải thích luồng nghiệp vụ chi tiết
 
 ### 1. [Phân đoạn nghiệp vụ 1]
@@ -78,61 +79,30 @@ Dưới đây là sơ đồ trực quan luồng [MÔ TẢ NGẮN GỌN LUỒNG H
 
 ---
 
-## 3. Quy Trình Tự Động Biên Dịch Mermaid Sang PNG/SVG
+## 3. Quy Trình Tự Động Biên Dịch Mermaid sang PNG từ file MD
 
-Để tạo ra file ảnh PNG/SVG có nền tối solid màu `#121212` (giúp hiển thị rõ ràng trên mọi trình xem ảnh nền sáng), sử dụng file PowerShell Script [generate_images.ps1](file:///c:/Users/Admin/OneDrive/Desktop/FPT/diagrams/generate_images.ps1) có sẵn trong dự án.
+Để tạo ra file ảnh PNG có nền tối solid màu `#121212` trực tiếp từ khối code Mermaid trong file Markdown, sử dụng lệnh PowerShell sau:
 
-### Script Biên Dịch (`diagrams/generate_images.ps1`):
+### Lệnh PowerShell biên dịch nhanh:
 ```powershell
-# Read the mermaid file with UTF-8 encoding
-$content = Get-Content -Path "diagrams/[tên-sơ-đồ].mermaid" -Encoding UTF8
-
-# Filter out markdown code fences (lines containing ```)
-$pureCodeLines = @()
-foreach ($line in $content) {
-    if ($line -notmatch '```') {
-        $pureCodeLines += $line
-    }
-}
-$pureCode = $pureCodeLines -join "`n"
-$pureCode = $pureCode.Trim()
-
-# Encode to base64 UTF-8
-$bytes = [System.Text.Encoding]::UTF8.GetBytes($pureCode)
-$base64 = [Convert]::ToBase64String($bytes)
-$base64Safe = $base64.Replace('+', '-').Replace('/', '_').Replace('=', '')
-
-# Define URLs with solid dark background (#121212)
-$svgUrl = "https://mermaid.ink/svg/${base64Safe}?bgColor=121212"
-$pngUrl = "https://mermaid.ink/img/${base64Safe}?bgColor=121212"
-
-# Download SVG & PNG
-Invoke-WebRequest -Uri $svgUrl -OutFile "diagrams/[tên-sơ-đồ].svg" -UserAgent "Mozilla/5.0"
-Invoke-WebRequest -Uri $pngUrl -OutFile "diagrams/[tên-sơ-đồ].png" -UserAgent "Mozilla/5.0"
+$name = "[tên-sơ-đồ]"; $md = Get-Content -Path "diagrams/$name.md" -Raw -Encoding UTF8; if ($md -match '(?s)```mermaid\s*\r?\n(.*?)\r?\n```') { $code = $Matches[1].Trim(); $bytes = [System.Text.Encoding]::UTF8.GetBytes($code); $b64 = [Convert]::ToBase64String($bytes).Replace('+', '-').Replace('/', '_').Replace('=', ''); Invoke-WebRequest -Uri "https://mermaid.ink/img/${b64}?bgColor=121212&type=png" -OutFile "diagrams/$name.png" -UserAgent "Mozilla/5.0" }
 ```
 
-### Cách Thực Thi:
-Chạy lệnh PowerShell sau ở Terminal để cập nhật lại ảnh sơ đồ bất cứ khi nào file nguồn `.mermaid` thay đổi:
-```powershell
-powershell -ExecutionPolicy Bypass -File diagrams/generate_images.ps1
-```
+Hoặc bạn có thể chạy file script PowerShell dùng chung [generate_images.ps1](file:///c:/Users/Admin/OneDrive/Desktop/FPT/diagrams/generate_images.ps1) (nếu có) bằng cách truyền tên sơ đồ làm tham số.
 
 ---
 
 ## 4. Thư Mục Templates
 
-Skill này đi kèm một thư mục `templates/` chứa các file mẫu sẵn sàng để copy và sử dụng ngay. Khi cần vẽ sơ đồ mới, hãy đọc các file trong thư mục này để lấy mẫu thay vì viết từ đầu:
+Skill này đi kèm một thư mục `templates/` chứa các file mẫu sẵn sàng để sử dụng ngay:
 
 | File | Mô tả |
 |------|--------|
-| `templates/sequence-template.mermaid` | Mẫu code Mermaid Sequence Diagram chuẩn Dark Theme. Copy và thay thế nội dung. |
-| `templates/sequence-template.md` | Mẫu file tài liệu Markdown kèm chỗ nhúng ảnh PNG. Copy và điền thông tin. |
-| `templates/generate-images-template.ps1` | Mẫu script PowerShell biên dịch ra ảnh. Chỉ cần đổi biến `$diagramName`. |
+| `templates/sequence-template.md` | Mẫu file tài liệu Markdown kèm khối code Mermaid và chỗ nhúng ảnh PNG. |
 | `templates/example-related-articles.md` | Ví dụ thực tế hoàn chỉnh (Sơ đồ "Thông tin hay theo Tag sản phẩm") để tham khảo. |
 
 ### Quy Trình Tạo Sơ Đồ Mới (Dùng Template):
-1. Copy file `templates/sequence-template.mermaid` → `diagrams/[tên-mới].mermaid` và điền nội dung.
-2. Copy file `templates/sequence-template.md` → `diagrams/[tên-mới].md` và thay thế các placeholder `{{...}}`.
-3. Copy file `templates/generate-images-template.ps1` → `diagrams/generate_images.ps1`, đổi biến `$diagramName` thành `[tên-mới]`.
-4. Chạy lệnh: `powershell -ExecutionPolicy Bypass -File diagrams/generate_images.ps1`
-5. Mở file `.md` để xem kết quả.
+1. Copy file `templates/sequence-template.md` → `diagrams/[tên-mới].md` và điền nội dung sơ đồ vào khối code block ````mermaid```` cùng phần mô tả.
+2. Chạy lệnh PowerShell biên dịch nhanh ở trên (thay thế `$name = "[tên-mới]"`) để sinh ra file ảnh `diagrams/[tên-mới].png`.
+3. Kiểm tra hiển thị trong file Markdown mới tạo.
+

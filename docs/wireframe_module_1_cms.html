@@ -1094,6 +1094,7 @@
              <div class="menu-item" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup
             </div>
             <div class="menu-item" onclick="switchModule('faq', 'primary')" id="menu-faq">Quản lý Bài viết & FAQ</div>
+            <div class="menu-item" onclick="switchModule('tag-mapping', 'primary')" id="menu-tag-mapping">Cấu hình Thông tin hay</div>
             <!-- Marketing Gói Bán — tạm ẩn theo yêu cầu
             <div class="menu-item" onclick="switchModule('cms-package', 'primary')" id="menu-cms-package">Marketing Gói
                 Bán</div>
@@ -2117,6 +2118,25 @@
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.2); color:#ef4444; flex-shrink:0;">🗑</button>
                                         </div>
                                         <button class="btn btn-secondary btn-sm" style="border:1px dashed var(--primary); color:var(--primary); background:transparent; align-self:flex-start;">+ Thêm phương thức thanh toán</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Phần 5: Thông tin hay & Bài viết liên quan (Chuyển sang Quản lý Tập trung) -->
+                            <div class="form-section" style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
+                                <div style="background:rgba(69, 100, 237, 0.05); border:1px solid rgba(69, 100, 237, 0.15); border-radius:8px; padding:16px; display:flex; flex-direction:column; gap:10px;">
+                                    <div style="display:flex; align-items:center; gap:8px; color:var(--primary); font-weight:600; font-size:13px;">
+                                        <span>⚡ Quản lý Mapping Tập trung</span>
+                                    </div>
+                                    <p style="font-size:12px; color:var(--text-muted); margin:0; line-height:1.6;">
+                                        Tính năng cấu hình Tag-based Mapping và Khối "Thông tin hay & Bài viết liên quan" hiện đã được chuyển sang mục quản lý tập trung ở menu 
+                                        <a href="#" onclick="switchModule('tag-mapping', 'primary'); return false;" style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu hình Thông tin hay</a> 
+                                        trong danh mục CMS. Việc này giúp Vận hành dễ dàng thiết lập ma trận liên kết giữa hàng loạt SKU sản phẩm và bài viết tin tức/FAQ thông qua các tag chung.
+                                    </p>
+                                    <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; font-size:12px; border-top:1px solid rgba(255,255,255,0.05); padding-top:10px;">
+                                        <span style="color:var(--text-muted); font-weight:500;">Tags liên kết SKU hiện tại (chế độ chỉ đọc):</span>
+                                        <div id="sku-tag-readonly-list" style="display:flex; gap:6px; flex-wrap:wrap;">
+                                            <!-- Sẽ render các tag dưới dạng read-only badge để Vận hành dễ quan sát -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -5214,6 +5234,124 @@
                 </div>
             </div>
 
+            <!-- ============================================== -->
+            <!--             CẤU HÌNH THÔNG TIN HAY & MAPPING      -->
+            <!-- ============================================== -->
+            <div id="mod-tag-mapping" class="module-view">
+                <div class="card">
+                    <div class="page-header">
+                        <h2>Cấu hình Thông tin hay & Bài viết liên quan (Tag-based Mapping)</h2>
+                        <button class="btn btn-primary" onclick="showAddTagModal()">+ Thêm Tag Mới</button>
+                    </div>
+                    
+                    <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:20px; margin-top:-10px;">
+                        Quản lý tập trung các tag liên kết để tự động hiển thị bài viết tin tức & FAQ tại trang chi tiết SKU sản phẩm. Hệ thống sẽ truy vấn các bài viết có tag trùng khớp với tag sản phẩm để hiển thị tự động.
+                    </p>
+
+                    <div style="display:grid; grid-template-columns: 1.25fr 1fr; gap:24px;">
+                        <!-- Cột Trái: Bảng quản lý Mapping -->
+                        <div style="display:flex; flex-direction:column; gap:16px;">
+                            <div class="form-grid filters" style="grid-template-columns: 2fr 1fr; gap:12px; margin-bottom: 0; display:flex;">
+                                <input type="text" id="tag-mapping-search" class="form-input" placeholder="Tìm kiếm Tag..." oninput="filterTagMappingTable()" style="flex:1;">
+                                <button class="btn btn-primary" onclick="filterTagMappingTable()">Tìm Kiếm</button>
+                            </div>
+                            
+                            <div style="overflow-x:auto; border: 1px solid var(--border-glass); border-radius: 8px;">
+                                <table class="data-table" id="tag-mapping-table" style="margin:0; width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Tag</th>
+                                            <th>SKUs Liên Kết</th>
+                                            <th>Fallback</th>
+                                            <th>Bài trùng</th>
+                                            <th style="text-align:right;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tag-mapping-tbody">
+                                        <!-- Render động danh sách tag mapping -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Cột Phải: Cấu hình chi tiết & Live Preview -->
+                        <div style="display:flex; flex-direction:column; gap:20px; background:rgba(255,255,255,0.015); border:1px solid var(--border-glass); border-radius:10px; padding:20px;">
+                            <!-- Form Chỉnh sửa Cấu hình Tag -->
+                            <div id="tag-config-panel" style="border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:20px;">
+                                <h3 id="tag-config-title" style="margin-top:0; margin-bottom:12px; color:var(--primary);">Chọn một Tag để cấu hình</h3>
+                                <input type="hidden" id="selected-tag-name" value="">
+                                
+                                <div class="form-group" style="margin-bottom:12px;">
+                                    <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Danh sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
+                                    <div id="tag-skus-container" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:6px; max-height:150px; overflow-y:auto;">
+                                        <!-- Danh sách check box các SKU: INT-GIGA, INT-SKY, CAM-IQ3, CAM-SE, PLAY-MAX, MODEM-AX3000GZ -->
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-bottom:16px;">
+                                    <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:10px 12px; border-radius:6px;">
+                                        <div style="display:flex; flex-direction:column; gap:2px; flex:1; padding-right:10px;">
+                                            <span style="font-size:12.5px; font-weight:500;">Quy tắc Fallback khi không khớp</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Hiển thị Bài viết Khuyến mãi Hot khi không khớp bài trùng tag.</span>
+                                        </div>
+                                        <label class="switch"><input type="checkbox" id="tag-fallback-toggle" onchange="updateTagMappingPreview()"><span class="slider"></span></label>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex; justify-content:flex-end; gap:8px;">
+                                    <button class="btn btn-secondary btn-sm" onclick="resetTagConfig()">Hủy</button>
+                                    <button class="btn btn-primary btn-sm" id="btn-save-tag-config" onclick="saveTagConfig()">Lưu cấu hình</button>
+                                </div>
+                            </div>
+
+                            <!-- Live Preview khối "Thông tin hay" -->
+                            <div style="display:flex; flex-direction:column; gap:12px; flex:1;">
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                    <span style="font-size:13px; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                        👁️ Live Preview: Khối "Thông tin hay" của Tag
+                                    </span>
+                                    <span id="tag-preview-status" class="badge" style="font-size:10px;">Vui lòng chọn Tag</span>
+                                </div>
+
+                                <div style="display:flex; gap:12px; background:rgba(0,0,0,0.2); border:1px dashed rgba(255,255,255,0.05); border-radius:8px; padding:12px; min-height:180px;">
+                                    <!-- Cột trái: Mockup Content SKU -->
+                                    <div style="flex:1; background:rgba(255,255,255,0.01); border:1px dashed rgba(255,255,255,0.06); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:6px; opacity:0.3; pointer-events:none;">
+                                        <div style="width:60%; height:8px; background:#fff; border-radius:2px;"></div>
+                                        <div style="width:100%; height:60px; background:rgba(255,255,255,0.03); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">[ Nội dung trang chi tiết sản phẩm ]</div>
+                                    </div>
+                                    
+                                    <!-- Cột phải: Live Preview thực tế Sticky Sidebar -->
+                                    <div style="flex:1.5; border-left:1px solid rgba(255,255,255,0.06); padding-left:12px; display:flex; flex-direction:column; gap:8px;">
+                                        <div style="font-size:9.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px;">💡 THÔNG TIN HAY</div>
+                                        <div id="tag-article-preview-list" style="display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:130px; padding-right:4px;">
+                                            <!-- Render bài viết preview động -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal thêm tag mới -->
+            <div id="add-tag-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+                <div class="card" style="width:400px; padding:24px; margin: 15% auto; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); background: var(--bg-panel); border: 1px solid var(--border-glass);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                        <h3 style="margin:0; color:#fff;">Thêm Tag Mapping Mới</h3>
+                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);" onclick="closeAddTagModal()">✕</span>
+                    </div>
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Tên Tag <span style="color:var(--danger)">*</span></label>
+                        <input type="text" id="new-tag-name" class="form-input" placeholder="VD: camera, internet, wifi6..." style="width:100%;">
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:8px;">
+                        <button class="btn btn-secondary btn-sm" onclick="closeAddTagModal()">Hủy</button>
+                        <button class="btn btn-primary btn-sm" onclick="submitAddTag()">Tạo mới</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- NỘI DUNG GÓI BÁN (CMS) -->
             <div id="mod-cms-package" class="module-view">
                 <div id="cmspackage-list" class="sub-view active card">
@@ -6189,7 +6327,7 @@
             'dashboards',
             'pdh-category', 'pdh-attribute', 'pdh-sku', 'pdh-package', 'pdh-price', 'pdh-fee', // PDH
             'set-area', // Settings
-            'pages', 'landing', 'sections', 'blocks', 'banner', 'faq', 'cms-package', 'cms-display', 'cms-popup', // CMS
+            'pages', 'landing', 'sections', 'blocks', 'banner', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping', // CMS
             'ord-draft', 'ord-contract' // Orders
         ];
 
@@ -6202,6 +6340,7 @@
             'sections': 'Quản lý Sections (CMS)', 'blocks': 'Quản lý Blocks (CMS)',
             'banner': 'Quản lý Banner (CMS)', 'faq': 'Quản lý Bài viết & FAQ (CMS)',
             'cms-package': 'Marketing Gói Bán (CMS)', 'cms-display': 'Cài đặt Hiển thị (CMS)', 'cms-popup': 'Quản lý Popup (CMS)',
+            'tag-mapping': 'Cấu hình Thông tin hay (CMS)',
             'ord-draft': 'Đơn hàng tạm (Orders)', 'ord-contract': 'Danh sách hợp đồng (Orders)'
         };
 
@@ -6229,6 +6368,13 @@
             // Show appropriate module view
             modules.forEach(m => document.getElementById('mod-' + m).classList.remove('active'));
             document.getElementById('mod-' + modName).classList.add('active');
+
+            // Tag Mapping module initialization
+            if (modName === 'tag-mapping') {
+                syncTagMappingToSku();
+                renderTagMappingTable();
+                resetTagConfig();
+            }
         }
         let currentAttrTab = 'group';
 
@@ -6520,6 +6666,7 @@
 
             // Always start on Tab 1
             skuSwitchTab('chung');
+            renderSkuTagsReadonly(code);
         }
 
         function skuSwitchTab(tabName) {
@@ -7048,6 +7195,378 @@
                 + '</div></div>';
             list.appendChild(div);
         }
+
+        // ===== Tag-based Mapping & Article Sync Logic =====
+        const mockArticles = [
+            { title: "Hướng dẫn cài đặt modem Wi-Fi 6 thế hệ mới", tag: "wifi6", type: "tin-tuc" },
+            { title: "Ưu đãi lắp đặt cáp quang FPT giá cực rẻ tháng này", tag: "internet", type: "khuyen-mai" },
+            { title: "Top 5 tính năng đột phá trên FPT Camera IQ3", tag: "camera", type: "tin-tuc" },
+            { title: "Gói FPT Play SMAX có gì hot mà giới trẻ mê mệt?", tag: "truyenhinh", type: "tin-tuc" },
+            { title: "Khắc phục lỗi mạng chập chờn tại nhà đơn giản", tag: "internet", type: "tin-tuc" },
+            { title: "Sử dụng camera an ninh sao cho an toàn bảo mật?", tag: "camera", type: "faq" },
+            { title: "[Khuyến mãi] Tặng ngay voucher 100k khi lắp Internet", tag: "khuyenmai", type: "khuyen-mai" },
+            { title: "Đại hội thể thao phát sóng trực tiếp trên FPT Play", tag: "truyenhinh", type: "tin-tuc" }
+        ];
+
+        let tagMappingData = {
+            'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: true },
+            'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: true },
+            'wifi6': { skus: ['MODEM-AX3000GZ', 'INT-SKY'], fallback: false },
+            'truyenhinh': { skus: ['PLAY-MAX'], fallback: true }
+        };
+
+        let skuTagsData = {};
+
+        function syncTagMappingToSku() {
+            skuTagsData = {};
+            for (let tag in tagMappingData) {
+                tagMappingData[tag].skus.forEach(sku => {
+                    if (!skuTagsData[sku]) {
+                        skuTagsData[sku] = [];
+                    }
+                    if (!skuTagsData[sku].includes(tag)) {
+                        skuTagsData[sku].push(tag);
+                    }
+                });
+            }
+        }
+
+        // Render danh sách tag chỉ đọc ở tab Content của SKU Detail
+        function renderSkuTagsReadonly(skuCode) {
+            const listEl = document.getElementById('sku-tag-readonly-list');
+            if (!listEl) return;
+            listEl.innerHTML = '';
+            
+            syncTagMappingToSku();
+            const tags = skuTagsData[skuCode] || [];
+            if (tags.length === 0) {
+                listEl.innerHTML = '<span style="color:var(--text-muted); font-style:italic;">Không có tag nào liên kết.</span>';
+                return;
+            }
+            
+            tags.forEach(tag => {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                badge.style.background = 'rgba(69, 100, 237, 0.15)';
+                badge.style.color = '#6F86FF';
+                badge.style.border = '1px solid rgba(69, 100, 237, 0.3)';
+                badge.style.padding = '3px 8px';
+                badge.style.borderRadius = '4px';
+                badge.style.fontSize = '11px';
+                badge.innerText = '#' + tag;
+                listEl.appendChild(badge);
+            });
+        }
+
+        function renderTagMappingTable() {
+            const tbody = document.getElementById('tag-mapping-tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const searchValue = document.getElementById('tag-mapping-search').value.trim().toLowerCase();
+
+            for (let tag in tagMappingData) {
+                if (searchValue && !tag.toLowerCase().includes(searchValue)) {
+                    continue;
+                }
+
+                const data = tagMappingData[tag];
+                
+                // Đếm số bài viết trùng khớp
+                const matchedCount = mockArticles.filter(art => art.tag === tag).length;
+                
+                const tr = document.createElement('tr');
+                tr.style.cursor = 'pointer';
+                tr.onclick = function() { selectTagForConfig(tag); };
+
+                // Tạo badges cho SKUs
+                let skuBadges = '';
+                if (data.skus.length === 0) {
+                    skuBadges = '<span style="color:var(--text-muted); font-style:italic; font-size:11px;">Chưa gán</span>';
+                } else {
+                    data.skus.forEach(sku => {
+                        skuBadges += `<span class="badge" style="background:rgba(245,158,11,0.1); color:var(--warning); margin-right:4px; font-size:10px; padding:2px 5px; border-radius:3px;">${sku}</span>`;
+                    });
+                }
+
+                // Trạng thái fallback
+                const fallbackBadge = data.fallback 
+                    ? '<span class="badge" style="background:rgba(16,185,129,0.15); color:var(--success); border:1px solid rgba(16,185,129,0.3); font-size:10px;">Bật</span>'
+                    : '<span class="badge" style="background:rgba(255,255,255,0.05); color:var(--text-muted); border:1px solid rgba(255,255,255,0.1); font-size:10px;">Tắt</span>';
+
+                tr.innerHTML = `
+                    <td style="font-weight:600; color:var(--primary); font-size:13px;">#${tag}</td>
+                    <td><div style="display:flex; flex-wrap:wrap; gap:2px;">${skuBadges}</div></td>
+                    <td>${fallbackBadge}</td>
+                    <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
+                    <td style="text-align:right;" onclick="event.stopPropagation();">
+                        <button class="btn btn-sm" style="background:rgba(69,100,237,0.15); color:#6F86FF; padding:4px 8px; border:none; margin-right:4px;" onclick="selectTagForConfig('${tag}')">✏️ Cấu hình</button>
+                        <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 8px; border:none;" onclick="deleteTagMapping('${tag}')">🗑</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+
+            if (tbody.children.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
+            }
+        }
+
+        function filterTagMappingTable() {
+            renderTagMappingTable();
+        }
+
+        const availableSkus = ['INT-GIGA', 'INT-SKY', 'CAM-IQ3', 'CAM-SE', 'PLAY-MAX', 'MODEM-AX3000GZ'];
+        const skuNames = {
+            'INT-GIGA': 'Internet Giga (150Mbps)',
+            'INT-SKY': 'Internet Sky (1Gbps/150Mbps)',
+            'CAM-IQ3': 'FPT Camera IQ3',
+            'CAM-SE': 'FPT Camera SE',
+            'PLAY-MAX': 'Gói FPT Play SMAX',
+            'MODEM-AX3000GZ': 'Modem Wi-Fi 6 AX3000GZ'
+        };
+
+        function selectTagForConfig(tag) {
+            document.getElementById('selected-tag-name').value = tag;
+            document.getElementById('tag-config-title').innerHTML = `Cấu hình Tag: <span style="color:#fff; font-weight:700;">#${tag}</span>`;
+            
+            // Checkbox SKUs list
+            const container = document.getElementById('tag-skus-container');
+            container.innerHTML = '';
+            
+            const linkedSkus = tagMappingData[tag] ? tagMappingData[tag].skus : [];
+            
+            availableSkus.forEach(sku => {
+                const checked = linkedSkus.includes(sku) ? 'checked' : '';
+                const div = document.createElement('div');
+                div.style.display = 'flex';
+                div.style.alignItems = 'center';
+                div.style.gap = '8px';
+                div.style.padding = '4px 0';
+                
+                div.innerHTML = `
+                    <input type="checkbox" id="chk-sku-${sku}" value="${sku}" ${checked} onchange="updateTagMappingPreview()" style="accent-color:var(--primary); cursor:pointer;">
+                    <label for="chk-sku-${sku}" style="font-size:12px; cursor:pointer; color:#ccc;">
+                        <strong style="color:var(--warning); font-family:monospace;">${sku}</strong> - ${skuNames[sku]}
+                    </label>
+                `;
+                container.appendChild(div);
+            });
+            
+            // Fallback toggle
+            const fallbackToggle = document.getElementById('tag-fallback-toggle');
+            fallbackToggle.checked = tagMappingData[tag] ? tagMappingData[tag].fallback : false;
+            
+            // Update preview status
+            document.getElementById('tag-preview-status').className = 'badge active';
+            document.getElementById('tag-preview-status').innerText = 'Đang Preview Tag: #' + tag;
+            
+            updateTagMappingPreview();
+        }
+
+        function updateTagMappingPreview() {
+            const tag = document.getElementById('selected-tag-name').value;
+            const previewList = document.getElementById('tag-article-preview-list');
+            if (!previewList) return;
+            previewList.innerHTML = '';
+
+            if (!tag) {
+                previewList.innerHTML = '<div style="color:var(--text-muted); font-style:italic; font-size:11px; text-align:center; padding-top:30px;">Vui lòng chọn một Tag từ danh sách để xem Live Preview bài viết.</div>';
+                return;
+            }
+
+            // Lấy các bài viết trùng tag
+            let matched = mockArticles.filter(art => art.tag === tag);
+            const fallbackEnabled = document.getElementById('tag-fallback-toggle').checked;
+
+            if (matched.length > 0) {
+                matched.forEach(art => {
+                    const icon = art.type === 'faq' ? '❓' : '📄';
+                    const typeText = art.type === 'faq' ? 'FAQ' : art.type === 'khuyen-mai' ? 'Ưu đãi' : 'Tin tức';
+                    const badgeColor = art.type === 'faq' ? 'rgba(168,85,247,0.15)' : art.type === 'khuyen-mai' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)';
+                    const textColor = art.type === 'faq' ? '#d946ef' : art.type === 'khuyen-mai' ? '#ef4444' : '#60a5fa';
+
+                    const item = document.createElement('div');
+                    item.style.padding = '8px';
+                    item.style.background = 'rgba(255,255,255,0.03)';
+                    item.style.border = '1px solid rgba(255,255,255,0.06)';
+                    item.style.borderRadius = '5px';
+                    item.style.display = 'flex';
+                    item.style.flexDirection = 'column';
+                    item.style.gap = '4px';
+
+                    item.innerHTML = `
+                        <div style="font-size:12.5px; font-weight:500; color:#fff; display:flex; align-items:flex-start; gap:6px;">
+                            <span style="font-size:12px;">${icon}</span>
+                            <span>${art.title}</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px; font-size:10px;">
+                            <span class="badge" style="background:${badgeColor}; color:${textColor}; padding:1px 4px; border-radius:3px;">${typeText}</span>
+                            <span style="color:var(--text-muted);">Khớp tag: #${tag}</span>
+                        </div>
+                    `;
+                    previewList.appendChild(item);
+                });
+            } else {
+                // Không khớp bài
+                if (fallbackEnabled) {
+                    // Hiển thị bài viết fallback (các bài viết tag khuyenmai)
+                    let fallbacks = mockArticles.filter(art => art.tag === 'khuyenmai');
+                    if (fallbacks.length > 0) {
+                        fallbacks.forEach(art => {
+                            const item = document.createElement('div');
+                            item.style.padding = '8px';
+                            item.style.background = 'rgba(245,158,11,0.04)';
+                            item.style.border = '1px dashed rgba(245,158,11,0.2)';
+                            item.style.borderRadius = '5px';
+                            item.style.display = 'flex';
+                            item.style.flexDirection = 'column';
+                            item.style.gap = '4px';
+
+                            item.innerHTML = `
+                                <div style="font-size:12.5px; font-weight:500; color:#eee; display:flex; align-items:flex-start; gap:6px;">
+                                    <span style="font-size:12px;">🎁</span>
+                                    <span>${art.title}</span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px; font-size:10px;">
+                                    <span class="badge" style="background:rgba(245,158,11,0.15); color:var(--warning); padding:1px 4px; border-radius:3px;">Khuyến mãi Hot</span>
+                                    <span style="color:var(--text-muted); font-style:italic;">Fallback logic kích hoạt</span>
+                                </div>
+                            `;
+                            previewList.appendChild(item);
+                        });
+                    } else {
+                        previewList.innerHTML = '<div style="color:var(--danger); font-size:11px; text-align:center; padding:15px; border:1px dashed rgba(239,68,68,0.2); border-radius:6px; background:rgba(239,68,68,0.02);">Chưa cấu hình bài viết Fallback.</div>';
+                    }
+                } else {
+                    previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp và quy tắc Fallback đang tắt.</div>';
+                }
+            }
+        }
+
+        function saveTagConfig() {
+            const tag = document.getElementById('selected-tag-name').value;
+            if (!tag) {
+                alert('Vui lòng chọn Tag để lưu cấu hình.');
+                return;
+            }
+
+            // Thu thập các SKU được check
+            const checkedSkus = [];
+            availableSkus.forEach(sku => {
+                const chk = document.getElementById('chk-sku-' + sku);
+                if (chk && chk.checked) {
+                    checkedSkus.push(sku);
+                }
+            });
+
+            const fallback = document.getElementById('tag-fallback-toggle').checked;
+
+            // Lưu dữ liệu
+            if (!tagMappingData[tag]) {
+                tagMappingData[tag] = {};
+            }
+            tagMappingData[tag].skus = checkedSkus;
+            tagMappingData[tag].fallback = fallback;
+
+            // Đồng bộ dữ liệu
+            syncTagMappingToSku();
+
+            // Render lại bảng
+            renderTagMappingTable();
+
+            // Cập nhật SKU Detail đang mở (nếu có)
+            const openSkuHdr = document.getElementById('sku-hdr-code');
+            if (openSkuHdr && openSkuHdr.innerText) {
+                renderSkuTagsReadonly(openSkuHdr.innerText);
+            }
+
+            // Hiển thị Toast hoặc Alert thành công
+            alert(`Lưu cấu hình cho Tag #${tag} thành công!`);
+
+            // Reset panel cấu hình
+            resetTagConfig();
+        }
+
+        function resetTagConfig() {
+            document.getElementById('selected-tag-name').value = '';
+            document.getElementById('tag-config-title').innerText = 'Chọn một Tag để cấu hình';
+            document.getElementById('tag-skus-container').innerHTML = '<div style="grid-column:span 2; color:var(--text-muted); font-style:italic; font-size:11.5px; text-align:center; padding:10px;">Chưa chọn Tag</div>';
+            document.getElementById('tag-fallback-toggle').checked = false;
+            
+            document.getElementById('tag-preview-status').className = 'badge';
+            document.getElementById('tag-preview-status').innerText = 'Vui lòng chọn Tag';
+            
+            updateTagMappingPreview();
+        }
+
+        function showAddTagModal() {
+            document.getElementById('add-tag-modal').style.display = 'flex';
+            document.getElementById('new-tag-name').focus();
+        }
+
+        function closeAddTagModal() {
+            document.getElementById('add-tag-modal').style.display = 'none';
+            document.getElementById('new-tag-name').value = '';
+        }
+
+        function submitAddTag() {
+            const tagName = document.getElementById('new-tag-name').value.trim().toLowerCase();
+            if (!tagName) {
+                alert('Vui lòng nhập tên Tag.');
+                return;
+            }
+
+            // Kiểm tra ký tự đặc biệt, chỉ cho phép chữ, số và dấu gạch ngang
+            if (!/^[a-z0-9\-]+$/.test(tagName)) {
+                alert('Tên Tag chỉ được phép chứa các ký tự chữ thường viết liền không dấu, số và ký tự gạch ngang (-). Ví dụ: camera, wifi-6');
+                return;
+            }
+
+            if (tagMappingData[tagName]) {
+                alert('Tag này đã tồn tại trong danh sách.');
+                return;
+            }
+
+            // Thêm mới
+            tagMappingData[tagName] = { skus: [], fallback: false };
+            
+            // Đồng bộ và render
+            syncTagMappingToSku();
+            renderTagMappingTable();
+            closeAddTagModal();
+
+            // Mở cấu hình tag mới tạo luôn
+            selectTagForConfig(tagName);
+        }
+
+        function deleteTagMapping(tag) {
+            if (confirm(`Bạn có chắc chắn muốn xóa Tag Mapping #${tag}?\nHành động này sẽ hủy liên kết Tag này khỏi toàn bộ SKUs.`)) {
+                delete tagMappingData[tag];
+                
+                // Đồng bộ và render
+                syncTagMappingToSku();
+                renderTagMappingTable();
+                
+                // Reset form nếu đang cấu hình chính tag vừa xóa
+                const currentConfigTag = document.getElementById('selected-tag-name').value;
+                if (currentConfigTag === tag) {
+                    resetTagConfig();
+                }
+
+                // Cập nhật SKU Detail đang mở (nếu có)
+                const openSkuHdr = document.getElementById('sku-hdr-code');
+                if (openSkuHdr && openSkuHdr.innerText) {
+                    renderSkuTagsReadonly(openSkuHdr.innerText);
+                }
+            }
+        }
+
+        // Tự động chạy đồng bộ lần đầu
+        syncTagMappingToSku();
+
+        list.appendChild(div);
+    }
     </script>
 
     <!-- SKU Preview Drawer -->

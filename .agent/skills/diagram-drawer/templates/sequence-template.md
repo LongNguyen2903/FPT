@@ -2,7 +2,20 @@
 
 {{MÔ_TẢ_NGẮN_GỌN_LUỒNG_HOẠT_ĐỘNG}}
 
-![Sơ đồ Sequence Diagram](file:///c:/Users/Admin/OneDrive/Desktop/FPT/diagrams/{{tên-sơ-đồ}}.png)
+![Sơ đồ Sequence Diagram](./{{tên-sơ-đồ}}.png)
+
+## Mã nguồn Mermaid (Dùng để render ảnh)
+```mermaid
+%%{init: { 'theme': 'dark' } }%%
+sequenceDiagram
+    autonumber
+    participant [Thực thể 1] as "[Tên hiển thị 1]"
+    participant [Thực thể 2] as "[Tên hiển thị 2]"
+
+    Note over [Thực thể 1], [Thực thể 2]: [TÊN PHÂN CẢNH]
+    [Thực thể 1]->>[Thực thể 2]: "1. [Mô tả hành động]"
+    [Thực thể 2]-->>[Thực thể 1]: "2. [Mô tả phản hồi]"
+```
 
 ## Giải thích luồng nghiệp vụ chi tiết
 
