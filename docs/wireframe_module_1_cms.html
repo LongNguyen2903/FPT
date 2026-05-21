@@ -6509,7 +6509,7 @@
             });
             var first = document.querySelector('.prev-tab');
             if (first) { first.style.color = '#fff'; first.style.borderBottom = '2px solid var(--warning)'; }
-            ['tab-dactinh', 'tab-banhang', 'tab-media'].forEach(function (id) {
+            ['tab-dactinh', 'tab-media', 'tab-faq'].forEach(function (id) {
                 document.getElementById(id).style.display = 'none';
             });
             document.getElementById('tab-chung').style.display = 'block';
@@ -6534,7 +6534,7 @@
                 t.style.color = '#888'; t.style.borderBottom = '2px solid transparent';
             });
             el.style.color = '#fff'; el.style.borderBottom = '2px solid var(--warning)';
-            ['tab-chung', 'tab-dactinh', 'tab-banhang', 'tab-media'].forEach(function (id) {
+            ['tab-chung', 'tab-dactinh', 'tab-media', 'tab-faq'].forEach(function (id) {
                 document.getElementById(id).style.display = (id === tabId) ? 'block' : 'none';
             });
         }
@@ -6963,9 +6963,9 @@
             <div onclick="skuPrevTab(this,'tab-media')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Quản lý Content</div>
-            <div onclick="skuPrevTab(this,'tab-banhang')" class="prev-tab"
+            <div onclick="skuPrevTab(this,'tab-faq')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
-                Gói bán</div>
+                FAQ</div>
         </div>
         <!-- Tab: Thông tin sản phẩm — mirror Tab 1 internal (QLCS read-only) -->
         <div id="tab-chung" style="padding:20px; flex:1;">
@@ -7082,70 +7082,68 @@
             </div>
         </div>
 
-        <!-- Tab: Gói bán — mirror Tab 4 internal -->
-        <div id="tab-banhang" style="display:none; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; margin-bottom:14px; text-transform:uppercase;">Vận hành & Kênh bán</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 16px; margin-bottom:24px;">
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Tình trạng (ON/OFF)</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:8px;">
-                        <span style="display:inline-block; width:32px; height:17px; background:var(--warning); border-radius:9px; position:relative; flex-shrink:0;">
-                            <span style="position:absolute; top:2px; left:2px; width:13px; height:13px; background:#fff; border-radius:50%;"></span>
-                        </span>
-                        <span style="font-size:13px; color:#ccc;">Hoạt động</span>
+        <!-- Tab: FAQ — mirror Tab 5 internal (read-only preview) -->
+        <div id="tab-faq" style="display:none; padding:20px;">
+            <!-- Sync notice -->
+            <div style="display:flex; align-items:center; gap:8px; background:rgba(16,185,129,0.07); border:1px solid rgba(16,185,129,0.22); border-radius:8px; padding:9px 14px; margin-bottom:18px; font-size:12px; color:var(--success);">
+                🔄 Đồng bộ 2 chiều với <strong>Quản lý Bài viết & FAQ</strong> — chỉnh sửa trực tiếp trong trang chi tiết SKU
+            </div>
+
+            <!-- Header count -->
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                <div style="font-size:13px; font-weight:600; color:#e2e8f0;">▾ FAQ đính kèm SKU <span style="font-size:12px; font-weight:400; color:var(--text-muted);">(3 câu hỏi / 2 nhóm)</span></div>
+                <a href="#" onclick="skuClosePreview(); return false;" style="font-size:12px; color:var(--primary); text-decoration:none;">↗ Mở trang chi tiết để chỉnh sửa</a>
+            </div>
+
+            <!-- Group 1: Câu hỏi thường gặp về Thiết bị -->
+            <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
+                    <span style="font-size:14px;">📂</span>
+                    <span style="font-weight:600; font-size:13px; color:#e2e8f0; flex:1;">Câu hỏi thường gặp về Thiết bị</span>
+                    <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">2 câu hỏi</span>
+                </div>
+                <!-- Q1 -->
+                <div style="padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <div style="display:flex; align-items:flex-start; gap:10px;">
+                        <span style="font-size:11px; color:var(--text-muted); font-weight:600; min-width:18px; margin-top:2px;">Q1</span>
+                        <div style="flex:1;">
+                            <div style="font-size:13px; font-weight:500; color:#e2e8f0; margin-bottom:6px;">Modem có hỗ trợ WiFi 6 không?</div>
+                            <div style="font-size:12px; color:var(--text-muted); line-height:1.5;">Có, modem hỗ trợ chuẩn WiFi 6 (802.11ax) với tốc độ lên đến 1800 Mbps.</div>
+                            <div style="font-size:10px; color:#555; margin-top:6px;">Cập nhật: 14/05/2026 · Admin User · <span style="color:var(--success);">✓ Đã sync</span></div>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Tên gói hiển thị</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">URL trang sản phẩm</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Giá tối thiểu</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:var(--warning); font-weight:600; border:1px solid rgba(255,255,255,0.06);">500.000 đ</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Thứ tự hiển thị</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Kênh bán</div>
-                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:4px; flex-wrap:wrap;">
-                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">tongdaiwifi</span>
-                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">hifpt</span>
+                <!-- Q2 -->
+                <div style="padding:12px 16px;">
+                    <div style="display:flex; align-items:flex-start; gap:10px;">
+                        <span style="font-size:11px; color:var(--text-muted); font-weight:600; min-width:18px; margin-top:2px;">Q2</span>
+                        <div style="flex:1;">
+                            <div style="font-size:13px; font-weight:500; color:#e2e8f0; margin-bottom:6px;">Bảo hành bao lâu?</div>
+                            <div style="font-size:12px; color:var(--text-muted); line-height:1.5;">Modem được bảo hành 24 tháng tại trung tâm bảo hành FPT.</div>
+                            <div style="font-size:10px; color:#555; margin-top:6px;">Cập nhật: 10/05/2026 · Admin User · <span style="color:var(--warning);">⏳ Chưa lưu</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:16px; margin-bottom:14px;">
-                <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:14px;">Gói bán đính kèm</div>
-                <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                    <thead>
-                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Tên gói bán</th>
-                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Giá</th>
-                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Kênh</th>
-                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Trạng thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
-                            <td style="padding:8px 10px; color:#ccc;">Gói Internet Cơ Bản</td>
-                            <td style="padding:8px 10px; color:var(--warning); font-weight:600;">500.000 đ</td>
-                            <td style="padding:8px 10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">tongdaiwifi</span></td>
-                            <td style="padding:8px 10px;"><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:8px; font-size:11px;">Hoạt động</span></td>
-                        </tr>
-                        <tr>
-                            <td style="padding:8px 10px; color:#ccc;">Gói Combo Internet + Camera</td>
-                            <td style="padding:8px 10px; color:var(--warning); font-weight:600;">850.000 đ</td>
-                            <td style="padding:8px 10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">hifpt</span></td>
-                            <td style="padding:8px 10px;"><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:8px; font-size:11px;">Hoạt động</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Group 2: Khắc phục sự cố -->
+            <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 16px; background:rgba(255,255,255,0.04); border-bottom:1px solid var(--border-glass);">
+                    <span style="font-size:14px;">📂</span>
+                    <span style="font-weight:600; font-size:13px; color:#e2e8f0; flex:1;">Khắc phục sự cố</span>
+                    <span style="font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.06); padding:2px 8px; border-radius:10px;">1 câu hỏi</span>
+                </div>
+                <!-- Q3 -->
+                <div style="padding:12px 16px;">
+                    <div style="display:flex; align-items:flex-start; gap:10px;">
+                        <span style="font-size:11px; color:var(--text-muted); font-weight:600; min-width:18px; margin-top:2px;">Q1</span>
+                        <div style="flex:1;">
+                            <div style="font-size:13px; font-weight:500; color:#e2e8f0; margin-bottom:6px;">Wifi yếu, làm thế nào để khắc phục?</div>
+                            <div style="font-size:12px; color:var(--text-muted); line-height:1.5;">Đặt modem ở vị trí trung tâm, tránh vật cản. Kiểm tra firmware và liên hệ 19006600 nếu cần hỗ trợ.</div>
+                            <div style="font-size:10px; color:#555; margin-top:6px;">Cập nhật: 07/05/2026 · Admin User · <span style="color:var(--success);">✓ Đã sync</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
