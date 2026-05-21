@@ -1828,14 +1828,10 @@
                                     </span>
                                 </div>
 
-                                <!-- Nhóm đặc tính + toggle thiết bị/dịch vụ -->
+                                <!-- Nhóm đặc tính — read-only, set động bởi skuRenderDactinh -->
                                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
                                     <span style="font-size:12px; color:var(--text-muted);">Nhóm đặc tính:</span>
-                                    <select id="dactinh-nhom-select" onchange="toggleDactinhNoibat(this.value)" style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px; cursor:pointer;">
-                                        <option value="thietbi">Thông số Router/Modem</option>
-                                        <option value="camera">Thông số Camera</option>
-                                        <option value="dichvu">Thông số Dịch vụ</option>
-                                    </select>
+                                    <span id="dactinh-nhom-select" style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px;">Thông số Router/Modem</span>
                                     <span id="dactinh-hint-dichvu" style="display:none; font-size:11px; color:var(--text-muted); font-style:italic;">ℹ️ Dịch vụ không dùng Nổi bật — xem <strong>Ưu đãi & Đặc quyền</strong> ở Tab Quản lý Content.</span>
                                     <span id="dactinh-hint-thietbi" style="font-size:11px; color:var(--text-muted);">☆ Tick <strong style="color:var(--primary);">Nổi bật</strong> → thông số hiển thị nổi bật dưới gallery trên web</span>
                                 </div>
@@ -6500,8 +6496,9 @@
 
             var isService = (dataKey === 'service');
 
-            // Sync select value
-            if (sel) sel.value = isService ? 'dichvu' : (dataKey === 'camera' ? 'camera' : 'thietbi');
+            // Sync nhóm đặc tính label
+            var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
+            if (sel) sel.innerText = nhomLabel;
 
             // Toggle Nổi bật column visibility
             toggleDactinhNoibat(isService ? 'dichvu' : 'thietbi');
