@@ -6951,164 +6951,79 @@
                     style="background:transparent; border:none; color:#888; font-size:20px; cursor:pointer; padding:0 4px; line-height:1;">✕</button>
             </div>
         </div>
-        <!-- Tab strip -->
+        <!-- Tab strip — đồng bộ với internal SKU view -->
         <div
             style="display:flex; border-bottom:1px solid rgba(255,255,255,0.08); padding:0 20px; overflow-x:auto; flex-shrink:0;">
             <div onclick="skuPrevTab(this,'tab-chung')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#fff; border-bottom:2px solid var(--warning); white-space:nowrap;">
-                Thông tin chung</div>
+                Thông tin sản phẩm</div>
             <div onclick="skuPrevTab(this,'tab-dactinh')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Đặc tính & TB đi kèm</div>
+            <div onclick="skuPrevTab(this,'tab-media')" class="prev-tab"
+                style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
+                Quản lý Content</div>
             <div onclick="skuPrevTab(this,'tab-banhang')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Gói bán</div>
-            <div onclick="skuPrevTab(this,'tab-media')" class="prev-tab"
-                style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
-                Media &amp; Mô tả</div>
         </div>
-        <!-- Tab: Thông tin chung (đồng bộ với detail page) -->
+        <!-- Tab: Thông tin sản phẩm — mirror Tab 1 internal (QLCS read-only) -->
         <div id="tab-chung" style="padding:20px; flex:1;">
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px 16px;">
+            <!-- QLCS sync banner -->
+            <div style="display:flex; align-items:center; gap:10px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
+                <span style="font-size:18px;">🔗</span>
+                <div>
+                    <div style="font-weight:600; font-size:13px; color:var(--primary);">Dữ liệu đồng bộ từ hệ thống QLCS</div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Thông tin cơ bản của SKU được quản lý tập trung tại QLCS. Chỉ xem — không chỉnh sửa trực tiếp trên CMS.</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" style="margin-left:auto; color:var(--primary); border-color:var(--primary); flex-shrink:0;">↗ Mở QLCS</button>
+            </div>
 
-                <!-- Loại SP | Tên SKU | Tên SP Web -->
+            <!-- Section: Thông tin sản phẩm (QLCS) -->
+            <div style="font-size:13px; font-weight:600; color:#e2e8f0; margin-bottom:14px; display:flex; align-items:center; gap:6px;">
+                <span style="color:var(--warning);">▾</span> 1. Thông tin sản phẩm (QLCS)
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 16px;">
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Loại sản phẩm <span
-                            style="color:#ef4444;">*</span></div>
-                    <div id="prev-f-loai"
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        Hàng bán</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Dịch vụ</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Internet</div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tên SKU <span
-                            style="color:#ef4444;">*</span></div>
-                    <div id="prev-f-tensku"
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Nhóm dịch vụ</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Basic Net</div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tên SP (hiển thị WEB) <span
-                            style="color:#ef4444;">*</span></div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Loại sản phẩm</div>
+                    <div id="prev-f-loai" style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Thiết bị</div>
                 </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Tên SKU <span style="font-size:10px; opacity:0.6;">(tên raw từ QLCS)</span></div>
+                    <div id="prev-f-tensku" style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">ModemWifi6AX1800GZ</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Giá tối thiểu</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:var(--warning); font-weight:600; border:1px solid rgba(255,255,255,0.06);">500.000 đ</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Hình thức quản lý</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Thiết bị lẻ</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Gói tính cước</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Trả 1 lần</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Đơn vị tính</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">Cái</div>
+                </div>
+            </div>
 
-                <!-- Tình trạng | Tên gói | URL -->
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tình trạng (ON/OFF)</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:8px;">
-                        <span
-                            style="display:inline-block; width:32px; height:17px; background:var(--warning); border-radius:9px; position:relative; flex-shrink:0;"><span
-                                style="position:absolute; top:2px; left:2px; width:13px; height:13px; background:#fff; border-radius:50%;"></span></span>
-                        <span style="font-size:13px; color:#ccc;">Hoạt động</span>
-                    </div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tên gói</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">URL</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
-                </div>
+            <!-- Divider -->
+            <div style="border-top:1px solid rgba(255,255,255,0.07); margin:20px 0;"></div>
 
-                <!-- Giá tối thiểu (1 col) -->
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Giá tối thiểu</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:var(--warning); font-weight:600; border:1px solid rgba(255,255,255,0.06);">
-                        500.000 đ</div>
-                </div>
-                <div style="grid-column: 2 / 4;"></div>
-
-                <!-- Content mô tắt (full width) -->
-                <div style="grid-column: 1 / 4;">
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Content mô tắt</div>
-                    <div
-                        style="padding:8px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:48px;">
-                        —</div>
-                </div>
-
-                <!-- Thumb | Ảnh mô tả | Banner đầu -->
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Thumb image</div>
-                    <div
-                        style="height:64px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        📷</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Ảnh mô tả</div>
-                    <div
-                        style="height:64px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        📷</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Banner đầu trang</div>
-                    <div
-                        style="height:64px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        🖼</div>
-                </div>
-
-                <!-- Banner giữa | Tag nổi bật | Thông số KT -->
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Banner giữa trang</div>
-                    <div
-                        style="height:64px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        🖼</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tag nổi bật</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:5px; flex-wrap:wrap;">
-                        <span
-                            style="background:rgba(245,158,11,0.15); color:var(--warning); padding:2px 8px; border-radius:4px; font-size:12px; border:1px solid rgba(245,158,11,0.3);">Bán
-                            chạy</span>
-                    </div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Thông số kỹ thuật (link)</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
-                </div>
-
-                <!-- Thiết bị nhận thêm | Đặc quyền | Ưu đãi -->
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Thiết bị nhận thêm trong gói</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:5px; flex-wrap:wrap; min-height:34px;">
-                        <span
-                            style="background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:4px; font-size:12px; color:#ccc;">Camera</span><span
-                            style="background:rgba(255,255,255,0.08); padding:2px 8px; border-radius:4px; font-size:12px; color:#ccc;">Modem</span>
-                    </div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Đặc quyền</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:34px;">
-                        —</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Ưu đãi đặc biệt</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:34px;">
-                        —</div>
-                </div>
-
-                <!-- FAQ (full width) -->
-                <div style="grid-column: 1 / 4;">
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">FAQ</div>
-                    <div
-                        style="padding:8px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:48px;">
-                        —</div>
-                </div>
-
+            <!-- Section: Cập nhật -->
+            <div style="font-size:12px; color:var(--text-muted);">
+                Cập nhật lần cuối: <strong style="color:#e2e8f0;">14/05/2026 13:50</strong> bởi <strong style="color:#e2e8f0;">Admin User</strong>
             </div>
         </div>
         <!-- Tab: Đặc tính & TB đi kèm -->
@@ -7167,125 +7082,133 @@
             </div>
         </div>
 
-        <!-- Tab: Gói bán -->
+        <!-- Tab: Gói bán — mirror Tab 4 internal -->
         <div id="tab-banhang" style="display:none; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">VẬN HÀNH
-                & KÊNH BÁN</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px 16px; margin-bottom:24px;">
+            <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; margin-bottom:14px; text-transform:uppercase;">Vận hành & Kênh bán</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 16px; margin-bottom:24px;">
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tình trạng (ON/OFF)</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:8px;">
-                        <span
-                            style="display:inline-block; width:32px; height:17px; background:var(--warning); border-radius:9px; position:relative; flex-shrink:0;"><span
-                                style="position:absolute; top:2px; left:2px; width:13px; height:13px; background:#fff; border-radius:50%;"></span></span>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Tình trạng (ON/OFF)</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; gap:8px;">
+                        <span style="display:inline-block; width:32px; height:17px; background:var(--warning); border-radius:9px; position:relative; flex-shrink:0;">
+                            <span style="position:absolute; top:2px; left:2px; width:13px; height:13px; background:#fff; border-radius:50%;"></span>
+                        </span>
                         <span style="font-size:13px; color:#ccc;">Hoạt động</span>
                     </div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Tên gói</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Tên gói hiển thị</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">URL</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">URL trang sản phẩm</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Giá tối thiểu</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:var(--warning); font-weight:600; border:1px solid rgba(255,255,255,0.06);">
-                        500.000 đ</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Giá tối thiểu</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:var(--warning); font-weight:600; border:1px solid rgba(255,255,255,0.06);">500.000 đ</div>
                 </div>
-            </div>
-            <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">
-                MARKETING & ĐẶC QUYỀN</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; margin-bottom:20px;">
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Tag nổi bật</div>
-                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <span
-                            style="padding:4px 10px; background:rgba(245,158,11,0.15); color:var(--warning); border-radius:4px; font-size:12px; border:1px solid rgba(245,158,11,0.3);">Bán
-                            chạy</span>
-                        <span
-                            style="padding:4px 10px; background:rgba(255,255,255,0.05); color:#666; border-radius:4px; font-size:12px; border:1px solid rgba(255,255,255,0.08);">Mới</span>
-                        <span
-                            style="padding:4px 10px; background:rgba(255,255,255,0.05); color:#666; border-radius:4px; font-size:12px; border:1px solid rgba(255,255,255,0.08);">Khuyên
-                            dùng</span>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Thứ tự hiển thị</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Kênh bán</div>
+                    <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:4px; flex-wrap:wrap;">
+                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">tongdaiwifi</span>
+                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">hifpt</span>
                     </div>
                 </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Link thông số kỹ thuật</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#ccc; border:1px solid rgba(255,255,255,0.06);">
-                        —</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Đặc quyền</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:36px;">
-                        —</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Ưu đãi đặc biệt</div>
-                    <div
-                        style="padding:7px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:36px;">
-                        —</div>
-                </div>
             </div>
-            <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">NỘI DUNG
-                MÔ TẢ</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Mô tả ngắn</div>
-                    <div
-                        style="padding:8px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:60px;">
-                        —</div>
-                </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:4px;">Mô tả dài</div>
-                    <div
-                        style="padding:8px 10px; background:rgba(0,0,0,0.3); border-radius:5px; font-size:13px; color:#555; border:1px solid rgba(255,255,255,0.06); min-height:60px;">
-                        —</div>
-                </div>
+
+            <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:16px; margin-bottom:14px;">
+                <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:14px;">Gói bán đính kèm</div>
+                <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                    <thead>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Tên gói bán</th>
+                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Giá</th>
+                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Kênh</th>
+                            <th style="text-align:left; padding:6px 10px; color:var(--text-muted); font-weight:500;">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
+                            <td style="padding:8px 10px; color:#ccc;">Gói Internet Cơ Bản</td>
+                            <td style="padding:8px 10px; color:var(--warning); font-weight:600;">500.000 đ</td>
+                            <td style="padding:8px 10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">tongdaiwifi</span></td>
+                            <td style="padding:8px 10px;"><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:8px; font-size:11px;">Hoạt động</span></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 10px; color:#ccc;">Gói Combo Internet + Camera</td>
+                            <td style="padding:8px 10px; color:var(--warning); font-weight:600;">850.000 đ</td>
+                            <td style="padding:8px 10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:1px 7px; border-radius:8px; font-size:11px;">hifpt</span></td>
+                            <td style="padding:8px 10px;"><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:2px 8px; border-radius:8px; font-size:11px;">Hoạt động</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Tab: Media & Mô tả -->
+        <!-- Tab: Quản lý Content — mirror Tab 3 internal (media + marketing + mô tả) -->
         <div id="tab-media" style="display:none; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">ẢNH SẢN
-                PHẨM</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+            <!-- Section: Ảnh sản phẩm -->
+            <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; margin-bottom:14px; text-transform:uppercase;">Ảnh sản phẩm</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:24px;">
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Ảnh Thumbnail</div>
-                    <div
-                        style="height:100px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        Chưa có ảnh</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Thumb image</div>
+                    <div style="height:80px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px dashed rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:#444; font-size:20px;">📷</div>
                 </div>
                 <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Ảnh mô tả</div>
-                    <div
-                        style="height:100px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        Chưa có ảnh</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Ảnh mô tả</div>
+                    <div style="height:80px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px dashed rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:#444; font-size:20px;">📷</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Banner đầu trang</div>
+                    <div style="height:80px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px dashed rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:#444; font-size:20px;">🖼</div>
+                </div>
+                <div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Banner giữa trang</div>
+                    <div style="height:80px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px dashed rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; color:#444; font-size:20px;">🖼</div>
                 </div>
             </div>
-            <div style="font-size:11px; font-weight:600; color:#888; letter-spacing:0.8px; margin-bottom:14px;">BANNER
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Banner đầu trang</div>
-                    <div
-                        style="height:80px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        Chưa có banner</div>
+
+            <!-- Section: Marketing & Đặc quyền -->
+            <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:16px; margin-bottom:16px;">
+                <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; margin-bottom:14px; text-transform:uppercase;">Marketing & Đặc quyền</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-bottom:14px;">
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:6px;">Tag nổi bật</div>
+                        <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:5px; flex-wrap:wrap;">
+                            <span style="padding:2px 8px; background:rgba(245,158,11,0.15); color:var(--warning); border-radius:4px; font-size:12px; border:1px solid rgba(245,158,11,0.3);">Bán chạy</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Thông số kỹ thuật (link)</div>
+                        <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06);">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Đặc quyền</div>
+                        <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06); min-height:36px;">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Ưu đãi đặc biệt</div>
+                        <div style="padding:7px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06); min-height:36px;">—</div>
+                    </div>
                 </div>
-                <div>
-                    <div style="font-size:11px; color:#666; margin-bottom:6px;">Banner giữa trang</div>
-                    <div
-                        style="height:80px; background:rgba(0,0,0,0.3); border-radius:6px; border:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#444; font-size:12px;">
-                        Chưa có banner</div>
+            </div>
+
+            <!-- Section: Nội dung mô tả -->
+            <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:16px;">
+                <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; margin-bottom:14px; text-transform:uppercase;">Nội dung mô tả</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px 16px;">
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Mô tả ngắn</div>
+                        <div style="padding:8px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06); min-height:60px;">—</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-bottom:4px;">Mô tả dài</div>
+                        <div style="padding:8px 10px; background:rgba(0,0,0,0.25); border-radius:6px; font-size:13px; color:#888; border:1px solid rgba(255,255,255,0.06); min-height:60px;">—</div>
+                    </div>
                 </div>
             </div>
         </div>
