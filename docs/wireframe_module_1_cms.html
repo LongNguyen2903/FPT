@@ -6298,81 +6298,6 @@
             <!--              ĐƠN HÀNG & HỢP ĐỒNG               -->
             <!-- ============================================== -->
 
-            <div id="mod-ord-draft" class="module-view">
-                <div class="card">
-                    <div class="page-header">
-                        <h2>Đơn hàng tạm (Draft Orders)</h2><button class="btn btn-secondary">📥 Xuất Excel</button>
-                    </div>
-                    <div class="form-grid filters">
-                        <div class="form-group"><input type="date" class="form-input" title="Từ ngày"></div>
-                        <div class="form-group"><input type="date" class="form-input" title="Đến ngày"></div>
-                        <div class="form-group"><select class="form-select">
-                                <option>Trạng thái (Tất cả)</option>
-                                <option>Đang tạo dở</option>
-                            </select></div>
-                        <div class="form-group"><button class="btn" style="background: var(--purple-gradient);">Tìm
-                                Kiếm</button></div>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã Đơn Tạm</th>
-                                <th>Khách hàng</th>
-                                <th>Gói chọn</th>
-                                <th>Thời gian cập nhật</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>DFT-09213</td>
-                                <td>Nguyễn Văn A</td>
-                                <td>Gói Internet Sky</td>
-                                <td>14:30 14/05/2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="mod-ord-contract" class="module-view">
-                <div class="card">
-                    <div class="page-header">
-                        <h2>Danh sách Hợp đồng (Contracts)</h2><button class="btn btn-secondary">📥 Xuất Excel</button>
-                    </div>
-                    <div class="form-grid filters">
-                        <div class="form-group"><input type="text" class="form-input"
-                                placeholder="Mã đơn / Tên / SĐT..."></div>
-                        <div class="form-group"><select class="form-select">
-                                <option>Thanh toán (Thành công)</option>
-                                <option>Chờ thanh toán</option>
-                            </select></div>
-                        <div class="form-group"><button class="btn" style="background: var(--purple-gradient);">Tìm
-                                Kiếm</button></div>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã Đơn Hàng</th>
-                                <th>Khách hàng</th>
-                                <th>SĐT</th>
-                                <th>Tổng tiền</th>
-                                <th>Thanh toán</th>
-                                <th>Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>ORD-FPT-889</td>
-                                <td>Trần Thị B</td>
-                                <td>0988xxx123</td>
-                                <td>1.500.000đ</td>
-                                <td><span class="badge active">Thành công</span></td>
-                                <td><button class="btn btn-secondary btn-sm">Xem chi tiết</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -6382,8 +6307,7 @@
             'dashboards',
             'pdh-category', 'pdh-attribute', 'pdh-sku', 'pdh-package', 'pdh-price', 'pdh-fee', // PDH
             'set-area', // Settings
-            'pages', 'landing', 'sections', 'blocks', 'banner', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping', // CMS
-            'ord-draft', 'ord-contract' // Orders
+            'pages', 'landing', 'sections', 'blocks', 'banner', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping' // CMS
         ];
 
         const titles = {
@@ -6395,8 +6319,7 @@
             'sections': 'Quản lý Sections (CMS)', 'blocks': 'Quản lý Blocks (CMS)',
             'banner': 'Quản lý Banner (CMS)', 'faq': 'Quản lý Bài viết & FAQ (CMS)',
             'cms-package': 'Marketing Gói Bán (CMS)', 'cms-display': 'Cài đặt Hiển thị (CMS)', 'cms-popup': 'Quản lý Popup (CMS)',
-            'tag-mapping': 'Cấu hình Thông tin hay (CMS)',
-            'ord-draft': 'Đơn hàng tạm (Orders)', 'ord-contract': 'Danh sách hợp đồng (Orders)'
+            'tag-mapping': 'Cấu hình Thông tin hay (CMS)'
         };
 
         function switchModule(modName, theme) {
