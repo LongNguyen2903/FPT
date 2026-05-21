@@ -1,0 +1,16 @@
+%%{init: { 'theme': 'dark' } }%%
+sequenceDiagram
+    autonumber
+    participant ActorA as "Bên Gửi (Sender)"
+    participant System as "Hệ thống (System)"
+    participant ActorB as "Bên Nhận (Receiver)"
+
+    Note over ActorA, ActorB: TIÊU ĐỀ PHÂN CẢNH/LUỒNG NGHIỆP VỤ (CHỮ IN HOA)
+    ActorA->>System: "1. Yêu cầu thực hiện hành động (Tham số)"
+    System->>System: "2. Xử lý logic nội bộ"
+    System-->>ActorA: "3. Phản hồi kết quả/Yêu cầu bước tiếp theo"
+
+    Note over System, ActorB: PHÂN CẢNH TIẾP THEO
+    System->>ActorB: "4. Truy xuất hoặc gửi thông tin"
+    ActorB-->>System: "5. Trả về dữ liệu kết quả"
+    System-->>ActorA: "6. Trả về giao diện/kết quả cuối cùng"
