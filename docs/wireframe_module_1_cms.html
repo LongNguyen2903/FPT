@@ -1828,33 +1828,64 @@
                                     </span>
                                 </div>
 
-                                <!-- Nhóm đặc tính — read-only -->
-                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+                                <!-- Nhóm đặc tính + toggle thiết bị/dịch vụ -->
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
                                     <span style="font-size:12px; color:var(--text-muted);">Nhóm đặc tính:</span>
-                                    <span style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px;">Thông số Dịch vụ</span>
-                                    <span style="font-size:11px; color:var(--text-muted); font-style:italic;">ℹ️ Dịch vụ không hiển thị thông số nổi bật dưới gallery — xem <strong>Ưu đãi & Đặc quyền</strong> ở Tab Quản lý Content.</span>
+                                    <select id="dactinh-nhom-select" onchange="toggleDactinhNoibat(this.value)" style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px; cursor:pointer;">
+                                        <option value="thietbi">Thông số Router/Modem</option>
+                                        <option value="camera">Thông số Camera</option>
+                                        <option value="dichvu">Thông số Dịch vụ</option>
+                                    </select>
+                                    <span id="dactinh-hint-dichvu" style="display:none; font-size:11px; color:var(--text-muted); font-style:italic;">ℹ️ Dịch vụ không dùng Nổi bật — xem <strong>Ưu đãi & Đặc quyền</strong> ở Tab Quản lý Content.</span>
+                                    <span id="dactinh-hint-thietbi" style="font-size:11px; color:var(--text-muted);">☆ Tick <strong style="color:var(--primary);">Nổi bật</strong> → thông số hiển thị nổi bật dưới gallery trên web</span>
                                 </div>
 
-                                <!-- Inline label-value list -->
-                                <div style="display:flex; flex-direction:column; gap:6px;">
-                                    <div style="display:flex; align-items:baseline; gap:8px;">
-                                        <span style="font-size:13px; color:var(--text-muted); min-width:160px; flex-shrink:0;">Tốc độ download</span>
-                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500;">100 <span style="font-size:11px; color:var(--text-muted); font-weight:400;">Mbps</span></span>
+                                <!-- Attribute list — label / value / ☆ Nổi bật (chỉ thiết bị) -->
+                                <div id="dactinh-attr-list" style="display:flex; flex-direction:column; gap:2px;">
+                                    <!-- Header row — chỉ hiện khi là thiết bị -->
+                                    <div id="dactinh-header-row" style="display:flex; align-items:center; gap:0; padding:0 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:4px;">
+                                        <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; min-width:180px; flex-shrink:0;">Đặc tính</span>
+                                        <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; flex:1;">Giá trị</span>
+                                        <span class="col-noibat" style="font-size:10px; font-weight:600; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; width:100px; text-align:center;">Nổi bật ☆</span>
                                     </div>
-                                    <div style="display:flex; align-items:baseline; gap:8px;">
-                                        <span style="font-size:13px; color:var(--text-muted); min-width:160px; flex-shrink:0;">Tốc độ upload</span>
-                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500;">50 <span style="font-size:11px; color:var(--text-muted); font-weight:400;">Mbps</span></span>
+                                    <!-- Row 1 -->
+                                    <div style="display:flex; align-items:center; gap:0; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <span style="font-size:13px; color:var(--text-muted); min-width:180px; flex-shrink:0;">Tốc độ WiFi</span>
+                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500; flex:1;">1800 <span style="font-size:11px; color:var(--text-muted); font-weight:400;">Mbps</span></span>
+                                        <label class="col-noibat" style="width:100px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+                                            <input type="checkbox" checked style="accent-color:var(--primary); width:15px; height:15px;">
+                                            <span style="font-size:11px; color:var(--primary);">Nổi bật</span>
+                                        </label>
                                     </div>
-                                    <div style="display:flex; align-items:baseline; gap:8px;">
-                                        <span style="font-size:13px; color:var(--text-muted); min-width:160px; flex-shrink:0;">Loại đường truyền</span>
-                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500;">Cáp quang FTTH</span>
+                                    <!-- Row 2 -->
+                                    <div style="display:flex; align-items:center; gap:0; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <span style="font-size:13px; color:var(--text-muted); min-width:180px; flex-shrink:0;">Chuẩn WiFi</span>
+                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500; flex:1;">WiFi 6 (802.11ax)</span>
+                                        <label class="col-noibat" style="width:100px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+                                            <input type="checkbox" checked style="accent-color:var(--primary); width:15px; height:15px;">
+                                            <span style="font-size:11px; color:var(--primary);">Nổi bật</span>
+                                        </label>
                                     </div>
-                                    <div style="display:flex; align-items:baseline; gap:8px;">
-                                        <span style="font-size:13px; color:var(--text-muted); min-width:160px; flex-shrink:0;">IP tĩnh</span>
-                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500;">Không</span>
+                                    <!-- Row 3 -->
+                                    <div style="display:flex; align-items:center; gap:0; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <span style="font-size:13px; color:var(--text-muted); min-width:180px; flex-shrink:0;">Số cổng LAN</span>
+                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500; flex:1;">4 <span style="font-size:11px; color:var(--text-muted); font-weight:400;">cổng</span></span>
+                                        <label class="col-noibat" style="width:100px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+                                            <input type="checkbox" style="accent-color:var(--primary); width:15px; height:15px;">
+                                            <span style="font-size:11px; color:var(--text-muted);">Nổi bật</span>
+                                        </label>
+                                    </div>
+                                    <!-- Row 4 -->
+                                    <div style="display:flex; align-items:center; gap:0; padding:7px 0;">
+                                        <span style="font-size:13px; color:var(--text-muted); min-width:180px; flex-shrink:0;">Băng tần</span>
+                                        <span style="font-size:13px; color:#e0e0e0; font-weight:500; flex:1;">Dual-Band 2.4GHz + 5GHz</span>
+                                        <label class="col-noibat" style="width:100px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+                                            <input type="checkbox" style="accent-color:var(--primary); width:15px; height:15px;">
+                                            <span style="font-size:11px; color:var(--text-muted);">Nổi bật</span>
+                                        </label>
                                     </div>
                                 </div>
-                                <p style="font-size:11px; color:var(--text-muted); margin:12px 0 0; display:flex; align-items:center; gap:6px;">🔒 Để thêm / sửa đặc tính, thao tác trực tiếp trên <strong>PDH / QLCS</strong>.</p>
+                                <p style="font-size:11px; color:var(--text-muted); margin:10px 0 0; display:flex; align-items:center; gap:6px;">🔒 Để thêm / sửa đặc tính, thao tác trực tiếp trên <strong>PDH / QLCS</strong>. Chỉ cột <strong style="color:var(--primary);">Nổi bật</strong> được lưu bởi CMS.</p>
                             </div>
 
                             <!-- Thiết bị đi kèm — Read-only, sync từ QLCS/PDH -->
@@ -6646,6 +6677,16 @@
             ['tab-chung', 'tab-dactinh', 'tab-media', 'tab-faq'].forEach(function (id) {
                 document.getElementById(id).style.display = (id === tabId) ? 'block' : 'none';
             });
+        }
+
+        function toggleDactinhNoibat(val) {
+            var isService = val === 'dichvu';
+            document.querySelectorAll('.col-noibat').forEach(function(el) {
+                el.style.display = isService ? 'none' : '';
+            });
+            document.getElementById('dactinh-hint-dichvu').style.display = isService ? '' : 'none';
+            document.getElementById('dactinh-hint-thietbi').style.display = isService ? 'none' : '';
+            document.getElementById('dactinh-header-row').style.display = isService ? 'none' : '';
         }
 
         function addPtttRowDrawer() {
