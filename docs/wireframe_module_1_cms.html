@@ -5281,10 +5281,15 @@
                                 <h3 id="tag-config-title" style="margin-top:0; margin-bottom:12px; color:var(--primary);">Chọn một Tag để cấu hình</h3>
                                 <input type="hidden" id="selected-tag-name" value="">
                                 
-                                <div class="form-group" style="margin-bottom:12px;">
-                                    <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Danh sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
-                                    <div id="tag-skus-container" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:6px; max-height:150px; overflow-y:auto;">
-                                        <!-- Danh sách check box các SKU: INT-GIGA, INT-SKY, CAM-IQ3, CAM-SE, PLAY-MAX, MODEM-AX3000GZ -->
+                                <div class="form-group" style="margin-bottom:16px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                        <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="openSkuSelectorModal()" style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
+                                            <span>✏️ Quản lý SKUs</span>
+                                        </button>
+                                    </div>
+                                    <div id="tag-selected-skus-preview" style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.2); border:1px solid rgba(255,255,255,0.05); padding:10px; border-radius:8px; min-height:48px; max-height:120px; overflow-y:auto;">
+                                        <span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>
                                     </div>
                                 </div>
 
@@ -5348,6 +5353,56 @@
                     <div style="display:flex; justify-content:flex-end; gap:8px;">
                         <button class="btn btn-secondary btn-sm" onclick="closeAddTagModal()">Hủy</button>
                         <button class="btn btn-primary btn-sm" onclick="submitAddTag()">Tạo mới</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal Chọn SKUs nâng cao (Advanced SKU Selector) -->
+            <div id="sku-selector-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+                <div class="card" style="width:680px; max-width:90%; padding:24px; margin: 5% auto; position:relative; box-shadow: 0 10px 30px rgba(0,0,0,0.6); background: var(--bg-panel); border: 1px solid var(--border-glass); display:flex; flex-direction:column; gap:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+                        <h3 style="margin:0; color:#fff; display:flex; align-items:center; gap:8px; font-size:16px;">
+                            <span>📦 Bộ chọn SKUs liên kết</span>
+                            <span id="sku-selector-count" style="font-size:11px; background:var(--primary); color:#fff; padding:2px 8px; border-radius:10px; font-weight:normal;">Đã chọn 0 SKUs</span>
+                        </h3>
+                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);" onclick="closeSkuSelectorModal()">✕</span>
+                    </div>
+
+                    <!-- Bộ lọc & Tìm kiếm SKU -->
+                    <div style="display:grid; grid-template-columns: 2fr 1fr; gap:12px; background:rgba(0,0,0,0.2); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03);">
+                        <div style="position:relative; display:flex; align-items:center;">
+                            <span style="position:absolute; left:10px; color:var(--text-muted); font-size:12px;">🔍</span>
+                            <input type="text" id="sku-selector-search" class="form-input" placeholder="Tìm kiếm mã hoặc tên SKU..." oninput="filterSkuSelectorList()" style="padding-left:28px; font-size:13px; width:100%; height:38px;">
+                        </div>
+                        <div>
+                            <select id="sku-selector-filter-type" class="form-select" onchange="filterSkuSelectorList()" style="font-size:13px; padding: 10px 14px; height:38px;">
+                                <option value="">Tất cả dịch vụ</option>
+                                <option value="Internet">Internet</option>
+                                <option value="Truyền hình">Truyền hình</option>
+                                <option value="Camera">Camera</option>
+                                <option value="Thiết bị">Thiết bị</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Nút Chọn nhanh -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:12.5px;">
+                        <div style="display:flex; gap:10px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="bulkSelectSkus(true)" style="padding:4px 10px; font-size:12px; background:rgba(255,255,255,0.05); height:28px;">Chọn tất cả</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="bulkSelectSkus(false)" style="padding:4px 10px; font-size:12px; background:rgba(255,255,255,0.05); height:28px;">Bỏ chọn tất cả</button>
+                        </div>
+                        <span id="sku-selector-total-found" style="color:var(--text-muted); font-size:12px;">Tìm thấy 0 SKUs</span>
+                    </div>
+
+                    <!-- Danh sách SKUs (cuộn) -->
+                    <div id="sku-selector-list" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; max-height:280px; overflow-y:auto; padding:8px 4px; border:1px solid rgba(255,255,255,0.05); border-radius:6px; background:rgba(0,0,0,0.15);">
+                        <!-- Render danh sách checkbox SKU có cuộn và bộ lọc -->
+                    </div>
+
+                    <!-- Footer -->
+                    <div style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid rgba(255,255,255,0.08); padding-top:16px; margin-top:8px;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="closeSkuSelectorModal()">Hủy</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="confirmSkuSelection()">Xác nhận chọn</button>
                     </div>
                 </div>
             </div>
@@ -7279,14 +7334,23 @@
                 tr.style.cursor = 'pointer';
                 tr.onclick = function() { selectTagForConfig(tag); };
 
-                // Tạo badges cho SKUs
+                // Tạo badges cho SKUs (Thu gọn khi > 3 SKUs)
                 let skuBadges = '';
                 if (data.skus.length === 0) {
                     skuBadges = '<span style="color:var(--text-muted); font-style:italic; font-size:11px;">Chưa gán</span>';
                 } else {
-                    data.skus.forEach(sku => {
+                    const maxDisplay = 3;
+                    const displayedSkus = data.skus.slice(0, maxDisplay);
+                    const remainingCount = data.skus.length - maxDisplay;
+                    
+                    displayedSkus.forEach(sku => {
                         skuBadges += `<span class="badge" style="background:rgba(245,158,11,0.1); color:var(--warning); margin-right:4px; font-size:10px; padding:2px 5px; border-radius:3px;">${sku}</span>`;
                     });
+                    
+                    if (remainingCount > 0) {
+                        const allSkusString = data.skus.join(', ');
+                        skuBadges += `<span class="badge" style="background:rgba(255,255,255,0.08); color:var(--text-muted); font-size:10px; padding:2px 5px; border-radius:3px; cursor:help;" title="${allSkusString}">+${remainingCount} SKUs...</span>`;
+                    }
                 }
 
                 // Trạng thái fallback
@@ -7316,42 +7380,60 @@
             renderTagMappingTable();
         }
 
-        const availableSkus = ['INT-GIGA', 'INT-SKY', 'CAM-IQ3', 'CAM-SE', 'PLAY-MAX', 'MODEM-AX3000GZ'];
+        const availableSkus = [
+            'INT-GIGA', 'INT-SKY', 'CAM-IQ3', 'CAM-SE', 'PLAY-MAX', 'MODEM-AX3000GZ',
+            'INT-META', 'INT-LUX500', 'INT-LUX800', 'INT-F1-GIGA', 'INT-F1-SKY', 'INT-F1-META',
+            'CAM-OUTDOOR', 'CAM-PLAY', 'CAM-IQ2', 'CAM-IQ25', 'CAM-DOME',
+            'PLAY-VIP', 'PLAY-SPORT', 'PLAY-KPLUS', 'PLAY-PREMIUM',
+            'DEV-ONT-AC1000C', 'DEV-AP-AX1800C', 'DEV-MESH-AC1200', 'DEV-MESH-AX1500', 'DEV-STB-FPTPLAY'
+        ];
         const skuNames = {
             'INT-GIGA': 'Internet Giga (150Mbps)',
             'INT-SKY': 'Internet Sky (1Gbps/150Mbps)',
             'CAM-IQ3': 'FPT Camera IQ3',
             'CAM-SE': 'FPT Camera SE',
             'PLAY-MAX': 'Gói FPT Play SMAX',
-            'MODEM-AX3000GZ': 'Modem Wi-Fi 6 AX3000GZ'
+            'MODEM-AX3000GZ': 'Modem Wi-Fi 6 AX3000GZ',
+            'INT-META': 'Internet Meta (1Gbps)',
+            'INT-LUX500': 'Internet LUX 500 (500Mbps Wi-Fi 6)',
+            'INT-LUX800': 'Internet LUX 800 (800Mbps Wi-Fi 6)',
+            'INT-F1-GIGA': 'Internet Giga F1',
+            'INT-F1-SKY': 'Internet Sky F1',
+            'INT-F1-META': 'Internet Meta F1',
+            'CAM-OUTDOOR': 'FPT Camera Outdoor',
+            'CAM-PLAY': 'FPT Camera Play (Wi-Fi)',
+            'CAM-IQ2': 'FPT Camera IQ 2',
+            'CAM-IQ25': 'FPT Camera IQ 2.5',
+            'CAM-DOME': 'FPT Camera Dome',
+            'PLAY-VIP': 'Gói FPT Play VIP',
+            'PLAY-SPORT': 'Gói FPT Play SPORT',
+            'PLAY-KPLUS': 'Gói FPT Play K+',
+            'PLAY-PREMIUM': 'Gói FPT Play Premium',
+            'DEV-ONT-AC1000C': 'Modem ONT AC1000C V2',
+            'DEV-AP-AX1800C': 'Access Point Wi-Fi 6 AX1800C',
+            'DEV-MESH-AC1200': 'Thiết bị Access Point Mesh AC1200',
+            'DEV-MESH-AX1500': 'Thiết bị Access Point Mesh AX1500 Wi-Fi 6',
+            'DEV-STB-FPTPLAY': 'FPT Play Box 2026 (STB)'
         };
+
+        let tempSelectedSkus = [];
+
+        function getSkuServiceType(sku) {
+            if (sku.startsWith('INT-')) return 'Internet';
+            if (sku.startsWith('CAM-')) return 'Camera';
+            if (sku.startsWith('PLAY-')) return 'Truyền hình';
+            if (sku.startsWith('MODEM-') || sku.startsWith('DEV-')) return 'Thiết bị';
+            return 'Khác';
+        }
 
         function selectTagForConfig(tag) {
             document.getElementById('selected-tag-name').value = tag;
             document.getElementById('tag-config-title').innerHTML = `Cấu hình Tag: <span style="color:#fff; font-weight:700;">#${tag}</span>`;
             
-            // Checkbox SKUs list
-            const container = document.getElementById('tag-skus-container');
-            container.innerHTML = '';
-            
             const linkedSkus = tagMappingData[tag] ? tagMappingData[tag].skus : [];
+            tempSelectedSkus = [...linkedSkus];
             
-            availableSkus.forEach(sku => {
-                const checked = linkedSkus.includes(sku) ? 'checked' : '';
-                const div = document.createElement('div');
-                div.style.display = 'flex';
-                div.style.alignItems = 'center';
-                div.style.gap = '8px';
-                div.style.padding = '4px 0';
-                
-                div.innerHTML = `
-                    <input type="checkbox" id="chk-sku-${sku}" value="${sku}" ${checked} onchange="updateTagMappingPreview()" style="accent-color:var(--primary); cursor:pointer;">
-                    <label for="chk-sku-${sku}" style="font-size:12px; cursor:pointer; color:#ccc;">
-                        <strong style="color:var(--warning); font-family:monospace;">${sku}</strong> - ${skuNames[sku]}
-                    </label>
-                `;
-                container.appendChild(div);
-            });
+            renderSelectedSkusPreview();
             
             // Fallback toggle
             const fallbackToggle = document.getElementById('tag-fallback-toggle');
@@ -7362,6 +7444,169 @@
             document.getElementById('tag-preview-status').innerText = 'Đang Preview Tag: #' + tag;
             
             updateTagMappingPreview();
+        }
+
+        function renderSelectedSkusPreview() {
+            const previewDiv = document.getElementById('tag-selected-skus-preview');
+            if (!previewDiv) return;
+            previewDiv.innerHTML = '';
+            
+            if (tempSelectedSkus.length === 0) {
+                previewDiv.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>';
+                return;
+            }
+            
+            tempSelectedSkus.forEach(sku => {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                badge.style.background = 'rgba(255,255,255,0.06)';
+                badge.style.border = '1px solid rgba(255,255,255,0.1)';
+                badge.style.color = '#fff';
+                badge.style.display = 'inline-flex';
+                badge.style.alignItems = 'center';
+                badge.style.gap = '6px';
+                badge.style.padding = '4px 8px';
+                badge.style.borderRadius = '4px';
+                badge.style.fontSize = '12px';
+                
+                badge.innerHTML = `
+                    <strong style="color:var(--warning); font-family:monospace;">${sku}</strong>
+                    <span onclick="removeSkuFromSelection('${sku}')" style="cursor:pointer; color:#ef4444; font-weight:bold; font-size:14px; line-height:1; display:inline-block; padding:0 2px;" title="Xóa nhanh">&times;</span>
+                `;
+                previewDiv.appendChild(badge);
+            });
+        }
+
+        function removeSkuFromSelection(sku) {
+            const index = tempSelectedSkus.indexOf(sku);
+            if (index > -1) {
+                tempSelectedSkus.splice(index, 1);
+            }
+            renderSelectedSkusPreview();
+        }
+
+        function openSkuSelectorModal() {
+            const tag = document.getElementById('selected-tag-name').value;
+            if (!tag) {
+                alert('Vui lòng chọn hoặc tạo một Tag trước khi cấu hình SKU liên kết.');
+                return;
+            }
+            document.getElementById('sku-selector-modal').style.display = 'flex';
+            document.getElementById('sku-selector-search').value = '';
+            document.getElementById('sku-selector-filter-type').value = '';
+            renderSkuSelectorList();
+        }
+
+        function closeSkuSelectorModal() {
+            document.getElementById('sku-selector-modal').style.display = 'none';
+        }
+
+        function renderSkuSelectorList() {
+            const listDiv = document.getElementById('sku-selector-list');
+            if (!listDiv) return;
+            listDiv.innerHTML = '';
+            
+            const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
+            const typeFilter = document.getElementById('sku-selector-filter-type').value;
+            
+            let filtered = availableSkus.filter(sku => {
+                const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
+                const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
+                return matchesSearch && matchesType;
+            });
+
+            document.getElementById('sku-selector-total-found').innerText = `Tìm thấy ${filtered.length} SKUs`;
+            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
+
+            if (filtered.length === 0) {
+                listDiv.innerHTML = '<div style="grid-column: span 2; color:var(--text-muted); font-style:italic; font-size:12px; text-align:center; padding:20px;">Không tìm thấy SKU nào phù hợp</div>';
+                return;
+            }
+
+            filtered.forEach(sku => {
+                const isChecked = tempSelectedSkus.includes(sku) ? 'checked' : '';
+                const item = document.createElement('div');
+                item.style.display = 'flex';
+                item.style.alignItems = 'center';
+                item.style.gap = '8px';
+                item.style.padding = '8px 10px';
+                item.style.background = isChecked ? 'rgba(69, 100, 237, 0.08)' : 'rgba(255,255,255,0.02)';
+                item.style.border = '1px solid';
+                item.style.borderColor = isChecked ? 'rgba(69, 100, 237, 0.2)' : 'rgba(255,255,255,0.04)';
+                item.style.borderRadius = '6px';
+                item.style.transition = '0.2s';
+                
+                item.innerHTML = `
+                    <input type="checkbox" id="sel-sku-${sku}" value="${sku}" ${isChecked} onchange="toggleSkuInSelector('${sku}', this.checked)" style="accent-color:var(--primary); cursor:pointer; width:16px; height:16px;">
+                    <label for="sel-sku-${sku}" style="font-size:12px; cursor:pointer; color:#ccc; display:flex; flex-direction:column; gap:2px; flex:1; margin:0;">
+                        <span style="font-weight:600; color:var(--warning); font-family:monospace;">${sku}</span>
+                        <span style="font-size:11px; color:#aaa;">${skuNames[sku]}</span>
+                        <span style="font-size:10px; color:#666;">Phân loại: ${getSkuServiceType(sku)}</span>
+                    </label>
+                `;
+                listDiv.appendChild(item);
+            });
+        }
+
+        function toggleSkuInSelector(sku, isChecked) {
+            const index = tempSelectedSkus.indexOf(sku);
+            if (isChecked) {
+                if (index === -1) {
+                    tempSelectedSkus.push(sku);
+                }
+            } else {
+                if (index > -1) {
+                    tempSelectedSkus.splice(index, 1);
+                }
+            }
+            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
+            
+            const chk = document.getElementById(`sel-sku-${sku}`);
+            if (chk) {
+                const parent = chk.parentElement;
+                if (isChecked) {
+                    parent.style.background = 'rgba(69, 100, 237, 0.08)';
+                    parent.style.borderColor = 'rgba(69, 100, 237, 0.2)';
+                } else {
+                    parent.style.background = 'rgba(255,255,255,0.02)';
+                    parent.style.borderColor = 'rgba(255,255,255,0.04)';
+                }
+            }
+        }
+
+        function filterSkuSelectorList() {
+            renderSkuSelectorList();
+        }
+
+        function bulkSelectSkus(selectAll) {
+            const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
+            const typeFilter = document.getElementById('sku-selector-filter-type').value;
+            
+            let filtered = availableSkus.filter(sku => {
+                const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
+                const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
+                return matchesSearch && matchesType;
+            });
+
+            filtered.forEach(sku => {
+                const index = tempSelectedSkus.indexOf(sku);
+                if (selectAll) {
+                    if (index === -1) {
+                        tempSelectedSkus.push(sku);
+                    }
+                } else {
+                    if (index > -1) {
+                        tempSelectedSkus.splice(index, 1);
+                    }
+                }
+            });
+            
+            renderSkuSelectorList();
+        }
+
+        function confirmSkuSelection() {
+            closeSkuSelectorModal();
+            renderSelectedSkusPreview();
         }
 
         function updateTagMappingPreview() {
@@ -7408,9 +7653,7 @@
                     previewList.appendChild(item);
                 });
             } else {
-                // Không khớp bài
                 if (fallbackEnabled) {
-                    // Hiển thị bài viết fallback (các bài viết tag khuyenmai)
                     let fallbacks = mockArticles.filter(art => art.tag === 'khuyenmai');
                     if (fallbacks.length > 0) {
                         fallbacks.forEach(art => {
@@ -7451,47 +7694,31 @@
                 return;
             }
 
-            // Thu thập các SKU được check
-            const checkedSkus = [];
-            availableSkus.forEach(sku => {
-                const chk = document.getElementById('chk-sku-' + sku);
-                if (chk && chk.checked) {
-                    checkedSkus.push(sku);
-                }
-            });
-
             const fallback = document.getElementById('tag-fallback-toggle').checked;
 
-            // Lưu dữ liệu
             if (!tagMappingData[tag]) {
                 tagMappingData[tag] = {};
             }
-            tagMappingData[tag].skus = checkedSkus;
+            tagMappingData[tag].skus = [...tempSelectedSkus];
             tagMappingData[tag].fallback = fallback;
 
-            // Đồng bộ dữ liệu
             syncTagMappingToSku();
-
-            // Render lại bảng
             renderTagMappingTable();
 
-            // Cập nhật SKU Detail đang mở (nếu có)
             const openSkuHdr = document.getElementById('sku-hdr-code');
             if (openSkuHdr && openSkuHdr.innerText) {
                 renderSkuTagsReadonly(openSkuHdr.innerText);
             }
 
-            // Hiển thị Toast hoặc Alert thành công
             alert(`Lưu cấu hình cho Tag #${tag} thành công!`);
-
-            // Reset panel cấu hình
             resetTagConfig();
         }
 
         function resetTagConfig() {
+            tempSelectedSkus = [];
             document.getElementById('selected-tag-name').value = '';
             document.getElementById('tag-config-title').innerText = 'Chọn một Tag để cấu hình';
-            document.getElementById('tag-skus-container').innerHTML = '<div style="grid-column:span 2; color:var(--text-muted); font-style:italic; font-size:11.5px; text-align:center; padding:10px;">Chưa chọn Tag</div>';
+            renderSelectedSkusPreview();
             document.getElementById('tag-fallback-toggle').checked = false;
             
             document.getElementById('tag-preview-status').className = 'badge';

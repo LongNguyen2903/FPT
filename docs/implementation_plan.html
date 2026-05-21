@@ -173,10 +173,16 @@
                     <ul>
                         <li><strong>Cơ chế Tag-based Mapping:</strong> Xây dựng luồng liên kết động: Vận hành gắn Tag (ví dụ: <code>"camera"</code>) cho Bài viết/FAQ và gắn Tag tương ứng cho SKU. CMS API tự động Query tối đa 5 bài viết mới nhất trùng Tag để trả về cho Frontend.</li>
                         <li><strong>Quản lý tập trung độc lập:</strong> Tách biệt cấu hình Tag khỏi màn hình SKU Detail cũ thành một menu riêng biệt trong CMS. Admin dễ dàng gán SKU - Tag hai chiều tại một nơi, xem Live Preview danh sách bài viết/FAQ theo thời gian thực và quản trị logic Fallback trực quan. SKU Detail cũ chỉ hiển thị danh sách tag ở chế độ chỉ đọc.</li>
-                        <li><strong>Kiến trúc UI hiển thị:</strong> Khối "Thông tin hay" được thiết kế dạng Sticky Block bám dọc trang chi tiết (Desktop) hoặc dạng danh sách vuốt ngang (Mobile) giúp tối ưu không gian hiển thị mà không ngắt quãng luồng đọc.</li>
+                        <li><strong>Tối ưu hóa UI/UX khi số lượng SKU cực lớn (Advanced SKU Selector Modal):</strong>
+                            Thay vì hiển thị danh sách checkbox dài dặc gây vỡ giao diện Sidebar, hệ thống chuyển sang dạng hiển thị preview danh sách Chips/Badges SKU đã gán kèm nút xóa nhanh `✕`. Khi cần thay đổi, mở Modal chọn SKU nâng cao hỗ trợ: tìm kiếm thời gian thực theo mã/tên SKU, bộ lọc theo phân loại dịch vụ (Internet, Camera, Truyền hình, Thiết bị), và phím chọn nhanh/bỏ chọn tất cả.
+                        </li>
+                        <li><strong>Hiển thị thu gọn thông minh (Collapsed Badges):</strong>
+                            Trên bảng danh sách Tag chính ở cột "SKUs Liên kết", nếu một Tag liên kết với nhiều hơn 3 SKU, hệ thống chỉ hiển thị 3 SKU đầu tiên và 1 badge "+N SKUs..." màu xám. Khi rê chuột vào badge này, hiển thị tooltip HTML chứa danh sách toàn bộ các SKU còn lại để giao diện dòng luôn gọn gàng và không bị phình to chiều cao.
+                        </li>
                         <li><strong>Fallback Logic (Quy tắc hiển thị phụ):</strong> Nếu SKU không có Tag hoặc chưa có bài viết nào trùng Tag, hệ thống tự động ẩn Block này hoặc fallback về việc hiển thị bài viết Khuyến mãi hot nhất để tránh giao diện trống (Blank State).</li>
                         <li><a href="../diagrams/fpt-article-tag-seq.md" style="color:#818cf8; text-decoration:underline;">🔗 Xem Sơ đồ luồng Sequence Diagram chi tiết tại đây</a></li>
-                        <li><a href="wireframe_fpt_detail.html" style="color:#818cf8; text-decoration:underline;">🔗 Trải nghiệm Wireframe Website FE (Trang chi tiết sản phẩm & block "Thông tin hay")</a></li>
+                        <li><a href="../diagrams/sku-selector-ux-flow.md" style="color:#818cf8; text-decoration:underline;">🔗 Xem Sơ đồ luồng Advanced SKU Selector tại đây</a></li>
+                        <li><a href="wireframe_module_1_cms.html" style="color:#818cf8; text-decoration:underline;">🔗 Trải nghiệm Wireframe CMS (Cấu hình Tag-based Mapping & Advanced SKU Selector)</a></li>
                     </ul>
                 </td>
                 <td><span class="badge badge-success">Đã cập nhật</span></td>
