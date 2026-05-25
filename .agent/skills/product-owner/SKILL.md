@@ -206,3 +206,43 @@ User: "Cần roadmap cho quý tới"
 - Define goals
 - Group initiatives
 - Build timeline
+
+## 11. Product Backlog Template
+
+Dưới đây là template chuẩn để quản lý Product Backlog (dạng Markdown):
+
+| ID | Tiêu đề/ Story | Type | Priority | Status | Story Points | Sprint | Acceptance Criteria |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **US-001** | **As a** CMS Admin, **I want to** search SKUs by code/name, **so that** I can quickly configure checkout options for large portfolios. | User Story | High | Refined | 2 | Sprint 1 | **Given** the admin is on Checkout config tab,<br>**When** they type "Giga" in search box,<br>**Then** only SKUs containing "Giga" are displayed. |
+| **US-002** | **As a** CMS Admin, **I want to** collapse/expand channel settings, **so that** I can focus on one channel without distraction. | User Story | Medium | Done | 1 | Sprint 1 | **Given** the channel list is displayed,<br>**When** the admin clicks on the channel header,<br>**Then** the body sections are toggled. |
+
+### Backlog Item Details Template (Markdown File)
+
+Khi tạo một tài liệu chi tiết cho từng Backlog Item / User Story, sử dụng cấu trúc sau:
+
+```markdown
+# [US-XXX] [Tên User Story]
+
+## 1. Description (Mô tả)
+- **As a** [Role]
+- **I want to** [Action]
+- **So that** [Value/Benefit]
+
+## 2. Business Value & Priority
+- **Business Value**: [High/Medium/Low] hoặc [Score 1-10]
+- **Priority**: [Must / Should / Could / Won't]
+- **RICE Score**: Reach: [X] | Impact: [X] | Confidence: [X] | Effort: [X] = [Score]
+
+## 3. Acceptance Criteria (Tiêu chí nghiệm thu)
+Sử dụng Gherkin syntax (Given - When - Then):
+- **Scenario 1: [Tên kịch bản]**
+  - **Given** [Bối cảnh]
+  - **When** [Hành động xảy ra]
+  - **Then** [Kết quả mong đợi]
+
+## 4. Technical Notes & Wireframe Reference
+- **API/Data requirements**: [Mô tả dữ liệu cần thiết]
+- **UI/UX Wireframe**: [Đường dẫn file thiết kế/wireframe]
+- **Security & Performance**: [Các lưu ý về bảo mật/hiệu năng]
+```
+

@@ -1360,9 +1360,9 @@
                 <div class="menu-child" onclick="switchModule('cms-popup', 'primary')" id="menu-cms-popup">Quản lý Popup</div>
             </div>
 
-            <!-- Nhóm 3: Bài viết & Thông tin -->
+            <!-- Nhóm 3: Bài viết & Cấu hình nội dung -->
             <div class="menu-parent open" onclick="toggleMenuGroup('group-content', this)" id="parent-content">
-                <span>📰 Bài viết & Thông tin</span>
+                <span>📰 Bài viết & Cấu hình nội dung</span>
                 <span class="menu-parent-icon">›</span>
             </div>
             <div class="menu-children open" id="group-content">
@@ -1377,7 +1377,20 @@
 
             <!-- Item đơn: Cài đặt Hiển thị -->
             <div class="menu-item settings" onclick="switchModule('cms-display', 'primary')" id="menu-cms-display">⚙️ Cài đặt Hiển thị</div>
-           
+
+            <div class="menu-category" style="color: #a78bfa;">QUẢN LÝ HỆ THỐNG</div>
+
+            <!-- Nhóm: Phân quyền -->
+            <div class="menu-parent open" onclick="toggleMenuGroup('group-sys', this)" id="parent-sys">
+                <span>🔐 Phân quyền</span>
+                <span class="menu-parent-icon">›</span>
+            </div>
+            <div class="menu-children open" id="group-sys">
+                <div class="menu-child" onclick="switchModule('sys-roles', 'purple')" id="menu-sys-roles">🏷 Vai trò</div>
+                <div class="menu-child" onclick="switchModule('sys-users', 'purple')" id="menu-sys-users">👤 Người dùng</div>
+                <div class="menu-child" onclick="switchModule('sys-permissions', 'purple')" id="menu-sys-permissions">🔑 Phân quyền màn hình</div>
+            </div>
+
         </div>
     </div>
 
@@ -7987,6 +8000,373 @@
             <!--              ĐƠN HÀNG & HỢP ĐỒNG               -->
             <!-- ============================================== -->
 
+            <!-- ============================================== -->
+            <!--         MODULE: QUẢN LÝ VAI TRÒ                -->
+            <!-- ============================================== -->
+            <div id="mod-sys-roles" class="module-view">
+                <div class="content-area">
+                    <div id="sys-roles-list">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                            <div>
+                                <h2 style="margin:0 0 4px 0;">Quản lý Vai trò</h2>
+                                <div style="font-size:13px;color:var(--text-muted);">Hệ thống / Phân quyền / Vai trò</div>
+                            </div>
+                            <button class="btn btn-primary" onclick="sysRolesShowCreate()">+ Tạo vai trò</button>
+                        </div>
+
+                        <div class="glass" style="border-radius:12px;overflow:hidden;margin-top:20px;">
+                            <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
+                                <thead>
+                                    <tr style="border-bottom:1px solid var(--border-glass);">
+                                        <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;width:40px;">#</th>
+                                        <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">TÊN VAI TRÒ</th>
+                                        <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">MÔ TẢ</th>
+                                        <th style="padding:12px 20px;text-align:center;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:120px;">SỐ NGƯỜI DÙNG</th>
+                                        <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:160px;">NGÀY TẠO</th>
+                                        <th style="padding:12px 20px;text-align:center;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:100px;">THAO TÁC</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                                        <td style="padding:14px 20px;color:var(--text-muted);">1</td>
+                                        <td style="padding:14px 20px;font-weight:700;">
+                                            <span style="background:rgba(168,85,247,0.15);color:#c084fc;padding:3px 12px;border-radius:20px;font-size:12.5px;">Super Admin</span>
+                                        </td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Toàn quyền hệ thống, không giới hạn</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#c084fc;">2</td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">01/01/2026 08:00</td>
+                                        <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
+                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;" title="Xóa" disabled>🗑</button>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                                        <td style="padding:14px 20px;color:var(--text-muted);">2</td>
+                                        <td style="padding:14px 20px;font-weight:700;">
+                                            <span style="background:rgba(59,130,246,0.12);color:#60a5fa;padding:3px 12px;border-radius:20px;font-size:12.5px;">Admin CMS</span>
+                                        </td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Quản lý toàn bộ nội dung CMS, phân quyền nội bộ</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#60a5fa;">5</td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">01/01/2026 08:00</td>
+                                        <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
+                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                                        <td style="padding:14px 20px;color:var(--text-muted);">3</td>
+                                        <td style="padding:14px 20px;font-weight:700;">
+                                            <span style="background:rgba(16,185,129,0.12);color:#34d399;padding:3px 12px;border-radius:20px;font-size:12.5px;">Biên tập viên</span>
+                                        </td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Tạo & sửa nội dung, không được xóa hoặc xuất bản</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#34d399;">12</td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">15/01/2026 09:30</td>
+                                        <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
+                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                                        <td style="padding:14px 20px;color:var(--text-muted);">4</td>
+                                        <td style="padding:14px 20px;font-weight:700;">
+                                            <span style="background:rgba(245,158,11,0.12);color:#fbbf24;padding:3px 12px;border-radius:20px;font-size:12.5px;">Người duyệt</span>
+                                        </td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Xem & duyệt nội dung, không chỉnh sửa trực tiếp</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#fbbf24;">4</td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">20/01/2026 10:00</td>
+                                        <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
+                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
+                                        </td>
+                                    </tr>
+                                    <tr onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                                        <td style="padding:14px 20px;color:var(--text-muted);">5</td>
+                                        <td style="padding:14px 20px;font-weight:700;">
+                                            <span style="background:rgba(100,116,139,0.15);color:#94a3b8;padding:3px 12px;border-radius:20px;font-size:12.5px;">Viewer</span>
+                                        </td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Chỉ xem báo cáo & nội dung, không thao tác</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#94a3b8;">8</td>
+                                        <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">20/01/2026 10:00</td>
+                                        <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
+                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Form tạo vai trò -->
+                    <div id="sys-roles-form" style="display:none;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                            <div>
+                                <h2 style="margin:0 0 4px 0;">Tạo vai trò mới</h2>
+                                <div style="font-size:13px;color:var(--text-muted);">Hệ thống / Vai trò / <span style="color:#a78bfa;">Tạo mới</span></div>
+                            </div>
+                            <button class="btn btn-secondary" onclick="document.getElementById('sys-roles-form').style.display='none';document.getElementById('sys-roles-list').style.display='block';">← Quay lại</button>
+                        </div>
+                        <div class="glass" style="padding:28px;border-radius:12px;margin-top:20px;margin-bottom:20px;">
+                            <div style="font-weight:700;font-size:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border-glass);">Thông tin vai trò</div>
+                            <div class="form-group">
+                                <label>Tên vai trò <span style="color:#ef4444;">*</span></label>
+                                <input type="text" class="form-input" placeholder="VD: Biên tập viên cao cấp">
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea class="form-input" rows="3" placeholder="Mô tả ngắn về quyền hạn của vai trò này..."></textarea>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label>Màu nhận diện</label>
+                                <div style="display:flex;gap:10px;margin-top:6px;">
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#c084fc;cursor:pointer;border:3px solid rgba(255,255,255,0.3);"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#60a5fa;cursor:pointer;"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#34d399;cursor:pointer;"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#fbbf24;cursor:pointer;"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#f87171;cursor:pointer;"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#94a3b8;cursor:pointer;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:flex;justify-content:flex-end;gap:12px;">
+                            <button class="btn btn-secondary" onclick="document.getElementById('sys-roles-form').style.display='none';document.getElementById('sys-roles-list').style.display='block';">Huỷ</button>
+                            <button class="btn btn-primary">✓ Lưu vai trò</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!--         MODULE: QUẢN LÝ NGƯỜI DÙNG             -->
+            <!-- ============================================== -->
+            <div id="mod-sys-users" class="module-view">
+                <div class="content-area">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                        <div>
+                            <h2 style="margin:0 0 4px 0;">Quản lý Người dùng</h2>
+                            <div style="font-size:13px;color:var(--text-muted);">Hệ thống / Phân quyền / Người dùng</div>
+                        </div>
+                        <button class="btn btn-primary" onclick="document.getElementById('modal-add-user').style.display='flex'">+ Thêm người dùng</button>
+                    </div>
+
+                    <!-- Modal: Thêm người dùng -->
+                    <div id="modal-add-user" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;">
+                        <div class="glass" style="width:520px;border-radius:16px;padding:32px;position:relative;max-height:90vh;overflow-y:auto;">
+                            <!-- Header -->
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                                <div>
+                                    <div style="font-size:18px;font-weight:700;">Thêm người dùng</div>
+                                    <div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Tài khoản nội bộ · quyền thừa hưởng từ vai trò được chọn</div>
+                                </div>
+                                <button onclick="document.getElementById('modal-add-user').style.display='none'" style="background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;line-height:1;">✕</button>
+                            </div>
+
+                            <!-- Form -->
+                            <div class="form-group">
+                                <label>Họ và tên <span style="color:#ef4444;">*</span></label>
+                                <input type="text" class="form-input" placeholder="Nguyễn Văn A">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email đăng nhập <span style="color:#ef4444;">*</span></label>
+                                <input type="email" class="form-input" placeholder="tendn@fpt.vn">
+                                <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;">Dùng để đăng nhập vào hệ thống CMS</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mật khẩu tạm <span style="color:#ef4444;">*</span></label>
+                                <div style="position:relative;">
+                                    <input type="password" class="form-input" placeholder="Tối thiểu 8 ký tự" id="modal-pwd" style="padding-right:44px;">
+                                    <span onclick="var f=document.getElementById('modal-pwd');f.type=f.type==='password'?'text':'password';" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-muted);font-size:16px;">👁</span>
+                                </div>
+                                <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;">Người dùng sẽ được yêu cầu đổi mật khẩu lần đầu đăng nhập</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span>Vai trò <span style="color:#ef4444;">*</span></span>
+                                    <span onclick="document.getElementById('modal-add-user').style.display='none';switchModule('sys-roles','purple');"
+                                          style="font-size:12px;color:#a78bfa;cursor:pointer;font-weight:500;text-decoration:underline;text-underline-offset:2px;">
+                                        ⚙ Quản lý vai trò
+                                    </span>
+                                </label>
+                                <select class="form-input" onchange="sysUserRoleHint(this)">
+                                    <option value="">— Chọn vai trò —</option>
+                                    <option value="admin">Admin CMS</option>
+                                    <option value="editor">Biên tập viên</option>
+                                    <option value="viewer">Viewer</option>
+                                </select>
+                                <!-- Hint hiển thị sau khi chọn -->
+                                <div id="role-hint" style="margin-top:8px;font-size:12px;padding:8px 12px;border-radius:8px;display:none;"></div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label>Trạng thái</label>
+                                <div style="display:flex;gap:16px;margin-top:8px;">
+                                    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;">
+                                        <input type="radio" name="modal-status" value="active" checked style="accent-color:#34d399;width:16px;height:16px;">
+                                        <span style="color:#34d399;font-weight:500;">Hoạt động</span>
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;">
+                                        <input type="radio" name="modal-status" value="inactive" style="accent-color:#f87171;width:16px;height:16px;">
+                                        <span style="color:var(--text-muted);">Tạm khoá</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Divider -->
+                            <div style="border-top:1px solid var(--border-glass);margin:24px 0;"></div>
+
+                            <!-- Actions -->
+                            <div style="display:flex;justify-content:flex-end;gap:12px;">
+                                <button class="btn btn-secondary" onclick="document.getElementById('modal-add-user').style.display='none'">Huỷ</button>
+                                <button class="btn btn-primary">✓ Tạo tài khoản</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bộ lọc -->
+                    <div class="glass" style="padding:20px 24px;border-radius:12px;margin-top:20px;margin-bottom:20px;">
+                        <div style="font-weight:700;font-size:15px;margin-bottom:16px;">Bộ lọc</div>
+                        <div style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;">
+                            <div style="flex:2;min-width:200px;">
+                                <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Tên / Email</label>
+                                <input type="text" class="form-input" placeholder="🔍 Tìm theo tên hoặc email...">
+                            </div>
+                            <div style="flex:1;min-width:150px;">
+                                <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Vai trò</label>
+                                <select class="form-input">
+                                    <option value="">Tất cả</option>
+                                    <option>Super Admin</option>
+                                    <option>Admin CMS</option>
+                                    <option>Biên tập viên</option>
+                                    <option>Người duyệt</option>
+                                    <option>Viewer</option>
+                                </select>
+                            </div>
+                            <div style="flex:1;min-width:140px;">
+                                <label style="font-size:13px;color:var(--text-muted);display:block;margin-bottom:6px;">Trạng thái</label>
+                                <select class="form-input">
+                                    <option value="">Tất cả</option>
+                                    <option>Đang hoạt động</option>
+                                    <option>Tạm khóa</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary">🔍 Tìm kiếm</button>
+                        </div>
+                    </div>
+
+                    <!-- Bảng người dùng -->
+                    <div class="glass" style="border-radius:12px;overflow:hidden;">
+                        <table style="width:100%;border-collapse:collapse;font-size:13.5px;">
+                            <thead>
+                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                    <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;width:40px;">#</th>
+                                    <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">HỌ TÊN</th>
+                                    <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">EMAIL</th>
+                                    <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:160px;">VAI TRÒ</th>
+                                    <th style="padding:12px 20px;text-align:center;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:130px;">TRẠNG THÁI</th>
+                                    <th style="padding:12px 20px;text-align:left;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:170px;">ĐĂNG NHẬP CUỐI</th>
+                                    <th style="padding:12px 20px;text-align:center;color:var(--text-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;width:100px;">THAO TÁC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sys-users-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:13px;color:var(--text-muted);">
+                        <span>1 – 6 trên tổng 31</span>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <select class="form-input" style="width:110px;padding:6px 10px;font-size:13px;"><option>20/Trang</option></select>
+                            <button class="btn btn-secondary btn-sm">«</button>
+                            <button class="btn btn-primary btn-sm">1</button>
+                            <button class="btn btn-secondary btn-sm">2</button>
+                            <button class="btn btn-secondary btn-sm">»</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!--       MODULE: PHÂN QUYỀN MÀN HÌNH              -->
+            <!-- ============================================== -->
+            <div id="mod-sys-permissions" class="module-view">
+                <div class="content-area">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+                        <div>
+                            <h2 style="margin:0 0 4px 0;">Phân quyền màn hình</h2>
+                            <div style="font-size:13px;color:var(--text-muted);">Hệ thống / Phân quyền</div>
+                        </div>
+                        <button class="btn btn-primary">💾 Lưu thay đổi</button>
+                    </div>
+
+                    <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px;padding:10px 16px;background:rgba(168,85,247,0.07);border-radius:8px;border-left:3px solid #a78bfa;">
+                        ⚠️ Quyền được gán theo <strong style="color:#c084fc;">vai trò</strong>. Khi tạo tài khoản, chọn vai trò → người dùng tự động thừa hưởng quyền của vai trò đó. Super Admin luôn toàn quyền, không thể chỉnh.
+                    </div>
+
+                    <!-- Ma trận: Màn hình × Vai trò × CRUD -->
+                    <div class="glass" style="border-radius:12px;overflow:auto;">
+                        <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:860px;">
+                            <thead>
+                                <!-- Row 1: Tên vai trò -->
+                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                    <th rowspan="2" style="padding:14px 20px;text-align:left;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;width:220px;border-right:1px solid var(--border-glass);vertical-align:middle;">MÀN HÌNH</th>
+                                    <!-- Super Admin — locked -->
+                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#c084fc;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);background:rgba(168,85,247,0.06);">
+                                        🔒 Super Admin
+                                        <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Toàn quyền · không chỉnh được</div>
+                                    </th>
+                                    <!-- Admin CMS -->
+                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#60a5fa;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                        Admin CMS
+                                        <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Quản lý toàn bộ nội dung</div>
+                                    </th>
+                                    <!-- Biên tập viên -->
+                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#34d399;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                        Biên tập viên
+                                        <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Tạo & sửa nội dung</div>
+                                    </th>
+                                    <!-- Viewer -->
+                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#94a3b8;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                        Viewer
+                                        <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Chỉ xem</div>
+                                    </th>
+                                </tr>
+                                <!-- Row 2: CRUD labels -->
+                                <tr style="border-bottom:2px solid var(--border-glass);background:rgba(0,0,0,0.12);">
+                                    <!-- Super Admin CRUD -->
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
+                                    <!-- Admin CMS CRUD -->
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
+                                    <!-- Biên tập viên CRUD -->
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
+                                    <!-- Viewer CRUD -->
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sys-perm-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!--              ĐƠN HÀNG & HỢP ĐỒNG               -->
+            <!-- ============================================== -->
+
 
         </div>
     </div>
@@ -7996,7 +8376,8 @@
             'dashboards',
             'pdh-category', 'pdh-attribute', 'pdh-sku', 'pdh-package', 'pdh-price', 'pdh-fee', // PDH
             'set-area', // Settings
-            'pages', 'landing', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping' // CMS
+            'pages', 'landing', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping', // CMS
+            'sys-roles', 'sys-users', 'sys-permissions' // Hệ thống
         ];
 
         const titles = {
@@ -8011,7 +8392,10 @@
             'faq': 'Quản lý FAQ (CMS)',
             'cms-package': 'Marketing Gói Bán (CMS)', 'cms-display': 'Cài đặt Hiển thị (CMS)', 'cms-popup': 'Quản lý Popup (CMS)',
             'tag-mapping': 'Cấu hình Thông tin hay (CMS)',
-            'cms-menu': 'Quản lý Menu (CMS)'
+            'cms-menu': 'Quản lý Menu (CMS)',
+            'sys-roles': '🏷 Quản lý Vai trò',
+            'sys-users': '👤 Quản lý Người dùng',
+            'sys-permissions': '🔑 Phân quyền màn hình'
         };
 
         function toggleMenuGroup(groupId, parentEl) {
@@ -8067,6 +8451,151 @@
             if (modName === 'cms-menu') {
                 cmsMenuShowList();
                 cmsMenuRender(cmsMenuData);
+            }
+
+            // Phân quyền initialization
+            if (modName === 'sys-users') sysUsersRender();
+            if (modName === 'sys-permissions') sysPermRender();
+
+            // Topbar màu tím cho module hệ thống
+            if (['sys-roles','sys-users','sys-permissions'].includes(modName)) {
+                document.getElementById('topbar-title').style.color = '#c084fc';
+            }
+        }
+
+        // ===== LOGIC PHÂN QUYỀN =====
+
+        function sysRolesShowCreate() {
+            document.getElementById('sys-roles-list').style.display = 'none';
+            document.getElementById('sys-roles-form').style.display = 'block';
+        }
+
+        const sysUsersData = [
+            { name:'Nguyễn Thị Thuy',   email:'thuy.nguyen@fpt.vn',      role:'Admin CMS',      roleColor:'#60a5fa', roleBg:'rgba(59,130,246,0.12)',   status:'active', lastLogin:'25/05/2026 08:41' },
+            { name:'Trần Minh Khoa',     email:'khoa.tran@fpt.vn',        role:'Biên tập viên',  roleColor:'#34d399', roleBg:'rgba(16,185,129,0.12)',   status:'active', lastLogin:'25/05/2026 07:55' },
+            { name:'Lê Thị Hương',       email:'huong.le@fpt.vn',         role:'Biên tập viên',  roleColor:'#34d399', roleBg:'rgba(16,185,129,0.12)',   status:'active', lastLogin:'24/05/2026 16:20' },
+            { name:'Phạm Văn Đức',       email:'duc.pham@fpt.vn',         role:'Người duyệt',    roleColor:'#fbbf24', roleBg:'rgba(245,158,11,0.12)',   status:'active', lastLogin:'23/05/2026 14:10' },
+            { name:'Hoàng Thị Mai',      email:'mai.hoang@fpt.vn',        role:'Viewer',         roleColor:'#94a3b8', roleBg:'rgba(100,116,139,0.15)', status:'locked', lastLogin:'10/05/2026 09:00' },
+            { name:'Bùi Quốc Hùng',      email:'hung.bui@fpt.vn',         role:'Biên tập viên',  roleColor:'#34d399', roleBg:'rgba(16,185,129,0.12)',   status:'active', lastLogin:'25/05/2026 08:05' },
+        ];
+
+        function sysUsersRender() {
+            const tbody = document.getElementById('sys-users-tbody');
+            if (!tbody) return;
+            tbody.innerHTML = sysUsersData.map((u, i) => {
+                const statusBadge = u.status === 'active'
+                    ? '<span style="background:rgba(16,185,129,0.12);color:#34d399;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;">Hoạt động</span>'
+                    : '<span style="background:rgba(239,68,68,0.1);color:#f87171;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;">Tạm khóa</span>';
+                const avatar = u.name.split(' ').map(w=>w[0]).slice(-2).join('').toUpperCase();
+                return `<tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
+                    <td style="padding:12px 20px;color:var(--text-muted);">${i+1}</td>
+                    <td style="padding:12px 20px;">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div style="width:36px;height:36px;border-radius:50%;background:var(--primary-gradient);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;">${avatar}</div>
+                            <span style="font-weight:600;">${u.name}</span>
+                        </div>
+                    </td>
+                    <td style="padding:12px 20px;color:var(--text-muted);font-size:13px;">${u.email}</td>
+                    <td style="padding:12px 20px;"><span style="background:${u.roleBg};color:${u.roleColor};padding:3px 12px;border-radius:20px;font-size:12.5px;font-weight:600;">${u.role}</span></td>
+                    <td style="padding:12px 20px;text-align:center;">${statusBadge}</td>
+                    <td style="padding:12px 20px;color:var(--text-muted);font-size:13px;">${u.lastLogin}</td>
+                    <td style="padding:12px 20px;text-align:center;">
+                        <div style="display:flex;gap:6px;justify-content:center;">
+                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
+                            <button class="btn btn-sm" style="background:rgba(245,158,11,0.1);color:#fbbf24;border:none;padding:5px 10px;" title="${u.status==='active'?'Khóa':'Mở khóa'}">${u.status==='active'?'🔒':'🔓'}</button>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        const sysPermModules = [
+            { group: 'QUẢN LÝ SẢN PHẨM',       name: 'SKUs' },
+            { group: 'CẤU TRÚC TRANG',           name: 'Quản lý Trang (Pages)' },
+            { group: '',                          name: 'Quản lý Sections' },
+            { group: '',                          name: 'Quản lý Blocks' },
+            { group: '',                          name: 'Landing Page (LDP)' },
+            { group: '',                          name: 'Quản lý Menu' },
+            { group: 'MEDIA & QUẢNG BÁ',         name: 'Quản lý Banner' },
+            { group: '',                          name: 'Quản lý Popup' },
+            { group: 'BÀI VIẾT & NỘI DUNG',      name: 'Quản lý Tin tức' },
+            { group: '',                          name: 'Quản lý FAQ' },
+            { group: '',                          name: 'Cấu hình Thông tin hay' },
+            { group: 'CÀI ĐẶT & HỆ THỐNG',      name: 'Cài đặt Hiển thị' },
+            { group: '',                          name: 'Quản lý Người dùng' },
+            { group: '',                          name: 'Phân quyền màn hình' },
+        ];
+
+        // Ma trận quyền theo vai trò: { màn hình: [superAdmin[4], adminCMS[4], bienTap[4], viewer[4]] }
+        // Mỗi mảng con: [xem, tao, sua, xoa]
+        const sysPermByRole = {
+            'SKUs':                    [[1,1,1,1],[1,1,1,0],[1,0,0,0],[1,0,0,0]],
+            'Quản lý Trang (Pages)':   [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Quản lý Sections':        [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Quản lý Blocks':          [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Landing Page (LDP)':      [[1,1,1,1],[1,1,1,1],[1,1,0,0],[0,0,0,0]],
+            'Quản lý Menu':            [[1,1,1,1],[1,1,1,0],[1,0,0,0],[0,0,0,0]],
+            'Quản lý Banner':          [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Quản lý Popup':           [[1,1,1,1],[1,1,1,1],[1,1,1,0],[0,0,0,0]],
+            'Quản lý Tin tức':         [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Quản lý FAQ':             [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
+            'Cấu hình Thông tin hay':  [[1,1,1,1],[1,1,1,0],[1,0,1,0],[0,0,0,0]],
+            'Cài đặt Hiển thị':        [[1,1,1,1],[1,1,1,0],[0,0,0,0],[0,0,0,0]],
+            'Quản lý Người dùng':      [[1,1,1,1],[1,1,0,0],[0,0,0,0],[0,0,0,0]],
+            'Phân quyền màn hình':     [[1,1,1,1],[1,1,0,0],[0,0,0,0],[0,0,0,0]],
+        };
+
+        // roleColors: [superAdmin, adminCMS, bienTap, viewer]
+        const sysRoleColors = ['#c084fc','#60a5fa','#34d399','#94a3b8'];
+
+        function sysPermRender() {
+            const tbody = document.getElementById('sys-perm-tbody');
+            if (!tbody) return;
+            let html = '';
+            let lastGroup = '';
+            sysPermModules.forEach(mod => {
+                if (mod.group && mod.group !== lastGroup) {
+                    lastGroup = mod.group;
+                    html += `<tr style="background:rgba(168,85,247,0.06);">
+                        <td colspan="17" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
+                    </tr>`;
+                }
+                const roles = sysPermByRole[mod.name] || [[1,1,1,1],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+                let cells = '';
+                roles.forEach((rp, ri) => {
+                    const locked = ri === 0;
+                    rp.forEach((val, ci) => {
+                        const bl = ci === 0 ? 'border-left:1px solid var(--border-glass);' : '';
+                        cells += `<td style="padding:10px 4px;text-align:center;${bl}">
+                            <input type="checkbox" ${val?'checked':''} ${locked?'disabled title="Super Admin luôn toàn quyền"':''}
+                                style="width:15px;height:15px;accent-color:${sysRoleColors[ri]};cursor:${locked?'not-allowed':'pointer'};">
+                        </td>`;
+                    });
+                });
+                html += `<tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.025)'" onmouseout="this.style.background=''">
+                    <td style="padding:11px 20px;font-size:13.5px;font-weight:500;border-right:1px solid var(--border-glass);">${mod.name}</td>
+                    ${cells}
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        }
+
+        function sysUserRoleHint(sel) {
+            const hint = document.getElementById('role-hint');
+            const map = {
+                'admin':  { color:'#60a5fa', bg:'rgba(59,130,246,0.08)', text:'Quản lý toàn bộ nội dung CMS, tạo & xóa được. Không chỉnh được phân quyền.' },
+                'editor': { color:'#34d399', bg:'rgba(16,185,129,0.08)', text:'Tạo & sửa nội dung. Không xóa, không truy cập cài đặt hệ thống.' },
+                'viewer': { color:'#94a3b8', bg:'rgba(100,116,139,0.08)', text:'Chỉ xem nội dung. Không thực hiện bất kỳ thao tác ghi nào.' },
+            };
+            if (sel.value && map[sel.value]) {
+                const r = map[sel.value];
+                hint.style.display = 'block';
+                hint.style.background = r.bg;
+                hint.style.color = r.color;
+                hint.style.borderLeft = `3px solid ${r.color}`;
+                hint.innerHTML = `<strong>${sel.options[sel.selectedIndex].text}:</strong> ${r.text}`;
+            } else {
+                hint.style.display = 'none';
             }
         }
 
