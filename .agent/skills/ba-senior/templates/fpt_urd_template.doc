@@ -1,0 +1,299 @@
+﻿<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FPT.VN URD - Template chuáº©n</title>
+<style>
+    body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000000; font-size: 12pt; }
+    .header-table { width: 100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 20px; }
+    .header-table td { border: 1px solid #000; padding: 10px; font-weight: bold; }
+    h1 { font-family: 'Arial', sans-serif; color: #1f4e78; font-size: 18pt; font-weight: bold; text-transform: uppercase; margin-top: 24px; margin-bottom: 12px; }
+    h2 { font-family: 'Arial', sans-serif; color: #2e75b6; font-size: 14pt; font-weight: bold; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #2e75b6; padding-bottom: 3px; }
+    h3 { font-family: 'Arial', sans-serif; color: #5b9bd5; font-size: 12pt; font-weight: bold; margin-top: 16px; margin-bottom: 8px; }
+    h4 { font-family: 'Arial', sans-serif; color: #000; font-size: 12pt; font-weight: bold; margin-top: 12px; margin-bottom: 6px; }
+    table.data-table { border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 15px; }
+    table.data-table th, table.data-table td { border: 1px solid #000000; padding: 8px; text-align: left; vertical-align: top; }
+    table.data-table th { background-color: #d9e1f2; font-weight: bold; color: #1f4e78; }
+    table.usecase-table { border-collapse: collapse; width: 100%; margin-top: 8px; margin-bottom: 12px; }
+    table.usecase-table td { border: 1px solid #000000; padding: 8px; vertical-align: top; }
+    table.usecase-table td.label { background-color: #f2f2f2; font-weight: bold; width: 150px; }
+    ul, ol { margin-top: 5px; margin-bottom: 10px; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    p { margin-top: 0; margin-bottom: 8px; }
+    .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- TRANG BÃŒA & HEADER -->
+<table class="header-table">
+    <tr>
+        <td rowspan="2" style="width: 120px; text-align: center; vertical-align: middle;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg" alt="FPT Logo" style="width:80px;height:auto;"/>
+        </td>
+        <td style="font-size: 16pt; text-align: center; text-transform: uppercase;">FPT.VN URD â€“ USER REQUIREMENTS DOCUMENT</td>
+    </tr>
+    <tr>
+        <td style="font-size: 11pt;">
+            <strong>MÃ£ hiá»‡u:</strong> [MÃ£ hiá»‡u tÃ i liá»‡u - VÃ­ dá»¥: URD-CMS-01] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>PhiÃªn báº£n:</strong> [PhiÃªn báº£n - VÃ­ dá»¥: 1.0] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>NgÃ y:</strong> [NgÃ y ban hÃ nh]
+        </td>
+    </tr>
+</table>
+
+<h2>REVISION HISTORY</h2>
+<p><em>[A]: Add â€“ ThÃªm má»›i | [U]: Update â€“ Cáº­p nháº­t, thay Ä‘á»•i | [D]: Delete - XÃ³a</em></p>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Author</th>
+            <th>Reviewer</th>
+            <th>Approver</th>
+            <th>Change Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>[NgÃ y/ThÃ¡ng/NÄƒm]</td>
+            <td>[PhiÃªn báº£n]</td>
+            <td>[NgÆ°á»i soáº¡n]</td>
+            <td>[NgÆ°á»i kiá»ƒm tra]</td>
+            <td>[NgÆ°á»i phÃª duyá»‡t]</td>
+            <td>[MÃ´ táº£ thay Ä‘á»•i]</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>Má»¤C Lá»¤C</h1>
+<ol>
+    <li><strong>I. GIá»šI THIá»†U</strong></li>
+    <li><strong>II. Tá»”NG QUAN</strong></li>
+    <li><strong>III. Äáº¶C Táº¢ CHI TIáº¾T CÃC CHá»¨C NÄ‚NG</strong></li>
+    <li><strong>IV. CÃC YÃŠU Cáº¦U PHI CHá»¨C NÄ‚NG</strong></li>
+    <li><strong>V. PHá»¤ Lá»¤C</strong></li>
+</ol>
+
+<div class="page-break"></div>
+
+<h1>I. GIá»šI THIá»†U</h1>
+
+<h3>1. Má»¥c Ä‘Ã­ch tÃ i liá»‡u</h3>
+<p>[Viáº¿t má»¥c Ä‘Ã­ch cá»§a tÃ i liá»‡u URD, vÃ­ dá»¥: TÃ i liá»‡u nÃ y mÃ´ táº£ chi tiáº¿t cÃ¡c yÃªu cáº§u nghiá»‡p vá»¥ vÃ  chá»©c nÄƒng cá»§a phÃ¢n há»‡...]</p>
+
+<h3>2. ThÃ´ng tin chung</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 200px;">Háº NG Má»¤C</th>
+            <th>MÃ” Táº¢</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Giá»›i thiá»‡u tá»•ng quan</td>
+            <td>[TÃ³m táº¯t ná»™i dung dá»± Ã¡n hoáº·c phÃ¢n há»‡]</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Hiá»‡n tráº¡ng</td>
+            <td>[MÃ´ táº£ hiá»‡n tráº¡ng nghiá»‡p vá»¥/há»‡ thá»‘ng trÆ°á»›c khi triá»ƒn khai]</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Má»¥c tiÃªu ká»³ vá»ng</td>
+            <td>[Ká»³ vá»ng Ä‘áº¡t Ä‘Æ°á»£c sau khi triá»ƒn khai há»‡ thá»‘ng má»›i]</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Pháº¡m vi triá»ƒn khai</td>
+            <td>[Khu vá»±c Ã¡p dá»¥ng, tÃ­ch há»£p vá»›i cÃ¡c phÃ¢n há»‡ nÃ o]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Thuáº­t ngá»¯ vÃ  viáº¿t táº¯t</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 150px;">THUáº¬T NGá»®</th>
+            <th>MÃ” Táº¢</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>URD</td>
+            <td>User Requirements Document (TÃ i liá»‡u YÃªu cáº§u NgÆ°á»i dÃ¹ng)</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>[Thuáº­t ngá»¯ má»›i]</td>
+            <td>[Äá»‹nh nghÄ©a Ã½ nghÄ©a]</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>II. Tá»”NG QUAN Há»† THá»NG</h1>
+
+<h3>1. SÆ¡ Ä‘á»“ luá»“ng nghiá»‡p vá»¥ tá»•ng quan (Business Flow)</h3>
+<p>[MÃ´ táº£ luá»“ng nghiá»‡p vá»¥ tá»•ng quÃ¡t hoáº·c chÃ¨n hÃ¬nh áº£nh sÆ¡ Ä‘á»“ luá»“ng táº¡i Ä‘Ã¢y]</p>
+
+<h3>2. Danh sÃ¡ch cÃ¡c chá»©c nÄƒng chÃ­nh</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th>Chá»©c nÄƒng</th>
+            <th style="width: 80px;">Version</th>
+            <th style="width: 80px;">Loáº¡i</th>
+            <th>MÃ´ táº£ tÃ³m táº¯t</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>[TÃªn chá»©c nÄƒng]</td>
+            <td>1.0</td>
+            <td>[New / Update]</td>
+            <td>[MÃ´ táº£ ngáº¯n gá»n chá»©c nÄƒng lÃ m gÃ¬]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Ma tráº­n quyá»n háº¡n phÃ¢n há»‡ (Permission Matrix)</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Chá»©c nÄƒng</th>
+            <th>Role Admin</th>
+            <th>Role User</th>
+            <th>Role Viewer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>[TÃªn chá»©c nÄƒng]</strong></td>
+            <td>ToÃ n quyá»n</td>
+            <td>Xem/Sá»­a</td>
+            <td>Xem</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>III. Äáº¶C Táº¢ CHI TIáº¾T CÃC CHá»¨C NÄ‚NG (USE CASE SPECS)</h1>
+
+<h2>I. [TÃªn Chá»©c NÄƒng 1]</h2>
+<h3>1. Äáº·c táº£ Use Case (Use Case Specification)</h3>
+<h4>a. Thuá»™c tÃ­nh Use Case</h4>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>[MÃ´ táº£ tÃ³m táº¯t hÃ nh vi vÃ  giÃ¡ trá»‹ nghiá»‡p vá»¥ cá»§a chá»©c nÄƒng]</td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>[TÃ¡c nhÃ¢n thá»±c hiá»‡n, vÃ­ dá»¥: Quáº£n trá»‹ viÃªn, NgÆ°á»i dÃ¹ng há»‡ thá»‘ng]</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>[Sá»± kiá»‡n kÃ­ch hoáº¡t chá»©c nÄƒng, vÃ­ dá»¥: NgÆ°á»i dÃ¹ng chá»n menu... vÃ  nháº¥n nÃºt...]</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>[Äiá»u kiá»‡n cáº§n cÃ³ trÆ°á»›c khi thá»±c hiá»‡n, vÃ­ dá»¥: NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p thÃ nh cÃ´ng]</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>[Káº¿t quáº£ sau khi hoÃ n thÃ nh, vÃ­ dá»¥: Dá»¯ liá»‡u Ä‘Æ°á»£c cáº­p nháº­t thÃ nh cÃ´ng ngoÃ i website]</td>
+    </tr>
+</table>
+
+<h4>b. Diá»…n giáº£i cÃ¡c bÆ°á»›c thá»±c hiá»‡n (Step-by-step)</h4>
+<ul>
+    <li><strong>BÆ°á»›c 1:</strong> NgÆ°á»i dÃ¹ng truy cáº­p há»‡ thá»‘ng -> chá»n menu "[TÃªn menu]".</li>
+    <li><strong>BÆ°á»›c 2:</strong> NgÆ°á»i dÃ¹ng nháº¥n nÃºt "[+ Táº¡o má»›i]" hoáº·c chá»n "[Sá»­a]".</li>
+    <li><strong>BÆ°á»›c 3:</strong> Há»‡ thá»‘ng hiá»ƒn thá»‹ Form thÃ´ng tin nháº­p liá»‡u.</li>
+    <li><strong>BÆ°á»›c 4:</strong> NgÆ°á»i dÃ¹ng nháº­p/chá»n cÃ¡c thÃ´ng tin trÃªn mÃ n hÃ¬nh.</li>
+    <li><strong>BÆ°á»›c 5:</strong> NgÆ°á»i dÃ¹ng nháº¥n nÃºt "LÆ°u".</li>
+    <li><strong>BÆ°á»›c 6:</strong> Há»‡ thá»‘ng kiá»ƒm tra há»£p lá»‡ dá»¯ liá»‡u (validate), lÆ°u thÃ´ng tin vÃ o database vÃ  hiá»ƒn thá»‹ thÃ´ng bÃ¡o thÃ nh cÃ´ng.</li>
+</ul>
+
+<h3>2. Business Rules</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 120px;">Code</th>
+            <th>Quy táº¯c nghiá»‡p vá»¥</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR-[CODE]-01</strong></td>
+            <td>[Ná»™i dung quy táº¯c nghiá»‡p vá»¥ - VÃ­ dá»¥: MÃ£ SKU khÃ´ng Ä‘Æ°á»£c trÃ¹ng láº·p trong cÆ¡ sá»Ÿ dá»¯ liá»‡u]</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. MÃ´ táº£ mÃ n hÃ¬nh (Screen Description)</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Kiá»ƒu dá»¯ liá»‡u</th>
+            <th>RÃ ng buá»™c</th>
+            <th>HÃ nh vi há»‡ thá»‘ng</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>[TÃªn TrÆ°á»ng]</strong></td>
+            <td>[Text / Select / File...]</td>
+            <td>[Báº¯t buá»™c / Tá»‘i Ä‘a kÃ­ tá»± / Äá»‹nh dáº¡ng...]</td>
+            <td>[VÃ­ dá»¥: Tá»± Ä‘á»™ng sinh slug tá»« tÃªn trÆ°á»ng khi ngÆ°á»i dÃ¹ng gÃµ]</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>IV. CÃC YÃŠU Cáº¦U PHI CHá»¨C NÄ‚NG</h1>
+
+<h3>1. Hiá»‡u nÄƒng & Kháº£ nÄƒng táº£i (Performance)</h3>
+<ul>
+    <li>Thá»i gian pháº£n há»“i khi lÆ°u dá»¯ liá»‡u hoáº·c táº£i trang danh sÃ¡ch dÆ°á»›i [X] giÃ¢y.</li>
+    <li>Há»‡ thá»‘ng cháº¡y mÆ°á»£t mÃ  khÃ´ng giáº­t lag khi táº£i lÆ°á»£ng lá»›n báº£n ghi.</li>
+</ul>
+
+<h3>2. Tráº£i nghiá»‡m ngÆ°á»i dÃ¹ng (UI/UX)</h3>
+<ul>
+    <li>Giao diá»‡n thÃ¢n thiá»‡n, tÆ°Æ¡ng thÃ­ch tá»‘t trÃªn cáº£ hai phiÃªn báº£n Desktop vÃ  Mobile (Responsive).</li>
+    <li>CÃ¡c tráº¡ng thÃ¡i káº¿ thá»«a thÃ´ng tin hoáº·c khÃ³a thao tÃ¡c pháº£i Ä‘Æ°á»£c hiá»ƒn thá»‹ trá»±c quan rÃµ rÃ ng.</li>
+</ul>
+
+<h3>3. An toÃ n thÃ´ng tin & Báº£o máº­t (Security)</h3>
+<ul>
+    <li>Táº¥t cáº£ API thao tÃ¡c nghiá»‡p vá»¥ (Táº¡o/Sá»­a/XÃ³a) Ä‘á»u cáº§n kiá»ƒm tra token xÃ¡c thá»±c.</li>
+    <li>PhÃ¢n quyá»n cháº·t cháº½ theo nhÃ³m ngÆ°á»i dÃ¹ng (RBAC).</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h1>V. PHá»¤ Lá»¤C</h1>
+<ul>
+    <li>[ÄÆ°á»ng dáº«n/Link] file Wireframe / Mockup thiáº¿t káº¿ chi tiáº¿t giao diá»‡n.</li>
+    <li>[ÄÆ°á»ng dáº«n/Link] cÃ¡c tÃ i liá»‡u tham chiáº¿u khÃ¡c cá»§a FPT.</li>
+</ul>
+
+</body>
+</html>

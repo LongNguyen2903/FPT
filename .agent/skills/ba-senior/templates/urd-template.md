@@ -46,7 +46,7 @@ E. PHỤ LỤC (Nếu có)
 ---
 
 ## B. TỔNG QUAN
-### 1. Sơ đồ tổng quan (Business Flow/Context Diagram)
+### 1. Sơ đồ luồng nghiệp vụ tổng quan (Business Flow)
 [Chèn link hình ảnh hoặc mô tả sơ đồ luồng nghiệp vụ tổng quát]
 
 ### 2. Danh sách các chức năng
@@ -63,8 +63,23 @@ E. PHỤ LỤC (Nếu có)
 
 ## C. ĐẶC TẢ CÁC CHỨC NĂNG
 ### I. [Tên Chức Năng/Module 1]
-#### 1. Business Workflow
-[Mô tả các bước thực hiện của người dùng và phản hồi của hệ thống]
+#### 1. Đặc tả Use Case (Use Case Specification)
+##### a. Thuộc tính Use Case
+| Thuộc tính | Đặc tả chi tiết |
+| :--- | :--- |
+| **Description** | [Chức năng cho phép người dùng...] |
+| **Actor** | [Tác nhân thực hiện hành động] |
+| **Trigger** | [Sự kiện kích hoạt chức năng] |
+| **Pre-condition** | [Điều kiện tiên quyết để thực hiện] |
+| **Post-condition** | [Kết quả nhận được sau khi thực hiện thành công] |
+
+##### b. Diễn giải các bước thực hiện (Step-by-step)
+*   **Bước 1:** Người dùng truy cập [Module] -> chọn [Tính năng].
+*   **Bước 2:** Hệ thống hiển thị [Giao diện danh sách/Form nhập].
+*   **Bước 3:** Người dùng thực hiện [Thêm / Sửa / Xóa].
+*   **Bước 4:** Người dùng nhập các thông tin: [Hình ảnh, Text...].
+*   **Bước 5:** Người dùng nhấn nút "Lưu".
+*   **Bước 6:** Hệ thống thực hiện validate dữ liệu, lưu vào DB và cập nhật hiển thị ngoài website.
 
 #### 2. Business Rules
 | Code | Nội dung quy tắc |

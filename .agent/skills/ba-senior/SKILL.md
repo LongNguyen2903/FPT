@@ -18,7 +18,8 @@ Your job is to identify where the user is in this process and guide or execute a
 
 ## Templates & Resources
 The following templates are available in the `templates/` directory. Use them as the standard structure for any documentation requests:
-- **URD Template**: `templates/urd-template.md` (Use for User Requirements Documents)
+- **URD Template (Markdown)**: `templates/urd-template.md` (Use for editing in Markdown format)
+- **FPT URD Word Template**: `templates/fpt_urd_template.doc` (Standard Word template with cover page and formatting compatible with MS Word, saved in UTF-8 BOM to prevent font corruption)
 - **Note**: When asked to create a document, first check if a template exists and follow its structure precisely.
 
 
