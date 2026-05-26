@@ -1368,7 +1368,6 @@
             <div class="menu-children open" id="group-content">
                 <div class="menu-child" onclick="switchModule('news', 'primary')" id="menu-news">📰 Quản lý Tin tức</div>
                 <div class="menu-child" onclick="switchModule('faq', 'primary')" id="menu-faq">❓ Quản lý FAQ</div>
-                <div class="menu-child" onclick="switchModule('tag-mapping', 'primary')" id="menu-tag-mapping">Cấu hình Thông tin hay</div>
             </div>
 
             <!-- Marketing Gói Bán — tạm ẩn theo yêu cầu
@@ -2418,7 +2417,7 @@
                                     </div>
                                     <p style="font-size:12px; color:var(--text-muted); margin:0; line-height:1.6;">
                                         Tính năng cấu hình Tag-based Mapping và Khối "Thông tin hay & Bài viết liên quan" hiện đã được chuyển sang mục quản lý tập trung ở menu 
-                                        <a href="#" onclick="switchModule('tag-mapping', 'primary'); return false;" style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu hình Thông tin hay</a> 
+                                        <a href="#" onclick="switchModule('news', 'primary'); switchNewsTab('tag', document.querySelector('#mod-news .tabs .tab:nth-child(3)')); return false;" style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu hình Thông tin hay</a> 
                                         trong danh mục CMS. Việc này giúp Vận hành dễ dàng thiết lập ma trận liên kết giữa hàng loạt SKU sản phẩm và bài viết tin tức/FAQ thông qua các tag chung.
                                     </p>
                                     <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; font-size:12px; border-top:1px solid rgba(255,255,255,0.05); padding-top:10px;">
@@ -5504,10 +5503,10 @@
                         <h2>Quản lý Tin tức (News & Articles)</h2>
                         <div style="display:flex; gap:10px;">
                             <button class="btn btn-secondary"
-                                onclick="document.getElementById('news-cat-form').style.display='block'; document.getElementById('news-list').style.display='none'; document.getElementById('news-cat-list').style.display='none'; document.getElementById('news-item-form').style.display='none';">+
+                                onclick="document.getElementById('news-cat-form').style.display='block'; document.getElementById('news-list').style.display='none'; document.getElementById('news-cat-list').style.display='none'; document.getElementById('news-tag-list').style.display='none'; document.getElementById('news-item-form').style.display='none';">+
                                 Thêm Chuyên Mục</button>
                             <button class="btn btn-primary"
-                                onclick="document.getElementById('news-item-form').style.display='block'; document.getElementById('news-list').style.display='none'; document.getElementById('news-cat-list').style.display='none'; document.getElementById('news-cat-form').style.display='none'; resetNewsForm();">+
+                                onclick="document.getElementById('news-item-form').style.display='block'; document.getElementById('news-list').style.display='none'; document.getElementById('news-cat-list').style.display='none'; document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-tag-list').style.display='none'; resetNewsForm();">+
                                 Thêm Bài Viết</button>
                         </div>
                     </div>
@@ -5515,6 +5514,7 @@
                     <div class="tabs">
                         <div class="tab active" onclick="switchNewsTab('list', this)">Danh sách Bài viết</div>
                         <div class="tab" onclick="switchNewsTab('category', this)">Chuyên mục (Categories)</div>
+                        <div class="tab" onclick="switchNewsTab('tag', this)">Cấu hình Thông tin hay (Tags Mapping)</div>
                     </div>
 
                     <!-- Tin tức Stats & List -->
@@ -5703,16 +5703,152 @@
                     <!-- News Category Form -->
                     <div id="news-cat-form" style="display:none; margin-top:20px;">
                         <div class="form-section">
-                            <h3 style="margin-top:0;">Tạo mới / Chỉnh sửa Chuyên mục</h3>
-                            <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <div class="form-group"><label>Tên chuyên mục <span style="color:var(--danger)">*</span></label><input type="text" class="form-input" id="newscat-title" placeholder="VD: Tin khuyến mãi" oninput="document.getElementById('newscat-slug').value = convertToSlug(this.value);"></div>
-                                <div class="form-group"><label>URL Slug <span style="color:var(--danger)">*</span></label><input type="text" class="form-input" id="newscat-slug" placeholder="VD: tin-khuyen-mai"></div>
-                                <div class="form-group"><label>Thứ tự hiển thị</label><input type="number" class="form-input" id="newscat-order" value="1"></div>
-                                <div class="form-group" style="display:flex; align-items:center; gap:10px;"><input type="checkbox" id="newscat-status" checked style="width:18px; height:18px; accent-color:var(--primary);"><label style="margin:0;">Trạng thái hoạt động</label></div>
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255, 255, 255, 0.05); padding-bottom:10px; margin-bottom:20px;">
+                                <h3 style="margin:0;" id="newscat-form-title">Tạo mới / Chỉnh sửa Chuyên mục</h3>
+                                <button class="btn btn-secondary btn-sm" onclick="document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-cat-list').style.display='block';">← Quay lại</button>
                             </div>
-                            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px;">
-                                <button class="btn btn-secondary" onclick="document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-list').style.display='block';">Hủy</button>
-                                <button class="btn btn-primary" onclick="document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-list').style.display='block'; showLdpToast('Đã lưu chuyên mục tin tức!');">Lưu Chuyên mục</button>
+
+                            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px;">
+                                <!-- Cột trái: Thông tin chính -->
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    <div class="form-group">
+                                        <label>Tên chuyên mục <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" id="newscat-title" placeholder="Nhập tên chuyên mục" oninput="document.getElementById('newscat-slug').value = convertToSlug(this.value);">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Biệt danh (slug) <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" id="newscat-slug" placeholder="chuyen-muc-mau">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả ngắn</label>
+                                        <textarea class="form-textarea" id="newscat-desc" placeholder="Mô tả tóm tắt" style="min-height:80px;"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nội dung chi tiết</label>
+                                        <textarea class="form-textarea" id="newscat-content" placeholder="Nội dung chi tiết" style="min-height:120px;"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Cột phải: Cấu hình phụ -->
+                                <div style="display:flex; flex-direction:column; gap:16px;">
+                                    <div class="form-group">
+                                        <label>Chuyên mục cha</label>
+                                        <select class="form-select" id="newscat-parent">
+                                            <option value="">— Chọn chuyên mục cha —</option>
+                                            <option value="1">Internet FPT</option>
+                                            <option value="2">FPT Camera</option>
+                                            <option value="3">Tin khuyến mãi</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kiểu giao diện</label>
+                                        <select class="form-select" id="newscat-layout">
+                                            <option value="default">Mặc định (Default)</option>
+                                            <option value="grid">Grid 3 cột</option>
+                                            <option value="list">Danh sách (List)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ngôn ngữ</label>
+                                        <select class="form-select" id="newscat-lang">
+                                            <option value="vi">Tiếng Việt</option>
+                                            <option value="en">English</option>
+                                        </select>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div class="form-group">
+                                            <label>Hiển thị trang chủ</label>
+                                            <input type="text" class="form-input" id="newscat-show-home" placeholder="VD: 1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hiển thị đầu DS</label>
+                                            <input type="text" class="form-input" id="newscat-show-top" placeholder="VD: 1">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div class="form-group">
+                                            <label>Thứ tự</label>
+                                            <input type="number" class="form-input" id="newscat-order" value="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Màu sắc</label>
+                                            <input type="text" class="form-input" id="newscat-color" placeholder="VD: #0072BC">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-top:10px;">
+                                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                            <input type="checkbox" id="newscat-status" checked style="width:16px; height:16px; accent-color:var(--primary);">
+                                            <span>Trạng thái hoạt động</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phân đoạn Hình ảnh (Image Upload Section) -->
+                            <div style="border-top:1px dashed var(--border-glass); margin:24px 0; padding-top:20px;">
+                                <h4 style="color:#fff; font-size:14px; margin-bottom:15px; font-weight:600;">Hình ảnh</h4>
+                                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Biểu tượng (Icon)</label>
+                                        <div style="border: 1px dashed var(--border-glass); border-radius:8px; padding:12px 6px; text-align:center; background:rgba(0,0,0,0.2); cursor:pointer;" onclick="showLdpToast('Bấm chọn biểu tượng Chuyên mục')">
+                                            <span style="font-size:20px; display:block;">☁️</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Chọn biểu tượng</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Biểu tượng rê chuột</label>
+                                        <div style="border: 1px dashed var(--border-glass); border-radius:8px; padding:12px 6px; text-align:center; background:rgba(0,0,0,0.2); cursor:pointer;" onclick="showLdpToast('Bấm chọn biểu tượng hover')">
+                                            <span style="font-size:20px; display:block;">☁️</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Biểu tượng rê chuột</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Logo Chuyên mục</label>
+                                        <div style="border: 1px dashed var(--border-glass); border-radius:8px; padding:12px 6px; text-align:center; background:rgba(0,0,0,0.2); cursor:pointer;" onclick="showLdpToast('Bấm chọn logo')">
+                                            <span style="font-size:20px; display:block;">☁️</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Chọn logo</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Hình đại diện</label>
+                                        <div style="border: 1px dashed var(--border-glass); border-radius:8px; padding:12px 6px; text-align:center; background:rgba(0,0,0,0.2); cursor:pointer;" onclick="showLdpToast('Bấm chọn hình đại diện')">
+                                            <span style="font-size:20px; display:block;">☁️</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Chọn hình đại diện</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-top:12px;">
+                                    <label style="font-size:12px;">Ghi chú hình đại diện (Alt Text)</label>
+                                    <input type="text" class="form-input" id="newscat-img-alt" placeholder="Mô tả ảnh (alt)">
+                                </div>
+                            </div>
+
+                            <!-- Phân đoạn SEO (SEO Settings) -->
+                            <div style="border-top:1px dashed var(--border-glass); margin:24px 0; padding-top:20px;">
+                                <h4 style="color:#fff; font-size:14px; margin-bottom:15px; font-weight:600;">Cấu hình SEO</h4>
+                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:12px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Meta tiêu đề (Meta Title)</label>
+                                        <input type="text" class="form-input" id="newscat-seo-title" placeholder="Hiển thị trên Google">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px;">Meta từ khoá (Meta Keywords)</label>
+                                        <input type="text" class="form-input" id="newscat-seo-keywords" placeholder="từ khoá, phân cách bằng dấu phẩy">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:12px;">
+                                    <label style="font-size:12px;">Meta mô tả (Meta Description)</label>
+                                    <textarea class="form-textarea" id="newscat-seo-desc" placeholder="Mô tả ngắn cho SEO" style="min-height:60px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-size:12px;">Từ khoá</label>
+                                    <input type="text" class="form-input" id="newscat-keywords" placeholder="Từ khoá tìm kiếm">
+                                </div>
+                            </div>
+
+                            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px; border-top:1px solid var(--border-glass); padding-top:20px;">
+                                <button class="btn btn-secondary" onclick="document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-cat-list').style.display='block';">Hủy</button>
+                                <button class="btn btn-primary" onclick="document.getElementById('news-cat-form').style.display='none'; document.getElementById('news-cat-list').style.display='block'; showLdpToast('Đã lưu chuyên mục tin tức thành công!');">Lưu Chuyên mục</button>
                             </div>
                         </div>
                     </div>
@@ -5823,14 +5959,14 @@
                                     </div>
 
                                     <!-- SEO Accordion Section -->
-                                    <div style="border: 1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
-                                        <div style="padding:10px 14px; background:rgba(255,255,255,0.03); font-weight:700; font-size:12px; display:flex; justify-content:space-between; cursor:pointer;" onclick="toggleNewsSeoAccordion()">
+                                    <div style="border: 1px solid var(--border-glass); border-radius: 8px; overflow: hidden;">
+                                        <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.03); font-weight: 700; font-size: 12px; display: flex; justify-content: space-between; cursor: pointer;" onclick="toggleNewsSeoAccordion()">
                                             <span>🔍 TỐI ƯU HÓA SEO (METADATA)</span>
                                             <span id="news-seo-icon">▼</span>
                                         </div>
-                                        <div id="news-seo-content" style="padding:12px; display:flex; flex-direction:column; gap:12px; border-top:1px solid var(--border-glass); background:rgba(0,0,0,0.1);">
+                                        <div id="news-seo-content" style="padding: 12px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border-glass); background: rgba(0, 0, 0, 0.1);">
                                             <div class="form-group">
-                                                <label style="font-size:11px;">SEO Title (Tối đa 70 ký tự)</label>
+                                                <label style="font-size: 11px;">SEO Title (Tối đa 70 ký tự)</label>
                                                 <input type="text" class="form-input" id="art-seo-title" placeholder="VD: Khuyến mãi lắp mạng FPT mới nhất">
                                             </div>
                                             <div class="form-group">
@@ -5849,6 +5985,45 @@
                             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px; border-top:1px solid var(--border-glass); padding-top:20px;">
                                 <button type="button" class="btn btn-secondary" onclick="document.getElementById('news-item-form').style.display='none'; document.getElementById('news-list').style.display='block';">Hủy</button>
                                 <button type="button" class="btn btn-primary" onclick="saveNewsArticleAction()">Lưu Bài viết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Tags View (Tab Content) -->
+                    <div id="news-tag-list" style="display:none; margin-top:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                            <h3 style="margin:0; color:#fff; font-size:16px;">Cấu hình Thông tin hay & Bài viết liên quan (Tag-based Mapping)</h3>
+                            <button class="btn btn-primary btn-sm" onclick="showAddTagModal()">+ Thêm Tag Mới</button>
+                        </div>
+                        
+                        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:20px; margin-top:-10px;">
+                            Quản lý tập trung các tag liên kết để tự động hiển thị bài viết tin tức & FAQ tại trang chi tiết SKU sản phẩm. Hệ thống sẽ truy vấn các bài viết có tag trùng khớp với tag sản phẩm để hiển thị tự động.
+                        </p>
+
+                        <div style="display:flex; flex-direction:column; gap:16px;">
+                            <!-- Bảng quản lý Mapping -->
+                            <div style="display:flex; flex-direction:column; gap:16px;">
+                                <div class="form-grid filters" style="grid-template-columns: 2fr 1fr; gap:12px; margin-bottom: 0; display:flex;">
+                                    <input type="text" id="tag-mapping-search" class="form-input" placeholder="Tìm kiếm Tag..." oninput="filterTagMappingTable()" style="flex:1;">
+                                    <button class="btn btn-primary" onclick="filterTagMappingTable()">Tìm Kiếm</button>
+                                </div>
+                                
+                                <div style="overflow-x:auto; border: 1px solid var(--border-glass); border-radius: 8px;">
+                                    <table class="data-table" id="tag-mapping-table" style="margin:0; width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Tag</th>
+                                                <th>SKUs Liên Kết</th>
+                                                <th>Trạng thái Fallback</th>
+                                                <th>Bài viết khớp Tag</th>
+                                                <th style="text-align:right;">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tag-mapping-tbody">
+                                            <!-- Render động danh sách tag mapping -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -6028,52 +6203,11 @@
                 </div>
             </div>
 
-            <!-- ============================================== -->
-            <!--             CẤU HÌNH THÔNG TIN HAY & MAPPING      -->
-            <!-- ============================================== -->
-            <div id="mod-tag-mapping" class="module-view">
-                <div class="card">
-                    <div class="page-header">
-                        <h2>Cấu hình Thông tin hay & Bài viết liên quan (Tag-based Mapping)</h2>
-                        <button class="btn btn-primary" onclick="showAddTagModal()">+ Thêm Tag Mới</button>
-                    </div>
-                    
-                    <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:20px; margin-top:-10px;">
-                        Quản lý tập trung các tag liên kết để tự động hiển thị bài viết tin tức & FAQ tại trang chi tiết SKU sản phẩm. Hệ thống sẽ truy vấn các bài viết có tag trùng khớp với tag sản phẩm để hiển thị tự động.
-                    </p>
 
-                    <div style="display:flex; flex-direction:column; gap:16px;">
-                        <!-- Bảng quản lý Mapping -->
-                        <div style="display:flex; flex-direction:column; gap:16px;">
-                            <div class="form-grid filters" style="grid-template-columns: 2fr 1fr; gap:12px; margin-bottom: 0; display:flex;">
-                                <input type="text" id="tag-mapping-search" class="form-input" placeholder="Tìm kiếm Tag..." oninput="filterTagMappingTable()" style="flex:1;">
-                                <button class="btn btn-primary" onclick="filterTagMappingTable()">Tìm Kiếm</button>
-                            </div>
-                            
-                            <div style="overflow-x:auto; border: 1px solid var(--border-glass); border-radius: 8px;">
-                                <table class="data-table" id="tag-mapping-table" style="margin:0; width:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>Tag</th>
-                                            <th>SKUs Liên Kết</th>
-                                            <th>Trạng thái Fallback</th>
-                                            <th>Bài viết khớp Tag</th>
-                                            <th style="text-align:right;">Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tag-mapping-tbody">
-                                        <!-- Render động danh sách tag mapping -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Modal Cấu hình Tag Mapping (Tag Config Modal) -->
-            <div id="tag-config-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
-                <div class="card" style="width:820px; max-width:92%; padding:24px; margin: 4% auto; position:relative; box-shadow: 0 10px 30px rgba(0,0,0,0.6); background: var(--bg-panel); border: 1px solid var(--border-glass); display:flex; flex-direction:column; gap:16px;">
+            <!-- Modal Cấu hình Tag Mapping (Tag Config Modal - Drawer trượt từ phải qua) -->
+            <div id="tag-config-modal" class="modal" onclick="if(event.target===this) resetTagConfig();" style="display:none; position:fixed; z-index:9999; inset:0; background-color:rgba(0,0,0,0.5); align-items:stretch; justify-content:flex-end;">
+                <div class="card" id="tag-config-drawer-content" style="position:fixed; right:0; top:0; bottom:0; width:60%; max-width:90%; padding:24px; margin:0; border-radius:0; border-top-left-radius:16px; border-bottom-left-radius:16px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); background: var(--bg-panel); border:none; border-left: 1px solid var(--border-glass); display:flex; flex-direction:column; gap:16px; overflow-y:auto; transform:translateX(100%); transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);">
                     <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
                         <h3 id="tag-config-title" style="margin:0; color:#fff; font-size:16px; display:flex; align-items:center; gap:8px;">
                             <span>⚙️ Cấu hình Tag Mapping</span>
@@ -8376,7 +8510,7 @@
             'dashboards',
             'pdh-category', 'pdh-attribute', 'pdh-sku', 'pdh-package', 'pdh-price', 'pdh-fee', // PDH
             'set-area', // Settings
-            'pages', 'landing', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-popup', 'tag-mapping', // CMS
+            'pages', 'landing', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-popup', // CMS
             'sys-roles', 'sys-users', 'sys-permissions' // Hệ thống
         ];
 
@@ -8391,7 +8525,6 @@
             'news': 'Quản lý Tin tức (CMS)',
             'faq': 'Quản lý FAQ (CMS)',
             'cms-package': 'Marketing Gói Bán (CMS)', 'cms-display': 'Cài đặt Hiển thị (CMS)', 'cms-popup': 'Quản lý Popup (CMS)',
-            'tag-mapping': 'Cấu hình Thông tin hay (CMS)',
             'cms-menu': 'Quản lý Menu (CMS)',
             'sys-roles': '🏷 Quản lý Vai trò',
             'sys-users': '👤 Quản lý Người dùng',
@@ -8430,16 +8563,15 @@
             modules.forEach(m => document.getElementById('mod-' + m).classList.remove('active'));
             document.getElementById('mod-' + modName).classList.add('active');
 
-            // Tag Mapping module initialization
-            if (modName === 'tag-mapping') {
-                syncTagMappingToSku();
-                renderTagMappingTable();
-                resetTagConfig();
-            }
-
             // News module initialization
             if (modName === 'news') {
                 updateNewsStats();
+                const activeTab = document.querySelector('#mod-news .tabs .tab.active');
+                if (activeTab && activeTab.innerText.includes('Cấu hình Thông tin hay')) {
+                    syncTagMappingToSku();
+                    renderTagMappingTable();
+                    resetTagConfig();
+                }
             }
 
             // FAQ module initialization
@@ -8683,13 +8815,24 @@
             if (tab === 'list') {
                 document.getElementById('news-list').style.display = 'block';
                 document.getElementById('news-cat-list').style.display = 'none';
+                document.getElementById('news-tag-list').style.display = 'none';
                 document.getElementById('news-item-form').style.display = 'none';
                 document.getElementById('news-cat-form').style.display = 'none';
             } else if (tab === 'category') {
                 document.getElementById('news-list').style.display = 'none';
                 document.getElementById('news-cat-list').style.display = 'block';
+                document.getElementById('news-tag-list').style.display = 'none';
                 document.getElementById('news-item-form').style.display = 'none';
                 document.getElementById('news-cat-form').style.display = 'none';
+            } else if (tab === 'tag') {
+                document.getElementById('news-list').style.display = 'none';
+                document.getElementById('news-cat-list').style.display = 'none';
+                document.getElementById('news-tag-list').style.display = 'block';
+                document.getElementById('news-item-form').style.display = 'none';
+                document.getElementById('news-cat-form').style.display = 'none';
+                syncTagMappingToSku();
+                renderTagMappingTable();
+                resetTagConfig();
             }
         }
 
@@ -8993,6 +9136,8 @@
             });
             showLdpToast('Đã lọc danh sách bài viết!');
         }
+
+
 
         // ===== LOGIC QUẢN LÝ FAQ =====
         const faqArticlesData = {
@@ -10206,8 +10351,11 @@
             
             updateTagMappingPreview();
 
-            // Mở modal cấu hình
-            document.getElementById('tag-config-modal').style.display = 'flex';
+            // Mở modal cấu hình (dạng drawer trượt từ phải qua)
+            var overlay = document.getElementById('tag-config-modal');
+            var drawerContent = document.getElementById('tag-config-drawer-content');
+            overlay.style.display = 'flex';
+            setTimeout(function () { drawerContent.style.transform = 'translateX(0)'; }, 10);
         }
 
         function renderSelectedSkusPreview() {
@@ -10490,8 +10638,14 @@
             
             updateTagMappingPreview();
 
-            // Đóng modal cấu hình
-            document.getElementById('tag-config-modal').style.display = 'none';
+            // Đóng modal cấu hình (dạng drawer trượt từ phải qua)
+            var drawerContent = document.getElementById('tag-config-drawer-content');
+            if (drawerContent) {
+                drawerContent.style.transform = 'translateX(100%)';
+            }
+            setTimeout(function () {
+                document.getElementById('tag-config-modal').style.display = 'none';
+            }, 260);
         }
 
         function showAddTagModal() {

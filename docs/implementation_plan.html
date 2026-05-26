@@ -71,8 +71,8 @@
             <tr><td>3</td><td><strong>Quản lý Blocks</strong></td><td>Các khối nội dung nhỏ cấu thành nên các Sections.</td></tr>
             <tr><td>4</td><td><strong>LDP Builder</strong></td><td>Dựng Landing Page chiến dịch (Tab <em>Chọn Template</em> đưa lên đầu tiên).</td></tr>
             <tr><td>5</td><td><strong>Quản lý Banner</strong></td><td>Hình ảnh, slide biểu ngữ đầu trang.</td></tr>
-            <tr><td>6</td><td><strong>Bài viết & FAQ</strong></td><td>Danh mục bài viết tin tức và hệ thống câu hỏi thường gặp.</td></tr>
-            <tr><td>7</td><td><strong>Cấu hình Thông tin hay</strong></td><td>Quản lý tập trung Tag-based Mapping liên kết SKU và bài viết liên quan/FAQ.</td></tr>
+            <tr><td>6</td><td><strong>Quản lý Tin tức (CMS)</strong></td><td>Soạn thảo bài viết, quản lý chuyên mục và tab **Cấu hình Thông tin hay (Tags Mapping)**.</td></tr>
+            <tr><td>7</td><td><strong>Quản lý FAQ (CMS)</strong></td><td>Quản lý ngân hàng câu hỏi & câu trả lời thường gặp theo chủ đề.</td></tr>
             <tr><td>8</td><td><strong>Cài đặt Hiển thị</strong></td><td>Cài đặt cấu hình hiển thị chung và nội dung Checkout đa kênh.</td></tr>
             <tr><td>9</td><td><strong>Quản lý Popup</strong></td><td>Popup quảng cáo, popup nhận tư vấn theo thời gian/hành vi.</td></tr>
         </tbody>
@@ -172,7 +172,7 @@
                 <td>
                     <ul>
                         <li><strong>Cơ chế Tag-based Mapping:</strong> Xây dựng luồng liên kết động: Vận hành gắn Tag (ví dụ: <code>"camera"</code>) cho Bài viết/FAQ và gắn Tag tương ứng cho SKU. CMS API tự động Query tối đa 5 bài viết mới nhất trùng Tag để trả về cho Frontend.</li>
-                        <li><strong>Quản lý tập trung độc lập & Drawer cấu hình tối ưu:</strong> Tách biệt cấu hình Tag thành menu riêng biệt. Chuyển đổi giao diện cấu hình chi tiết Tag sang dạng **Drawer trượt từ bên phải 2 cột** (Cấu hình SKUs/Fallback bên trái, Live Preview bên phải) giống như thao tác ở SKUs giúp tối ưu diện tích và tăng không gian hiển thị danh sách Tag chính thành 1 cột toàn màn hình. Cập nhật các cột hiển thị rõ nghĩa: *Trạng thái Fallback* và *Bài viết khớp Tag*.</li>
+                        <li><strong>Tích hợp trực tiếp dạng Tab & Drawer cấu hình trượt từ phải qua:</strong> Gộp cấu hình Tag vào phân hệ Quản lý Tin tức dưới dạng tab thứ 3 để tối ưu hóa menu Sidebar. Đồng thời, nâng cấp modal cấu hình chi tiết Tag sang dạng **Drawer trượt từ bên phải** (Slide-over panel) đồng bộ 100% với SKU preview drawer, tích hợp live preview và bộ lọc SKU nâng cao, giúp giao diện gọn gàng và giữ nguyên ngữ cảnh vận hành.</li>
                         <li><strong>Tối ưu hóa UI/UX khi số lượng SKU cực lớn (Advanced SKU Selector Modal):</strong>
                             Thay vì hiển thị danh sách checkbox dài dặc gây vỡ giao diện Sidebar, hệ thống chuyển sang dạng hiển thị preview danh sách Chips/Badges SKU đã gán kèm nút xóa nhanh `✕`. Khi cần thay đổi, mở Modal chọn SKU nâng cao hỗ trợ: tìm kiếm thời gian thực theo mã/tên SKU, bộ lọc theo phân loại dịch vụ (Internet, Camera, Truyền hình, Thiết bị), và phím chọn nhanh/bỏ chọn tất cả.
                         </li>
