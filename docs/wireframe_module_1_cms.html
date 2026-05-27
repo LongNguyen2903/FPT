@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -2417,7 +2417,7 @@
                                     </div>
                                     <p style="font-size:12px; color:var(--text-muted); margin:0; line-height:1.6;">
                                         Tính năng cấu hình Tag-based Mapping và Khối "Thông tin hay & Bài viết liên quan" hiện đã được chuyển sang mục quản lý tập trung ở menu 
-                                        <a href="#" onclick="switchModule('news', 'primary'); switchNewsTab('tag', document.querySelector('#mod-news .tabs .tab:nth-child(3)')); return false;" style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu hình Thông tin hay</a> 
+                                        <a href="#" onclick="switchModule('news', 'primary'); switchNewsTab('tag-mapping', document.querySelector('#mod-news .tabs .tab:nth-child(4)')); return false;" style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu hình Thông tin hay</a> 
                                         trong danh mục CMS. Việc này giúp Vận hành dễ dàng thiết lập ma trận liên kết giữa hàng loạt SKU sản phẩm và bài viết tin tức/FAQ thông qua các tag chung.
                                     </p>
                                     <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; font-size:12px; border-top:1px solid rgba(255,255,255,0.05); padding-top:10px;">
@@ -5514,7 +5514,8 @@
                     <div class="tabs">
                         <div class="tab active" onclick="switchNewsTab('list', this)">Danh sách Bài viết</div>
                         <div class="tab" onclick="switchNewsTab('category', this)">Chuyên mục (Categories)</div>
-                        <div class="tab" onclick="switchNewsTab('tag', this)">Cấu hình Thông tin hay (Tags Mapping)</div>
+                        <div class="tab" onclick="switchNewsTab('tag-list', this)">Quản lý Tags</div>
+                        <div class="tab" onclick="switchNewsTab('tag-mapping', this)">Cấu hình Thông tin hay (Tags Mapping)</div>
                     </div>
 
                     <!-- Tin tức Stats & List -->
@@ -5990,10 +5991,78 @@
                     </div>
 
                     <!-- News Tags View (Tab Content) -->
+                    <!-- News Tags List View (Tab Content 3 - Quản lý Tags) -->
                     <div id="news-tag-list" style="display:none; margin-top:20px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                            <h3 style="margin:0; color:#fff; font-size:16px;">Danh sách Tags Tin tức</h3>
+                            <button class="btn btn-primary btn-sm" onclick="openNewsTagForm()">+ Thêm Tag</button>
+                        </div>
+
+                        <!-- Bảng danh sách Tags -->
+                        <div id="newstags-list-view">
+                            <div class="form-grid filters" style="display:flex; gap:12px; align-items:center; background:rgba(0,0,0,0.2); padding:15px; border-radius:8px; margin-bottom:20px;">
+                                <div class="form-group" style="flex:1; margin:0;">
+                                    <input type="text" class="form-input" id="newstags-search-keyword" placeholder="Tìm theo tên tag..." oninput="filterNewsTagsTable()">
+                                </div>
+                                <div class="form-group" style="margin:0;">
+                                    <button class="btn btn-primary" onclick="filterNewsTagsTable()">Tìm Kiếm</button>
+                                </div>
+                            </div>
+
+                            <div style="overflow-x:auto; border: 1px solid var(--border-glass); border-radius: 8px;">
+                                <table class="data-table" id="newstags-table" style="margin:0; width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:60px;">STT</th>
+                                            <th>Tên Tag</th>
+                                            <th>URL Slug</th>
+                                            <th style="text-align:center; width:180px;">Số bài viết sử dụng</th>
+                                            <th style="width:150px;">Trạng thái</th>
+                                            <th style="width:150px; text-align:right;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="newstags-table-body">
+                                        <!-- Render qua JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Form thêm mới/sửa Tag -->
+                        <div id="news-tag-form" style="display:none; margin-top:20px;">
+                            <div class="form-section" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); padding: 20px; border-radius: 8px;">
+                                <h3 id="newstags-form-title" style="margin-top:0; border-bottom:1px solid rgba(255, 255, 255, 0.08); padding-bottom:12px; color:#fff; font-size:15px;">Tạo mới Tag tin tức</h3>
+                                <input type="hidden" id="newstags-edit-id" value="">
+                                <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px; color:var(--text-muted); margin-bottom:6px; display:block;">Tên Tag <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" id="newstags-input-name" placeholder="VD: khuyenmai, camera..." oninput="document.getElementById('newstags-input-slug').value = convertToSlug(this.value);" required style="width:100%;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px; color:var(--text-muted); margin-bottom:6px; display:block;">URL Slug <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" id="newstags-input-slug" placeholder="VD: khuyenmai, camera..." required style="width:100%;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px; color:var(--text-muted); margin-bottom:6px; display:block;">Trạng thái</label>
+                                        <select class="form-select" id="newstags-input-status" style="width:100%;">
+                                            <option value="Active">Hoạt động (Active)</option>
+                                            <option value="Draft">Bản nháp (Draft)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px;">
+                                    <button class="btn btn-secondary" onclick="closeNewsTagForm()">Hủy</button>
+                                    <button class="btn btn-primary" onclick="saveNewsTagAction()">Lưu Tag</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News Tags Mapping View (Tab Content 4 - Cấu hình Thông tin hay) -->
+                    <div id="news-tag-mapping" style="display:none; margin-top:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                             <h3 style="margin:0; color:#fff; font-size:16px;">Cấu hình Thông tin hay & Bài viết liên quan (Tag-based Mapping)</h3>
-                            <button class="btn btn-primary btn-sm" onclick="showAddTagModal()">+ Thêm Tag Mới</button>
+                            <button class="btn btn-primary btn-sm" onclick="showAddTagMappingModal()">+ Thêm Thông tin hay mới</button>
                         </div>
                         
                         <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:20px; margin-top:-10px;">
@@ -6279,20 +6348,23 @@
                 </div>
             </div>
 
-            <!-- Modal thêm tag mới -->
-            <div id="add-tag-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
-                <div class="card" style="width:400px; padding:24px; margin: 15% auto; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); background: var(--bg-panel); border: 1px solid var(--border-glass);">
+            <!-- Modal Thêm Thông tin hay mới (Chọn Tag để cấu hình Mapping) -->
+            <div id="add-tag-mapping-modal" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+                <div class="card" style="width:420px; padding:24px; margin: 15% auto; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); background: var(--bg-panel); border: 1px solid var(--border-glass);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                        <h3 style="margin:0; color:#fff;">Thêm Tag Mapping Mới</h3>
-                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);" onclick="closeAddTagModal()">✕</span>
+                        <h3 style="margin:0; color:#fff; font-size:15px; font-weight:600;">Thêm Thông tin hay mới</h3>
+                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);" onclick="closeAddTagMappingModal()">✕</span>
                     </div>
-                    <div class="form-group" style="margin-bottom:16px;">
-                        <label style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Tên Tag <span style="color:var(--danger)">*</span></label>
-                        <input type="text" id="new-tag-name" class="form-input" placeholder="VD: camera, internet, wifi6..." style="width:100%;">
+                    <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px; margin-top:-8px;">
+                        Vui lòng chọn một Tag từ danh mục để bắt đầu thiết lập cấu hình liên kết sản phẩm (SKU).
+                    </p>
+                    <div class="form-group" style="margin-bottom:20px;">
+                        <label style="font-size:11.5px; font-weight:600; color:var(--text-muted); margin-bottom:6px; display:block;">Chọn Tag liên kết <span style="color:var(--danger)">*</span></label>
+                        <select id="select-mapping-tag" class="form-select" style="width:100%;"></select>
                     </div>
                     <div style="display:flex; justify-content:flex-end; gap:8px;">
-                        <button class="btn btn-secondary btn-sm" onclick="closeAddTagModal()">Hủy</button>
-                        <button class="btn btn-primary btn-sm" onclick="submitAddTag()">Tạo mới</button>
+                        <button class="btn btn-secondary btn-sm" onclick="closeAddTagMappingModal()">Hủy</button>
+                        <button class="btn btn-primary btn-sm" onclick="submitAddTagMapping()">Xác nhận</button>
                     </div>
                 </div>
             </div>
@@ -8567,10 +8639,15 @@
             if (modName === 'news') {
                 updateNewsStats();
                 const activeTab = document.querySelector('#mod-news .tabs .tab.active');
-                if (activeTab && activeTab.innerText.includes('Cấu hình Thông tin hay')) {
-                    syncTagMappingToSku();
-                    renderTagMappingTable();
-                    resetTagConfig();
+                if (activeTab) {
+                    if (activeTab.innerText.includes('Quản lý Tags')) {
+                        renderNewsTagsTable();
+                        closeNewsTagForm();
+                    } else if (activeTab.innerText.includes('Cấu hình Thông tin hay')) {
+                        syncTagMappingToSku();
+                        renderTagMappingTable();
+                        resetTagConfig();
+                    }
                 }
             }
 
@@ -8811,28 +8888,138 @@
             for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
             element.classList.add('active');
 
+            // Ẩn tất cả các view chính
+            document.getElementById('news-list').style.display = 'none';
+            document.getElementById('news-cat-list').style.display = 'none';
+            document.getElementById('news-tag-list').style.display = 'none';
+            document.getElementById('news-tag-mapping').style.display = 'none';
+            document.getElementById('news-item-form').style.display = 'none';
+            document.getElementById('news-cat-form').style.display = 'none';
+
             // Show/hide views
             if (tab === 'list') {
                 document.getElementById('news-list').style.display = 'block';
-                document.getElementById('news-cat-list').style.display = 'none';
-                document.getElementById('news-tag-list').style.display = 'none';
-                document.getElementById('news-item-form').style.display = 'none';
-                document.getElementById('news-cat-form').style.display = 'none';
             } else if (tab === 'category') {
-                document.getElementById('news-list').style.display = 'none';
                 document.getElementById('news-cat-list').style.display = 'block';
-                document.getElementById('news-tag-list').style.display = 'none';
-                document.getElementById('news-item-form').style.display = 'none';
-                document.getElementById('news-cat-form').style.display = 'none';
-            } else if (tab === 'tag') {
-                document.getElementById('news-list').style.display = 'none';
-                document.getElementById('news-cat-list').style.display = 'none';
+            } else if (tab === 'tag-list') {
                 document.getElementById('news-tag-list').style.display = 'block';
-                document.getElementById('news-item-form').style.display = 'none';
-                document.getElementById('news-cat-form').style.display = 'none';
+                renderNewsTagsTable();
+                closeNewsTagForm();
+            } else if (tab === 'tag-mapping') {
+                document.getElementById('news-tag-mapping').style.display = 'block';
                 syncTagMappingToSku();
                 renderTagMappingTable();
                 resetTagConfig();
+            }
+        }
+
+        // ===== LOGIC QUẢN LÝ TAGS TIN TỨC (CRUD) =====
+        function renderNewsTagsTable(data = newsTagsData) {
+            const tbody = document.getElementById('newstags-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let index = 1;
+            for (let id in data) {
+                const tag = data[id];
+                const tr = document.createElement('tr');
+                tr.setAttribute('data-tag-id', tag.id);
+                
+                const statusBadge = tag.status === 'Active' 
+                    ? '<span class="badge active newstag-status-badge">Active</span>' 
+                    : '<span class="badge warning newstag-status-badge">Draft</span>';
+
+                // Đếm số bài viết sử dụng tag này
+                let articleCount = 0;
+                mockNewsArticles.forEach(art => {
+                    if (art.tag === tag.slug) articleCount++;
+                });
+
+                tr.innerHTML = `
+                    <td>${index++}</td>
+                    <td><strong class="newstag-name" style="color:#fff;">#${tag.name}</strong></td>
+                    <td class="newstag-slug">${tag.slug}</td>
+                    <td class="text-center newstag-count">${articleCount} bài</td>
+                    <td>${statusBadge}</td>
+                    <td style="text-align:right;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="editNewsTag('${tag.id}')">Sửa</button>
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left: 5px;" onclick="deleteNewsTag('${tag.id}')">Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        function filterNewsTagsTable() {
+            const kw = document.getElementById('newstags-search-keyword').value.toLowerCase().trim();
+            const filtered = {};
+            for (let id in newsTagsData) {
+                const tag = newsTagsData[id];
+                if (!kw || tag.name.toLowerCase().includes(kw) || tag.slug.toLowerCase().includes(kw)) {
+                    filtered[id] = tag;
+                }
+            }
+            renderNewsTagsTable(filtered);
+            showLdpToast('Đã lọc danh sách tags!');
+        }
+
+        function openNewsTagForm() {
+            document.getElementById('newstags-form-title').innerText = 'Tạo mới Tag tin tức';
+            document.getElementById('newstags-edit-id').value = '';
+            document.getElementById('newstags-input-name').value = '';
+            document.getElementById('newstags-input-slug').value = '';
+            document.getElementById('newstags-input-status').value = 'Active';
+
+            document.getElementById('newstags-list-view').style.display = 'none';
+            document.getElementById('news-tag-form').style.display = 'block';
+        }
+
+        function closeNewsTagForm() {
+            document.getElementById('newstags-list-view').style.display = 'block';
+            document.getElementById('news-tag-form').style.display = 'none';
+        }
+
+        function editNewsTag(id) {
+            const tag = newsTagsData[id];
+            if (!tag) return;
+            document.getElementById('newstags-form-title').innerText = 'Chỉnh sửa Tag tin tức';
+            document.getElementById('newstags-edit-id').value = tag.id;
+            document.getElementById('newstags-input-name').value = tag.name;
+            document.getElementById('newstags-input-slug').value = tag.slug;
+            document.getElementById('newstags-input-status').value = tag.status;
+
+            document.getElementById('newstags-list-view').style.display = 'none';
+            document.getElementById('news-tag-form').style.display = 'block';
+        }
+
+        function saveNewsTagAction() {
+            const name = document.getElementById('newstags-input-name').value.trim();
+            const slug = document.getElementById('newstags-input-slug').value.trim();
+            const status = document.getElementById('newstags-input-status').value;
+
+            if (!name || !slug) {
+                alert('Vui lòng điền đầy đủ các trường bắt buộc!');
+                return;
+            }
+
+            const id = document.getElementById('newstags-edit-id').value || 'tag-' + (Object.keys(newsTagsData).length + 1);
+            
+            newsTagsData[id] = {
+                id: id,
+                name: name,
+                slug: slug,
+                status: status
+            };
+
+            renderNewsTagsTable();
+            closeNewsTagForm();
+            showLdpToast('Đã lưu Tag thành công!');
+        }
+
+        function deleteNewsTag(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa Tag này không?')) {
+                delete newsTagsData[id];
+                renderNewsTagsTable();
+                showLdpToast('Đã xóa Tag thành công!');
             }
         }
 
@@ -10169,6 +10356,14 @@
             { title: "Đại hội thể thao phát sóng trực tiếp trên FPT Play", tag: "truyenhinh", type: "tin-tuc" }
         ];
 
+        let newsTagsData = {
+            'tag-1': { id: 'tag-1', name: 'internet', slug: 'internet', count: 2, status: 'Active' },
+            'tag-2': { id: 'tag-2', name: 'camera', slug: 'camera', count: 1, status: 'Active' },
+            'tag-3': { id: 'tag-3', name: 'wifi6', slug: 'wifi6', count: 1, status: 'Active' },
+            'tag-4': { id: 'tag-4', name: 'truyenhinh', slug: 'truyenhinh', count: 2, status: 'Active' },
+            'tag-5': { id: 'tag-5', name: 'khuyenmai', slug: 'khuyenmai', count: 1, status: 'Active' }
+        };
+
         let tagMappingData = {
             'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: true },
             'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: true },
@@ -10233,6 +10428,21 @@
 
                 const data = tagMappingData[tag];
                 
+                // Tra cứu thông tin hiển thị và trạng thái của Tag từ newsTagsData
+                let displayTagName = tag;
+                let tagObj = null;
+                for (let id in newsTagsData) {
+                    if (newsTagsData[id].slug === tag) {
+                        tagObj = newsTagsData[id];
+                        displayTagName = newsTagsData[id].name;
+                        break;
+                    }
+                }
+
+                const draftBadge = (tagObj && tagObj.status === 'Draft')
+                    ? ' <span class="badge warning" style="font-size:9.5px; padding:1px 4px; vertical-align:middle; border-radius:3px; font-weight:normal; margin-left:4px;">Nháp</span>'
+                    : '';
+                
                 // Đếm số bài viết trùng khớp
                 const matchedCount = mockArticles.filter(art => art.tag === tag).length;
                 
@@ -10265,7 +10475,7 @@
                     : '<span class="badge" style="background:rgba(255,255,255,0.05); color:var(--text-muted); border:1px solid rgba(255,255,255,0.1); font-size:10px;">Tắt</span>';
 
                 tr.innerHTML = `
-                    <td style="font-weight:600; color:var(--primary); font-size:13px;">#${tag}</td>
+                    <td style="font-weight:600; color:var(--primary); font-size:13px;">#${displayTagName}${draftBadge}</td>
                     <td><div style="display:flex; flex-wrap:wrap; gap:2px;">${skuBadges}</div></td>
                     <td>${fallbackBadge}</td>
                     <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
@@ -10648,44 +10858,57 @@
             }, 260);
         }
 
-        function showAddTagModal() {
-            document.getElementById('add-tag-modal').style.display = 'flex';
-            document.getElementById('new-tag-name').focus();
+        function showAddTagMappingModal() {
+            // Render danh sách tags vào select dropdown
+            const selectEl = document.getElementById('select-mapping-tag');
+            if (selectEl) {
+                selectEl.innerHTML = '';
+                
+                // Thêm option mặc định
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = '';
+                defaultOpt.innerText = '-- Chọn Tag để thiết lập --';
+                selectEl.appendChild(defaultOpt);
+
+                // Lặp qua newsTagsData để thêm các tag đang active
+                for (let id in newsTagsData) {
+                    const tag = newsTagsData[id];
+                    if (tag.status === 'Active') {
+                        const opt = document.createElement('option');
+                        opt.value = tag.slug;
+                        opt.innerText = '#' + tag.name;
+                        selectEl.appendChild(opt);
+                    }
+                }
+            }
+
+            document.getElementById('add-tag-mapping-modal').style.display = 'flex';
         }
 
-        function closeAddTagModal() {
-            document.getElementById('add-tag-modal').style.display = 'none';
-            document.getElementById('new-tag-name').value = '';
+        function closeAddTagMappingModal() {
+            document.getElementById('add-tag-mapping-modal').style.display = 'none';
+            document.getElementById('select-mapping-tag').value = '';
         }
 
-        function submitAddTag() {
-            const tagName = document.getElementById('new-tag-name').value.trim().toLowerCase();
-            if (!tagName) {
-                alert('Vui lòng nhập tên Tag.');
+        function submitAddTagMapping() {
+            const selectedTag = document.getElementById('select-mapping-tag').value;
+            if (!selectedTag) {
+                alert('Vui lòng chọn một Tag.');
                 return;
             }
 
-            // Kiểm tra ký tự đặc biệt, chỉ cho phép chữ, số và dấu gạch ngang
-            if (!/^[a-z0-9\-]+$/.test(tagName)) {
-                alert('Tên Tag chỉ được phép chứa các ký tự chữ thường viết liền không dấu, số và ký tự gạch ngang (-). Ví dụ: camera, wifi-6');
-                return;
+            // Nếu tagMappingData chưa có tag này, khởi tạo mapping trống
+            if (!tagMappingData[selectedTag]) {
+                tagMappingData[selectedTag] = { skus: [], fallback: false };
             }
 
-            if (tagMappingData[tagName]) {
-                alert('Tag này đã tồn tại trong danh sách.');
-                return;
-            }
-
-            // Thêm mới
-            tagMappingData[tagName] = { skus: [], fallback: false };
-            
             // Đồng bộ và render
             syncTagMappingToSku();
             renderTagMappingTable();
-            closeAddTagModal();
+            closeAddTagMappingModal();
 
-            // Mở cấu hình tag mới tạo luôn
-            selectTagForConfig(tagName);
+            // Mở drawer cấu hình tag
+            selectTagForConfig(selectedTag);
         }
 
         function deleteTagMapping(tag) {

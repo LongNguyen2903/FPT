@@ -69,6 +69,14 @@
             <td>PM</td>
             <td>[U] Cập nhật thiết kế Cấu hình Thông tin hay (Tag Mapping) gộp vào module Tin tức dạng Tab và đổi giao diện cấu hình sang cơ chế Slide-over Drawer.</td>
         </tr>
+        <tr>
+            <td>27/05/2026</td>
+            <td>1.2</td>
+            <td>BA Team</td>
+            <td>QA Team</td>
+            <td>PM</td>
+            <td>[U] Tách biệt Cấu hình Thông tin hay thành 2 Tab trong Tin tức: Tab Quản lý Tags (CRUD tag) và Tab Tags Mapping (Thiết lập mapping qua Drawer bằng cách chọn Tag có sẵn từ dropdown).</td>
+        </tr>
     </tbody>
 </table>
 
@@ -162,7 +170,7 @@
         <tr><td>7</td><td>Quản lý Popup</td><td>1.0</td><td>New</td><td>Tạo Popup quảng cáo/thông báo nổi, cấu hình tần suất hiển thị.</td></tr>
         <tr><td>8</td><td>Quản lý Tin tức</td><td>1.0</td><td>New</td><td>Soạn thảo tin tức bài viết, phân loại chuyên mục và xuất bản.</td></tr>
         <tr><td>9</td><td>Quản lý FAQ</td><td>1.0</td><td>New</td><td>Quản lý ngân hàng câu hỏi & câu trả lời thường gặp theo chủ đề.</td></tr>
-        <tr><td>10</td><td>Cấu hình Thông tin hay (Tag Mapping)</td><td>1.1</td><td>Update</td><td>Ánh xạ từ khóa bài viết đến sản phẩm. Thiết kế mới tích hợp dạng Tab trong Quản lý Tin tức và sử dụng Slide-over Drawer để cấu hình.</td></tr>
+        <tr><td>10</td><td>Cấu hình Thông tin hay (Tag Mapping)</td><td>1.2</td><td>Update</td><td>Ánh xạ từ khóa bài viết đến sản phẩm. Tách biệt thành 2 Tab riêng biệt trong module Tin tức: Tab Quản lý Tags và Tab Tags Mapping (thiết lập liên kết qua Slide-over Drawer).</td></tr>
         <tr><td>11</td><td>Cài đặt hiển thị (Checkout Config)</td><td>1.0</td><td>Update</td><td>Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị).</td></tr>
     </tbody>
 </table>
@@ -747,7 +755,7 @@
 <table class="usecase-table">
     <tr>
         <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng tạo các Tag từ khóa và liên kết (map) các tin tức, bài viết hướng dẫn hoặc FAQ liên quan đến Tag đó cho các sản phẩm/gói cước tương ứng. Tính năng này được tích hợp trực tiếp dưới dạng một tab chức năng trong module Quản lý Tin tức.</td>
+        <td>Chức năng cho phép người dùng liên kết (map) các tin tức, bài viết hướng dẫn hoặc FAQ liên quan đến Tag cho các sản phẩm/gói cước tương ứng. Chức năng được tách biệt thành 2 Tab riêng trong module Quản lý Tin tức: Tab 3 "Quản lý Tags" để tạo/sửa/xóa tag và Tab 4 "Cấu hình Thông tin hay (Tags Mapping)" để cấu hình mapping SKU.</td>
     </tr>
     <tr>
         <td class="label">Actor</td>
@@ -755,11 +763,11 @@
     </tr>
     <tr>
         <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Tin tức", chọn tab "Cấu hình Thông tin hay (Tags Mapping)" và nhấp chọn nút "Cấu hình" (⚙️) tại dòng Tag tương ứng.</td>
+        <td>Người dùng chọn menu "Quản lý Tin tức", chọn tab "Cấu hình Thông tin hay (Tags Mapping)" và click chọn nút "+ Thêm Thông tin hay mới" hoặc nhấp nút "Cấu hình" (⚙️) tại từng dòng Tag đã liên kết.</td>
     </tr>
     <tr>
         <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào CMS và truy cập module Quản lý Tin tức.</td>
+        <td>Người dùng đã đăng nhập thành công vào CMS và truy cập module Quản lý Tin tức. Các tag mong muốn phải được tạo trước bên tab "Quản lý Tags".</td>
     </tr>
     <tr>
         <td class="label">Post-condition</td>
@@ -771,18 +779,21 @@
 <p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
     <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Tin tức" -> chọn tab "Cấu hình Thông tin hay (Tags Mapping)".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấp chọn nút "Cấu hình" (⚙️) tại dòng Tag cần chỉnh sửa hoặc nhấn "Thêm Tag Mới".</li>
-    <li><strong>Bước 3:</strong> Hệ thống mở **Panel cấu hình trượt từ bên phải qua (Slide-over Drawer)**, hiển thị Form cấu hình chi tiết (Tên Tag, bật/tắt Fallback, danh sách SKU liên kết, live preview bài viết liên quan).</li>
-    <li><strong>Bước 4:</strong> Người dùng cập nhật các thông tin liên kết: tìm kiếm và chọn các SKU sản phẩm liên quan đến Tag này.</li>
-    <li><strong>Bước 5:</strong> Người dùng nhấn nút "Lưu cấu hình".</li>
-    <li><strong>Bước 6:</strong> Hệ thống thực hiện validate dữ liệu, lưu cấu hình vào database, trượt đóng panel về bên phải, hiển thị thông báo thành công và cập nhật liên kết ngoài website.</li>
+    <li><strong>Bước 2:</strong> Người dùng nhấp chọn nút "+ Thêm Thông tin hay mới" (hoặc chọn nút "Cấu hình" ⚙️ trên bảng).</li>
+    <li><strong>Bước 3:</strong> Nếu thêm mới, hệ thống hiển thị Modal "Thêm Thông tin hay mới" dạng dropdown. Người dùng chọn Tag muốn cấu hình từ danh sách và click "Xác nhận".</li>
+    <li><strong>Bước 4:</strong> Hệ thống mở **Panel cấu hình trượt từ bên phải qua (Slide-over Drawer)**, hiển thị Form cấu hình chi tiết (Tên Tag, bật/tắt Fallback, danh sách SKU liên kết, live preview bài viết liên quan).</li>
+    <li><strong>Bước 5:</strong> Người dùng cập nhật các thông tin liên kết: tìm kiếm và chọn các SKU sản phẩm liên quan đến Tag này.</li>
+    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu cấu hình".</li>
+    <li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu cấu hình vào database, trượt đóng panel về bên phải, hiển thị thông báo thành công và cập nhật liên kết ngoài website.</li>
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
 <ul>
     <li>Một bài viết hoặc FAQ có thể được gán vào nhiều Tag khác nhau. Một dòng sản phẩm cũng có thể ánh xạ đến nhiều Tag.</li>
-    <li>Tag phải viết dưới dạng không dấu, ngăn cách bằng dấu gạch ngang (VD: uu-dai-wifi-giga).</li>
-    <li>**Quy tắc giao diện (UI/UX)**: Form cấu hình chi tiết của Tag sử dụng cơ chế Slide-over panel (trượt từ phải qua) chiếm 60% chiều rộng màn hình, cho phép thao tác nhanh mà không che khuất hoàn toàn ngữ cảnh danh sách bên dưới, mang lại trải nghiệm đồng bộ với màn hình cấu hình chi tiết SKU sản phẩm.</li>
+    <li>Tag phải viết dưới dạng không dấu, ngăn cách bằng dấu gạch ngang (VD: uu-dai-wifi-giga) và được quản lý tập trung tại Tab "Quản lý Tags".</li>
+    <li>Khi thêm mapping mới, người dùng bắt buộc phải chọn từ các tag đã định nghĩa sẵn.</li>
+    <li>Khi xóa một dòng mapping, hệ thống chỉ hủy ánh xạ Tag đó tới các SKU chứ không xóa Tag gốc khỏi danh mục Tag ở Tab 3.</li>
+    <li>**Quy tắc giao diện (UI/UX)**: Form cấu hình chi tiết của Tag sử dụng cơ chế Slide-over panel (trượt từ phải qua) chiếm 60% chiều rộng màn hình, cho phép thao tác nhanh mà không che khuất hoàn toàn danh sách bên dưới.</li>
 </ul>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
