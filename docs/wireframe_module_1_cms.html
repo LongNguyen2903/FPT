@@ -54,8 +54,8 @@
             --bg-panel: rgba(15, 23, 42, 0.9);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --primary: #4564ED;
-            --primary-gradient: linear-gradient(135deg, #4564ED 0%, #6F86FF 100%);
+            --primary: #F97316;
+            --primary-gradient: linear-gradient(135deg, #FB923C 0%, #EA580C 100%);
             --pdh-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             --success-gradient: linear-gradient(135deg, #10b981 0%, #34d399 100%);
             --purple-gradient: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
@@ -76,8 +76,8 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-base);
             background-image:
-                radial-gradient(circle at top left, rgba(59, 130, 246, 0.1), transparent 40%),
-                radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.1), transparent 40%);
+                radial-gradient(circle at top left, rgba(249, 115, 22, 0.1), transparent 40%),
+                radial-gradient(circle at bottom right, rgba(234, 88, 12, 0.08), transparent 40%);
             color: var(--text-main);
             display: flex;
             height: 100vh;
@@ -151,7 +151,7 @@
         }
 
         .menu-item.active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, transparent 100%);
+            background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, transparent 100%);
             color: #fff;
             border-left: 4px solid var(--primary);
             font-weight: 600;
@@ -232,7 +232,7 @@
         }
 
         .menu-child.active {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.15) 0%, transparent 100%);
+            background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, transparent 100%);
             color: #fff;
             border-left: 3px solid var(--primary);
             font-weight: 600;
@@ -244,7 +244,7 @@
         body.light .menu-parent:hover, body.light .menu-parent.open { color: #1e293b; background: rgba(0,0,0,0.03); }
         body.light .menu-child { color: #64748b; }
         body.light .menu-child:hover { background: rgba(0,0,0,0.04); color: #1e293b; }
-        body.light .menu-child.active { background: rgba(59,130,246,0.08); color: #1e293b; }
+        body.light .menu-child.active { background: rgba(249,115,22,0.08); color: #1e293b; }
 
         /* Main Content */
         .main-content {
@@ -297,12 +297,12 @@
 
         .btn-primary {
             background: var(--primary-gradient);
-            box-shadow: 0 4px 15px rgba(69, 100, 237, 0.3);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(69, 100, 237, 0.5);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
         }
 
         .btn-warning {
@@ -441,7 +441,7 @@
         .form-textarea:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
         }
 
         .form-textarea {
@@ -562,7 +562,7 @@
         .tab.active {
             color: #fff;
             border-bottom-color: var(--primary);
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(249, 115, 22, 0.1);
         }
 
         .tab.active.warning {
@@ -690,7 +690,7 @@
         }
 
         .wizard-step.active {
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(249, 115, 22, 0.2);
             color: #fff;
         }
 
@@ -794,8 +794,8 @@
 
         .ldp-section-row.active {
             border-color: var(--primary) !important;
-            box-shadow: 0 0 0 3px rgba(69, 100, 237, 0.15) !important;
-            background: rgba(69, 100, 237, 0.05) !important;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15) !important;
+            background: rgba(249, 115, 22, 0.05) !important;
         }
 
         .ldp-template-card {
@@ -835,8 +835,8 @@
 
         body.light .ldp-section-row.active {
             border-color: var(--primary) !important;
-            box-shadow: 0 0 0 3px rgba(69, 100, 237, 0.1) !important;
-            background: rgba(69, 100, 237, 0.04) !important;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1) !important;
+            background: rgba(249, 115, 22, 0.04) !important;
         }
 
         body.light .ldp-template-card {
@@ -847,8 +847,8 @@
         /* ===== LIGHT MODE ===== */
         body.light {
             background-color: #f8fafc;
-            background-image: radial-gradient(circle at top left, rgba(69, 100, 237, 0.05), transparent 40%),
-                             radial-gradient(circle at bottom right, rgba(111, 134, 255, 0.05), transparent 40%);
+            background-image: radial-gradient(circle at top left, rgba(249, 115, 22, 0.05), transparent 40%),
+                             radial-gradient(circle at bottom right, rgba(234, 88, 12, 0.05), transparent 40%);
             color: #1e293b;
             --bg-base: #f8fafc;
             --bg-glass: rgba(255, 255, 255, 0.8);
@@ -856,8 +856,8 @@
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-glass: #cbd5e1;
-            --primary: #4564ED;
-            --primary-gradient: linear-gradient(135deg, #4564ED 0%, #6F86FF 100%);
+            --primary: #F97316;
+            --primary-gradient: linear-gradient(135deg, #FB923C 0%, #EA580C 100%);
         }
 
         body.light .glass {
@@ -888,7 +888,7 @@
         }
 
         body.light .menu-item.active {
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(249, 115, 22, 0.08);
             color: #1e293b;
         }
 
@@ -1031,7 +1031,7 @@
         }
 
         body.light .wizard-step.active {
-            background: rgba(59, 130, 246, 0.08);
+            background: rgba(249, 115, 22, 0.08);
             color: #1e293b;
         }
 
@@ -1335,7 +1335,7 @@
             <div class="menu-category" style="color: #fbbf24;">QUẢN LÝ SẢN PHẨM</div>
             <div class="menu-item pdh" onclick="switchModule('pdh-sku', 'warning')" id="menu-pdh-sku">SKUs</div>
 
-            <div class="menu-category" style="color: #60a5fa;">QUẢN LÝ NỘI DUNG (CMS)</div>
+            <div class="menu-category" style="color: #FB923C;">QUẢN LÝ NỘI DUNG (CMS)</div>
 
             <!-- Nhóm 1: Cấu trúc Trang -->
             <div class="menu-parent open" onclick="toggleMenuGroup('group-structure', this)" id="parent-structure">
@@ -1404,7 +1404,7 @@
                         <!-- Moon icon (dark mode) -->
                         <span id="icon-moon">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#4564ED" stroke="#4564ED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#F97316" stroke="#F97316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
                         <!-- Sun icon (light mode) -->
@@ -1791,7 +1791,7 @@
                                                         style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('INT-GIGA','Gói Internet Giga (150Mbps)','Dịch vụ','Internet')">✏️</button>
                                         </td>
@@ -1829,7 +1829,7 @@
                                                         style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('INT-SKY','Gói Internet Sky (1Gbps/150Mbps)','Dịch vụ','Internet')">✏️</button>
                                         </td>
@@ -1867,7 +1867,7 @@
                                                         style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('CAM-IQ3','FPT Camera IQ3','Thiết bị','Camera')">✏️</button>
                                         </td>
@@ -1905,7 +1905,7 @@
                                                         style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('CAM-SE','FPT Camera SE','Thiết bị','Camera')">✏️</button>
                                         </td>
@@ -1943,7 +1943,7 @@
                                                         style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('PLAY-MAX','Gói FPT Play SMAX','Dịch vụ','Truyền hình')">✏️</button>
                                         </td>
@@ -1981,7 +1981,7 @@
                                                         style="position:absolute; top:2px; left:16px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
                                             </label>
                                             <button class="btn btn-sm"
-                                                style="background:rgba(59,130,246,0.2); color:#60a5fa; padding:4px 8px;"
+                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
                                                 title="Xem nhanh"
                                                 onclick="skuOpenPreview('MODEM-AX3000GZ','Modem Wi-Fi 6 AX3000GZ','Thiết bị','Internet')">✏️</button>
                                         </td>
@@ -2062,7 +2062,7 @@
                         <!-- TAB 1: Thông tin sản phẩm (QLCS read-only) -->
                         <div id="sku-tab-chung">
                             <div class="form-section">
-                                <div style="display:flex; align-items:center; gap:10px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
+                                <div style="display:flex; align-items:center; gap:10px; background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
                                     <span style="font-size:18px;">🔗</span>
                                     <div>
                                         <div style="font-weight:600; font-size:13px; color:var(--primary);">Dữ liệu đồng bộ từ hệ thống QLCS</div>
@@ -2159,14 +2159,14 @@
                                             <tr style="background:rgba(0,0,0,0.25);">
                                                 <th style="padding:8px 10px; text-align:center; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:36px; border-bottom:1px solid var(--border-glass);">#</th>
                                                 <!-- Ảnh — CMS editable -->
-                                                <th style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.05); width:64px;">Ảnh ✏️</th>
+                                                <th style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:64px;">Ảnh ✏️</th>
                                                 <th style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Mã SKU</th>
                                                 <th style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Tên QLCS <span style="opacity:0.4;">(raw)</span></th>
                                                 <!-- Tên hiển thị web — CMS editable -->
-                                                <th style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.05);">Tên hiển thị web ✏️</th>
+                                                <th style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05);">Tên hiển thị web ✏️</th>
                                                 <th style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Phân loại</th>
                                                 <!-- Hiển thị web — CMS editable (đổi từ "Bắt buộc") -->
-                                                <th style="padding:8px 10px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.05);">Hiển thị web ✏️</th>
+                                                <th style="padding:8px 10px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05);">Hiển thị web ✏️</th>
                                                 <!--
                                                     SL Tạm ẩn — chưa xác định có lấy được từ QLCS/PDH không
                                                     <th>SL mặc định</th>
@@ -2179,16 +2179,16 @@
                                             <!-- Row 1 — CAM-1D-ONLY, Main -->
                                             <tr>
                                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">1</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(69,100,237,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
+                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
                                                 </td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D-ONLY</span></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">1D FPT Camera Only</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);"><input type="text" class="form-input" value="Camera FPT 1 ngày" style="font-size:12px; padding:5px 9px; height:30px;"></td>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);"><input type="text" class="form-input" value="Camera FPT 1 ngày" style="font-size:12px; padding:5px 9px; height:30px;"></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
                                                 </td>
-                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
+                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
                                                     <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
                                                         <input type="checkbox" checked style="accent-color:var(--primary); width:15px; height:15px;">
                                                         <span style="font-size:11px; color:var(--primary);">Hiện</span>
@@ -2198,16 +2198,16 @@
                                             <!-- Row 2 — CAM-1D, Required -->
                                             <tr style="background:rgba(255,255,255,0.01);">
                                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">2</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(69,100,237,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
+                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
                                                 </td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D</span></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">1D FPT Camera</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;"></td>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;"></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
                                                     <span style="background:rgba(245,158,11,0.12); color:var(--warning); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Required</span>
                                                 </td>
-                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
+                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
                                                     <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
                                                         <input type="checkbox" checked style="accent-color:var(--primary); width:15px; height:15px;">
                                                         <span style="font-size:11px; color:var(--primary);">Hiện</span>
@@ -2217,16 +2217,16 @@
                                             <!-- Row 3 — CAM-14D-MOT, Extra -->
                                             <tr>
                                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">3</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(69,100,237,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
+                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;" title="Upload ảnh">📷</div>
                                                 </td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-14D-MOT</span></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">14D - Motion</td>
-                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;"></td>
+                                                <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;"></td>
                                                 <td style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
                                                     <span style="background:rgba(16,185,129,0.12); color:var(--success); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Extra</span>
                                                 </td>
-                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(69,100,237,0.03);">
+                                                <td style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
                                                     <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
                                                         <input type="checkbox" style="accent-color:var(--primary); width:15px; height:15px;">
                                                         <span style="font-size:11px; color:var(--text-muted);">Ẩn</span>
@@ -2236,16 +2236,16 @@
                                             <!-- Row 4 — STB-HD01, Main -->
                                             <tr style="background:rgba(255,255,255,0.01);">
                                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted);">4</td>
-                                                <td style="padding:8px 10px; background:rgba(69,100,237,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px solid rgba(69,100,237,0.35); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; overflow:hidden;" title="Upload ảnh">📺</div>
+                                                <td style="padding:8px 10px; background:rgba(249,115,22,0.03);">
+                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px solid rgba(249,115,22,0.35); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; overflow:hidden;" title="Upload ảnh">📺</div>
                                                 </td>
                                                 <td style="padding:8px 10px;"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">STB-HD01</span></td>
                                                 <td style="padding:8px 10px; color:var(--text-muted); font-size:12px;">Đầu thu HD FPT</td>
-                                                <td style="padding:8px 10px; background:rgba(69,100,237,0.03);"><input type="text" class="form-input" value="Đầu thu HD FPT" style="font-size:12px; padding:5px 9px; height:30px;"></td>
+                                                <td style="padding:8px 10px; background:rgba(249,115,22,0.03);"><input type="text" class="form-input" value="Đầu thu HD FPT" style="font-size:12px; padding:5px 9px; height:30px;"></td>
                                                 <td style="padding:8px 10px;">
-                                                    <span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
                                                 </td>
-                                                <td style="padding:8px 10px; text-align:center; background:rgba(69,100,237,0.03);">
+                                                <td style="padding:8px 10px; text-align:center; background:rgba(249,115,22,0.03);">
                                                     <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
                                                         <input type="checkbox" checked style="accent-color:var(--primary); width:15px; height:15px;">
                                                         <span style="font-size:11px; color:var(--primary);">Hiện</span>
@@ -2258,7 +2258,7 @@
                                 <!-- Legend phân loại -->
                                 <div style="display:flex; align-items:center; gap:16px; margin-top:10px; flex-wrap:wrap;">
                                     <span style="font-size:11px; color:var(--text-muted);">Phân loại:</span>
-                                    <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:1px 8px; border-radius:20px; font-weight:600;">Main</span> — Thiết bị chính đi kèm SKU</span>
+                                    <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:1px 8px; border-radius:20px; font-weight:600;">Main</span> — Thiết bị chính đi kèm SKU</span>
                                     <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span style="background:rgba(245,158,11,0.12); color:var(--warning); padding:1px 8px; border-radius:20px; font-weight:600;">Required</span> — Bắt buộc, không tách rời</span>
                                     <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span style="background:rgba(16,185,129,0.12); color:var(--success); padding:1px 8px; border-radius:20px; font-weight:600;">Extra</span> — Tuỳ chọn thêm</span>
                                 </div>
@@ -2411,7 +2411,7 @@
                             </div>
                             <!-- Phần 5: Thông tin hay & Bài viết liên quan (Chuyển sang Quản lý Tập trung) -->
                             <div class="form-section" style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <div style="background:rgba(69, 100, 237, 0.05); border:1px solid rgba(69, 100, 237, 0.15); border-radius:8px; padding:16px; display:flex; flex-direction:column; gap:10px;">
+                                <div style="background:rgba(249, 115, 22, 0.05); border:1px solid rgba(249, 115, 22, 0.15); border-radius:8px; padding:16px; display:flex; flex-direction:column; gap:10px;">
                                     <div style="display:flex; align-items:center; gap:8px; color:var(--primary); font-weight:600; font-size:13px;">
                                         <span>⚡ Quản lý Mapping Tập trung</span>
                                     </div>
@@ -3268,7 +3268,7 @@
                                                     nâng cao</a></div>
                                         </td>
                                         <td><input type="text" class="form-input" value="1.111.111"
-                                                style="width:100px; background: rgba(59,130,246,0.1); color: #fff; font-weight: bold;"
+                                                style="width:100px; background: rgba(249,115,22,0.1); color: #fff; font-weight: bold;"
                                                 readonly></td>
                                         <td style="text-align:center;"><input type="checkbox"
                                                 style="width:16px; height:16px; accent-color: var(--primary);"></td>
@@ -4202,7 +4202,7 @@
                                     </div>
                                 </div>
                                 <div id="ldp-utm-preview-box"
-                                    style="background:rgba(69,100,237,0.07); border:1px solid rgba(69,100,237,0.2); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                                    style="background:rgba(249,115,22,0.07); border:1px solid rgba(249,115,22,0.2); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all; display:flex; align-items:center; justify-content:space-between; gap:12px;">
                                     🔗 <strong style="color:var(--primary);">UTM Preview:</strong> <span
                                         id="ldp-utm-preview-text">fpt.vn/km-internet-t5?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
                                      <button class="btn btn-secondary btn-sm" style="flex-shrink:0; padding:6px 12px; font-size:12px;" onclick="ldpCopyUtm()">📋 Sao chép</button>
@@ -4398,7 +4398,7 @@
                                                     Submit</div>
                                             </div>
                                             <span
-                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                                style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
                                             <label
                                                 style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
                                                     type="checkbox" checked style="accent-color:var(--success);"> Hiển
@@ -4522,7 +4522,7 @@
                                                     title="Di chuyển xuống">▼</button>
                                             </div>
                                             <div
-                                                style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 ⭐</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Đánh giá khách hàng
@@ -4531,7 +4531,7 @@
                                                     Tiêu đề, danh sách review: avatar, tên, rating, nội dung</div>
                                             </div>
                                             <span
-                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
+                                                style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
                                             <label
                                                 style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
                                                     type="checkbox" checked style="accent-color:var(--success);"> Hiển
@@ -4604,7 +4604,7 @@
                                                     CTA, Ảnh thiết bị</div>
                                             </div>
                                             <span
-                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                                style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
                                             <label
                                                 style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
                                                     type="checkbox" checked style="accent-color:var(--success);"> Hiển
@@ -4728,7 +4728,7 @@
                                                     title="Di chuyển xuống">▼</button>
                                             </div>
                                             <div
-                                                style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 🚀</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Footer CTA</div>
@@ -4736,7 +4736,7 @@
                                                     Background, text kêu gọi hành động, nút đăng ký</div>
                                             </div>
                                             <span
-                                                style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">CTA</span>
+                                                style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">CTA</span>
                                             <label
                                                 style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
                                                     type="checkbox" checked style="accent-color:var(--success);"> Hiển
@@ -4760,7 +4760,7 @@
                                                 <div style="font-weight:600; font-size:14px;">① Hero Banner + Nút CTA</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Background, Headline, Subheadline, Nút CTA (Mua Ngay, Đăng ký), Ảnh FPT Camera</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                            <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
                                             <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
                                             <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('cam-hero')">✏ Sửa</button>
                                         </div>
@@ -4905,12 +4905,12 @@
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⚡</div>
+                                            <div style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⚡</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">① Hero Wi-Fi 7 (Countdown)</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Headline, giới thiệu Wi-Fi 7, bộ đếm ngược thời gian kết thúc ưu đãi, form điền thông tin nhanh</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                            <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
                                             <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
                                             <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('camp-hero')">✏ Sửa</button>
                                         </div>
@@ -4985,12 +4985,12 @@
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎯</div>
+                                            <div style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">🎯</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑥ Đối tượng mục tiêu</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Gợi ý sử dụng: Gamer/Streamer, Hộ gia đình đông người, Biệt thự, Cafe/Quán ăn</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Targets</span>
+                                            <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Targets</span>
                                             <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
                                             <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('camp-targets')">✏ Sửa</button>
                                         </div>
@@ -5055,12 +5055,12 @@
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📝</div>
+                                            <div style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">📝</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">① Hero + Form thu Lead</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Title giật gân (Ưu đãi độc quyền), Subtitle, Form điền thông tin nhanh nhận quà</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
+                                            <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
                                             <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
                                             <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('lead-hero')">✏ Sửa</button>
                                         </div>
@@ -5119,12 +5119,12 @@
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'up')" title="Di chuyển lên">▲</button>
                                                 <button class="btn btn-secondary btn-sm" style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);" onclick="ldpMoveSection(this, 'down')" title="Di chuyển xuống">▼</button>
                                             </div>
-                                            <div style="width:32px; height:32px; background:rgba(59,130,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⭐</div>
+                                            <div style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">⭐</div>
                                             <div style="flex:1; min-width:0;">
                                                 <div style="font-weight:600; font-size:14px;">⑤ Đánh giá khách hàng (Rating)</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Grid nhận xét, hình ảnh lắp đặt thực tế và xếp hạng sao của khách hàng cũ</div>
                                             </div>
-                                            <span style="background:rgba(59,130,246,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
+                                            <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Reviews</span>
                                             <label style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input type="checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>
                                             <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); flex-shrink:0;" onclick="ldpEditSection('lead-reviews')">✏ Sửa</button>
                                         </div>
@@ -5228,7 +5228,7 @@
                                         <strong>best but 2</strong>
                                         <div style="color:#f43f5e; font-size:11px; margin-top:2px; font-weight:500; font-family:monospace;">best-but-2</div>
                                     </td>
-                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Camera Only</span></td>
+                                    <td><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Camera Only</span></td>
                                     <td style="font-size:12px; color:var(--text-muted);">row_vat</td>
                                     <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
                                     <td style="text-align:center; color:var(--text-muted);">—</td>
@@ -5242,7 +5242,7 @@
                                         <strong>best-dvi</strong>
                                         <div style="color:#f43f5e; font-size:11px; margin-top:2px; font-weight:500; font-family:monospace;">best-sellers-dvi</div>
                                     </td>
-                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Ultrafast</span></td>
+                                    <td><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Ultrafast</span></td>
                                     <td style="font-size:12px; color:var(--text-muted);">row_vat</td>
                                     <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
                                     <td style="text-align:center; color:var(--text-muted);">—</td>
@@ -5270,7 +5270,7 @@
                                         <strong>Faqs</strong>
                                         <div style="color:#f43f5e; font-size:11px; margin-top:2px; font-weight:500; font-family:monospace;">faqs</div>
                                     </td>
-                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
+                                    <td><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
                                     <td style="font-size:12px; color:var(--text-muted);">question</td>
                                     <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
                                     <td style="text-align:center; color:var(--text-muted);">—</td>
@@ -5284,7 +5284,7 @@
                                         <strong>Faqs</strong>
                                         <div style="color:#f43f5e; font-size:11px; margin-top:2px; font-weight:500; font-family:monospace;">faqs</div>
                                     </td>
-                                    <td><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
+                                    <td><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Faqs</span></td>
                                     <td style="font-size:12px; color:var(--text-muted);">question</td>
                                     <td><span style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 10px; border-radius:10px; font-size:12px;">Hoạt động</span></td>
                                     <td style="text-align:center; color:var(--text-muted);">—</td>
@@ -5300,7 +5300,7 @@
                                     </td>
                                     <td>
                                         <div style="display:flex; align-items:center; gap:4px; flex-wrap:nowrap;">
-                                            <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Internet siêu tiết kiệm</span>
+                                            <span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Internet siêu tiết kiệm</span>
                                             <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap; cursor:default;" title="Combo thể thao">+1</span>
                                         </div>
                                     </td>
@@ -5636,7 +5636,7 @@
                                         <tr>
                                             <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
                                             <td style="padding:10px;"><strong>Internet Giga</strong></td>
-                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
+                                            <td style="padding:10px;"><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
                                             <td style="padding:10px; color:var(--success); font-weight:600;">195.000đ/tháng</td>
                                             <td style="padding:10px;">300 Mbps</td>
                                             <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6</td>
@@ -5648,7 +5648,7 @@
                                         <tr>
                                             <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
                                             <td style="padding:10px;"><strong>Internet Sky</strong></td>
-                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp gia đình nhỏ</span></td>
+                                            <td style="padding:10px;"><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp gia đình nhỏ</span></td>
                                             <td style="padding:10px; color:var(--success); font-weight:600;">195.000đ/tháng</td>
                                             <td style="padding:10px;">1 Gbps</td>
                                             <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6</td>
@@ -5660,7 +5660,7 @@
                                         <tr>
                                             <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
                                             <td style="padding:10px;"><strong>Internet Giga F1</strong></td>
-                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, hộ gia đình</span></td>
+                                            <td style="padding:10px;"><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, hộ gia đình</span></td>
                                             <td style="padding:10px; color:var(--success); font-weight:600;">205.000đ/tháng</td>
                                             <td style="padding:10px;">300 Mbps</td>
                                             <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6 & 01 AP</td>
@@ -5672,7 +5672,7 @@
                                         <tr>
                                             <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
                                             <td style="padding:10px;"><strong>Internet Sky F1</strong></td>
-                                            <td style="padding:10px;"><span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
+                                            <td style="padding:10px;"><span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 6px; border-radius:4px; font-size:11px;">Phù hợp cá nhân, gia đình nhỏ</span></td>
                                             <td style="padding:10px; color:var(--success); font-weight:600;">210.000đ/tháng</td>
                                             <td style="padding:10px;">1 Gbps</td>
                                             <td style="padding:10px; font-size:12px; color:var(--text-muted);">Modem Wi-Fi 6 & 01 AP</td>
@@ -6069,7 +6069,7 @@
                                         <div style="font-weight:700; color:#fff;" class="news-art-title">Lắp đặt mạng FPT khuyến mãi hè 2026 cực sốc</div>
                                         <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">/tin-tuc/lap-mang-fpt-khuyen-mai-he-2026</div>
                                     </td>
-                                    <td><span class="badge news-art-cat" style="background:rgba(59,130,246,0.15); color:#60a5fa;">Tin khuyến mãi</span></td>
+                                    <td><span class="badge news-art-cat" style="background:rgba(249,115,22,0.15); color:#FB923C;">Tin khuyến mãi</span></td>
                                     <td class="news-art-author">Admin</td>
                                     <td class="news-art-date">22/05/2026</td>
                                     <td><span class="badge active news-art-status-badge">Active</span></td>
@@ -6414,7 +6414,7 @@
                                     <!-- Upload Thumbnail Box -->
                                     <div class="form-group">
                                         <label>Ảnh đại diện (Thumbnail)</label>
-                                        <div style="border: 1px dashed var(--primary); border-radius: 8px; padding: 15px; text-align: center; background: rgba(69, 100, 237, 0.03); cursor: pointer;" onclick="document.getElementById('art-file-input').click();">
+                                        <div style="border: 1px dashed var(--primary); border-radius: 8px; padding: 15px; text-align: center; background: rgba(249, 115, 22, 0.03); cursor: pointer;" onclick="document.getElementById('art-file-input').click();">
                                             <div style="font-size:28px; margin-bottom:6px;">📤</div>
                                             <div style="font-size:12px; font-weight:600; color:var(--primary);">Bấm để chọn file ảnh</div>
                                             <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">PNG, JPG (Khuyến nghị tỉ lệ 3:2)</div>
@@ -7314,15 +7314,15 @@
                         <!-- Logic Badge Legend -->
                         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; background:rgba(0,0,0,0.2); border:1px solid var(--border-glass); border-radius:8px; padding:10px 14px; margin-bottom:20px; font-size:11px;">
                             <span style="font-weight:600; color:var(--text-muted);">Trạng thái kênh:</span>
-                            <span style="display:inline-flex; align-items:center; gap:4px; background:rgba(69,100,237,0.18); color:var(--primary); padding:2px 9px; border-radius:10px; white-space:nowrap; font-weight:600;">✏️ Tùy chỉnh riêng</span>
+                            <span style="display:inline-flex; align-items:center; gap:4px; background:rgba(249,115,22,0.18); color:var(--primary); padding:2px 9px; border-radius:10px; white-space:nowrap; font-weight:600;">✏️ Tùy chỉnh riêng</span>
                             <span style="color:var(--text-muted); font-size:12px;">— Kênh đã lưu nội dung riêng, ghi đè Global</span>
                             <span style="margin-left:8px; display:inline-flex; align-items:center; gap:4px; background:rgba(255,255,255,0.07); color:var(--text-muted); padding:2px 9px; border-radius:10px; white-space:nowrap; font-weight:600;">🌐 Dùng Global</span>
                             <span style="color:var(--text-muted); font-size:12px;">— Kênh để trống, tự kế thừa cấu hình Global</span>
                         </div>
 
                         <!-- ══ GLOBAL ACCORDION ══ -->
-                        <div id="ch-global-wrap" style="border:1px solid rgba(69,100,237,0.4); border-radius:10px; margin-bottom:12px; overflow:hidden;">
-                            <div onclick="toggleChannel('global')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:rgba(69,100,237,0.1); cursor:pointer; user-select:none;">
+                        <div id="ch-global-wrap" style="border:1px solid rgba(249,115,22,0.4); border-radius:10px; margin-bottom:12px; overflow:hidden;">
+                            <div onclick="toggleChannel('global')" style="display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:rgba(249,115,22,0.1); cursor:pointer; user-select:none;">
                                 <div style="display:flex; align-items:center; gap:12px;">
                                     <span style="font-size:20px;">🌐</span>
                                     <div>
@@ -7337,7 +7337,7 @@
                                     <span id="ch-global-arrow" style="color:var(--text-muted); font-size:14px; transition:transform 0.2s;">▲</span>
                                 </div>
                             </div>
-                            <div id="ch-global-body" style="padding:20px 24px; border-top:1px solid rgba(69,100,237,0.2);">
+                            <div id="ch-global-body" style="padding:20px 24px; border-top:1px solid rgba(249,115,22,0.2);">
                                 <!-- BẮT ĐẦU CHỌN SKUs -->
                                 <div class="checkout-config-section" style="margin-bottom: 20px;">
                                     <div class="checkout-config-title">🏷️ Chọn SKUs Gói cước Áp dụng <span style="color:var(--danger)">*</span></div>
@@ -7421,22 +7421,22 @@
                         </div>
 
                         <!-- ══ CHANNEL: tongdaiwifi (Tùy chỉnh riêng — expanded) ══ -->
-                        <div id="ch-tdw-wrap" style="border:1px solid rgba(69,100,237,0.3); border-radius:10px; margin-bottom:12px; overflow:hidden;">
-                            <div onclick="toggleChannel('tdw')" style="display:flex; align-items:center; justify-content:space-between; padding:13px 18px; background:rgba(69,100,237,0.06); cursor:pointer; user-select:none;">
+                        <div id="ch-tdw-wrap" style="border:1px solid rgba(249,115,22,0.3); border-radius:10px; margin-bottom:12px; overflow:hidden;">
+                            <div onclick="toggleChannel('tdw')" style="display:flex; align-items:center; justify-content:space-between; padding:13px 18px; background:rgba(249,115,22,0.06); cursor:pointer; user-select:none;">
                                 <div style="display:flex; align-items:center; gap:12px;">
-                                    <span style="width:34px; height:34px; background:rgba(69,100,237,0.18); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;">📡</span>
+                                    <span style="width:34px; height:34px; background:rgba(249,115,22,0.18); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;">📡</span>
                                     <div>
                                         <div style="font-weight:600; font-size:14px; color:#e2e8f0;">tongdaiwifi</div>
                                         <div style="font-size:12px; color:var(--text-muted);">Kênh bán: tongdaiwifi.fpt.vn</div>
                                     </div>
                                 </div>
                                 <div style="display:flex; align-items:center; gap:10px;">
-                                    <span id="ch-tdw-badge" style="background:rgba(69,100,237,0.18); color:var(--primary); padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap;">✏️ Tùy chỉnh riêng</span>
+                                    <span id="ch-tdw-badge" style="background:rgba(249,115,22,0.18); color:var(--primary); padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap;">✏️ Tùy chỉnh riêng</span>
                                     <span id="ch-tdw-arrow" style="color:var(--text-muted); font-size:14px; transition:transform 0.2s;">▲</span>
                                 </div>
                             </div>
-                            <div id="ch-tdw-body" style="padding:20px 24px; border-top:1px solid rgba(69,100,237,0.15);">
-                                <div style="background:rgba(69,100,237,0.06); border:1px solid rgba(69,100,237,0.15); border-radius:7px; padding:9px 13px; margin-bottom:16px; font-size:12px; color:var(--text-muted);">
+                            <div id="ch-tdw-body" style="padding:20px 24px; border-top:1px solid rgba(249,115,22,0.15);">
+                                <div style="background:rgba(249,115,22,0.06); border:1px solid rgba(249,115,22,0.15); border-radius:7px; padding:9px 13px; margin-bottom:16px; font-size:12px; color:var(--text-muted);">
                                     💡 Nội dung bên dưới sẽ <strong style="color:#e2e8f0;">ghi đè Global</strong> cho kênh <strong style="color:var(--primary);">tongdaiwifi</strong>. Để trống trường nào → trường đó kế thừa Global.
                                 </div>
                                 
@@ -7787,10 +7787,10 @@
                 var wrap  = document.getElementById('ch-' + id + '-wrap');
                 if (!badge) return;
                 badge.textContent = '✏️ Tùy chỉnh riêng';
-                badge.style.background = 'rgba(69,100,237,0.18)';
+                badge.style.background = 'rgba(249,115,22,0.18)';
                 badge.style.color = 'var(--primary)';
-                wrap.style.border  = '1px solid rgba(69,100,237,0.3)';
-                wrap.querySelector('[onclick]').style.background = 'rgba(69,100,237,0.06)';
+                wrap.style.border  = '1px solid rgba(249,115,22,0.3)';
+                wrap.querySelector('[onclick]').style.background = 'rgba(249,115,22,0.06)';
                 
                 // Khi lưu cấu hình kênh con, nếu kênh con đang ở trạng thái kế thừa thì chuyển sang tùy chỉnh riêng
                 if (id !== 'global' && checkoutInheritStates[id]) {
@@ -7825,12 +7825,12 @@
                 var wrap = document.getElementById('ch-' + channel + '-wrap');
                 if (badge) {
                     badge.textContent = '✏️ Tùy chỉnh riêng';
-                    badge.style.background = 'rgba(69,100,237,0.18)';
+                    badge.style.background = 'rgba(249,115,22,0.18)';
                     badge.style.color = 'var(--primary)';
                 }
                 if (wrap) {
-                    wrap.style.border = '1px solid rgba(69,100,237,0.3)';
-                    wrap.querySelector('[onclick]').style.background = 'rgba(69,100,237,0.06)';
+                    wrap.style.border = '1px solid rgba(249,115,22,0.3)';
+                    wrap.querySelector('[onclick]').style.background = 'rgba(249,115,22,0.06)';
                 }
                 
                 // Đồng bộ phí lắp đặt từ Global nếu kênh con chưa nhập
@@ -8319,8 +8319,8 @@
                                     <td><strong>Flash Sale T5</strong></td>
                                     <td style="font-size:13px;">Trang chủ (Homepage)</td>
                                     <td>
-                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
-                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">hifpt</span>
+                                        <span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
+                                        <span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">hifpt</span>
                                     </td>
                                     <td style="font-size:12px; white-space:nowrap;">15/05/2026 – 20/05/2026</td>
                                     <td><span class="badge active" style="white-space:nowrap;">🟢 Đang chạy</span></td>
@@ -8334,7 +8334,7 @@
                                     <td>Khuyến mãi Camera</td>
                                     <td style="font-size:13px;">Checkout (Gói Cam)</td>
                                     <td>
-                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
+                                        <span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">tongdaiwifi</span>
                                     </td>
                                     <td style="font-size:12px; white-space:nowrap;">01/05/2026 – 31/05/2026</td>
                                     <td><span class="badge active" style="white-space:nowrap;">🟢 Đang chạy</span></td>
@@ -8348,7 +8348,7 @@
                                     <td>Ưu đãi lắp mới Internet</td>
                                     <td style="font-size:13px;">Toàn trang (Global)</td>
                                     <td>
-                                        <span style="background:rgba(69,100,237,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">fpt.vn</span>
+                                        <span style="background:rgba(249,115,22,0.15); color:var(--primary); padding:2px 7px; border-radius:10px; font-size:11px; white-space:nowrap;">fpt.vn</span>
                                     </td>
                                     <td style="font-size:12px; white-space:nowrap;">10/04/2026 – 10/05/2026</td>
                                     <td><span class="badge inactive" style="white-space:nowrap;">⚪ Hết hạn</span></td>
@@ -8455,7 +8455,7 @@
                                     <label style="display:block; margin-bottom:10px; font-size:13px;">Desktop <span style="color:var(--danger)">*</span>
                                         <span style="color:var(--text-muted); font-size:11px;">(Tỷ lệ 16:9, tối đa 1MB)</span>
                                     </label>
-                                    <div style="width:200px; height:120px; border:2px dashed rgba(69,100,237,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
+                                    <div style="width:200px; height:120px; border:2px dashed rgba(249,115,22,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
                                         <span style="font-size:28px;">🖼</span> Tải ảnh lên
                                     </div>
                                 </div>
@@ -8463,7 +8463,7 @@
                                     <label style="display:block; margin-bottom:10px; font-size:13px;">Mobile / Bottom Sheet <span style="color:var(--danger)">*</span>
                                         <span style="color:var(--text-muted); font-size:11px;">(Tỷ lệ 1:1 hoặc dọc, tối đa 1MB)</span>
                                     </label>
-                                    <div style="width:100px; height:120px; border:2px dashed rgba(69,100,237,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
+                                    <div style="width:100px; height:120px; border:2px dashed rgba(249,115,22,0.4); color:var(--primary); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; gap:6px; font-size:13px;">
                                         <span style="font-size:28px;">📱</span> Tải ảnh
                                     </div>
                                 </div>
@@ -8718,20 +8718,20 @@
                                         <td style="padding:14px 20px;text-align:center;font-weight:600;color:#c084fc;">2</td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">01/01/2026 08:00</td>
                                         <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
-                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;" title="Xóa" disabled>🗑</button>
                                         </td>
                                     </tr>
                                     <tr style="border-bottom:1px solid var(--border-glass);" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
                                         <td style="padding:14px 20px;color:var(--text-muted);">2</td>
                                         <td style="padding:14px 20px;font-weight:700;">
-                                            <span style="background:rgba(59,130,246,0.12);color:#60a5fa;padding:3px 12px;border-radius:20px;font-size:12.5px;">Admin CMS</span>
+                                            <span style="background:rgba(249,115,22,0.12);color:#FB923C;padding:3px 12px;border-radius:20px;font-size:12.5px;">Admin CMS</span>
                                         </td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">Quản lý toàn bộ nội dung CMS, phân quyền nội bộ</td>
-                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#60a5fa;">5</td>
+                                        <td style="padding:14px 20px;text-align:center;font-weight:600;color:#FB923C;">5</td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">01/01/2026 08:00</td>
                                         <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
-                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;">✏️</button>
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
                                         </td>
                                     </tr>
@@ -8744,7 +8744,7 @@
                                         <td style="padding:14px 20px;text-align:center;font-weight:600;color:#34d399;">12</td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">15/01/2026 09:30</td>
                                         <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
-                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;">✏️</button>
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
                                         </td>
                                     </tr>
@@ -8757,7 +8757,7 @@
                                         <td style="padding:14px 20px;text-align:center;font-weight:600;color:#fbbf24;">4</td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">20/01/2026 10:00</td>
                                         <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
-                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;">✏️</button>
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
                                         </td>
                                     </tr>
@@ -8770,7 +8770,7 @@
                                         <td style="padding:14px 20px;text-align:center;font-weight:600;color:#94a3b8;">8</td>
                                         <td style="padding:14px 20px;color:var(--text-muted);font-size:13px;">20/01/2026 10:00</td>
                                         <td style="padding:14px 20px;text-align:center;display:flex;gap:6px;justify-content:center;">
-                                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;">✏️</button>
+                                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;">✏️</button>
                                             <button class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#f87171;border:none;padding:5px 10px;">🗑</button>
                                         </td>
                                     </tr>
@@ -8802,7 +8802,7 @@
                                 <label>Màu nhận diện</label>
                                 <div style="display:flex;gap:10px;margin-top:6px;">
                                     <div style="width:32px;height:32px;border-radius:50%;background:#c084fc;cursor:pointer;border:3px solid rgba(255,255,255,0.3);"></div>
-                                    <div style="width:32px;height:32px;border-radius:50%;background:#60a5fa;cursor:pointer;"></div>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:#FB923C;cursor:pointer;"></div>
                                     <div style="width:32px;height:32px;border-radius:50%;background:#34d399;cursor:pointer;"></div>
                                     <div style="width:32px;height:32px;border-radius:50%;background:#fbbf24;cursor:pointer;"></div>
                                     <div style="width:32px;height:32px;border-radius:50%;background:#f87171;cursor:pointer;"></div>
@@ -9000,7 +9000,7 @@
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Toàn quyền · không chỉnh được</div>
                                     </th>
                                     <!-- Admin CMS -->
-                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#60a5fa;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#FB923C;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
                                         Admin CMS
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Quản lý toàn bộ nội dung</div>
                                     </th>
@@ -9156,7 +9156,7 @@
         }
 
         const sysUsersData = [
-            { name:'Nguyễn Thị Thuy',   email:'thuy.nguyen@fpt.vn',      role:'Admin CMS',      roleColor:'#60a5fa', roleBg:'rgba(59,130,246,0.12)',   status:'active', lastLogin:'25/05/2026 08:41' },
+            { name:'Nguyễn Thị Thuy',   email:'thuy.nguyen@fpt.vn',      role:'Admin CMS',      roleColor:'#FB923C', roleBg:'rgba(249,115,22,0.12)',   status:'active', lastLogin:'25/05/2026 08:41' },
             { name:'Trần Minh Khoa',     email:'khoa.tran@fpt.vn',        role:'Biên tập viên',  roleColor:'#34d399', roleBg:'rgba(16,185,129,0.12)',   status:'active', lastLogin:'25/05/2026 07:55' },
             { name:'Lê Thị Hương',       email:'huong.le@fpt.vn',         role:'Biên tập viên',  roleColor:'#34d399', roleBg:'rgba(16,185,129,0.12)',   status:'active', lastLogin:'24/05/2026 16:20' },
             { name:'Phạm Văn Đức',       email:'duc.pham@fpt.vn',         role:'Người duyệt',    roleColor:'#fbbf24', roleBg:'rgba(245,158,11,0.12)',   status:'active', lastLogin:'23/05/2026 14:10' },
@@ -9186,7 +9186,7 @@
                     <td style="padding:12px 20px;color:var(--text-muted);font-size:13px;">${u.lastLogin}</td>
                     <td style="padding:12px 20px;text-align:center;">
                         <div style="display:flex;gap:6px;justify-content:center;">
-                            <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
+                            <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;" title="Chỉnh sửa">✏️</button>
                             <button class="btn btn-sm" style="background:rgba(245,158,11,0.1);color:#fbbf24;border:none;padding:5px 10px;" title="${u.status==='active'?'Khóa':'Mở khóa'}">${u.status==='active'?'🔒':'🔓'}</button>
                         </div>
                     </td>
@@ -9231,7 +9231,7 @@
         };
 
         // roleColors: [superAdmin, adminCMS, bienTap, viewer]
-        const sysRoleColors = ['#c084fc','#60a5fa','#34d399','#94a3b8'];
+        const sysRoleColors = ['#c084fc','#FB923C','#34d399','#94a3b8'];
 
         function sysPermRender() {
             const tbody = document.getElementById('sys-perm-tbody');
@@ -9268,7 +9268,7 @@
         function sysUserRoleHint(sel) {
             const hint = document.getElementById('role-hint');
             const map = {
-                'admin':  { color:'#60a5fa', bg:'rgba(59,130,246,0.08)', text:'Quản lý toàn bộ nội dung CMS, tạo & xóa được. Không chỉnh được phân quyền.' },
+                'admin':  { color:'#FB923C', bg:'rgba(249,115,22,0.08)', text:'Quản lý toàn bộ nội dung CMS, tạo & xóa được. Không chỉnh được phân quyền.' },
                 'editor': { color:'#34d399', bg:'rgba(16,185,129,0.08)', text:'Tạo & sửa nội dung. Không xóa, không truy cập cài đặt hệ thống.' },
                 'viewer': { color:'#94a3b8', bg:'rgba(100,116,139,0.08)', text:'Chỉ xem nội dung. Không thực hiện bất kỳ thao tác ghi nào.' },
             };
@@ -9309,7 +9309,7 @@
         ];
 
         const cmsMenuTypeBadge = {
-            'category': '<span style="background:rgba(59,130,246,0.12);color:#60a5fa;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:600;">category</span>',
+            'category': '<span style="background:rgba(249,115,22,0.12);color:#FB923C;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:600;">category</span>',
             'page':     '<span style="background:rgba(16,185,129,0.12);color:#34d399;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:600;">page</span>',
             'link':     '<span style="background:rgba(245,158,11,0.12);color:#fbbf24;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:600;">link</span>',
         };
@@ -9332,7 +9332,7 @@
                     <td style="padding:11px 16px; text-align:center; color:var(--text-muted);">${row.order}</td>
                     <td style="padding:11px 16px; color:var(--text-muted); font-size:12.5px;">${row.date}</td>
                     <td style="padding:11px 16px; text-align:center;">
-                        <button class="btn btn-sm" style="background:rgba(59,130,246,0.12);color:#60a5fa;border:none;padding:5px 10px;" onclick="cmsMenuShowCreate()" title="Chỉnh sửa">✏️</button>
+                        <button class="btn btn-sm" style="background:rgba(249,115,22,0.12);color:#FB923C;border:none;padding:5px 10px;" onclick="cmsMenuShowCreate()" title="Chỉnh sửa">✏️</button>
                     </td>
                 </tr>`;
             }).join('');
@@ -9705,7 +9705,7 @@
             let tbody = document.querySelector('#news-table tbody');
             let row = tbody.querySelector(`tr[data-id="${id}"]`);
 
-            let catColor = 'rgba(59,130,246,0.15); color:#60a5fa;'; // mặc định khuyến mãi
+            let catColor = 'rgba(249,115,22,0.15); color:#FB923C;'; // mặc định khuyến mãi
             if (category === 'Tin công nghệ') catColor = 'rgba(168,85,247,0.15); color:#c084fc;';
             else if (category === 'Sự kiện') catColor = 'rgba(245,158,11,0.15); color:#fbbf24;';
             else if (category === 'Thông báo') catColor = 'rgba(16,185,129,0.15); color:#34d399;';
@@ -9843,7 +9843,7 @@
                 let statusColor = faq.status === 'Active' ? 'rgba(16,185,129,0.15); color:var(--success);' : 'rgba(239,68,68,0.15); color:var(--danger);';
                 let statusBadge = `<span class="badge" style="background:${statusColor}">${faq.status}</span>`;
 
-                let catColor = 'rgba(59,130,246,0.15); color:#60a5fa;'; // mặc định
+                let catColor = 'rgba(249,115,22,0.15); color:#FB923C;'; // mặc định
                 if (faq.category === 'Khắc phục sự cố') catColor = 'rgba(239,68,68,0.15); color:var(--danger);';
                 else if (faq.category === 'Chính sách & Thủ tục') catColor = 'rgba(245,158,11,0.15); color:var(--warning);';
                 else if (faq.category === 'Dịch vụ GTGT') catColor = 'rgba(168,85,247,0.15); color:var(--purple);';
@@ -10315,7 +10315,7 @@
         // ===== Light / Dark Mode Toggle =====
         // Design system: Untitled UI PRO VARIABLES v5.0
         // Motion spec: 200ms ease-out (dropdown tier)
-        // Tokens: radius-full, shadow-xs, Primary/500 #4564ED
+        // Tokens: radius-full, shadow-xs, Primary/500 #F97316
 
         function applyTheme(isLight) {
             if (isLight) {
@@ -10641,7 +10641,7 @@
         // Custom Premium Toast Notification
         function showLdpToast(msg) {
             var toast = document.createElement('div');
-            toast.style.cssText = 'position:fixed; bottom:24px; right:24px; background:var(--primary-gradient, linear-gradient(135deg, #4564ED 0%, #6F86FF 100%)); color:#fff; padding:12px 24px; border-radius:12px; box-shadow:0 10px 25px -5px rgba(69, 100, 237, 0.4); z-index:9999; font-size:14px; font-weight:500; opacity:0; transform:translateY(20px); transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.1);';
+            toast.style.cssText = 'position:fixed; bottom:24px; right:24px; background:var(--primary-gradient, linear-gradient(135deg, #F97316 0%, #FB923C 100%)); color:#fff; padding:12px 24px; border-radius:12px; box-shadow:0 10px 25px -5px rgba(249, 115, 22, 0.4); z-index:9999; font-size:14px; font-weight:500; opacity:0; transform:translateY(20px); transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display:flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.1);';
             toast.innerHTML = '<span style="font-size:16px;">✨</span> <span>' + msg + '</span>';
             document.body.appendChild(toast);
             setTimeout(function() {
@@ -10960,9 +10960,9 @@
             tags.forEach(tag => {
                 const badge = document.createElement('span');
                 badge.className = 'badge';
-                badge.style.background = 'rgba(69, 100, 237, 0.15)';
-                badge.style.color = '#6F86FF';
-                badge.style.border = '1px solid rgba(69, 100, 237, 0.3)';
+                badge.style.background = 'rgba(249, 115, 22, 0.15)';
+                badge.style.color = '#FB923C';
+                badge.style.border = '1px solid rgba(249, 115, 22, 0.3)';
                 badge.style.padding = '3px 8px';
                 badge.style.borderRadius = '4px';
                 badge.style.fontSize = '11px';
@@ -11037,7 +11037,7 @@
                     <td>${fallbackBadge}</td>
                     <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
                     <td style="text-align:right;" onclick="event.stopPropagation();">
-                        <button class="btn btn-sm" style="background:rgba(69,100,237,0.15); color:#6F86FF; padding:4px 8px; border:none; margin-right:4px;" onclick="selectTagForConfig('${tag}')">✏️ Cấu hình</button>
+                        <button class="btn btn-sm" style="background:rgba(249,115,22,0.15); color:#FB923C; padding:4px 8px; border:none; margin-right:4px;" onclick="selectTagForConfig('${tag}')">✏️ Cấu hình</button>
                         <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 8px; border:none;" onclick="deleteTagMapping('${tag}')">🗑</button>
                     </td>
                 `;
@@ -11209,9 +11209,9 @@
                 item.style.alignItems = 'center';
                 item.style.gap = '8px';
                 item.style.padding = '8px 10px';
-                item.style.background = isChecked ? 'rgba(69, 100, 237, 0.08)' : 'rgba(255,255,255,0.02)';
+                item.style.background = isChecked ? 'rgba(249, 115, 22, 0.08)' : 'rgba(255,255,255,0.02)';
                 item.style.border = '1px solid';
-                item.style.borderColor = isChecked ? 'rgba(69, 100, 237, 0.2)' : 'rgba(255,255,255,0.04)';
+                item.style.borderColor = isChecked ? 'rgba(249, 115, 22, 0.2)' : 'rgba(255,255,255,0.04)';
                 item.style.borderRadius = '6px';
                 item.style.transition = '0.2s';
                 
@@ -11244,8 +11244,8 @@
             if (chk) {
                 const parent = chk.parentElement;
                 if (isChecked) {
-                    parent.style.background = 'rgba(69, 100, 237, 0.08)';
-                    parent.style.borderColor = 'rgba(69, 100, 237, 0.2)';
+                    parent.style.background = 'rgba(249, 115, 22, 0.08)';
+                    parent.style.borderColor = 'rgba(249, 115, 22, 0.2)';
                 } else {
                     parent.style.background = 'rgba(255,255,255,0.02)';
                     parent.style.borderColor = 'rgba(255,255,255,0.04)';
@@ -11307,8 +11307,8 @@
                 matched.forEach(art => {
                     const icon = art.type === 'faq' ? '❓' : '📄';
                     const typeText = art.type === 'faq' ? 'FAQ' : art.type === 'khuyen-mai' ? 'Ưu đãi' : 'Tin tức';
-                    const badgeColor = art.type === 'faq' ? 'rgba(168,85,247,0.15)' : art.type === 'khuyen-mai' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)';
-                    const textColor = art.type === 'faq' ? '#d946ef' : art.type === 'khuyen-mai' ? '#ef4444' : '#60a5fa';
+                    const badgeColor = art.type === 'faq' ? 'rgba(168,85,247,0.15)' : art.type === 'khuyen-mai' ? 'rgba(239,68,68,0.15)' : 'rgba(249,115,22,0.15)';
+                    const textColor = art.type === 'faq' ? '#d946ef' : art.type === 'khuyen-mai' ? '#ef4444' : '#FB923C';
 
                     const item = document.createElement('div');
                     item.style.padding = '8px';
@@ -11519,7 +11519,7 @@
                     style="background:rgba(239,68,68,0.15); color:#ef4444; font-size:12px; white-space:nowrap;">Hủy kích
                     hoạt <span style="opacity:0.5;">(Shift+F12)</span></button>
                 <button id="prev-edit-btn" class="btn btn-sm"
-                    style="background:rgba(59,130,246,0.2); color:#60a5fa; font-size:12px; white-space:nowrap;">Chỉnh
+                    style="background:rgba(249,115,22,0.2); color:#FB923C; font-size:12px; white-space:nowrap;">Chỉnh
                     sửa <span style="opacity:0.5;">(Ctrl+E)</span></button>
                 <button onclick="skuClosePreview()"
                     style="background:transparent; border:none; color:#888; font-size:20px; cursor:pointer; padding:0 4px; line-height:1;">✕</button>
@@ -11544,7 +11544,7 @@
         <!-- Tab: Thông tin sản phẩm — mirror Tab 1 internal (QLCS read-only) -->
         <div id="tab-chung" style="padding:20px; flex:1;">
             <!-- QLCS sync banner -->
-            <div style="display:flex; align-items:center; gap:10px; background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
+            <div style="display:flex; align-items:center; gap:10px; background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.25); border-radius:8px; padding:10px 16px; margin-bottom:20px;">
                 <span style="font-size:18px;">🔗</span>
                 <div>
                     <div style="font-weight:600; font-size:13px; color:var(--primary);">Dữ liệu đồng bộ từ hệ thống QLCS</div>
@@ -11687,7 +11687,7 @@
                                 <th style="padding:8px 10px; text-align:center; color:var(--text-muted); font-weight:500; width:36px;">STT</th>
                                 <th style="padding:8px 10px; color:var(--text-muted); font-weight:500;">Mã SKU</th>
                                 <th style="padding:8px 10px; color:var(--text-muted); font-weight:500;">Tên QLCS <span style="opacity:0.5;">(raw)</span></th>
-                                <th style="padding:8px 10px; color:var(--primary); font-weight:500; background:rgba(69,100,237,0.06);">Tên hiển thị web ✏️</th>
+                                <th style="padding:8px 10px; color:var(--primary); font-weight:500; background:rgba(249,115,22,0.06);">Tên hiển thị web ✏️</th>
                                 <th style="padding:8px 10px; color:var(--text-muted); font-weight:500; text-align:center;">Main/Extra</th>
                             </tr>
                         </thead>
@@ -11696,21 +11696,21 @@
                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted);">1</td>
                                 <td style="padding:8px 10px;"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 6px; border-radius:4px;">CAM-1D-ONLY</span></td>
                                 <td style="padding:8px 10px; color:var(--text-muted);">1D FPT Camera Only</td>
-                                <td style="padding:6px 10px; background:rgba(69,100,237,0.04);"><input type="text" class="form-input" value="Camera FPT 1 ngày" style="font-size:12px; padding:5px 8px; height:30px;"></td>
-                                <td style="padding:8px 10px; text-align:center;"><span style="background:rgba(69,100,237,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; font-weight:600;">Main</span></td>
+                                <td style="padding:6px 10px; background:rgba(249,115,22,0.04);"><input type="text" class="form-input" value="Camera FPT 1 ngày" style="font-size:12px; padding:5px 8px; height:30px;"></td>
+                                <td style="padding:8px 10px; text-align:center;"><span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; font-weight:600;">Main</span></td>
                             </tr>
                             <tr style="border-bottom:1px solid rgba(255,255,255,0.04);">
                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted);">2</td>
                                 <td style="padding:8px 10px;"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 6px; border-radius:4px;">CAM-1D</span></td>
                                 <td style="padding:8px 10px; color:var(--text-muted);">1D FPT Camera</td>
-                                <td style="padding:6px 10px; background:rgba(69,100,237,0.04);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 8px; height:30px; border-style:dashed;"></td>
+                                <td style="padding:6px 10px; background:rgba(249,115,22,0.04);"><input type="text" class="form-input" placeholder="Nhập tên hiển thị web..." style="font-size:12px; padding:5px 8px; height:30px; border-style:dashed;"></td>
                                 <td style="padding:8px 10px; text-align:center;"><span style="background:rgba(255,255,255,0.07); color:var(--text-muted); padding:2px 8px; border-radius:10px; font-size:11px;">Extra</span></td>
                             </tr>
                             <tr>
                                 <td style="padding:8px 10px; text-align:center; color:var(--text-muted);">3</td>
                                 <td style="padding:8px 10px;"><span style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 6px; border-radius:4px;">STB-HD</span></td>
                                 <td style="padding:8px 10px; color:var(--text-muted);">Đầu thu HD FPT</td>
-                                <td style="padding:6px 10px; background:rgba(69,100,237,0.04);"><input type="text" class="form-input" value="Đầu thu HD FPT" style="font-size:12px; padding:5px 8px; height:30px;"></td>
+                                <td style="padding:6px 10px; background:rgba(249,115,22,0.04);"><input type="text" class="form-input" value="Đầu thu HD FPT" style="font-size:12px; padding:5px 8px; height:30px;"></td>
                                 <td style="padding:8px 10px; text-align:center;"><span style="background:rgba(255,255,255,0.07); color:var(--text-muted); padding:2px 8px; border-radius:10px; font-size:11px;">Extra</span></td>
                             </tr>
                         </tbody>
@@ -11827,7 +11827,7 @@
                     <div style="aspect-ratio:1; background:rgba(255,255,255,0.08); border-radius:6px; border:1px solid rgba(255,255,255,0.14); display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; overflow:hidden;">
                         <img src="" onerror="this.style.display='none'" style="width:100%; height:100%; object-fit:cover;">
                         <span style="font-size:18px; color:#444; position:absolute;">📷</span>
-                        <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(69,100,237,0.85); text-align:center; font-size:10px; color:#fff; padding:2px;">Thumb</div>
+                        <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(249,115,22,0.85); text-align:center; font-size:10px; color:#fff; padding:2px;">Thumb</div>
                     </div>
                     <div style="aspect-ratio:1; background:rgba(255,255,255,0.05); border-radius:6px; border:1px dashed rgba(255,255,255,0.12); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:#555; font-size:10px; gap:4px;">
                         <span style="font-size:20px;">+</span>Thêm ảnh
@@ -11929,7 +11929,7 @@
                             <button onclick="this.closest('div[style*=grid]').remove()" style="padding:4px; background:rgba(239,68,68,0.15); border:none; border-radius:4px; color:var(--danger); cursor:pointer; font-size:14px; line-height:1;">✕</button>
                         </div>
                     </div>
-                    <button onclick="addPtttRowDrawer()" style="font-size:12px; color:var(--primary); background:rgba(69,100,237,0.12); border:1px dashed rgba(69,100,237,0.4); border-radius:6px; padding:6px 14px; cursor:pointer; width:100%;">+ Thêm phương thức thanh toán</button>
+                    <button onclick="addPtttRowDrawer()" style="font-size:12px; color:var(--primary); background:rgba(249,115,22,0.12); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; padding:6px 14px; cursor:pointer; width:100%;">+ Thêm phương thức thanh toán</button>
                 </div>
                 <!-- Save actions -->
                 <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:20px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.07);">
