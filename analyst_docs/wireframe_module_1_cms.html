@@ -9985,12 +9985,10 @@
 
         // Chuyển tab cho module Tin tức
         function switchNewsTab(tab, element) {
-            // Update tabs UI
             let tabs = element.parentElement.children;
             for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
             element.classList.add('active');
 
-            // Ẩn tất cả các view chính
             document.getElementById('news-list').style.display = 'none';
             document.getElementById('news-cat-list').style.display = 'none';
             document.getElementById('news-tag-list').style.display = 'none';
@@ -9998,9 +9996,9 @@
             document.getElementById('news-item-form').style.display = 'none';
             document.getElementById('news-cat-form').style.display = 'none';
 
-            // Show/hide views
             if (tab === 'list') {
                 document.getElementById('news-list').style.display = 'block';
+                renderNewsTableHTML();
             } else if (tab === 'category') {
                 document.getElementById('news-cat-list').style.display = 'block';
             } else if (tab === 'tag-list') {
@@ -10032,9 +10030,11 @@
 
                 // Đếm số bài viết sử dụng tag này
                 let articleCount = 0;
-                mockArticles.forEach(art => {
-                    if (art.tag === tag.slug) articleCount++;
-                });
+                if (typeof mockArticles !== 'undefined') {
+                    mockArticles.forEach(art => {
+                        if (art.tag === tag.slug) articleCount++;
+                    });
+                }
 
                 tr.innerHTML = `
                     <td>${index++}</td>
@@ -10147,7 +10147,7 @@
         }
 
         // Ẩn/Hiện SEO Accordion
-        let newsSeoOpen = true; // Mặc định mở
+        let newsSeoOpen = true; 
         function toggleNewsSeoAccordion() {
             newsSeoOpen = !newsSeoOpen;
             const content = document.getElementById('news-seo-content');
@@ -11547,7 +11547,7 @@
         }
 
         // ===== Tag-based Mapping & Article Sync Logic =====
-        const mockArticles = [
+        var mockArticles = [
             { title: "Hướng dẫn cài đặt modem Wi-Fi 6 thế hệ mới", tag: "wifi6", type: "tin-tuc" },
             { title: "Ưu đãi lắp đặt cáp quang FPT giá cực rẻ tháng này", tag: "internet", type: "khuyen-mai" },
             { title: "Top 5 tính năng đột phá trên FPT Camera IQ3", tag: "camera", type: "tin-tuc" },
@@ -11563,7 +11563,7 @@
             { title: "Ưu đãi lắp đặt gói cước Lux Wi-Fi 6 tốc độ cao", tag: "lux", type: "khuyen-mai" }
         ];
 
-        let newsTagsData = {
+        var newsTagsData = {
             'tag-1': { id: 'tag-1', name: 'internet', slug: 'internet', count: 2, status: 'Active' },
             'tag-2': { id: 'tag-2', name: 'camera', slug: 'camera', count: 2, status: 'Active' },
             'tag-3': { id: 'tag-3', name: 'wifi6', slug: 'wifi6', count: 1, status: 'Active' },
@@ -11576,14 +11576,14 @@
             'tag-10': { id: 'tag-10', name: 'hotro-kythuat', slug: 'hotro-kythuat', count: 0, status: 'Draft' }
         };
 
-        let tagMappingData = {
+        var tagMappingData = {
             'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: true },
             'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: true },
             'wifi6': { skus: ['MODEM-AX3000GZ', 'INT-SKY'], fallback: false },
             'truyenhinh': { skus: ['PLAY-MAX'], fallback: true }
         };
 
-        let skuTagsData = {};
+        var skuTagsData = {};
 
         function syncTagMappingToSku() {
             skuTagsData = {};
@@ -11744,7 +11744,7 @@
             'DEV-STB-FPTPLAY': 'FPT Play Box 2026 (STB)'
         };
 
-        let tempSelectedSkus = [];
+        var tempSelectedSkus = [];
 
         function getSkuServiceType(sku) {
             if (sku.startsWith('INT-')) return 'Internet';
@@ -13563,8 +13563,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 <button class="btn btn-primary" onclick="saveCardData()">Lưu Card</button>
             </div>
         </div>
-
-
+    <script src="news_cms.js"></script>
 </body>
 
 </html>
