@@ -17,7 +17,7 @@
 
     * **I. GIỚI THIỆU**
     * **II. TỔNG QUAN**
-    * **III. ĐẶC TẢ CHI TIẾT 11 CHỨC NĂNG**
+    * **III. ĐẶC TẢ CHI TIẾT 12 CHỨC NĂNG**
     * **IV. CÁC YÊU CẦU PHI CHỨC NĂNG**
     * **V. PHỤ LỤC**
 
@@ -64,11 +64,12 @@
 | 8   | Quản lý Tin tức                      | 1.0     | New    | Soạn thảo tin tức bài viết, phân loại chuyên mục và xuất bản.                                                                        |
 | 9   | Quản lý FAQ                          | 1.0     | New    | Quản lý ngân hàng câu hỏi & câu trả lời thường gặp theo chủ đề.                                                                      |
 | 10  | Cấu hình Thông tin hay (Tag Mapping) | 1.1     | Update | Ánh xạ từ khóa bài viết đến sản phẩm. Thiết kế mới tích hợp dạng Tab trong Quản lý Tin tức và sử dụng Slide-over Drawer để cấu hình. |
-| 11  | Cài đặt hiển thị (Checkout Config)   | 1.0     | Update | Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị).                                                                   |
+| 11  | Cài đặt hiển thị (Checkout Config)   | 1.0     | Update | Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị). **(Chuyển sang Phân hệ Quản lý sản phẩm)** |
+| 12  | Quản lý tài khoản cá nhân & Đăng xuất | 1.0   | New    | Hỗ trợ người dùng tự chỉnh sửa thông tin cá nhân (họ tên, email), đổi mật khẩu, cập nhật ảnh đại diện và đăng xuất tài khoản. |
 
 ---
 
-# III. ĐẶC TẢ CHI TIẾT 11 CHỨC NĂNG
+# III. ĐẶC TẢ CHI TIẾT 12 CHỨC NĂNG
 
 ## 1. Quản lý cấu trúc các Trang (Pages)
 
@@ -479,7 +480,7 @@ Module FAQ gồm **2 Tab chức năng chính**:
 
 ---
 
-## 11. Cài đặt hiển thị (Cấu hình Checkout đa kênh)
+## 11. Cài đặt hiển thị (Cấu hình Checkout đa kênh) - Thuộc Phân hệ Quản lý sản phẩm
 
 | Description    | Chức năng cho phép người dùng cấu hình chi tiết các thông tin hiển thị trên trang Checkout (SKUs áp dụng, chu kỳ thanh toán, mô tả khuyến mãi, thiết bị đi kèm, dịch vụ bổ sung, phương thức thanh toán và phí lắp đặt) độc lập cho từng kênh bán (Global vs tdw, hifpt, fptvn). |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -513,6 +514,57 @@ Module FAQ gồm **2 Tab chức năng chính**:
 | 6   | Dịch vụ bổ sung    | N               | Checkbox List | Các dịch vụ giá trị gia tăng mua kèm (VD: Fsafe, Ultra Fast, FPT Play VIP).                                  |
 | 7   | Phương thức thanh toán| N            | List          | Cấu hình danh sách cổng thanh toán (Tên, Ảnh logo, Mô tả ngắn, Hoạt động).                                   |
 | 8   | Chú thích phí lắp đặt| N             | Text          | Dòng chữ chú thích nhỏ hiển thị dưới mục Phí lắp đặt ở trang Checkout.                                       |
+
+---
+
+## 12. Quản lý tài khoản cá nhân & Đăng xuất
+
+| Description    | Chức năng cho phép người dùng tự cập nhật thông tin cá nhân (họ tên, email, ảnh đại diện), thay đổi mật khẩu tài khoản cá nhân trực tiếp trên giao diện CMS, và thực hiện đăng xuất khỏi hệ thống. |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Actor          | Tất cả người dùng hệ thống (Admin, BTV, Duyệt bài, nhân sự vận hành...).                                                                                                                          |
+| Trigger        | Người dùng click chọn mục "Thông tin tài khoản", "Đổi mật khẩu" hoặc "Đăng xuất" từ dropdown cá nhân ở góc phải trên của Header.                                                                   |
+| Pre-condition  | Người dùng đã đăng nhập thành công vào hệ thống.                                                                                                                                                  |
+| Post-condition | Thông tin cá nhân hoặc mật khẩu được lưu cập nhật thành công; hoặc người dùng đăng xuất thành công khỏi phiên làm việc (hiển thị thông báo).                                                      |
+
+*   **Workflow Cập nhật Thông tin tài khoản:**
+    *   **Bước 1:** Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.
+    *   **Bước 2:** Người dùng chọn "Thông tin tài khoản", hệ thống chuyển hướng và hiển thị trang **Thông tin tài khoản cá nhân** trong vùng nội dung chính.
+    *   **Bước 3:** Người dùng thay đổi Họ và tên mới, Email mới, hoặc nhập URL ảnh đại diện / Click chọn tải ảnh mới lên máy tính (giao diện hiển thị Live Preview tức thời).
+    *   **Bước 4:** Người dùng nhấn nút "Lưu thay đổi".
+    *   **Bước 5:** Hệ thống validate dữ liệu, cập nhật thông tin mới vào database và cập nhật avatar cùng tên hiển thị của người dùng ở góc phải trên Header đồng bộ.
+
+*   **Workflow Đổi mật khẩu:**
+    *   **Bước 1:** Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.
+    *   **Bước 2:** Người dùng chọn "Đổi mật khẩu", hệ thống chuyển hướng và hiển thị trang **Thay đổi mật khẩu** trong vùng nội dung chính.
+    *   **Bước 3:** Người dùng nhập Mật khẩu hiện tại, Mật khẩu mới (tối thiểu 6 ký tự) và Xác nhận mật khẩu mới.
+    *   **Bước 4:** Người dùng nhấn nút "Cập nhật mật khẩu".
+    *   **Bước 5:** Hệ thống kiểm tra tính chính xác của mật khẩu hiện tại, tính trùng khớp của mật khẩu mới, cập nhật vào database và hiển thị Toast thông báo thành công.
+
+*   **Workflow Đăng xuất:**
+    *   **Bước 1:** Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.
+    *   **Bước 2:** Người dùng click chọn tùy chọn "Đăng xuất".
+    *   **Bước 3:** Hệ thống ghi nhận yêu cầu, đóng menu dropdown, và hiển thị thông báo Toast: *"Đăng xuất tài khoản thành công! (Hệ thống Demo)"* để xác nhận hoàn tất phiên làm việc.
+
+### Quy tắc nghiệp vụ (Business Rules)
+*   **Xác thực mật khẩu:** Khi đổi mật khẩu, bắt buộc người dùng nhập đúng mật khẩu hiện tại đang sử dụng. Mật khẩu mới phải có tối thiểu 6 ký tự và trường xác nhận mật khẩu mới phải khớp 100% với mật khẩu mới.
+*   **Thông tin bắt buộc:** Họ tên và Email là các trường bắt buộc nhập, không được để trống khi lưu cập nhật thông tin cá nhân.
+*   **Trạng thái Kênh & Vai trò:** Các trường Kênh vận hành và Vai trò hệ thống chỉ hiển thị dạng đọc (Read-only), người dùng cá nhân không được phép tự ý thay đổi (chỉ có Admin hệ thống mới có quyền cấp phát thông qua phân quyền tài khoản).
+*   **Avatar preview:** Khi người dùng thay đổi URL ảnh hoặc upload file ảnh lên, vùng xem trước avatar (preview) phải hiển thị chính xác ảnh mới. Nếu không có ảnh, hệ thống hiển thị hai chữ cái đầu viết hoa của tên người dùng làm ký tự đại diện.
+
+### Bảng mô tả trường thông tin Profile & Mật khẩu (Screen Description - Profile Form)
+
+| STT | Tên trường         | Bắt buộc? (Y/N) | Format   | Mô tả                                                                                   |
+| --- | ------------------ | --------------- | -------- | --------------------------------------------------------------------------------------- |
+| 1   | Ảnh đại diện (URL) | N               | Text/File| Đường dẫn URL ảnh đại diện hoặc upload file trực tiếp để cập nhật avatar.                |
+| 2   | Họ và tên          | Y               | Text     | Họ và tên đầy đủ hiển thị trên hệ thống.                                                 |
+| 3   | Email              | Y               | Text     | Địa chỉ email liên hệ.                                                                  |
+| 4   | Kênh vận hành      | Y               | Readonly | Kênh bán người dùng đang trực tiếp quản lý/vận hành dữ liệu (VD: FPT Telecom, FPT Play). |
+| 5   | Vai trò            | Y               | Readonly | Nhóm quyền hạn của tài khoản trên CMS.                                                   |
+| 6   | Mật khẩu cũ        | Y (khi đổi pass)| Password | Nhập mật khẩu hiện tại của tài khoản để xác thực.                                       |
+| 7   | Mật khẩu mới       | Y (khi đổi pass)| Password | Mật khẩu mới mong muốn thay đổi (tối thiểu 6 ký tự).                                    |
+| 8   | Xác nhận mật khẩu  | Y (khi đổi pass)| Password | Xác nhận lại mật khẩu mới vừa nhập.                                                     |
+
+---
 
 # IV. CÁC YÊU CẦU PHI CHỨC NĂNG
 

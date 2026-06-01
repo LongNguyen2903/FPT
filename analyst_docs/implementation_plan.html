@@ -8,14 +8,14 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; color: #e0e0e0; background-color: #121212; max-width: 950px; margin: 0 auto; padding: 20px; }
         h1, h2, h3 { color: #ffffff; }
         h1 { border-bottom: 2px solid #333; padding-bottom: 10px; font-size: 24px; }
-        h2 { border-bottom: 1px solid #4f46e5; padding-bottom: 5px; margin-top: 25px; font-size: 18px; color: #818cf8; }
+        h2 { border-bottom: 1px solid #EA580C; padding-bottom: 5px; margin-top: 25px; font-size: 18px; color: #FB923C; }
         h3 { font-size: 15px; margin-top: 15px; color: #fbbf24; }
         .note, .warning, .tip { padding: 12px 15px; border-radius: 6px; margin: 15px 0; background-color: #1e1e1e; border-left: 4px solid; font-size: 13px; }
-        .note { border-color: #3b82f6; }
+        .note { border-color: #F97316; }
         .warning { border-color: #ef4444; }
         .tip { border-color: #10b981; }
         .tag { font-weight: bold; }
-        .note .tag { color: #3b82f6; }
+        .note .tag { color: #F97316; }
         .warning .tag { color: #ef4444; }
         .tip .tag { color: #10b981; }
         img { max-width: 100%; height: auto; border-radius: 8px; margin-top: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5); }
@@ -30,7 +30,7 @@
         .badge-success { background: rgba(16, 185, 129, 0.15); color: #10b981; }
         .badge-warning { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
         .badge-danger { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-        .badge-info { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .badge-info { background: rgba(249, 115, 22, 0.15); color: #F97316; }
         code { background: rgba(255,255,255,0.08); padding: 2px 4px; border-radius: 4px; font-family: monospace; font-size: 12px; }
     </style>
 </head>
@@ -180,8 +180,45 @@
                             Trên bảng danh sách Tag chính ở cột "SKUs Liên kết", nếu một Tag liên kết với nhiều hơn 3 SKU, hệ thống chỉ hiển thị 3 SKU đầu tiên và 1 badge "+N SKUs..." màu xám. Khi rê chuột vào badge này, hiển thị tooltip HTML chứa danh sách toàn bộ các SKU còn lại để giao diện dòng luôn gọn gàng và không bị phình to chiều cao.
                         </li>
                         <li><strong>Fallback Logic (Quy tắc hiển thị phụ):</strong> Nếu SKU không có Tag hoặc chưa có bài viết nào trùng Tag, hệ thống tự động ẩn Block này hoặc fallback về việc hiển thị bài viết Khuyến mãi hot nhất để tránh giao diện trống (Blank State).</li>
-                        <li><a href="../diagrams/fpt-article-tag-seq.md" style="color:#818cf8; text-decoration:underline;">🔗 Xem Sơ đồ luồng Sequence Diagram chi tiết tại đây</a></li>
-                        <li><a href="wireframe_module_1_cms.html" style="color:#818cf8; text-decoration:underline;">🔗 Trải nghiệm Wireframe CMS (Cấu hình Tag-based Mapping & Advanced SKU Selector)</a></li>
+                        <li><a href="../diagrams/fpt-article-tag-seq.md" style="color:#FB923C; text-decoration:underline;">🔗 Xem Sơ đồ luồng Sequence Diagram chi tiết tại đây</a></li>
+                        <li><a href="wireframe_module_1_cms.html" style="color:#FB923C; text-decoration:underline;">🔗 Trải nghiệm Wireframe CMS (Cấu hình Tag-based Mapping & Advanced SKU Selector)</a></li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
+            </tr>
+            <tr>
+                <td><strong>[Yêu cầu #6]<br>UI Design</strong><br><small style="color:#94a3b8;">2026-05-28</small></td>
+                <td>Toàn bộ bảng màu trên wireframe và tài liệu đang dùng tông xanh lam (<code>#4564ED</code>) không đồng nhất với nhận diện thương hiệu FPT Telecom. Yêu cầu chuyển sang tông cam đặc trưng.</td>
+                <td>
+                    <ul>
+                        <li><strong>Thay thế toàn bộ bảng màu chính</strong> sang tông cam FPT trên cả 2 file (<code>wireframe_module_1_cms.html</code> &amp; <code>implementation_plan.html</code>), tổng <strong>42 điểm màu</strong> được cập nhật.</li>
+                        <li><strong>Bảng màu mới:</strong>
+                            <ul>
+                                <li>Primary: <code style="background:rgba(249,115,22,0.15);color:#F97316;">#F97316</code> — cam chính (thay <code>#4564ED</code>)</li>
+                                <li>Light: <code style="background:rgba(251,146,60,0.15);color:#FB923C;">#FB923C</code> — cam sáng (thay <code>#6F86FF</code>)</li>
+                                <li>Dark: <code style="background:rgba(234,88,12,0.15);color:#EA580C;">#EA580C</code> — cam đậm (thay <code>#4F46E5</code>)</li>
+                            </ul>
+                        </li>
+                        <li>Gradient chính: <code>linear-gradient(135deg, #FB923C → #EA580C)</code></li>
+                        <li>Áp dụng trên: CSS variables, button shadows, focus rings, tab active states, background glows, SVG icons, và toàn bộ inline styles.</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
+            </tr>
+            <tr>
+                <td><strong>[Yêu cầu #7]<br>UI/UX — Sidebar</strong><br><small style="color:#94a3b8;">2026-05-28</small></td>
+                <td>Các mục con trong Sidebar menu bị lệch hàng: một số item có icon emoji, một số không có, khiến text bắt đầu ở các vị trí khác nhau gây mất thẩm mỹ.</td>
+                <td>
+                    <ul>
+                        <li><strong>Bổ sung icon cho toàn bộ menu item còn thiếu:</strong>
+                            <ul>
+                                <li>📦 SKUs &nbsp;|&nbsp; 📄 Quản lý Trang &nbsp;|&nbsp; 🔲 Sections &nbsp;|&nbsp; 🧱 Blocks</li>
+                                <li>🚀 Landing Page (LDP) &nbsp;|&nbsp; 🖼 Banner &nbsp;|&nbsp; 💬 Popup</li>
+                                <li>📝 Bài viết &amp; Cấu hình nội dung (cập nhật icon parent)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Chuẩn hóa alignment bằng CSS Flex:</strong> Thêm <code>display: flex; align-items: center</code> cho <code>.menu-child</code> và <code>.menu-parent</code>.</li>
+                        <li><strong>Fixed-width icon container:</strong> Bọc tất cả icon trong <code>&lt;span class="mc-icon"&gt;</code> với <code>width: 20px; flex-shrink: 0</code> — đảm bảo text luôn bắt đầu đúng hàng dù kích thước emoji khác nhau.</li>
                     </ul>
                 </td>
                 <td><span class="badge badge-success">Đã cập nhật</span></td>

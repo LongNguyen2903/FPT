@@ -172,6 +172,7 @@
         <tr><td>9</td><td>Quản lý FAQ</td><td>1.0</td><td>New</td><td>Quản lý ngân hàng câu hỏi & câu trả lời thường gặp theo chủ đề.</td></tr>
         <tr><td>10</td><td>Cấu hình Thông tin hay (Tag Mapping)</td><td>1.2</td><td>Update</td><td>Ánh xạ từ khóa bài viết đến sản phẩm. Tách biệt thành 2 Tab riêng biệt trong module Tin tức: Tab Quản lý Tags và Tab Tags Mapping (thiết lập liên kết qua Slide-over Drawer).</td></tr>
         <tr><td>11</td><td>Cài đặt hiển thị (Checkout Config)</td><td>1.0</td><td>Update</td><td>Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị).</td></tr>
+        <tr><td>12</td><td>Quản lý tài khoản cá nhân & Đăng xuất</td><td>1.0</td><td>New</td><td>Hỗ trợ người dùng tự chỉnh sửa thông tin cá nhân (họ tên, email), đổi mật khẩu, cập nhật ảnh đại diện và đăng xuất tài khoản.</td></tr>
     </tbody>
 </table>
 
@@ -217,11 +218,28 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>URL path của trang phải là duy nhất trên toàn hệ thống (Unique constraint), không được trùng lặp.</li>
-    <li>Không cho phép người dùng xóa các trang hệ thống cốt lõi (như Trang chủ /, Trang lỗi /404).</li>
-    <li>Tên trang và URL path là hai trường bắt buộc nhập, không được để trống khi lưu.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>URL path của trang phải là duy nhất trên toàn hệ thống (Unique constraint), không được trùng lặp.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Không cho phép người dùng xóa các trang hệ thống cốt lõi (như Trang chủ /, Trang lỗi /404).</td>
+        </tr>
+        <tr>
+            <td><strong>BR03</strong></td>
+            <td>Tên trang và URL path là hai trường bắt buộc nhập, không được để trống khi lưu.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -283,10 +301,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Một Section là component dùng chung. Khi thay đổi cấu trúc/khối Block bên trong Section, các trang đang sử dụng Section đó sẽ được cập nhật đồng thời.</li>
-    <li>Mỗi Section bắt buộc phải chọn 1 mẫu layout định sẵn của hệ thống.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Một Section là component dùng chung. Khi thay đổi cấu trúc/khối Block bên trong Section, các trang đang sử dụng Section đó sẽ được cập nhật đồng thời.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Mỗi Section bắt buộc phải chọn 1 mẫu layout định sẵn của hệ thống.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -347,10 +379,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Block loại Sản phẩm chỉ hiển thị các Package đang hoạt động (Active) được lấy từ Product Hub.</li>
-    <li>Block Banner dọc yêu cầu tải lên đủ 2 định dạng kích thước: Desktop (1920px) và Mobile (768px).</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Block loại Sản phẩm chỉ hiển thị các Package đang hoạt động (Active) được lấy từ Product Hub.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Block Banner dọc yêu cầu tải lên đủ 2 định dạng kích thước: Desktop (1920px) và Mobile (768px).</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -411,9 +457,20 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Landing Page có cấu trúc định tuyến (route) riêng biệt, bỏ qua cấu trúc header/footer mặc định của trang chủ nếu được cấu hình dạng "Full-blank".</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Landing Page có cấu trúc định tuyến (route) riêng biệt, bỏ qua cấu trúc header/footer mặc định của trang chủ nếu được cấu hình dạng "Full-blank".</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -473,10 +530,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Hỗ trợ tối đa 3 cấp menu (Menu cha -> Menu con cấp 1 -> Menu con cấp 2) để đảm bảo hiển thị tối ưu trên giao diện.</li>
-    <li>Mỗi menu item bắt buộc phải điền đầy đủ nhãn hiển thị và URL liên kết.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Hỗ trợ tối đa 3 cấp menu (Menu cha -> Menu con cấp 1 -> Menu con cấp 2) để đảm bảo hiển thị tối ưu trên giao diện.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Mỗi menu item bắt buộc phải điền đầy đủ nhãn hiển thị và URL liên kết.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -536,10 +607,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Phải tải lên tối thiểu hình ảnh bản Desktop. Nếu không tải ảnh Mobile, hệ thống tự động co giãn ảnh Desktop theo tỉ lệ màn hình.</li>
-    <li>Banner chỉ hiển thị ngoài website nếu trạng thái là Active và thời gian hiện tại nằm trong khoảng thời gian cấu hình hiển thị.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Phải tải lên tối thiểu hình ảnh bản Desktop. Nếu không tải ảnh Mobile, hệ thống tự động co giãn ảnh Desktop theo tỉ lệ màn hình.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Banner chỉ hiển thị ngoài website nếu trạng thái là Active và thời gian hiện tại nằm trong khoảng thời gian cấu hình hiển thị.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -600,10 +685,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Mỗi trang tại một thời điểm chỉ cho phép kích hoạt tối đa 01 Popup để tránh gây phiền nhiễu cho trải nghiệm của khách hàng (UX).</li>
-    <li>Tần suất hiển thị mặc định: 1 lần mỗi phiên làm việc của người dùng nếu không có cấu hình khác.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Mỗi trang tại một thời điểm chỉ cho phép kích hoạt tối đa 01 Popup để tránh gây phiền nhiễu cho trải nghiệm của khách hàng (UX).</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Tần suất hiển thị mặc định: 1 lần mỗi phiên làm việc của người dùng nếu không có cấu hình khác.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -663,10 +762,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Ảnh đại diện bài viết (Thumbnail) bắt buộc tải lên và có định dạng tỉ lệ 3:2 hoặc 16:9 để hiển thị đồng bộ trên danh sách tin.</li>
-    <li>Hệ thống tự động lưu lịch sử biên tập (Version History) và ghi nhận tên tài khoản thực hiện chỉnh sửa gần nhất.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Ảnh đại diện bài viết (Thumbnail) bắt buộc tải lên và có định dạng tỉ lệ 3:2 hoặc 16:9 để hiển thị đồng bộ trên danh sách tin.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Hệ thống tự động lưu lịch sử biên tập (Version History) và ghi nhận tên tài khoản thực hiện chỉnh sửa gần nhất.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -725,10 +838,24 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Hỗ trợ tìm kiếm nhanh câu hỏi theo từ khóa trong thư viện FAQ để phục vụ gán nhanh vào Block mà không cần tạo mới trùng lặp.</li>
-    <li>Cả câu hỏi và câu trả lời đều không được để trống khi thực hiện lưu.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Hỗ trợ tìm kiếm nhanh câu hỏi theo từ khóa trong thư viện FAQ để phục vụ gán nhanh vào Block mà không cần tạo mới trùng lặp.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Cả câu hỏi và câu trả lời đều không được để trống khi thực hiện lưu.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -788,13 +915,36 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Một bài viết hoặc FAQ có thể được gán vào nhiều Tag khác nhau. Một dòng sản phẩm cũng có thể ánh xạ đến nhiều Tag.</li>
-    <li>Tag phải viết dưới dạng không dấu, ngăn cách bằng dấu gạch ngang (VD: uu-dai-wifi-giga) và được quản lý tập trung tại Tab "Quản lý Tags".</li>
-    <li>Khi thêm mapping mới, người dùng bắt buộc phải chọn từ các tag đã định nghĩa sẵn.</li>
-    <li>Khi xóa một dòng mapping, hệ thống chỉ hủy ánh xạ Tag đó tới các SKU chứ không xóa Tag gốc khỏi danh mục Tag ở Tab 3.</li>
-    <li>**Quy tắc giao diện (UI/UX)**: Form cấu hình chi tiết của Tag sử dụng cơ chế Slide-over panel (trượt từ phải qua) chiếm 60% chiều rộng màn hình, cho phép thao tác nhanh mà không che khuất hoàn toàn danh sách bên dưới.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Một bài viết hoặc FAQ có thể được gán vào nhiều Tag khác nhau. Một dòng sản phẩm cũng có thể ánh xạ đến nhiều Tag.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Tag phải viết dưới dạng không dấu, ngăn cách bằng dấu gạch ngang (VD: uu-dai-wifi-giga) và được quản lý tập trung tại Tab "Quản lý Tags".</td>
+        </tr>
+        <tr>
+            <td><strong>BR03</strong></td>
+            <td>Khi thêm mapping mới, người dùng bắt buộc phải chọn từ các tag đã định nghĩa sẵn.</td>
+        </tr>
+        <tr>
+            <td><strong>BR04</strong></td>
+            <td>Khi xóa một dòng mapping, hệ thống chỉ hủy ánh xạ Tag đó tới các SKU chứ không xóa Tag gốc khỏi danh mục Tag ở Tab 3.</td>
+        </tr>
+        <tr>
+            <td><strong>BR05</strong></td>
+            <td>**Quy tắc giao diện (UI/UX)**: Form cấu hình chi tiết của Tag sử dụng cơ chế Slide-over panel (trượt từ phải qua) chiếm 60% chiều rộng màn hình, cho phép thao tác nhanh mà không che khuất hoàn toàn danh sách bên dưới.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -853,12 +1003,32 @@
 </ul>
 
 <p><strong>c. Business Rules:</strong></p>
-<ul>
-    <li>Bắt buộc chọn ít nhất 1 SKU gói cước áp dụng tại cấu hình Global để kích hoạt hiển thị cấu hình chi tiết bên dưới. Nếu không có SKU nào, hiển thị cảnh báo yêu cầu chọn SKU.</li>
-    <li>Danh sách SKU hiển thị dưới dạng list cuộn dọc giới hạn chiều cao tối đa 160px để tránh kéo giãn màn hình. Tích hợp thanh tìm kiếm thời gian thực theo mã và tên SKU.</li>
-    <li>Kênh con khi ở chế độ kế thừa (🌐 Dùng Global) sẽ bị vô hiệu hóa chỉnh sửa, các thông tin hiển thị mờ và ghi nhãn *(Kế thừa Global)*.</li>
-    <li>Khi có bất kỳ hành động chỉnh sửa nào trên kênh con, hệ thống tự động gọi hàm switchToCustom để nhân bản dữ liệu Global hiện tại sang và chuyển giao diện sang trạng thái Tùy chỉnh.</li>
-</ul>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td>Bắt buộc chọn ít nhất 1 SKU gói cước áp dụng tại cấu hình Global để kích hoạt hiển thị cấu hình chi tiết bên dưới. Nếu không có SKU nào, hiển thị cảnh báo yêu cầu chọn SKU.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td>Danh sách SKU hiển thị dưới dạng list cuộn dọc giới hạn chiều cao tối đa 160px để tránh kéo giãn màn hình. Tích hợp thanh tìm kiếm thời gian thực theo mã và tên SKU.</td>
+        </tr>
+        <tr>
+            <td><strong>BR03</strong></td>
+            <td>Kênh con khi ở chế độ kế thừa (🌐 Dùng Global) sẽ bị vô hiệu hóa chỉnh sửa, các thông tin hiển thị mờ và ghi nhãn *(Kế thừa Global)*.</td>
+        </tr>
+        <tr>
+            <td><strong>BR04</strong></td>
+            <td>Khi có bất kỳ hành động chỉnh sửa nào trên kênh con, hệ thống tự động gọi hàm switchToCustom để nhân bản dữ liệu Global hiện tại sang và chuyển giao diện sang trạng thái Tùy chỉnh.</td>
+        </tr>
+    </tbody>
+</table>
 
 <p><strong>d. Wireframe, screen description:</strong></p>
 <table class="data-table">
@@ -878,6 +1048,118 @@
         <tr><td>4</td><td>Chu kỳ thanh toán</td><td>Y</td><td>List</td><td>Thêm mới, sửa hoặc bật/tắt các chu kỳ (1T, 3T, 6T, 12T) áp dụng.</td></tr>
         <tr><td>5</td><td>Thiết bị đi kèm</td><td>N</td><td>Checkbox List</td><td>Chọn các thiết bị (Modem WiFi, FPT Play Box) đi kèm mặc định.</td></tr>
     </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- CHỨC NĂNG 12 -->
+<h2>12. Quản lý tài khoản cá nhân & Đăng xuất</h2>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>Chức năng cho phép người dùng tự cập nhật thông tin cá nhân (họ tên, email, ảnh đại diện), thay đổi mật khẩu tài khoản cá nhân trực tiếp trên giao diện CMS, và thực hiện đăng xuất khỏi hệ thống.</td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>Tất cả người dùng hệ thống (Admin, BTV, Duyệt bài, nhân sự vận hành...).</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>Người dùng click chọn mục "Thông tin tài khoản", "Đổi mật khẩu" hoặc "Đăng xuất" từ dropdown cá nhân ở góc phải trên của Header.</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>Thông tin cá nhân hoặc mật khẩu được lưu cập nhật thành công; hoặc người dùng đăng xuất thành công khỏi phiên làm việc (hiển thị thông báo).</td>
+    </tr>
+</table>
+
+<p><strong>a. Workflow:</strong> N/A</p>
+<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
+<ul>
+    <li><strong>Workflow Cập nhật Thông tin tài khoản:</strong>
+        <ul>
+            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+            <li><strong>Bước 2:</strong> Người dùng chọn "Thông tin tài khoản", hệ thống chuyển hướng và hiển thị trang <strong>Thông tin tài khoản cá nhân</strong> trong vùng nội dung chính.</li>
+            <li><strong>Bước 3:</strong> Người dùng thay đổi Họ và tên mới, Email mới, hoặc nhập URL ảnh đại diện / Click chọn tải ảnh mới lên máy tính (giao diện hiển thị Live Preview tức thời).</li>
+            <li><strong>Bước 4:</strong> Người dùng nhấn nút "Lưu thay đổi".</li>
+            <li><strong>Bước 5:</strong> Hệ thống validate dữ liệu, cập nhật thông tin mới vào database và cập nhật avatar cùng tên hiển thị của người dùng ở góc phải trên Header đồng bộ.</li>
+        </ul>
+    </li>
+    <li><strong>Workflow Đổi mật khẩu:</strong>
+        <ul>
+            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+            <li><strong>Bước 2:</strong> Người dùng chọn "Đổi mật khẩu", hệ thống chuyển hướng và hiển thị trang <strong>Thay đổi mật khẩu</strong> trong vùng nội dung chính.</li>
+            <li><strong>Bước 3:</strong> Người dùng nhập Mật khẩu hiện tại, Mật khẩu mới (tối thiểu 6 ký tự) và Xác nhận mật khẩu mới.</li>
+            <li><strong>Bước 4:</strong> Người dùng nhấn nút "Cập nhật mật khẩu".</li>
+            <li><strong>Bước 5:</strong> Hệ thống kiểm tra tính chính xác của mật khẩu hiện tại, tính trùng khớp của mật khẩu mới, cập nhật vào database và hiển thị Toast thông báo thành công.</li>
+        </ul>
+    </li>
+    <li><strong>Workflow Đăng xuất:</strong>
+        <ul>
+            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+            <li><strong>Bước 2:</strong> Người dùng click chọn tùy chọn "Đăng xuất".</li>
+            <li><strong>Bước 3:</strong> Hệ thống ghi nhận yêu cầu, đóng menu dropdown, và hiển thị thông báo Toast: *"Đăng xuất tài khoản thành công! (Hệ thống Demo)"* để xác nhận hoàn tất phiên làm việc.</li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>c. Business Rules:</strong></p>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Rule</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>BR01</strong></td>
+            <td><strong>Xác thực mật khẩu:</strong> Khi đổi mật khẩu, bắt buộc người dùng nhập đúng mật khẩu hiện tại đang sử dụng. Mật khẩu mới phải có tối thiểu 6 ký tự và trường xác nhận mật khẩu mới phải khớp 100% với mật khẩu mới.</td>
+        </tr>
+        <tr>
+            <td><strong>BR02</strong></td>
+            <td><strong>Thông tin bắt buộc:</strong> Họ tên và Email là các trường bắt buộc nhập, không được để trống khi lưu cập nhật thông tin cá nhân.</td>
+        </tr>
+        <tr>
+            <td><strong>BR03</strong></td>
+            <td><strong>Trạng thái Kênh & Vai trò:</strong> Các trường Kênh vận hành và Vai trò hệ thống chỉ hiển thị dạng đọc (Read-only), người dùng cá nhân không được phép tự ý thay đổi (chỉ có Admin hệ thống mới có quyền cấp phát thông qua phân quyền tài khoản).</td>
+        </tr>
+        <tr>
+            <td><strong>BR04</strong></td>
+            <td><strong>Avatar preview:</strong> Khi người dùng thay đổi URL ảnh hoặc upload file ảnh lên, vùng xem trước avatar (preview) phải hiển thị chính xác ảnh mới. Nếu không có ảnh, hệ thống hiển thị hai chữ cái đầu viết hoa của tên người dùng làm ký tự đại diện.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>d. Wireframe, screen description:</strong></p>
+<p><strong>Bảng mô tả trường thông tin Profile & Mật khẩu (Screen Description - Profile Form):</strong></p>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th>Tên trường</th>
+            <th>Bắt buộc? (Y/N)</th>
+            <th>Format</th>
+            <th>Mô tả</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td>Ảnh đại diện (URL)</td><td>N</td><td>Text/File</td><td>Đường dẫn URL ảnh đại diện hoặc upload file trực tiếp để cập nhật avatar.</td></tr>
+        <tr><td>2</td><td>Họ và tên</td><td>Y</td><td>Text</td><td>Họ và tên đầy đủ hiển thị trên hệ thống.</td></tr>
+        <tr><td>3</td><td>Email</td><td>Y</td><td>Text</td><td>Địa chỉ email liên hệ.</td></tr>
+        <tr><td>4</td><td>Kênh vận hành</td><td>Y</td><td>Readonly</td><td>Kênh bán người dùng đang trực tiếp quản lý/vận hành dữ liệu (VD: FPT Telecom, FPT Play).</td></tr>
+        <tr><td>5</td><td>Vai trò</td><td>Y</td><td>Readonly</td><td>Nhóm quyền hạn của tài khoản trên CMS.</td></tr>
+        <tr><td>6</td><td>Mật khẩu cũ</td><td>Y (khi đổi pass)</td><td>Password</td><td>Nhập mật khẩu hiện tại của tài khoản để xác thực.</td></tr>
+        <tr><td>7</td><td>Mật khẩu mới</td><td>Y (khi đổi pass)</td><td>Password</td><td>Mật khẩu mới mong muốn thay đổi (tối thiểu 6 ký tự).</td></tr>
+        <tr><td>8</td><td>Xác nhận mật khẩu</td><td>Y (khi đổi pass)</td><td>Password</td><td>Xác nhận lại mật khẩu mới vừa nhập.</td></tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
 </table>
 
 <div class="page-break"></div>
