@@ -813,6 +813,52 @@
                 el.style.borderColor = '';
             }
         }
+        // CMS-06: Live snippet preview update
+        window.updateSeoSnippetPreview();
+    };
+
+    // CMS-06: Snippet preview giả lập Google
+    window.updateSeoSnippetPreview = function() {
+        const seoTitle = document.getElementById('art-seo-title')?.value.trim();
+        const artTitle = document.getElementById('art-title')?.value.trim();
+        const seoDesc = document.getElementById('art-seo-desc')?.value.trim();
+        const artSapo = document.getElementById('art-sapo')?.value.trim();
+        const slug = document.getElementById('art-slug')?.value.trim();
+
+        const snippetTitle = document.getElementById('seo-snippet-title');
+        const snippetUrl = document.getElementById('seo-snippet-url');
+        const snippetDesc = document.getElementById('seo-snippet-desc');
+
+        if (snippetTitle) snippetTitle.innerText = seoTitle || artTitle || 'Tiêu đề SEO sẽ hiển thị ở đây';
+        if (snippetUrl) snippetUrl.innerText = slug || 'url-slug-bai-viet';
+        if (snippetDesc) snippetDesc.innerText = seoDesc || artSapo || 'Meta description sẽ hiển thị ở đây khi xuất hiện trên kết quả tìm kiếm Google...';
+    };
+
+    // CMS-08: Kiểm tra slug trùng
+    window.validateSlugUnique = function(currentSlug) {
+        const currentId = document.getElementById('article-id')?.value;
+        for (let id in window.newsArticlesData) {
+            if (id !== currentId && window.newsArticlesData[id].slug === currentSlug) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    window.onSlugBlur = function() {
+        const slugEl = document.getElementById('art-slug');
+        if (!slugEl) return;
+        const slug = slugEl.value.trim();
+        if (!slug) return;
+        if (!window.validateSlugUnique(slug)) {
+            slugEl.style.borderColor = 'var(--danger)';
+            showLdpToast('⚠️ Slug này đã tồn tại! Vui lòng chọn slug khác.');
+            // Gợi ý slug thay thế
+            slugEl.value = slug + '-' + Math.floor(Math.random() * 100);
+        } else {
+            slugEl.style.borderColor = '';
+        }
+        window.updateSeoSnippetPreview();
     };
 
     // Auto-save logic
@@ -971,6 +1017,54 @@
 
     window.closeNewsPreviewModal = function() {
         document.getElementById('news-preview-modal').style.display = 'none';
+    };
+
+    // Google Snippet Preview live update
+    window.updateSeoSnippetPreview = function() {
+        const titleEl  = document.getElementById('art-seo-title');
+        const descEl   = document.getElementById('art-seo-desc');
+        const slugEl   = document.getElementById('art-slug');
+        const artTitle = document.getElementById('art-title');
+
+        const snippetTitle = document.getElementById('seo-snippet-title');
+        const snippetUrl   = document.getElementById('seo-snippet-url');
+        const snippetDesc  = document.getElementById('seo-snippet-desc');
+
+        if (snippetTitle) snippetTitle.innerText = (titleEl && titleEl.value) || (artTitle && artTitle.value) || 'Tiêu đề SEO sẽ hiển thị ở đây';
+        if (snippetUrl)   snippetUrl.innerText   = (slugEl && slugEl.value)   || 'url-slug-bai-viet';
+        if (snippetDesc)  snippetDesc.innerText  = (descEl && descEl.value)   || 'Meta description sẽ hiển thị ở đây khi xuất hiện trên kết quả tìm kiếm Google...';
+    };
+
+    // Slug duplicate check (CMS-08)
+    window.onSlugBlur = function() {
+        const slugInput   = document.getElementById('art-slug');
+        const warningEl   = document.getElementById('art-slug-warning');
+        const okEl        = document.getElementById('art-slug-ok');
+        const suggestionEl = document.getElementById('art-slug-suggestion');
+        const currentId   = document.getElementById('article-id').value;
+
+        if (!slugInput || !slugInput.value.trim()) return;
+
+        const slug = slugInput.value.trim();
+        let isDuplicate = false;
+
+        for (let id in window.newsArticlesData) {
+            if (id !== currentId && window.newsArticlesData[id].slug === slug) {
+                isDuplicate = true;
+                break;
+            }
+        }
+
+        if (isDuplicate) {
+            const today = new Date();
+            const suffix = '-' + today.getDate().toString().padStart(2, '0') + today.getMonth().toString().padStart(2, '0');
+            if (warningEl) warningEl.style.display = 'block';
+            if (okEl)       okEl.style.display       = 'none';
+            if (suggestionEl) suggestionEl.innerText = slug + suffix;
+        } else {
+            if (warningEl) warningEl.style.display = 'none';
+            if (okEl)       okEl.style.display       = slug ? 'block' : 'none';
+        }
     };
 
     // Run first rendering setup once document is loaded

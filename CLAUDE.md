@@ -24,3 +24,9 @@
 ## Browser & Web Review
 - Cho phép mở browser tự động mỗi khi có yêu cầu review qua trang web, không cần xác nhận.
 - Khi cần view hoặc phân tích website, sử dụng Chrome profile **Long Nguyen**.
+
+## Tiết kiệm Token & Sửa đổi Code (Quan trọng nhất)
+- **Tuyệt đối không viết lại code cũ:** Chỉ sửa đổi đúng (surgical edit) các dòng code cần thiết cho yêu cầu mới. Không được thay thế/ghi đè/hoàn tác toàn bộ hàm hay file nếu không liên quan.
+- **Không phục hồi các đoạn code cũ** khi người dùng không yêu cầu.
+- **Tối ưu hóa dung lượng truyền tải:** Hạn chế đọc/ghi các file quá lớn mà không có lý do cụ thể, chỉ thao tác trên phạm vi thay đổi hẹp nhất có thể.
+
