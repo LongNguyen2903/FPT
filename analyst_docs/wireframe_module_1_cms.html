@@ -6304,6 +6304,16 @@
 
                     <!-- Tin tức Stats & List -->
                     <div id="news-list">
+                        <!-- Bulk Action Bar — ẩn mặc định, hiện khi chọn bài -->
+                        <div id="news-bulk-bar" style="display:none;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.25);border-radius:8px;margin-bottom:16px;">
+                            <span id="news-bulk-count" style="font-size:13px;font-weight:600;color:var(--primary);">0 bài được chọn</span>
+                            <div style="flex:1;"></div>
+                            <button class="btn btn-secondary btn-sm" style="font-size:12px;" onclick="showLdpToast('Đã ẩn các bài được chọn')" title="Ẩn hàng loạt">Ẩn</button>
+                            <button class="btn btn-secondary btn-sm" style="font-size:12px;color:#fbbf24;border-color:rgba(251,191,36,0.4);" onclick="showLdpToast('Đã đánh dấu nổi bật')" title="Đánh dấu nổi bật hàng loạt">⭐ Nổi bật</button>
+                            <button class="btn btn-secondary btn-sm" style="font-size:12px;color:var(--danger);border-color:var(--danger);" onclick="if(confirm('Xóa tất cả bài đã chọn?'))showLdpToast('Đã xóa các bài được chọn')">Xóa</button>
+                            <button class="btn btn-secondary btn-sm" style="font-size:12px;color:var(--text-muted);" onclick="document.querySelectorAll('.news-row-check,#news-check-all').forEach(function(c){c.checked=false;});updateNewsBulkBar();">✕ Bỏ chọn</button>
+                        </div>
+
                         <!-- Stats Cards nhỏ bên trong -->
                         <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom:20px;">
                             <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:8px; padding:12px 16px; display:flex; align-items:center; gap:12px;">
@@ -6346,8 +6356,16 @@
                             <div class="form-group">
                                 <select class="form-select" id="news-search-status">
                                     <option value="">Tất cả trạng thái</option>
-                                    <option value="Active">Hoạt động (Active)</option>
+                                    <option value="Published">Đã xuất bản (Published)</option>
                                     <option value="Draft">Bản nháp (Draft)</option>
+                                    <option value="Scheduled">Đã lên lịch (Scheduled)</option>
+                                    <option value="Hidden">Đã ẩn (Hidden)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-select" id="news-search-featured">
+                                    <option value="">Tất cả bài</option>
+                                    <option value="featured">⭐ Chỉ bài nổi bật</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -6359,7 +6377,7 @@
                         <table class="data-table" id="news-table">
                             <thead>
                                 <tr>
-                                    <th style="width:40px;text-align:center;">✓</th>
+                                    <th style="width:40px;text-align:center;"><input type="checkbox" id="news-check-all" title="Chọn tất cả" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;" onchange="(function(cb){document.querySelectorAll('#news-table tbody tr').forEach(function(tr){if(tr.style.display!=='none'){var c=tr.querySelector('.news-row-check');if(c)c.checked=cb.checked;}});updateNewsBulkBar();})(this)"></th>
                                     <th style="width:80px;">Thumbnail</th>
                                     <th>Tiêu đề & Slug</th>
                                     <th style="width:36px;text-align:center;">⭐</th>
@@ -6387,9 +6405,11 @@
                                     <td><span class="badge news-art-cat" style="background:rgba(249,115,22,0.15); color:#FB923C;">Tin khuyến mãi</span></td>
                                     <td class="news-art-author">Admin</td>
                                     <td class="news-art-date">22/05/2026</td>
-                                    <td><span class="badge active news-art-status-badge">Active</span></td>
+                                    <td><span class="badge active news-art-status-badge">Published</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="editNewsArticle('news-1')">Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:#60a5fa;border-color:rgba(96,165,250,0.4);margin-left:5px;" onclick="showLdpToast('Mở preview bài viết news-1')">Preview</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);border-color:var(--border-glass);margin-left:5px;" onclick="if(confirm('Bạn chắc chắn muốn ẩn bài viết này?')) showLdpToast('Đã ẩn bài viết')">Ẩn</button>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left: 5px;" onclick="deleteNewsArticle('news-1')">Xóa</button>
                                     </td>
                                 </tr>
@@ -6408,9 +6428,11 @@
                                     <td><span class="badge news-art-cat" style="background:rgba(168,85,247,0.15); color:#c084fc;">Tin công nghệ</span></td>
                                     <td class="news-art-author">Phương Nam</td>
                                     <td class="news-art-date">20/05/2026</td>
-                                    <td><span class="badge active news-art-status-badge">Active</span></td>
+                                    <td><span class="badge active news-art-status-badge">Published</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="editNewsArticle('news-2')">Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:#60a5fa;border-color:rgba(96,165,250,0.4);margin-left:5px;" onclick="showLdpToast('Mở preview bài viết news-2')">Preview</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);border-color:var(--border-glass);margin-left:5px;" onclick="if(confirm('Bạn chắc chắn muốn ẩn bài viết này?')) showLdpToast('Đã ẩn bài viết')">Ẩn</button>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left: 5px;" onclick="deleteNewsArticle('news-2')">Xóa</button>
                                     </td>
                                 </tr>
@@ -6432,6 +6454,8 @@
                                     <td><span class="badge warning news-art-status-badge">Draft</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="editNewsArticle('news-3')">Sửa</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:#60a5fa;border-color:rgba(96,165,250,0.4);margin-left:5px;" onclick="showLdpToast('Mở preview bài viết news-3')">Preview</button>
+                                        <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);border-color:var(--border-glass);margin-left:5px;" onclick="if(confirm('Bạn chắc chắn muốn ẩn bài viết này?')) showLdpToast('Đã ẩn bài viết')">Ẩn</button>
                                         <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left: 5px;" onclick="deleteNewsArticle('news-3')">Xóa</button>
                                     </td>
                                 </tr>
@@ -6655,145 +6679,207 @@
 
                     <!-- News Article Editor Form -->
                     <div id="news-item-form" style="display:none; margin-top:20px;">
+                        <!-- Fixed Action Bar P0 -->
+                        <div style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--bg-glass);backdrop-filter:blur(12px);border:1px solid var(--border-glass);border-radius:10px;margin-bottom:20px;gap:12px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('news-item-form').style.display='none';document.getElementById('news-list').style.display='block';">← Quay lại</button>
+                                <h3 style="margin:0;font-size:15px;font-weight:700;" id="article-form-title-bar">Soạn bài viết</h3>
+                            </div>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                <button type="button" class="btn btn-secondary" onclick="showLdpToast('Đã lưu nháp')" style="font-size:12px;padding:6px 14px;">💾 Lưu nháp</button>
+                                <button type="button" class="btn btn-secondary" onclick="previewNewsArticle()" style="font-size:12px;padding:6px 14px;color:#60a5fa;border-color:rgba(96,165,250,0.4);">👁 Xem trước</button>
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('art-status').value='Scheduled';document.getElementById('art-schedule-section').style.display='block'" style="font-size:12px;padding:6px 14px;color:#fbbf24;border-color:rgba(251,191,36,0.4);">📅 Đặt lịch</button>
+                                <button type="button" class="btn btn-primary" onclick="saveNewsArticleAction()" style="font-size:12px;padding:6px 16px;background:var(--primary-gradient);">🚀 Xuất bản</button>
+                            </div>
+                        </div>
                         <div class="form-section">
                             <h3 style="margin-top:0;" id="article-form-title">Tạo mới Bài viết Tin tức</h3>
                             <input type="hidden" id="article-id" value="">
-                            
-                            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px;">
-                                <!-- Cột bên trái: Nội dung chính -->
-                                <div style="display:flex; flex-direction:column; gap:20px;">
-                                    <div class="form-group">
+
+                            <!-- Grid: stretch để cột trái tự lấp đầy chiều cao sidebar -->
+                            <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:stretch;">
+
+                                <!-- ===== CỘT TRÁI ===== -->
+                                <div style="display:flex;flex-direction:column;gap:14px;">
+
+                                    <!-- Tiêu đề -->
+                                    <div class="form-group" style="margin:0;">
                                         <label>Tiêu đề bài viết <span style="color:var(--danger)">*</span></label>
-                                        <input type="text" class="form-input" id="art-title" placeholder="Nhập tiều đề tin tức..." oninput="document.getElementById('art-slug').value = convertToSlug(this.value);" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label>URL Slug <span style="color:var(--danger)">*</span></label>
-                                        <div style="display:flex; gap:8px;">
-                                            <span style="align-self:center; color:var(--text-muted); font-size:13px;">/tin-tuc/</span>
-                                            <input type="text" class="form-input" id="art-slug" placeholder="vd: lap-mang-fpt-he-2026" required>
-                                        </div>
+                                        <input type="text" class="form-input" id="art-title" placeholder="Nhập tiêu đề tin tức..." oninput="document.getElementById('art-slug').value=convertToSlug(this.value);" required style="font-size:15px;font-weight:600;padding:10px 14px;">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Mô tả ngắn / Sa-po <span style="color:var(--danger)">*</span></label>
-                                        <textarea class="form-textarea" id="art-sapo" placeholder="Nhập mô tả ngắn dẫn dắt tin tức (khoảng 2-3 câu)..." style="min-height:80px;"></textarea>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Nội dung chi tiết (Mô phỏng Rich Text Editor) <span style="color:var(--danger)">*</span></label>
-                                        <!-- WYSIWYG Editor Mockup -->
-                                        <div style="border: 1px solid var(--border-glass); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.2);">
-                                            <!-- Editor Toolbar -->
-                                            <div style="display:flex; flex-wrap:wrap; gap:4px; padding:6px; background: rgba(255,255,255,0.03); border-bottom:1px solid var(--border-glass); align-items:center;">
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; min-width:30px; font-weight:700;" onclick="showLdpToast('Bold Text')">B</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; min-width:30px; font-style:italic;" onclick="showLdpToast('Italic Text')">I</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; min-width:30px; text-decoration:underline;" onclick="showLdpToast('Underline Text')">U</button>
-                                                <div style="width:1px; height:18px; background:var(--border-glass); margin:0 4px;"></div>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; font-size:11px;" onclick="showLdpToast('Canh lề trái')">Align Left</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; font-size:11px;" onclick="showLdpToast('Canh lề giữa')">Center</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; font-size:11px;" onclick="showLdpToast('Canh lề phải')">Right</button>
-                                                <div style="width:1px; height:18px; background:var(--border-glass); margin:0 4px;"></div>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; color:var(--primary); font-size:11px;" onclick="showLdpToast('Chèn Link')">🔗 Insert Link</button>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px; color:var(--success); font-size:11px;" onclick="showLdpToast('Chèn Hình ảnh')">🖼️ Insert Image</button>
+                                    <!-- Slug + Sapo — 2 cột ngang -->
+                                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                        <div class="form-group" style="margin:0;">
+                                            <label>URL Slug <span style="color:var(--danger)">*</span></label>
+                                            <div style="display:flex;align-items:center;background:rgba(0,0,0,0.2);border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;">
+                                                <span style="padding:9px 8px 9px 12px;color:var(--text-muted);font-size:12px;white-space:nowrap;border-right:1px solid var(--border-glass);">/tin-tuc/</span>
+                                                <input type="text" id="art-slug" placeholder="lap-mang-fpt-he-2026" required style="flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:13px;padding:9px 10px;">
                                             </div>
-                                            <!-- Editor Content Area -->
-                                            <textarea class="form-textarea" id="art-content" placeholder="Nhập nội dung chi tiết bài viết tại đây..." style="min-height: 250px; border:none; border-radius:0; background:transparent; resize:vertical;"></textarea>
+                                        </div>
+                                        <div class="form-group" style="margin:0;">
+                                            <label>Thẻ / Tags <span style="color:var(--text-muted);font-weight:400;font-size:11px;">(cách nhau bằng dấu phẩy)</span></label>
+                                            <input type="text" class="form-input" id="art-tags" placeholder="camera, khuyen mai, fpt play" style="font-size:13px;">
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Thẻ / Tags (Ngăn cách bằng dấu phẩy)</label>
-                                        <input type="text" class="form-input" id="art-tags" placeholder="camera, khuyen mai, fpt play">
-                                        <span style="font-size:11px; color:var(--text-muted); margin-top:4px; display:block;">Tags giúp liên kết tự động bài viết với SKUs thông qua "Cấu hình Thông tin hay"</span>
+                                    <!-- Sapo -->
+                                    <div class="form-group" style="margin:0;">
+                                        <label>Mô tả ngắn / Sa-po <span style="color:var(--danger)">*</span></label>
+                                        <textarea class="form-textarea" id="art-sapo" placeholder="Nhập mô tả ngắn dẫn dắt tin tức (khoảng 2-3 câu)..." style="min-height:72px;resize:none;"></textarea>
                                     </div>
+
+                                    <!-- Rich Text Editor — flex:1 để lấp đầy phần còn lại -->
+                                    <div class="form-group" style="margin:0;flex:1;display:flex;flex-direction:column;">
+                                        <label>Nội dung chi tiết <span style="color:var(--danger)">*</span></label>
+                                        <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;background:rgba(0,0,0,0.2);flex:1;display:flex;flex-direction:column;">
+                                            <!-- Toolbar -->
+                                            <div style="display:flex;flex-wrap:wrap;gap:4px;padding:6px 8px;background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border-glass);align-items:center;flex-shrink:0;">
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 9px;font-weight:700;" onclick="showLdpToast('Bold')">B</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 9px;font-style:italic;" onclick="showLdpToast('Italic')">I</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 9px;text-decoration:underline;" onclick="showLdpToast('Underline')">U</button>
+                                                <div style="width:1px;height:16px;background:var(--border-glass);margin:0 4px;"></div>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px;font-size:11px;" onclick="showLdpToast('Canh trái')">≡ Left</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px;font-size:11px;" onclick="showLdpToast('Center')">≡ Center</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px;font-size:11px;" onclick="showLdpToast('Right')">≡ Right</button>
+                                                <div style="width:1px;height:16px;background:var(--border-glass);margin:0 4px;"></div>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px;color:var(--primary);font-size:11px;" onclick="showLdpToast('Chèn Link')">🔗 Link</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:4px 8px;color:var(--success);font-size:11px;" onclick="showLdpToast('Chèn ảnh')">🖼 Image</button>
+                                            </div>
+                                            <!-- Content area — flex:1 -->
+                                            <textarea class="form-textarea" id="art-content" placeholder="Nhập nội dung chi tiết bài viết tại đây..." style="flex:1;min-height:220px;border:none;border-radius:0;background:transparent;resize:none;"></textarea>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <!-- Cột bên phải: Cài đặt phụ & SEO -->
-                                <div style="display:flex; flex-direction:column; gap:20px;">
-                                    <div class="form-group">
-                                        <label>Kênh vận hành <span style="color:var(--danger)">*</span></label>
-                                        <select class="form-select" id="art-channel">
-                                            <option value="fpt-telecom" selected>🌐 FPT Telecom (Kênh chính)</option>
-                                            <option value="fpt-play">📺 FPT Play (Giải trí)</option>
-                                            <option value="fpt-camera">📷 FPT Camera (Thiết bị)</option>
-                                        </select>
-                                    </div>
+                                <!-- ===== CỘT PHẢI: Sidebar (3 cards) ===== -->
+                                <div style="display:flex;flex-direction:column;gap:12px;">
 
-                                    <div class="form-group">
-                                        <label>Chuyên mục <span style="color:var(--danger)">*</span></label>
-                                        <select class="form-select" id="art-category">
-                                            <option value="Tin khuyến mãi">Tin khuyến mãi</option>
-                                            <option value="Tin công nghệ">Tin công nghệ</option>
-                                            <option value="Thông báo">Thông báo</option>
-                                            <option value="Sự kiện">Sự kiện</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Tác giả</label>
-                                        <input type="text" class="form-input" id="art-author" value="Admin">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Trạng thái</label>
-                                        <select class="form-select" id="art-status">
-                                            <option value="Active">Hoạt động (Active)</option>
-                                            <option value="Draft">Bản nháp (Draft)</option>
-                                        </select>
-                                    </div>
-
-                                    <!-- Upload Thumbnail Box -->
-                                    <div class="form-group">
-                                        <label>Ảnh đại diện (Thumbnail)</label>
-                                        <div style="border: 1px dashed var(--primary); border-radius: 8px; padding: 15px; text-align: center; background: rgba(249, 115, 22, 0.03); cursor: pointer;" onclick="document.getElementById('art-file-input').click();">
-                                            <div style="font-size:28px; margin-bottom:6px;">📤</div>
-                                            <div style="font-size:12px; font-weight:600; color:var(--primary);">Bấm để chọn file ảnh</div>
-                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">PNG, JPG (Khuyến nghị tỉ lệ 3:2)</div>
-                                            <input type="file" id="art-file-input" style="display:none;" onchange="handleArtFileSelect(this)">
-                                        </div>
-                                        <!-- Image URL preview & input field -->
-                                        <div style="margin-top:10px;">
-                                            <input type="text" class="form-input" id="art-thumbnail-url" placeholder="Đường dẫn ảnh đại diện..." value="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" oninput="updateArtThumbnailPreview(this.value)">
-                                            <!-- Preview element -->
-                                            <div style="margin-top:10px; display:flex; gap:8px; align-items:center; background:rgba(0,0,0,0.2); padding:6px; border-radius:6px; border:1px solid var(--border-glass);">
-                                                <img id="art-thumb-preview" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" style="width:60px; height:40px; border-radius:4px; object-fit:cover;">
-                                                <div style="flex-grow:1; overflow:hidden;">
-                                                    <span style="font-size:11px; font-weight:600; color:#fff; display:block; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="art-thumb-filename">img_thumbnail_default.png</span>
-                                                    <span style="font-size:10px; color:var(--text-muted);">85 KB · Hoạt động</span>
+                                    <!-- Card 1: Xuất bản + Phân loại (gộp lại) -->
+                                    <div style="border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">
+                                        <div style="padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-muted);text-transform:uppercase;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.18);">⚙️ Cài đặt bài viết</div>
+                                        <div style="padding:14px;display:flex;flex-direction:column;gap:11px;">
+                                            <!-- Trạng thái -->
+                                            <div>
+                                                <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Trạng thái</label>
+                                                <select class="form-select" id="art-status" onchange="document.getElementById('art-schedule-section').style.display=this.value==='Scheduled'?'block':'none'" style="font-size:13px;">
+                                                    <option value="Draft">📝 Bản nháp</option>
+                                                    <option value="Published">✅ Đã xuất bản</option>
+                                                    <option value="Scheduled">📅 Đặt lịch</option>
+                                                    <option value="Hidden">🚫 Đã ẩn</option>
+                                                </select>
+                                            </div>
+                                            <!-- Schedule (ẩn mặc định) -->
+                                            <div id="art-schedule-section" style="display:none;">
+                                                <label style="font-size:12px;color:#fbbf24;display:block;margin-bottom:5px;">📅 Thời điểm xuất bản</label>
+                                                <input type="datetime-local" class="form-input" id="art-schedule-datetime" style="font-size:12px;">
+                                            </div>
+                                            <div style="height:1px;background:var(--border-glass);"></div>
+                                            <!-- Kênh + Chuyên mục -->
+                                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                                                <div>
+                                                    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Kênh <span style="color:var(--danger)">*</span></label>
+                                                    <select class="form-select" id="art-channel" style="font-size:12px;padding:6px 8px;">
+                                                        <option value="fpt-telecom" selected>🌐 FPT Telecom</option>
+                                                        <option value="fpt-play">📺 FPT Play</option>
+                                                        <option value="fpt-camera">📷 FPT Camera</option>
+                                                    </select>
                                                 </div>
-                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:2px 6px;" onclick="showLdpToast('Đã copy link ảnh đại diện!')">Copy Link</button>
+                                                <div>
+                                                    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Chuyên mục <span style="color:var(--danger)">*</span></label>
+                                                    <select class="form-select" id="art-category" style="font-size:12px;padding:6px 8px;">
+                                                        <option>Tin khuyến mãi</option>
+                                                        <option>Tin công nghệ</option>
+                                                        <option>Thông báo</option>
+                                                        <option>Sự kiện</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Tác giả -->
+                                            <div>
+                                                <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Tác giả</label>
+                                                <input type="text" class="form-input" id="art-author" value="Admin" style="font-size:13px;">
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- SEO Accordion Section -->
-                                    <div style="border: 1px solid var(--border-glass); border-radius: 8px; overflow: hidden;">
-                                        <div style="padding: 10px 14px; background: rgba(255, 255, 255, 0.03); font-weight: 700; font-size: 12px; display: flex; justify-content: space-between; cursor: pointer;" onclick="toggleNewsSeoAccordion()">
-                                            <span>🔍 TỐI ƯU HÓA SEO (METADATA)</span>
+                                    <!-- Card 2: Ảnh đại diện -->
+                                    <div style="border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">
+                                        <div style="padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-muted);text-transform:uppercase;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.18);">🖼 Ảnh đại diện</div>
+                                        <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+                                            <!-- Preview nếu có ảnh -->
+                                            <div style="position:relative;border-radius:6px;overflow:hidden;background:rgba(0,0,0,0.3);aspect-ratio:3/2;cursor:pointer;" onclick="document.getElementById('art-file-input').click();">
+                                                <img id="art-thumb-preview" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80" style="width:100%;height:100%;object-fit:cover;display:block;">
+                                                <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0">
+                                                    <div style="font-size:20px;">📤</div>
+                                                    <div style="font-size:11px;color:#fff;font-weight:600;margin-top:4px;">Thay ảnh</div>
+                                                </div>
+                                                <input type="file" id="art-file-input" style="display:none;" onchange="handleArtFileSelect(this)">
+                                            </div>
+                                            <!-- Tên file + copy -->
+                                            <div style="display:flex;align-items:center;gap:8px;background:rgba(0,0,0,0.2);padding:6px 8px;border-radius:6px;border:1px solid var(--border-glass);">
+                                                <div style="flex:1;overflow:hidden;">
+                                                    <span style="font-size:11px;font-weight:600;color:#fff;display:block;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;" id="art-thumb-filename">img_thumbnail_default.png</span>
+                                                    <span style="font-size:10px;color:var(--text-muted);">85 KB · Hoạt động</span>
+                                                </div>
+                                                <button type="button" class="btn btn-secondary btn-sm" style="padding:2px 8px;font-size:11px;flex-shrink:0;" onclick="showLdpToast('Đã copy link!')">Copy</button>
+                                            </div>
+                                            <!-- URL input -->
+                                            <input type="text" class="form-input" id="art-thumbnail-url" placeholder="Hoặc dán URL ảnh..." value="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" oninput="updateArtThumbnailPreview(this.value)" style="font-size:12px;">
+                                            <!-- Alt + Caption -->
+                                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                                                <div>
+                                                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:3px;">Alt text <span style="color:var(--danger)">*</span></label>
+                                                    <input type="text" class="form-input" id="art-thumbnail-alt" placeholder="Mô tả ảnh..." style="font-size:12px;padding:5px 8px;">
+                                                </div>
+                                                <div>
+                                                    <label style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:3px;">Caption</label>
+                                                    <input type="text" class="form-input" id="art-thumbnail-caption" placeholder="Chú thích..." style="font-size:12px;padding:5px 8px;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card 3: SEO -->
+                                    <div style="border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">
+                                        <div style="padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-muted);text-transform:uppercase;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.18);display:flex;justify-content:space-between;cursor:pointer;" onclick="toggleNewsSeoAccordion()">
+                                            <span>🔍 Tối ưu SEO</span>
                                             <span id="news-seo-icon">▼</span>
                                         </div>
-                                        <div id="news-seo-content" style="padding: 12px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--border-glass); background: rgba(0, 0, 0, 0.1);">
-                                            <div class="form-group">
-                                                <label style="font-size: 11px;">SEO Title (Tối đa 70 ký tự)</label>
-                                                <input type="text" class="form-input" id="art-seo-title" placeholder="VD: Khuyến mãi lắp mạng FPT mới nhất">
+                                        <div id="news-seo-content" style="padding:14px;display:flex;flex-direction:column;gap:11px;">
+                                            <div>
+                                                <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">SEO Title <span style="font-weight:400;">(≤60 ký tự)</span></label>
+                                                <input type="text" class="form-input" id="art-seo-title" maxlength="60" placeholder="VD: Khuyến mãi lắp mạng FPT mới nhất" oninput="var c=document.getElementById('seo-title-count');if(c)c.textContent=this.value.length+'/60'" style="font-size:12px;">
+                                                <span id="seo-title-count" style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/60</span>
                                             </div>
-                                            <div class="form-group">
-                                                <label style="font-size:11px;">Meta Description (Tối đa 160 ký tự)</label>
-                                                <textarea class="form-textarea" id="art-seo-desc" placeholder="Mô tả nội dung bài viết hiển thị trên Google..." style="min-height:60px; font-size:12px;"></textarea>
+                                            <div>
+                                                <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Meta Description <span style="font-weight:400;">(≤160 ký tự)</span></label>
+                                                <textarea class="form-textarea" id="art-seo-desc" maxlength="160" placeholder="Mô tả hiển thị trên Google..." style="min-height:56px;font-size:12px;resize:none;" oninput="var c=document.getElementById('seo-desc-count');if(c)c.textContent=this.value.length+'/160'"></textarea>
+                                                <span id="seo-desc-count" style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/160</span>
                                             </div>
-                                            <div class="form-group">
-                                                <label style="font-size:11px;">Meta Keywords</label>
-                                                <input type="text" class="form-input" id="art-seo-keywords" placeholder="lap mang fpt, khuyen mai, fpt telecom">
+                                            <div>
+                                                <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Canonical URL</label>
+                                                <input type="text" class="form-input" id="art-seo-canonical" placeholder="https://fpt.vn/tin-tuc/..." style="font-size:12px;padding:6px 10px;">
+                                            </div>
+                                            <!-- Google Preview -->
+                                            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:7px;padding:10px;">
+                                                <div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Google Snippet Preview</div>
+                                                <div style="font-size:13px;color:#60a5fa;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="seo-preview-title">Tiêu đề SEO sẽ hiển thị ở đây...</div>
+                                                <div style="font-size:11px;color:#34d399;margin:2px 0;">fpt.vn › tin-tuc › <span id="seo-preview-slug">url-slug</span></div>
+                                                <div style="font-size:12px;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;" id="seo-preview-desc">Meta description sẽ hiển thị ở đây khi bạn nhập nội dung bên trên.</div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
-                            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:30px; border-top:1px solid var(--border-glass); padding-top:20px;">
-                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('news-item-form').style.display='none'; document.getElementById('news-list').style.display='block';">Hủy</button>
-                                <button type="button" class="btn btn-primary" onclick="saveNewsArticleAction()">Lưu Bài viết</button>
+                            <div style="display:flex;align-items:center;gap:10px;margin-top:20px;border-top:1px solid var(--border-glass);padding-top:16px;">
+                                <button type="button" class="btn btn-secondary" onclick="document.getElementById('news-item-form').style.display='none';document.getElementById('news-list').style.display='block';">← Quay lại danh sách</button>
+                                <div style="flex:1;"></div>
+                                <button type="button" class="btn btn-secondary" onclick="showLdpToast('Đã lưu nháp')">💾 Lưu nháp</button>
+                                <button type="button" class="btn btn-primary" onclick="saveNewsArticleAction()" style="background:var(--primary-gradient);">🚀 Xuất bản</button>
                             </div>
                         </div>
                     </div>
@@ -9624,48 +9710,36 @@
                                 <tr style="border-bottom:1px solid var(--border-glass);">
                                     <th rowspan="2" style="padding:14px 20px;text-align:left;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;width:220px;border-right:1px solid var(--border-glass);vertical-align:middle;">MÀN HÌNH</th>
                                     <!-- Super Admin — locked -->
-                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#c084fc;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);background:rgba(168,85,247,0.06);">
+                                    <th colspan="2" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#c084fc;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);background:rgba(168,85,247,0.06);">
                                         🔒 Super Admin
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Toàn quyền · không chỉnh được</div>
                                     </th>
                                     <!-- Admin CMS -->
-                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#FB923C;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                    <th colspan="2" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#FB923C;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
                                         Admin CMS
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Quản lý toàn bộ nội dung</div>
                                     </th>
                                     <!-- Biên tập viên -->
-                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#34d399;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                    <th colspan="2" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#34d399;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
                                         Biên tập viên
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Tạo & sửa nội dung</div>
                                     </th>
                                     <!-- Viewer -->
-                                    <th colspan="4" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#94a3b8;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
+                                    <th colspan="2" style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#94a3b8;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
                                         Viewer
                                         <div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">Chỉ xem</div>
                                     </th>
                                 </tr>
-                                <!-- Row 2: CRUD labels -->
+                                <!-- Row 2: 2 quyền mỗi vai trò -->
                                 <tr style="border-bottom:2px solid var(--border-glass);background:rgba(0,0,0,0.12);">
-                                    <!-- Super Admin CRUD -->
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
-                                    <!-- Admin CMS CRUD -->
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
-                                    <!-- Biên tập viên CRUD -->
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
-                                    <!-- Viewer CRUD -->
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:52px;">Xem</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Tạo</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Sửa</th>
-                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:52px;">Xóa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:80px;">Chỉnh sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:80px;">Chỉnh sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:80px;">Chỉnh sửa</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">Xem</th>
+                                    <th style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:80px;">Chỉnh sửa</th>
                                 </tr>
                             </thead>
                             <tbody id="sys-perm-tbody"></tbody>
@@ -10313,7 +10387,7 @@
         }
 
         const sysPermModules = [
-            { group: 'QUẢN LÝ SẢN PHẨM',       name: 'SKUs' },
+            { group: 'QUẢN LÝ SẢN PHẨM',       name: 'Thông tin sản phẩm' },
             { group: 'CẤU TRÚC TRANG',           name: 'Quản lý Trang (Pages)' },
             { group: '',                          name: 'Quản lý Sections' },
             { group: '',                          name: 'Quản lý Blocks' },
@@ -10324,7 +10398,7 @@
             { group: 'BÀI VIẾT & NỘI DUNG',      name: 'Quản lý Tin tức' },
             { group: '',                          name: 'Quản lý FAQ' },
             { group: '',                          name: 'Cấu hình Thông tin hay' },
-            { group: 'CÀI ĐẶT & HỆ THỐNG',      name: 'Cài đặt Hiển thị' },
+            { group: 'CÀI ĐẶT & HỆ THỐNG',      name: 'Thông tin checkout' },
             { group: '',                          name: 'Quản lý Người dùng' },
             { group: '',                          name: 'Phân quyền màn hình' },
         ];
@@ -10332,20 +10406,20 @@
         // Ma trận quyền theo vai trò: { màn hình: [superAdmin[4], adminCMS[4], bienTap[4], viewer[4]] }
         // Mỗi mảng con: [xem, tao, sua, xoa]
         const sysPermByRole = {
-            'SKUs':                    [[1,1,1,1],[1,1,1,0],[1,0,0,0],[1,0,0,0]],
-            'Quản lý Trang (Pages)':   [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Quản lý Sections':        [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Quản lý Blocks':          [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Landing Page (LDP)':      [[1,1,1,1],[1,1,1,1],[1,1,0,0],[0,0,0,0]],
-            'Quản lý Menu':            [[1,1,1,1],[1,1,1,0],[1,0,0,0],[0,0,0,0]],
-            'Quản lý Banner':          [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Quản lý Popup':           [[1,1,1,1],[1,1,1,1],[1,1,1,0],[0,0,0,0]],
-            'Quản lý Tin tức':         [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Quản lý FAQ':             [[1,1,1,1],[1,1,1,1],[1,1,1,0],[1,0,0,0]],
-            'Cấu hình Thông tin hay':  [[1,1,1,1],[1,1,1,0],[1,0,1,0],[0,0,0,0]],
-            'Cài đặt Hiển thị':        [[1,1,1,1],[1,1,1,0],[0,0,0,0],[0,0,0,0]],
-            'Quản lý Người dùng':      [[1,1,1,1],[1,1,0,0],[0,0,0,0],[0,0,0,0]],
-            'Phân quyền màn hình':     [[1,1,1,1],[1,1,0,0],[0,0,0,0],[0,0,0,0]],
+            'Thông tin sản phẩm':      [[1,1],[1,1],[1,0],[1,0]],
+            'Quản lý Trang (Pages)':   [[1,1],[1,1],[1,1],[1,0]],
+            'Quản lý Sections':        [[1,1],[1,1],[1,1],[1,0]],
+            'Quản lý Blocks':          [[1,1],[1,1],[1,1],[1,0]],
+            'Landing Page (LDP)':      [[1,1],[1,1],[1,1],[0,0]],
+            'Quản lý Menu':            [[1,1],[1,1],[1,0],[0,0]],
+            'Quản lý Banner':          [[1,1],[1,1],[1,1],[1,0]],
+            'Quản lý Popup':           [[1,1],[1,1],[1,1],[0,0]],
+            'Quản lý Tin tức':         [[1,1],[1,1],[1,1],[1,0]],
+            'Quản lý FAQ':             [[1,1],[1,1],[1,1],[1,0]],
+            'Cấu hình Thông tin hay':  [[1,1],[1,1],[1,1],[0,0]],
+            'Thông tin checkout':      [[1,1],[1,1],[0,0],[0,0]],
+            'Quản lý Người dùng':      [[1,1],[1,1],[0,0],[0,0]],
+            'Phân quyền màn hình':     [[1,1],[1,1],[0,0],[0,0]],
         };
 
         // roleColors: [superAdmin, adminCMS, bienTap, viewer]
@@ -10360,10 +10434,10 @@
                 if (mod.group && mod.group !== lastGroup) {
                     lastGroup = mod.group;
                     html += `<tr style="background:rgba(168,85,247,0.06);">
-                        <td colspan="17" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
+                        <td colspan="9" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
                     </tr>`;
                 }
-                const roles = sysPermByRole[mod.name] || [[1,1,1,1],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+                const roles = sysPermByRole[mod.name] || [[1,1],[0,0],[0,0],[0,0]];
                 let cells = '';
                 roles.forEach((rp, ri) => {
                     const locked = ri === 0;
@@ -10490,7 +10564,7 @@
 
             if (tab === 'list') {
                 document.getElementById('news-list').style.display = 'block';
-                renderNewsTableHTML();
+                filterNewsTable();
             } else if (tab === 'category') {
                 document.getElementById('news-cat-list').style.display = 'block';
             } else if (tab === 'tag-list') {
@@ -10844,10 +10918,11 @@
                 channelBg = 'rgba(245,158,11,0.15); color:#fbbf24;';
             }
 
-            let statusBadge = `<span class="badge active news-art-status-badge">Active</span>`;
+            let statusBadge = `<span class="badge active news-art-status-badge">Published</span>`;
             if (status === 'Draft') statusBadge = `<span class="badge warning news-art-status-badge">Draft</span>`;
 
             let rowHtml = `
+                <td style="text-align:center;"><input type="checkbox" class="news-row-check" data-id="${id}" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;"></td>
                 <td>
                     <img src="${thumbUrl}" alt="News Thumbnail" style="width:60px; height:40px; border-radius:4px; object-fit:cover; border:1px solid var(--border-glass);">
                 </td>
@@ -10855,14 +10930,17 @@
                     <div style="font-weight:700; color:#fff;" class="news-art-title">${title}</div>
                     <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">/tin-tuc/${slug}</div>
                 </td>
+                <td style="text-align:center;"><span class="news-featured-toggle" style="cursor:pointer;font-size:15px;opacity:0.4;" title="Bật/tắt nổi bật" onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1';this.closest('tr').dataset.featured=this.style.opacity==='1'?'1':'0'">⭐</span></td>
                 <td><span class="badge" style="background:${channelBg}">${channelName}</span></td>
                 <td><span class="badge news-art-cat" style="background:${catColor}">${category}</span></td>
                 <td class="news-art-author">${author}</td>
                 <td class="news-art-date">${isNew ? '22/05/2026' : newsArticlesData[id].date}</td>
                 <td>${statusBadge}</td>
                 <td>
-                    <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="editNewsArticle('${id}')">Sửa</button>
-                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left: 5px;" onclick="deleteNewsArticle('${id}')">Xóa</button>
+                    <button class="btn btn-secondary btn-sm" style="color:var(--primary);border-color:var(--primary);" onclick="editNewsArticle('${id}')">Sửa</button>
+                    <button class="btn btn-secondary btn-sm" style="color:#60a5fa;border-color:rgba(96,165,250,0.4);margin-left:5px;" onclick="showLdpToast('Mở preview bài viết ${id}')">Preview</button>
+                    <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);border-color:var(--border-glass);margin-left:5px;" onclick="if(confirm('Bạn chắc chắn muốn ẩn bài viết này?')) showLdpToast('Đã ẩn bài viết')">Ẩn</button>
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger);border-color:var(--danger);margin-left:5px;" onclick="deleteNewsArticle('${id}')">Xóa</button>
                 </td>
             `;
 
@@ -10912,29 +10990,47 @@
         }
 
         // Tìm kiếm và Lọc bảng tin tức
+        function updateNewsBulkBar() {
+            const checked = document.querySelectorAll('#news-table tbody .news-row-check:checked');
+            const total = document.querySelectorAll('#news-table tbody .news-row-check');
+            const bar = document.getElementById('news-bulk-bar');
+            const countEl = document.getElementById('news-bulk-count');
+            const allCb = document.getElementById('news-check-all');
+            if (bar) bar.style.display = checked.length > 0 ? 'flex' : 'none';
+            if (countEl) countEl.textContent = checked.length + ' bài được chọn';
+            if (allCb) allCb.indeterminate = checked.length > 0 && checked.length < total.length;
+            if (allCb && checked.length === total.length && total.length > 0) allCb.checked = true;
+            if (allCb && checked.length === 0) allCb.checked = false;
+        }
+        window.onNewsRowCheck = updateNewsBulkBar;
+
         function filterNewsTable() {
-            const kw = document.getElementById('news-search-keyword').value.toLowerCase();
+            const kw = (document.getElementById('news-search-keyword').value || '').toLowerCase();
             const cat = document.getElementById('news-search-cat').value;
             const status = document.getElementById('news-search-status').value;
+            const featured = document.getElementById('news-search-featured').value;
 
             const rows = document.querySelectorAll('#news-table tbody tr');
+            let visible = 0;
             rows.forEach(row => {
-                const title = row.querySelector('.news-art-title').innerText.toLowerCase();
-                const slug = row.querySelector('.news-art-slug').innerText.toLowerCase();
-                const category = row.querySelector('.news-art-cat').innerText;
-                const statusBadge = row.querySelector('.news-art-status-badge').innerText;
+                const titleEl = row.querySelector('.news-art-title');
+                const slugEl = row.querySelector('.news-art-slug');
+                const catEl = row.querySelector('.news-art-cat');
+                const statusEl = row.querySelector('.news-art-status-badge');
+                const featuredToggle = row.querySelector('.news-featured-toggle');
+                if (!titleEl || !catEl || !statusEl) return;
 
-                let matchKw = !kw || title.includes(kw) || slug.includes(kw);
-                let matchCat = !cat || category === cat;
-                let matchStatus = !status || statusBadge === status;
+                const isFeatured = featuredToggle && featuredToggle.style.opacity === '1';
 
-                if (matchKw && matchCat && matchStatus) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
+                let matchKw = !kw || titleEl.innerText.toLowerCase().includes(kw) || (slugEl && slugEl.innerText.toLowerCase().includes(kw));
+                let matchCat = !cat || catEl.innerText.trim() === cat;
+                let matchStatus = !status || statusEl.innerText.trim() === status;
+                let matchFeatured = !featured || (featured === 'featured' && isFeatured);
+
+                row.style.display = (matchKw && matchCat && matchStatus && matchFeatured) ? '' : 'none';
+                if (row.style.display === '') visible++;
             });
-            showLdpToast('Đã lọc danh sách bài viết!');
+            showLdpToast(`Lọc xong — ${visible} bài phù hợp`);
         }
 
 
@@ -14087,6 +14183,97 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             </div>
         </div>
     <script src="news_cms.js"></script>
+
+    <!-- ===== MODAL PREVIEW BÀI VIẾT (IDs khớp news_cms.js) ===== -->
+    <div id="news-preview-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);overflow-y:auto;padding:24px 16px;flex-direction:column;align-items:center;">
+        <div style="max-width:900px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+
+            <!-- Browser chrome bar -->
+            <div style="background:#1e2330;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.07);">
+                <div style="display:flex;gap:6px;flex-shrink:0;">
+                    <span style="width:12px;height:12px;border-radius:50%;background:#ff5f57;display:block;"></span>
+                    <span style="width:12px;height:12px;border-radius:50%;background:#febc2e;display:block;"></span>
+                    <span style="width:12px;height:12px;border-radius:50%;background:#28c840;display:block;"></span>
+                </div>
+                <div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:5px 12px;font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:6px;">
+                    <span style="color:#34d399;font-size:11px;">🔒</span>
+                    <span>fpt.vn/tin-tuc/<span id="preview-slug-bar">url-slug</span></span>
+                    <span style="margin-left:auto;font-size:10px;background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);border-radius:4px;padding:1px 7px;font-weight:600;">PREVIEW</span>
+                </div>
+                <button onclick="closeNewsPreviewModal()" style="background:none;border:none;color:#94a3b8;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;" title="Đóng preview">&times;</button>
+            </div>
+
+            <!-- Trang FPT frontend giả -->
+            <div style="background:#fff;color:#1e293b;font-family:'Inter',sans-serif;">
+
+                <!-- FPT Header -->
+                <div style="background:#ff6b00;padding:12px 32px;display:flex;align-items:center;justify-content:space-between;">
+                    <div style="font-size:19px;font-weight:800;color:#fff;letter-spacing:-.5px;">FPT <span style="font-weight:400;">Telecom</span></div>
+                    <div style="display:flex;gap:20px;">
+                        <span style="font-size:13px;color:rgba(255,255,255,0.8);cursor:pointer;">Sản phẩm</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.8);cursor:pointer;">Khuyến mãi</span>
+                        <span style="font-size:13px;font-weight:700;color:#fff;border-bottom:2px solid rgba(255,255,255,0.8);padding-bottom:2px;">Tin tức</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.8);cursor:pointer;">Hỗ trợ</span>
+                    </div>
+                </div>
+
+                <!-- Breadcrumb -->
+                <div style="padding:9px 32px;font-size:12px;color:#64748b;background:#f8fafc;border-bottom:1px solid #e2e8f0;">
+                    Trang chủ &rsaquo; Tin tức &rsaquo; <span style="color:#ff6b00;">Tin tức</span> &rsaquo; <span id="prev-art-title-breadcrumb" style="color:#334155;font-weight:500;">Tiêu đề bài viết</span>
+                </div>
+
+                <!-- 2 cột: sidebar TOC + article content -->
+                <div style="display:flex;gap:0;max-width:1100px;margin:0 auto;padding:32px 24px 48px;align-items:start;gap:32px;">
+
+                    <!-- Cột chính: Article -->
+                    <div style="flex:1;min-width:0;">
+                        <h1 id="prev-art-title" style="font-size:26px;font-weight:800;line-height:1.3;color:#0f172a;margin:0 0 12px;">Tiêu đề bài viết</h1>
+                        <div id="prev-art-meta" style="font-size:13px;color:#64748b;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #e2e8f0;">Tác giả: Admin · Chuyên mục: Tin tức · Kênh: FPT Telecom</div>
+
+                        <!-- Thumbnail -->
+                        <div style="border-radius:10px;overflow:hidden;background:#f1f5f9;margin-bottom:18px;">
+                            <img id="prev-art-thumb" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=720&q=80" alt="" style="width:100%;max-height:360px;object-fit:cover;display:block;">
+                            <div id="prev-art-caption" style="padding:6px 14px;font-size:11px;color:#64748b;font-style:italic;background:#f8fafc;border-top:1px solid #e2e8f0;"></div>
+                        </div>
+
+                        <!-- Sapo -->
+                        <p id="prev-art-sapo" style="font-size:15px;font-weight:600;color:#334155;line-height:1.7;background:#fff8f3;border-left:3px solid #ff6b00;padding:12px 16px;border-radius:0 6px 6px 0;margin:0 0 20px;">Sa-po bài viết...</p>
+
+                        <!-- Content -->
+                        <div id="prev-art-content-area" style="font-size:14px;color:#1e293b;line-height:1.85;"></div>
+                    </div>
+
+                    <!-- Sidebar: Mục lục -->
+                    <div style="width:220px;flex-shrink:0;position:sticky;top:20px;">
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;">
+                            <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">📋 Mục lục</div>
+                            <ul id="prev-art-toc-list" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 32px;text-align:center;">
+                    <div style="font-size:12px;color:#94a3b8;">© 2026 FPT Telecom &mdash; <span style="color:#fbbf24;font-weight:600;">Bản preview nội bộ, chưa công khai</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Sync slug vào URL bar khi preview mở
+    var _origPreviewNewsArticle = window.previewNewsArticle;
+    window.previewNewsArticle = function() {
+        var slugEl = document.getElementById('art-slug');
+        var titleEl = document.getElementById('art-title');
+        var slugBar = document.getElementById('preview-slug-bar');
+        var titleBc = document.getElementById('prev-art-title-breadcrumb');
+        if (slugBar && slugEl) slugBar.textContent = slugEl.value || 'url-slug';
+        if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
+        if (_origPreviewNewsArticle) _origPreviewNewsArticle();
+        document.getElementById('news-preview-modal').style.display = 'flex';
+    };
+    </script>
 </body>
 
 </html>
