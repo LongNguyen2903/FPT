@@ -8356,26 +8356,31 @@
             }
             </script>
 
-            <div id="mod-cms-payment" class="module-view">
+                        <div id="mod-cms-payment" class="module-view">
                 <div class="card" style="padding: 24px;">
-                    <div class="page-header" style="border-bottom: 1px solid var(--border-glass); padding-bottom: 12px; margin-bottom: 20px;">
+                    <div class="page-header"
+                        style="border-bottom: 1px solid var(--border-glass); padding-bottom: 12px; margin-bottom: 20px;">
                         <div>
-                            <h2 style="font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
+                            <h2
+                                style="font-size: 20px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
                                 💳 Phương thức Thanh toán & Ưu đãi
                             </h2>
                             <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
-                                Định nghĩa các phương thức thanh toán toàn hệ thống, cấu hình ưu đãi riêng và gán gói cước áp dụng.
+                                Định nghĩa các phương thức thanh toán toàn hệ thống, cấu hình ưu đãi riêng và gán gói cước áp dụng theo kênh bán hàng.
                             </div>
                         </div>
                     </div>
 
                     <!-- TABS -->
-                    <div class="tabs" style="margin-bottom: 20px; border-bottom: 1px solid var(--border-glass); display: flex; gap: 10px;">
-                        <div id="payment-tab-config" class="tab active" onclick="switchPaymentTab('config')" style="font-size: 13.5px; font-weight: 600; padding: 10px 20px; cursor: pointer;">
+                    <div class="tabs"
+                        style="margin-bottom: 20px; border-bottom: 1px solid var(--border-glass); display: flex; gap: 10px;">
+                        <div id="payment-tab-config" class="tab active" onclick="switchPaymentTab('config')"
+                            style="font-size: 13.5px; font-weight: 600; padding: 10px 20px; cursor: pointer;">
                             ⚙️ Cấu hình Ưu đãi & Mô tả
                         </div>
-                        <div id="payment-tab-history" class="tab" onclick="switchPaymentTab('history')" style="font-size: 13.5px; font-weight: 600; padding: 10px 20px; cursor: pointer;">
-                            🕒 Lịch sử chỉnh sửa
+                        <div id="payment-tab-history" class="tab" onclick="switchPaymentTab('history')"
+                            style="font-size: 13.5px; font-weight: 600; padding: 10px 20px; cursor: pointer;">
+                            🕒 Danh sách cấu hình PTTT
                         </div>
                     </div>
 
@@ -8383,16 +8388,40 @@
                     <div id="payment-view-config" class="payment-sub-view">
                         <div style="display: flex; gap: 24px; min-height: 550px; align-items: stretch;">
                             <!-- Panel Trái: Danh sách Phương thức / SKU -->
-                            <div id="payment-sidebar-container" style="width: 280px; border-right: 1px solid var(--border-glass); padding-right: 20px; display: flex; flex-direction: column; gap: 12px; flex-shrink:0;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                    <span id="payment-sidebar-title" style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px;">DANH SÁCH PHƯƠNG THỨC</span>
-                                    <!-- Nút + Thêm mới bị loại bỏ vì PTTT lấy từ Payment Hub -->
+                            <div id="payment-sidebar-container"
+                                style="width: 280px; border-right: 1px solid var(--border-glass); padding-right: 20px; display: flex; flex-direction: column; gap: 12px; flex-shrink:0;">
+                                
+                                <!-- Bộ lọc Kênh bán hàng -->
+                                <div class="form-group" style="margin-bottom:4px;">
+                                    <label style="display:block; font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:4px; letter-spacing:0.5px;">CẤU HÌNH THEO KÊNH BÁN</label>
+                                    <select class="form-select" id="sel-payment-channel" onchange="onChangePaymentChannel(this.value)" style="font-size:12px; padding:6px 10px; width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); color:#fff; border-radius:6px;">
+                                        <option value="global">Global (Tất cả kênh)</option>
+                                        <option value="tdw">tongdaiwifi.fpt.vn</option>
+                                        <option value="hifpt">App HiFPT</option>
+                                        <option value="fptvn">Website fpt.vn</option>
+                                    </select>
                                 </div>
-                                <div id="payment-methods-sidebar-list" style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 520px; padding-right: 4px;">
+
+                                <!-- Box trạng thái Kế thừa (chỉ hiển thị cho kênh con) -->
+                                <div id="div-payment-channel-inherit" style="display:none; padding:8px 12px; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:6px; margin-bottom:8px;">
+                                    <label style="display:inline-flex; align-items:center; font-size:11.5px; color:var(--warning); cursor:pointer; user-select:none; margin:0;">
+                                        <input type="checkbox" id="chk-payment-channel-inherit" checked onchange="onChangePaymentInherit(this.checked)" style="margin-right:6px; cursor:pointer;"> Kế thừa từ Global
+                                    </label>
+                                    <p style="font-size:9.5px; color:var(--text-muted); margin:4px 0 0 0; line-height:1.3;">Kênh con sẽ dùng chung cấu hình với Global (Không thể chỉnh sửa).</p>
+                                </div>
+
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                    <span id="payment-sidebar-title"
+                                        style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px;">DANH SÁCH GÓI CƯỚC (SKU)</span>
+                                </div>
+                                <div id="payment-methods-sidebar-list"
+                                    style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 420px; padding-right: 4px;">
                                 </div>
                             </div>
                             <!-- Panel Phải: Form Chi tiết -->
-                            <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0;" id="payment-method-detail-panel">
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0;"
+                                id="payment-method-detail-panel">
                             </div>
                         </div>
                     </div>
@@ -8404,9 +8433,13 @@
                             <table class="checkout-table" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th style="width: 180px;">Thời gian</th>
-                                        <th style="width: 140px;">Người thực hiện</th>
-                                        <th>Nội dung thay đổi</th>
+                                        <th style="width: 160px;">Thời gian</th>
+                                        <th style="width: 120px;">Người thực hiện</th>
+                                        <th style="width: 150px;">PTTT tác động</th>
+                                        <th style="width: 180px;">Gói cước (SKU)</th>
+                                        <th style="width: 150px;">Thao tác</th>
+                                        <th>Chi tiết thay đổi</th>
+                                        <th style="width: 140px; text-align: center;">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody id="payment-history-log-body"></tbody>
@@ -8416,532 +8449,1046 @@
                 </div>
             </div>
 
+            <!-- MODAL CHỈNH SỬA CẤU HÌNH TỪ LOG LỊCH SỬ -->
+            <div id="modal-payment-log-edit" class="modal" style="display:none; justify-content:center; align-items:center; z-index:9999;">
+                <div class="modal-content" style="width: 720px; background:var(--bg-panel); border:1px solid var(--border-glass); margin: auto;">
+                    <div class="modal-header" style="border-bottom:1px solid var(--border-glass);">
+                        <h3 id="modal-payment-log-edit-title" style="color:#fff; font-size:16px; font-weight:700; display:flex; align-items:center; gap:8px;">✏️ Chỉnh sửa cấu hình nhanh PTTT</h3>
+                        <span class="close" onclick="closePaymentLogEditModal()" style="cursor:pointer; font-size:20px; color:var(--text-muted);">&times;</span>
+                    </div>
+                    <div class="modal-body" style="padding:20px; max-height: 480px; overflow-y: auto;">
+                        <input type="hidden" id="modal-edit-channel">
+                        <input type="hidden" id="modal-edit-method-idx">
+                        
+                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:8px; padding:12px; margin-bottom:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                            <div>
+                                <label style="display:block; font-size:11px; color:var(--text-muted); margin-bottom:4px; font-weight:600;">PHƯƠNG THỨC THANH TOÁN</label>
+                                <input type="text" id="modal-edit-method-title" class="form-input" disabled style="background:rgba(255,255,255,0.05); color:var(--text-muted); cursor:not-allowed; font-weight:600;">
+                            </div>
+                            <div>
+                                <label style="display:block; font-size:11px; color:var(--text-muted); margin-bottom:4px; font-weight:600;">KÊNH BÁN HÀNG</label>
+                                <input type="text" id="modal-edit-channel-name" class="form-input" disabled style="background:rgba(255,255,255,0.05); color:var(--text-muted); cursor:not-allowed; font-weight:600;">
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                            <div class="form-group">
+                                <label style="display:block; font-size:11px; color:var(--text-muted); margin-bottom:4px; font-weight:600;">NGÀY BẮT ĐẦU</label>
+                                <input type="date" id="modal-edit-start-date" class="form-input" style="font-size:12.5px; padding:6px 10px;">
+                            </div>
+                            <div class="form-group">
+                                <label style="display:block; font-size:11px; color:var(--text-muted); margin-bottom:4px; font-weight:600;">NGÀY HẾT HẠN</label>
+                                <input type="date" id="modal-edit-expiry-date" class="form-input" style="font-size:12.5px; padding:6px 10px;">
+                            </div>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); border-radius:8px; padding:16px; margin-bottom:16px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <label style="font-size:12px; font-weight:700; color:var(--text-muted);">MÔ TẢ ƯU ĐÃI KÈM THEO</label>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="addModalPaymentDescRow()" style="font-size:10px; padding:2px 8px; border-color:var(--primary); color:var(--primary);">+ Thêm dòng</button>
+                            </div>
+                            <div id="modal-payment-desc-list-wrapper">
+                                <!-- JS render -->
+                            </div>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); border-radius:8px; padding:16px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                <label style="font-size:12px; font-weight:700; color:var(--text-muted); margin:0;">GÁN GÓI CƯỚC SKU ÁP DỤNG</label>
+                                <label style="display:inline-flex; align-items:center; gap:4px; font-size:11px; color:var(--text-muted); cursor:pointer; user-select:none; margin:0;">
+                                    <input type="checkbox" id="modal-sku-select-all" onchange="toggleModalAllSkus(this.checked)" style="width:13px; height:13px; accent-color:var(--primary); cursor:pointer;"> Chọn tất cả
+                                </label>
+                            </div>
+                            <input type="text" id="modal-payment-sku-search" placeholder="🔍 Nhập mã hoặc tên SKU để lọc nhanh..." oninput="filterModalSkus(this.value)" style="width:100%; font-size:12px; padding:6px 10px; margin-bottom:8px; background:rgba(0,0,0,0.25); border:1px solid var(--border-glass); color:#fff; border-radius:6px; box-sizing:border-box;">
+                            <div style="border:1px solid var(--border-glass); border-radius:6px; max-height:160px; overflow-y:auto; padding:8px; background:rgba(0,0,0,0.15);">
+                                <div id="modal-payment-sku-checkboxes" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                                    <!-- JS render checkboxes -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border-top:1px solid var(--border-glass); padding:12px 20px; display:flex; justify-content:space-between; align-items:center;">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="deletePaymentConfigFromModal()" style="color:var(--danger); border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.08);">🗑 Xóa cấu hình</button>
+                        <div style="display:flex; gap:8px;">
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="closePaymentLogEditModal()">Hủy bỏ</button>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="savePaymentConfigFromModal()">Lưu cấu hình</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <script>
-            // ===== DỮ LIỆU PHƯƠNG THỨC THANH TOÁN NÂNG CAO =====
-            var globalPaymentMethods = [
-                { title: 'Thanh toán bằng VietQR', logo: '', descs: ['Giảm 50k khi thanh toán Online'], startDate: '2026-06-01', expiryDate: '2026-12-31', skus: ['INT-GIGA', 'INT-SKY', 'INT-META'] },
-                { title: 'Ví điện tử Momo', logo: '', descs: ['Giảm 50k khi thanh toán Online', 'Hoàn tiền 10k cho giao dịch đầu tiên'], startDate: '2026-06-01', expiryDate: '2026-09-30', skus: ['INT-GIGA', 'INT-SKY', 'SA-SMAX'] },
-                { title: 'Ví Zalopay', logo: '', descs: ['Giảm 50k khi thanh toán Online'], startDate: '2026-06-01', expiryDate: '2026-10-31', skus: ['INT-GIGA', 'CAM-IQ3'] }
-            ];
+                // ===== DỮ LIỆU PHƯƠNG THỨC THANH TOÁN THEO KÊNH =====
+                var channelPaymentMethods = {
+                    global: [
+                        { title: 'Thanh toán bằng VietQR', logo: '', descs: ['Giảm 50k khi thanh toán Online'], startDate: '2026-06-01', expiryDate: '2026-12-31', skus: ['INT-GIGA', 'INT-SKY', 'INT-META'] },
+                        { title: 'Ví điện tử Momo', logo: '', descs: ['Giảm 50k khi thanh toán Online', 'Hoàn tiền 10k cho giao dịch đầu tiên'], startDate: '2026-06-01', expiryDate: '2026-09-30', skus: ['INT-GIGA', 'INT-SKY', 'SA-SMAX'] },
+                        { title: 'Ví Zalopay', logo: '', descs: ['Giảm 50k khi thanh toán Online'], startDate: '2026-06-01', expiryDate: '2026-10-31', skus: ['INT-GIGA', 'CAM-IQ3'] }
+                    ],
+                    tdw: [],
+                    hifpt: [],
+                    fptvn: []
+                };
 
-            var activePaymentIdx = 0;
-            var paymentViewMode = 'sku'; // Mặc định là 'sku'
-            var activeSkuCode = 'INT-GIGA';
-            var paymentSkuSearchKeyword = '';
-            var paymentSkuFilterType = 'all';
+                var activePaymentChannel = 'global';
+                var paymentChannelInheritStates = { tdw: true, hifpt: true, fptvn: true };
 
-            var paymentAuditLogs = [
-                { time: '01/06/2026 14:15:22', user: 'huyennk', action: 'Cập nhật ưu đãi cho phương thức Ví điện tử Momo' },
-                { time: '01/06/2026 10:30:05', user: 'Test003', action: 'Cập nhật danh sách SKU áp dụng cho VietQR' },
-                { time: '28/05/2026 09:21:40', user: 'Admin User', action: 'Khởi tạo danh sách phương thức thanh toán mặc định' }
-            ];
+                var activePaymentIdx = 0;
+                var paymentViewMode = 'sku'; // Mặc định là 'sku'
+                var activeSkuCode = 'INT-GIGA';
+                var paymentSkuSearchKeyword = '';
+                var paymentSkuFilterType = 'all';
 
-            function switchPaymentTab(tabName) {
-                document.querySelectorAll('#mod-cms-payment .tabs .tab').forEach(function(t){ t.classList.remove('active'); });
-                document.querySelectorAll('#mod-cms-payment .payment-sub-view').forEach(function(v){ v.style.display = 'none'; });
-                document.getElementById('payment-tab-' + tabName).classList.add('active');
-                document.getElementById('payment-view-' + tabName).style.display = 'block';
-                if (tabName === 'history') { renderPaymentAuditLogs(); }
-                else { renderPaymentMethodsSidebar(); renderPaymentMethodDetail(); }
-            }
+                // Lịch sử chỉnh sửa nâng cấp
+                var paymentAuditLogs = [
+                    { time: '01/06/2026 14:15:22', user: 'huyennk', actionType: 'Cập nhật ưu đãi', method: 'Ví điện tử Momo', skus: ['INT-GIGA', 'INT-SKY'], detail: 'Thay đổi mô tả dòng 1 thành: Giảm 50k khi thanh toán Online', channel: 'global', methodIdx: 1 },
+                    { time: '01/06/2026 10:30:05', user: 'Test003', actionType: 'Thay đổi SKU', method: 'Thanh toán bằng VietQR', skus: ['INT-GIGA', 'INT-SKY', 'INT-META'], detail: 'Gán thêm 3 gói cước áp dụng', channel: 'global', methodIdx: 0 },
+                    { time: '28/05/2026 09:21:40', user: 'Admin User', actionType: 'Khởi tạo', method: 'Tất cả', skus: ['Tất cả'], detail: 'Khởi tạo danh sách phương thức thanh toán mặc định', channel: 'global', methodIdx: -1 }
+                ];
 
-
-
-            function setPaymentViewMode(mode) {
-                paymentViewMode = mode;
-                var btnMethod = document.getElementById('payment-mode-method-btn');
-                var btnSku = document.getElementById('payment-mode-sku-btn');
-                var sidebarContainer = document.getElementById('payment-sidebar-container');
-                
-                if (mode === 'method') {
-                    if (btnMethod) {
-                        btnMethod.style.background = 'var(--primary-gradient)';
-                        btnMethod.style.color = '#fff';
-                        btnMethod.style.border = 'none';
-                    }
-                    if (btnSku) {
-                        btnSku.style.background = 'rgba(255,255,255,0.05)';
-                        btnSku.style.color = 'var(--text-muted)';
-                        btnSku.style.border = '1px solid var(--border-glass)';
-                    }
-                    if (sidebarContainer) sidebarContainer.style.display = 'flex';
-                } else {
-                    if (btnMethod) {
-                        btnMethod.style.background = 'rgba(255,255,255,0.05)';
-                        btnMethod.style.color = 'var(--text-muted)';
-                        btnMethod.style.border = '1px solid var(--border-glass)';
-                    }
-                    if (btnSku) {
-                        btnSku.style.background = 'var(--primary-gradient)';
-                        btnSku.style.color = '#fff';
-                        btnSku.style.border = 'none';
-                    }
-                    if (sidebarContainer) sidebarContainer.style.display = 'flex';
+                function switchPaymentTab(tabName) {
+                    document.querySelectorAll('#mod-cms-payment .tabs .tab').forEach(function (t) { t.classList.remove('active'); });
+                    document.querySelectorAll('#mod-cms-payment .payment-sub-view').forEach(function (v) { v.style.display = 'none'; });
+                    document.getElementById('payment-tab-' + tabName).classList.add('active');
+                    document.getElementById('payment-view-' + tabName).style.display = 'block';
+                    if (tabName === 'history') { renderPaymentAuditLogs(); }
+                    else { renderPaymentMethodsSidebar(); renderPaymentMethodDetail(); }
                 }
-                
-                renderPaymentMethodsSidebar();
-                renderPaymentMethodDetail();
-            }
 
-            // Bộ lọc tìm kiếm & phân loại cho danh sách SKU ở sidebar
-            var paymentSidebarSkuSearchKeyword = '';
-            var paymentSidebarSkuFilterType = 'all';
-            var paymentSidebarSelectedSkus = []; // Lưu các SKU được check chọn để sửa đồng loạt
-
-            function renderPaymentMethodsSidebar() {
-                var container = document.getElementById('payment-methods-sidebar-list');
-                if (!container) return;
-                container.innerHTML = '';
-                
-                var titleElement = document.getElementById('payment-sidebar-title');
-
-                if (paymentViewMode === 'method') {
-                    if (titleElement) titleElement.innerHTML = 'DANH SÁCH PHƯƠNG THỨC';
-                    globalPaymentMethods.forEach(function(method, idx) {
-                        var item = document.createElement('div');
-                        item.style.cssText = 'padding:12px 14px;background:' + (activePaymentIdx === idx ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.02)') + ';border:1px solid ' + (activePaymentIdx === idx ? 'rgba(249,115,22,0.35)' : 'var(--border-glass)') + ';border-radius:8px;display:flex;align-items:center;gap:10px;cursor:pointer;position:relative;transition:0.2s;';
-                        item.onclick = function(e) {
-                            activePaymentIdx = idx; paymentSkuSearchKeyword = ''; paymentSkuFilterType = 'all';
-                            renderPaymentMethodsSidebar(); renderPaymentMethodDetail();
-                        };
-                        var logoHtml = method.logo ? '<img src="' + method.logo + '" style="width:32px;height:32px;object-fit:contain;border-radius:4px;">' : '<div style="width:32px;height:32px;background:rgba(0,0,0,0.2);border:1px solid var(--border-glass);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;">📷</div>';
-                        item.innerHTML = logoHtml + '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;color:#fff;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">' + (method.title || 'Chưa đặt tên') + '</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:2px;">' + (method.descs ? method.descs.length : 0) + ' dòng ưu đãi</div></div>';
-                        container.appendChild(item);
-                    });
-                } else {
-                    if (titleElement) titleElement.innerHTML = 'DANH SÁCH GÓI CƯỚC (SKU)';
+                function onChangePaymentChannel(val) {
+                    activePaymentChannel = val;
                     
+                    var inheritDiv = document.getElementById('div-payment-channel-inherit');
+                    var inheritChk = document.getElementById('chk-payment-channel-inherit');
+                    
+                    if (val === 'global') {
+                        if (inheritDiv) inheritDiv.style.display = 'none';
+                    } else {
+                        if (inheritDiv) inheritDiv.style.display = 'block';
+                        if (inheritChk) inheritChk.checked = paymentChannelInheritStates[val];
+                    }
+                    
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                }
+
+                function onChangePaymentInherit(isChecked) {
+                    var channel = activePaymentChannel;
+                    if (channel === 'global') return;
+                    
+                    paymentChannelInheritStates[channel] = isChecked;
+                    if (!isChecked && channelPaymentMethods[channel].length === 0) {
+                        // Chuyển sang Custom: Copy sâu dữ liệu từ Global sang
+                        channelPaymentMethods[channel] = JSON.parse(JSON.stringify(channelPaymentMethods['global']));
+                        showLdpToast('✏️ Đã chuyển sang cấu hình tùy chỉnh riêng cho kênh.');
+                    } else if (isChecked) {
+                        // Reset về kế thừa
+                        channelPaymentMethods[channel] = [];
+                        showLdpToast('🌐 Đã reset về kế thừa cấu hình Global.');
+                    }
+                    
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                }
+
+                function switchToPaymentCustom() {
+                    var channel = activePaymentChannel;
+                    if (channel === 'global' || !paymentChannelInheritStates[channel]) return;
+                    
+                    paymentChannelInheritStates[channel] = false;
+                    channelPaymentMethods[channel] = JSON.parse(JSON.stringify(channelPaymentMethods['global']));
+                    
+                    var inheritChk = document.getElementById('chk-payment-channel-inherit');
+                    if (inheritChk) inheritChk.checked = false;
+                    
+                    showLdpToast('✏️ Tự động chuyển sang tùy chỉnh riêng.');
+                    renderPaymentMethodsSidebar();
+                }
+
+                var paymentSidebarSkuSearchKeyword = '';
+                var paymentSidebarSkuFilterType = 'all';
+                var paymentSidebarSelectedSkus = [];
+
+                function renderPaymentMethodsSidebar() {
+                    var container = document.getElementById('payment-methods-sidebar-list');
+                    if (!container) return;
+                    container.innerHTML = '';
+
+                    var titleElement = document.getElementById('payment-sidebar-title');
+                    var channel = activePaymentChannel;
+                    var isInherit = (channel !== 'global' && paymentChannelInheritStates[channel]);
+                    var targetChannel = isInherit ? 'global' : channel;
+
+                    if (paymentViewMode === 'method') {
+                        if (titleElement) titleElement.innerHTML = 'DANH SÁCH PHƯƠNG THỨC';
+                        channelPaymentMethods[targetChannel].forEach(function (method, idx) {
+                            var item = document.createElement('div');
+                            item.style.cssText = 'padding:12px 14px;background:' + (activePaymentIdx === idx ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.02)') + ';border:1px solid ' + (activePaymentIdx === idx ? 'rgba(249,115,22,0.35)' : 'var(--border-glass)') + ';border-radius:8px;display:flex;align-items:center;gap:10px;cursor:pointer;position:relative;transition:0.2s;';
+                            item.onclick = function (e) {
+                                activePaymentIdx = idx; paymentSkuSearchKeyword = ''; paymentSkuFilterType = 'all';
+                                renderPaymentMethodsSidebar(); renderPaymentMethodDetail();
+                            };
+                            var logoHtml = method.logo ? '<img src="' + method.logo + '" style="width:32px;height:32px;object-fit:contain;border-radius:4px;">' : '<div style="width:32px;height:32px;background:rgba(0,0,0,0.2);border:1px solid var(--border-glass);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;">📷</div>';
+                            item.innerHTML = logoHtml + '<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;color:#fff;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">' + (method.title || 'Chưa đặt tên') + '</div><div style="font-size:10.5px;color:var(--text-muted);margin-top:2px;">' + (method.descs ? method.descs.length : 0) + ' dòng ưu đãi</div></div>';
+                            container.appendChild(item);
+                        });
+                    } else {
+                        if (titleElement) titleElement.innerHTML = 'DANH SÁCH GÓI CƯỚC (SKU)';
+
+                        var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
+                        var filteredSkus = skus.filter(function (sku) {
+                            if (paymentSidebarSkuFilterType !== 'all' && sku.type !== paymentSidebarSkuFilterType) return false;
+                            if (paymentSidebarSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSidebarSkuSearchKeyword.toLowerCase()) === -1) return false;
+                            return true;
+                        });
+
+                        var isAllChecked = filteredSkus.length > 0 && filteredSkus.every(function (s) {
+                            return paymentSidebarSelectedSkus.indexOf(s.code) > -1;
+                        });
+
+                        var filterArea = document.createElement('div');
+                        filterArea.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05);';
+                        
+                        var checkboxDisabled = isInherit ? 'disabled' : '';
+                        
+                        filterArea.innerHTML =
+                            '<div style="display:flex; align-items:center; gap:8px;">'
+                            + '<label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#fff; cursor:pointer; user-select:none; white-space:nowrap;">'
+                            + '<input type="checkbox" id="sku-select-all-checkbox" ' + (isAllChecked ? 'checked' : '') + ' ' + checkboxDisabled + ' onchange="toggleSelectAllSkus(this.checked)" style="width:15px; height:15px; accent-color:var(--primary); cursor:pointer;">'
+                            + 'Chọn tất cả'
+                            + '</label>'
+                            + '<input type="text" class="form-input" placeholder="🔍 Lọc mã/tên SKU..." value="' + paymentSidebarSkuSearchKeyword + '" oninput="onPaymentSidebarSkuSearch(this.value)" style="font-size:12px; padding:6px 10px; flex:1;">'
+                            + '</div>'
+                            + '<div style="display:flex; gap:4px; flex-wrap:wrap;">'
+                            + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'all' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'all\', this)" style="font-size:10px; padding:3px 6px;">Tất cả</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Internet' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Internet\', this)" style="font-size:10px; padding:3px 6px;">📡 Internet</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Camera' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Camera\', this)" style="font-size:10px; padding:3px 6px;">📷 Cam</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Truyền hình' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Truyền hình\', this)" style="font-size:10px; padding:3px 6px;">📺 TV</button>'
+                            + '</div>';
+                        container.appendChild(filterArea);
+
+                        var listWrapper = document.createElement('div');
+                        listWrapper.style.cssText = 'display:flex; flex-direction:column; gap:6px; overflow-y:auto; flex:1; max-height: 320px;';
+
+                        filteredSkus.forEach(function (sku) {
+                            var isChecked = paymentSidebarSelectedSkus.indexOf(sku.code) > -1;
+                            var isActive = activeSkuCode === sku.code;
+                            
+                            // Lấy danh sách các PTTT đang bật cho SKU này trên kênh hiện tại
+                            var activeMethods = channelPaymentMethods[targetChannel].filter(function(m) {
+                                return m.skus && m.skus.indexOf(sku.code) > -1;
+                            }).map(function(m) {
+                                var shortTitle = m.title.indexOf('VietQR') > -1 ? 'QR' : m.title.indexOf('Momo') > -1 ? 'Momo' : m.title.indexOf('Zalopay') > -1 ? 'Zalo' : 'Khác';
+                                return '<span class="badge" style="background:rgba(16,185,129,0.12);color:var(--success);font-size:9px;padding:1px 4px;margin-right:2px;border-radius:3px;font-weight:600;">' + shortTitle + '</span>';
+                            }).join('');
+                            
+                            if (!activeMethods) {
+                                activeMethods = '<span class="badge" style="background:rgba(239,68,68,0.1);color:var(--danger);font-size:9px;padding:1px 4px;border-radius:3px;">Tắt PTTT</span>';
+                            }
+
+                            var item = document.createElement('div');
+                            item.style.cssText = 'padding:10px 12px;background:' + (isActive ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.02)') + ';border:1px solid ' + (isActive ? 'rgba(249,115,22,0.35)' : 'var(--border-glass)') + ';border-radius:6px;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:10px;';
+
+                            item.onclick = function (e) {
+                                if (e.target.type === 'checkbox') return;
+                                activeSkuCode = sku.code;
+                                renderPaymentMethodsSidebar();
+                                renderPaymentMethodDetail();
+                            };
+
+                            item.innerHTML = '<input type="checkbox" ' + (isChecked ? 'checked' : '') + ' ' + checkboxDisabled + ' onchange="toggleSelectSku(\'' + sku.code + '\', this.checked)" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer; flex-shrink:0;">'
+                                + '<div style="flex:1; min-width:0;">'
+                                + '<div style="font-size:12px;font-weight:600;color:#fff;display:flex;justify-content:space-between;align-items:center;"><span>' + sku.code + '</span><span style="font-size:9px;padding:1px 4px;border-radius:4px;background:rgba(255,255,255,0.05);color:var(--text-muted);font-weight:normal;">' + sku.type + '</span></div>'
+                                + '<div style="font-size:11px;color:var(--text-muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + sku.name + '</div>'
+                                + '<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:2px;">' + activeMethods + '</div>'
+                                + '</div>';
+                            listWrapper.appendChild(item);
+                        });
+
+                        if (filteredSkus.length === 0) {
+                            var empty = document.createElement('div');
+                            empty.style.cssText = 'text-align:center;color:var(--text-muted);font-size:12px;padding:20px;';
+                            empty.textContent = 'Không có SKU phù hợp';
+                            listWrapper.appendChild(empty);
+                        }
+
+                        container.appendChild(listWrapper);
+                    }
+                }
+
+                function toggleSelectSku(skuCode, isChecked) {
+                    var idx = paymentSidebarSelectedSkus.indexOf(skuCode);
+                    if (isChecked) {
+                        if (idx === -1) paymentSidebarSelectedSkus.push(skuCode);
+                    } else {
+                        if (idx > -1) paymentSidebarSelectedSkus.splice(idx, 1);
+                    }
+
+                    if (isChecked && paymentSidebarSelectedSkus.length === 1) {
+                        activeSkuCode = skuCode;
+                    }
+
                     var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
-                    var filteredSkus = skus.filter(function(sku) {
+                    var filtered = skus.filter(function (sku) {
+                        if (paymentSidebarSkuFilterType !== 'all' && sku.type !== paymentSidebarSkuFilterType) return false;
+                        if (paymentSidebarSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSidebarSkuSearchKeyword.toLowerCase()) === -1) return false;
+                        return true;
+                    });
+                    var isAllChecked = filtered.length > 0 && filtered.every(function (s) {
+                        return paymentSidebarSelectedSkus.indexOf(s.code) > -1;
+                    });
+                    var selectAllCheck = document.getElementById('sku-select-all-checkbox');
+                    if (selectAllCheck) selectAllCheck.checked = isAllChecked;
+
+                    renderPaymentMethodDetail();
+                }
+
+                function toggleSelectAllSkus(isChecked) {
+                    var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
+                    var filtered = skus.filter(function (sku) {
                         if (paymentSidebarSkuFilterType !== 'all' && sku.type !== paymentSidebarSkuFilterType) return false;
                         if (paymentSidebarSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSidebarSkuSearchKeyword.toLowerCase()) === -1) return false;
                         return true;
                     });
 
-                    // Tính toán trạng thái checkbox Chọn tất cả
-                    var isAllChecked = filteredSkus.length > 0 && filteredSkus.every(function(s) {
-                        return paymentSidebarSelectedSkus.indexOf(s.code) > -1;
-                    });
-
-                    // Thêm thanh Tìm kiếm, Checkbox All & Filter ngay trên đầu sidebar cho SKU
-                    var filterArea = document.createElement('div');
-                    filterArea.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05);';
-                    filterArea.innerHTML = 
-                        '<div style="display:flex; align-items:center; gap:8px;">'
-                        + '<label style="display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#fff; cursor:pointer; user-select:none; white-space:nowrap;">'
-                        + '<input type="checkbox" id="sku-select-all-checkbox" ' + (isAllChecked ? 'checked' : '') + ' onchange="toggleSelectAllSkus(this.checked)" style="width:15px; height:15px; accent-color:var(--primary); cursor:pointer;">'
-                        + 'Chọn tất cả'
-                        + '</label>'
-                        + '<input type="text" class="form-input" placeholder="🔍 Lọc mã/tên SKU..." value="' + paymentSidebarSkuSearchKeyword + '" oninput="onPaymentSidebarSkuSearch(this.value)" style="font-size:12px; padding:6px 10px; flex:1;">'
-                        + '</div>'
-                        + '<div style="display:flex; gap:4px; flex-wrap:wrap;">'
-                        + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'all' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'all\', this)" style="font-size:10px; padding:3px 6px;">Tất cả</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Internet' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Internet\', this)" style="font-size:10px; padding:3px 6px;">📡 Internet</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Camera' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Camera\', this)" style="font-size:10px; padding:3px 6px;">📷 Cam</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSidebarSkuFilterType === 'Truyền hình' ? 'active' : '') + '" onclick="onPaymentSidebarSkuFilterType(\'Truyền hình\', this)" style="font-size:10px; padding:3px 6px;">📺 TV</button>'
-                        + '</div>';
-                    container.appendChild(filterArea);
-
-                    var listWrapper = document.createElement('div');
-                    listWrapper.style.cssText = 'display:flex; flex-direction:column; gap:6px; overflow-y:auto; flex:1; max-height: 400px;';
-                    
-                    filteredSkus.forEach(function(sku) {
-                        var isChecked = paymentSidebarSelectedSkus.indexOf(sku.code) > -1;
-                        var isActive = activeSkuCode === sku.code;
-                        var item = document.createElement('div');
-                        item.style.cssText = 'padding:10px 12px;background:' + (isActive ? 'rgba(249,115,22,0.12)' : 'rgba(255,255,255,0.02)') + ';border:1px solid ' + (isActive ? 'rgba(249,115,22,0.35)' : 'var(--border-glass)') + ';border-radius:6px;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:10px;';
-                        
-                        // Để click vào item thì focus vào cấu hình SKU đó, click vào checkbox thì check chọn
-                        item.onclick = function(e) {
-                            if (e.target.type === 'checkbox') return;
-                            activeSkuCode = sku.code;
-                            renderPaymentMethodsSidebar();
-                            renderPaymentMethodDetail();
-                        };
-
-                        item.innerHTML = '<input type="checkbox" ' + (isChecked ? 'checked' : '') + ' onchange="toggleSelectSku(\'' + sku.code + '\', this.checked)" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer; flex-shrink:0;">'
-                            + '<div style="flex:1; min-width:0;">'
-                            + '<div style="font-size:12.5px;font-weight:600;color:#fff;">' + sku.code + '</div>'
-                            + '<div style="font-size:11px;color:var(--text-muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + sku.name + '</div>'
-                            + '</div>'
-                            + '<span style="font-size:9.5px;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,0.05);color:var(--text-muted);flex-shrink:0;">' + sku.type + '</span>';
-                        listWrapper.appendChild(item);
-                    });
-
-                    if (filteredSkus.length === 0) {
-                        var empty = document.createElement('div');
-                        empty.style.cssText = 'text-align:center;color:var(--text-muted);font-size:12px;padding:20px;';
-                        empty.textContent = 'Không có SKU phù hợp';
-                        listWrapper.appendChild(empty);
-                    }
-
-                    container.appendChild(listWrapper);
-                }
-            }
-
-            function toggleSelectSku(skuCode, isChecked) {
-                var idx = paymentSidebarSelectedSkus.indexOf(skuCode);
-                if (isChecked) {
-                    if (idx === -1) paymentSidebarSelectedSkus.push(skuCode);
-                } else {
-                    if (idx > -1) paymentSidebarSelectedSkus.splice(idx, 1);
-                }
-                
-                // Nếu SKU đang active bị uncheck hoặc click check SKU mới thì cập nhật activeSkuCode
-                if (isChecked && paymentSidebarSelectedSkus.length === 1) {
-                    activeSkuCode = skuCode;
-                }
-                
-                // Cập nhật lại checkbox Chọn tất cả để đồng bộ trạng thái
-                var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
-                var filtered = skus.filter(function(sku) {
-                    if (paymentSidebarSkuFilterType !== 'all' && sku.type !== paymentSidebarSkuFilterType) return false;
-                    if (paymentSidebarSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSidebarSkuSearchKeyword.toLowerCase()) === -1) return false;
-                    return true;
-                });
-                var isAllChecked = filtered.length > 0 && filtered.every(function(s) {
-                    return paymentSidebarSelectedSkus.indexOf(s.code) > -1;
-                });
-                var selectAllCheck = document.getElementById('sku-select-all-checkbox');
-                if (selectAllCheck) selectAllCheck.checked = isAllChecked;
-                
-                renderPaymentMethodDetail();
-            }
-
-            function toggleSelectAllSkus(isChecked) {
-                var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
-                var filtered = skus.filter(function(sku) {
-                    if (paymentSidebarSkuFilterType !== 'all' && sku.type !== paymentSidebarSkuFilterType) return false;
-                    if (paymentSidebarSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSidebarSkuSearchKeyword.toLowerCase()) === -1) return false;
-                    return true;
-                });
-
-                filtered.forEach(function(sku) {
-                    var idx = paymentSidebarSelectedSkus.indexOf(sku.code);
-                    if (isChecked) {
-                        if (idx === -1) paymentSidebarSelectedSkus.push(sku.code);
-                    } else {
-                        if (idx > -1) paymentSidebarSelectedSkus.splice(idx, 1);
-                    }
-                });
-
-                // Cập nhật giao diện danh sách SKU
-                var listContainer = document.getElementById('payment-methods-sidebar-list');
-                if (listContainer) {
-                    var checkboxes = listContainer.querySelectorAll('input[type="checkbox"]');
-                    checkboxes.forEach(function(cb) {
-                        if (cb.id !== 'sku-select-all-checkbox') {
-                            cb.checked = isChecked;
+                    filtered.forEach(function (sku) {
+                        var idx = paymentSidebarSelectedSkus.indexOf(sku.code);
+                        if (isChecked) {
+                            if (idx === -1) paymentSidebarSelectedSkus.push(sku.code);
+                        } else {
+                            if (idx > -1) paymentSidebarSelectedSkus.splice(idx, 1);
                         }
                     });
+
+                    var listContainer = document.getElementById('payment-methods-sidebar-list');
+                    if (listContainer) {
+                        var checkboxes = listContainer.querySelectorAll('input[type="checkbox"]');
+                        checkboxes.forEach(function (cb) {
+                            if (cb.id !== 'sku-select-all-checkbox') {
+                                cb.checked = isChecked;
+                            }
+                        });
+                    }
+
+                    if (isChecked && filtered.length > 0) {
+                        activeSkuCode = filtered[0].code;
+                    } else if (!isChecked) {
+                        activeSkuCode = '';
+                    }
+
+                    renderPaymentMethodDetail();
                 }
-                
-                // Thiết lập SKU đại diện để hiển thị cấu hình nếu cần
-                if (isChecked && filtered.length > 0) {
-                    activeSkuCode = filtered[0].code;
-                } else if (!isChecked) {
-                    activeSkuCode = '';
+
+                function onPaymentSidebarSkuSearch(val) {
+                    paymentSidebarSkuSearchKeyword = val;
+                    renderPaymentMethodsSidebar();
                 }
 
-                renderPaymentMethodDetail();
-            }
+                function onPaymentSidebarSkuFilterType(type, btn) {
+                    paymentSidebarSkuFilterType = type;
+                    var tabs = btn.parentElement.querySelectorAll('.sku-filter-tab');
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
+                    btn.classList.add('active');
+                    renderPaymentMethodsSidebar();
+                }
 
-            function onPaymentSidebarSkuSearch(val) {
-                paymentSidebarSkuSearchKeyword = val;
-                renderPaymentMethodsSidebar();
-            }
+                function renderPaymentMethodDetail() {
+                    var panel = document.getElementById('payment-method-detail-panel');
+                    if (!panel) return;
 
-            function onPaymentSidebarSkuFilterType(type, btn) {
-                paymentSidebarSkuFilterType = type;
-                var tabs = btn.parentElement.querySelectorAll('.sku-filter-tab');
-                tabs.forEach(function(t){ t.classList.remove('active'); });
-                btn.classList.add('active');
-                renderPaymentMethodsSidebar();
-            }
+                    var channel = activePaymentChannel;
+                    var isInherit = (channel !== 'global' && paymentChannelInheritStates[channel]);
+                    var targetChannel = isInherit ? 'global' : channel;
+                    var inputsDisabled = isInherit ? 'disabled' : '';
 
-            function renderPaymentMethodDetail() {
-                var panel = document.getElementById('payment-method-detail-panel');
-                if (!panel) return;
-                
-                if (paymentViewMode === 'method') {
-                    if (globalPaymentMethods.length === 0 || activePaymentIdx >= globalPaymentMethods.length) {
-                        panel.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:300px;color:var(--text-muted);font-size:13px;border:1px dashed var(--border-glass);border-radius:12px;">Vui lòng chọn phương thức thanh toán.</div>';
-                        return;
-                    }
-                    var method = globalPaymentMethods[activePaymentIdx];
-                    var descRowsHtml = (method.descs || []).map(function(d, di) {
-                        return '<div class="desc-input-row" style="display:flex;gap:8px;margin-bottom:8px;"><input type="text" class="form-input" value="' + d.replace(/"/g,'&quot;') + '" placeholder="VD: Giảm 50k khi thanh toán Online" style="flex:1;font-size:12.5px;padding:6px 10px;" oninput="updatePaymentDescValue(' + di + ',this.value)"><button type="button" class="remove-desc-btn" onclick="removePaymentDescRow(' + di + ')" style="background:none;border:1px solid var(--border-glass);border-radius:6px;color:var(--danger);cursor:pointer;padding:0 10px;">✕</button></div>';
-                    }).join('');
-
-                    panel.innerHTML =
-                        '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;display:flex;gap:20px;align-items:flex-start;">'
-                        + '<div title="Logo PTTT (Xem từ Payment Hub)" style="width:72px;height:72px;border:1px solid var(--border-glass);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:rgba(0,0,0,0.15);overflow:hidden;">'
-                        + (method.logo ? '<img src="' + method.logo + '" style="width:100%;height:100%;object-fit:contain;">' : '<span style="font-size:20px;">📷</span><span style="font-size:9.5px;color:var(--text-muted);margin-top:2px;">Logo</span>')
-                        + '</div>'
-                        + '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;">'
-                        + '<div class="form-group" style="grid-column:span 2;"><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">TÊN PHƯƠNG THỨC (ĐƯỢC ĐỒNG BỘ TỪ PAYMENT HUB)</label><input type="text" class="form-input" value="' + method.title.replace(/"/g,'&quot;') + '" disabled style="font-size:13px;font-weight:600;padding:7px 12px;background:rgba(255,255,255,0.05);color:var(--text-muted);cursor:not-allowed;"></div>'
-                        + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY BẮT ĐẦU</label><input type="date" class="form-input" value="' + (method.startDate || '') + '" style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDate(\'startDate\',this.value)"></div>'
-                        + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY HẾT HẠN</label><input type="date" class="form-input" value="' + (method.expiryDate || '') + '" style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDate(\'expiryDate\',this.value)"></div>'
-                        + '</div></div>'
-                        + '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;">'
-                        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><label style="font-size:12px;font-weight:700;color:var(--text-muted);">MÔ TẢ ƯU ĐÃI KÈM THEO</label><button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentDescRow()" style="font-size:11px;padding:3px 10px;border-color:var(--primary);color:var(--primary);">+ Thêm dòng</button></div>'
-                        + '<div id="payment-detail-descs-list">' + (descRowsHtml || '<div style="text-align:center;color:var(--text-muted);padding:15px;font-size:12px;border:1px dashed var(--border-glass);border-radius:6px;">Chưa có dòng mô tả. Nhấn Thêm dòng ở trên.</div>') + '</div>'
-                        + '</div>'
-                        + '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;">'
-                        + '<div><label style="font-size:12px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px;">GÁN GÓI CƯỚC SKU ÁP DỤNG</label><p style="font-size:11.5px;color:var(--text-muted);margin:0 0 10px 0;">Chọn các gói cước được áp dụng ưu đãi của phương thức này.</p></div>'
-                        + '<div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">'
-                        + '<div style="display:flex;gap:5px;flex-wrap:wrap;">'
-                        + '<button class="sku-filter-tab ' + (paymentSkuFilterType==='all'?'active':'') + '" onclick="filterPaymentSkuListByType(\'all\')">Tất cả</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSkuFilterType==='Internet'?'active':'') + '" onclick="filterPaymentSkuListByType(\'Internet\')">📡 Internet</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSkuFilterType==='Camera'?'active':'') + '" onclick="filterPaymentSkuListByType(\'Camera\')">📷 Camera</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSkuFilterType==='Truyền hình'?'active':'') + '" onclick="filterPaymentSkuListByType(\'Truyền hình\')">📺 Truyền hình</button>'
-                        + '<button class="sku-filter-tab ' + (paymentSkuFilterType==='Thiết bị'?'active':'') + '" onclick="filterPaymentSkuListByType(\'Thiết bị\')">🔧 Thiết bị</button>'
-                        + '</div>'
-                        + '<input type="text" class="form-input" placeholder="🔍 Tìm SKU..." value="' + paymentSkuSearchKeyword + '" oninput="filterPaymentSkuListByKeyword(this.value)" style="width:200px;font-size:12px;padding:5px 10px;">'
-                        + '</div>'
-                        + '<div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;max-height:240px;overflow-y:auto;"><table class="checkout-table" style="width:100%;"><thead><tr><th style="width:50px;text-align:center;">Áp dụng</th><th style="width:130px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Dịch vụ</th></tr></thead><tbody id="payment-sku-selection-tbody"></tbody></table></div>'
-                        + '</div>'
-                        + '<div style="display:flex;justify-content:flex-end;gap:12px;margin-top:10px;">'
-                        + '<button type="button" class="btn btn-secondary" onclick="renderPaymentMethodDetail()" style="font-size:13px;">Đặt lại</button>'
-                        + '<button type="button" class="btn btn-primary" onclick="savePaymentMethodConfig()" style="font-size:13px;background:var(--primary-gradient);">Lưu cấu hình</button>'
-                        + '</div>';
-                    renderPaymentSkuSelectionTable();
-                } else {
-                    var sku = (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).find(function(s) { return s.code === activeSkuCode; });
-                    var html = '';
-
-                    if (!sku && paymentSidebarSelectedSkus.length === 0) {
-                        html += '<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:450px; color:var(--text-muted); font-size:13px; border:1px dashed var(--border-glass); border-radius:12px; background:rgba(0,0,0,0.1); gap:12px;">'
-                            + '<span style="font-size:32px;">👈</span>'
-                            + '<span style="font-size:13px; font-weight:500;">Vui lòng chọn ít nhất một Gói cước (SKU) ở danh sách bên trái để bắt đầu cấu hình.</span>'
-                            + '</div>';
-                        panel.innerHTML = html;
-                        return;
-                    }
-                    
-                    var titleText = '';
-                    var subText = '';
-                    if (paymentSidebarSelectedSkus.length > 1) {
-                        titleText = '📦 Cấu hình PTTT cho <span style="color:var(--primary);">' + paymentSidebarSelectedSkus.length + ' Gói cước (SKU) đã chọn</span>';
-                        subText = 'Cấu hình dưới đây sẽ được áp dụng đồng loạt cho tất cả các SKU đã được tick chọn bên trái.';
-                    } else {
-                        var activeSku = sku || (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).find(function(s) { return s.code === paymentSidebarSelectedSkus[0]; });
-                        titleText = '📦 Cấu hình PTTT cho Gói: <span style="color:var(--primary);">' + activeSku.name + ' (' + activeSku.code + ')</span>';
-                        subText = 'Bật/tắt các phương thức thanh toán áp dụng cho gói cước này và chỉnh sửa ưu đãi trực tiếp.';
-                    }
-
-                    html += '<div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); border-radius:10px; padding:18px; margin-bottom: 16px;">'
-                        + '<h3 style="margin-top:0; color:#fff; display:flex; align-items:center; gap:8px;">'
-                        + titleText
-                        + '</h3>'
-                        + '<p style="font-size:12.5px; color:var(--text-muted); margin:4px 0 0 0;">' + subText + '</p>'
-                        + '</div>'
-                        + '<div style="display:flex; flex-direction:column; gap:16px;">';
-
-                    globalPaymentMethods.forEach(function(method, mIdx) {
-                        var isApplied = method.skus && method.skus.indexOf(sku.code) > -1;
-                        
-                        var descRows = (method.descs || []).map(function(d, di) {
-                            return '<div class="desc-input-row" style="display:flex;gap:8px;margin-bottom:8px;">'
-                                + '<input type="text" class="form-input" value="' + d.replace(/"/g,'&quot;') + '" placeholder="VD: Giảm 50k khi thanh toán Online" style="flex:1;font-size:12.5px;padding:6px 10px;" oninput="updatePaymentDescValueFromSku(' + mIdx + ',' + di + ',this.value)">'
-                                + '<button type="button" class="remove-desc-btn" onclick="removePaymentDescRowFromSku(' + mIdx + ',' + di + ')" style="background:none;border:1px solid var(--border-glass);border-radius:6px;color:var(--danger);cursor:pointer;padding:0 10px;">✕</button>'
-                                + '</div>';
+                    if (paymentViewMode === 'method') {
+                        var methods = channelPaymentMethods[targetChannel];
+                        if (methods.length === 0 || activePaymentIdx >= methods.length) {
+                            panel.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:300px;color:var(--text-muted);font-size:13px;border:1px dashed var(--border-glass);border-radius:12px;">Vui lòng chọn phương thức thanh toán.</div>';
+                            return;
+                        }
+                        var method = methods[activePaymentIdx];
+                        var descRowsHtml = (method.descs || []).map(function (d, di) {
+                            var btnHtml = isInherit ? '' : '<button type="button" class="remove-desc-btn" onclick="removePaymentDescRow(' + di + ')" style="background:none;border:1px solid var(--border-glass);border-radius:6px;color:var(--danger);cursor:pointer;padding:0 10px;">✕</button>';
+                            return '<div class="desc-input-row" style="display:flex;gap:8px;margin-bottom:8px;"><input type="text" class="form-input" value="' + d.replace(/"/g, '&quot;') + '" ' + inputsDisabled + ' placeholder="VD: Giảm 50k khi thanh toán Online" style="flex:1;font-size:12.5px;padding:6px 10px;" oninput="updatePaymentDescValue(' + di + ',this.value)">' + btnHtml + '</div>';
                         }).join('');
 
-                        var detailSectionHtml = '';
-                        if (isApplied) {
-                            detailSectionHtml = '<div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.05); display:grid; grid-template-columns: 1fr 1fr; gap:14px;">'
-                                + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY BẮT ĐẦU</label><input type="date" class="form-input" value="' + (method.startDate || '') + '" style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDateFromSku(' + mIdx + ',\'startDate\',this.value)"></div>'
-                                + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY HẾT HẠN</label><input type="date" class="form-input" value="' + (method.expiryDate || '') + '" style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDateFromSku(' + mIdx + ',\'expiryDate\',this.value)"></div>'
-                                + '<div class="form-group" style="grid-column:span 2;">'
-                                + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><label style="font-size:11px;font-weight:700;color:var(--text-muted);">MÔ TẢ ƯU ĐÃI KÈM THEO</label><button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentDescRowFromSku(' + mIdx + ')" style="font-size:10px;padding:2px 8px;border-color:var(--primary);color:var(--primary);">+ Thêm dòng</button></div>'
-                                + '<div id="payment-desc-list-sku-' + mIdx + '">' + (descRows || '<div style="text-align:center;color:var(--text-muted);padding:10px;font-size:11.5px;border:1px dashed var(--border-glass);border-radius:6px;">Chưa có dòng mô tả.</div>') + '</div>'
-                                + '</div>'
+                        var inheritWarning = isInherit ? '<div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.25);color:var(--warning);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:12px;">⚠️ Đang kế thừa cấu hình từ Global. Hãy bỏ tích "Kế thừa từ Global" ở cột bên trái nếu muốn chỉnh sửa riêng cho kênh này.</div>' : '';
+
+                        var addDescBtn = isInherit ? '' : '<button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentDescRow()" style="font-size:11px;padding:3px 10px;border-color:var(--primary);color:var(--primary);">+ Thêm dòng</button>';
+                        var saveBtn = isInherit ? '<button type="button" class="btn btn-secondary" disabled style="opacity:0.4;cursor:not-allowed;">Kế thừa Global (Đọc ghi tắt)</button>' : '<button type="button" class="btn btn-primary" onclick="savePaymentMethodConfig()" style="font-size:13px;background:var(--primary-gradient);">Lưu cấu hình</button>';
+
+                        panel.innerHTML =
+                            inheritWarning
+                            + '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;display:flex;gap:20px;align-items:flex-start;">'
+                            + '<div title="Logo PTTT (Xem từ Payment Hub)" style="width:72px;height:72px;border:1px solid var(--border-glass);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:rgba(0,0,0,0.15);overflow:hidden;">'
+                            + (method.logo ? '<img src="' + method.logo + '" style="width:100%;height:100%;object-fit:contain;">' : '<span style="font-size:20px;">📷</span><span style="font-size:9.5px;color:var(--text-muted);margin-top:2px;">Logo</span>')
+                            + '</div>'
+                            + '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:14px;">'
+                            + '<div class="form-group" style="grid-column:span 2;"><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">TÊN PHƯƠNG THỨC (ĐƯỢC ĐỒNG BỘ TỪ PAYMENT HUB)</label><input type="text" class="form-input" value="' + method.title.replace(/"/g, '&quot;') + '" disabled style="font-size:13px;font-weight:600;padding:7px 12px;background:rgba(255,255,255,0.05);color:var(--text-muted);cursor:not-allowed;"></div>'
+                            + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY BẮT ĐẦU</label><input type="date" class="form-input" value="' + (method.startDate || '') + '" ' + inputsDisabled + ' style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDate(\'startDate\',this.value)"></div>'
+                            + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY HẾT HẠN</label><input type="date" class="form-input" value="' + (method.expiryDate || '') + '" ' + inputsDisabled + ' style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDate(\'expiryDate\',this.value)"></div>'
+                            + '</div></div>'
+                            + '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;">'
+                            + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><label style="font-size:12px;font-weight:700;color:var(--text-muted);">MÔ TẢ ƯU ĐÃI KÈM THEO</label>' + addDescBtn + '</div>'
+                            + '<div id="payment-detail-descs-list">' + (descRowsHtml || '<div style="text-align:center;color:var(--text-muted);padding:15px;font-size:12px;border:1px dashed var(--border-glass);border-radius:6px;">Chưa có dòng mô tả. Nhấn Thêm dòng ở trên.</div>') + '</div>'
+                            + '</div>'
+                            + '<div style="background:rgba(255,255,255,0.01);border:1px solid var(--border-glass);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;">'
+                            + '<div><label style="font-size:12px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:4px;">GÁN GÓI CƯỚC SKU ÁP DỤNG</label><p style="font-size:11.5px;color:var(--text-muted);margin:0 0 10px 0;">Chọn các gói cước được áp dụng ưu đãi của phương thức này.</p></div>'
+                            + '<div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">'
+                            + '<div style="display:flex;gap:5px;flex-wrap:wrap;">'
+                            + '<button class="sku-filter-tab ' + (paymentSkuFilterType === 'all' ? 'active' : '') + '" onclick="filterPaymentSkuListByType(\'all\')">Tất cả</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSkuFilterType === 'Internet' ? 'active' : '') + '" onclick="filterPaymentSkuListByType(\'Internet\')">📡 Internet</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSkuFilterType === 'Camera' ? 'active' : '') + '" onclick="filterPaymentSkuListByType(\'Camera\')">📷 Camera</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSkuFilterType === 'Truyền hình' ? 'active' : '') + '" onclick="filterPaymentSkuListByType(\'Truyền hình\')">📺 Truyền hình</button>'
+                            + '<button class="sku-filter-tab ' + (paymentSkuFilterType === 'Thiết bị' ? 'active' : '') + '" onclick="filterPaymentSkuListByType(\'Thiết bị\')">🔧 Thiết bị</button>'
+                            + '</div>'
+                            + '<input type="text" class="form-input" placeholder="🔍 Tìm SKU..." value="' + paymentSkuSearchKeyword + '" oninput="filterPaymentSkuListByKeyword(this.value)" style="width:200px;font-size:12px;padding:5px 10px;">'
+                            + '</div>'
+                            + '<div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;max-height:240px;overflow-y:auto;"><table class="checkout-table" style="width:100%;"><thead><tr><th style="width:50px;text-align:center;">Áp dụng</th><th style="width:130px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Dịch vụ</th></tr></thead><tbody id="payment-sku-selection-tbody"></tbody></table></div>'
+                            + '</div>'
+                            + '<div style="display:flex;justify-content:flex-end;gap:12px;margin-top:10px;">'
+                            + '<button type="button" class="btn btn-secondary" onclick="renderPaymentMethodDetail()" style="font-size:13px;">Đặt lại</button>'
+                            + saveBtn
+                            + '</div>';
+                        renderPaymentSkuSelectionTable();
+                    } else {
+                        var sku = (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).find(function (s) { return s.code === activeSkuCode; });
+                        var html = '';
+
+                        if (!sku && paymentSidebarSelectedSkus.length === 0) {
+                            html += '<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:450px; color:var(--text-muted); font-size:13px; border:1px dashed var(--border-glass); border-radius:12px; background:rgba(0,0,0,0.1); gap:12px;">'
+                                + '<span style="font-size:32px;">👈</span>'
+                                + '<span style="font-size:13px; font-weight:500;">Vui lòng chọn ít nhất một Gói cước (SKU) ở danh sách bên trái để bắt đầu cấu hình.</span>'
                                 + '</div>';
-                        } else {
-                            detailSectionHtml = '<div style="margin-top:8px; font-size:12px; color:var(--text-muted);">Phương thức này đang tắt đối với gói cước này. Tick chọn bên phải để kích hoạt.</div>';
+                            panel.innerHTML = html;
+                            return;
                         }
 
-                        var logoHtml = method.logo ? '<img src="' + method.logo + '" style="width:32px;height:32px;object-fit:contain;border-radius:4px;">' : '<div style="width:32px;height:32px;background:rgba(0,0,0,0.2);border:1px solid var(--border-glass);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;">📷</div>';
+                        var titleText = '';
+                        var subText = '';
+                        if (paymentSidebarSelectedSkus.length > 1) {
+                            titleText = '📦 Cấu hình PTTT cho <span style="color:var(--primary);">' + paymentSidebarSelectedSkus.length + ' Gói cước (SKU) đã chọn</span>';
+                            subText = 'Cấu hình dưới đây sẽ được áp dụng đồng loạt cho tất cả các SKU đã được tick chọn bên trái.';
+                        } else {
+                            var activeSku = sku || (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).find(function (s) { return s.code === paymentSidebarSelectedSkus[0]; });
+                            titleText = '📦 Cấu hình PTTT cho Gói: <span style="color:var(--primary);">' + activeSku.name + ' (' + activeSku.code + ')</span>';
+                            subText = 'Bật/tắt các phương thức thanh toán áp dụng cho gói cước này và chỉnh sửa ưu đãi trực tiếp.';
+                        }
 
-                        html += '<div style="background:' + (isApplied ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.01)') + '; border:1px solid ' + (isApplied ? 'rgba(249,115,22,0.25)' : 'var(--border-glass)') + '; border-radius:10px; padding:16px; transition:0.2s;">'
-                            + '<div style="display:flex; align-items:center; justify-content:space-between;">'
-                            + '<div style="display:flex; align-items:center; gap:12px;">'
-                            + logoHtml
-                            + '<div>'
-                            + '<div style="font-size:14px; font-weight:700; color:#fff;">' + method.title + '</div>'
-                            + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Nguồn: Payment Hub</div>'
+                        var inheritWarning = isInherit ? '<div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.25);color:var(--warning);padding:10px 14px;border-radius:6px;font-size:12px;margin-bottom:12px;">⚠️ Đang kế thừa cấu hình từ Global. Hãy bỏ tích "Kế thừa từ Global" ở cột bên trái nếu muốn chỉnh sửa riêng cho kênh này.</div>' : '';
+
+                        html += inheritWarning
+                            + '<div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); border-radius:10px; padding:18px; margin-bottom: 16px;">'
+                            + '<h3 style="margin-top:0; color:#fff; display:flex; align-items:center; gap:8px;">'
+                            + titleText
+                            + '</h3>'
+                            + '<p style="font-size:12.5px; color:var(--text-muted); margin:4px 0 0 0;">' + subText + '</p>'
                             + '</div>'
-                            + '</div>'
-                            + '<div style="display:flex; align-items:center; gap:8px;">'
-                            + '<span style="font-size:12px; font-weight:600; color:' + (isApplied ? 'var(--primary)' : 'var(--text-muted)') + ';">' + (isApplied ? 'Đang áp dụng' : 'Không áp dụng') + '</span>'
-                            + '<input type="checkbox" ' + (isApplied ? 'checked' : '') + ' onchange="togglePaymentMethodForSku(' + mIdx + ', \'' + sku.code + '\', this.checked)" style="accent-color:var(--primary); width:18px; height:18px; cursor:pointer;">'
-                            + '</div>'
-                            + '</div>'
-                            + detailSectionHtml
+                            + '<div style="display:flex; flex-direction:column; gap:16px;">';
+
+                        channelPaymentMethods[targetChannel].forEach(function (method, mIdx) {
+                            var isApplied = method.skus && method.skus.indexOf(sku.code) > -1;
+
+                            var descRows = (method.descs || []).map(function (d, di) {
+                                var btnHtml = isInherit ? '' : '<button type="button" class="remove-desc-btn" onclick="removePaymentDescRowFromSku(' + mIdx + ',' + di + ')" style="background:none;border:1px solid var(--border-glass);border-radius:6px;color:var(--danger);cursor:pointer;padding:0 10px;">✕</button>';
+                                return '<div class="desc-input-row" style="display:flex;gap:8px;margin-bottom:8px;">'
+                                    + '<input type="text" class="form-input" value="' + d.replace(/"/g, '&quot;') + '" ' + inputsDisabled + ' placeholder="VD: Giảm 50k khi thanh toán Online" style="flex:1;font-size:12.5px;padding:6px 10px;" oninput="updatePaymentDescValueFromSku(' + mIdx + ',' + di + ',this.value)">'
+                                    + btnHtml
+                                    + '</div>';
+                            }).join('');
+
+                            var detailSectionHtml = '';
+                            if (isApplied) {
+                                var addRowBtn = isInherit ? '' : '<button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentDescRowFromSku(' + mIdx + ')" style="font-size:10px;padding:2px 8px;border-color:var(--primary);color:var(--primary);">+ Thêm dòng</button>';
+                                detailSectionHtml = '<div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.05); display:grid; grid-template-columns: 1fr 1fr; gap:14px;">'
+                                    + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY BẮT ĐẦU</label><input type="date" class="form-input" value="' + (method.startDate || '') + '" ' + inputsDisabled + ' style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDateFromSku(' + mIdx + ',\'startDate\',this.value)"></div>'
+                                    + '<div class="form-group"><label style="display:block;font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:4px;">NGÀY HẾT HẠN</label><input type="date" class="form-input" value="' + (method.expiryDate || '') + '" ' + inputsDisabled + ' style="font-size:12px;padding:6px 10px;" onchange="updatePaymentMethodDateFromSku(' + mIdx + ',\'expiryDate\',this.value)"></div>'
+                                    + '<div class="form-group" style="grid-column:span 2;">'
+                                    + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><label style="font-size:11px;font-weight:700;color:var(--text-muted);">MÔ TẢ ƯU ĐÃI KÈM THEO</label>' + addRowBtn + '</div>'
+                                    + '<div id="payment-desc-list-sku-' + mIdx + '">' + (descRows || '<div style="text-align:center;color:var(--text-muted);padding:10px;font-size:11.5px;border:1px dashed var(--border-glass);border-radius:6px;">Chưa có dòng mô tả.</div>') + '</div>'
+                                    + '</div>'
+                                    + '</div>';
+                            } else {
+                                detailSectionHtml = '<div style="margin-top:8px; font-size:12px; color:var(--text-muted);">Phương thức này đang tắt đối với gói cước này. Tick chọn bên phải để kích hoạt.</div>';
+                            }
+
+                            var logoHtml = method.logo ? '<img src="' + method.logo + '" style="width:32px;height:32px;object-fit:contain;border-radius:4px;">' : '<div style="width:32px;height:32px;background:rgba(0,0,0,0.2);border:1px solid var(--border-glass);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;">📷</div>';
+
+                            html += '<div style="background:' + (isApplied ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.01)') + '; border:1px solid ' + (isApplied ? 'rgba(249,115,22,0.25)' : 'var(--border-glass)') + '; border-radius:10px; padding:16px; transition:0.2s;">'
+                                + '<div style="display:flex; align-items:center; justify-content:space-between;">'
+                                + '<div style="display:flex; align-items:center; gap:12px;">'
+                                + logoHtml
+                                + '<div>'
+                                + '<div style="font-size:14px; font-weight:700; color:#fff;">' + method.title + '</div>'
+                                + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Nguồn: Payment Hub</div>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div style="display:flex; align-items:center; gap:8px;">'
+                                + '<span style="font-size:12px; font-weight:600; color:' + (isApplied ? 'var(--primary)' : 'var(--text-muted)') + ';">' + (isApplied ? 'Đang áp dụng' : 'Không áp dụng') + '</span>'
+                                + '<input type="checkbox" ' + (isApplied ? 'checked' : '') + ' ' + inputsDisabled + ' onchange="togglePaymentMethodForSku(' + mIdx + ', \'' + sku.code + '\', this.checked)" style="accent-color:var(--primary); width:18px; height:18px; cursor:pointer;">'
+                                + '</div>'
+                                + '</div>'
+                                + detailSectionHtml
+                                + '</div>';
+                        });
+
+                        var saveBtn = isInherit ? '<button type="button" class="btn btn-secondary" disabled style="opacity:0.4;cursor:not-allowed;">Kế thừa Global (Đọc ghi tắt)</button>' : '<button type="button" class="btn btn-primary" onclick="savePaymentMethodConfigFromSku()" style="font-size:13px;background:var(--primary-gradient);">Lưu cấu hình</button>';
+
+                        html += '</div>'
+                            + '<div style="display:flex;justify-content:flex-end;gap:12px;margin-top:20px;">'
+                            + '<button type="button" class="btn btn-secondary" onclick="renderPaymentMethodDetail()" style="font-size:13px;">Đặt lại</button>'
+                            + saveBtn
                             + '</div>';
+
+                        panel.innerHTML = html;
+                    }
+                }
+
+                function renderPaymentSkuSelectionTable() {
+                    var tbody = document.getElementById('payment-sku-selection-tbody');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    var channel = activePaymentChannel;
+                    var isInherit = (channel !== 'global' && paymentChannelInheritStates[channel]);
+                    var targetChannel = isInherit ? 'global' : channel;
+                    
+                    var method = channelPaymentMethods[targetChannel][activePaymentIdx];
+                    var selectedSkus = method.skus || [];
+                    
+                    var inputDisabled = isInherit ? 'disabled' : '';
+
+                    (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).forEach(function (sku) {
+                        if (paymentSkuFilterType !== 'all' && sku.type !== paymentSkuFilterType) return;
+                        if (paymentSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSkuSearchKeyword.toLowerCase()) === -1) return;
+                        var isChecked = selectedSkus.indexOf(sku.code) > -1;
+                        var tr = document.createElement('tr');
+                        tr.innerHTML = '<td style="text-align:center;"><input type="checkbox" ' + (isChecked ? 'checked' : '') + ' ' + inputDisabled + ' onchange="togglePaymentSkuSelection(\'' + sku.code + '\',this.checked)" style="accent-color:var(--primary);width:16px;height:16px;"></td><td style="font-weight:600;color:#fff;">' + sku.code + '</td><td>' + sku.name + '</td><td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:' + (sku.type === 'Internet' ? 'rgba(59,130,246,0.15)' : sku.type === 'Camera' ? 'rgba(16,185,129,0.15)' : 'rgba(245,158,11,0.15)') + ';color:' + (sku.type === 'Internet' ? '#60a5fa' : sku.type === 'Camera' ? '#34d399' : '#fbbf24') + ';">' + sku.type + '</span></td>';
+                        tbody.appendChild(tr);
+                    });
+                }
+
+                function togglePaymentSkuSelection(skuCode, isChecked) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    var method = channelPaymentMethods[channel][activePaymentIdx];
+                    if (!method.skus) method.skus = [];
+                    var idx = method.skus.indexOf(skuCode);
+                    if (isChecked) { if (idx === -1) method.skus.push(skuCode); }
+                    else { if (idx > -1) method.skus.splice(idx, 1); }
+                }
+
+                function filterPaymentSkuListByType(type) {
+                    paymentSkuFilterType = type;
+                    renderPaymentMethodDetail();
+                }
+
+                function filterPaymentSkuListByKeyword(val) {
+                    paymentSkuSearchKeyword = val;
+                    renderPaymentSkuSelectionTable();
+                }
+
+                function updatePaymentMethodDate(field, val) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    channelPaymentMethods[channel][activePaymentIdx][field] = val;
+                }
+
+                function updatePaymentDescValue(di, val) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    channelPaymentMethods[channel][activePaymentIdx].descs[di] = val;
+                }
+
+                function addPaymentDescRow() {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    var method = channelPaymentMethods[channel][activePaymentIdx];
+                    if (!method.descs) method.descs = [];
+                    method.descs.push('');
+                    renderPaymentMethodDetail();
+                }
+
+                function removePaymentDescRow(di) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    channelPaymentMethods[channel][activePaymentIdx].descs.splice(di, 1);
+                    renderPaymentMethodDetail();
+                }
+
+                function togglePaymentMethodForSku(methodIdx, skuCode, isChecked) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
+                    targetSkus.forEach(function (code) {
+                        var method = channelPaymentMethods[channel][methodIdx];
+                        if (!method.skus) method.skus = [];
+                        var idx = method.skus.indexOf(code);
+                        if (isChecked) {
+                            if (idx === -1) method.skus.push(code);
+                        } else {
+                            if (idx > -1) method.skus.splice(idx, 1);
+                        }
+                    });
+                    renderPaymentMethodDetail();
+                }
+
+                function updatePaymentMethodDateFromSku(methodIdx, field, val) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
+                    channelPaymentMethods[channel][methodIdx][field] = val;
+                }
+
+                function updatePaymentDescValueFromSku(methodIdx, di, val) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    channelPaymentMethods[channel][methodIdx].descs[di] = val;
+                }
+
+                function addPaymentDescRowFromSku(methodIdx) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    var method = channelPaymentMethods[channel][methodIdx];
+                    if (!method.descs) method.descs = [];
+                    method.descs.push('');
+                    renderPaymentMethodDetail();
+                }
+
+                function removePaymentDescRowFromSku(methodIdx, di) {
+                    switchToPaymentCustom();
+                    var channel = activePaymentChannel;
+                    channelPaymentMethods[channel][methodIdx].descs.splice(di, 1);
+                    renderPaymentMethodDetail();
+                }
+
+                function savePaymentMethodConfigFromSku() {
+                    var channel = activePaymentChannel;
+                    var isInherit = (channel !== 'global' && paymentChannelInheritStates[channel]);
+                    if (isInherit) return;
+
+                    var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
+                    if (targetSkus.length === 0 || !targetSkus[0]) {
+                        alert('Vui lòng chọn ít nhất một gói cước để cấu hình.');
+                        return;
+                    }
+
+                    var now = new Date();
+                    var channelName = channel === 'global' ? 'Global' : channel === 'tdw' ? 'tongdaiwifi' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    
+                    // Thêm bản ghi log có cấu trúc đầy đủ
+                    paymentAuditLogs.unshift({
+                        time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+                        user: 'Admin User',
+                        actionType: 'Cập nhật cấu hình',
+                        method: 'Nhiều phương thức',
+                        skus: targetSkus.slice(),
+                        detail: 'Cập nhật cấu hình cổng thanh toán cho ' + targetSkus.length + ' gói cước trên Kênh: ' + channelName,
+                        channel: channel,
+                        methodIdx: -2
                     });
 
-                    html += '</div>'
-                        + '<div style="display:flex;justify-content:flex-end;gap:12px;margin-top:20px;">'
-                        + '<button type="button" class="btn btn-secondary" onclick="renderPaymentMethodDetail()" style="font-size:13px;">Đặt lại</button>'
-                        + '<button type="button" class="btn btn-primary" onclick="savePaymentMethodConfigFromSku()" style="font-size:13px;background:var(--primary-gradient);">Lưu cấu hình</button>'
-                        + '</div>';
-
-                    panel.innerHTML = html;
+                    showLdpToast('✅ Đã lưu cấu hình PTTT áp dụng cho ' + targetSkus.length + ' gói cước!');
+                    renderPaymentMethodsSidebar();
                 }
-            }
 
-            function renderPaymentSkuSelectionTable() {
-                var tbody = document.getElementById('payment-sku-selection-tbody');
-                if (!tbody) return;
-                tbody.innerHTML = '';
-                var method = globalPaymentMethods[activePaymentIdx];
-                var selectedSkus = method.skus || [];
-                (typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : []).forEach(function(sku) {
-                    if (paymentSkuFilterType !== 'all' && sku.type !== paymentSkuFilterType) return;
-                    if (paymentSkuSearchKeyword && (sku.code + sku.name).toLowerCase().indexOf(paymentSkuSearchKeyword.toLowerCase()) === -1) return;
-                    var isChecked = selectedSkus.indexOf(sku.code) > -1;
-                    var tr = document.createElement('tr');
-                    tr.innerHTML = '<td style="text-align:center;"><input type="checkbox" ' + (isChecked ? 'checked' : '') + ' onchange="togglePaymentSkuSelection(\'' + sku.code + '\',this.checked)" style="accent-color:var(--primary);width:16px;height:16px;"></td><td style="font-weight:600;color:#fff;">' + sku.code + '</td><td>' + sku.name + '</td><td><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:' + (sku.type==='Internet'?'rgba(59,130,246,0.15)':sku.type==='Camera'?'rgba(16,185,129,0.15)':'rgba(245,158,11,0.15)') + ';color:' + (sku.type==='Internet'?'#60a5fa':sku.type==='Camera'?'#34d399':'#fbbf24') + ';">' + sku.type + '</span></td>';
-                    tbody.appendChild(tr);
-                });
-            }
+                function savePaymentMethodConfig() {
+                    var channel = activePaymentChannel;
+                    var isInherit = (channel !== 'global' && paymentChannelInheritStates[channel]);
+                    if (isInherit) return;
 
-            function togglePaymentSkuSelection(skuCode, isChecked) {
-                var method = globalPaymentMethods[activePaymentIdx];
-                if (!method.skus) method.skus = [];
-                var idx = method.skus.indexOf(skuCode);
-                if (isChecked) { if (idx === -1) method.skus.push(skuCode); }
-                else { if (idx > -1) method.skus.splice(idx, 1); }
-            }
+                    var method = channelPaymentMethods[channel][activePaymentIdx];
+                    if (!method || !method.title.trim()) { alert('Vui lòng chọn phương thức!'); return; }
+                    
+                    var now = new Date();
+                    var channelName = channel === 'global' ? 'Global' : channel === 'tdw' ? 'tongdaiwifi' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    
+                    // Thêm bản ghi log có cấu trúc đầy đủ
+                    paymentAuditLogs.unshift({
+                        time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+                        user: 'Admin User',
+                        actionType: 'Cập nhật ưu đãi',
+                        method: method.title,
+                        skus: (method.skus && method.skus.length > 0) ? method.skus.slice() : ['Không gán SKU'],
+                        detail: 'Cập nhật ưu đãi & hạn chạy của phương thức trên Kênh: ' + channelName,
+                        channel: channel,
+                        methodIdx: activePaymentIdx
+                    });
 
-            function filterPaymentSkuListByType(type) {
-                paymentSkuFilterType = type;
-                renderPaymentMethodDetail();
-            }
+                    showLdpToast('✅ Đã lưu cấu hình phương thức thanh toán!');
+                    renderPaymentMethodsSidebar();
+                }
 
-            function filterPaymentSkuListByKeyword(val) {
-                paymentSkuSearchKeyword = val;
-                renderPaymentSkuSelectionTable();
-            }
+                function renderPaymentAuditLogs() {
+                    var tbody = document.getElementById('payment-history-log-body');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+                    paymentAuditLogs.forEach(function (log, idx) {
+                        var tr = document.createElement('tr');
+                        
+                        // Màu sắc cho Thao tác
+                        var actionBg = 'rgba(255,255,255,0.05)';
+                        var actionColor = 'var(--text-muted)';
+                        if (log.actionType === 'Cập nhật ưu đãi' || log.actionType === 'Cập nhật cấu hình') {
+                            actionBg = 'rgba(245,158,11,0.12)'; actionColor = '#fbbf24';
+                        } else if (log.actionType === 'Bật PTTT') {
+                            actionBg = 'rgba(16,185,129,0.12)'; actionColor = '#34d399';
+                        } else if (log.actionType === 'Tắt PTTT') {
+                            actionBg = 'rgba(239,68,68,0.12)'; actionColor = 'var(--danger)';
+                        } else if (log.actionType === 'Thay đổi SKU') {
+                            actionBg = 'rgba(59,130,246,0.12)'; actionColor = '#60a5fa';
+                        } else if (log.actionType === 'Xóa cấu hình') {
+                            actionBg = 'rgba(239,68,68,0.15)'; actionColor = '#f87171';
+                        }
+                        
+                        var actionBadge = '<span class="badge" style="background:' + actionBg + ';color:' + actionColor + ';padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;display:inline-block;">' + log.actionType + '</span>';
+                        
+                        // Logo PTTT tác động
+                        var methodIcon = log.method.indexOf('Momo') > -1 ? '💬 ' : log.method.indexOf('VietQR') > -1 ? '💳 ' : log.method.indexOf('Zalopay') > -1 ? '👛 ' : '⚙️ ';
+                        var methodLabel = '<span style="font-weight:600;color:#fff;">' + methodIcon + log.method + '</span>';
+                        
+                        // Định dạng danh sách SKU tác động
+                        var skusLabel = '';
+                        if (log.skus.length === 1) {
+                            skusLabel = '<span class="badge" style="background:rgba(255,255,255,0.05);color:var(--text-muted);padding:2px 6px;border-radius:4px;">' + log.skus[0] + '</span>';
+                        } else if (log.skus.indexOf('Tất cả') > -1 || log.skus.indexOf('Tất cả SKU') > -1) {
+                            skusLabel = '<span class="badge" style="background:rgba(59,130,246,0.1);color:#60a5fa;padding:2px 6px;border-radius:4px;font-weight:600;">Tất cả gói</span>';
+                        } else {
+                            // Nhiều SKU
+                            skusLabel = log.skus.slice(0, 2).map(function(s){
+                                return '<span class="badge" style="background:rgba(255,255,255,0.05);color:var(--text-muted);padding:2px 6px;border-radius:4px;margin-right:2px;font-size:10px;">' + s + '</span>';
+                            }).join('') + (log.skus.length > 2 ? ' <span style="font-size:11px;color:var(--text-muted);">+' + (log.skus.length - 2) + '</span>' : '');
+                        }
 
-            function updatePaymentMethodDate(field, val) {
-                globalPaymentMethods[activePaymentIdx][field] = val;
-            }
+                        // Kiểm tra nút Sửa/Xóa log
+                        var actionsHtml = '';
+                        if (log.methodIdx !== -1 && log.methodIdx !== -2 && log.method !== 'Tất cả') {
+                            actionsHtml = '<div style="display:flex; gap:6px; justify-content:center;">' +
+                                '<button type="button" class="btn btn-secondary btn-sm" style="color:var(--primary);border-color:var(--primary);padding:2px 6px;font-size:11px;" onclick="openPaymentEditModalFromLog(' + idx + ')">✏️ Sửa</button>' +
+                                '<button type="button" class="btn btn-secondary btn-sm" style="color:var(--danger);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);padding:2px 6px;font-size:11px;" onclick="deletePaymentConfigFromOutside(' + idx + ')">🗑️ Xóa</button>' +
+                                '</div>';
+                        } else {
+                            actionsHtml = '<span style="color:var(--text-muted);font-size:11px;font-style:italic;">Hệ thống</span>';
+                        }
 
-            function updatePaymentDescValue(di, val) {
-                globalPaymentMethods[activePaymentIdx].descs[di] = val;
-            }
+                        tr.innerHTML = 
+                            '<td style="font-weight:500;color:var(--text-muted);">' + log.time + '</td>'
+                            + '<td><span style="display:inline-flex;align-items:center;gap:5px;background:rgba(168,85,247,0.12);color:#c084fc;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">👤 ' + log.user + '</span></td>'
+                            + '<td>' + methodLabel + '</td>'
+                            + '<td>' + skusLabel + '</td>'
+                            + '<td>' + actionBadge + '</td>'
+                            + '<td style="color:#e2e8f0;font-weight:500;font-size:12.5px;">' + (log.detail || log.action) + '</td>'
+                            + '<td style="text-align:center;">' + actionsHtml + '</td>';
+                        tbody.appendChild(tr);
+                    });
+                }
 
-            function addPaymentDescRow() {
-                var method = globalPaymentMethods[activePaymentIdx];
-                if (!method.descs) method.descs = [];
-                method.descs.push('');
-                renderPaymentMethodDetail();
-            }
+                // ===== HÀM HỖ TRỢ MODAL CHỈNH SỬA NHANH TỪ LỊCH SỬ =====
+                function openPaymentEditModalFromLog(logIdx) {
+                    var log = paymentAuditLogs[logIdx];
+                    if (!log) return;
 
-            function removePaymentDescRow(di) {
-                globalPaymentMethods[activePaymentIdx].descs.splice(di, 1);
-                renderPaymentMethodDetail();
-            }
-
-            // SKU Mode helper functions
-            function togglePaymentMethodForSku(methodIdx, skuCode, isChecked) {
-                // Áp dụng bật/tắt PTTT cho tất cả SKU được check chọn trong sidebar
-                var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
-                targetSkus.forEach(function(code) {
-                    var method = globalPaymentMethods[methodIdx];
-                    if (!method.skus) method.skus = [];
-                    var idx = method.skus.indexOf(code);
-                    if (isChecked) {
-                        if (idx === -1) method.skus.push(code);
-                    } else {
-                        if (idx > -1) method.skus.splice(idx, 1);
+                    if (log.methodIdx === -1 || log.method === 'Tất cả') {
+                        alert('Bản ghi hệ thống, không thể chỉnh sửa.');
+                        return;
                     }
-                });
-                renderPaymentMethodDetail();
-            }
+                    if (log.methodIdx === -2 || log.method === 'Nhiều phương thức') {
+                        alert('Bản ghi thay đổi đồng loạt nhiều gói cước, vui lòng chỉnh sửa chi tiết ở tab Cấu hình.');
+                        return;
+                    }
 
-            function updatePaymentMethodDateFromSku(methodIdx, field, val) {
-                // Đồng bộ ngày bắt đầu/kết thúc sang tất cả SKU được check chọn (nếu có)
-                var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
-                globalPaymentMethods[methodIdx][field] = val;
-            }
+                    var channel = log.channel || 'global';
+                    var methodIdx = log.methodIdx;
+                    var method = channelPaymentMethods[channel] ? channelPaymentMethods[channel][methodIdx] : null;
 
-            function updatePaymentDescValueFromSku(methodIdx, di, val) {
-                globalPaymentMethods[methodIdx].descs[di] = val;
-            }
+                    if (channel !== 'global' && paymentChannelInheritStates[channel] && (!method || method.length === 0)) {
+                        method = channelPaymentMethods['global'][methodIdx];
+                    }
 
-            function addPaymentDescRowFromSku(methodIdx) {
-                var method = globalPaymentMethods[methodIdx];
-                if (!method.descs) method.descs = [];
-                method.descs.push('');
-                renderPaymentMethodDetail();
-            }
+                    if (!method) {
+                        alert('Không tìm thấy dữ liệu phương thức thanh toán liên quan.');
+                        return;
+                    }
 
-            function removePaymentDescRowFromSku(methodIdx, di) {
-                globalPaymentMethods[methodIdx].descs.splice(di, 1);
-                renderPaymentMethodDetail();
-            }
+                    document.getElementById('modal-edit-channel').value = channel;
+                    document.getElementById('modal-edit-method-idx').value = methodIdx;
+                    document.getElementById('modal-edit-method-title').value = method.title;
+                    document.getElementById('modal-edit-channel-name').value = channel === 'global' ? 'Global (Tất cả kênh)' : channel === 'tdw' ? 'tongdaiwifi.fpt.vn' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    
+                    document.getElementById('modal-edit-start-date').value = method.startDate || '';
+                    document.getElementById('modal-edit-expiry-date').value = method.expiryDate || '';
 
-            function savePaymentMethodConfigFromSku() {
-                var targetSkus = paymentSidebarSelectedSkus.length > 0 ? paymentSidebarSelectedSkus : [activeSkuCode];
-                if (targetSkus.length === 0 || !targetSkus[0]) {
-                    alert('Vui lòng chọn ít nhất một gói cước để cấu hình.');
-                    return;
+                    renderModalPaymentDescs(method.descs || []);
+
+                    var skuContainer = document.getElementById('modal-payment-sku-checkboxes');
+                    if (skuContainer) {
+                        skuContainer.innerHTML = '';
+                        var skus = typeof checkoutPackageSkus !== 'undefined' ? checkoutPackageSkus : [];
+                        skus.forEach(function (sku) {
+                            var isChecked = method.skus && method.skus.indexOf(sku.code) > -1;
+                            skuContainer.innerHTML += '<label style="display:inline-flex; align-items:center; font-size:12px; color:#e2e8f0; cursor:pointer; background:rgba(255,255,255,0.02); padding:4px 8px; border-radius:4px; border:1px solid var(--border-glass); gap:6px;">' +
+                                '<input type="checkbox" class="modal-sku-chk" value="' + sku.code + '" ' + (isChecked ? 'checked' : '') + ' style="width:14px; height:14px; cursor:pointer; accent-color:var(--primary);"> ' + sku.name + ' (' + sku.code + ')' +
+                                '</label>';
+                        });
+                    }
+
+                    // Reset search & select all in modal
+                    var searchInput = document.getElementById('modal-payment-sku-search');
+                    if (searchInput) searchInput.value = '';
+                    var selectAllChk = document.getElementById('modal-sku-select-all');
+                    if (selectAllChk) selectAllChk.checked = false;
+                    filterModalSkus('');
+
+                    document.getElementById('modal-payment-log-edit').style.display = 'flex';
                 }
-                
-                var now = new Date();
-                var logMsg = 'Cập nhật cấu hình PTTT cho ' + targetSkus.length + ' gói cước SKU (' + targetSkus.join(', ') + ')';
-                
-                paymentAuditLogs.unshift({
-                    time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
-                    user: 'Admin User',
-                    action: logMsg
-                });
-                
-                var toast = document.createElement('div');
-                toast.textContent = 'Đã lưu cấu hình PTTT áp dụng đồng loạt cho ' + targetSkus.length + ' gói cước!';
-                toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#166534;color:#4ade80;border:1px solid #14532d;border-radius:8px;padding:10px 18px;font-size:13px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.4);font-weight:600;';
-                document.body.appendChild(toast);
-                setTimeout(function(){ if (document.body.contains(toast)) document.body.removeChild(toast); }, 2500);
-                
-                renderPaymentMethodsSidebar();
-            }
 
-            function savePaymentMethodConfig() {
-                var method = globalPaymentMethods[activePaymentIdx];
-                if (!method || !method.title.trim()) { alert('Vui lòng chọn phương thức!'); return; }
-                var now = new Date();
-                paymentAuditLogs.unshift({ time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'), user: 'Admin User', action: 'Cập nhật cấu hình: ' + method.title + ' (' + (method.skus ? method.skus.length : 0) + ' SKUs)' });
-                var toast = document.createElement('div');
-                toast.textContent = 'Đã lưu cấu hình phương thức thanh toán!';
-                toast.style.cssText = 'position:fixed;bottom:28px;right:28px;background:#166534;color:#4ade80;border:1px solid #14532d;border-radius:8px;padding:10px 18px;font-size:13px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.4);font-weight:600;';
-                document.body.appendChild(toast);
-                setTimeout(function(){ if (document.body.contains(toast)) document.body.removeChild(toast); }, 2500);
-                renderPaymentMethodsSidebar();
-            }
+                function closePaymentLogEditModal() {
+                    document.getElementById('modal-payment-log-edit').style.display = 'none';
+                }
 
+                function renderModalPaymentDescs(descs) {
+                    var wrapper = document.getElementById('modal-payment-desc-list-wrapper');
+                    if (!wrapper) return;
+                    wrapper.innerHTML = '';
 
+                    if (descs.length === 0) {
+                        wrapper.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:10px;font-size:11.5px;border:1px dashed var(--border-glass);border-radius:6px;">Chưa có dòng mô tả. Nhấn Thêm dòng ở trên.</div>';
+                        return;
+                    }
 
-            function renderPaymentAuditLogs() {
-                var tbody = document.getElementById('payment-history-log-body');
-                if (!tbody) return;
-                tbody.innerHTML = '';
-                paymentAuditLogs.forEach(function(log) {
-                    var tr = document.createElement('tr');
-                    tr.innerHTML = '<td style="font-weight:500;color:var(--text-muted);">' + log.time + '</td><td><span style="display:inline-flex;align-items:center;gap:5px;background:rgba(168,85,247,0.12);color:#c084fc;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;">👤 ' + log.user + '</span></td><td style="color:#e2e8f0;font-weight:500;">' + log.action + '</td>';
-                    tbody.appendChild(tr);
-                });
-            }
+                    descs.forEach(function (d, i) {
+                        var row = document.createElement('div');
+                        row.className = 'desc-input-row';
+                        row.style.cssText = 'display:flex; gap:8px; margin-bottom:8px;';
+                        row.innerHTML = '<input type="text" class="form-input modal-desc-input" value="' + d.replace(/"/g, '&quot;') + '" placeholder="VD: Giảm 50k khi thanh toán Online" style="flex:1; font-size:12.5px; padding:6px 10px;">' +
+                            '<button type="button" class="remove-desc-btn" onclick="removeModalPaymentDescRow(' + i + ')" style="background:none; border:1px solid var(--border-glass); border-radius:6px; color:var(--danger); cursor:pointer; padding:0 10px;">✕</button>';
+                        wrapper.appendChild(row);
+                    });
+                }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() { renderPaymentMethodsSidebar(); renderPaymentMethodDetail(); });
-            } else {
-                renderPaymentMethodsSidebar(); renderPaymentMethodDetail();
-            }
+                function addModalPaymentDescRow() {
+                    var inputs = document.querySelectorAll('.modal-desc-input');
+                    var descs = [];
+                    inputs.forEach(function (input) { descs.push(input.value); });
+                    descs.push('');
+                    renderModalPaymentDescs(descs);
+                }
+
+                function removeModalPaymentDescRow(idx) {
+                    var inputs = document.querySelectorAll('.modal-desc-input');
+                    var descs = [];
+                    inputs.forEach(function (input) { descs.push(input.value); });
+                    descs.splice(idx, 1);
+                    renderModalPaymentDescs(descs);
+                }
+
+                function savePaymentConfigFromModal() {
+                    var channel = document.getElementById('modal-edit-channel').value;
+                    var methodIdx = parseInt(document.getElementById('modal-edit-method-idx').value);
+                    
+                    var startDate = document.getElementById('modal-edit-start-date').value;
+                    var expiryDate = document.getElementById('modal-edit-expiry-date').value;
+
+                    var descs = [];
+                    var descInputs = document.querySelectorAll('.modal-desc-input');
+                    descInputs.forEach(function (input) {
+                        if (input.value.trim()) descs.push(input.value.trim());
+                    });
+
+                    var skus = [];
+                    var skuChks = document.querySelectorAll('.modal-sku-chk:checked');
+                    skuChks.forEach(function (chk) {
+                        skus.push(chk.value);
+                    });
+
+                    if (channel !== 'global' && paymentChannelInheritStates[channel]) {
+                        paymentChannelInheritStates[channel] = false;
+                        channelPaymentMethods[channel] = JSON.parse(JSON.stringify(channelPaymentMethods['global']));
+                        var inheritChk = document.getElementById('chk-payment-channel-inherit');
+                        if (inheritChk) inheritChk.checked = false;
+                    }
+
+                    var method = channelPaymentMethods[channel][methodIdx];
+                    if (!method) {
+                        method = { title: document.getElementById('modal-edit-method-title').value, logo: '', descs: [] };
+                        channelPaymentMethods[channel][methodIdx] = method;
+                    }
+                    method.startDate = startDate;
+                    method.expiryDate = expiryDate;
+                    method.descs = descs;
+                    method.skus = skus;
+
+                    var now = new Date();
+                    var channelName = channel === 'global' ? 'Global' : channel === 'tdw' ? 'tongdaiwifi' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    paymentAuditLogs.unshift({
+                        time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+                        user: 'Admin User',
+                        actionType: 'Cập nhật cấu hình',
+                        method: method.title,
+                        skus: skus.slice(),
+                        detail: 'Chỉnh sửa nhanh cấu hình từ Lịch sử (Kênh: ' + channelName + ')',
+                        channel: channel,
+                        methodIdx: methodIdx
+                    });
+
+                    renderPaymentAuditLogs();
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                    
+                    closePaymentLogEditModal();
+                    showLdpToast('✅ Đã lưu cấu hình chỉnh sửa từ Lịch sử!');
+                }
+
+                function setPaymentViewMode(mode) {
+                    paymentViewMode = mode;
+                    var tabs = document.querySelectorAll('#payment-sidebar-container .sku-filter-tab');
+                    tabs.forEach(function (t) { t.classList.remove('active'); });
+                    
+                    var titleElement = document.getElementById('payment-sidebar-title');
+                    
+                    if (mode === 'method') {
+                        if (titleElement) titleElement.innerHTML = 'DANH SÁCH PHƯƠNG THỨC';
+                    } else {
+                        if (titleElement) titleElement.innerHTML = 'DANH SÁCH GÓI CƯỚC (SKU)';
+                    }
+                    
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                }
+
+                // ===== CÁC HÀM BỔ SUNG CHO MODAL CHỈNH SỬA NHANH PTTT =====
+                function filterModalSkus(keyword) {
+                    var kw = (keyword || '').toLowerCase().trim();
+                    var labels = document.querySelectorAll('#modal-payment-sku-checkboxes label');
+                    labels.forEach(function(label) {
+                        var text = label.textContent.toLowerCase();
+                        if (text.indexOf(kw) > -1) {
+                            label.style.display = 'inline-flex';
+                        } else {
+                            label.style.display = 'none';
+                        }
+                    });
+                }
+
+                function toggleModalAllSkus(checked) {
+                    var labels = document.querySelectorAll('#modal-payment-sku-checkboxes label');
+                    labels.forEach(function(label) {
+                        if (label.style.display !== 'none') {
+                            var chk = label.querySelector('.modal-sku-chk');
+                            if (chk) chk.checked = checked;
+                        }
+                    });
+                }
+
+                function deletePaymentConfigFromModal() {
+                    var channel = document.getElementById('modal-edit-channel').value;
+                    var methodIdx = parseInt(document.getElementById('modal-edit-method-idx').value);
+                    
+                    if (channel !== 'global' && paymentChannelInheritStates[channel]) {
+                        paymentChannelInheritStates[channel] = false;
+                        channelPaymentMethods[channel] = JSON.parse(JSON.stringify(channelPaymentMethods['global']));
+                        var inheritChk = document.getElementById('chk-payment-channel-inherit');
+                        if (inheritChk) inheritChk.checked = false;
+                    }
+
+                    var method = channelPaymentMethods[channel][methodIdx];
+                    if (!method) {
+                        alert('Không tìm thấy dữ liệu cấu hình để xóa.');
+                        return;
+                    }
+
+                    if (!confirm('Bạn có chắc chắn muốn xóa cấu hình phương thức thanh toán "' + method.title + '" khỏi kênh này không?')) {
+                        return;
+                    }
+
+                    var methodTitle = method.title;
+
+                    // Xóa khỏi mảng cấu hình
+                    channelPaymentMethods[channel].splice(methodIdx, 1);
+
+                    // Ghi log xóa
+                    var now = new Date();
+                    var channelName = channel === 'global' ? 'Global' : channel === 'tdw' ? 'tongdaiwifi' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    paymentAuditLogs.unshift({
+                        time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+                        user: 'Admin User',
+                        actionType: 'Xóa cấu hình',
+                        method: methodTitle,
+                        skus: [],
+                        detail: 'Xóa cấu hình phương thức thanh toán để tránh rác dữ liệu (Kênh: ' + channelName + ')',
+                        channel: channel,
+                        methodIdx: -1
+                    });
+
+                    // Cập nhật lại active index nếu cần
+                    if (activePaymentIdx >= channelPaymentMethods[channel].length) {
+                        activePaymentIdx = Math.max(0, channelPaymentMethods[channel].length - 1);
+                    }
+
+                    renderPaymentAuditLogs();
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                    
+                    closePaymentLogEditModal();
+                    showLdpToast('🗑 Đã xóa cấu hình phương thức thanh toán!');
+                }
+
+                function deletePaymentConfigFromOutside(logIdx) {
+                    var log = paymentAuditLogs[logIdx];
+                    if (!log) return;
+
+                    var channel = log.channel || 'global';
+                    var methodIdx = log.methodIdx;
+
+                    if (channel !== 'global' && paymentChannelInheritStates[channel]) {
+                        paymentChannelInheritStates[channel] = false;
+                        channelPaymentMethods[channel] = JSON.parse(JSON.stringify(channelPaymentMethods['global']));
+                        var inheritChk = document.getElementById('chk-payment-channel-inherit');
+                        if (inheritChk) inheritChk.checked = false;
+                    }
+
+                    var method = channelPaymentMethods[channel] ? channelPaymentMethods[channel][methodIdx] : null;
+                    if (!method) {
+                        alert('Không tìm thấy dữ liệu cấu hình để xóa.');
+                        return;
+                    }
+
+                    if (!confirm('Bạn có chắc chắn muốn xóa cấu hình phương thức thanh toán "' + method.title + '" khỏi kênh này không?')) {
+                        return;
+                    }
+
+                    var methodTitle = method.title;
+
+                    // Xóa khỏi mảng cấu hình
+                    channelPaymentMethods[channel].splice(methodIdx, 1);
+
+                    // Ghi log xóa
+                    var now = new Date();
+                    var channelName = channel === 'global' ? 'Global' : channel === 'tdw' ? 'tongdaiwifi' : channel === 'hifpt' ? 'App HiFPT' : 'Website fpt.vn';
+                    paymentAuditLogs.unshift({
+                        time: now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN'),
+                        user: 'Admin User',
+                        actionType: 'Xóa cấu hình',
+                        method: methodTitle,
+                        skus: [],
+                        detail: 'Xóa cấu hình phương thức thanh toán từ danh sách ngoài (Kênh: ' + channelName + ')',
+                        channel: channel,
+                        methodIdx: -1
+                    });
+
+                    // Cập nhật lại active index nếu cần
+                    if (activePaymentIdx >= channelPaymentMethods[channel].length) {
+                        activePaymentIdx = Math.max(0, channelPaymentMethods[channel].length - 1);
+                    }
+
+                    renderPaymentAuditLogs();
+                    renderPaymentMethodsSidebar();
+                    renderPaymentMethodDetail();
+                    
+                    showLdpToast('🗑 Đã xóa cấu hình phương thức thanh toán!');
+                }
             </script>
+
 
             <!-- QUẢN LÝ POPUP -->
             <div id="mod-cms-popup" class="module-view">
