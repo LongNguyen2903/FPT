@@ -10754,6 +10754,12 @@
             if (modName === 'sys-users') sysUsersRender();
             if (modName === 'sys-permissions') sysPermRender();
 
+            // Payment module initialization
+            if (modName === 'cms-payment') {
+                renderPaymentMethodsSidebar();
+                renderPaymentMethodDetail();
+            }
+
             // Topbar màu tím cho module hệ thống
             if (['sys-roles','sys-users','sys-permissions'].includes(modName)) {
                 document.getElementById('topbar-title').style.color = '#c084fc';
