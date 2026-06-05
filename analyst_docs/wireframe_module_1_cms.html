@@ -2339,15 +2339,26 @@
                             <div class="form-section">
                                 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
                                     <h3 style="margin:0;">▾ Đặc tính sản phẩm</h3>
-                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:6px; padding:4px 10px;">
-                                        🔒 Đồng bộ từ QLCS · Read-only
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:6px; padding:4px 10px;">
+                                        ✏️ Vận hành tự quản lý
                                     </span>
                                 </div>
 
-                                <!-- Nhóm đặc tính — read-only, set động bởi skuRenderDactinh -->
+                                <!-- Quick Actions Toolbar cho Đặc tính -->
+                                <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="applyDactinhTemplate()" style="display:flex; align-items:center; gap:6px; font-size:12px; padding:6px 12px; border:1px solid var(--border-glass);"><span style="color:var(--warning);">⚙️</span> Áp dụng Template</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="openCloneDactinhModal()" style="display:flex; align-items:center; gap:6px; font-size:12px; padding:6px 12px; border:1px solid var(--border-glass);"><span style="color:var(--warning);">📋</span> Sao chép từ SP khác</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="triggerImportExcel()" style="display:flex; align-items:center; gap:6px; font-size:12px; padding:6px 12px; border:1px solid var(--border-glass);"><span style="color:var(--warning);">📥</span> Import Excel</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="downloadExcelTemplate()" style="display:flex; align-items:center; gap:6px; font-size:12px; padding:6px 12px; border:1px solid var(--border-glass);"><span style="color:var(--text-muted);">📤</span> Tải file mẫu</button>
+                                </div>
+
+                                <!-- Nhóm đặc tính — set động bởi skuRenderDactinh -->
                                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
                                     <span style="font-size:12px; color:var(--text-muted);">Nhóm đặc tính:</span>
-                                    <span id="dactinh-nhom-select" style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px;">Thông số Router/Modem</span>
+                                    <select id="dactinh-nhom-select-dropdown" class="form-select" style="font-size:13px; font-weight:600; color:#e0e0e0; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); border-radius:6px; padding:4px 12px; width:auto; height:auto; display:inline-block;" onchange="skuRenderDactinh(this.value === 'Thông số Camera' ? 'camera' : 'modem')">
+                                        <option>Thông số Router/Modem</option>
+                                        <option>Thông số Camera</option>
+                                    </select>
                                     <span id="dactinh-hint-dichvu" style="display:none; font-size:11px; color:var(--text-muted); font-style:italic;">ℹ️ Dịch vụ không dùng Nổi bật — xem <strong>Ưu đãi & Đặc quyền</strong> ở Tab Quản lý Content.</span>
                                     <span id="dactinh-hint-thietbi" style="font-size:11px; color:var(--text-muted);">☆ Tick <strong style="color:var(--primary);">Nổi bật</strong> → thông số hiển thị nổi bật dưới gallery trên web</span>
                                 </div>
@@ -2355,14 +2366,19 @@
                                 <!-- Attribute list — JS renders rows via skuRenderDactinh() -->
                                 <div id="dactinh-attr-list" style="display:flex; flex-direction:column; gap:0;">
                                     <!-- Header row — chỉ hiện khi là thiết bị -->
-                                    <div id="dactinh-header-row" style="display:grid; grid-template-columns:200px 1fr 110px; align-items:center; padding:0 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:2px;">
+                                    <div id="dactinh-header-row" style="display:grid; grid-template-columns:30px 200px 1fr 110px 50px; align-items:center; padding:0 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:2px;">
+                                        <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Vị trí</span>
                                         <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Đặc tính</span>
                                         <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Giá trị</span>
                                         <span class="col-noibat" style="font-size:10px; font-weight:600; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Nổi bật ☆</span>
+                                        <span style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Hành động</span>
                                     </div>
                                     <!-- Rows rendered by skuRenderDactinh() -->
                                 </div>
-                                <p style="font-size:11px; color:var(--text-muted); margin:10px 0 0; display:flex; align-items:center; gap:6px;">🔒 Để thêm / sửa đặc tính, thao tác trực tiếp trên <strong>PDH / QLCS</strong>. Chỉ cột <strong style="color:var(--primary);">Nổi bật</strong> được lưu bởi CMS.</p>
+                                <div style="margin-top:10px;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="skuAddDactinhRow()" style="border:1px dashed rgba(255,255,255,0.2); width:100%; justify-content:center; display:flex; align-items:center; gap:6px; padding:8px;"><span style="color:var(--warning); font-weight:bold; font-size:14px; margin-right:4px;">+</span> Th&#234;m d&#242;ng thu&#7897;c t&#237;nh m&#7899;i</button>
+                                </div>
+                                <p style="font-size:11px; color:var(--text-muted); margin:12px 0 0; display:flex; align-items:center; gap:6px;"><span style="color:var(--warning); margin-right:4px;">&#8505;&#65039;</span> VH t&#7921; c&#7853;p nh&#7853;t &#273;&#7863;c t&#237;nh. H&#7879; th&#7889;ng h&#7897; tr&#7907; import file Excel ho&#7863;c &#225;p d&#7909;ng template d&#7875; nh&#7853;p nhanh.</p>
                             </div>
 
                             <!-- Thiết bị đi kèm — Read-only, sync từ QLCS/PDH -->
@@ -6827,6 +6843,14 @@
                                             </div>
                                             <!-- URL input -->
                                             <input type="text" class="form-input" id="art-thumbnail-url" placeholder="Hoặc dán URL ảnh..." value="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" oninput="updateArtThumbnailPreview(this.value)" style="font-size:12px;">
+                                            <!-- Crop Action & State -->
+                                            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;background:rgba(0,0,0,0.15);padding:6px 10px;border-radius:6px;border:1px solid var(--border-glass);">
+                                                <input type="hidden" id="art-crop-ratio" value="3:2">
+                                                <span style="font-size:11px;color:var(--text-muted);">Tỷ lệ cắt: <strong id="art-crop-ratio-display" style="color:var(--primary);">3:2</strong></span>
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="openNewsCropModal()" style="padding:3px 8px;font-size:11px;border-color:var(--border-glass);cursor:pointer;color:#fff;margin:0;">
+                                                    ✂️ Cắt ảnh (Crop)
+                                                </button>
+                                            </div>
                                             <!-- Alt + Caption -->
                                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
                                                 <div>
@@ -7767,8 +7791,8 @@
                                         <button class="sku-filter-tab" onclick="filterSkuByType('global','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-global" placeholder="🔍 Tìm mã hoặc tên SKU..." oninput="filterSkuTable('global',this.value)" style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
-                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;">
-                                        <table class="checkout-table"><thead><tr><th style="width:40px;text-align:center;">✓</th><th style="width:145px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Loại dịch vụ</th></tr></thead><tbody id="sku-table-body-global"></tbody></table>
+                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow-x:auto;">
+                                        <table class="checkout-table" style="min-width:860px;"><thead><tr><th style="width:40px;text-align:center;">&#10003;</th><th style="width:110px;">M&#227; SKU</th><th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th><th style="width:95px;">Lo&#7841;i DV</th><th>Thi&#7871;t b&#7883; &#273;i k&#232;m <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th><th>D&#7883;ch v&#7909; b&#7893; sung <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th></tr></thead><tbody id="sku-table-body-global"></tbody></table>
                                     </div>
                                 </div>
                                 <div id="checkout-placeholder-global" style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.</div>
@@ -7786,22 +7810,6 @@
                                             <table class="checkout-table"><thead><tr><th style="width:44px;text-align:center;">Bật</th><th style="width:115px;">Chu kỳ</th><th>Ưu đãi / Mô tả phụ <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(có thể thêm nhiều)</span></th><th style="width:40px;"></th></tr></thead><tbody id="checkout-cycles-list-global"></tbody></table>
                                         </div>
                                         <button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentCycle('global')" style="border-color:var(--primary);color:var(--primary);font-size:12px;margin-top:8px;">+ Thêm chu kỳ thanh toán</button>
-                                    </div>
-                                    <!-- Thiết bị & Dịch vụ TABLE -->
-                                    <div class="checkout-config-section">
-                                        <div class="checkout-config-title">🔌 2. Thiết bị đi kèm & Dịch vụ bổ sung</div>
-                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                                            <div>
-                                                <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">THIẾT BỊ ĐI KÈM</label>
-                                                <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên thiết bị</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="device-list-global"></tbody></table></div>
-                                                
-                                            </div>
-                                            <div>
-                                                <label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">DỊCH VỤ BỔ SUNG</label>
-                                                <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên dịch vụ</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="service-list-global"></tbody></table></div>
-                                                
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- Phí lắp đặt -->
                                     <div class="checkout-config-section" style="margin-bottom:20px;">
@@ -7840,7 +7848,7 @@
                                         <button class="sku-filter-tab" onclick="filterSkuByType('tdw','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-tdw" placeholder="🔍 Tìm mã hoặc tên SKU..." oninput="filterSkuTable('tdw',this.value)" style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
-                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:40px;text-align:center;">✓</th><th style="width:145px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Loại dịch vụ</th></tr></thead><tbody id="sku-table-body-tdw"></tbody></table></div>
+                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow-x:auto;"><table class="checkout-table" style="min-width:860px;"><thead><tr><th style="width:40px;text-align:center;">&#10003;</th><th style="width:110px;">M&#227; SKU</th><th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th><th style="width:95px;">Lo&#7841;i DV</th><th>Thi&#7871;t b&#7883; &#273;i k&#232;m <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th><th>D&#7883;ch v&#7909; b&#7893; sung <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th></tr></thead><tbody id="sku-table-body-tdw"></tbody></table></div>
                                 </div>
                                 <div id="checkout-placeholder-tdw" style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.</div>
                                 <div id="checkout-details-tdw">
@@ -7853,13 +7861,6 @@
                                         <div class="checkout-config-title">⚙️ 1. Cấu hình chu kỳ thanh toán & Mô tả ưu đãi</div>
                                         <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:44px;text-align:center;">Bật</th><th style="width:115px;">Chu kỳ</th><th>Ưu đãi / Mô tả phụ</th><th style="width:40px;"></th></tr></thead><tbody id="checkout-cycles-list-tdw"></tbody></table></div>
                                         <button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentCycle('tdw')" style="border-color:var(--primary);color:var(--primary);font-size:12px;margin-top:8px;">+ Thêm chu kỳ thanh toán</button>
-                                    </div>
-                                    <div class="checkout-config-section">
-                                        <div class="checkout-config-title">🔌 2. Thiết bị đi kèm & Dịch vụ bổ sung</div>
-                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">THIẾT BỊ ĐI KÈM</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên thiết bị</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="device-list-tdw"></tbody></table></div></div>
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">DỊCH VỤ BỔ SUNG</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên dịch vụ</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="service-list-tdw"></tbody></table></div></div>
-                                        </div>
                                     </div>
                                     <div class="checkout-config-section" style="margin-bottom:20px;">
                                         <div class="checkout-config-title">🛠️ 3. Phí lắp đặt & Chú thích phụ</div>
@@ -7900,7 +7901,7 @@
                                         <button class="sku-filter-tab" onclick="filterSkuByType('hifpt','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-hifpt" placeholder="🔍 Tìm mã hoặc tên SKU..." oninput="filterSkuTable('hifpt',this.value)" style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
-                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:40px;text-align:center;">✓</th><th style="width:145px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Loại dịch vụ</th></tr></thead><tbody id="sku-table-body-hifpt"></tbody></table></div>
+                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow-x:auto;"><table class="checkout-table" style="min-width:860px;"><thead><tr><th style="width:40px;text-align:center;">&#10003;</th><th style="width:110px;">M&#227; SKU</th><th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th><th style="width:95px;">Lo&#7841;i DV</th><th>Thi&#7871;t b&#7883; &#273;i k&#232;m <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th><th>D&#7883;ch v&#7909; b&#7893; sung <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th></tr></thead><tbody id="sku-table-body-hifpt"></tbody></table></div>
                                 </div>
                                 <div id="checkout-placeholder-hifpt" style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.</div>
                                 <div id="checkout-details-hifpt">
@@ -7913,13 +7914,6 @@
                                         <div class="checkout-config-title">⚙️ 1. Cấu hình chu kỳ thanh toán & Mô tả ưu đãi</div>
                                         <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:44px;text-align:center;">Bật</th><th style="width:115px;">Chu kỳ</th><th>Ưu đãi / Mô tả phụ</th><th style="width:40px;"></th></tr></thead><tbody id="checkout-cycles-list-hifpt"></tbody></table></div>
                                         <button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentCycle('hifpt')" style="border-color:var(--primary);color:var(--primary);font-size:12px;margin-top:8px;">+ Thêm chu kỳ thanh toán</button>
-                                    </div>
-                                    <div class="checkout-config-section">
-                                        <div class="checkout-config-title">🔌 2. Thiết bị đi kèm & Dịch vụ bổ sung</div>
-                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">THIẾT BỊ ĐI KÈM</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên thiết bị</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="device-list-hifpt"></tbody></table></div></div>
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">DỊCH VỤ BỔ SUNG</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên dịch vụ</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="service-list-hifpt"></tbody></table></div></div>
-                                        </div>
                                     </div>
                                     <div class="checkout-config-section" style="margin-bottom:20px;">
                                         <div class="checkout-config-title">🛠️ 3. Phí lắp đặt & Chú thích phụ</div>
@@ -7960,7 +7954,7 @@
                                         <button class="sku-filter-tab" onclick="filterSkuByType('fptvn','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-fptvn" placeholder="🔍 Tìm mã hoặc tên SKU..." oninput="filterSkuTable('fptvn',this.value)" style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
-                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:40px;text-align:center;">✓</th><th style="width:145px;">Mã SKU</th><th>Tên gói cước</th><th style="width:120px;">Loại dịch vụ</th></tr></thead><tbody id="sku-table-body-fptvn"></tbody></table></div>
+                                    <div style="border:1px solid var(--border-glass);border-radius:8px;overflow-x:auto;"><table class="checkout-table" style="min-width:860px;"><thead><tr><th style="width:40px;text-align:center;">&#10003;</th><th style="width:110px;">M&#227; SKU</th><th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th><th style="width:95px;">Lo&#7841;i DV</th><th>Thi&#7871;t b&#7883; &#273;i k&#232;m <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th><th>D&#7883;ch v&#7909; b&#7893; sung <span style="font-weight:400;font-style:italic;color:var(--text-muted);">(PDH &#8226; s&#7917;a &#273;&#432;&#7907;c &#8226; Web &#9744;)</span></th></tr></thead><tbody id="sku-table-body-fptvn"></tbody></table></div>
                                 </div>
                                 <div id="checkout-placeholder-fptvn" style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.</div>
                                 <div id="checkout-details-fptvn">
@@ -7973,13 +7967,6 @@
                                         <div class="checkout-config-title">⚙️ 1. Cấu hình chu kỳ thanh toán & Mô tả ưu đãi</div>
                                         <div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th style="width:44px;text-align:center;">Bật</th><th style="width:115px;">Chu kỳ</th><th>Ưu đãi / Mô tả phụ</th><th style="width:40px;"></th></tr></thead><tbody id="checkout-cycles-list-fptvn"></tbody></table></div>
                                         <button type="button" class="btn btn-secondary btn-sm" onclick="addPaymentCycle('fptvn')" style="border-color:var(--primary);color:var(--primary);font-size:12px;margin-top:8px;">+ Thêm chu kỳ thanh toán</button>
-                                    </div>
-                                    <div class="checkout-config-section">
-                                        <div class="checkout-config-title">🔌 2. Thiết bị đi kèm & Dịch vụ bổ sung</div>
-                                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">THIẾT BỊ ĐI KÈM</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên thiết bị</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="device-list-fptvn"></tbody></table></div></div>
-                                            <div><label style="display:block;font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">DỊCH VỤ BỔ SUNG</label><div style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;"><table class="checkout-table"><thead><tr><th>Tên dịch vụ</th><th>Mô tả</th><th style="width:36px;"></th></tr></thead><tbody id="service-list-fptvn"></tbody></table></div></div>
-                                        </div>
                                     </div>
                                     <div class="checkout-config-section" style="margin-bottom:20px;">
                                         <div class="checkout-config-title">🛠️ 3. Phí lắp đặt & Chú thích phụ</div>
@@ -8007,16 +7994,36 @@
             var checkoutInheritStates = { tdw: true, hifpt: true, fptvn: true };
 
             var checkoutPackageSkus = [
-                { code: 'INT-GIGA',   name: 'Internet Giga (150Mbps)',       type: 'Internet' },
-                { code: 'INT-SKY',    name: 'Internet Sky (1Gbps/150Mbps)',   type: 'Internet' },
-                { code: 'INT-META',   name: 'Internet Meta (1Gbps)',           type: 'Internet' },
-                { code: 'INT-LUX500', name: 'Internet LUX 500 (500Mbps)',      type: 'Internet' },
-                { code: 'INT-LUX800', name: 'Internet LUX 800 (800Mbps)',      type: 'Internet' },
-                { code: 'CAM-IQ3',    name: 'FPT Camera IQ3',                  type: 'Camera' },
-                { code: 'CAM-IQ4S',   name: 'FPT Camera IQ4S (AI)',            type: 'Camera' },
-                { code: 'SA-SMAX',    name: 'FPT Play SMax',                   type: 'Truyền hình' },
-                { code: 'SA-SVIP',    name: 'FPT Play SVip',                   type: 'Truyền hình' },
-                { code: 'DEV-WIFI7',  name: 'Router Wi-Fi 7',                  type: 'Thiết bị' }
+                { code: 'INT-GIGA',   name: 'Internet Giga (150Mbps)',       type: 'Internet',
+                  devices:  [{ name: 'ONT 1 port 1G', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }, { name: 'Thi&#7871;t b&#7883; Wi-Fi 6', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }],
+                  services: [{ name: 'Fsafe &#8211; B&#7843;o m&#7853;t', desc: 'B&#7843;o v&#7879; thi&#7871;t b&#7883; kh&#7887;i virus &amp; t&#7845;n c&#244;ng m&#7841;ng' }, { name: 'Ultra Fast &#8211; Ch&#417;i game', desc: 'T&#7889;i &#432;u &#273;&#432;&#7901;ng truy&#7873;n cho gaming, gi&#7843;m ping' }, { name: 'FPT Play VIP', desc: 'Xem phim, th&#7875; thao tr&#7921;c ti&#7871;p ch&#7845;t l&#432;&#7907;ng cao' }] },
+                { code: 'INT-SKY',    name: 'Internet Sky (1Gbps/150Mbps)',   type: 'Internet',
+                  devices:  [{ name: 'ONT 1 port 1G', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }, { name: 'Thi&#7871;t b&#7883; Wi-Fi 6', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }],
+                  services: [{ name: 'FPT Play VIP', desc: 'Xem phim, th&#7875; thao tr&#7921;c ti&#7871;p ch&#7845;t l&#432;&#7907;ng cao' }] },
+                { code: 'INT-META',   name: 'Internet Meta (1Gbps)',           type: 'Internet',
+                  devices:  [{ name: 'ONT 2 port 1G', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }, { name: 'Thi&#7871;t b&#7883; Wi-Fi 6E', desc: '1 c&#225;i &#8211; Mi&#7877;n ph&#237; (0&#273;)' }],
+                  services: [{ name: 'Ultra Fast &#8211; Ch&#417;i game', desc: 'T&#7889;i &#432;u &#273;&#432;&#7901;ng truy&#7873;n cho gaming, gi&#7843;m ping' }] },
+                { code: 'INT-LUX500', name: 'Internet LUX 500 (500Mbps)',      type: 'Internet',
+                  devices:  [{ name: 'ONT 2 port 1G', desc: '1 c&#225;i &#8211; T&#7863;ng k&#232;m LUX 500' }, { name: 'Thi&#7871;t b&#7883; Wi-Fi 6', desc: '1 c&#225;i &#8211; T&#7863;ng k&#232;m LUX 500' }],
+                  services: [{ name: 'Fsafe &#8211; B&#7843;o m&#7853;t', desc: 'B&#7843;o v&#7879; thi&#7871;t b&#7883; kh&#7887;i virus &amp; t&#7845;n c&#244;ng m&#7841;ng' }, { name: 'FPT Play VIP', desc: 'Xem phim, th&#7875; thao tr&#7921;c ti&#7871;p ch&#7845;t l&#432;&#7907;ng cao' }] },
+                { code: 'INT-LUX800', name: 'Internet LUX 800 (800Mbps)',      type: 'Internet',
+                  devices:  [{ name: 'ONT 2 port 1G', desc: '1 c&#225;i &#8211; T&#7863;ng k&#232;m LUX 800' }, { name: 'Thi&#7871;t b&#7883; Wi-Fi 6', desc: '1 c&#225;i &#8211; T&#7863;ng k&#232;m LUX 800' }],
+                  services: [{ name: 'Fsafe &#8211; B&#7843;o m&#7853;t', desc: 'B&#7843;o v&#7879; thi&#7871;t b&#7883; kh&#7887;i virus &amp; t&#7845;n c&#244;ng m&#7841;ng' }, { name: 'Ultra Fast &#8211; Ch&#417;i game', desc: 'T&#7889;i &#432;u &#273;&#432;&#7901;ng truy&#7873;n cho gaming, gi&#7843;m ping' }, { name: 'FPT Play VIP', desc: 'Xem phim, th&#7875; thao tr&#7921;c ti&#7871;p ch&#7845;t l&#432;&#7907;ng cao' }] },
+                { code: 'CAM-IQ3',    name: 'FPT Camera IQ3',                  type: 'Camera',
+                  devices:  [{ name: 'Camera IQ3', desc: '1 c&#225;i &#8211; Bao g&#7891;m' }],
+                  services: [{ name: 'Fsafe &#8211; B&#7843;o m&#7853;t', desc: 'B&#7843;o v&#7879; thi&#7871;t b&#7883; kh&#7887;i virus &amp; t&#7845;n c&#244;ng m&#7841;ng' }] },
+                { code: 'CAM-IQ4S',   name: 'FPT Camera IQ4S (AI)',            type: 'Camera',
+                  devices:  [{ name: 'Camera IQ4S (AI)', desc: '1 c&#225;i &#8211; Bao g&#7891;m' }],
+                  services: [{ name: 'Fsafe &#8211; B&#7843;o m&#7853;t', desc: 'B&#7843;o v&#7879; thi&#7871;t b&#7883; kh&#7887;i virus &amp; t&#7845;n c&#244;ng m&#7841;ng' }] },
+                { code: 'SA-SMAX',    name: 'FPT Play SMax',                   type: 'Truy&#7873;n h&#236;nh',
+                  devices:  [],
+                  services: [{ name: 'FPT Play SMax', desc: 'Xem truy&#7873;n h&#236;nh tr&#7921;c ti&#7871;p &amp; kho phim &#273;a d&#7841;ng' }] },
+                { code: 'SA-SVIP',    name: 'FPT Play SVip',                   type: 'Truy&#7873;n h&#236;nh',
+                  devices:  [],
+                  services: [{ name: 'FPT Play SVip', desc: 'G&#243;i cao c&#7845;p: 4K, th&#7875; thao, kho n&#7897;i dung VIP' }] },
+                { code: 'DEV-WIFI7',  name: 'Router Wi-Fi 7',                  type: 'Thi&#7871;t b&#7883;',
+                  devices:  [{ name: 'Router Wi-Fi 7', desc: '1 c&#225;i &#8211; Bao g&#7891;m' }],
+                  services: [] }
             ];
 
             var paymentCycles = {
@@ -8029,16 +8036,68 @@
                 tdw: [], hifpt: [], fptvn: []
             };
 
-            // Thiết bị & dịch vụ (thay thế checkbox model)
-            var checkoutDevices = {
-                global: {
-                    devices:  [{ name: 'ONT 1 port 1G', desc: '1 cái – Miễn phí (0đ)' }, { name: 'Thiết bị Wi-Fi 6', desc: '1 cái – Miễn phí (0đ)' }],
-                    services: [{ name: 'Fsafe – Bảo mật', desc: '20.000đ/tháng' }, { name: 'Ultra Fast – Chơi game', desc: '39.000đ/tháng' }, { name: 'FPT Play VIP', desc: '120.000đ/tháng' }]
-                },
-                tdw:   { devices: [], services: [] },
-                hifpt: { devices: [], services: [] },
-                fptvn: { devices: [], services: [] }
-            };
+            // Per-channel item data, kh&#7903;i t&#7841;o t&#7915; PDH defaults khi l&#7847;n &#273;&#7847;u truy c&#7853;p
+            var skuItemData = { global: {}, tdw: {}, hifpt: {}, fptvn: {} };
+
+            function getSkuItems(channel, skuCode) {
+                var src = (channel !== 'global' && checkoutInheritStates[channel]) ? 'global' : channel;
+                if (!skuItemData[src][skuCode]) {
+                    var sku = null;
+                    for (var i = 0; i < checkoutPackageSkus.length; i++) { if (checkoutPackageSkus[i].code === skuCode) { sku = checkoutPackageSkus[i]; break; } }
+                    skuItemData[src][skuCode] = {
+                        devices:  (sku && sku.devices  || []).map(function(d){ return { name: d.name, desc: d.desc, visible: true }; }),
+                        services: (sku && sku.services || []).map(function(s){ return { name: s.name, desc: s.desc, visible: true }; })
+                    };
+                }
+                return skuItemData[src][skuCode];
+            }
+
+            function buildItemCellHtml(channel, skuCode, items, itemType) {
+                var rows = (items || []).map(function(item, idx) {
+                    var vis = item.visible !== false;
+                    var descCell = '<input type="text" value="' + (item.desc||'').replace(/"/g,'&quot;') + '" placeholder="M&#244; t&#7843;..." title="' + (item.desc||'').replace(/"/g,'&quot;') + '" style="width:120px;font-size:11px;padding:3px 5px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:#e2e8f0;flex-shrink:0;" onfocus="this.style.position=\'absolute\';this.style.left=\'106px\';this.style.zIndex=\'20\';this.style.width=\'200px\';this.style.boxShadow=\'0 4px 12px rgba(0,0,0,0.5)\';this.style.borderColor=\'var(--primary)\';" onblur="this.style.position=\'\';this.style.left=\'\';this.style.zIndex=\'\';this.style.width=\'120px\';this.style.boxShadow=\'\';this.style.borderColor=\'\';" oninput="updateSkuItem(\'' + channel + '\',\'' + skuCode + '\',\'' + itemType + '\',' + idx + ',\'desc\',this.value);this.title=this.value">';
+                    var expandStyle = 'position:absolute;z-index:20;width:200px;box-shadow:0 4px 12px rgba(0,0,0,0.5);border-color:var(--primary) !important;';
+                    var collapseStyle = 'width:100px;';
+                    return '<div style="position:relative;display:flex;align-items:center;gap:3px;margin-bottom:3px;padding-right:46px;">'
+                        + '<input type="text" value="' + (item.name||'').replace(/"/g,'&quot;') + '" placeholder="T&#234;n..." title="' + (item.name||'').replace(/"/g,'&quot;') + '" style="width:100px;font-size:11px;padding:3px 5px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:#e2e8f0;flex-shrink:0;" onfocus="this.style.position=\'absolute\';this.style.zIndex=\'20\';this.style.width=\'200px\';this.style.boxShadow=\'0 4px 12px rgba(0,0,0,0.5)\';this.style.borderColor=\'var(--primary)\';" onblur="this.style.position=\'\';this.style.zIndex=\'\';this.style.width=\'100px\';this.style.boxShadow=\'\';this.style.borderColor=\'\';" oninput="updateSkuItem(\'' + channel + '\',\'' + skuCode + '\',\'' + itemType + '\',' + idx + ',\'name\',this.value);this.title=this.value">'
+                        + descCell
+                        + '<label title="Hi&#7875;n th&#7883; tr&#234;n web" style="position:absolute;right:0;display:inline-flex;align-items:center;gap:2px;cursor:pointer;white-space:nowrap;font-size:10px;color:var(--text-muted);z-index:30;"><input type="checkbox"' + (vis ? ' checked' : '') + ' onchange="updateSkuItem(\'' + channel + '\',\'' + skuCode + '\',\'' + itemType + '\',' + idx + ',\'visible\',this.checked)" style="width:12px;height:12px;accent-color:var(--primary);">&#160;Web</label>'
+                        + '</div>';
+                }).join('');
+                return rows || '<span style="font-size:11px;color:var(--text-muted);">&#8212;</span>';
+            }
+
+            function updateSkuItem(channel, skuCode, itemType, idx, field, value) {
+                if (channel !== 'global' && checkoutInheritStates[channel]) switchToCustom(channel);
+                var data = getSkuItems(channel, skuCode);
+                var arr = data[itemType + 's'];
+                if (arr && arr[idx] !== undefined) arr[idx][field] = value;
+            }
+
+            function addSkuItem(channel, skuCode, itemType) {
+                if (channel !== 'global' && checkoutInheritStates[channel]) switchToCustom(channel);
+                var data = getSkuItems(channel, skuCode);
+                data[itemType + 's'].push({ name: '', desc: '', visible: true });
+                reRenderSkuItemCells(channel, skuCode);
+            }
+
+            function removeSkuItem(channel, skuCode, itemType, idx) {
+                if (channel !== 'global' && checkoutInheritStates[channel]) switchToCustom(channel);
+                var data = getSkuItems(channel, skuCode);
+                data[itemType + 's'].splice(idx, 1);
+                reRenderSkuItemCells(channel, skuCode);
+            }
+
+            function reRenderSkuItemCells(channel, skuCode) {
+                var tr = document.querySelector('#sku-table-body-' + channel + ' tr[data-sku-code="' + skuCode + '"]');
+                if (!tr) return;
+                var data = getSkuItems(channel, skuCode);
+                tr.cells[4].innerHTML = buildItemCellHtml(channel, skuCode, data.devices, 'device');
+                tr.cells[5].innerHTML = buildItemCellHtml(channel, skuCode, data.services, 'service');
+            }
+
+            // checkoutDevices gi&#7919; l&#7841;i &#273;&#7875; c&#225;c h&#224;m c&#361; kh&#244;ng b&#7883; l&#7895;i
+            var checkoutDevices = { global: { devices: [], services: [] }, tdw: { devices: [], services: [] }, hifpt: { devices: [], services: [] }, fptvn: { devices: [], services: [] } };
 
             // ===== SKU TABLE (thay thế scrollable checkbox) =====
             var skuCurrentFilter = { global: 'all', tdw: 'all', hifpt: 'all', fptvn: 'all' };
@@ -8058,12 +8117,17 @@
                     var isChecked = activeSkus.indexOf(sku.code) > -1;
                     var typeClass = { 'Internet': 'internet', 'Camera': 'camera', 'Truyền hình': 'truyen-hinh', 'Thiết bị': 'thiet-bi' }[sku.type] || '';
                     var inheritNote = isInherit ? ' <span style="font-size:10px;color:var(--text-muted);font-style:italic;">(Kế thừa)</span>' : '';
+                    var data = getSkuItems(channel, sku.code);
+                    var devHtml = buildItemCellHtml(channel, sku.code, data.devices, 'device');
+                    var svcHtml = buildItemCellHtml(channel, sku.code, data.services, 'service');
                     var tr = document.createElement('tr');
                     tr.setAttribute('data-sku-code', sku.code);
-                    tr.innerHTML = '<td style="text-align:center;"><input type="checkbox"' + (isChecked ? ' checked' : '') + ' onchange="onCheckoutSkuChange(\'' + channel + '\',\'' + sku.code + '\',this.checked)"></td>'
-                        + '<td><strong>' + sku.code + '</strong>' + inheritNote + '</td>'
-                        + '<td style="color:#e2e8f0;">' + sku.name + '</td>'
-                        + '<td><span class="sku-type-badge ' + typeClass + '">' + sku.type + '</span></td>';
+                    tr.innerHTML = '<td style="text-align:center;vertical-align:top;padding-top:12px;"><input type="checkbox"' + (isChecked ? ' checked' : '') + ' onchange="onCheckoutSkuChange(\'' + channel + '\',\'' + sku.code + '\',this.checked)"></td>'
+                        + '<td style="vertical-align:top;padding-top:12px;"><strong>' + sku.code + '</strong>' + inheritNote + '</td>'
+                        + '<td style="color:#e2e8f0;vertical-align:top;padding-top:12px;">' + sku.name + '</td>'
+                        + '<td style="vertical-align:top;padding-top:12px;"><span class="sku-type-badge ' + typeClass + '">' + sku.type + '</span></td>'
+                        + '<td style="vertical-align:top;padding:8px 10px;min-width:200px;">' + devHtml + '</td>'
+                        + '<td style="vertical-align:top;padding:8px 10px;min-width:200px;">' + svcHtml + '</td>';
                     tbody.appendChild(tr);
                 });
                 toggleCheckoutDetailsVisibility(channel);
@@ -11371,6 +11435,13 @@
             }
         };
 
+        function skuRenderDactinh_OLD2(dataKey) {
+            return; // Disabled duplicate definition
+            var list = document.getElementById('dactinh-attr-list');
+            var sel  = document.getElementById('dactinh-nhom-select');
+            if (!list) return;
+        }
+
         // Reset form tin tức
         function resetNewsForm() {
             document.getElementById('article-form-title').innerText = 'Tạo mới Bài viết Tin tức';
@@ -11641,7 +11712,7 @@
                         <div style="font-weight:700; color:#fff;" class="faq-question">${faq.question}</div>
                         <div style="font-size:11px; color:var(--text-muted); max-height:40px; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; margin-top:4px;">${faq.answer.replace(/\n/g, '<br>')}</div>
                     </td>
-                    <td><span class="badge faq-category" style="background:${catColor}">${faq.category}</span></td>
+<td><span class="badge faq-category" style="background:${catColor}">${faq.category}</span></td>
                     <td class="faq-lang">${faq.lang}</td>
                     <td>${statusBadge}</td>
                     <td>
@@ -11651,6 +11722,125 @@
                 `;
                 tbody.appendChild(tr);
             }
+        }
+
+        function skuRenderDactinh(dataKey) {
+            var list = document.getElementById('dactinh-attr-list');
+            var sel  = document.getElementById('dactinh-nhom-select-dropdown');
+            if (!list) return;
+
+            var isService = (dataKey === 'service');
+
+            // Sync nhóm đặc tính dropdown
+            var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
+            if (sel) {
+                for(var i=0; i<sel.options.length; i++) {
+                    if (sel.options[i].text === nhomLabel) {
+                        sel.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            // Toggle Nổi bật column visibility
+            toggleDactinhNoibat(isService ? 'dichvu' : 'thietbi');
+
+            // Render rows (remove old dynamic rows first, keep header)
+            list.querySelectorAll('.dactinh-row').forEach(function(el){ el.remove(); });
+
+            var rows = dactinhData[dataKey] || dactinhData['modem'];
+            rows.forEach(function(r, i) {
+                var div = document.createElement('div');
+                div.className = 'dactinh-row';
+                var isLast = i === rows.length - 1;
+                // Dùng grid 5 cột cùng template với header mới
+                div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
+
+                var noibatCol = isService ? '<span class="col-noibat"></span>' :
+                    '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
+                    + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;">'
+                    + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
+                    + '</label>';
+
+                var actionCol = '<div style="display:flex;justify-content:center;">'
+                    + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
+                    + '</div>';
+
+                var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
+
+                var nameVal = r.name;
+                var valueVal = r.value + (r.unit ? ' ' + r.unit : '');
+
+                div.innerHTML = dragCol
+                    + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="' + nameVal + '" placeholder="Tên đặc tính"></div>'
+                    + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="' + valueVal + '" placeholder="Giá trị"></div>'
+                    + noibatCol
+                    + actionCol;
+                list.appendChild(div);
+            });
+        }
+
+        function skuAddDactinhRow() {
+            var list = document.getElementById('dactinh-attr-list');
+            if (!list) return;
+            
+            var div = document.createElement('div');
+            div.className = 'dactinh-row';
+            div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
+
+            var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
+                + '<input type="checkbox" style="accent-color:var(--primary);width:15px;height:15px;">'
+                + '<span style="font-size:11px;color:var(--text-muted);">Nổi bật</span>'
+                + '</label>';
+
+            var actionCol = '<div style="display:flex;justify-content:center;">'
+                + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
+                + '</div>';
+
+            var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
+
+            div.innerHTML = dragCol
+                + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="" placeholder="Tên đặc tính"></div>'
+                + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="" placeholder="Giá trị"></div>'
+                + noibatCol
+                + actionCol;
+            list.appendChild(div);
+        }
+
+        function applyDactinhTemplate() {
+            var dropdown = document.getElementById('dactinh-nhom-select-dropdown');
+            var selectedType = dropdown ? dropdown.value : 'Thông số Router/Modem';
+            var key = selectedType === 'Thông số Camera' ? 'camera' : 'modem';
+            skuRenderDactinh(key);
+            showLdpToast('Áp dụng Template đặc tính cho ' + selectedType + ' thành công!');
+        }
+
+        function openCloneDactinhModal() {
+            var prodCode = prompt("Nhập mã SKU sản phẩm bạn muốn sao chép đặc tính (Ví dụ: CAM-IQ3, CAM-SE):", "CAM-IQ3");
+            if (prodCode) {
+                skuRenderDactinh('camera');
+                showLdpToast('Đã sao chép đặc tính từ sản phẩm ' + prodCode + ' thành công!');
+            }
+        }
+
+        function triggerImportExcel() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.xlsx, .xls';
+            input.onchange = function() {
+                showLdpToast('Đã phân tích file Excel. Import 6 đặc tính thành công!');
+            };
+            input.click();
+        }
+
+        function skuRenderDactinh_OLD3(dataKey) {
+            return; // Disabled duplicate definition
+            var list = document.getElementById('dactinh-attr-list');
+            var sel  = document.getElementById('dactinh-nhom-select');
+        }
+
+        function downloadExcelTemplate() {
+            showLdpToast('Tải file mẫu Excel cấu hình đặc tính thành công!');
         }
 
         function resetFaqForm() {
@@ -12010,7 +12200,7 @@
             ]
         };
 
-        function skuRenderDactinh(dataKey) {
+        function skuRenderDactinh_OLD_FINAL(dataKey) {
             var list = document.getElementById('dactinh-attr-list');
             var sel  = document.getElementById('dactinh-nhom-select');
             if (!list) return;
@@ -14735,6 +14925,46 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 <button class="btn btn-primary" onclick="saveCardData()">Lưu Card</button>
             </div>
         </div>
+    </div>
+
+    <!-- ===== MODAL CẮT ẢNH / CROP THUMBNAIL (Khớp news_cms.js) ===== -->
+    <div id="news-crop-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center; backdrop-filter:blur(4px);">
+        <div style="background:#18181b; border:1px solid rgba(255,255,255,0.1); border-radius:12px; width:500px; max-width:95%; padding:24px; box-shadow:0 20px 40px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:20px; color:#f4f4f5; font-family:'Inter', sans-serif;">
+            <h3 style="margin:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; color:var(--primary); display:flex; justify-content:space-between; align-items:center; font-size:18px; font-weight:600;">
+                <span>✂️ Cắt ảnh đại diện (Crop Thumbnail)</span>
+                <span style="cursor:pointer; font-size:24px; line-height:1; color:#a1a1aa;" onclick="closeNewsCropModal()">&times;</span>
+            </h3>
+            
+            <!-- Vùng hiển thị ảnh và khung cắt -->
+            <div style="position:relative; width:100%; height:300px; background:#09090b; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid var(--border-glass);">
+                <!-- Ảnh gốc -->
+                <img id="news-crop-target-img" src="" style="max-width:100%; max-height:100%; object-fit:contain; opacity:0.6;">
+                
+                <!-- Khung cắt (Crop Box Overlay) -->
+                <div id="news-crop-box-overlay" style="position:absolute; border:2px dashed var(--primary); box-shadow:0 0 0 9999px rgba(0,0,0,0.65); pointer-events:none; transition: all 0.2s ease; display:flex; align-items:center; justify-content:center; box-sizing:border-box;">
+                    <span style="color:#fff; font-size:11px; background:rgba(0,0,0,0.7); padding:3px 8px; border-radius:4px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; border:1px solid rgba(255,255,255,0.1);">Khung Cắt</span>
+                </div>
+            </div>
+
+            <!-- Các nút chọn Tỷ lệ cắt -->
+            <div>
+                <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:8px; font-weight:500;">Chọn tỷ lệ khuyến nghị (URD):</label>
+                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
+                    <button type="button" class="btn btn-secondary crop-ratio-btn" data-ratio="3:2" onclick="selectCropRatio('3:2')" style="font-size:13px; font-weight:600; padding:8px 0; border:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); cursor:pointer; border-radius:6px; transition:0.2s;">3:2</button>
+                    <button type="button" class="btn btn-secondary crop-ratio-btn" data-ratio="16:9" onclick="selectCropRatio('16:9')" style="font-size:13px; font-weight:600; padding:8px 0; border:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); cursor:pointer; border-radius:6px; transition:0.2s;">16:9</button>
+                    <button type="button" class="btn btn-secondary crop-ratio-btn" data-ratio="4:3" onclick="selectCropRatio('4:3')" style="font-size:13px; font-weight:600; padding:8px 0; border:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); cursor:pointer; border-radius:6px; transition:0.2s;">4:3</button>
+                    <button type="button" class="btn btn-secondary crop-ratio-btn" data-ratio="1:1" onclick="selectCropRatio('1:1')" style="font-size:13px; font-weight:600; padding:8px 0; border:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); cursor:pointer; border-radius:6px; transition:0.2s;">1:1</button>
+                </div>
+            </div>
+
+            <!-- Chân modal hành động -->
+            <div style="display:flex; justify-content:flex-end; gap:12px; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; margin-top:4px;">
+                <button type="button" class="btn btn-secondary" onclick="closeNewsCropModal()" style="font-size:12.5px; padding:8px 16px; cursor:pointer;">Hủy bỏ</button>
+                <button type="button" class="btn btn-primary" onclick="applyCropImage()" style="font-size:12.5px; padding:8px 18px; cursor:pointer; background:var(--primary-gradient);">Xác nhận cắt</button>
+            </div>
+        </div>
+    </div>
+
     <script src="news_cms.js"></script>
 
     <!-- ===== MODAL PREVIEW BÀI VIẾT (IDs khớp news_cms.js) ===== -->

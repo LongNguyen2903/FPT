@@ -504,6 +504,8 @@
         document.getElementById('art-thumbnail-alt').value = '';
         document.getElementById('art-thumbnail-caption').value = '';
         document.getElementById('art-crop-ratio').value = '3:2';
+        const displayEl1 = document.getElementById('art-crop-ratio-display');
+        if (displayEl1) displayEl1.innerText = '3:2';
 
         document.getElementById('art-seo-title').value = '';
         document.getElementById('art-seo-desc').value = '';
@@ -544,6 +546,8 @@
         document.getElementById('art-thumbnail-alt').value = art.thumbAlt || '';
         document.getElementById('art-thumbnail-caption').value = art.thumbCaption || '';
         document.getElementById('art-crop-ratio').value = art.cropRatio || '3:2';
+        const displayEl2 = document.getElementById('art-crop-ratio-display');
+        if (displayEl2) displayEl2.innerText = art.cropRatio || '3:2';
 
         document.getElementById('art-seo-title').value = art.seoTitle || '';
         document.getElementById('art-seo-desc').value = art.seoDesc || '';
@@ -696,6 +700,8 @@
         let activeBtn = document.querySelector('.crop-ratio-btn.active');
         let ratio = activeBtn ? activeBtn.getAttribute('data-ratio') : '3:2';
         document.getElementById('art-crop-ratio').value = ratio;
+        const displayEl3 = document.getElementById('art-crop-ratio-display');
+        if (displayEl3) displayEl3.innerText = ratio;
         window.closeNewsCropModal();
         showLdpToast(`Đã cắt ảnh theo tỷ lệ ${ratio} thành công!`);
         window.triggerAutoSave();
