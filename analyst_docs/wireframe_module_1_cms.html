@@ -1281,6 +1281,157 @@
             border-color: #cbd5e1;         /* Gray/300 */
         }
 
+        /* =====================================================
+           LIGHT MODE — COMPREHENSIVE TEXT FIX
+           Mục đích: fix tất cả text bị trắng/mờ khi light mode
+           ===================================================== */
+
+        /* Menu category labels */
+        body.light .menu-category {
+            color: #64748b !important;
+        }
+
+        /* Menu items hover & active */
+        body.light .menu-item:hover {
+            color: #1e293b !important;
+        }
+        body.light .menu-item.active {
+            color: #c2410c !important;
+            background: rgba(249,115,22,0.08) !important;
+        }
+        body.light .menu-child.active {
+            color: #c2410c !important;
+        }
+
+        /* Tabs */
+        body.light .tab {
+            color: #64748b;
+        }
+        body.light .tab:hover {
+            background: rgba(0,0,0,0.04);
+            color: #1e293b;
+        }
+        body.light .tab.active {
+            color: #c2410c !important;
+            background: rgba(249,115,22,0.08);
+            border-bottom-color: #F97316;
+        }
+
+        /* Form inputs, select, textarea */
+        body.light .form-input,
+        body.light .form-select,
+        body.light .form-textarea {
+            background: #fff;
+            border-color: #cbd5e1;
+            color: #1e293b !important;
+        }
+        body.light .form-input::placeholder,
+        body.light .form-textarea::placeholder {
+            color: #94a3b8;
+        }
+        body.light .form-group label {
+            color: #475569 !important;
+        }
+        body.light .form-grid.filters {
+            background: #f1f5f9;
+        }
+
+        /* SKU list items */
+        body.light .sku-list-item {
+            color: #334155;
+            background: #fff;
+            border-color: #e2e8f0;
+        }
+        body.light .sku-list-item:hover {
+            color: #1e293b;
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        /* Modal */
+        body.light .modal-header h3 {
+            color: #1e293b;
+        }
+        body.light .modal-body {
+            color: #334155;
+        }
+
+        /* Form section */
+        body.light .form-section {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+        }
+        body.light .form-section h3 {
+            color: #1e293b !important;
+            border-bottom-color: #e2e8f0;
+        }
+
+        /* Close button */
+        body.light .close:hover {
+            color: #1e293b;
+        }
+
+        /* Tree nodes */
+        body.light .tree-node {
+            color: #334155;
+            border-bottom-color: #e2e8f0;
+        }
+
+        /* Wizard steps */
+        body.light .wizard-step {
+            color: #64748b;
+        }
+        body.light .wizard-step.active {
+            color: #1e293b !important;
+            background: rgba(249,115,22,0.08);
+        }
+
+        /* Channel dropdown options */
+        body.light .channel-opt {
+            color: #334155 !important;
+        }
+        body.light .channel-opt:hover {
+            background: rgba(0,0,0,0.04) !important;
+            color: #1e293b !important;
+        }
+        body.light .user-dropdown-opt {
+            color: #334155 !important;
+        }
+        body.light .user-dropdown-opt:hover {
+            background: rgba(0,0,0,0.04) !important;
+            color: #1e293b !important;
+        }
+
+        /* Global: bất kỳ text hard-coded trắng dùng var(--text-main) */
+        body.light {
+            --text-main: #1e293b;
+        }
+
+        /* td default text color */
+        body.light td {
+            color: #374151;
+        }
+
+        /* Checkout config title */
+        body.light .checkout-config-title {
+            color: #1e293b !important;
+        }
+
+        /* Inline style overrides cho các phần tử dùng style="color:#fff" */
+        body.light [style*="color:#fff"],
+        body.light [style*="color: #fff"],
+        body.light [style*="color:white"],
+        body.light [style*="color: white"] {
+            color: #1e293b !important;
+        }
+        /* Ngoại lệ: giữ màu trắng cho button primary, badge, avatar chữ */
+        body.light .btn-primary [style*="color:#fff"],
+        body.light .btn-primary [style*="color: #fff"],
+        body.light .badge [style*="color:#fff"],
+        body.light .badge [style*="color: #fff"] {
+            color: #fff !important;
+        }
+
         /* Checkout Configuration Style */
         /* SKU Filter Tabs */
         .sku-filter-tab {
