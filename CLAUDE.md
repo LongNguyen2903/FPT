@@ -26,6 +26,7 @@
 - Khi cần view hoặc phân tích website, sử dụng Chrome profile **Long Nguyen**.
 
 ## Tiết kiệm Token & Sửa đổi Code (Quan trọng nhất)
+- **Tuyệt đối không rollback hoặc ghi đè code cũ:** Phải luôn dùng tool đọc (`view_file`/`grep_search`) lấy nội dung file thực tế đang chạy trên máy khách trước khi thực hiện replace. Tránh tuyệt đối việc sử dụng code cũ trong lịch sử hội thoại (đặc biệt khi xảy ra history compaction) đè lên các chức năng đã sửa thành công ở lượt trước.
 - **Tuyệt đối không viết lại code cũ:** Chỉ sửa đổi đúng (surgical edit) các dòng code cần thiết cho yêu cầu mới. Không được thay thế/ghi đè/hoàn tác toàn bộ hàm hay file nếu không liên quan.
 - **Không phục hồi các đoạn code cũ** khi người dùng không yêu cầu.
 - **Tối ưu hóa dung lượng truyền tải:** Hạn chế đọc/ghi các file quá lớn mà không có lý do cụ thể, chỉ thao tác trên phạm vi thay đổi hẹp nhất có thể.

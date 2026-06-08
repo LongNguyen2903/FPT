@@ -1717,6 +1717,70 @@
             background: rgba(0, 0, 0, 0.28);
         }
 
+        #checkout-rule-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 9000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        #checkout-rule-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #checkout-rule-drawer {
+            position: fixed !important;
+            top: 0;
+            right: 0;
+            width: 680px;
+            height: 100vh;
+            z-index: 9001;
+            overflow-y: auto;
+            background: var(--bg-panel) !important;
+            border-left: 1px solid var(--border-glass);
+            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            display: none;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        #checkout-rule-drawer.open {
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        #checkout-rule-drawer>div:first-child {
+            position: sticky !important;
+            top: 0;
+            z-index: 10;
+        }
+
+        #checkout-rule-drawer .form-section {
+            padding: 20px 24px;
+        }
+
+        body.light #checkout-rule-drawer {
+            background: #fff !important;
+            border-left-color: #e2e8f0;
+            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
+        }
+
+        body.light #checkout-rule-overlay {
+            background: rgba(0, 0, 0, 0.28);
+        }
+
         /* Style cho card thống kê tin tức hỗ trợ click filter */
         .news-stat-card {
             cursor: pointer;
@@ -9777,6 +9841,11 @@
                         <h2>Cài đặt Hiển thị & Checkout</h2>
                     </div>
 
+                    <div class="tabs" style="margin-bottom: 20px;">
+                        <div class="tab active" onclick="window.switchDisplayTab('checkout', this)">Cấu hình hiển thị</div>
+                        <div class="tab" onclick="window.switchDisplayTab('rules', this)">Quy tắc Banner & Popup</div>
+                    </div>
+
                     <div id="display-tab-checkout">
                         <!-- Description -->
                         <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
@@ -10300,10 +10369,429 @@
 
                     </div><!-- /display-tab-checkout -->
 
+                    <!-- Tab 2: Quy tắc Banner & Popup Checkout -->
+                    <div id="display-tab-checkout-rules" style="display:none; margin-top:10px;">
+                        <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">
+                            Cấu hình các quy tắc (Rule-based) để tự động hiển thị Banner trên, Banner dưới, hoặc Popup tại trang Checkout theo từng SKU gói cước hoặc kênh bán. Quy tắc có độ ưu tiên cao hơn sẽ đè lên quy tắc thấp hơn.
+                        </p>
+                        <div class="form-grid filters" style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div style="display:flex; gap:10px; flex:1; min-width:280px;">
+                                <input type="text" class="form-input" id="checkout-rule-search" placeholder="Tìm kiếm quy tắc..." oninput="window.renderCheckoutRulesTable();" style="flex:1;">
+                                <button class="btn btn-secondary" onclick="window.renderCheckoutRulesTable();">Tìm Kiếm</button>
+                            </div>
+                            <button class="btn btn-primary" onclick="window.openAddCheckoutRuleForm();">+ Thêm Quy tắc mới</button>
+                        </div>
+                        <div style="border:1px solid var(--border-glass); border-radius:10px; overflow-x:auto; background:rgba(0,0,0,0.15);">
+                            <table class="data-table" style="width:100%; border-collapse:collapse; min-width:1100px;">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Quy tắc</th>
+                                        <th>Kênh áp dụng</th>
+                                        <th>SKUs áp dụng</th>
+                                        <th>Khoảng thời gian</th>
+                                        <th style="text-align:center;">Ưu tiên</th>
+                                        <th>Header Banner</th>
+                                        <th>Footer Banner</th>
+                                        <th>Popup Checkout</th>
+                                        <th>Trạng thái</th>
+                                        <th style="text-align:right;">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="checkout-rules-table-body">
+                                    <!-- Render động bằng JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Overlay & Drawer cho Quy tắc Checkout -->
+                    <div id="checkout-rule-overlay" onclick="window.closeCheckoutRuleDrawer();"></div>
+                    <div id="checkout-rule-drawer">
+                        <!-- Header Drawer -->
+                        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg-glass);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glass);gap:12px;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <button type="button" class="btn btn-secondary" style="padding:7px 12px;font-size:13px;" onclick="window.closeCheckoutRuleDrawer();">✕ Đóng</button>
+                                <h3 style="margin:0;font-size:15px;font-weight:700;" id="checkout-rule-form-title">Soạn quy tắc Checkout</h3>
+                            </div>
+                        </div>
+                        <!-- Body Drawer -->
+                        <div class="form-section" style="display:flex; flex-direction:column; gap:20px; padding:24px; max-height:calc(100vh - 130px); overflow-y:auto;">
+                            <input type="hidden" id="checkout-rule-id" value="">
+                            
+                            <!-- Nhóm 1: Thông tin cơ bản -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
+                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">1. Thông tin chung &amp; Điều kiện</h4>
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Tên quy tắc <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" id="checkout-rule-name" placeholder="VD: Khuyến mãi Hè Gói LUX" style="width:100%;">
+                                    </div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Kênh áp dụng <span style="color:var(--danger)">*</span></label>
+                                            <select class="form-select" id="checkout-rule-channel" style="width:100%;">
+                                                <option value="global">Global (Tất cả)</option>
+                                                <option value="tdw">tongdaiwifi</option>
+                                                <option value="hifpt">App HiFPT</option>
+                                                <option value="fptvn">Website fpt.vn</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Độ ưu tiên <span style="color:var(--danger)">*</span></label>
+                                            <input type="number" class="form-input" id="checkout-rule-priority" value="0" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Thời gian bắt đầu</label>
+                                            <input type="datetime-local" class="form-input" id="checkout-rule-start" style="width:100%;">
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Thời gian kết thúc</label>
+                                            <input type="datetime-local" class="form-input" id="checkout-rule-end" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn SKUs gói cước áp dụng <span style="color:var(--danger)">*</span></label>
+                                        <div style="max-height:120px; overflow-y:auto; border:1px solid var(--border-glass); border-radius:6px; padding:10px; background:rgba(0,0,0,0.15);" id="checkout-rule-skus-container">
+                                            <!-- Checkbox SKUs render động -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nhóm 2: Header Banner -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
+                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">2. Banner Đầu Trang (Header Banner)</h4>
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn Banner</label>
+                                        <select class="form-select" id="checkout-rule-header-banner" style="width:100%;">
+                                            <option value="">— Không hiển thị —</option>
+                                            <option value="banner-1">Banner Combo Thể thao Sky (Giảm 50K)</option>
+                                            <option value="banner-2">Banner Wi-Fi 6 siêu tốc (Tặng 2T cước)</option>
+                                            <option value="banner-3">Banner FPT Camera IQ3 (An tâm mọi góc nhìn)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nhóm 3: Footer Banner -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
+                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">3. Banner Chân Trang (Footer Banner)</h4>
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn Banner</label>
+                                        <select class="form-select" id="checkout-rule-footer-banner" style="width:100%;">
+                                            <option value="">— Không hiển thị —</option>
+                                            <option value="banner-footer-1">Tại sao nên chọn Combo Thể Thao Sky</option>
+                                            <option value="banner-footer-2">Tại sao chọn mạng cáp quang FPT Telecom</option>
+                                            <option value="banner-footer-3">Tại sao nên lắp đặt Camera IQ3 FPT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nhóm 4: Popup -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
+                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">4. Popup trang Checkout</h4>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn Popup</label>
+                                        <select class="form-select" id="checkout-rule-popup" style="width:100%;">
+                                            <option value="">— Không hiển thị —</option>
+                                            <option value="popup-1">Popup Ưu đãi Momo Giảm 30K</option>
+                                            <option value="popup-2">Popup Voucher 100K Lắp mạng</option>
+                                            <option value="popup-3">Popup Hỗ trợ Hotline Trực tiếp</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Kiểu kích hoạt</label>
+                                        <select class="form-select" id="checkout-rule-popup-trigger" style="width:100%;">
+                                            <option value="exit-intent">Ý định rời trang (Exit Intent)</option>
+                                            <option value="immediate">Vừa vào trang (Immediate)</option>
+                                            <option value="delay-15">Trễ 15 giây (Time delay)</option>
+                                            <option value="delay-30">Trễ 30 giây (Time delay)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nhóm 5: Cài đặt khác -->
+                            <div>
+                                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; color:#fff;">
+                                    <input type="checkbox" id="checkout-rule-status" checked style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;">
+                                    <span>Kích hoạt quy tắc hoạt động (Active)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Footer Drawer -->
+                        <div style="display:flex; justify-content:flex-end; gap:10px; padding:16px 20px; background:var(--bg-glass); border-top:1px solid var(--border-glass); position:sticky; bottom:0; z-index:11;">
+                            <button type="button" class="btn btn-secondary" onclick="window.closeCheckoutRuleDrawer();">Hủy</button>
+                            <button type="button" class="btn btn-primary" onclick="window.saveCheckoutRuleAction();">Lưu Quy tắc</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <script>
+                // ===== DỮ LIỆU BANNER & POPUP RULES =====
+                window.checkoutRulesData = {
+                    'rule-1': {
+                        id: 'rule-1',
+                        name: 'Ưu đãi Combo Thể thao Sky Hè 2026',
+                        channel: 'global',
+                        priority: 10,
+                        start: '2026-06-01T00:00',
+                        end: '2026-08-31T23:59',
+                        skus: ['INT-SKY'],
+                        headerBanner: 'banner-1',
+                        footerBanner: 'banner-footer-1',
+                        popup: 'popup-1',
+                        popupTrigger: 'exit-intent',
+                        status: true
+                    },
+                    'rule-2': {
+                        id: 'rule-2',
+                        name: 'Chiến dịch Wi-Fi 7 Thế hệ mới',
+                        channel: 'tdw',
+                        priority: 5,
+                        start: '',
+                        end: '',
+                        skus: ['DEV-WIFI7'],
+                        headerBanner: 'banner-2',
+                        footerBanner: 'banner-footer-2',
+                        popup: 'popup-2',
+                        popupTrigger: 'delay-15',
+                        status: true
+                    }
+                };
+
+                window.switchDisplayTab = function(tab, element) {
+                    var tabs = element.parentElement.children;
+                    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+                    element.classList.add('active');
+
+                    if (tab === 'checkout') {
+                        document.getElementById('display-tab-checkout').style.display = 'block';
+                        document.getElementById('display-tab-checkout-rules').style.display = 'none';
+                    } else {
+                        document.getElementById('display-tab-checkout').style.display = 'none';
+                        document.getElementById('display-tab-checkout-rules').style.display = 'block';
+                        window.renderCheckoutRulesTable();
+                    }
+                };
+
+                window.renderCheckoutRulesTable = function() {
+                    var tbody = document.getElementById('checkout-rules-table-body');
+                    if (!tbody) return;
+                    tbody.innerHTML = '';
+
+                    var keyword = (document.getElementById('checkout-rule-search')?.value || '').toLowerCase().trim();
+
+                    for (var id in window.checkoutRulesData) {
+                        var r = window.checkoutRulesData[id];
+                        if (keyword && !r.name.toLowerCase().includes(keyword)) continue;
+
+                        var tr = document.createElement('tr');
+                        
+                        var channelLabel = {
+                            global: '🌐 Global',
+                            tdw: '📡 tongdaiwifi',
+                            hifpt: '📱 App HiFPT',
+                            fptvn: '💻 Website fpt.vn'
+                        }[r.channel] || r.channel;
+
+                        var skusBadges = r.skus.map(function(s) {
+                            return '<span class="badge active" style="margin:2px; font-size:10.5px; background:rgba(232,105,9,0.15); color:var(--primary); border:1px solid rgba(232,105,9,0.25);">' + s + '</span>';
+                        }).join('');
+
+                        var timeRange = (r.start && r.end) 
+                            ? '<span style="font-size:12px;">' + r.start.replace('T', ' ') + ' ~ ' + r.end.replace('T', ' ') + '</span>'
+                            : '<span style="color:var(--text-muted); font-size:12px; font-style:italic;">Chạy liên tục</span>';
+
+                        var statusBadge = r.status 
+                            ? '<span class="badge success" style="background:rgba(16,185,129,0.15); color:var(--success);">Active</span>' 
+                            : '<span class="badge" style="background:rgba(255,255,255,0.07); color:var(--text-muted);">Draft</span>';
+
+                        var hbLabel = {
+                            'banner-1': 'Combo Sky (Giảm 50K)',
+                            'banner-2': 'Wi-Fi 6 (Tặng 2T)',
+                            'banner-3': 'Camera IQ3 (Mắt thần)'
+                        }[r.headerBanner] || '<span style="color:var(--text-muted); font-style:italic;">— Không —</span>';
+
+                        var fbLabel = {
+                            'banner-footer-1': 'Tại sao chọn Combo Sky',
+                            'banner-footer-2': 'Tại sao chọn mạng FPT',
+                            'banner-footer-3': 'Tại sao chọn Camera FPT'
+                        }[r.footerBanner] || '<span style="color:var(--text-muted); font-style:italic;">— Không —</span>';
+
+                        var popupLabel = {
+                            'popup-1': 'Momo Giảm 30K',
+                            'popup-2': 'Voucher 100K',
+                            'popup-3': 'Hotline Hỗ trợ'
+                        }[r.popup] || '<span style="color:var(--text-muted); font-style:italic;">— Không —</span>';
+
+                        tr.innerHTML = '<td><strong>' + r.name + '</strong></td>'
+                            + '<td>' + channelLabel + '</td>'
+                            + '<td><div style="display:flex; flex-wrap:wrap; max-width:200px;">' + skusBadges + '</div></td>'
+                            + '<td>' + timeRange + '</td>'
+                            + '<td style="text-align:center;">' + r.priority + '</td>'
+                            + '<td>' + hbLabel + '</td>'
+                            + '<td>' + fbLabel + '</td>'
+                            + '<td>' + popupLabel + '</td>'
+                            + '<td>' + statusBadge + '</td>'
+                            + '<td style="text-align:right; white-space:nowrap;">'
+                            + '  <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="window.editCheckoutRule(\'' + r.id + '\')">Sửa</button>'
+                            + '  <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left:5px;" onclick="window.deleteCheckoutRule(\'' + r.id + '\')">Xóa</button>'
+                            + '</td>';
+                        tbody.appendChild(tr);
+                    }
+                };
+
+                window.openAddCheckoutRuleForm = function() {
+                    document.getElementById('checkout-rule-form-title').innerText = 'Thêm quy tắc Checkout mới';
+                    document.getElementById('checkout-rule-id').value = '';
+                    document.getElementById('checkout-rule-name').value = '';
+                    document.getElementById('checkout-rule-channel').value = 'global';
+                    document.getElementById('checkout-rule-priority').value = '0';
+                    document.getElementById('checkout-rule-start').value = '';
+                    document.getElementById('checkout-rule-end').value = '';
+                    document.getElementById('checkout-rule-header-banner').value = '';
+                    document.getElementById('checkout-rule-footer-banner').value = '';
+                    document.getElementById('checkout-rule-popup').value = '';
+                    document.getElementById('checkout-rule-popup-trigger').value = 'exit-intent';
+                    document.getElementById('checkout-rule-status').checked = true;
+
+                    window.renderCheckoutRuleSkusSelector([]);
+
+                    document.getElementById('checkout-rule-overlay').style.display = 'block';
+                    document.getElementById('checkout-rule-drawer').style.display = 'block';
+                    setTimeout(function() {
+                        document.getElementById('checkout-rule-overlay').classList.add('open');
+                        document.getElementById('checkout-rule-drawer').classList.add('open');
+                    }, 50);
+                };
+
+                window.editCheckoutRule = function(id) {
+                    var r = window.checkoutRulesData[id];
+                    if (!r) return;
+
+                    document.getElementById('checkout-rule-form-title').innerText = 'Chỉnh sửa quy tắc #' + id;
+                    document.getElementById('checkout-rule-id').value = r.id;
+                    document.getElementById('checkout-rule-name').value = r.name;
+                    document.getElementById('checkout-rule-channel').value = r.channel;
+                    document.getElementById('checkout-rule-priority').value = r.priority;
+                    document.getElementById('checkout-rule-start').value = r.start || '';
+                    document.getElementById('checkout-rule-end').value = r.end || '';
+                    document.getElementById('checkout-rule-header-banner').value = r.headerBanner || '';
+                    document.getElementById('checkout-rule-footer-banner').value = r.footerBanner || '';
+                    document.getElementById('checkout-rule-popup').value = r.popup || '';
+                    document.getElementById('checkout-rule-popup-trigger').value = r.popupTrigger || 'exit-intent';
+                    document.getElementById('checkout-rule-status').checked = r.status;
+
+                    window.renderCheckoutRuleSkusSelector(r.skus);
+
+                    document.getElementById('checkout-rule-overlay').style.display = 'block';
+                    document.getElementById('checkout-rule-drawer').style.display = 'block';
+                    setTimeout(function() {
+                        document.getElementById('checkout-rule-overlay').classList.add('open');
+                        document.getElementById('checkout-rule-drawer').classList.add('open');
+                    }, 50);
+                };
+
+                window.closeCheckoutRuleDrawer = function() {
+                    document.getElementById('checkout-rule-overlay').classList.remove('open');
+                    document.getElementById('checkout-rule-drawer').classList.remove('open');
+                    setTimeout(function() {
+                        document.getElementById('checkout-rule-overlay').style.display = 'none';
+                        document.getElementById('checkout-rule-drawer').style.display = 'none';
+                    }, 300);
+                };
+
+                window.renderCheckoutRuleSkusSelector = function(selectedSkus) {
+                    var container = document.getElementById('checkout-rule-skus-container');
+                    if (!container) return;
+                    container.innerHTML = '';
+
+                    checkoutPackageSkus.forEach(function(sku) {
+                        var isChecked = selectedSkus.indexOf(sku.code) > -1;
+                        var div = document.createElement('div');
+                        div.style.margin = '4px 0';
+                        div.innerHTML = '<label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12.5px;">'
+                            + '<input type="checkbox" class="rule-sku-cb" value="' + sku.code + '"' + (isChecked ? ' checked' : '') + ' style="width:15px; height:15px; cursor:pointer;">'
+                            + '<span>' + sku.code + ' - ' + sku.name + '</span>'
+                            + '</label>';
+                        container.appendChild(div);
+                    });
+                };
+
+                window.saveCheckoutRuleAction = function() {
+                    var id = document.getElementById('checkout-rule-id').value;
+                    var name = document.getElementById('checkout-rule-name').value.trim();
+                    var channel = document.getElementById('checkout-rule-channel').value;
+                    var priority = parseInt(document.getElementById('checkout-rule-priority').value) || 0;
+                    var start = document.getElementById('checkout-rule-start').value;
+                    var end = document.getElementById('checkout-rule-end').value;
+                    var headerBanner = document.getElementById('checkout-rule-header-banner').value;
+                    var footerBanner = document.getElementById('checkout-rule-footer-banner').value;
+                    var popup = document.getElementById('checkout-rule-popup').value;
+                    var popupTrigger = document.getElementById('checkout-rule-popup-trigger').value;
+                    var status = document.getElementById('checkout-rule-status').checked;
+
+                    if (!name) {
+                        showLdpToast('Vui lòng nhập Tên quy tắc hiển thị!');
+                        return;
+                    }
+
+                    // Thu thập SKUs đã chọn
+                    var skus = [];
+                    var checkboxes = document.querySelectorAll('.rule-sku-cb');
+                    checkboxes.forEach(function(cb) {
+                        if (cb.checked) skus.push(cb.value);
+                    });
+
+                    if (skus.length === 0) {
+                        showLdpToast('Vui lòng chọn ít nhất một SKU gói cước áp dụng!');
+                        return;
+                    }
+
+                    if (!id) {
+                        id = 'rule-' + (Object.keys(window.checkoutRulesData).length + 1);
+                    }
+
+                    window.checkoutRulesData[id] = {
+                        id: id,
+                        name: name,
+                        channel: channel,
+                        priority: priority,
+                        start: start,
+                        end: end,
+                        skus: skus,
+                        headerBanner: headerBanner,
+                        footerBanner: footerBanner,
+                        popup: popup,
+                        popupTrigger: popupTrigger,
+                        status: status
+                    };
+
+                    window.renderCheckoutRulesTable();
+                    window.closeCheckoutRuleDrawer();
+                    showLdpToast('Đã lưu quy tắc Banner & Popup thành công!');
+                };
+
+                window.deleteCheckoutRule = function(id) {
+                    var r = window.checkoutRulesData[id];
+                    if (!r) return;
+
+                    if (confirm('Bạn có chắc chắn muốn xóa quy tắc "' + r.name + '" không?')) {
+                        delete window.checkoutRulesData[id];
+                        window.renderCheckoutRulesTable();
+                        showLdpToast('Đã xóa quy tắc thành công!');
+                    }
+                };
+
                 // ===== DỮ LIỆU CMS-DISPLAY =====
                 var checkoutSkus = { global: [], tdw: [], hifpt: [], fptvn: [] };
                 var checkoutInheritStates = { tdw: true, hifpt: true, fptvn: true };
@@ -10884,6 +11372,7 @@
                     ['global', 'tdw', 'hifpt', 'fptvn'].forEach(function (ch) {
                         renderDeviceServiceTables(ch);
                     });
+                    if (window.renderCheckoutRulesTable) window.renderCheckoutRulesTable();
                 }
 
                 if (document.readyState === 'loading') {
