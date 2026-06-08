@@ -41,7 +41,128 @@
         'truyenhinh': { skus: ['PLAY-MAX'], fallback: true }
     };
 
+    window.newsCategoriesData = {
+        'cat-1': {
+            id: 'cat-1',
+            name: 'Tin khuyến mãi',
+            slug: 'tin-khuyen-mai',
+            desc: 'Các chương trình ưu đãi, khuyến mãi lắp đặt mạng FPT, FPT Play, FPT Camera',
+            content: 'Nội dung chi tiết về các chương trình ưu đãi và khuyến mãi mới nhất của FPT Telecom.',
+            parent: '',
+            layout: 'default',
+            lang: 'vi',
+            showHome: '1',
+            showTop: '1',
+            order: 1,
+            color: '#ff6b00',
+            status: 'Active',
+            imgAlt: 'Khuyến mãi FPT',
+            seoTitle: 'Tổng Hợp Khuyến Mãi FPT Mới Nhất Hè 2026',
+            seoKeywords: 'khuyen mai fpt, lap mang fpt gia re',
+            seoDesc: 'Cập nhật nhanh chóng các chương trình khuyến mãi lắp đặt cáp quang, truyền hình, camera FPT.',
+            keywords: 'khuyen mai, lap mang'
+        },
+        'cat-2': {
+            id: 'cat-2',
+            name: 'Tin công nghệ',
+            slug: 'tin-cong-nghe',
+            desc: 'Tin tức công nghệ mới nhất từ FPT Telecom và thế giới',
+            content: 'Chuyên mục tổng hợp các tin tức công nghệ mới nhất, xu hướng công nghệ Wi-Fi 6, Wi-Fi 7, thiết bị thông minh.',
+            parent: '',
+            layout: 'grid',
+            lang: 'vi',
+            showHome: '1',
+            showTop: '0',
+            order: 2,
+            color: '#fbbf24',
+            status: 'Active',
+            imgAlt: 'Công nghệ FPT',
+            seoTitle: 'Tin Tức Công Nghệ Mới Nhất - FPT Telecom',
+            seoKeywords: 'tin cong nghe, wifi 6 fpt, camera ai',
+            seoDesc: 'Theo dõi các thông tin công nghệ mới nhất, thiết bị và giải pháp AI tiên tiến.',
+            keywords: 'cong nghe, tin tuc'
+        },
+        'cat-3': {
+            id: 'cat-3',
+            name: 'Thông báo',
+            slug: 'thong-bao',
+            desc: 'Thông báo chính thức từ ban quản trị hệ thống',
+            content: 'Thông tin bảo trì mạng định kỳ, nâng cấp hệ thống, thông báo chung tới quý khách hàng.',
+            parent: '',
+            layout: 'list',
+            lang: 'vi',
+            showHome: '0',
+            showTop: '1',
+            order: 3,
+            color: '#38bdf8',
+            status: 'Active',
+            imgAlt: 'Thông báo FPT',
+            seoTitle: 'Thông Báo Khách Hàng - FPT Telecom',
+            seoKeywords: 'thong bao bao tri, thong bao fpt',
+            seoDesc: 'Tổng hợp thông báo chính thức gửi tới quý khách hàng sử dụng dịch vụ FPT.',
+            keywords: 'thong bao, bao tri'
+        },
+        'cat-4': {
+            id: 'cat-4',
+            name: 'Sự kiện',
+            slug: 'su-kien',
+            desc: 'Các sự kiện nổi bật của FPT Telecom và đối tác',
+            content: 'Các giải đấu thể thao trên FPT Play, sự kiện ra mắt sản phẩm mới, chương trình cộng đồng.',
+            parent: '',
+            layout: 'default',
+            lang: 'vi',
+            showHome: '1',
+            showTop: '0',
+            order: 4,
+            color: '#a78bfa',
+            status: 'Active',
+            imgAlt: 'Sự kiện FPT',
+            seoTitle: 'Sự Kiện Nổi Bật FPT Play, FPT Telecom',
+            seoKeywords: 'su kien fpt, giai dau fpt play',
+            seoDesc: 'Thông tin các chương trình sự kiện hoành tráng nhất của FPT Telecom.',
+            keywords: 'su kien, fpt play'
+        }
+    };
+
     window.skuTagsData = {};
+
+    window.openNewsArticleDrawer = function() {
+        const overlay = document.getElementById('news-edit-overlay');
+        const drawerContent = document.getElementById('news-item-form');
+        if (overlay && drawerContent) {
+            // Đưa ra ngoài body để tránh bị stacking context và flexbox co giãn
+            document.body.appendChild(overlay);
+            document.body.appendChild(drawerContent);
+            
+            overlay.style.display = 'block';
+            drawerContent.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(function () { 
+                overlay.classList.add('open');
+                drawerContent.classList.add('open');
+            }, 10);
+        }
+    };
+
+    window.closeNewsArticleDrawer = function() {
+        const overlay = document.getElementById('news-edit-overlay');
+        const drawerContent = document.getElementById('news-item-form');
+        if (drawerContent) {
+            drawerContent.classList.remove('open');
+        }
+        if (overlay) {
+            overlay.classList.remove('open');
+        }
+        document.body.style.overflow = '';
+        setTimeout(function () {
+            if (drawerContent && !drawerContent.classList.contains('open')) {
+                drawerContent.style.display = 'none';
+            }
+            if (overlay && !overlay.classList.contains('open')) {
+                overlay.style.display = 'none';
+            }
+        }, 300);
+    };
 
     window.newsArticlesData = {
         'news-1': {
@@ -139,7 +260,7 @@
         document.getElementById('news-cat-list').style.display = 'none';
         document.getElementById('news-tag-list').style.display = 'none';
         document.getElementById('news-tag-mapping').style.display = 'none';
-        document.getElementById('news-item-form').style.display = 'none';
+        window.closeNewsArticleDrawer();
         document.getElementById('news-cat-form').style.display = 'none';
 
         if (tab === 'list') {
@@ -147,6 +268,7 @@
             window.renderNewsTableHTML();
         } else if (tab === 'category') {
             document.getElementById('news-cat-list').style.display = 'block';
+            window.renderNewsCategoriesTable();
         } else if (tab === 'tag-list') {
             document.getElementById('news-tag-list').style.display = 'block';
             window.renderNewsTagsTable();
@@ -268,6 +390,197 @@
         }
     };
 
+    // --- NEWS CATEGORIES LOGIC ---
+    window.renderNewsCategoriesTable = function() {
+        const tbody = document.getElementById('newscat-table-body');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const searchKw = (document.querySelector('#news-cat-list input[placeholder="Tìm chuyên mục..."]')?.value || '').toLowerCase().trim();
+
+        for (let id in window.newsCategoriesData) {
+            const cat = window.newsCategoriesData[id];
+
+            if (searchKw && !cat.name.toLowerCase().includes(searchKw) && !cat.slug.toLowerCase().includes(searchKw)) {
+                continue;
+            }
+
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-cat-id', cat.id);
+
+            const statusBadge = cat.status === 'Active' 
+                ? '<span class="badge active">Active</span>' 
+                : '<span class="badge warning">Draft</span>';
+
+            tr.innerHTML = `
+                <td><strong>${cat.name}</strong></td>
+                <td>${cat.slug}</td>
+                <td>${cat.order}</td>
+                <td>${statusBadge}</td>
+                <td>
+                    <button class="btn btn-secondary btn-sm"
+                        style="color:var(--primary); border-color:var(--primary);"
+                        onclick="window.editNewsCategory('${cat.id}')">Sửa</button>
+                    <button class="btn btn-secondary btn-sm"
+                        style="color:var(--danger); border-color:var(--danger); margin-left: 5px;"
+                        onclick="window.deleteNewsCategory('${cat.id}')">Xóa</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+    };
+
+    window.openAddNewsCategoryForm = function() {
+        document.getElementById('newscat-form-title').innerText = 'Tạo mới Chuyên mục';
+        document.getElementById('newscat-edit-id').value = '';
+        document.getElementById('newscat-title').value = '';
+        document.getElementById('newscat-slug').value = '';
+        document.getElementById('newscat-desc').value = '';
+        document.getElementById('newscat-content').value = '';
+        document.getElementById('newscat-parent').value = '';
+        document.getElementById('newscat-layout').value = 'default';
+        document.getElementById('newscat-lang').value = 'vi';
+        document.getElementById('newscat-show-home').value = '';
+        document.getElementById('newscat-show-top').value = '';
+        document.getElementById('newscat-order').value = Object.keys(window.newsCategoriesData).length + 1;
+        document.getElementById('newscat-color').value = '';
+        document.getElementById('newscat-status').checked = true;
+        document.getElementById('newscat-img-alt').value = '';
+        document.getElementById('newscat-seo-title').value = '';
+        document.getElementById('newscat-seo-keywords').value = '';
+        document.getElementById('newscat-seo-desc').value = '';
+        document.getElementById('newscat-keywords').value = '';
+
+        window.updateParentCategoryOptions();
+
+        document.getElementById('news-list').style.display = 'none';
+        document.getElementById('news-cat-list').style.display = 'none';
+        document.getElementById('news-tag-list').style.display = 'none';
+        document.getElementById('news-tag-mapping').style.display = 'none';
+        document.getElementById('news-cat-form').style.display = 'block';
+    };
+
+    window.editNewsCategory = function(id) {
+        const cat = window.newsCategoriesData[id];
+        if (!cat) return;
+
+        document.getElementById('newscat-form-title').innerText = 'Chỉnh sửa Chuyên mục #' + id;
+        document.getElementById('newscat-edit-id').value = cat.id;
+        document.getElementById('newscat-title').value = cat.name;
+        document.getElementById('newscat-slug').value = cat.slug;
+        document.getElementById('newscat-desc').value = cat.desc || '';
+        document.getElementById('newscat-content').value = cat.content || '';
+        document.getElementById('newscat-parent').value = cat.parent || '';
+        document.getElementById('newscat-layout').value = cat.layout || 'default';
+        document.getElementById('newscat-lang').value = cat.lang || 'vi';
+        document.getElementById('newscat-show-home').value = cat.showHome || '';
+        document.getElementById('newscat-show-top').value = cat.showTop || '';
+        document.getElementById('newscat-order').value = cat.order || 0;
+        document.getElementById('newscat-color').value = cat.color || '';
+        document.getElementById('newscat-status').checked = (cat.status === 'Active');
+        document.getElementById('newscat-img-alt').value = cat.imgAlt || '';
+        document.getElementById('newscat-seo-title').value = cat.seoTitle || '';
+        document.getElementById('newscat-seo-keywords').value = cat.seoKeywords || '';
+        document.getElementById('newscat-seo-desc').value = cat.seoDesc || '';
+        document.getElementById('newscat-keywords').value = cat.keywords || '';
+
+        window.updateParentCategoryOptions();
+
+        document.getElementById('news-list').style.display = 'none';
+        document.getElementById('news-cat-list').style.display = 'none';
+        document.getElementById('news-tag-list').style.display = 'none';
+        document.getElementById('news-tag-mapping').style.display = 'none';
+        document.getElementById('news-cat-form').style.display = 'block';
+    };
+
+    window.saveNewsCategoryAction = function() {
+        const id = document.getElementById('newscat-edit-id').value || 'cat-' + (Object.keys(window.newsCategoriesData).length + 1);
+        const name = document.getElementById('newscat-title').value.trim();
+        const slug = document.getElementById('newscat-slug').value.trim();
+
+        if (!name || !slug) {
+            showLdpToast('Vui lòng nhập đầy đủ Tên chuyên mục và Biệt danh (slug)!');
+            return;
+        }
+
+        window.newsCategoriesData[id] = {
+            id: id,
+            name: name,
+            slug: slug,
+            desc: document.getElementById('newscat-desc').value.trim(),
+            content: document.getElementById('newscat-content').value.trim(),
+            parent: document.getElementById('newscat-parent').value,
+            layout: document.getElementById('newscat-layout').value,
+            lang: document.getElementById('newscat-lang').value,
+            showHome: document.getElementById('newscat-show-home').value.trim(),
+            showTop: document.getElementById('newscat-show-top').value.trim(),
+            order: parseInt(document.getElementById('newscat-order').value) || 0,
+            color: document.getElementById('newscat-color').value.trim(),
+            status: document.getElementById('newscat-status').checked ? 'Active' : 'Draft',
+            imgAlt: document.getElementById('newscat-img-alt').value.trim(),
+            seoTitle: document.getElementById('newscat-seo-title').value.trim(),
+            seoKeywords: document.getElementById('newscat-seo-keywords').value.trim(),
+            seoDesc: document.getElementById('newscat-seo-desc').value.trim(),
+            keywords: document.getElementById('newscat-keywords').value.trim()
+        };
+
+        window.updateArticleCategoryOptions();
+
+        window.renderNewsCategoriesTable();
+        document.getElementById('news-cat-form').style.display = 'none';
+        document.getElementById('news-cat-list').style.display = 'block';
+        showLdpToast('Đã lưu chuyên mục tin tức thành công!');
+    };
+
+    window.deleteNewsCategory = function(id) {
+        const cat = window.newsCategoriesData[id];
+        if (!cat) return;
+
+        if (confirm(`Bạn có chắc chắn muốn xóa chuyên mục "${cat.name}" không?`)) {
+            delete window.newsCategoriesData[id];
+            window.renderNewsCategoriesTable();
+            window.updateArticleCategoryOptions();
+            showLdpToast('Đã xóa chuyên mục thành công!');
+        }
+    };
+
+    window.updateArticleCategoryOptions = function() {
+        const selectEl = document.getElementById('art-category');
+        if (!selectEl) return;
+        const currentVal = selectEl.value;
+        selectEl.innerHTML = '';
+        for (let id in window.newsCategoriesData) {
+            const cat = window.newsCategoriesData[id];
+            const opt = document.createElement('option');
+            opt.value = cat.name;
+            opt.innerText = cat.name;
+            selectEl.appendChild(opt);
+        }
+        if (currentVal && Array.from(selectEl.options).some(opt => opt.value === currentVal)) {
+            selectEl.value = currentVal;
+        }
+    };
+
+    window.updateParentCategoryOptions = function() {
+        const selectEl = document.getElementById('newscat-parent');
+        if (!selectEl) return;
+        const currentVal = selectEl.value;
+        selectEl.innerHTML = '<option value="">— Chọn chuyên mục cha —</option>';
+        for (let id in window.newsCategoriesData) {
+            const cat = window.newsCategoriesData[id];
+            const currentEditId = document.getElementById('newscat-edit-id').value;
+            if (cat.id === currentEditId) continue;
+            
+            const opt = document.createElement('option');
+            opt.value = cat.id;
+            opt.innerText = cat.name;
+            selectEl.appendChild(opt);
+        }
+        if (currentVal && Array.from(selectEl.options).some(opt => opt.value === currentVal)) {
+            selectEl.value = currentVal;
+        }
+    };
+
     window.toggleNewsSeoAccordion = function() {
         const content = document.getElementById('news-seo-content');
         const icon = document.getElementById('news-seo-icon');
@@ -353,7 +666,7 @@
 
             tr.innerHTML = `
                 <td style="text-align:center;">
-                    <input type="checkbox" class="news-select-item" data-id="${art.id}" ${isChecked} onclick="window.onNewsSelectChange()" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;">
+                    <input type="checkbox" class="news-row-check news-select-item" data-id="${art.id}" ${isChecked} onclick="window.onNewsSelectChange(); if(window.onNewsRowCheck) window.onNewsRowCheck();" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;">
                 </td>
                 <td>
                     <img src="${art.thumbUrl}" alt="News Thumbnail" style="width:60px; height:40px; border-radius:4px; object-fit:cover; border:1px solid var(--border-glass);">
@@ -387,6 +700,9 @@
         window.onNewsSelectChange();
         window.updateNewsStats();
         window.syncNewsToMockArticles();
+        if (typeof window.filterNewsTable === 'function') {
+            window.filterNewsTable();
+        }
     };
 
     window.toggleSelectAllNews = function(cb) {
@@ -412,7 +728,7 @@
                 allChecked = false;
             }
         });
-        const masterCb = document.getElementById('news-select-all');
+        const masterCb = document.getElementById('news-check-all');
         if (masterCb) masterCb.checked = allChecked;
         window.updateBulkNewsButtonState();
     };
@@ -434,7 +750,7 @@
 
     window.clearNewsSelection = function() {
         window.selectedNewsIds = [];
-        const masterCb = document.getElementById('news-select-all');
+        const masterCb = document.getElementById('news-check-all');
         if (masterCb) masterCb.checked = false;
         document.querySelectorAll('.news-select-item').forEach(item => item.checked = false);
         window.updateBulkNewsButtonState();
@@ -509,13 +825,17 @@
 
         document.getElementById('art-seo-title').value = '';
         document.getElementById('art-seo-desc').value = '';
-        document.getElementById('art-seo-title-count').innerText = '0 / 60';
-        document.getElementById('art-seo-desc-count').innerText = '0 / 160';
+        const titleCountEl = document.getElementById('seo-title-count');
+        if (titleCountEl) titleCountEl.innerText = '0 / 60';
+        const descCountEl = document.getElementById('seo-desc-count');
+        if (descCountEl) descCountEl.innerText = '0 / 160';
         document.getElementById('art-seo-title').style.borderColor = '';
         document.getElementById('art-seo-desc').style.borderColor = '';
 
-        document.getElementById('art-autosave-status').innerText = '';
-        document.getElementById('art-featured').checked = false;
+        const autosaveEl = document.getElementById('art-autosave-status');
+        if (autosaveEl) autosaveEl.innerText = '';
+        const featuredEl = document.getElementById('art-featured');
+        if (featuredEl) featuredEl.checked = false;
 
         window.onArticleStatusChange();
 
@@ -551,21 +871,21 @@
 
         document.getElementById('art-seo-title').value = art.seoTitle || '';
         document.getElementById('art-seo-desc').value = art.seoDesc || '';
-        document.getElementById('art-featured').checked = art.featured || false;
+        const featuredEl = document.getElementById('art-featured');
+        if (featuredEl) featuredEl.checked = art.featured || false;
 
         if (art.status === 'Scheduled' && art.scheduledTime) {
-            document.getElementById('art-scheduled-time').value = art.scheduledTime;
+            const schedTimeEl = document.getElementById('art-schedule-datetime');
+            if (schedTimeEl) schedTimeEl.value = art.scheduledTime;
         }
 
         window.onSeoInput('title');
         window.onSeoInput('desc');
         window.onArticleStatusChange();
 
-        document.getElementById('news-item-form').style.display = 'block';
-        document.getElementById('news-list').style.display = 'none';
-        document.getElementById('news-cat-list').style.display = 'none';
-        document.getElementById('news-cat-form').style.display = 'none';
-        document.getElementById('art-autosave-status').innerText = '';
+        window.openNewsArticleDrawer();
+        const autosaveEl = document.getElementById('art-autosave-status');
+        if (autosaveEl) autosaveEl.innerText = '';
 
         window.startAutoSaveTimer();
     };
@@ -587,7 +907,8 @@
         const cropRatio = document.getElementById('art-crop-ratio').value;
         const seoTitle = document.getElementById('art-seo-title').value.trim();
         const seoDesc = document.getElementById('art-seo-desc').value.trim();
-        const featured = document.getElementById('art-featured').checked;
+        const featuredEl = document.getElementById('art-featured');
+        const featured = featuredEl ? featuredEl.checked : false;
 
         if (!title || !slug || !content || !sapo) {
             showLdpToast('Vui lòng nhập đầy đủ các thông tin bắt buộc (*)!');
@@ -596,7 +917,8 @@
 
         let scheduledTime = '';
         if (status === 'Scheduled') {
-            scheduledTime = document.getElementById('art-scheduled-time').value;
+            const schedTimeEl = document.getElementById('art-schedule-datetime');
+            scheduledTime = schedTimeEl ? schedTimeEl.value : '';
             if (!scheduledTime) {
                 showLdpToast('Vui lòng chọn ngày giờ đặt lịch xuất bản!');
                 return;
@@ -629,8 +951,7 @@
         };
 
         window.stopAutoSaveTimer();
-        document.getElementById('news-item-form').style.display = 'none';
-        document.getElementById('news-list').style.display = 'block';
+        window.closeNewsArticleDrawer();
         
         window.renderNewsTableHTML();
         showLdpToast('Đã lưu bài viết thành công!');
@@ -788,7 +1109,7 @@
     window.onSeoInput = function(type) {
         if (type === 'title') {
             const el = document.getElementById('art-seo-title');
-            const cnt = document.getElementById('art-seo-title-count');
+            const cnt = document.getElementById('seo-title-count');
             if (!el || !cnt) return;
             const len = el.value.length;
             cnt.innerText = `${len} / 60`;
@@ -804,7 +1125,7 @@
             }
         } else if (type === 'desc') {
             const el = document.getElementById('art-seo-desc');
-            const cnt = document.getElementById('art-seo-desc-count');
+            const cnt = document.getElementById('seo-desc-count');
             if (!el || !cnt) return;
             const len = el.value.length;
             cnt.innerText = `${len} / 160`;
@@ -831,9 +1152,9 @@
         const artSapo = document.getElementById('art-sapo')?.value.trim();
         const slug = document.getElementById('art-slug')?.value.trim();
 
-        const snippetTitle = document.getElementById('seo-snippet-title');
-        const snippetUrl = document.getElementById('seo-snippet-url');
-        const snippetDesc = document.getElementById('seo-snippet-desc');
+        const snippetTitle = document.getElementById('seo-preview-title');
+        const snippetUrl = document.getElementById('seo-preview-slug');
+        const snippetDesc = document.getElementById('seo-preview-desc');
 
         if (snippetTitle) snippetTitle.innerText = seoTitle || artTitle || 'Tiêu đề SEO sẽ hiển thị ở đây';
         if (snippetUrl) snippetUrl.innerText = slug || 'url-slug-bai-viet';
@@ -884,7 +1205,10 @@
                 if (title) {
                     const now = new Date();
                     const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
-                    document.getElementById('art-autosave-status').innerText = `🔄 Tự động lưu nháp thành công lúc ${timeStr}`;
+                    const autosaveEl = document.getElementById('art-autosave-status');
+                    if (autosaveEl) {
+                        autosaveEl.innerText = `🔄 Tự động lưu nháp thành công lúc ${timeStr}`;
+                    }
                     window.isFormChanged = false;
                     
                     const id = document.getElementById('article-id').value || 'news-temp-autosave';
@@ -899,7 +1223,8 @@
                     const thumbUrl = document.getElementById('art-thumbnail-url').value;
                     const seoTitle = document.getElementById('art-seo-title').value.trim();
                     const seoDesc = document.getElementById('art-seo-desc').value.trim();
-                    const featured = document.getElementById('art-featured').checked;
+                    const featuredEl = document.getElementById('art-featured');
+                    const featured = featuredEl ? featuredEl.checked : false;
 
                     window.newsArticlesData[id] = {
                         id: id,
@@ -935,18 +1260,21 @@
 
     window.onArticleStatusChange = function() {
         const status = document.getElementById('art-status').value;
-        const scheduledGroup = document.getElementById('scheduled-time-group');
-        if (status === 'Scheduled') {
-            scheduledGroup.style.display = 'block';
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            tomorrow.setMinutes(0);
-            tomorrow.setSeconds(0);
-            const tzoffset = tomorrow.getTimezoneOffset() * 60000;
-            const localISOTime = (new Date(tomorrow.getTime() - tzoffset)).toISOString().slice(0, 16);
-            document.getElementById('art-scheduled-time').value = localISOTime;
-        } else {
-            scheduledGroup.style.display = 'none';
+        const scheduledGroup = document.getElementById('art-schedule-section');
+        if (scheduledGroup) {
+            if (status === 'Scheduled') {
+                scheduledGroup.style.display = 'block';
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setMinutes(0);
+                tomorrow.setSeconds(0);
+                const tzoffset = tomorrow.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(tomorrow.getTime() - tzoffset)).toISOString().slice(0, 16);
+                const schedTimeEl = document.getElementById('art-schedule-datetime');
+                if (schedTimeEl) schedTimeEl.value = localISOTime;
+            } else {
+                scheduledGroup.style.display = 'none';
+            }
         }
     };
 
@@ -1032,9 +1360,9 @@
         const slugEl   = document.getElementById('art-slug');
         const artTitle = document.getElementById('art-title');
 
-        const snippetTitle = document.getElementById('seo-snippet-title');
-        const snippetUrl   = document.getElementById('seo-snippet-url');
-        const snippetDesc  = document.getElementById('seo-snippet-desc');
+        const snippetTitle = document.getElementById('seo-preview-title');
+        const snippetUrl   = document.getElementById('seo-preview-slug');
+        const snippetDesc  = document.getElementById('seo-preview-desc');
 
         if (snippetTitle) snippetTitle.innerText = (titleEl && titleEl.value) || (artTitle && artTitle.value) || 'Tiêu đề SEO sẽ hiển thị ở đây';
         if (snippetUrl)   snippetUrl.innerText   = (slugEl && slugEl.value)   || 'url-slug-bai-viet';
@@ -1081,6 +1409,57 @@
             window.renderNewsTagsTable();
             window.syncTagMappingToSku();
             window.renderTagMappingTable();
+            window.renderNewsCategoriesTable();
+            window.updateArticleCategoryOptions();
+
+            // Đồng bộ master checkbox
+            const masterCb = document.getElementById('news-check-all');
+            if (masterCb) {
+                masterCb.addEventListener('change', function() {
+                    window.toggleSelectAllNews(this);
+                });
+            }
         }, 100);
     });
+
+    // Select filter by card click
+    window.selectNewsStatusFilter = function(statusValue, cardElement) {
+        const selectEl = document.getElementById('news-search-status');
+        if (selectEl) {
+            selectEl.value = statusValue;
+        }
+        
+        // Cập nhật classes active
+        document.querySelectorAll('.news-stat-card').forEach((card) => {
+            card.classList.remove('active-total', 'active-pub', 'active-draft');
+        });
+        
+        const cards = document.querySelectorAll('.news-stat-card');
+        if (cardElement) {
+            if (statusValue === '') {
+                cardElement.classList.add('active-total');
+            } else if (statusValue === 'Published') {
+                cardElement.classList.add('active-pub');
+            } else if (statusValue === 'Draft') {
+                cardElement.classList.add('active-draft');
+            }
+        } else {
+            // Trường hợp đồng bộ từ dropdown select
+            if (statusValue === '') {
+                cards[0]?.classList.add('active-total');
+            } else if (statusValue === 'Published') {
+                cards[1]?.classList.add('active-pub');
+            } else if (statusValue === 'Draft') {
+                cards[2]?.classList.add('active-draft');
+            }
+        }
+        
+        if (typeof window.filterNewsTable === 'function') {
+            window.filterNewsTable();
+        }
+    };
+
+    window.syncNewsCardFilterFromSelect = function(statusValue) {
+        window.selectNewsStatusFilter(statusValue, null);
+    };
 })();
