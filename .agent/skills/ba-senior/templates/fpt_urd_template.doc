@@ -1,7 +1,7 @@
 ﻿<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>FPT.VN URD - Template chuáº©n</title>
+<title>FPT.VN URD - Template chuẩn</title>
 <style>
     body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000000; font-size: 12pt; }
     .header-table { width: 100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 20px; }
@@ -24,25 +24,25 @@
 </head>
 <body>
 
-<!-- TRANG BÃŒA & HEADER -->
+<!-- TRANG BÌA & HEADER -->
 <table class="header-table">
     <tr>
         <td rowspan="2" style="width: 120px; text-align: center; vertical-align: middle;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg" alt="FPT Logo" style="width:80px;height:auto;"/>
         </td>
-        <td style="font-size: 16pt; text-align: center; text-transform: uppercase;">FPT.VN URD â€“ USER REQUIREMENTS DOCUMENT</td>
+        <td style="font-size: 16pt; text-align: center; text-transform: uppercase;">FPT.VN URD – USER REQUIREMENTS DOCUMENT</td>
     </tr>
     <tr>
         <td style="font-size: 11pt;">
-            <strong>MÃ£ hiá»‡u:</strong> [MÃ£ hiá»‡u tÃ i liá»‡u - VÃ­ dá»¥: URD-CMS-01] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <strong>PhiÃªn báº£n:</strong> [PhiÃªn báº£n - VÃ­ dá»¥: 1.0] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <strong>NgÃ y:</strong> [NgÃ y ban hÃ nh]
+            <strong>Mã hiệu:</strong> [Mã hiệu tài liệu - Ví dụ: URD-CMS-01] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>Phiên bản:</strong> [Phiên bản - Ví dụ: 1.0] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>Ngày:</strong> [Ngày ban hành]
         </td>
     </tr>
 </table>
 
 <h2>REVISION HISTORY</h2>
-<p><em>[A]: Add â€“ ThÃªm má»›i | [U]: Update â€“ Cáº­p nháº­t, thay Ä‘á»•i | [D]: Delete - XÃ³a</em></p>
+<p><em>[A]: Add – Thêm mới | [U]: Update – Cập nhật, thay đổi | [D]: Delete - Xóa</em></p>
 <table class="data-table">
     <thead>
         <tr>
@@ -56,124 +56,124 @@
     </thead>
     <tbody>
         <tr>
-            <td>[NgÃ y/ThÃ¡ng/NÄƒm]</td>
-            <td>[PhiÃªn báº£n]</td>
-            <td>[NgÆ°á»i soáº¡n]</td>
-            <td>[NgÆ°á»i kiá»ƒm tra]</td>
-            <td>[NgÆ°á»i phÃª duyá»‡t]</td>
-            <td>[MÃ´ táº£ thay Ä‘á»•i]</td>
+            <td>[Ngày/Tháng/Năm]</td>
+            <td>[Phiên bản]</td>
+            <td>[Người soạn]</td>
+            <td>[Người kiểm tra]</td>
+            <td>[Người phê duyệt]</td>
+            <td>[Mô tả thay đổi]</td>
         </tr>
     </tbody>
 </table>
 
 <div class="page-break"></div>
 
-<h1>Má»¤C Lá»¤C</h1>
+<h1>MỤC LỤC</h1>
 <ol>
-    <li><strong>I. GIá»šI THIá»†U</strong></li>
-    <li><strong>II. Tá»”NG QUAN</strong></li>
-    <li><strong>III. Äáº¶C Táº¢ CHI TIáº¾T CÃC CHá»¨C NÄ‚NG</strong></li>
-    <li><strong>IV. CÃC YÃŠU Cáº¦U PHI CHá»¨C NÄ‚NG</strong></li>
-    <li><strong>V. PHá»¤ Lá»¤C</strong></li>
+    <li><strong>I. GIỚI THIỆU</strong></li>
+    <li><strong>II. TỔNG QUAN</strong></li>
+    <li><strong>III. ĐẶC TẢ CHI TIẾT CÁC CHỨC NĂNG</strong></li>
+    <li><strong>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</strong></li>
+    <li><strong>V. PHỤ LỤC</strong></li>
 </ol>
 
 <div class="page-break"></div>
 
-<h1>I. GIá»šI THIá»†U</h1>
+<h1>I. GIỚI THIỆU</h1>
 
-<h3>1. Má»¥c Ä‘Ã­ch tÃ i liá»‡u</h3>
-<p>[Viáº¿t má»¥c Ä‘Ã­ch cá»§a tÃ i liá»‡u URD, vÃ­ dá»¥: TÃ i liá»‡u nÃ y mÃ´ táº£ chi tiáº¿t cÃ¡c yÃªu cáº§u nghiá»‡p vá»¥ vÃ  chá»©c nÄƒng cá»§a phÃ¢n há»‡...]</p>
+<h3>1. Mục đích tài liệu</h3>
+<p>[Viết mục đích của tài liệu URD, ví dụ: Tài liệu này mô tả chi tiết các yêu cầu nghiệp vụ và chức năng của phân hệ...]</p>
 
-<h3>2. ThÃ´ng tin chung</h3>
+<h3>2. Thông tin chung</h3>
 <table class="data-table">
     <thead>
         <tr>
             <th style="width: 50px;">STT</th>
-            <th style="width: 200px;">Háº NG Má»¤C</th>
-            <th>MÃ” Táº¢</th>
+            <th style="width: 200px;">HẠNG MỤC</th>
+            <th>MÔ TẢ</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>1</td>
-            <td>Giá»›i thiá»‡u tá»•ng quan</td>
-            <td>[TÃ³m táº¯t ná»™i dung dá»± Ã¡n hoáº·c phÃ¢n há»‡]</td>
+            <td>Giới thiệu tổng quan</td>
+            <td>[Tóm tắt nội dung dự án hoặc phân hệ]</td>
         </tr>
         <tr>
             <td>2</td>
-            <td>Hiá»‡n tráº¡ng</td>
-            <td>[MÃ´ táº£ hiá»‡n tráº¡ng nghiá»‡p vá»¥/há»‡ thá»‘ng trÆ°á»›c khi triá»ƒn khai]</td>
+            <td>Hiện trạng</td>
+            <td>[Mô tả hiện trạng nghiệp vụ/hệ thống trước khi triển khai]</td>
         </tr>
         <tr>
             <td>3</td>
-            <td>Má»¥c tiÃªu ká»³ vá»ng</td>
-            <td>[Ká»³ vá»ng Ä‘áº¡t Ä‘Æ°á»£c sau khi triá»ƒn khai há»‡ thá»‘ng má»›i]</td>
+            <td>Mục tiêu kỳ vọng</td>
+            <td>[Kỳ vọng đạt được sau khi triển khai hệ thống mới]</td>
         </tr>
         <tr>
             <td>4</td>
-            <td>Pháº¡m vi triá»ƒn khai</td>
-            <td>[Khu vá»±c Ã¡p dá»¥ng, tÃ­ch há»£p vá»›i cÃ¡c phÃ¢n há»‡ nÃ o]</td>
+            <td>Phạm vi triển khai</td>
+            <td>[Khu vực áp dụng, tích hợp với các phân hệ nào]</td>
         </tr>
     </tbody>
 </table>
 
-<h3>3. Thuáº­t ngá»¯ vÃ  viáº¿t táº¯t</h3>
+<h3>3. Thuật ngữ và viết tắt</h3>
 <table class="data-table">
     <thead>
         <tr>
             <th style="width: 50px;">STT</th>
-            <th style="width: 150px;">THUáº¬T NGá»®</th>
-            <th>MÃ” Táº¢</th>
+            <th style="width: 150px;">THUẬT NGỮ</th>
+            <th>MÔ TẢ</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>1</td>
             <td>URD</td>
-            <td>User Requirements Document (TÃ i liá»‡u YÃªu cáº§u NgÆ°á»i dÃ¹ng)</td>
+            <td>User Requirements Document (Tài liệu Yêu cầu Người dùng)</td>
         </tr>
         <tr>
             <td>2</td>
-            <td>[Thuáº­t ngá»¯ má»›i]</td>
-            <td>[Äá»‹nh nghÄ©a Ã½ nghÄ©a]</td>
+            <td>[Thuật ngữ mới]</td>
+            <td>[Định nghĩa ý nghĩa]</td>
         </tr>
     </tbody>
 </table>
 
 <div class="page-break"></div>
 
-<h1>II. Tá»”NG QUAN Há»† THá»NG</h1>
+<h1>II. TỔNG QUAN HỆ THỐNG</h1>
 
-<h3>1. SÆ¡ Ä‘á»“ luá»“ng nghiá»‡p vá»¥ tá»•ng quan (Business Flow)</h3>
-<p>[MÃ´ táº£ luá»“ng nghiá»‡p vá»¥ tá»•ng quÃ¡t hoáº·c chÃ¨n hÃ¬nh áº£nh sÆ¡ Ä‘á»“ luá»“ng táº¡i Ä‘Ã¢y]</p>
+<h3>1. Sơ đồ luồng nghiệp vụ tổng quan (Business Flow)</h3>
+<p>[Mô tả luồng nghiệp vụ tổng quát hoặc chèn hình ảnh sơ đồ luồng tại đây]</p>
 
-<h3>2. Danh sÃ¡ch cÃ¡c chá»©c nÄƒng chÃ­nh</h3>
+<h3>2. Danh sách các chức năng chính</h3>
 <table class="data-table">
     <thead>
         <tr>
             <th style="width: 50px;">STT</th>
-            <th>Chá»©c nÄƒng</th>
+            <th>Chức năng</th>
             <th style="width: 80px;">Version</th>
-            <th style="width: 80px;">Loáº¡i</th>
-            <th>MÃ´ táº£ tÃ³m táº¯t</th>
+            <th style="width: 80px;">Loại</th>
+            <th>Mô tả tóm tắt</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>1</td>
-            <td>[TÃªn chá»©c nÄƒng]</td>
+            <td>[Tên chức năng]</td>
             <td>1.0</td>
             <td>[New / Update]</td>
-            <td>[MÃ´ táº£ ngáº¯n gá»n chá»©c nÄƒng lÃ m gÃ¬]</td>
+            <td>[Mô tả ngắn gọn chức năng làm gì]</td>
         </tr>
     </tbody>
 </table>
 
-<h3>3. Ma tráº­n quyá»n háº¡n phÃ¢n há»‡ (Permission Matrix)</h3>
+<h3>3. Ma trận quyền hạn phân hệ (Permission Matrix)</h3>
 <table class="data-table">
     <thead>
         <tr>
-            <th>Chá»©c nÄƒng</th>
+            <th>Chức năng</th>
             <th>Role Admin</th>
             <th>Role User</th>
             <th>Role Viewer</th>
@@ -181,9 +181,9 @@
     </thead>
     <tbody>
         <tr>
-            <td><strong>[TÃªn chá»©c nÄƒng]</strong></td>
-            <td>ToÃ n quyá»n</td>
-            <td>Xem/Sá»­a</td>
+            <td><strong>[Tên chức năng]</strong></td>
+            <td>Toàn quyền</td>
+            <td>Xem/Sửa</td>
             <td>Xem</td>
         </tr>
     </tbody>
@@ -191,42 +191,42 @@
 
 <div class="page-break"></div>
 
-<h1>III. Äáº¶C Táº¢ CHI TIáº¾T CÃC CHá»¨C NÄ‚NG (USE CASE SPECS)</h1>
+<h1>III. ĐẶC TẢ CHI TIẾT CÁC CHỨC NĂNG (USE CASE SPECS)</h1>
 
-<h2>I. [TÃªn Chá»©c NÄƒng 1]</h2>
-<h3>1. Äáº·c táº£ Use Case (Use Case Specification)</h3>
-<h4>a. Thuá»™c tÃ­nh Use Case</h4>
+<h2>I. [Tên Chức Năng 1]</h2>
+<h3>1. Đặc tả Use Case (Use Case Specification)</h3>
+<h4>a. Thuộc tính Use Case</h4>
 <table class="usecase-table">
     <tr>
         <td class="label">Description</td>
-        <td>[MÃ´ táº£ tÃ³m táº¯t hÃ nh vi vÃ  giÃ¡ trá»‹ nghiá»‡p vá»¥ cá»§a chá»©c nÄƒng]</td>
+        <td>[Mô tả tóm tắt hành vi và giá trị nghiệp vụ của chức năng]</td>
     </tr>
     <tr>
         <td class="label">Actor</td>
-        <td>[TÃ¡c nhÃ¢n thá»±c hiá»‡n, vÃ­ dá»¥: Quáº£n trá»‹ viÃªn, NgÆ°á»i dÃ¹ng há»‡ thá»‘ng]</td>
+        <td>[Tác nhân thực hiện, ví dụ: Quản trị viên, Người dùng hệ thống]</td>
     </tr>
     <tr>
         <td class="label">Trigger</td>
-        <td>[Sá»± kiá»‡n kÃ­ch hoáº¡t chá»©c nÄƒng, vÃ­ dá»¥: NgÆ°á»i dÃ¹ng chá»n menu... vÃ  nháº¥n nÃºt...]</td>
+        <td>[Sự kiện kích hoạt chức năng, ví dụ: Người dùng chọn menu... và nhấn nút...]</td>
     </tr>
     <tr>
         <td class="label">Pre-condition</td>
-        <td>[Äiá»u kiá»‡n cáº§n cÃ³ trÆ°á»›c khi thá»±c hiá»‡n, vÃ­ dá»¥: NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p thÃ nh cÃ´ng]</td>
+        <td>[Điều kiện cần có trước khi thực hiện, ví dụ: Người dùng đã đăng nhập thành công]</td>
     </tr>
     <tr>
         <td class="label">Post-condition</td>
-        <td>[Káº¿t quáº£ sau khi hoÃ n thÃ nh, vÃ­ dá»¥: Dá»¯ liá»‡u Ä‘Æ°á»£c cáº­p nháº­t thÃ nh cÃ´ng ngoÃ i website]</td>
+        <td>[Kết quả sau khi hoàn thành, ví dụ: Dữ liệu được cập nhật thành công ngoài website]</td>
     </tr>
 </table>
 
-<h4>b. Diá»…n giáº£i cÃ¡c bÆ°á»›c thá»±c hiá»‡n (Step-by-step)</h4>
+<h4>b. Diễn giải các bước thực hiện (Step-by-step)</h4>
 <ul>
-    <li><strong>BÆ°á»›c 1:</strong> NgÆ°á»i dÃ¹ng truy cáº­p há»‡ thá»‘ng -> chá»n menu "[TÃªn menu]".</li>
-    <li><strong>BÆ°á»›c 2:</strong> NgÆ°á»i dÃ¹ng nháº¥n nÃºt "[+ Táº¡o má»›i]" hoáº·c chá»n "[Sá»­a]".</li>
-    <li><strong>BÆ°á»›c 3:</strong> Há»‡ thá»‘ng hiá»ƒn thá»‹ Form thÃ´ng tin nháº­p liá»‡u.</li>
-    <li><strong>BÆ°á»›c 4:</strong> NgÆ°á»i dÃ¹ng nháº­p/chá»n cÃ¡c thÃ´ng tin trÃªn mÃ n hÃ¬nh.</li>
-    <li><strong>BÆ°á»›c 5:</strong> NgÆ°á»i dÃ¹ng nháº¥n nÃºt "LÆ°u".</li>
-    <li><strong>BÆ°á»›c 6:</strong> Há»‡ thá»‘ng kiá»ƒm tra há»£p lá»‡ dá»¯ liá»‡u (validate), lÆ°u thÃ´ng tin vÃ o database vÃ  hiá»ƒn thá»‹ thÃ´ng bÃ¡o thÃ nh cÃ´ng.</li>
+    <li><strong>Bước 1:</strong> Người dùng truy cập hệ thống -> chọn menu "[Tên menu]".</li>
+    <li><strong>Bước 2:</strong> Người dùng nhấn nút "[+ Tạo mới]" hoặc chọn "[Sửa]".</li>
+    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form thông tin nhập liệu.</li>
+    <li><strong>Bước 4:</strong> Người dùng nhập/chọn các thông tin trên màn hình.</li>
+    <li><strong>Bước 5:</strong> Người dùng nhấn nút "Lưu".</li>
+    <li><strong>Bước 6:</strong> Hệ thống kiểm tra hợp lệ dữ liệu (validate), lưu thông tin vào database và hiển thị thông báo thành công.</li>
 </ul>
 
 <h3>2. Business Rules</h3>
@@ -234,65 +234,65 @@
     <thead>
         <tr>
             <th style="width: 120px;">Code</th>
-            <th>Quy táº¯c nghiá»‡p vá»¥</th>
+            <th>Quy tắc nghiệp vụ</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td><strong>BR-[CODE]-01</strong></td>
-            <td>[Ná»™i dung quy táº¯c nghiá»‡p vá»¥ - VÃ­ dá»¥: MÃ£ SKU khÃ´ng Ä‘Æ°á»£c trÃ¹ng láº·p trong cÆ¡ sá»Ÿ dá»¯ liá»‡u]</td>
+            <td>[Nội dung quy tắc nghiệp vụ - Ví dụ: Mã SKU không được trùng lặp trong cơ sở dữ liệu]</td>
         </tr>
     </tbody>
 </table>
 
-<h3>3. MÃ´ táº£ mÃ n hÃ¬nh (Screen Description)</h3>
+<h3>3. Mô tả màn hình (Screen Description)</h3>
 <table class="data-table">
     <thead>
         <tr>
             <th>Field</th>
-            <th>Kiá»ƒu dá»¯ liá»‡u</th>
-            <th>RÃ ng buá»™c</th>
-            <th>HÃ nh vi há»‡ thá»‘ng</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>[TÃªn TrÆ°á»ng]</strong></td>
+            <td><strong>[Tên Trường]</strong></td>
             <td>[Text / Select / File...]</td>
-            <td>[Báº¯t buá»™c / Tá»‘i Ä‘a kÃ­ tá»± / Äá»‹nh dáº¡ng...]</td>
-            <td>[VÃ­ dá»¥: Tá»± Ä‘á»™ng sinh slug tá»« tÃªn trÆ°á»ng khi ngÆ°á»i dÃ¹ng gÃµ]</td>
+            <td>[Bắt buộc / Tối đa kí tự / Định dạng...]</td>
+            <td>[Ví dụ: Tự động sinh slug từ tên trường khi người dùng gõ]</td>
         </tr>
     </tbody>
 </table>
 
 <div class="page-break"></div>
 
-<h1>IV. CÃC YÃŠU Cáº¦U PHI CHá»¨C NÄ‚NG</h1>
+<h1>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</h1>
 
-<h3>1. Hiá»‡u nÄƒng & Kháº£ nÄƒng táº£i (Performance)</h3>
+<h3>1. Hiệu năng & Khả năng tải (Performance)</h3>
 <ul>
-    <li>Thá»i gian pháº£n há»“i khi lÆ°u dá»¯ liá»‡u hoáº·c táº£i trang danh sÃ¡ch dÆ°á»›i [X] giÃ¢y.</li>
-    <li>Há»‡ thá»‘ng cháº¡y mÆ°á»£t mÃ  khÃ´ng giáº­t lag khi táº£i lÆ°á»£ng lá»›n báº£n ghi.</li>
+    <li>Thời gian phản hồi khi lưu dữ liệu hoặc tải trang danh sách dưới [X] giây.</li>
+    <li>Hệ thống chạy mượt mà không giật lag khi tải lượng lớn bản ghi.</li>
 </ul>
 
-<h3>2. Tráº£i nghiá»‡m ngÆ°á»i dÃ¹ng (UI/UX)</h3>
+<h3>2. Trải nghiệm người dùng (UI/UX)</h3>
 <ul>
-    <li>Giao diá»‡n thÃ¢n thiá»‡n, tÆ°Æ¡ng thÃ­ch tá»‘t trÃªn cáº£ hai phiÃªn báº£n Desktop vÃ  Mobile (Responsive).</li>
-    <li>CÃ¡c tráº¡ng thÃ¡i káº¿ thá»«a thÃ´ng tin hoáº·c khÃ³a thao tÃ¡c pháº£i Ä‘Æ°á»£c hiá»ƒn thá»‹ trá»±c quan rÃµ rÃ ng.</li>
+    <li>Giao diện thân thiện, tương thích tốt trên cả hai phiên bản Desktop và Mobile (Responsive).</li>
+    <li>Các trạng thái kế thừa thông tin hoặc khóa thao tác phải được hiển thị trực quan rõ ràng.</li>
 </ul>
 
-<h3>3. An toÃ n thÃ´ng tin & Báº£o máº­t (Security)</h3>
+<h3>3. An toàn thông tin & Bảo mật (Security)</h3>
 <ul>
-    <li>Táº¥t cáº£ API thao tÃ¡c nghiá»‡p vá»¥ (Táº¡o/Sá»­a/XÃ³a) Ä‘á»u cáº§n kiá»ƒm tra token xÃ¡c thá»±c.</li>
-    <li>PhÃ¢n quyá»n cháº·t cháº½ theo nhÃ³m ngÆ°á»i dÃ¹ng (RBAC).</li>
+    <li>Tất cả API thao tác nghiệp vụ (Tạo/Sửa/Xóa) đều cần kiểm tra token xác thực.</li>
+    <li>Phân quyền chặt chẽ theo nhóm người dùng (RBAC).</li>
 </ul>
 
 <div class="page-break"></div>
 
-<h1>V. PHá»¤ Lá»¤C</h1>
+<h1>V. PHỤ LỤC</h1>
 <ul>
-    <li>[ÄÆ°á»ng dáº«n/Link] file Wireframe / Mockup thiáº¿t káº¿ chi tiáº¿t giao diá»‡n.</li>
-    <li>[ÄÆ°á»ng dáº«n/Link] cÃ¡c tÃ i liá»‡u tham chiáº¿u khÃ¡c cá»§a FPT.</li>
+    <li>[Đường dẫn/Link] file Wireframe / Mockup thiết kế chi tiết giao diện.</li>
+    <li>[Đường dẫn/Link] các tài liệu tham chiếu khác của FPT.</li>
 </ul>
 
 </body>
