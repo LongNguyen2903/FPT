@@ -1,0 +1,69 @@
+﻿<div id="ldpsec-inet-hero" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Background & Hình ảnh</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group"><label>Background Image Desktop (1920x1080px) <span style="color:var(--danger)">*</span></label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh nền Desktop" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"><label>Background Image Mobile (768x1080px)</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh nền Mobile" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Ảnh sản phẩm nổi bật</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh sản phẩm nổi bật" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Nội dung chính</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2;"><label>Headline (H1) <span style="color:var(--danger)">*</span></label>
+                    <input type="text" class="form-input" value="Internet tốc độ 1 Gbps – Lắp đặt ngay trong ngày">
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Subheadline</label>
+                    <input type="text" class="form-input" value="Miễn phí lắp đặt. Tặng ngay Wifi miễn phí.">
+                </div>
+                <div class="form-group"><label>Nút CTA chính — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                <div class="form-group"><label>Nút CTA chính — URL</label><input type="text" class="form-input" value="/dang-ky"></div>
+                <div class="form-group"><label>Nút CTA phụ — Text</label><input type="text" class="form-input" value="Xem chi tiết"></div>
+                <div class="form-group"><label>Nút CTA phụ — URL</label><input type="text" class="form-input" value="#cac-goi-cuoc"></div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Form đăng ký (bên phải hero)</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group"><label>Tiêu đề form</label><input type="text" class="form-input" value="Đăng ký tư vấn miễn phí"></div>
+                <div class="form-group"><label>Nút submit form</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Lời cảm ơn (sau submit)</label><input type="text" class="form-input" value="Cảm ơn! Tư vấn viên sẽ liên hệ trong 30 phút."></div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Dải Countdown hẹn giờ</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2; display:flex; align-items:center; gap:8px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:0;">
+                        <input type="checkbox" class="countdown-enable-chk" style="accent-color:var(--primary);" checked> Bật dải Countdown hẹn giờ
+                    </label>
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Tiêu đề dải Countdown</label><input type="text" class="form-input" value="Ưu đãi kết thúc sau"></div>
+                <div class="form-group"><label>Thời gian Countdown kết thúc</label><input type="datetime-local" class="form-input" value="2026-06-30T23:59"></div>
+                <div class="form-group"><label>Nút CTA Countdown — Text</label><input type="text" class="form-input" value="Nhận ưu đãi"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Nút CTA Countdown — URL</label><input type="text" class="form-input" value="/dang-ky"></div>
+            </div>
+        </div>

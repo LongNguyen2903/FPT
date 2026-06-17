@@ -32,9 +32,7 @@
 - **Tối ưu hóa dung lượng truyền tải:** Hạn chế đọc/ghi các file quá lớn mà không có lý do cụ thể, chỉ thao tác trên phạm vi thay đổi hẹp nhất có thể.
 
 ## Tránh lỗi Encoding & Vỡ Layout (Quan trọng)
-1. **Bảo toàn UTF-8 không BOM**: Khi đọc/ghi file (đặc biệt bằng PowerShell), luôn chỉ định rõ encoding UTF-8 không BOM (`New-Object System.Text.UTF8Encoding($false)`) để tránh làm hỏng font tiếng Việt (Mojibake).
+1. **Tránh sử dụng PowerShell để đọc/ghi/chỉnh sửa file**: Bắt buộc sử dụng trực tiếp các công cụ chuyên dụng của IDE (`replace_file_content`, `multi_replace_file_content`, `write_to_file`) để sửa đổi code nhanh nhất và tránh hoàn toàn lỗi encoding font tiếng Việt (Mojibake). Luôn bảo toàn định dạng UTF-8 không BOM.
 2. **Sử dụng HTML Entities**: Ưu tiên sử dụng HTML Entities thập phân (Decimal) hoặc Hex (ví dụ: `&#272;`, `&rarr;`) cho các phần text tiếng Việt mới chèn vào HTML để tránh lỗi font chữ trong mọi môi trường render.
 3. **Cân bằng thẻ div**: Khi thay đổi cấu trúc HTML, kiểm tra kỹ lưỡng các thẻ mở và đóng `<div>` để tránh làm vỡ layout. Nên chèn dựa trên các mốc dòng/nút bấm duy nhất thay vì dùng regex quá rộng dễ match nhầm vào script.
 4. **Tự động Review sau khi code**: Sau khi thay đổi code, bắt buộc chạy `browser_subagent` mở trang web thực tế, click kiểm tra các tính năng tương tác, xem console logs để đảm bảo không xảy ra bất kỳ lỗi layout hay lỗi runtime JS nào trước khi bàn giao cho người dùng.
-
-

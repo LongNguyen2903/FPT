@@ -1,0 +1,24 @@
+﻿<!-- ④ Camera Selection (Camera) -->
+        <div id="ldpsec-cam-select" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div class="form-group"><label>Tiêu đề Section chọn camera</label><input type="text" class="form-input"
+                    value="Chọn Camera phù hợp cho gia đình bạn"></div>
+            <div class="form-group"><label>Giá bắt đầu (text mô tả phụ)</label><input type="text" class="form-input"
+                    value="Combo lắp đặt trọn gói từ 1.000.000đ · Camera đơn lẻ từ 500.000đ"></div>
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 8px;">
+                Cấu hình 3 Tab phân loại</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                <div class="form-group"><label>Tab 1 (Combo)</label><input type="text" class="form-input"
+                        value="Combo Camera"></div>
+                <div class="form-group"><label>Tab 2 (Mua lẻ)</label><input type="text" class="form-input"
+                        value="Mua lẻ"></div>
+                <div class="form-group"><label>Tab 3 (Combo Internet)</label><input type="text" class="form-input"
+                        value="Combo Internet Camera"></div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 8px;">Danh sách sản phẩm / Combo</div>
+            <div id="cam-select-list"></div>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:8px;" onclick="ldpAddCamSelectCard()">+ Thêm sản phẩm / Combo</button>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">* Giá cước và SKU sản phẩm của các gói
+                sẽ tự động đồng bộ từ Product Hub tương ứng với các SKU được chọn.</p>
+        </div>
+        <!-- ⑤ Camera App (Camera) -->
