@@ -7048,6 +7048,40 @@
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('camp-form')">✏ Sửa</button>
                                         </div>
+                                        <!-- camp-sticky -->
+                                        <div class="ldp-section-row" data-section-id="camp-sticky">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
+                                            </div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(236,72,153,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                📌</div>
+                                            <div style="flex:1; min-width:0;">
+                                                <div style="font-weight:600; font-size:14px;">⑨ Sticky Bottom Bar
+                                                </div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
+                                                    Thanh ưu đãi/đăng ký nhanh dính chân trang (Icon, Tiêu đề, CTA)
+                                                </div>
+                                            </div>
+                                            <span
+                                                style="background:rgba(236,72,153,0.12); color:#f472b6; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Sticky</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('camp-sticky')">✏ Sửa</button>
+                                        </div>
                                         <!-- camp-faq -->
                                         <div class="ldp-section-row" data-section-id="camp-faq">
                                             <span
@@ -7066,7 +7100,7 @@
                                                 style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 ❓</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑨ FAQ Accordion</div>
+                                                <div style="font-weight:600; font-size:14px;">⑩ FAQ Accordion</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Các thắc mắc về thiết bị Wi-Fi 7, phí hòa mạng, chuyển đổi từ gói cũ
                                                 </div>
@@ -16202,16 +16236,17 @@
                 'sa-sticky': 'Sticky ưu đãi cuối trang',
                 'sa-footer': 'Footer CTA',
                 // Camera
-                'cam-hero': 'Hero Banner + Nút CTA', 'cam-usp': 'Công nghệ nổi bật',
+                'cam-hero': 'Hero Banner + Nút CTA chính & phụ', 'cam-usp': 'Công nghệ nổi bật',
                 'cam-detail': 'Chi tiết FPT Camera AI', 'cam-select': 'Danh mục & Chọn mua',
                 'cam-app': 'Ứng dụng FPT Camera',
                 'cam-awards': 'Thương hiệu & Giải thưởng', 'cam-faq': 'FAQ Accordion',
                 'cam-sticky': 'Sticky Bottom Bar',
                 // Campaign
-                'camp-hero': 'Hero Wi-Fi 7 (Countdown)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
-                'camp-usp': 'USP Công nghệ Wi-Fi 7', 'camp-products': 'Các gói cước Wi-Fi 7',
+                'camp-hero': 'Hero Wi-Fi 7 (Countdown & CTA chính/phụ)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
+                'camp-usp': 'Vì sao chọn SpeedX – Wi-Fi 7 của FPT', 'camp-products': 'Các gói cước Wi-Fi 7',
                 'camp-compare': 'Bảng so sánh thế hệ Wi-Fi', 'camp-targets': 'Đối tượng mục tiêu',
                 'camp-videos': 'Video Review thực tế', 'camp-form': 'Form đăng ký tư vấn',
+                'camp-sticky': 'Sticky Bottom Bar',
                 'camp-faq': 'FAQ Accordion',
                 // Thu Lead
                 'lead-hero': 'Hero + Form thu Lead', 'lead-proof': 'Social Proof chạy chữ',
@@ -16355,6 +16390,102 @@
             var arrow = card.querySelector('.arrow-indicator');
             if (body) body.style.display = 'block';
             if (arrow) arrow.textContent = '▲';
+        }
+
+        function campAddProductCard() {
+            var container = document.getElementById('camp-products-list');
+            if (!container) return;
+            var cards = container.querySelectorAll('.inet-product-card');
+            var idx = cards.length + 1;
+            var warningColor = 'var(--primary)';
+
+            var card = document.createElement('div');
+            card.className = 'inet-product-card';
+            card.style.cssText = 'border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;';
+
+            var html = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+                + '<div style="display:flex; align-items:center; gap:8px; flex:1;">'
+                + '<span style="font-size:12px; font-weight:700; color:\' + warningColor + \';" class="inet-product-card-idx">Gói ' + idx + '</span>'
+                + '<span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Gói mới</span>'
+                + '<span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"></span>'
+                + '</div>'
+                + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
+                + '<label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>'
+                + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+                + '</div>'
+                + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▲</span>'
+                + '</div>'
+                + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06);">'
+                + '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
+                + '<div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>'
+                + '</div>'
+                + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" placeholder="vd: FPT Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" placeholder="vd: 999.000" oninput="ldpUpdateProductCardHeader(this)"></div>'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
+                + '<div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3" placeholder="Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Kết nối đến 100 thiết bị"></textarea></div>'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" placeholder="Nhận tư vấn"></div>'
+                + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" placeholder="#tu-van"></div>'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" placeholder="#dang-ky"></div>'
+                + '</div>'
+                + '</div>';
+
+            card.innerHTML = html;
+            container.appendChild(card);
+
+            var body = card.querySelector('.inet-product-card-body');
+            var arrow = card.querySelector('.arrow-indicator');
+            if (body) body.style.display = 'block';
+            if (arrow) arrow.textContent = '▲';
+        }
+
+        function campAddCompareRow() {
+            var container = document.getElementById('camp-compare-list');
+            if (!container) return;
+            var row = document.createElement('div');
+            row.className = 'camp-compare-row';
+            row.style.cssText = 'display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;';
+            row.innerHTML = '<input type="text" class="form-input form-input-sm compare-feature" placeholder="Tính năng" style="font-size:12px; padding:6px 8px;">'
+                + '<input type="text" class="form-input form-input-sm compare-wf7" placeholder="Wi-Fi 7" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">'
+                + '<input type="text" class="form-input form-input-sm compare-wf6e" placeholder="Wi-Fi 6E" style="font-size:12px; padding:6px 8px;">'
+                + '<input type="text" class="form-input form-input-sm compare-wf6" placeholder="Wi-Fi 6" style="font-size:12px; padding:6px 8px;">'
+                + '<input type="text" class="form-input form-input-sm compare-wf5" placeholder="Wi-Fi 5" style="font-size:12px; padding:6px 8px;">'
+                + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest(\'.camp-compare-row\').remove()">✕</button>';
+            container.appendChild(row);
+        }
+
+        function campAddVideoCard() {
+            var container = document.getElementById('camp-videos-list');
+            if (!container) return;
+            var idx = container.querySelectorAll('.inet-product-card').length + 1;
+            var card = document.createElement('div');
+            card.className = 'inet-product-card';
+            card.style.cssText = 'border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;';
+            card.innerHTML = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+                + '<div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'
+                + '<span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">Video mới ' + idx + '</span>'
+                + '</div>'
+                + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
+                + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+                + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>'
+                + '</div>'
+                + '</div>'
+                + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">'
+                + '<div class="form-group" style="margin-bottom:8px;">'
+                + '<label style="font-size:11px;">Ảnh thumbnail</label>'
+                + '<div style="display:flex; gap:6px;">'
+                + '<input type="text" class="form-input" placeholder="URL ảnh thumbnail" style="flex:1;">'
+                + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>'
+                + '</div>'
+                + '</div>'
+                + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" placeholder="Nhập tiêu đề video" oninput="ldpUpdateProductCardHeader(this)"></div>'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" placeholder="https://..."></div>'
+                + '</div>'
+                + '</div>';
+            container.appendChild(card);
         }
 
         function ldpAddPricingCard() {
@@ -16625,6 +16756,46 @@
                 var text = group ? group.querySelector('input').value : '';
                 var count = document.querySelectorAll('#cam-select-list .cam-select-card-item').length;
                 summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' combo';
+            } else if (sectionId === 'camp-products') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-products .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                var count = document.querySelectorAll('#camp-products-list .inet-product-card').length;
+                summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' gói';
+            } else if (sectionId === 'camp-compare') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-compare .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                var count = document.querySelectorAll('#camp-compare-list .camp-compare-row').length;
+                summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' tiêu chí so sánh';
+            } else if (sectionId === 'camp-targets') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-targets .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                var count = document.querySelectorAll('#camp-targets-list .inet-product-card').length;
+                summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' nhóm đối tượng';
+            } else if (sectionId === 'camp-videos') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-videos .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                var count = document.querySelectorAll('#camp-videos-list .inet-product-card').length;
+                summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' video review';
+            } else if (sectionId === 'camp-form') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-form .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề trên Form');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                summaryText = 'Tiêu đề: "' + text + '"';
+            } else if (sectionId === 'camp-sticky') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-sticky .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề sticky');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                summaryText = 'Sticky: "' + text + '"';
             } else if (sectionId === 'cam-awards') {
                 var group = Array.from(document.querySelectorAll('#ldpsec-cam-awards .form-group')).find(function (g) {
                     return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
@@ -16632,6 +16803,24 @@
                 var text = group ? group.querySelector('input').value : '';
                 var count = document.querySelectorAll('#cam-awards-list .cam-award-item').length;
                 summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' giải thưởng';
+            } else if (sectionId === 'cam-hero') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-cam-hero .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                summaryText = 'Headline: "' + text + '"';
+            } else if (sectionId === 'camp-hero') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-camp-hero .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                summaryText = 'Headline: "' + text + '"';
+            } else if (sectionId === 'lead-hero') {
+                var group = Array.from(document.querySelectorAll('#ldpsec-lead-hero .form-group')).find(function (g) {
+                    return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+                });
+                var text = group ? group.querySelector('input').value : '';
+                summaryText = 'Headline: "' + text + '"';
             } else if (sectionId === 'sa-footer') {
                 var group = Array.from(document.querySelectorAll('#ldpsec-sa-footer .form-group')).find(function (g) {
                     return g.querySelector('label') && g.querySelector('label').textContent.includes('Text kêu gọi');
@@ -20302,27 +20491,68 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
         <!-- B. WI-FI 7 CAMPAIGN TEMPLATE FORMS -->
         <!-- ① Hero Wi-Fi 7 (Campaign) -->
         <div id="ldpsec-camp-hero" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                <div class="form-group" style="grid-column: span 2;"><label>Headline chính (H1)</label><input
-                        type="text" class="form-input" value="Wifi 7 – Chuẩn tốc độ mới cho mọi trải nghiệm Internet">
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Background & Hình ảnh</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group"><label>Background Image Desktop (1920x800px) <span style="color:var(--danger)">*</span></label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh nền Desktop" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group" style="grid-column: span 2;"><label>Mô tả phụ</label><input type="text"
-                        class="form-input"
-                        value="FPT Wi-Fi 7 kết hợp hạ tầng XGS-PON tốc độ 10Gbps đối xứng và chuẩn Wi-Fi 7 tiên tiến nhất.">
+                <div class="form-group"><label>Background Image Mobile (768x800px)</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh nền Mobile" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group"><label>Thời gian Countdown kết thúc</label><input type="datetime-local"
-                        class="form-input" value="2026-05-31T23:59"></div>
-                <div class="form-group"><label>Nhãn Countdown ưu đãi</label><input type="text" class="form-input"
-                        value="Tặng ngay: bộ sạc dự phòng và camera play 3 khi đăng kí mới"></div>
-                <div class="form-group"><label>Text Nút CTA chính</label><input type="text" class="form-input"
-                        value="Đăng ký nâng cấp ngay"></div>
-                <div class="form-group"><label>URL Nút CTA chính</label><input type="text" class="form-input"
-                        value="#register-form"></div>
-                <div class="form-group"><label>Text Nút CTA phụ</label><input type="text" class="form-input"
-                        value="Xem bảng giá"></div>
-                <div class="form-group"><label>URL Nút CTA phụ</label><input type="text" class="form-input"
-                        value="#cac-goi-cuoc"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Ảnh sản phẩm nổi bật</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh sản phẩm nổi bật" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:40px; height:40px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Nội dung chính</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2;"><label>Headline chính (H1) <span style="color:var(--danger)">*</span></label>
+                    <input type="text" class="form-input" value="Wifi 7 – Chuẩn tốc độ mới cho mọi trải nghiệm Internet">
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Mô tả phụ</label>
+                    <input type="text" class="form-input" value="FPT Wi-Fi 7 kết hợp hạ tầng XGS-PON tốc độ 10Gbps đối xứng và chuẩn Wi-Fi 7 tiên tiến nhất.">
+                </div>
+                <div class="form-group"><label>Text Nút CTA chính</label><input type="text" class="form-input" value="Đăng ký nâng cấp ngay"></div>
+                <div class="form-group"><label>URL Nút CTA chính</label><input type="text" class="form-input" value="#register-form"></div>
+                <div class="form-group"><label>Text Nút CTA phụ</label><input type="text" class="form-input" value="Xem bảng giá"></div>
+                <div class="form-group"><label>URL Nút CTA phụ</label><input type="text" class="form-input" value="#cac-goi-cuoc"></div>
+            </div>
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px;">Dải Countdown hẹn giờ</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2; display:flex; align-items:center; gap:8px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:0;">
+                        <input type="checkbox" class="countdown-enable-chk" style="accent-color:var(--primary);" checked> Bật dải Countdown hẹn giờ
+                    </label>
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Tiêu đề dải Countdown / Nhãn Countdown ưu đãi</label><input type="text" class="form-input" value="Tặng ngay: bộ sạc dự phòng và camera play 3 khi đăng kí mới"></div>
+                <div class="form-group"><label>Thời gian Countdown kết thúc</label><input type="datetime-local" class="form-input" value="2026-05-31T23:59"></div>
+                <div class="form-group"><label>Nút CTA Countdown — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Nút CTA Countdown — URL</label><input type="text" class="form-input" value="#register-form"></div>
+            </div>
+
         </div>
 
         <!-- ② Branding Bar (Campaign) -->
@@ -20344,7 +20574,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
         <!-- ③ USP (Campaign) -->
         <div id="ldpsec-camp-usp" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Headline Section</label><input type="text" class="form-input"
-                    value="Công nghệ nổi bật FPT Wi-Fi 7"></div>
+                    value="Vì sao chọn SpeedX – Wi-Fi 7 của FPT"></div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 <div style="border:1px solid var(--border-glass); padding:8px; border-radius:6px;">
                     <label style="font-weight:600; font-size:11px;">1. Tốc độ</label>
@@ -20367,57 +20597,529 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
         <!-- ④ Wi-Fi 7 Products (Campaign) -->
         <div id="ldpsec-camp-products" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề Section gói Wi-Fi 7</label><input type="text" class="form-input"
+            <div class="form-group" style="margin-bottom:16px;"><label>Tiêu đề Section gói Wi-Fi 7</label><input type="text" class="form-input"
                     value="Các gói cước FPT Wi-Fi 7 siêu tốc độ"></div>
-            <div
-                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">
-                Chọn các gói cước Wi-Fi 7 áp dụng</div>
-            <div
-                style="display:flex; flex-direction:column; gap:6px; background:rgba(0,0,0,0.2); padding:10px; border-radius:6px; border:1px solid var(--border-glass);">
-                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked
-                        style="accent-color:var(--primary);"> SKU: FPT-WF7-SPEEDX2 (Gói SpeedX2 - 999k/tháng)</label>
-                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked
-                        style="accent-color:var(--primary);"> SKU: FPT-WF7-SPEEDX2PRO (Gói SpeedX2 Pro -
-                    1099k/tháng)</label>
-                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked
-                        style="accent-color:var(--primary);"> SKU: FPT-WF7-SPEEDX10 (Gói SpeedX10 - 1599k/tháng)</label>
-                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked
-                        style="accent-color:var(--primary);"> SKU: FPT-WF7-SPEEDX10PRO (Gói SpeedX10 Pro -
-                    1690k/tháng)</label>
+            
+            <div id="camp-products-list" style="margin-bottom:14px;">
+                <!-- Gói 1 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);" class="inet-product-card-idx">Gói 1</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">FPT Speed X2</span>
+                            <span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"> - 999.000 VNĐ/tháng</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▲</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" value="999.000" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="2Gbps"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="2Gbps"></div>
+                            <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="4">Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Công nghệ XGS-PON tốc độ 2 Gbps&#10;Kết nối đến 100 thiết bị&#10;Tặng 01 Mesh Wi-Fi 7 mở rộng vùng</textarea></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#tu-van"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#dang-ky-x2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gói 2 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);" class="inet-product-card-idx">Gói 2</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">FPT Speed X2 Pro</span>
+                            <span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"> - 1.099.000 VNĐ/tháng</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X2 Pro" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" value="1.099.000" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="2Gbps"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="2Gbps"></div>
+                            <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="4">Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Công nghệ XGS-PON tốc độ 2 Gbps&#10;Kết nối đến 100 thiết bị&#10;Tặng 01 Mesh Wi-Fi 7 mở rộng vùng</textarea></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#tu-van"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#dang-ky-x2pro"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gói 3 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);" class="inet-product-card-idx">Gói 3</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">FPT Speed X10</span>
+                            <span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"> - 1.599.000 VNĐ/tháng</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X10" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" value="1.599.000" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="10Gbps"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="10Gbps"></div>
+                            <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Công nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps&#10;Kết nối đến 100 thiết bị</textarea></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#tu-van"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#dang-ky-x10"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gói 4 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);" class="inet-product-card-idx">Gói 4</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">FPT Speed X10 Pro</span>
+                            <span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"> - 1.690.000 VNĐ/tháng</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>
+                            <div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X10 Pro" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" value="1.690.000" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="10Gbps"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="10Gbps"></div>
+                            <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Công nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps&#10;Kết nối đến 100 thiết bị</textarea></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                            <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#tu-van"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#dang-ky-x10pro"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px; margin-top:10px;"
+                onclick="campAddProductCard()">+ Thêm gói cước</button>
         </div>
 
         <!-- ⑤ Compare Specs (Campaign) -->
         <div id="ldpsec-camp-compare" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề Section bảng so sánh</label><input type="text" class="form-input"
-                    value="FPT Wi-Fi 7 vượt trội như thế nào?"></div>
-            <div class="form-group"><label>Nhãn cột so sánh thế hệ</label><input type="text" class="form-input"
-                    value="Bảng so sánh các thế hệ Wi-Fi (Wi-Fi 5 / Wi-Fi 6 / Wi-Fi 7)"></div>
-            <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">* Dữ liệu so sánh thông số kĩ thuật được
-                định nghĩa sẵn trong hệ thống.</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Tiêu đề Section bảng so sánh</label>
+                    <input type="text" class="form-input" value="WiFi 7 vs. WiFi 6/6E vs. WiFi 5">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Mô tả phụ</label>
+                    <textarea class="form-textarea" rows="2">So sánh chi tiết thông số kỹ thuật để thấy sự vượt trội của chuẩn kết nối không dây thế hệ mới.</textarea>
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA chính (text)</label>
+                    <input type="text" class="form-input" value="Nâng cấp ngay">
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA chính (URL)</label>
+                    <input type="text" class="form-input" value="#dang-ky">
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA phụ (text)</label>
+                    <input type="text" class="form-input" value="Xem gói cước">
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA phụ (URL)</label>
+                    <input type="text" class="form-input" value="#goi-cuoc">
+                </div>
+            </div>
+
+            <div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; border-top:1px solid var(--border-glass); padding-top:14px;">
+                Cấu hình chi tiết bảng so sánh
+            </div>
+
+            <!-- Header hàng input -->
+            <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; margin-bottom:6px; padding:0 4px;">
+                <span style="font-size:11px; font-weight:600; color:var(--text-muted);">Tính năng / Tiêu chí</span>
+                <span style="font-size:11px; font-weight:600; color:var(--primary);">Wi-Fi 7</span>
+                <span style="font-size:11px; font-weight:600; color:#60a5fa;">Wi-Fi 6E</span>
+                <span style="font-size:11px; font-weight:600; color:var(--text-muted);">Wi-Fi 6</span>
+                <span style="font-size:11px; font-weight:600; color:var(--text-muted);">Wi-Fi 5</span>
+                <span></span>
+            </div>
+
+            <div id="camp-compare-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+                <!-- Hàng 1 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="IEEE" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="802.11be" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="802.11ax" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="802.11ax" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="802.11ac" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 2 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="Tốc độ dữ liệu tối đa" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="46 Gbps" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="9.6 Gbps" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="9.6 Gbps" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="3.5 Gbps" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 3 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="Băng tần" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="2.4GHz, 5GHz, 6GHz" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="2.4GHz, 5GHz, 6GHz" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="2.4GHz, 5GHz" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="5GHz" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 4 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="Băng thông" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="Lên đến 320 MHz" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="20, 40, 80, 80+80, 160 MHz" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="20, 40, 80, 160 MHz" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="20, 40, 80 MHz" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 5 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="Điều chế" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="4096-QAM" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="1024-QAM OFDMA" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="1024-QAM OFDMA" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="256-QAM OFDM" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 6 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="MIMO" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="16x16 MU-MIMO" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="8x8 MU-MIMO" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="8x8 MU-MIMO" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="4x4 MU-MIMO" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 7 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="RU" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="Multi-RU" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="RU" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="RU" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="Không có" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+                <!-- Hàng 8 -->
+                <div class="camp-compare-row" style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;">
+                    <input type="text" class="form-input form-input-sm compare-feature" value="Bảo mật" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf7" value="WPA3" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">
+                    <input type="text" class="form-input form-input-sm compare-wf6e" value="WPA3" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf6" value="WPA3" style="font-size:12px; padding:6px 8px;">
+                    <input type="text" class="form-input form-input-sm compare-wf5" value="WPA2" style="font-size:12px; padding:6px 8px;">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest('.camp-compare-row').remove()">✕</button>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;"
+                onclick="campAddCompareRow()">+ Thêm tiêu chí so sánh</button>
         </div>
 
         <!-- ⑥ Targets (Campaign) -->
         <div id="ldpsec-camp-targets" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề mục tiêu</label><input type="text" class="form-input"
-                    value="Wi-Fi 7 FPT phù hợp với mọi nhu cầu"></div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div class="form-group"><label>Nhóm 1 (Gamer)</label><input type="text" class="form-input"
-                        value="Game thủ Esport - trễ <10ms"></div>
-                <div class="form-group"><label>Nhóm 2 (Streamer)</label><input type="text" class="form-input"
-                        value="Streamer/Creator - streaming 8K"></div>
-                <div class="form-group"><label>Nhóm 3 (Smart home)</label><input type="text" class="form-input"
-                        value="Smart home - kết nối 100 thiết bị"></div>
-                <div class="form-group"><label>Nhóm 4 (SME)</label><input type="text" class="form-input"
-                        value="Doanh nghiệp nhỏ - WiFi phủ xuyên vật cản"></div>
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Tiêu đề mục tiêu</label>
+                <input type="text" class="form-input" value="Wi-Fi 7 FPT phù hợp với mọi nhu cầu">
+            </div>
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; border-bottom:1px solid var(--border-glass); padding-bottom:14px;">
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>CTA chính (text)</label>
+                    <input type="text" class="form-input" value="Nâng cấp ngay">
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                    <label>CTA chính (URL)</label>
+                    <input type="text" class="form-input" value="#dang-ky">
+                </div>
+            </div>
+
+            <div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">
+                Danh sách nhóm đối tượng
+            </div>
+
+            <div id="camp-targets-list" style="display:flex; flex-direction:column; gap:10px;">
+                <!-- Nhóm 1 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);">Nhóm 1</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Game thủ Esport</span>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▲</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh đối tượng</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh đối tượng" value="images/gamer.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;">
+                                <label style="font-size:11px;">Tiêu đề</label>
+                                <input type="text" class="form-input inet-product-name-input" value="Game thủ Esport" oninput="ldpUpdateProductCardHeader(this)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:11px;">Mô tả</label>
+                                <textarea class="form-textarea" rows="2" style="font-size:12px;">Độ trễ thấp, kết nối ổn định chiến game không giật lag.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nhóm 2 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);">Nhóm 2</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Streamer/Creator</span>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh đối tượng</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh đối tượng" value="images/streamer.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;">
+                                <label style="font-size:11px;">Tiêu đề</label>
+                                <input type="text" class="form-input inet-product-name-input" value="Streamer/Creator" oninput="ldpUpdateProductCardHeader(this)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:11px;">Mô tả</label>
+                                <textarea class="form-textarea" rows="2" style="font-size:12px;">Upload nhanh, livestream 4K mượt mà ổn định tuyệt đối</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nhóm 3 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);">Nhóm 3</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">3 băng tần mạnh mẽ</span>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh đối tượng</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh đối tượng" value="images/multiband.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;">
+                                <label style="font-size:11px;">Tiêu đề</label>
+                                <input type="text" class="form-input inet-product-name-input" value="3 băng tần mạnh mẽ" oninput="ldpUpdateProductCardHeader(this)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:11px;">Mô tả</label>
+                                <textarea class="form-textarea" rows="2" style="font-size:12px;">Hỗ trợ 2.4GHz, 5GHz và 6GHz giảm nhiễu, tăng hiệu suất.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nhóm 4 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:12px; font-weight:700; color:var(--primary);">Nhóm 4</span>
+                            <span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Doanh nghiệp nhỏ</span>
+                        </div>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh đối tượng</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh đối tượng" value="images/office.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:6px;">
+                                <label style="font-size:11px;">Tiêu đề</label>
+                                <input type="text" class="form-input inet-product-name-input" value="Doanh nghiệp nhỏ" oninput="ldpUpdateProductCardHeader(this)">
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:11px;">Mô tả</label>
+                                <textarea class="form-textarea" rows="2" style="font-size:12px;">Làm việc hiệu quả, họp online ổn định và mượt mà</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- ⑦ Video Reviews (Campaign) -->
         <div id="ldpsec-camp-videos" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề Section video</label><input type="text" class="form-input"
-                    value="Video review tốc độ, trải nghiệm thực tế gói SpeedX - Wi-Fi 7 FPT"></div>
-            <p style="font-size:12px; color:var(--text-muted);">Hỗ trợ cấu hình tối đa 4 link video review thực tế.</p>
+            <div class="form-group" style="margin-bottom:14px;">
+                <label>Tiêu đề Section video</label>
+                <input type="text" class="form-input" value="Review SpeedX - Wi-Fi 7 có gì HOT 🔥">
+            </div>
+
+            <div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">
+                Danh sách Video Review
+            </div>
+
+            <div id="camp-videos-list" style="display:flex; flex-direction:column; gap:10px;">
+                <!-- Video 1 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">WI-FI 7 NÊN KẾT HỢP CÙNG THIẾT BỊ NÀO</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                            <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                        </div>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh thumbnail</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb1.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="WI-FI 7 NÊN KẾT HỢP CÙNG THIẾT BỊ NÀO" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">TÍNH NĂNG BẢO MẬT CỦA WI-FI 7 RA SAO?</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                            <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                        </div>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh thumbnail</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb2.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="TÍNH NĂNG BẢO MẬT CỦA WI-FI 7 RA SAO?" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">THỬ THÁCH VIỆT HOÁ CỤM TỪ XGS-PON</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                            <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                        </div>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh thumbnail</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb3.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="THỬ THÁCH VIỆT HOÁ CỤM TỪ XGS-PON" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+                    <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                        <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                            <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">CHÍNH THỨC RA MẮT CÔNG NGHỆ XGS-PON VÀ WI-FI 7</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                            <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                            <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                        </div>
+                    </div>
+                    <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <label style="font-size:11px;">Ảnh thumbnail</label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb4.png" style="flex:1;">
+                                <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="CHÍNH THỨC RA MẮT CÔNG NGHỆ XGS-PON VÀ WI-FI 7" oninput="ldpUpdateProductCardHeader(this)"></div>
+                            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px; margin-top:10px;"
+                onclick="campAddVideoCard()">+ Thêm video review</button>
         </div>
 
         <!-- ⑧ Lead Form (Campaign) -->
@@ -20433,7 +21135,21 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             </div>
         </div>
 
-        <!-- ⑨ Campaign FAQ (Campaign) -->
+        <!-- ⑨ Sticky Bottom Bar (Campaign) -->
+        <div id="ldpsec-camp-sticky" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group"><label>Tiêu đề sticky</label><input type="text" class="form-input"
+                        value="Nâng cấp ngay WiFi 7 – Bứt phá mọi giới hạn kết nối!"></div>
+                <div class="form-group"><label>Nút CTA - Text</label><input type="text" class="form-input"
+                        value="Mua ngay"></div>
+                <div class="form-group" style="grid-column:span 2;"><label>Mô tả phụ</label><input type="text"
+                        class="form-input" value="Từ 999.000đ/tháng. Miễn phí lắp đặt – Tặng modem Wi-Fi 7"></div>
+                <div class="form-group" style="grid-column:span 2;"><label>Nút CTA - URL</label><input type="text"
+                        class="form-input" value="#dang-ky"></div>
+            </div>
+        </div>
+
+        <!-- ⑩ Campaign FAQ (Campaign) -->
         <div id="ldpsec-camp-faq" class="ldp-sec-form" style="padding:20px; display:none;">
             <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
                     value="Giải đáp thắc mắc về FPT Wi-Fi 7"></div>

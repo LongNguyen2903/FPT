@@ -2080,16 +2080,17 @@ function ldpEditSection(sectionId) {
         'sa-sticky': 'Sticky ưu đãi cuối trang',
         'sa-footer': 'Footer CTA',
         // Camera
-        'cam-hero': 'Hero Banner + Nút CTA', 'cam-usp': 'Công nghệ nổi bật',
+        'cam-hero': 'Hero Banner + Nút CTA chính & phụ', 'cam-usp': 'Công nghệ nổi bật',
         'cam-detail': 'Chi tiết FPT Camera AI', 'cam-select': 'Danh mục & Chọn mua',
         'cam-app': 'Ứng dụng FPT Camera',
         'cam-awards': 'Thương hiệu & Giải thưởng', 'cam-faq': 'FAQ Accordion',
         'cam-sticky': 'Sticky Bottom Bar',
         // Campaign
-        'camp-hero': 'Hero Wi-Fi 7 (Countdown)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
-        'camp-usp': 'USP Công nghệ Wi-Fi 7', 'camp-products': 'Các gói cước Wi-Fi 7',
+        'camp-hero': 'Hero Wi-Fi 7 (Countdown & CTA chính/phụ)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
+        'camp-usp': 'Vì sao chọn SpeedX – Wi-Fi 7 của FPT', 'camp-products': 'Các gói cước Wi-Fi 7',
         'camp-compare': 'Bảng so sánh thế hệ Wi-Fi', 'camp-targets': 'Đối tượng mục tiêu',
         'camp-videos': 'Video Review thực tế', 'camp-form': 'Form đăng ký tư vấn',
+        'camp-sticky': 'Sticky Bottom Bar',
         'camp-faq': 'FAQ Accordion',
         // Thu Lead
         'lead-hero': 'Hero + Form thu Lead', 'lead-proof': 'Social Proof chạy chữ',
@@ -2233,6 +2234,102 @@ function ldpAddProductCard(btnEl) {
     var arrow = card.querySelector('.arrow-indicator');
     if (body) body.style.display = 'block';
     if (arrow) arrow.textContent = '▲';
+}
+
+function campAddProductCard() {
+    var container = document.getElementById('camp-products-list');
+    if (!container) return;
+    var cards = container.querySelectorAll('.inet-product-card');
+    var idx = cards.length + 1;
+    var warningColor = 'var(--primary)';
+
+    var card = document.createElement('div');
+    card.className = 'inet-product-card';
+    card.style.cssText = 'border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;';
+
+    var html = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+        + '<div style="display:flex; align-items:center; gap:8px; flex:1;">'
+        + '<span style="font-size:12px; font-weight:700; color:\' + warningColor + \';" class="inet-product-card-idx">Gói ' + idx + '</span>'
+        + '<span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Gói mới</span>'
+        + '<span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"></span>'
+        + '</div>'
+        + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
+        + '<label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+        + '</div>'
+        + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▲</span>'
+        + '</div>'
+        + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06);">'
+        + '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
+        + '<div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>'
+        + '</div>'
+        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" placeholder="vd: FPT Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" placeholder="vd: 999.000" oninput="ldpUpdateProductCardHeader(this)"></div>'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
+        + '<div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3" placeholder="Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Kết nối đến 100 thiết bị"></textarea></div>'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" placeholder="Nhận tư vấn"></div>'
+        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" placeholder="#tu-van"></div>'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" placeholder="#dang-ky"></div>'
+        + '</div>'
+        + '</div>';
+
+    card.innerHTML = html;
+    container.appendChild(card);
+
+    var body = card.querySelector('.inet-product-card-body');
+    var arrow = card.querySelector('.arrow-indicator');
+    if (body) body.style.display = 'block';
+    if (arrow) arrow.textContent = '▲';
+}
+
+function campAddCompareRow() {
+    var container = document.getElementById('camp-compare-list');
+    if (!container) return;
+    var row = document.createElement('div');
+    row.className = 'camp-compare-row';
+    row.style.cssText = 'display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr 30px; gap:8px; align-items:center;';
+    row.innerHTML = '<input type="text" class="form-input form-input-sm compare-feature" placeholder="Tính năng" style="font-size:12px; padding:6px 8px;">'
+        + '<input type="text" class="form-input form-input-sm compare-wf7" placeholder="Wi-Fi 7" style="font-size:12px; padding:6px 8px; font-weight:600; color:var(--primary);">'
+        + '<input type="text" class="form-input form-input-sm compare-wf6e" placeholder="Wi-Fi 6E" style="font-size:12px; padding:6px 8px;">'
+        + '<input type="text" class="form-input form-input-sm compare-wf6" placeholder="Wi-Fi 6" style="font-size:12px; padding:6px 8px;">'
+        + '<input type="text" class="form-input form-input-sm compare-wf5" placeholder="Wi-Fi 5" style="font-size:12px; padding:6px 8px;">'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px;" onclick="this.closest(\'.camp-compare-row\').remove()">✕</button>';
+    container.appendChild(row);
+}
+
+function campAddVideoCard() {
+    var container = document.getElementById('camp-videos-list');
+    if (!container) return;
+    var idx = container.querySelectorAll('.inet-product-card').length + 1;
+    var card = document.createElement('div');
+    card.className = 'inet-product-card';
+    card.style.cssText = 'border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;';
+    card.innerHTML = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+        + '<div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'
+        + '<span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">Video mới ' + idx + '</span>'
+        + '</div>'
+        + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+        + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">'
+        + '<div class="form-group" style="margin-bottom:8px;">'
+        + '<label style="font-size:11px;">Ảnh thumbnail</label>'
+        + '<div style="display:flex; gap:6px;">'
+        + '<input type="text" class="form-input" placeholder="URL ảnh thumbnail" style="flex:1;">'
+        + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>'
+        + '</div>'
+        + '</div>'
+        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" placeholder="Nhập tiêu đề video" oninput="ldpUpdateProductCardHeader(this)"></div>'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" placeholder="https://..."></div>'
+        + '</div>'
+        + '</div>';
+    container.appendChild(card);
 }
 
 function ldpAddPricingCard() {
@@ -2432,6 +2529,46 @@ function ldpSaveSection() {
         var text = group ? group.querySelector('input').value : '';
         var count = document.querySelectorAll('#cam-select-list .cam-select-card-item').length;
         summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' combo';
+    } else if (sectionId === 'camp-products') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-products .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#camp-products-list .inet-product-card').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' gói';
+    } else if (sectionId === 'camp-compare') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-compare .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#camp-compare-list .camp-compare-row').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' tiêu chí so sánh';
+    } else if (sectionId === 'camp-targets') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-targets .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#camp-targets-list .inet-product-card').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' nhóm đối tượng';
+    } else if (sectionId === 'camp-videos') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-videos .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#camp-videos-list .inet-product-card').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' video review';
+    } else if (sectionId === 'camp-form') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-form .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề trên Form');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Tiêu đề: "' + text + '"';
+    } else if (sectionId === 'camp-sticky') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-sticky .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề sticky');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Sticky: "' + text + '"';
     } else if (sectionId === 'sa-features') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-features .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline');
@@ -2469,6 +2606,24 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Sticky: "' + text + '"';
+    } else if (sectionId === 'cam-hero') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-cam-hero .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'camp-hero') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-camp-hero .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'lead-hero') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-lead-hero .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Headline: "' + text + '"';
     } else if (sectionId === 'sa-footer') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-footer .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Text kêu gọi');
