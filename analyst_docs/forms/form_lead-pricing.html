@@ -1,0 +1,196 @@
+<!-- ③ Bảng giá & So sánh (Thu Lead) -->
+<div id="ldpsec-lead-pricing" class="ldp-sec-form" style="padding:20px; display:none;">
+    <div class="form-group" style="margin-bottom:16px;">
+        <label>Tiêu đề bảng giá</label>
+        <input type="text" class="form-input" value="Chọn gói phù hợp giá tốt tại">
+    </div>
+    <!-- TAB 1: Internet gia dinh -->
+    <div style="border:2px solid rgba(249,115,22,0.4); border-radius:10px; margin-bottom:14px; overflow:hidden;">
+        <div style="background:rgba(249,115,22,0.1); padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="font-weight:700; font-size:13px; color:#fb923c; flex:1;">Tab: Internet gia đình</span>
+            <input type="text" class="form-input" value="internet-gia-dinh" placeholder="slug" style="width:120px; font-size:11px; padding:3px 6px;">
+            <label style="font-size:11px; display:flex; align-items:center; gap:4px;"><input type="checkbox" checked style="accent-color:var(--success);"> Mặc định</label>
+            <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 7px; color:var(--danger); border-color:var(--danger);" onclick="this.closest('div').parentElement.remove()">Xóa tab</button>
+        </div>
+        <div style="padding:14px;">
+            <!-- Gói 1: FPT Speed X2 -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Speed X2</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="220.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="150 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="150 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value=""></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Trang bị Modem Wi-Fi 6 thế hệ mới&#10;Phù hợp nhu cầu cơ bản: lướt web, học online&#10;Hỗ trợ kỹ thuật 24/7</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gói 2: FPT Speed X2 PRO -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Speed X2 PRO</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X2 PRO" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="260.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="250 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="250 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value="Gói bán chạy 🔥"></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Trang bị Modem Wi-Fi 6 + 1 thiết bị Mesh mở rộng&#10;Phù hợp căn hộ 2-3 phòng ngủ, nhà nhiều tầng&#10;Hỗ trợ kỹ thuật 24/7</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gói 3: FPT Speed X10 -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Speed X10</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X10" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="320.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="500 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="500 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value=""></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Trang bị Modem Wi-Fi 7 thế hệ mới cực đỉnh&#10;Phù hợp gia đình đông người, stream 4K/8K mượt mà&#10;Bảo mật ưu việt, chống lag giật</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Gói 4: FPT Speed X10 Pro -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Speed X10 Pro</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Speed X10 Pro" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="390.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="1 Gbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="1 Gbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value="Gói Wi-Fi 7 Tốc độ cao 🌟"></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Trang bị Modem Wi-Fi 7 + 1 thiết bị Mesh Wi-Fi 7 mở rộng&#10;Tốc độ không giới hạn băng thông trong nước lên đến 1Gbps&#10;Hỗ trợ sự cố khẩn cấp 24/7</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;" onclick="ldpAddProductCard(this)">+ Thêm gói vào tab này</button>
+        </div>
+    </div>
+
+    <!-- TAB 2: Combo Internet truyen hinh -->
+    <div style="border:2px solid rgba(245,158,11,0.4); border-radius:10px; margin-bottom:14px; overflow:hidden;">
+        <div style="background:rgba(245,158,11,0.1); padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="font-weight:700; font-size:13px; color:#fbbf24; flex:1;">Tab: Combo Internet truyền hình</span>
+            <input type="text" class="form-input" value="combo-internet-truyen-hinh" placeholder="slug" style="width:120px; font-size:11px; padding:3px 6px;">
+            <label style="font-size:11px; display:flex; align-items:center; gap:4px;"><input type="checkbox" style="accent-color:var(--success);"> Mặc định</label>
+            <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 7px; color:var(--danger); border-color:var(--danger);" onclick="this.closest('div').parentElement.remove()">Xóa tab</button>
+        </div>
+        <div style="padding:14px;">
+            <!-- Gói Combo 1 -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Combo Speed X2</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Combo Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="280.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="150 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="150 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value=""></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Internet cáp quang siêu tốc + Truyền hình FPT Play&#10;Hơn 180 kênh đặc sắc truyền hình trong nước & quốc tế&#10;Tặng kèm Box FPT Play điều khiển giọng nói</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;" onclick="ldpAddProductCard(this)">+ Thêm gói vào tab này</button>
+        </div>
+    </div>
+
+    <!-- TAB 3: Internet doanh nghiep -->
+    <div style="border:2px solid rgba(244,63,94,0.4); border-radius:10px; margin-bottom:14px; overflow:hidden;">
+        <div style="background:rgba(244,63,94,0.1); padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="font-weight:700; font-size:13px; color:#fb7185; flex:1;">Tab: Internet doanh nghiệp</span>
+            <input type="text" class="form-input" value="internet-doanh-nghiep" placeholder="slug" style="width:120px; font-size:11px; padding:3px 6px;">
+            <label style="font-size:11px; display:flex; align-items:center; gap:4px;"><input type="checkbox" style="accent-color:var(--success);"> Mặc định</label>
+            <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 7px; color:var(--danger); border-color:var(--danger);" onclick="this.closest('div').parentElement.remove()">Xóa tab</button>
+        </div>
+        <div style="padding:14px;">
+            <!-- Gói Doanh nghiệp 1 -->
+            <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;">
+                <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">FPT Business 200</span>
+                    <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                        <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                    </div>
+                </div>
+                <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" value="FPT Business 200" oninput="ldpUpdateProductCardHeader(this)"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá bán (đ/tháng)</label><input type="text" class="form-input" value="800.000"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" value="200 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" value="200 Mbps"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input" placeholder="VD: Phổ biến" value=""></div>
+                        <div class="form-group" style="margin-bottom:6px;"></div>
+                        <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3">Tốc độ siêu cao, cam kết băng thông quốc tế tối thiểu 10 Mbps&#10;Hỗ trợ IP tĩnh miễn phí&#10;Hỗ trợ kỹ thuật riêng 24/7 chuyên nghiệp</textarea></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+                        <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" value="#consult"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" value="#register"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;" onclick="ldpAddProductCard(this)">+ Thêm gói vào tab này</button>
+        </div>
+    </div>
+    <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:13px; margin-top:10px; font-weight:600;" onclick="ldpAddProductTab(this)">+ Thêm tab mới</button>
+</div>

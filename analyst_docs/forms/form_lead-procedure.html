@@ -1,0 +1,139 @@
+<!-- ⑥ Hướng dẫn thủ tục (Thu Lead) -->
+<div id="ldpsec-lead-procedure" class="ldp-sec-form" style="padding:20px; display:none;">
+    <div class="form-group"><label>Tiêu đề section</label><input type="text" class="form-input"
+            value="Hướng dẫn thủ tục"></div>
+    <div class="form-group" style="margin-top:12px;">
+        <label style="font-weight:600; font-size:13px; color:var(--text-muted);">Các bước thủ tục</label>
+        <!-- Bước 1 -->
+        <div
+            style="border:1px solid var(--border); border-radius:8px; padding:12px; background:var(--bg-secondary); margin-top:10px; display:grid; grid-template-columns:32px 1fr; gap:12px; align-items:start;">
+            <div
+                style="width:32px; height:32px; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">
+                1</div>
+            <div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề bước
+                        1</label><input type="text" class="form-input" value="Chuẩn bị giấy tờ"></div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Mô
+                        tả</label><textarea class="form-textarea"
+                        rows="2">1 bản photo/scan CMND/CCCD (cá nhân) hoặc giấy phép KD + CCCD người đại diện (doanh nghiệp)</textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Icon bước
+                        1</label>
+                    <div class="media-upload-wrapper"
+                        style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" value="/media/uploads/icon-id-card.png"
+                            style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview"
+                            style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="/media/uploads/icon-id-card.png"
+                                style="width:100%; height:100%; object-fit:cover;">
+                            <span
+                                style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                                onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bước 2 -->
+        <div
+            style="border:1px solid var(--border); border-radius:8px; padding:12px; background:var(--bg-secondary); margin-top:10px; display:grid; grid-template-columns:32px 1fr; gap:12px; align-items:start;">
+            <div
+                style="width:32px; height:32px; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">
+                2</div>
+            <div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề bước
+                        2</label><input type="text" class="form-input" value="Thanh toán 299.000đ"></div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Mô
+                        tả</label><textarea class="form-textarea"
+                        rows="2">Chọn gói dịch vụ và thanh toán phí hòa mạng + lắp đặt Thanh toán trước 1/6/12 tháng theo chính sách ưu đãi</textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Icon bước
+                        2</label>
+                    <div class="media-upload-wrapper"
+                        style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" value="/media/uploads/icon-wallet.png"
+                            style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview"
+                            style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="/media/uploads/icon-wallet.png"
+                                style="width:100%; height:100%; object-fit:cover;">
+                            <span
+                                style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                                onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bước 3 -->
+        <div
+            style="border:1px solid var(--border); border-radius:8px; padding:12px; background:var(--bg-secondary); margin-top:10px; display:grid; grid-template-columns:32px 1fr; gap:12px; align-items:start;">
+            <div
+                style="width:32px; height:32px; background:var(--primary); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">
+                3</div>
+            <div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề bước
+                        3</label><input type="text" class="form-input" value="Lắp đặt dịch vụ"></div>
+                <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Mô
+                        tả</label><textarea class="form-textarea"
+                        rows="2">Kỹ thuật sẽ liên hệ, đến khảo sát + lắp trong ngày (nội thành) ≤24h xác nhận - Ngoại thành từ 12-36h</textarea>
+                </div>
+                <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Icon bước
+                        3</label>
+                    <div class="media-upload-wrapper"
+                        style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url"
+                            value="/media/uploads/icon-phone-call.png" style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview"
+                            style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                            <img src="/media/uploads/icon-phone-call.png"
+                                style="width:100%; height:100%; object-fit:cover;">
+                            <span
+                                style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;"
+                                                    onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA Buttons Configuration -->
+    <div
+        style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 10px;">
+        Nút hành động (CTA)</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div
+            style="border:1px solid var(--border); border-radius:8px; padding:12px; background:var(--bg-secondary);">
+            <label
+                style="font-weight:600; font-size:12px; color:var(--text-muted); display:block; margin-bottom:8px;">Nút
+                chính (Màu cam)</label>
+            <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Text
+                    nút</label><input type="text" class="form-input" value="Đăng ký ngay"></div>
+            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Link
+                    URL</label><input type="text" class="form-input" value="#register"></div>
+        </div>
+        <div
+            style="border:1px solid var(--border); border-radius:8px; padding:12px; background:var(--bg-secondary);">
+            <label
+                style="font-weight:600; font-size:12px; color:var(--text-muted); display:block; margin-bottom:8px;">Nút
+                phụ (Màu xanh)</label>
+            <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Text
+                    nút</label><input type="text" class="form-input" value="Nhận tư vấn"></div>
+            <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Số điện thoại /
+                    Link</label><input type="text" class="form-input" value="tel:19006600"></div>
+        </div>
+    </div>
+</div>

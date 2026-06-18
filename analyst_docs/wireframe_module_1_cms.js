@@ -2094,8 +2094,8 @@ function ldpEditSection(sectionId) {
         'camp-faq': 'FAQ Accordion',
         // Thu Lead
         'lead-hero': 'Hero + Form thu Lead', 'lead-proof': 'Social Proof chạy chữ',
-        'lead-pricing': 'Bảng giá & So sánh gói', 'lead-steps': 'Lợi ích & Quy trình',
-        'lead-reviews': 'Đánh giá khách hàng (Rating)', 'lead-faq': 'FAQ Accordion',
+        'lead-pricing': 'Bảng giá & So sánh gói', 'lead-steps': 'Giá ưu đãi, nhiều tiện ích',
+        'lead-reviews': 'Review Internet FPT', 'lead-faq': 'FAQ Accordion',
         'lead-sticky': 'Sticky Bottom Bar'
     };
     var titleEl = document.getElementById('ldp-sec-title');
@@ -2285,6 +2285,54 @@ function campAddProductCard() {
     if (arrow) arrow.textContent = '▲';
 }
 
+function ldpAddProductTab(btnEl) {
+    var container = btnEl.parentElement;
+    if (!container) return;
+    var tabs = container.querySelectorAll('div[style*="border-radius:10px"]');
+    var idx = tabs.length + 1;
+
+    // Chọn màu sắc xoay vòng
+    var borderColor = 'rgba(16,185,129,0.4)';
+    var bgColor = 'rgba(16,185,129,0.1)';
+    var textColor = '#34d399';
+    var slug = 'tab-moi-' + idx;
+    var name = 'Tab mới ' + idx;
+
+    if (idx % 3 === 1) {
+        borderColor = 'rgba(16,185,129,0.4)';
+        bgColor = 'rgba(16,185,129,0.1)';
+        textColor = '#34d399';
+    } else if (idx % 3 === 2) {
+        borderColor = 'rgba(245,158,11,0.4)';
+        bgColor = 'rgba(245,158,11,0.1)';
+        textColor = '#fbbf24';
+    } else {
+        borderColor = 'rgba(244,63,94,0.4)';
+        bgColor = 'rgba(244,63,94,0.1)';
+        textColor = '#fb7185';
+    }
+
+    var tabDiv = document.createElement('div');
+    tabDiv.style.cssText = 'border:2px solid ' + borderColor + '; border-radius:10px; margin-bottom:14px; overflow:hidden;';
+
+    var html = '<div style="background:' + bgColor + '; padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">'
+        + '<span style="font-weight:700; font-size:13px; color:' + textColor + '; flex:1;">Tab: ' + name + '</span>'
+        + '<input type="text" class="form-input" value="' + slug + '" placeholder="slug" style="width:120px; font-size:11px; padding:3px 6px;">'
+        + '<label style="font-size:11px; display:flex; align-items:center; gap:4px;"><input type="checkbox" style="accent-color:var(--success);"> Mặc định</label>'
+        + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 7px; color:var(--danger); border-color:var(--danger);" onclick="this.closest(\'div\').parentElement.remove()">Xóa tab</button>'
+        + '</div>'
+        + '<div style="padding:14px;">'
+        + '<button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;" onclick="ldpAddProductCard(this)">+ Thêm gói vào tab này</button>'
+        + '</div>';
+
+    tabDiv.innerHTML = html;
+    container.insertBefore(tabDiv, btnEl);
+    
+    // Tự động thêm 1 gói trống vào tab mới để tăng trải nghiệm người dùng
+    var addPkgBtn = tabDiv.querySelector('button[onclick*="ldpAddProductCard"]');
+    if (addPkgBtn) ldpAddProductCard(addPkgBtn);
+}
+
 function campAddCompareRow() {
     var container = document.getElementById('camp-compare-list');
     if (!container) return;
@@ -2302,6 +2350,38 @@ function campAddCompareRow() {
 
 function campAddVideoCard() {
     var container = document.getElementById('camp-videos-list');
+    if (!container) return;
+    var idx = container.querySelectorAll('.inet-product-card').length + 1;
+    var card = document.createElement('div');
+    card.className = 'inet-product-card';
+    card.style.cssText = 'border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;';
+    card.innerHTML = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+        + '<div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'
+        + '<span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">Video mới ' + idx + '</span>'
+        + '</div>'
+        + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+        + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">'
+        + '<div class="form-group" style="margin-bottom:8px;">'
+        + '<label style="font-size:11px;">Ảnh thumbnail</label>'
+        + '<div style="display:flex; gap:6px;">'
+        + '<input type="text" class="form-input" placeholder="URL ảnh thumbnail" style="flex:1;">'
+        + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>'
+        + '</div>'
+        + '</div>'
+        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" placeholder="Nhập tiêu đề video" oninput="ldpUpdateProductCardHeader(this)"></div>'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" placeholder="https://..."></div>'
+        + '</div>'
+        + '</div>';
+    container.appendChild(card);
+}
+
+function leadAddVideoCard() {
+    var container = document.getElementById('lead-videos-list');
     if (!container) return;
     var idx = container.querySelectorAll('.inet-product-card').length + 1;
     var card = document.createElement('div');
@@ -2624,6 +2704,19 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'lead-steps') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-lead-steps .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề Section Lợi ích');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Lợi ích: "' + text + '" · 4 lợi ích';
+    } else if (sectionId === 'lead-reviews') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-lead-reviews .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề Section video');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#lead-videos-list .inet-product-card').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' video review';
     } else if (sectionId === 'sa-footer') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-footer .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Text kêu gọi');

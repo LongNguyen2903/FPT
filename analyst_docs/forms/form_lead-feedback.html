@@ -1,0 +1,100 @@
+<!-- ⑥ Đánh giá khách hàng (Thu Lead) -->
+<div id="ldpsec-lead-feedback" class="ldp-sec-form" style="padding:20px; display:block;">
+    <div class="form-group">
+        <label>Tiêu đề section</label>
+        <input type="text" class="form-input" value="Khách hàng nói gì sau khi lắp đặt?">
+    </div>
+    <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 10px;">
+        Danh sách đánh giá (Slider)
+    </div>
+    <div id="lead-feedback-list" style="display:flex; flex-direction:column; gap:10px; margin-bottom:10px;">
+        <!-- Đánh giá 1: Duy An -->
+        <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; background:var(--bg-secondary);">
+            <button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
+            <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">
+                <div class="form-group">
+                    <label style="font-size:11px;">Avatar</label>
+                    <div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">
+                        <input type="text" class="form-input media-url" value="/media/uploads/user_duyan.jpg" style="font-size:11px;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
+                            <img src="/media/uploads/user_duyan.jpg" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tên khách hàng</label><input type="text" class="form-input" value="Duy An" style="font-size:12px;"></div>
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Khu vực / Phụ đề</label><input type="text" class="form-input" value="Khách hàng tại TP HCM" style="font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề nhận xét</label><input type="text" class="form-input" value="Dân văn phòng cần mạng ổn + EPL &quot;xịn&quot;, có hết!" style="font-size:12px;"></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:100%; font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-top:8px; margin-bottom:0;"><label style="font-size:11px;">Nội dung đánh giá</label><textarea class="form-textarea" rows="2" style="font-size:12px;">Ngày làm việc online, tối xem Ngoại hạng Anh. Internet FPT mượt, họp Zoom, gửi file nặng vẫn bay. Đến giờ bóng lăn bật FPT Play cái ăn ngay, không chờ, không...</textarea></div>
+                </div>
+            </div>
+        </div>
+        <!-- Đánh giá 2: Sơn Lương -->
+        <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; background:var(--bg-secondary);">
+            <button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
+            <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">
+                <div class="form-group">
+                    <label style="font-size:11px;">Avatar</label>
+                    <div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">
+                        <input type="text" class="form-input media-url" value="/media/uploads/user_sonluong.jpg" style="font-size:11px;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
+                            <img src="/media/uploads/user_sonluong.jpg" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tên khách hàng</label><input type="text" class="form-input" value="Sơn Lương" style="font-size:12px;"></div>
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Khu vực / Phụ đề</label><input type="text" class="form-input" value="Khách hàng tại Đà Nẵng" style="font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề nhận xét</label><input type="text" class="form-input" value="Truyền hình xịn, cuối tuần không cần ra quán!" style="font-size:12px;"></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:100%; font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-top:8px; margin-bottom:0;"><label style="font-size:11px;">Nội dung đánh giá</label><textarea class="form-textarea" rows="2" style="font-size:12px;">Gia đình mình coi EPL độc quyền trên FPT Play, âm thanh sống động nghe như đang ngồi khán đài. Wifi phủ cả nhà, con học online - mình xem bóng - vợ xe...</textarea></div>
+                </div>
+            </div>
+        </div>
+        <!-- Đánh giá 3: Thúy Trần -->
+        <div style="border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; background:var(--bg-secondary);">
+            <button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>
+            <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">
+                <div class="form-group">
+                    <label style="font-size:11px;">Avatar</label>
+                    <div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">
+                        <input type="text" class="form-input media-url" value="/media/uploads/user_thuytran.jpg" style="font-size:11px;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>
+                        <div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; margin-top:4px;">
+                            <img src="/media/uploads/user_thuytran.jpg" style="width:100%; height:100%; object-fit:cover;">
+                            <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tên khách hàng</label><input type="text" class="form-input" value="Thúy Trần" style="font-size:12px;"></div>
+                        <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Khu vực / Phụ đề</label><input type="text" class="form-input" value="Khách hàng tại Đắk Lắk" style="font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Tiêu đề nhận xét</label><input type="text" class="form-input" value="Dân văn phòng cần mạng ổn + EPL &quot;xịn&quot; - có hết!" style="font-size:12px;"></div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:100%; font-size:12px;"></div>
+                    </div>
+                    <div class="form-group" style="margin-top:8px; margin-bottom:0;"><label style="font-size:11px;">Nội dung đánh giá</label><textarea class="form-textarea" rows="2" style="font-size:12px;">Ngày làm việc online, tối xem Ngoại hạng Anh. Internet FPT mượt, họp Zoom, gửi file nặng vẫn bay. Đến giờ bóng lăn bật FPT Play cái ăn ngay, không chờ, không...</textarea></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; margin-top:10px;" onclick="ldpAddLeadFeedback()">+ Thêm đánh giá</button>
+</div>

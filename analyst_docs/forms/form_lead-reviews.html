@@ -1,0 +1,120 @@
+<!-- ⑤ Review Internet FPT (Thu Lead) -->
+<div id="ldpsec-lead-reviews" class="ldp-sec-form" style="padding:20px; display:none;">
+    <div class="form-group" style="margin-bottom:14px;">
+        <label>Tiêu đề Section video</label>
+        <input type="text" class="form-input" value="Review Internet FPT có gì HOT 🔥">
+    </div>
+
+    <div style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">
+        Danh sách Video Review
+    </div>
+
+    <div id="lead-videos-list" style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Video 1 -->
+        <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+            <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">WI-FI 7 NÊN KẾT HỢP CÙNG THIẾT BỊ NÀO</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                    <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                </div>
+            </div>
+            <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                <div class="form-group" style="margin-bottom:8px;">
+                    <label style="font-size:11px;">Ảnh thumbnail</label>
+                    <div style="display:flex; gap:6px;">
+                        <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb1.png" style="flex:1;">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="WI-FI 7 NÊN KẾT HỢP CÙNG THIẾT BỊ NÀO" oninput="ldpUpdateProductCardHeader(this)"></div>
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+            <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">TÍNH NĂNG BẢO MẬT CỦA WI-FI 7 RA SAO?</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                    <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                </div>
+            </div>
+            <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                <div class="form-group" style="margin-bottom:8px;">
+                    <label style="font-size:11px;">Ảnh thumbnail</label>
+                    <div style="display:flex; gap:6px;">
+                        <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb2.png" style="flex:1;">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="TÍNH NĂNG BẢO MẬT CỦA WI-FI 7 RA SAO?" oninput="ldpUpdateProductCardHeader(this)"></div>
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video2"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+            <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">THỬ THÁCH VIỆT HOÁ CỤM TỪ XGS-PON</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                    <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                </div>
+            </div>
+            <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                <div class="form-group" style="margin-bottom:8px;">
+                    <label style="font-size:11px;">Ảnh thumbnail</label>
+                    <div style="display:flex; gap:6px;">
+                        <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb3.png" style="flex:1;">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="THỬ THÁCH VIỆT HOÁ CỤM TỪ XGS-PON" oninput="ldpUpdateProductCardHeader(this)"></div>
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video 4 -->
+        <div class="inet-product-card" style="border:1px solid var(--border); border-radius:8px; background:var(--bg-secondary); overflow:hidden;">
+            <div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">
+                <div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    <span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">CHÍNH THỨC RA MẮT CÔNG NGHỆ XGS-PON VÀ WI-FI 7</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">
+                    <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest('.inet-product-card').remove()">Xóa</button>
+                    <span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>
+                </div>
+            </div>
+            <div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:none;">
+                <div class="form-group" style="margin-bottom:8px;">
+                    <label style="font-size:11px;">Ảnh thumbnail</label>
+                    <div style="display:flex; gap:6px;">
+                        <input type="text" class="form-input" placeholder="URL ảnh thumbnail" value="images/video_thumb4.png" style="flex:1;">
+                        <button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề video</label><input type="text" class="form-input inet-product-name-input" value="CHÍNH THỨC RA MẮT CÔNG NGHỆ XGS-PON VÀ WI-FI 7" oninput="ldpUpdateProductCardHeader(this)"></div>
+                    <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">URL Video</label><input type="text" class="form-input" value="https://www.youtube.com/watch?v=video4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px; margin-top:10px;"
+        onclick="leadAddVideoCard()">+ Thêm video review</button>
+</div>

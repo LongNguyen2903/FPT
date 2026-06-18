@@ -1,0 +1,33 @@
+<!-- ⑨ Sticky Bottom Bar (Thu Lead) -->
+<div id="ldpsec-lead-sticky" class="ldp-sec-form" style="padding:20px; display:block;">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+        <div class="form-group">
+            <label>Icon / Ảnh đại diện (3D Gift/Emoji)</label>
+            <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                <input type="text" class="form-input media-url" value="/media/uploads/gift_box_3d.png" placeholder="URL icon/ảnh" style="flex:1; font-size:11px;">
+                <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()" style="font-size:11px; padding:6px 10px;">Upload</button>
+                <div class="media-preview" style="width:36px; height:36px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">
+                    <img src="/media/uploads/gift_box_3d.png" style="width:100%; height:100%; object-fit:cover;">
+                    <span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:12px; height:12px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Tiêu đề sticky</label>
+            <input type="text" class="form-input" value="Giảm thêm 50k khi thanh toán online!">
+        </div>
+        <div class="form-group" style="grid-column:span 2;">
+            <label>Mô tả phụ</label>
+            <input type="text" class="form-input" value="Số lượng có hạn - Mua ngay để nhận ưu đãi">
+        </div>
+        <div class="form-group">
+            <label>Text nút CTA Đăng ký</label>
+            <input type="text" class="form-input" value="Đăng ký nhận ưu đãi">
+        </div>
+        <div class="form-group">
+            <label>URL nút CTA Đăng ký</label>
+            <input type="text" class="form-input" value="#hero-section">
+        </div>
+    </div>
+</div>
