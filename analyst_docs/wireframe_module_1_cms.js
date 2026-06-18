@@ -2080,9 +2080,9 @@ function ldpEditSection(sectionId) {
         'sa-sticky': 'Sticky ưu đãi cuối trang',
         'sa-footer': 'Footer CTA',
         // Camera
-        'cam-hero': 'Hero Banner + Nút CTA', 'cam-usp': 'Tính năng nổi bật (USP)',
+        'cam-hero': 'Hero Banner + Nút CTA', 'cam-usp': 'Công nghệ nổi bật',
         'cam-detail': 'Chi tiết FPT Camera AI', 'cam-select': 'Danh mục & Chọn mua',
-        'cam-app': 'Ứng dụng FPT Camera', 'cam-value': 'Lợi thế công nghệ',
+        'cam-app': 'Ứng dụng FPT Camera',
         'cam-awards': 'Thương hiệu & Giải thưởng', 'cam-faq': 'FAQ Accordion',
         'cam-sticky': 'Sticky Bottom Bar',
         // Campaign
@@ -2138,12 +2138,14 @@ function ldpUpdatePricingCardHeader(inputEl) {
 
     var nameInput = card.querySelector('.pricing-name-input');
     var priceInput = card.querySelector('.pricing-price-input');
+    var cycleInput = card.querySelector('.pricing-cycle-input');
 
     if (nameInput && headerTitleEl) {
         headerTitleEl.textContent = nameInput.value || 'Gói chưa đặt tên';
     }
     if (priceInput && headerPriceEl) {
-        headerPriceEl.textContent = priceInput.value ? priceInput.value + '/tháng' : '';
+        var cycle = cycleInput ? cycleInput.value : '/tháng';
+        headerPriceEl.textContent = priceInput.value ? priceInput.value + cycle : '';
     }
 }
 
@@ -2247,21 +2249,71 @@ function ldpAddPricingCard() {
         + '<span style="color:var(--text-muted); font-size:12px;">▲</span></div>'
         + '<div class="pricing-card-body" style="padding:14px; border-top:1px solid rgba(255,255,255,0.06);">'
         + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
-        + '<div class="form-group"><label>Tên gói <span style="color:var(--danger)">*</span></label><input type="text" class="form-input pricing-name-input" placeholder="vd: FPT Play Pro" oninput="ldpUpdatePricingCardHeader(this)"></div>'
-        + '<div class="form-group"><label>Badge nhãn</label><input type="text" class="form-input" placeholder="vd: Mới, Đề xuất"></div>'
+        + '<div class="form-group"><label>Tên gói <span style="color:var(--danger)">*</span></label><input type="text" class="form-input pricing-name-input" placeholder="vd: V.VIP2" oninput="ldpUpdatePricingCardHeader(this)"></div>'
+        + '<div class="form-group"><label>Badge nhãn (vd: Gói phổ biến nhất ✨)</label><input type="text" class="form-input pricing-badge-input" placeholder="Để trống nếu không có"></div>'
+        + '<div class="form-group" style="grid-column: 1/-1;"><label>Ảnh logo gói (vd: V.VIP2)</label>'
+        + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
+        + '<input type="text" class="form-input media-url pricing-logo-input" placeholder="URL ảnh logo gói" style="flex:1;">'
+        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+        + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button></div></div>'
         + '<div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input pricing-price-input" placeholder="vd: 150.000đ" oninput="ldpUpdatePricingCardHeader(this)"></div>'
-        + '<div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input" value="/tháng"></div>'
-        + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input" placeholder="Tuỳ chọn"></div>'
-        + '<div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input" value="' + idx + '" min="1" style="width:80px;"></div>'
-        + '<div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea" rows="2" placeholder="Điều kiện, ưu đãi..."></textarea></div>'
-        + '<div class="form-group" style="grid-column:1/-1;"><label>Tính năng nổi bật (mỗi dòng 1 tính năng)</label><textarea class="form-textarea" rows="3" placeholder="Tính năng 1&#10;Tính năng 2"></textarea></div>'
-        + '<div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input" value="Đăng ký ngay"></div>'
-        + '<div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input" placeholder="/dang-ky-..."></div>'
+        + '<div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input pricing-cycle-input" value="/tháng" oninput="ldpUpdatePricingCardHeader(this)"></div>'
+        + '<div class="form-group"><label>Chu kỳ phụ / Khuyến mãi</label><input type="text" class="form-input pricing-subcycle-input" placeholder="vd: Mua 3 tháng còn 133k/ tháng"></div>'
+        + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input pricing-originalprice-input" placeholder="vd: 180.000đ"></div>'
+        + '<div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input pricing-position-input" value="' + idx + '" min="1" style="width:80px;"></div>'
+        + '<div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea pricing-desc-input" rows="2" placeholder="Điều kiện, ưu đãi..."></textarea></div>'
+        + '<div class="form-group" style="grid-column:1/-1;"><label>Thông số so sánh (Mỗi dòng một tiêu chí: Tên tiêu chí | Giá trị)</label>'
+        + '<textarea class="form-textarea pricing-features-input" rows="5" placeholder="vd: Xem Ngoại hạng Anh | Xem đồng thời trên 2 thiết bị&#10;Nền tảng hỗ trợ | TV, Box, Mobile, Web&#10;Thể thao giải trí | check&#10;Chất lượng xem | check"></textarea></div>'
+        + '<div class="form-group"><label>Nút CTA chính — Text</label><input type="text" class="form-input pricing-cta-text-input" value="Đăng ký ngay"></div>'
+        + '<div class="form-group"><label>Nút CTA chính — URL</label><input type="text" class="form-input pricing-cta-url-input" placeholder="/dang-ky-..."></div>'
         + '</div>'
         + '<div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">'
-        + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input type="checkbox" style="accent-color:var(--success);"> Hiển thị gói này</label>'
+        + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer;"><input type="checkbox" class="pricing-show-checkbox" checked style="accent-color:var(--success);"> Hiển thị gói này</label>'
         + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3);" onclick="this.closest(\'.pricing-card-item\').remove()">🗑 Xoá gói</button>'
         + '</div></div>';
+    list.appendChild(card);
+}
+
+function ldpUpdateCamSelectCardHeader(inputEl) {
+    var card = inputEl.closest('.cam-select-card-item');
+    if (!card) return;
+    var headerTitleEl = card.querySelector('.cam-select-card-title');
+    if (headerTitleEl) {
+        headerTitleEl.textContent = inputEl.value || 'Sản phẩm / Combo mới';
+    }
+}
+
+function ldpAddCamSelectCard() {
+    var list = document.getElementById('cam-select-list');
+    if (!list) return;
+    var idx = list.querySelectorAll('.cam-select-card-item').length + 1;
+    var card = document.createElement('div');
+    card.className = 'cam-select-card-item';
+    card.style.cssText = 'border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;';
+    card.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
+        + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">Combo mới ' + idx + '</span>'
+        + '<div style="display:flex; gap:12px; align-items:center;">'
+        + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input type="checkbox" class="cam-select-show-checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;" onclick="this.closest(\'.cam-select-card-item\').remove()">🗑 Xoá</button>'
+        + '</div>'
+        + '</div>'
+        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
+        + '<div class="form-group"><label>Tên combo <span style="color:var(--danger)">*</span></label><input type="text" class="form-input cam-select-name-input" placeholder="vd: 3 Camera Ngoài trời" oninput="ldpUpdateCamSelectCardHeader(this)"></div>'
+        + '<div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text" class="form-input cam-select-badge-input" placeholder="Để trống nếu không có"></div>'
+        + '<div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>'
+        + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
+        + '<input type="text" class="form-input media-url cam-select-image-input" placeholder="URL ảnh minh họa" style="flex:1;">'
+        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+        + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button></div></div>'
+        + '<div class="form-group"><label>Giá khuyến mãi</label><input type="text" class="form-input cam-select-price-input" placeholder="vd: 999.999đ"></div>'
+        + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input cam-select-originalprice-input" placeholder="vd: 1.200.000đ"></div>'
+        + '<div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text" class="form-input cam-select-discount-input" placeholder="vd: -16%"></div>'
+        + '<div class="form-group"><label>Badge ưu đãi phụ</label><input type="text" class="form-input cam-select-promo-input" placeholder="vd: Ưu đãi 1 TRIỆU 3 CAM"></div>'
+        + '<div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input cam-select-cta-text-input" value="Mua ngay"></div>'
+        + '<div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input cam-select-cta-url-input" placeholder="vd: #register"></div>'
+        + '<div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>'
+        + '<textarea class="form-textarea cam-select-desc-input" rows="2" placeholder="Nhập mô tả combo..."></textarea></div>'
+        + '</div>';
     list.appendChild(card);
 }
 
@@ -2361,9 +2413,28 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'cam-usp') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-cam-usp .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Công nghệ: "' + text + '"';
+    } else if (sectionId === 'cam-detail') {
+        var labels = Array.from(document.querySelectorAll('#ldpsec-cam-detail label'));
+        var nameInputs = labels.filter(function (l) { return l.textContent.trim() === 'Tên sản phẩm'; }).map(function (l) { return l.nextElementSibling; });
+        var name1 = nameInputs[0] ? nameInputs[0].value : 'Camera Trong nhà';
+        var name2 = nameInputs[1] ? nameInputs[1].value : 'Camera Ngoài Trời';
+        summaryText = name1 + ' & ' + name2;
+    } else if (sectionId === 'cam-select') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-cam-select .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        var count = document.querySelectorAll('#cam-select-list .cam-select-card-item').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' combo';
     } else if (sectionId === 'sa-features') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-features .form-group')).find(function (g) {
-            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline lớn');
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline');
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Tiêu đề: "' + text + '"';
@@ -2390,10 +2461,14 @@ function ldpSaveSection() {
         summaryText = 'Experts: "' + (title ? title.value : '') + '"';
     } else if (sectionId === 'sa-faq-support') {
         var title = document.querySelector('#ldpsec-sa-faq-support input.form-input');
-        summaryText = 'FAQ: "' + (title ? title.value : '') + '"';
+        var qCount = document.querySelectorAll('#sa-faq-list > div').length;
+        summaryText = 'FAQ: "' + (title ? title.value : '') + '" · ' + qCount + ' câu hỏi';
     } else if (sectionId === 'sa-sticky') {
-        var title = document.querySelector('#ldpsec-sa-sticky input.form-input');
-        summaryText = 'Sticky: "' + (title ? title.value : '') + '"';
+        var group = Array.from(document.querySelectorAll('#ldpsec-sa-sticky .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Sticky: "' + text + '"';
     } else if (sectionId === 'sa-footer') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-footer .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Text kêu gọi');
