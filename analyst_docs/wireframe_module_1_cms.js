@@ -585,13 +585,14 @@ function sysPermRender() {
         if (mod.group && mod.group !== lastGroup) {
             lastGroup = mod.group;
             html += `<tr style="background:rgba(168,85,247,0.06);">
-                        <td colspan="9" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
+                        <td colspan="7" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
                     </tr>`;
         }
         const roles = sysPermByRole[mod.name] || [[1, 1], [0, 0], [0, 0], [0, 0]];
         let cells = '';
         roles.forEach((rp, ri) => {
-            const locked = ri === 0;
+            if (ri === 0) return; // Bỏ qua Super Admin
+            const locked = false;
             rp.forEach((val, ci) => {
                 const bl = ci === 0 ? 'border-left:1px solid var(--border-glass);' : '';
                 cells += `<td style="padding:10px 4px;text-align:center;${bl}">

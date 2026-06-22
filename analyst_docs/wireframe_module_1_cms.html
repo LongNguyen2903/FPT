@@ -14488,14 +14488,6 @@
                                     <th rowspan="2"
                                         style="padding:14px 20px;text-align:left;font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;width:220px;border-right:1px solid var(--border-glass);vertical-align:middle;">
                                         MÀN HÌNH</th>
-                                    <!-- Super Admin — locked -->
-                                    <th colspan="2"
-                                        style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#c084fc;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);background:rgba(168,85,247,0.06);">
-                                        🔒 Super Admin
-                                        <div
-                                            style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:2px;">
-                                            Toàn quyền · không chỉnh được</div>
-                                    </th>
                                     <!-- Admin CMS -->
                                     <th colspan="2"
                                         style="padding:10px 6px;text-align:center;font-size:12px;font-weight:700;color:#FB923C;border-left:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);">
@@ -14523,12 +14515,6 @@
                                 </tr>
                                 <!-- Row 2: 2 quyền mỗi vai trò -->
                                 <tr style="border-bottom:2px solid var(--border-glass);background:rgba(0,0,0,0.12);">
-                                    <th
-                                        style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">
-                                        Xem</th>
-                                    <th
-                                        style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;width:80px;">
-                                        Chỉnh sửa</th>
                                     <th
                                         style="padding:7px 4px;text-align:center;font-size:10px;color:var(--text-muted);font-weight:600;border-left:1px solid var(--border-glass);width:64px;">
                                         Xem</th>
@@ -15295,13 +15281,14 @@
                 if (mod.group && mod.group !== lastGroup) {
                     lastGroup = mod.group;
                     html += `<tr style="background:rgba(168,85,247,0.06);">
-                        <td colspan="9" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
+                        <td colspan="7" style="padding:7px 20px;font-size:11px;font-weight:700;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;border-right:1px solid var(--border-glass);">${mod.group}</td>
                     </tr>`;
                 }
                 const roles = sysPermByRole[mod.name] || [[1, 1], [0, 0], [0, 0], [0, 0]];
                 let cells = '';
                 roles.forEach((rp, ri) => {
-                    const locked = ri === 0;
+                    if (ri === 0) return; // Bỏ qua Super Admin
+                    const locked = false;
                     rp.forEach((val, ci) => {
                         const bl = ci === 0 ? 'border-left:1px solid var(--border-glass);' : '';
                         cells += `<td style="padding:10px 4px;text-align:center;${bl}">
