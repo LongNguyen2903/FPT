@@ -9020,7 +9020,7 @@
                             style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg-glass);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glass);gap:12px;">
                             <div style="display:flex;align-items:center;gap:10px;">
                                 <button type="button" class="btn btn-secondary" style="padding:7px 12px;font-size:13px;"
-                                    onclick="closeNewsDrawer()">✕ Đóng</button>
+                                    onclick="closeNewsDrawer()">← Quay lại</button>
                                 <h3 style="margin:0;font-size:15px;font-weight:700;" id="article-form-title-bar">Soạn
                                     bài viết</h3>
                             </div>
@@ -16004,22 +16004,33 @@
 
         // Mở / đóng News Edit Drawer
         function openNewsDrawer() {
-            var overlay = document.getElementById('news-edit-overlay');
-            var form = document.getElementById('news-item-form');
-            // Move ra body level thoát mọi stacking context
-            document.body.appendChild(overlay);
-            document.body.appendChild(form);
-            // Dùng inline style để bypass mọi CSS cascade/specificity issue
-            overlay.style.cssText = 'display:block!important;position:fixed!important;inset:0!important;background:rgba(12,17,29,0.55)!important;z-index:99000!important;pointer-events:auto!important;';
-            form.style.cssText = 'display:block!important;position:fixed!important;top:0!important;right:0!important;width:760px!important;height:100vh!important;z-index:99001!important;overflow-y:auto!important;background:var(--bg-panel)!important;border-left:1px solid var(--border-glass)!important;box-shadow:-12px 0 40px rgba(0,0,0,0.35)!important;transform:translateX(0)!important;pointer-events:auto!important;margin:0!important;padding:0!important;';
-            document.body.style.overflow = 'hidden';
+            if (typeof window.openNewsArticleDrawer === 'function') {
+                window.openNewsArticleDrawer();
+            } else {
+                var overlay = document.getElementById('news-edit-overlay');
+                var form = document.getElementById('news-item-form');
+                document.getElementById('news-list').style.display = 'none';
+                const pageHeader = document.querySelector('#mod-news .page-header'); if (pageHeader) pageHeader.style.display = 'none';
+                const tabs = document.querySelector('#mod-news .tabs'); if (tabs) tabs.style.display = 'none';
+                if (overlay) overlay.style.display = 'none';
+                form.style.cssText = 'display:block!important;position:relative!important;width:100%!important;height:auto!important;transform:none!important;box-shadow:none!important;border:none!important;z-index:auto!important;margin:0!important;padding:0!important;pointer-events:auto!important;';
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
         }
         function closeNewsDrawer() {
-            var overlay = document.getElementById('news-edit-overlay');
-            var form = document.getElementById('news-item-form');
-            overlay.style.cssText = 'display:none!important;';
-            form.style.cssText = 'display:none!important;';
-            document.body.style.overflow = '';
+            if (typeof window.closeNewsArticleDrawer === 'function') {
+                window.closeNewsArticleDrawer();
+            } else {
+                var overlay = document.getElementById('news-edit-overlay');
+                var form = document.getElementById('news-item-form');
+                form.style.display = 'none';
+                form.style.cssText = 'display:none!important;';
+                if (overlay) overlay.style.display = 'none';
+                const pageHeader = document.querySelector('#mod-news .page-header'); if (pageHeader) pageHeader.style.display = 'flex';
+                const tabs = document.querySelector('#mod-news .tabs'); if (tabs) tabs.style.display = 'flex';
+                document.getElementById('news-list').style.display = 'block';
+                document.body.style.overflow = '';
+            }
         }
 
         // Tải thông tin bài viết lên form để Sửa

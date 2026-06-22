@@ -129,18 +129,28 @@
     window.openNewsArticleDrawer = function () {
         const overlay = document.getElementById('news-edit-overlay');
         const drawerContent = document.getElementById('news-item-form');
-        if (overlay && drawerContent) {
-            // Đưa ra ngoài body để tránh bị stacking context và flexbox co giãn
-            document.body.appendChild(overlay);
-            document.body.appendChild(drawerContent);
+        if (drawerContent) {
+            // Ẩn các danh sách khác
+            const listEl = document.getElementById('news-list'); if (listEl) listEl.style.display = 'none';
+            const catListEl = document.getElementById('news-cat-list'); if (catListEl) catListEl.style.display = 'none';
+            const tagListEl = document.getElementById('news-tag-list'); if (tagListEl) tagListEl.style.display = 'none';
+            const tagMapEl = document.getElementById('news-tag-mapping'); if (tagMapEl) tagMapEl.style.display = 'none';
+            const authListEl = document.getElementById('news-author-list'); if (authListEl) authListEl.style.display = 'none';
+            const authFormEl = document.getElementById('news-author-form'); if (authFormEl) authFormEl.style.display = 'none';
+            const catFormEl = document.getElementById('news-cat-form'); if (catFormEl) catFormEl.style.display = 'none';
+            
+            // Ẩn page-header và tabs
+            const pageHeader = document.querySelector('#mod-news .page-header'); if (pageHeader) pageHeader.style.display = 'none';
+            const tabs = document.querySelector('#mod-news .tabs'); if (tabs) tabs.style.display = 'none';
 
-            overlay.style.display = 'block';
-            drawerContent.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            setTimeout(function () {
-                overlay.classList.add('open');
-                drawerContent.classList.add('open');
-            }, 10);
+            // Ẩn overlay
+            if (overlay) overlay.style.display = 'none';
+
+            // Hiển thị form trực tiếp trên trang, reset các thuộc tính position fixed
+            drawerContent.style.cssText = 'display:block!important;position:relative!important;width:100%!important;height:auto!important;transform:none!important;box-shadow:none!important;border:none!important;z-index:auto!important;margin:0!important;padding:0!important;pointer-events:auto!important;';
+            
+            // Scroll lên đầu trang
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     };
 
@@ -148,20 +158,36 @@
         const overlay = document.getElementById('news-edit-overlay');
         const drawerContent = document.getElementById('news-item-form');
         if (drawerContent) {
-            drawerContent.classList.remove('open');
+            drawerContent.style.display = 'none';
+            drawerContent.style.cssText = 'display:none!important;';
         }
         if (overlay) {
-            overlay.classList.remove('open');
+            overlay.style.display = 'none';
         }
+        
+        // Hiện lại page-header và tabs
+        const pageHeader = document.querySelector('#mod-news .page-header'); if (pageHeader) pageHeader.style.display = 'flex';
+        const tabs = document.querySelector('#mod-news .tabs'); if (tabs) tabs.style.display = 'flex';
+        
+        // Dựa vào tab active hiện tại để hiển thị lại danh sách phù hợp
+        const activeTab = document.querySelector('#mod-news .tabs .tab.active');
+        if (activeTab) {
+            if (activeTab.textContent.includes('Danh sách')) {
+                const el = document.getElementById('news-list'); if (el) el.style.display = 'block';
+            } else if (activeTab.textContent.includes('Chuyên mục')) {
+                const el = document.getElementById('news-cat-list'); if (el) el.style.display = 'block';
+            } else if (activeTab.textContent.includes('Tác giả')) {
+                const el = document.getElementById('news-author-list'); if (el) el.style.display = 'block';
+            } else if (activeTab.textContent.includes('Tags Mapping')) {
+                const el = document.getElementById('news-tag-mapping'); if (el) el.style.display = 'block';
+            } else {
+                const el = document.getElementById('news-tag-list'); if (el) el.style.display = 'block';
+            }
+        } else {
+            const el = document.getElementById('news-list'); if (el) el.style.display = 'block';
+        }
+        
         document.body.style.overflow = '';
-        setTimeout(function () {
-            if (drawerContent && !drawerContent.classList.contains('open')) {
-                drawerContent.style.display = 'none';
-            }
-            if (overlay && !overlay.classList.contains('open')) {
-                overlay.style.display = 'none';
-            }
-        }, 300);
     };
 
     window.newsArticlesData = {
