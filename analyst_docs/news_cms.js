@@ -209,7 +209,8 @@
             thumbCaption: 'Chương trình ưu đãi hè áp dụng trên toàn quốc',
             cropRatio: '3:2',
             seoTitle: 'Lắp Mạng FPT Khuyến Mãi Hè 2026 Mới Nhất: Tặng 2 Tháng Cước',
-            seoDesc: 'Lắp mạng cáp quang FPT hè 2026 nhận ưu đãi hấp dẫn. Miễn phí lắp đặt, trang bị miễn phí modem Wi-Fi 6 thế hệ mới, tặng thêm cước sử dụng.'
+            seoDesc: 'Lắp mạng cáp quang FPT hè 2026 nhận ưu đãi hấp dẫn. Miễn phí lắp đặt, trang bị miễn phí modem Wi-Fi 6 thế hệ mới, tặng thêm cước sử dụng.',
+            views: 342
         },
         'news-2': {
             id: 'news-2',
@@ -229,7 +230,8 @@
             thumbCaption: 'FPT Camera IQ3 tích hợp AI nhận diện thông minh',
             cropRatio: '3:2',
             seoTitle: 'FPT Camera Ra Mắt Tính Năng Nhận Diện AI Thông Minh Mới',
-            seoDesc: 'FPT Camera cập nhật tính năng AI nhận diện khuôn mặt và phân biệt chuyển động người/vật giúp giảm báo động giả và tăng cường an ninh.'
+            seoDesc: 'FPT Camera cập nhật tính năng AI nhận diện khuôn mặt và phân biệt chuyển động người/vật giúp giảm báo động giả và tăng cường an ninh.',
+            views: 1205
         },
         'news-3': {
             id: 'news-3',
@@ -249,7 +251,8 @@
             thumbCaption: 'Aston Villa ăn mừng chiếc cúp vô địch danh giá',
             cropRatio: '3:2',
             seoTitle: 'Aston Villa Vô Địch UEFA Europa League 2026 Trực Tiếp FPT Play',
-            seoDesc: 'Thầy trò HLV Unai Emery đăng quang ngôi vô địch Europa League 2026 đầy kịch tính. Đón xem lại trọn vẹn trận đấu độc quyền trên FPT Play.'
+            seoDesc: 'Thầy trò HLV Unai Emery đăng quang ngôi vô địch Europa League 2026 đầy kịch tính. Đón xem lại trọn vẹn trận đấu độc quyền trên FPT Play.',
+            views: 0
         }
     };
 
@@ -1024,6 +1027,7 @@
                 <td>${catBadge}</td>
                 <td class="news-art-author">${art.author}</td>
                 <td class="news-art-date">${art.date}</td>
+                <td style="text-align:center;" class="news-art-views">${art.views || 0}</td>
                 <td>${statusBadge}</td>
                 <td style="text-align:right; white-space:nowrap;">
                     <div style="display:inline-flex; gap:6px; justify-content:flex-end; align-items:center;">
@@ -1156,6 +1160,22 @@
         document.getElementById('art-author').value = 'Admin';
         document.getElementById('art-status').value = 'Published';
 
+        // Các trường mới bổ sung
+        const elType = document.getElementById('art-type'); if (elType) elType.value = 'article';
+        const elCatSub = document.getElementById('art-category-sub'); if (elCatSub) elCatSub.value = '';
+        const elLang = document.getElementById('art-lang'); if (elLang) elLang.value = 'vi';
+        const elPubDate = document.getElementById('art-publish-date');
+        if (elPubDate) {
+            const now = new Date();
+            const offset = now.getTimezoneOffset() * 60000;
+            const localISOTime = (new Date(now.getTime() - offset)).toISOString().slice(0, 16);
+            elPubDate.value = localISOTime;
+        }
+        const elAllowComment = document.getElementById('art-allow-comment'); if (elAllowComment) elAllowComment.checked = true;
+        const elMediaUrl = document.getElementById('art-media-url'); if (elMediaUrl) elMediaUrl.value = '';
+        const elSeoKeywords = document.getElementById('art-seo-keywords'); if (elSeoKeywords) elSeoKeywords.value = '';
+        const elSeoRobot = document.getElementById('art-seo-robot'); if (elSeoRobot) elSeoRobot.value = 'index, follow';
+
         document.getElementById('art-thumbnail-url').value = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
         document.getElementById('art-thumb-preview').src = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
         document.getElementById('art-thumb-filename').innerText = 'img_thumbnail_default.png';
@@ -1202,6 +1222,16 @@
         document.getElementById('art-author').value = art.author || 'Admin';
         document.getElementById('art-status').value = art.status;
 
+        // Các trường mới bổ sung
+        const elType = document.getElementById('art-type'); if (elType) elType.value = art.type || 'article';
+        const elCatSub = document.getElementById('art-category-sub'); if (elCatSub) elCatSub.value = art.categorySub || '';
+        const elLang = document.getElementById('art-lang'); if (elLang) elLang.value = art.lang || 'vi';
+        const elPubDate = document.getElementById('art-publish-date'); if (elPubDate) elPubDate.value = art.publishDate || '';
+        const elAllowComment = document.getElementById('art-allow-comment'); if (elAllowComment) elAllowComment.checked = art.allowComment !== false;
+        const elMediaUrl = document.getElementById('art-media-url'); if (elMediaUrl) elMediaUrl.value = art.mediaUrl || '';
+        const elSeoKeywords = document.getElementById('art-seo-keywords'); if (elSeoKeywords) elSeoKeywords.value = art.seoKeywords || '';
+        const elSeoRobot = document.getElementById('art-seo-robot'); if (elSeoRobot) elSeoRobot.value = art.seoRobot || 'index, follow';
+
         document.getElementById('art-thumbnail-url').value = art.thumbUrl;
         document.getElementById('art-thumb-preview').src = art.thumbUrl;
         document.getElementById('art-thumb-filename').innerText = art.thumbUrl.substring(art.thumbUrl.lastIndexOf('/') + 1);
@@ -1242,7 +1272,7 @@
         const category = document.getElementById('art-category').value;
         const channel = document.getElementById('art-channel').value;
         const author = document.getElementById('art-author').value.trim() || 'Admin';
-        const status = document.getElementById('art-status').value;
+        let status = document.getElementById('art-status').value;
         const thumbUrl = document.getElementById('art-thumbnail-url').value;
         const thumbAlt = document.getElementById('art-thumbnail-alt').value.trim();
         const thumbCaption = document.getElementById('art-thumbnail-caption').value.trim();
@@ -1252,6 +1282,16 @@
         const featuredEl = document.getElementById('art-featured');
         const featured = featuredEl ? featuredEl.checked : false;
 
+        // Các trường mới bổ sung
+        const elType = document.getElementById('art-type'); const type = elType ? elType.value : 'article';
+        const elCatSub = document.getElementById('art-category-sub'); const categorySub = elCatSub ? elCatSub.value : '';
+        const elLang = document.getElementById('art-lang'); const lang = elLang ? elLang.value : 'vi';
+        const elPubDate = document.getElementById('art-publish-date'); const publishDate = elPubDate ? elPubDate.value : '';
+        const elAllowComment = document.getElementById('art-allow-comment'); const allowComment = elAllowComment ? elAllowComment.checked : true;
+        const elMediaUrl = document.getElementById('art-media-url'); const mediaUrl = elMediaUrl ? elMediaUrl.value : '';
+        const elSeoKeywords = document.getElementById('art-seo-keywords'); const seoKeywords = elSeoKeywords ? elSeoKeywords.value : '';
+        const elSeoRobot = document.getElementById('art-seo-robot'); const seoRobot = elSeoRobot ? elSeoRobot.value : 'index, follow';
+
         if (!title || !slug || !content || !sapo) {
             showLdpToast('Vui lòng nhập đầy đủ các thông tin bắt buộc (*)!');
             return;
@@ -1259,16 +1299,46 @@
 
         let scheduledTime = '';
         if (status === 'Scheduled') {
-            const schedTimeEl = document.getElementById('art-schedule-datetime');
-            scheduledTime = schedTimeEl ? schedTimeEl.value : '';
+            scheduledTime = publishDate;
             if (!scheduledTime) {
-                showLdpToast('Vui lòng chọn ngày giờ đặt lịch xuất bản!');
+                showLdpToast('Vui lòng chọn ngày đăng để đặt lịch xuất bản!');
                 return;
             }
+            const schedDate = new Date(scheduledTime);
+            const now = new Date();
+            if (schedDate <= now) {
+                status = 'Published';
+                showLdpToast('Thời gian đặt lịch bằng hoặc nhỏ hơn hiện tại. Bài viết được xuất bản ngay lập tức!');
+            } else {
+                showLdpToast('Đã lưu bài viết ở trạng thái đặt lịch. Bài viết sẽ tự động xuất bản khi đến giờ hẹn!');
+            }
+        } else {
+            scheduledTime = publishDate;
         }
 
-        const today = new Date();
-        const dateStr = today.getDate().toString().padStart(2, '0') + '/' + (today.getMonth() + 1).toString().padStart(2, '0') + '/' + today.getFullYear();
+        const formatDateString = function (isoStr) {
+            if (!isoStr) return '';
+            try {
+                const d = new Date(isoStr);
+                if (isNaN(d.getTime())) return '';
+                const day = d.getDate().toString().padStart(2, '0');
+                const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                const year = d.getFullYear();
+                const hours = d.getHours().toString().padStart(2, '0');
+                const mins = d.getMinutes().toString().padStart(2, '0');
+                return `${day}/${month}/${year} ${hours}:${mins}`;
+            } catch (e) {
+                return '';
+            }
+        };
+
+        let dateStr = '';
+        if (publishDate) {
+            dateStr = formatDateString(publishDate);
+        } else {
+            const today = new Date();
+            dateStr = today.getDate().toString().padStart(2, '0') + '/' + (today.getMonth() + 1).toString().padStart(2, '0') + '/' + today.getFullYear() + ' ' + today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0');
+        }
 
         window.newsArticlesData[id] = {
             id: id,
@@ -1289,14 +1359,26 @@
             seoDesc: seoDesc,
             featured: featured,
             date: dateStr,
-            scheduledTime: scheduledTime
+            scheduledTime: scheduledTime,
+            // Cập nhật trường mới lưu vào db giả lập
+            type: type,
+            categorySub: categorySub,
+            lang: lang,
+            publishDate: publishDate,
+            allowComment: allowComment,
+            mediaUrl: mediaUrl,
+            seoKeywords: seoKeywords,
+            seoRobot: seoRobot,
+            views: window.newsArticlesData[id] ? (window.newsArticlesData[id].views || 0) : 0
         };
 
         window.stopAutoSaveTimer();
         window.closeNewsArticleDrawer();
 
         window.renderNewsTableHTML();
-        showLdpToast('Đã lưu bài viết thành công!');
+        if (status !== 'Scheduled') {
+            showLdpToast('Đã lưu bài viết thành công!');
+        }
     };
 
     window.saveNewsDraftAction = function () {
@@ -1602,22 +1684,54 @@
 
     window.onArticleStatusChange = function () {
         const status = document.getElementById('art-status').value;
-        const scheduledGroup = document.getElementById('art-schedule-section');
-        if (scheduledGroup) {
-            if (status === 'Scheduled') {
-                scheduledGroup.style.display = 'block';
-                const tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                tomorrow.setMinutes(0);
-                tomorrow.setSeconds(0);
-                const tzoffset = tomorrow.getTimezoneOffset() * 60000;
-                const localISOTime = (new Date(tomorrow.getTime() - tzoffset)).toISOString().slice(0, 16);
-                const schedTimeEl = document.getElementById('art-schedule-datetime');
-                if (schedTimeEl) schedTimeEl.value = localISOTime;
-            } else {
-                scheduledGroup.style.display = 'none';
+        const pubDateEl = document.getElementById('art-publish-date');
+        if (status === 'Scheduled' && pubDateEl) {
+            const val = pubDateEl.value;
+            let needsDefault = !val;
+            if (val) {
+                const d = new Date(val);
+                if (d <= new Date()) needsDefault = true;
+            }
+            if (needsDefault) {
+                const future = new Date(Date.now() + 60 * 60 * 1000);
+                const tzoffset = future.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(future.getTime() - tzoffset)).toISOString().slice(0, 16);
+                pubDateEl.value = localISOTime;
             }
         }
+    };
+
+    window.onScheduleButtonClick = function() {
+        const statusEl = document.getElementById('art-status');
+        if (statusEl) statusEl.value = 'Scheduled';
+        
+        const pubDateEl = document.getElementById('art-publish-date');
+        if (pubDateEl) {
+            const val = pubDateEl.value;
+            let needsDefault = !val;
+            if (val) {
+                const d = new Date(val);
+                if (d <= new Date()) needsDefault = true;
+            }
+            if (needsDefault) {
+                const future = new Date(Date.now() + 60 * 60 * 1000);
+                const tzoffset = future.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(future.getTime() - tzoffset)).toISOString().slice(0, 16);
+                pubDateEl.value = localISOTime;
+            }
+            pubDateEl.focus();
+            
+            pubDateEl.style.transition = 'all 0.3s ease';
+            pubDateEl.style.borderColor = '#fbbf24';
+            pubDateEl.style.boxShadow = '0 0 10px rgba(251, 191, 36, 0.6)';
+            setTimeout(() => {
+                pubDateEl.style.borderColor = '';
+                pubDateEl.style.boxShadow = '';
+            }, 3000);
+        }
+        
+        window.onArticleStatusChange();
+        showLdpToast('Đã chuyển sang Đặt lịch. Hãy thiết lập Ngày đăng!');
     };
 
     // Preview
@@ -1806,4 +1920,45 @@
     window.syncNewsCardFilterFromSelect = function (statusValue) {
         window.selectNewsStatusFilter(statusValue, null);
     };
+
+    // Scheduler quét tự động cho các bài viết Đặt lịch
+    if (!window.newsScheduleInterval) {
+        window.newsScheduleInterval = setInterval(function () {
+            const now = new Date();
+            let hasChanged = false;
+            let publishedTitles = [];
+            
+            for (let id in window.newsArticlesData) {
+                const art = window.newsArticlesData[id];
+                if (art.status === 'Scheduled' && art.publishDate) {
+                    const pubDate = new Date(art.publishDate);
+                    if (pubDate <= now) {
+                        art.status = 'Published';
+                        // Cập nhật lại ngày hiển thị sang giờ xuất bản hiện tại
+                        const day = now.getDate().toString().padStart(2, '0');
+                        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+                        const year = now.getFullYear();
+                        const hours = now.getHours().toString().padStart(2, '0');
+                        const mins = now.getMinutes().toString().padStart(2, '0');
+                        art.date = `${day}/${month}/${year} ${hours}:${mins}`;
+                        
+                        hasChanged = true;
+                        publishedTitles.push(art.title);
+                    }
+                }
+            }
+            
+            if (hasChanged) {
+                if (typeof window.renderNewsTableHTML === 'function') {
+                    window.renderNewsTableHTML();
+                }
+                if (typeof window.updateNewsStats === 'function') {
+                    window.updateNewsStats();
+                }
+                publishedTitles.forEach(title => {
+                    showLdpToast(`⏰ Hệ thống: Tự động xuất bản bài viết "${title}" thành công theo lịch hẹn!`);
+                });
+            }
+        }, 5000);
+    }
 })();

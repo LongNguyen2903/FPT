@@ -1190,7 +1190,8 @@ const newsArticlesData = {
         seoTitle: 'Khuyến mãi Lắp mạng FPT Hè 2026 mới nhất - Tặng 2 tháng cước',
         seoDesc: 'Đăng ký lắp mạng FPT cáp quang tốc độ cao khuyến mãi hè 2026. Tặng modem wifi 6 thế hệ mới nhất, giảm giá cước hàng tháng, tặng thêm tháng sử dụng miễn phí.',
         seoKeywords: 'lap mang fpt, khuyen mai fpt, wifi fpt, internet fpt',
-        thumbUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80'
+        thumbUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80',
+        views: 342
     },
     'news-2': {
         id: 'news-2',
@@ -1207,7 +1208,8 @@ const newsArticlesData = {
         seoTitle: 'FPT Camera IQ tích hợp công nghệ nhận diện AI thông minh mới',
         seoDesc: 'Dòng sản phẩm FPT Camera chính thức cập nhật công nghệ AI cảnh báo thông minh giúp phân biệt người và vật, hỗ trợ bảo vệ an ninh gia đình tối đa.',
         seoKeywords: 'fpt camera, camera ai, camera thong minh, nhan dien nguoi',
-        thumbUrl: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80'
+        thumbUrl: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80',
+        views: 1205
     },
     'news-3': {
         id: 'news-3',
@@ -1224,7 +1226,8 @@ const newsArticlesData = {
         seoTitle: 'Aston Villa vô địch UEFA Europa League 2026 - Xem trên FPT Play',
         seoDesc: 'Cập nhật tin tức Aston Villa vô địch cúp C2 châu Âu kịch tính. Đón xem các trận đấu UEFA Cup độc quyền trực tiếp trên FPT Play.',
         seoKeywords: 'aston villa, europa league, c2, fpt play, xem bong da',
-        thumbUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=150&q=80'
+        thumbUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=150&q=80',
+        views: 0
     }
 };
 
@@ -1330,7 +1333,8 @@ function saveNewsArticleAction() {
     // Lưu vào mock data
     newsArticlesData[id] = {
         id, title, slug, sapo, content, tags, category, channel, author, status, thumbUrl, seoTitle, seoDesc, seoKeywords,
-        date: isNew ? '22/05/2026' : newsArticlesData[id].date
+        date: isNew ? '22/05/2026' : newsArticlesData[id].date,
+        views: newsArticlesData[id] ? (newsArticlesData[id].views || 0) : 0
     };
 
     // Re-render table dòng tương ứng hoặc tạo mới dòng
@@ -1354,6 +1358,7 @@ function saveNewsArticleAction() {
 
     let statusBadge = `<span class="badge active news-art-status-badge">Published</span>`;
     if (status === 'Draft') statusBadge = `<span class="badge warning news-art-status-badge">Draft</span>`;
+    else if (status === 'Scheduled') statusBadge = `<span class="badge info news-art-status-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8;">Scheduled</span>`;
 
     let rowHtml = `
                 <td style="text-align:center;"><input type="checkbox" class="news-row-check" data-id="${id}" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;"></td>
@@ -1369,6 +1374,7 @@ function saveNewsArticleAction() {
                 <td><span class="badge news-art-cat" style="background:${catColor}">${category}</span></td>
                 <td class="news-art-author">${author}</td>
                 <td class="news-art-date">${isNew ? '22/05/2026' : newsArticlesData[id].date}</td>
+                <td style="text-align:center;" class="news-art-views">${newsArticlesData[id].views || 0}</td>
                 <td>${statusBadge}</td>
                 <td>
                     <button class="btn btn-secondary btn-sm" style="color:var(--primary);border-color:var(--primary);" onclick="editNewsArticle('${id}')">Sửa</button>

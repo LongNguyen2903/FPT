@@ -8539,11 +8539,12 @@
                                     </th>
                                     <th style="width:80px;">Thumbnail</th>
                                     <th>Tiêu đề & Slug</th>
-                                    <th style="width:36px;text-align:center;">⭐</th>
+                                    <th style="width:80px;text-align:center;">Nổi bật</th>
                                     <th>Kênh vận hành</th>
                                     <th>Chuyên mục</th>
                                     <th>Tác giả</th>
                                     <th>Ngày đăng</th>
+                                    <th style="width:80px;text-align:center;">Lượt xem</th>
                                     <th>Trạng thái</th>
                                     <th>Thao tác</th>
                                 </tr>
@@ -8566,9 +8567,8 @@
                                         <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">
                                             /tin-tuc/lap-mang-fpt-khuyen-mai-he-2026</div>
                                     </td>
-                                    <td style="text-align:center;"><span
-                                            style="cursor:pointer;font-size:15px;opacity:0.4;"
-                                            onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1'">⭐</span>
+                                    <td style="text-align:center;">
+                                        <span style="color:var(--text-muted); opacity:0.4; cursor:pointer; font-size:12px;" onclick="if(window.toggleNewsFeaturedDirect) window.toggleNewsFeaturedDirect('news-1'); else { this.innerText=this.innerText==='Nổi bật'?'Không':'Nổi bật'; this.style.color=this.innerText==='Nổi bật'?'#fbbf24':''; }">Không</span>
                                     </td>
                                     <td><span class="badge" style="background:rgba(255,107,0,0.15); color:#ff8c42;">FPT
                                             Telecom</span></td>
@@ -8577,6 +8577,7 @@
                                             mãi</span></td>
                                     <td class="news-art-author">Admin</td>
                                     <td class="news-art-date">22/05/2026</td>
+                                    <td style="text-align:center;" class="news-art-views">342</td>
                                     <td><span class="badge active news-art-status-badge">Published</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm"
@@ -8610,9 +8611,8 @@
                                         <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">
                                             /tin-tuc/fpt-camera-ra-mat-tinh-nang-nhan-dien-ai</div>
                                     </td>
-                                    <td style="text-align:center;"><span
-                                            style="cursor:pointer;font-size:15px;opacity:0.4;"
-                                            onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1'">⭐</span>
+                                    <td style="text-align:center;">
+                                         <span class="badge" style="background:rgba(245,158,11,0.15); color:#fbbf24; cursor:pointer; font-weight:600; padding:4px 8px; border-radius:4px; font-size:11px;" onclick="if(window.toggleNewsFeaturedDirect) window.toggleNewsFeaturedDirect('news-2'); else { this.innerText=this.innerText==='Nổi bật'?'Không':'Nổi bật'; }">Nổi bật</span>
                                     </td>
                                     <td><span class="badge" style="background:rgba(245,158,11,0.15); color:#fbbf24;">FPT
                                             Camera</span></td>
@@ -8621,6 +8621,7 @@
                                             nghệ</span></td>
                                     <td class="news-art-author">Phương Nam</td>
                                     <td class="news-art-date">20/05/2026</td>
+                                    <td style="text-align:center;" class="news-art-views">1205</td>
                                     <td><span class="badge active news-art-status-badge">Published</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm"
@@ -8656,7 +8657,7 @@
                                     </td>
                                     <td style="text-align:center;"><span
                                             style="cursor:pointer;font-size:15px;opacity:0.4;"
-                                            onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1'">⭐</span>
+                                            onclick="if(window.toggleNewsFeaturedDirect) window.toggleNewsFeaturedDirect('news-3'); else { this.innerText=this.innerText==='Nổi bật'?'Không':'Nổi bật'; this.style.color=this.innerText==='Nổi bật'?'#fbbf24':''; }">Không</span>
                                     </td>
                                     <td><span class="badge"
                                             style="background:rgba(167,139,250,0.15); color:#a78bfa;">FPT Play</span>
@@ -8664,7 +8665,7 @@
                                     <td><span class="badge news-art-cat"
                                             style="background:rgba(245,158,11,0.15); color:#fbbf24;">Sự kiện</span></td>
                                     <td class="news-art-author">Đức Nguyễn</td>
-                                    <td class="news-art-date">21/05/2026</td>
+                                    <td class="news-art-date">21/05/2026</td><td style="text-align:center;" class="news-art-views">0</td>
                                     <td><span class="badge warning news-art-status-badge">Draft</span></td>
                                     <td>
                                         <button class="btn btn-secondary btn-sm"
@@ -9031,7 +9032,7 @@
                                     style="font-size:12px;padding:6px 14px;color:#60a5fa;border-color:rgba(96,165,250,0.4);">👁
                                     Xem trước</button>
                                 <button type="button" class="btn btn-secondary"
-                                    onclick="document.getElementById('art-status').value='Scheduled';document.getElementById('art-schedule-section').style.display='block'"
+                                    onclick="if(typeof window.onScheduleButtonClick === 'function') { window.onScheduleButtonClick(); } else { document.getElementById('art-status').value='Scheduled'; }"
                                     style="font-size:12px;padding:6px 14px;color:#fbbf24;border-color:rgba(251,191,36,0.4);">📅
                                     Đặt lịch</button>
                                 <button type="button" class="btn btn-primary" onclick="saveNewsArticleAction()"
@@ -9136,72 +9137,110 @@
 
                                 </div>
 
-                                <!-- ===== CỘT PHẢI: Sidebar (3 cards) ===== -->
+                                <!-- ===== CỘT PHẢI: Sidebar (Cài đặt & Ảnh đại diện) ===== -->
                                 <div style="display:flex;flex-direction:column;gap:12px;">
 
-                                    <!-- Card 1: Xuất bản + Phân loại (gộp lại) -->
+                                    <!-- Card 1: Cài đặt bài viết -->
                                     <div
                                         style="border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">
                                         <div
                                             style="padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-muted);text-transform:uppercase;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.18);">
                                             ⚙️ Cài đặt bài viết</div>
                                         <div style="padding:14px;display:flex;flex-direction:column;gap:11px;">
+                                            <!-- Loại nội dung -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Loại nội dung <span style="color:var(--danger)">*</span></label>
+                                                <select class="form-select" id="art-type" style="font-size:13px;">
+                                                    <option value="article" selected>Tin bài / Bài viết</option>
+                                                    <option value="video">Video bài viết</option>
+                                                    <option value="promotion">Thông tin khuyến mãi</option>
+                                                    <option value="guide">Hướng dẫn kỹ thuật</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Chuyên mục chính -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Chuyên mục chính <span style="color:var(--danger)">*</span></label>
+                                                <select class="form-select" id="art-category" style="font-size:13px;">
+                                                    <option>Tin khuyến mãi</option>
+                                                    <option>Tin công nghệ</option>
+                                                    <option>Thông báo</option>
+                                                    <option>Sự kiện</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Chuyên mục phụ -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Chuyên mục phụ</label>
+                                                <select class="form-select" id="art-category-sub" style="font-size:13px;">
+                                                    <option value="">— Chọn chuyên mục phụ —</option>
+                                                    <option>Tin khuyến mãi</option>
+                                                    <option>Tin công nghệ</option>
+                                                    <option>Thông báo</option>
+                                                    <option>Sự kiện</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Kênh vận hành -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Kênh vận hành <span style="color:var(--danger)">*</span></label>
+                                                <select class="form-select" id="art-channel" style="font-size:13px;">
+                                                    <option value="fpt-telecom" selected>🌐 FPT Telecom</option>
+                                                    <option value="fpt-play">📺 FPT Play</option>
+                                                    <option value="fpt-camera">📷 FPT Camera</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Ngôn ngữ -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Ngôn ngữ</label>
+                                                <select class="form-select" id="art-lang" style="font-size:13px;">
+                                                    <option value="vi" selected>Tiếng Việt</option>
+                                                    <option value="en">Tiếng Anh</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Tác giả -->
+                                            <div>
+                                                <label
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Tác giả</label>
+                                                <select class="form-select" id="art-author" style="font-size:13px;"></select>
+                                            </div>
+
                                             <!-- Trạng thái -->
                                             <div>
                                                 <label
-                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Trạng
-                                                    thái</label>
-                                                <select class="form-select" id="art-status"
-                                                    onchange="document.getElementById('art-schedule-section').style.display=this.value==='Scheduled'?'block':'none'"
-                                                    style="font-size:13px;">
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Trạng thái</label>
+                                                <select class="form-select" id="art-status" style="font-size:13px;">
                                                     <option value="Draft">📝 Bản nháp</option>
                                                     <option value="Published">✅ Đã xuất bản</option>
                                                     <option value="Scheduled">📅 Đặt lịch</option>
                                                     <option value="Hidden">🚫 Đã ẩn</option>
                                                 </select>
                                             </div>
-                                            <!-- Schedule (ẩn mặc định) -->
-                                            <div id="art-schedule-section" style="display:none;">
-                                                <label
-                                                    style="font-size:12px;color:#fbbf24;display:block;margin-bottom:5px;">📅
-                                                    Thời điểm xuất bản</label>
-                                                <input type="datetime-local" class="form-input"
-                                                    id="art-schedule-datetime" style="font-size:12px;">
-                                            </div>
-                                            <div style="height:1px;background:var(--border-glass);"></div>
-                                            <!-- Kênh + Chuyên mục -->
-                                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                                                <div>
-                                                    <label
-                                                        style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Kênh
-                                                        <span style="color:var(--danger)">*</span></label>
-                                                    <select class="form-select" id="art-channel"
-                                                        style="font-size:12px;padding:6px 8px;">
-                                                        <option value="fpt-telecom" selected>🌐 FPT Telecom</option>
-                                                        <option value="fpt-play">📺 FPT Play</option>
-                                                        <option value="fpt-camera">📷 FPT Camera</option>
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <label
-                                                        style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Chuyên
-                                                        mục <span style="color:var(--danger)">*</span></label>
-                                                    <select class="form-select" id="art-category"
-                                                        style="font-size:12px;padding:6px 8px;">
-                                                        <option>Tin khuyến mãi</option>
-                                                        <option>Tin công nghệ</option>
-                                                        <option>Thông báo</option>
-                                                        <option>Sự kiện</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!-- Tác giả -->
+
+                                            <!-- Ngày đăng -->
                                             <div>
                                                 <label
-                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Tác
-                                                    giả</label>
-                                                <select class="form-select" id="art-author"
-                                                    style="font-size:13px;"></select>
+                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Ngày đăng</label>
+                                                <input type="datetime-local" class="form-input" id="art-publish-date" style="font-size:12px;">
+                                            </div>
+
+                                            <!-- Switch toggles cho Bài nổi bật & Cho phép bình luận -->
+                                            <div style="display:flex; flex-direction:column; gap:8px; margin-top:5px; border-top:1px solid var(--border-glass); padding-top:10px;">
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:12.5px; color:#fff;">
+                                                    <input type="checkbox" id="art-featured" style="width:16px; height:16px; accent-color:var(--primary);">
+                                                    <span>Bài nổi bật</span>
+                                                </label>
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:12.5px; color:#fff;">
+                                                    <input type="checkbox" id="art-allow-comment" checked style="width:16px; height:16px; accent-color:var(--primary);">
+                                                    <span>Cho phép bình luận</span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -9237,8 +9276,7 @@
                                                     <span
                                                         style="font-size:11px;font-weight:600;color:#fff;display:block;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;"
                                                         id="art-thumb-filename">img_thumbnail_default.png</span>
-                                                    <span style="font-size:10px;color:var(--text-muted);">85 KB · Hoạt
-                                                        động</span>
+                                                    <span style="font-size:10px;color:var(--text-muted);">85 KB · Hoạt động</span>
                                                 </div>
                                                 <button type="button" class="btn btn-secondary btn-sm"
                                                     style="padding:2px 8px;font-size:11px;flex-shrink:0;"
@@ -9266,8 +9304,7 @@
                                             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
                                                 <div>
                                                     <label
-                                                        style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:3px;">Alt
-                                                        text <span style="color:var(--danger)">*</span></label>
+                                                        style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:3px;">Alt text <span style="color:var(--danger)">*</span></label>
                                                     <input type="text" class="form-input" id="art-thumbnail-alt"
                                                         placeholder="Mô tả ảnh..."
                                                         style="font-size:12px;padding:5px 8px;">
@@ -9280,67 +9317,57 @@
                                                         style="font-size:12px;padding:5px 8px;">
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Card 3: SEO -->
-                                    <div
-                                        style="border:1px solid var(--border-glass);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">
-                                        <div style="padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.6px;color:var(--text-muted);text-transform:uppercase;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.18);display:flex;justify-content:space-between;cursor:pointer;"
-                                            onclick="toggleNewsSeoAccordion()">
-                                            <span>🔍 Tối ưu SEO</span>
-                                            <span id="news-seo-icon">▼</span>
-                                        </div>
-                                        <div id="news-seo-content"
-                                            style="padding:14px;display:flex;flex-direction:column;gap:11px;">
-                                            <div>
+                                            <!-- Media URL -->
+                                            <div style="margin-top:2px;">
                                                 <label
-                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">SEO
-                                                    Title <span style="font-weight:400;">(≤60 ký tự)</span></label>
-                                                <input type="text" class="form-input" id="art-seo-title" maxlength="60"
-                                                    placeholder="VD: Khuyến mãi lắp mạng FPT mới nhất"
-                                                    oninput="var c=document.getElementById('seo-title-count');if(c)c.textContent=this.value.length+'/60'"
-                                                    style="font-size:12px;">
-                                                <span id="seo-title-count"
-                                                    style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/60</span>
-                                            </div>
-                                            <div>
-                                                <label
-                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Meta
-                                                    Description <span style="font-weight:400;">(≤160 ký
-                                                        tự)</span></label>
-                                                <textarea class="form-textarea" id="art-seo-desc" maxlength="160"
-                                                    placeholder="Mô tả hiển thị trên Google..."
-                                                    style="min-height:56px;font-size:12px;resize:none;"
-                                                    oninput="var c=document.getElementById('seo-desc-count');if(c)c.textContent=this.value.length+'/160'"></textarea>
-                                                <span id="seo-desc-count"
-                                                    style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/160</span>
-                                            </div>
-                                            <div>
-                                                <label
-                                                    style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:5px;">Canonical
-                                                    URL</label>
-                                                <input type="text" class="form-input" id="art-seo-canonical"
-                                                    placeholder="https://fpt.vn/tin-tuc/..."
-                                                    style="font-size:12px;padding:6px 10px;">
-                                            </div>
-                                            <!-- Google Preview -->
-                                            <div
-                                                style="background:rgba(255,255,255,0.03);border:1px solid var(--border-glass);border-radius:7px;padding:10px;">
-                                                <div
-                                                    style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">
-                                                    Google Snippet Preview</div>
-                                                <div style="font-size:13px;color:#60a5fa;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"
-                                                    id="seo-preview-title">Tiêu đề SEO sẽ hiển thị ở đây...</div>
-                                                <div style="font-size:11px;color:#34d399;margin:2px 0;">fpt.vn › tin-tuc
-                                                    › <span id="seo-preview-slug">url-slug</span></div>
-                                                <div style="font-size:12px;color:var(--text-muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;"
-                                                    id="seo-preview-desc">Meta description sẽ hiển thị ở đây khi bạn
-                                                    nhập nội dung bên trên.</div>
+                                                    style="font-size:11px;color:var(--text-muted);display:block;margin-bottom:3px;">Media URL (video/embed)</label>
+                                                <input type="text" class="form-input" id="art-media-url"
+                                                    placeholder="Nhập URL video youtube hoặc iframe..."
+                                                    style="font-size:12px;padding:5px 8px;">
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                            </div>
+
+                            <!-- ===== SECTION SEO 100% CHIỀU RỘNG (Giống CMS cũ) ===== -->
+                            <div style="margin-top:24px; border:1px solid var(--border-glass); border-radius:10px; background:rgba(255,255,255,0.02); overflow:hidden;">
+                                <div style="padding:9px 14px; font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; border-bottom:1px solid var(--border-glass); background:rgba(0,0,0,0.18);">
+                                    🔍 Tối ưu SEO bài viết
+                                </div>
+                                <div style="padding:20px; display:flex; flex-direction:column; gap:16px;">
+                                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:5px;">Meta tiêu đề (SEO Title) <span style="font-weight:400;">(≤60 ký tự)</span></label>
+                                            <input type="text" class="form-input" id="art-seo-title" placeholder="Hiển thị trên Google" maxlength="60" oninput="var c=document.getElementById('seo-title-count');if(c)c.textContent=this.value.length+'/60'" style="font-size:13px;">
+                                            <span id="seo-title-count" style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/60</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:5px;">Meta từ khoá</label>
+                                            <input type="text" class="form-input" id="art-seo-keywords" placeholder="Từ khoá, phân cách bằng dấu phẩy" style="font-size:13px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:5px;">Meta mô tả (Meta Description) <span style="font-weight:400;">(≤160 ký tự)</span></label>
+                                        <textarea class="form-textarea" id="art-seo-desc" placeholder="Mô tả ngắn cho công cụ tìm kiếm hiển thị trên Google..." maxlength="160" oninput="var c=document.getElementById('seo-desc-count');if(c)c.textContent=this.value.length+'/160'" style="min-height:70px; font-size:13px; resize:none;"></textarea>
+                                        <span id="seo-desc-count" style="font-size:10px;color:var(--text-muted);text-align:right;display:block;margin-top:2px;">0/160</span>
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:5px;">Meta Robot</label>
+                                            <select class="form-select" id="art-seo-robot" style="font-size:13px;">
+                                                <option value="index, follow">index, follow</option>
+                                                <option value="noindex, follow">noindex, follow</option>
+                                                <option value="index, nofollow">index, nofollow</option>
+                                                <option value="noindex, nofollow">noindex, nofollow</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:5px;">Canonical URL</label>
+                                            <input type="text" class="form-input" id="art-seo-canonical" placeholder="https://fpt.vn/tin-tuc/..." style="font-size:13px;">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -15993,13 +16020,52 @@
             document.getElementById('art-category').value = 'Tin khuyến mãi';
             document.getElementById('art-channel').value = 'fpt-telecom';
             document.getElementById('art-author').value = 'Admin';
-            document.getElementById('art-status').value = 'Active';
+            document.getElementById('art-status').value = 'Published';
+
+            // Các trường mới bổ sung
+            const elType = document.getElementById('art-type'); if (elType) elType.value = 'article';
+            const elCatSub = document.getElementById('art-category-sub'); if (elCatSub) elCatSub.value = '';
+            const elLang = document.getElementById('art-lang'); if (elLang) elLang.value = 'vi';
+            const elPubDate = document.getElementById('art-publish-date');
+            if (elPubDate) {
+                const now = new Date();
+                const offset = now.getTimezoneOffset() * 60000;
+                const localISOTime = (new Date(now.getTime() - offset)).toISOString().slice(0, 16);
+                elPubDate.value = localISOTime;
+            }
+            const elAllowComment = document.getElementById('art-allow-comment'); if (elAllowComment) elAllowComment.checked = true;
+            const elMediaUrl = document.getElementById('art-media-url'); if (elMediaUrl) elMediaUrl.value = '';
+            const elSeoKeywords = document.getElementById('art-seo-keywords'); if (elSeoKeywords) elSeoKeywords.value = '';
+            const elSeoRobot = document.getElementById('art-seo-robot'); if (elSeoRobot) elSeoRobot.value = 'index, follow';
+
             document.getElementById('art-thumbnail-url').value = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
             document.getElementById('art-thumb-preview').src = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
             document.getElementById('art-thumb-filename').innerText = 'img_thumbnail_default.png';
+            document.getElementById('art-thumbnail-alt').value = '';
+            document.getElementById('art-thumbnail-caption').value = '';
+            document.getElementById('art-crop-ratio').value = '3:2';
+            const displayEl1 = document.getElementById('art-crop-ratio-display');
+            if (displayEl1) displayEl1.innerText = '3:2';
+
             document.getElementById('art-seo-title').value = '';
             document.getElementById('art-seo-desc').value = '';
-            document.getElementById('art-seo-keywords').value = '';
+            const titleCountEl = document.getElementById('seo-title-count');
+            if (titleCountEl) titleCountEl.innerText = '0 / 60';
+            const descCountEl = document.getElementById('seo-desc-count');
+            if (descCountEl) descCountEl.innerText = '0 / 160';
+            document.getElementById('art-seo-title').style.borderColor = '';
+            document.getElementById('art-seo-desc').style.borderColor = '';
+
+            const autosaveEl = document.getElementById('art-autosave-status');
+            if (autosaveEl) autosaveEl.innerText = '';
+            const featuredEl = document.getElementById('art-featured');
+            if (featuredEl) featuredEl.checked = false;
+
+            window.onArticleStatusChange();
+
+            if (shouldFillDemo) {
+                window.loadMockArticleToForm(false);
+            }
         }
 
         // Mở / đóng News Edit Drawer
@@ -16050,9 +16116,26 @@
             document.getElementById('art-channel').value = art.channel || 'fpt-telecom';
             document.getElementById('art-author').value = art.author || 'Admin';
             document.getElementById('art-status').value = art.status;
+
+            // Các trường mới bổ sung
+            const elType = document.getElementById('art-type'); if (elType) elType.value = art.type || 'article';
+            const elCatSub = document.getElementById('art-category-sub'); if (elCatSub) elCatSub.value = art.categorySub || '';
+            const elLang = document.getElementById('art-lang'); if (elLang) elLang.value = art.lang || 'vi';
+            const elPubDate = document.getElementById('art-publish-date'); if (elPubDate) elPubDate.value = art.publishDate || '';
+            const elAllowComment = document.getElementById('art-allow-comment'); if (elAllowComment) elAllowComment.checked = art.allowComment !== false;
+            const elMediaUrl = document.getElementById('art-media-url'); if (elMediaUrl) elMediaUrl.value = art.mediaUrl || '';
+            const elSeoKeywords = document.getElementById('art-seo-keywords'); if (elSeoKeywords) elSeoKeywords.value = art.seoKeywords || '';
+            const elSeoRobot = document.getElementById('art-seo-robot'); if (elSeoRobot) elSeoRobot.value = art.seoRobot || 'index, follow';
+
             document.getElementById('art-thumbnail-url').value = art.thumbUrl;
             document.getElementById('art-thumb-preview').src = art.thumbUrl;
             document.getElementById('art-thumb-filename').innerText = art.thumbUrl.substring(art.thumbUrl.lastIndexOf('/') + 1);
+            document.getElementById('art-thumbnail-alt').value = art.thumbAlt || '';
+            document.getElementById('art-thumbnail-caption').value = art.thumbCaption || '';
+            document.getElementById('art-crop-ratio').value = art.cropRatio || '3:2';
+            const displayEl2 = document.getElementById('art-crop-ratio-display');
+            if (displayEl2) displayEl2.innerText = art.cropRatio || '3:2';
+
             document.getElementById('art-seo-title').value = art.seoTitle || '';
             document.getElementById('art-seo-desc').value = art.seoDesc || '';
             document.getElementById('art-seo-keywords').value = art.seoKeywords || '';
@@ -16071,15 +16154,67 @@
             const category = document.getElementById('art-category').value;
             const channel = document.getElementById('art-channel').value;
             const author = document.getElementById('art-author').value || 'Admin';
-            const status = document.getElementById('art-status').value;
+            let status = document.getElementById('art-status').value;
             const thumbUrl = document.getElementById('art-thumbnail-url').value;
             const seoTitle = document.getElementById('art-seo-title').value;
             const seoDesc = document.getElementById('art-seo-desc').value;
-            const seoKeywords = document.getElementById('art-seo-keywords').value;
+
+            // Các trường mới bổ sung
+            const elType = document.getElementById('art-type'); const type = elType ? elType.value : 'article';
+            const elCatSub = document.getElementById('art-category-sub'); const categorySub = elCatSub ? elCatSub.value : '';
+            const elLang = document.getElementById('art-lang'); const lang = elLang ? elLang.value : 'vi';
+            const elPubDate = document.getElementById('art-publish-date'); const publishDate = elPubDate ? elPubDate.value : '';
+            const elAllowComment = document.getElementById('art-allow-comment'); const allowComment = elAllowComment ? elAllowComment.checked : true;
+            const elMediaUrl = document.getElementById('art-media-url'); const mediaUrl = elMediaUrl ? elMediaUrl.value : '';
+            const elSeoKeywords = document.getElementById('art-seo-keywords'); const seoKeywords = elSeoKeywords ? elSeoKeywords.value : '';
+            const elSeoRobot = document.getElementById('art-seo-robot'); const seoRobot = elSeoRobot ? elSeoRobot.value : 'index, follow';
 
             if (!title || !slug) {
                 showLdpToast('Vui lòng nhập đầy đủ Tiêu đề và Slug!');
                 return;
+            }
+
+            let scheduledTime = '';
+            if (status === 'Scheduled') {
+                scheduledTime = publishDate;
+                if (!scheduledTime) {
+                    showLdpToast('Vui lòng chọn ngày đăng để đặt lịch xuất bản!');
+                    return;
+                }
+                const schedDate = new Date(scheduledTime);
+                const now = new Date();
+                if (schedDate <= now) {
+                    status = 'Published';
+                    showLdpToast('Thời gian đặt lịch bằng hoặc nhỏ hơn hiện tại. Bài viết được xuất bản ngay lập tức!');
+                } else {
+                    showLdpToast('Đã lưu bài viết ở trạng thái đặt lịch. Bài viết sẽ tự động xuất bản khi đến giờ hẹn!');
+                }
+            } else {
+                scheduledTime = publishDate;
+            }
+
+            const formatDateString = function (isoStr) {
+                if (!isoStr) return '';
+                try {
+                    const d = new Date(isoStr);
+                    if (isNaN(d.getTime())) return '';
+                    const day = d.getDate().toString().padStart(2, '0');
+                    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                    const year = d.getFullYear();
+                    const hours = d.getHours().toString().padStart(2, '0');
+                    const mins = d.getMinutes().toString().padStart(2, '0');
+                    return `${day}/${month}/${year} ${hours}:${mins}`;
+                } catch (e) {
+                    return '';
+                }
+            };
+
+            let dateStr = '';
+            if (publishDate) {
+                dateStr = formatDateString(publishDate);
+            } else {
+                const today = new Date();
+                dateStr = today.getDate().toString().padStart(2, '0') + '/' + (today.getMonth() + 1).toString().padStart(2, '0') + '/' + today.getFullYear() + ' ' + today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0');
             }
 
             const isNew = !newsArticlesData[id];
@@ -16087,11 +16222,20 @@
             // Lưu vào mock data
             newsArticlesData[id] = {
                 id, title, slug, sapo, content, tags, category, channel, author, status, thumbUrl, seoTitle, seoDesc, seoKeywords,
-                date: isNew ? '22/05/2026' : newsArticlesData[id].date
+                date: dateStr,
+                type, categorySub, lang, publishDate, allowComment, mediaUrl, seoRobot, scheduledTime,
+                views: newsArticlesData[id] ? (newsArticlesData[id].views || 0) : 0
             };
 
             // Re-render table dòng tương ứng hoặc tạo mới dòng
             let tbody = document.querySelector('#news-table tbody');
+            if (!tbody) {
+                if (typeof window.renderNewsTableHTML === 'function') {
+                    window.renderNewsTableHTML();
+                }
+                closeNewsDrawer();
+                return;
+            }
             let row = tbody.querySelector(`tr[data-id="${id}"]`);
 
             let catColor = 'rgba(249,115,22,0.15); color:#FB923C;'; // mặc định khuyến mãi
@@ -16111,6 +16255,7 @@
 
             let statusBadge = `<span class="badge active news-art-status-badge">Published</span>`;
             if (status === 'Draft') statusBadge = `<span class="badge warning news-art-status-badge">Draft</span>`;
+            else if (status === 'Scheduled') statusBadge = `<span class="badge info news-art-status-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8;">Scheduled</span>`;
 
             let rowHtml = `
                 <td style="text-align:center;"><input type="checkbox" class="news-row-check" data-id="${id}" style="width:16px;height:16px;accent-color:var(--primary);cursor:pointer;"></td>
@@ -16126,6 +16271,7 @@
                 <td><span class="badge news-art-cat" style="background:${catColor}">${category}</span></td>
                 <td class="news-art-author">${author}</td>
                 <td class="news-art-date">${isNew ? '22/05/2026' : newsArticlesData[id].date}</td>
+                <td style="text-align:center;" class="news-art-views">${newsArticlesData[id].views || 0}</td>
                 <td>${statusBadge}</td>
                 <td>
                     <button class="btn btn-secondary btn-sm" style="color:var(--primary);border-color:var(--primary);" onclick="editNewsArticle('${id}')">Sửa</button>
@@ -16151,8 +16297,7 @@
             updateNewsStats();
 
             // Quay lại danh sách
-            document.getElementById('news-item-form').style.display = 'none';
-            document.getElementById('news-list').style.display = 'block';
+            closeNewsDrawer();
         }
 
         // Xóa bài viết
