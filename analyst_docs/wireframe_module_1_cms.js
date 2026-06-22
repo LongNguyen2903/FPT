@@ -712,6 +712,8 @@ function switchNewsTab(tab, element) {
     document.getElementById('news-tag-mapping').style.display = 'none';
     document.getElementById('news-item-form').style.display = 'none';
     document.getElementById('news-cat-form').style.display = 'none';
+    document.getElementById('news-author-list').style.display = 'none';
+    document.getElementById('news-author-form').style.display = 'none';
 
     if (tab === 'list') {
         document.getElementById('news-list').style.display = 'block';
@@ -727,8 +729,265 @@ function switchNewsTab(tab, element) {
         syncTagMappingToSku();
         renderTagMappingTable();
         resetTagConfig();
+    } else if (tab === 'author-list') {
+        document.getElementById('news-author-list').style.display = 'block';
+        renderNewsAuthorsTable();
     }
 }
+
+// ===== LOGIC QUẢN LÝ TÁC GIẢ TIN TỨC (CRUD) =====
+var newsAuthorsData = {
+    'auth-1': {
+        id: 'auth-1',
+        name: 'Admin',
+        slug: 'admin',
+        email: 'admin@fpt.com.vn',
+        phone: '0901234567',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80',
+        bio: 'Quản trị viên hệ thống FPT Telecom',
+        status: 'Active',
+        socials: [
+            { platform: 'facebook', url: 'https://facebook.com/admin.fpt' },
+            { platform: 'instagram', url: 'https://instagram.com/admin.fpt' }
+        ]
+    },
+    'auth-2': {
+        id: 'auth-2',
+        name: 'Phương Nam',
+        slug: 'phuong-nam',
+        email: 'namnp3@fpt.com.vn',
+        phone: '0902345678',
+        avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=80&q=80',
+        bio: 'Biên tập viên công nghệ FPT Camera',
+        status: 'Active',
+        socials: [
+            { platform: 'facebook', url: 'https://facebook.com/phuongnam.fpt' },
+            { platform: 'instagram', url: 'https://instagram.com/phuongnam.fpt' },
+            { platform: 'tiktok', url: 'https://tiktok.com/@phuongnam.fpt' }
+        ]
+    },
+    'auth-3': {
+        id: 'auth-3',
+        name: 'Đức Nguyễn',
+        slug: 'duc-nguyen',
+        email: 'ducnd4@fpt.com.vn',
+        phone: '0903456789',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80',
+        bio: 'Biên tập viên thể thao FPT Play',
+        status: 'Active',
+        socials: [
+            { platform: 'facebook', url: 'https://facebook.com/ducnguyen.fpt' }
+        ]
+    }
+};
+
+function renderNewsAuthorsTable() {
+    const tbody = document.getElementById('newsauthor-table-body');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const searchKw = (document.getElementById('news-author-search-keyword')?.value || '').toLowerCase().trim();
+
+    // Đếm động số bài viết của mỗi tác giả
+    const authorArticleCounts = {};
+    for (let artId in newsArticlesData) {
+        const art = newsArticlesData[artId];
+        const authorName = art.author || 'Admin';
+        authorArticleCounts[authorName] = (authorArticleCounts[authorName] || 0) + 1;
+    }
+
+    const socialEmojis = {
+        facebook: '📘 Facebook',
+        instagram: '📸 Instagram',
+        tiktok: '🎵 TikTok',
+        youtube: '🔴 YouTube',
+        linkedin: '💼 LinkedIn',
+        twitter: '🐦 Twitter/X',
+        other: '🔗 Link'
+    };
+    const socialColors = {
+        facebook: '#3b5998',
+        instagram: '#e1306c',
+        tiktok: '#ff0050',
+        youtube: '#ff0000',
+        linkedin: '#0077b5',
+        twitter: '#1da1f2',
+        other: '#9ca3af'
+    };
+
+    for (let id in newsAuthorsData) {
+        const author = newsAuthorsData[id];
+
+        if (searchKw && !author.name.toLowerCase().includes(searchKw) && !author.slug.toLowerCase().includes(searchKw) && !author.email.toLowerCase().includes(searchKw)) {
+            continue;
+        }
+
+        const tr = document.createElement('tr');
+        tr.setAttribute('data-author-id', author.id);
+
+        const statusBadge = author.status === 'Active'
+            ? '<span class="badge active">Active</span>'
+            : '<span class="badge warning">Draft</span>';
+
+        const count = authorArticleCounts[author.name] || 0;
+
+        let socialHTML = '';
+        if (author.socials && author.socials.length > 0) {
+            socialHTML = author.socials.map(item => {
+                const label = socialEmojis[item.platform] || '🔗 Link';
+                const color = socialColors[item.platform] || '#9ca3af';
+                return `<a href="${item.url}" target="_blank" title="${item.platform}" style="color: ${color}; text-decoration: none; font-size: 11px; display: inline-flex; align-items: center; gap: 3px; margin-right: 5px;">${label}</a>`;
+            }).join('');
+        } else {
+            socialHTML = '<span style="color: var(--text-muted); font-size: 11px;">Chưa liên kết</span>';
+        }
+
+        tr.innerHTML = `
+            <td style="text-align:center;">
+                <img src="${author.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80'}" alt="Avatar" style="width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid var(--border-glass);">
+            </td>
+            <td>
+                <strong>${author.name}</strong>
+                <div style="margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px 8px;">
+                    ${socialHTML}
+                </div>
+            </td>
+            <td>${author.slug}</td>
+            <td>${author.email || '-'}</td>
+            <td>${author.phone || '-'}</td>
+            <td style="text-align:center;"><span class="badge" style="background:rgba(255,255,255,0.05); color:#fff; padding:3px 10px; border-radius:20px;">${count}</span></td>
+            <td>${statusBadge}</td>
+            <td style="text-align:right;">
+                <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="window.editNewsAuthor('${author.id}')">Sửa</button>
+                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin-left:5px;" onclick="window.deleteNewsAuthor('${author.id}')">Xóa</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    }
+}
+
+function openAddNewsAuthorForm() {
+    document.getElementById('newsauthor-edit-id').value = '';
+    document.getElementById('newsauthor-name').value = '';
+    document.getElementById('newsauthor-slug').value = '';
+    document.getElementById('newsauthor-bio').value = '';
+    document.getElementById('newsauthor-email').value = '';
+    document.getElementById('newsauthor-phone').value = '';
+    document.getElementById('newsauthor-avatar').value = '';
+    document.getElementById('newsauthor-status').checked = true;
+    document.getElementById('newsauthor-form-title').innerText = 'Tạo mới Tác giả';
+
+    const container = document.getElementById('newsauthor-socials-container');
+    if (container) {
+        container.innerHTML = '';
+        window.addSocialLinkRow('facebook', '');
+    }
+
+    document.getElementById('news-author-list').style.display = 'none';
+    document.getElementById('news-author-form').style.display = 'block';
+}
+
+function editNewsAuthor(id) {
+    const author = newsAuthorsData[id];
+    if (!author) return;
+
+    document.getElementById('newsauthor-edit-id').value = author.id;
+    document.getElementById('newsauthor-name').value = author.name;
+    document.getElementById('newsauthor-slug').value = author.slug;
+    document.getElementById('newsauthor-bio').value = author.bio || '';
+    document.getElementById('newsauthor-email').value = author.email || '';
+    document.getElementById('newsauthor-phone').value = author.phone || '';
+    document.getElementById('newsauthor-avatar').value = author.avatar || '';
+    document.getElementById('newsauthor-status').checked = author.status === 'Active';
+    document.getElementById('newsauthor-form-title').innerText = 'Chỉnh sửa Tác giả #' + author.id;
+
+    const container = document.getElementById('newsauthor-socials-container');
+    if (container) {
+        container.innerHTML = '';
+        if (author.socials && author.socials.length > 0) {
+            author.socials.forEach(item => {
+                window.addSocialLinkRow(item.platform, item.url);
+            });
+        } else {
+            window.addSocialLinkRow('facebook', '');
+        }
+    }
+
+    document.getElementById('news-author-list').style.display = 'none';
+    document.getElementById('news-author-form').style.display = 'block';
+}
+
+function saveNewsAuthorAction() {
+    const editId = document.getElementById('newsauthor-edit-id').value;
+    const name = document.getElementById('newsauthor-name').value.trim();
+    const slug = document.getElementById('newsauthor-slug').value.trim();
+
+    if (!name || !slug) {
+        showLdpToast('Vui lòng nhập đầy đủ Tên tác giả và Biệt danh (slug)!');
+        return;
+    }
+
+    const id = editId || 'auth-' + (Object.keys(newsAuthorsData).length + 1);
+
+    newsAuthorsData[id] = {
+        id: id,
+        name: name,
+        slug: slug,
+        bio: document.getElementById('newsauthor-bio').value.trim(),
+        email: document.getElementById('newsauthor-email').value.trim(),
+        phone: document.getElementById('newsauthor-phone').value.trim(),
+        avatar: document.getElementById('newsauthor-avatar').value.trim() || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&q=80',
+        socials: window.getSocialLinksFromForm(),
+        status: document.getElementById('newsauthor-status').checked ? 'Active' : 'Draft'
+    };
+
+    updateArticleAuthorOptions();
+    renderNewsAuthorsTable();
+
+    document.getElementById('news-author-form').style.display = 'none';
+    document.getElementById('news-author-list').style.display = 'block';
+    showLdpToast('Đã lưu thông tin tác giả thành công!');
+}
+
+function deleteNewsAuthor(id) {
+    const author = newsAuthorsData[id];
+    if (!author) return;
+
+    if (confirm(`Bạn có chắc chắn muốn xóa tác giả "${author.name}" không?`)) {
+        delete newsAuthorsData[id];
+        updateArticleAuthorOptions();
+        renderNewsAuthorsTable();
+        showLdpToast('Đã xóa tác giả thành công!');
+    }
+}
+
+function updateArticleAuthorOptions() {
+    const selectEl = document.getElementById('art-author');
+    if (!selectEl) return;
+    const currentVal = selectEl.value;
+    selectEl.innerHTML = '';
+    for (let id in newsAuthorsData) {
+        const author = newsAuthorsData[id];
+        if (author.status !== 'Active') continue;
+        const opt = document.createElement('option');
+        opt.value = author.name;
+        opt.innerText = author.name;
+        selectEl.appendChild(opt);
+    }
+    if (currentVal && Array.from(selectEl.options).some(opt => opt.value === currentVal)) {
+        selectEl.value = currentVal;
+    } else {
+        selectEl.value = 'Admin';
+    }
+}
+
+// Gắn các hàm vào global window scope
+window.openAddNewsAuthorForm = openAddNewsAuthorForm;
+window.editNewsAuthor = editNewsAuthor;
+window.saveNewsAuthorAction = saveNewsAuthorAction;
+window.deleteNewsAuthor = deleteNewsAuthor;
+window.renderNewsAuthorsTable = renderNewsAuthorsTable;
+window.updateArticleAuthorOptions = updateArticleAuthorOptions;
 
 // ===== LOGIC QUẢN LÝ TAGS TIN TỨC (CRUD) =====
 function renderNewsTagsTable(data = newsTagsData) {
@@ -1282,14 +1541,18 @@ function skuRenderDactinh(dataKey) {
 
     var isService = (dataKey === 'service');
 
-    // Sync nhóm đặc tính dropdown
+    // Sync nhóm đặc tính dropdown/label
     var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
     if (sel) {
-        for (var i = 0; i < sel.options.length; i++) {
-            if (sel.options[i].text === nhomLabel) {
-                sel.selectedIndex = i;
-                break;
+        if (sel.tagName === 'SELECT') {
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].text === nhomLabel) {
+                    sel.selectedIndex = i;
+                    break;
+                }
             }
+        } else {
+            sel.textContent = nhomLabel;
         }
     }
 
@@ -1360,7 +1623,7 @@ function skuAddDactinhRow() {
 
 function applyDactinhTemplate() {
     var dropdown = document.getElementById('dactinh-nhom-select-dropdown');
-    var selectedType = dropdown ? dropdown.value : 'Thông số Router/Modem';
+    var selectedType = dropdown ? (dropdown.value || dropdown.textContent) : 'Thông số Router/Modem';
     var key = selectedType === 'Thông số Camera' ? 'camera' : 'modem';
     skuRenderDactinh(key);
     showLdpToast('Áp dụng Template đặc tính cho ' + selectedType + ' thành công!');
@@ -2327,7 +2590,7 @@ function ldpAddProductTab(btnEl) {
 
     tabDiv.innerHTML = html;
     container.insertBefore(tabDiv, btnEl);
-    
+
     // Tự động thêm 1 gói trống vào tab mới để tăng trải nghiệm người dùng
     var addPkgBtn = tabDiv.querySelector('button[onclick*="ldpAddProductCard"]');
     if (addPkgBtn) ldpAddProductCard(addPkgBtn);
@@ -2998,11 +3261,11 @@ function ldpAddSaMovieItem(btnEl, movieTitle, moviePoster, movieUrl) {
     var container = btnEl.previousElementSibling;
     if (!container) return;
     var idx = container.querySelectorAll('.sa-movie-item').length + 1;
-    
+
     var mTitle = movieTitle || '';
     var mPoster = moviePoster || '';
     var mUrl = movieUrl || '';
-    
+
     var item = document.createElement('div');
     item.className = 'sa-movie-item';
     item.style.cssText = 'border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:8px; background:rgba(255,255,255,0.02); display:flex; flex-direction:column; gap:6px; margin-bottom:6px;';
@@ -3018,7 +3281,7 @@ function ldpAddSaMovieItem(btnEl, movieTitle, moviePoster, movieUrl) {
         + '<button class="btn btn-secondary btn-sm" style="padding:2px 6px; font-size:10px;" onclick="this.previousElementSibling.click()">Upload</button>'
         + '</div></div>'
         + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">URL Phim / Đăng ký</label><input type="text" class="form-input form-input-sm movie-url" value="' + mUrl + '" placeholder="vd: /xem-phim/bach-nhat-de-dang"></div>';
-    
+
     container.appendChild(item);
 }
 
@@ -3638,4 +3901,13 @@ window.previewNewsArticle = function () {
     if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
     if (_origPreviewNewsArticle) _origPreviewNewsArticle();
     document.getElementById('news-preview-modal').style.display = 'flex';
+};
+var slugEl = document.getElementById('art-slug');
+var titleEl = document.getElementById('art-title');
+var slugBar = document.getElementById('preview-slug-bar');
+var titleBc = document.getElementById('prev-art-title-breadcrumb');
+if (slugBar && slugEl) slugBar.textContent = slugEl.value || 'url-slug';
+if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
+if (_origPreviewNewsArticle) _origPreviewNewsArticle();
+document.getElementById('news-preview-modal').style.display = 'flex';
 };
