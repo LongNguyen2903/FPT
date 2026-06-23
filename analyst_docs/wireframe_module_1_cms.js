@@ -1909,12 +1909,16 @@ function onBlockTypeChange() {
     const faqSec = document.getElementById('blk-faq-section');
     const bannerSec = document.getElementById('blk-banner-vertical-section');
     const pdhAssignSec = document.getElementById('blk-pdh-assign-section');
+    const bannerSelectSec = document.getElementById('blk-banner-section');
+    const popupSelectSec = document.getElementById('blk-popup-section');
 
     if (goiCuocSec) goiCuocSec.style.display = 'none';
     if (articleSec) articleSec.style.display = 'none';
     if (faqSec) faqSec.style.display = 'none';
     if (bannerSec) bannerSec.style.display = 'none';
     if (pdhAssignSec) pdhAssignSec.style.display = 'none';
+    if (bannerSelectSec) bannerSelectSec.style.display = 'none';
+    if (popupSelectSec) popupSelectSec.style.display = 'none';
 
     // 1. Danh sách card gói cước
     if (dataSource === 'goi-cuoc') {
@@ -1940,7 +1944,316 @@ function onBlockTypeChange() {
     if (dataSource === 'sa' || dataSource === 'product') {
         if (pdhAssignSec) pdhAssignSec.style.display = 'block';
     }
+
+    // 6. Chọn Banner (Nguồn dữ liệu Banner)
+    if (dataSource === 'banner') {
+        if (bannerSelectSec) bannerSelectSec.style.display = 'block';
+    }
+
+    // 7. Chọn Popup (Nguồn dữ liệu Popup)
+    if (dataSource === 'popup') {
+        if (popupSelectSec) popupSelectSec.style.display = 'block';
+    }
 }
+
+function onPopupTriggerTypeChange() {
+    const triggerType = document.getElementById('popup-trigger-type').value;
+    const delayGroup = document.getElementById('popup-delay-time-group');
+    if (delayGroup) {
+        if (triggerType === 'delay') {
+            delayGroup.style.display = 'block';
+        } else {
+            delayGroup.style.display = 'none';
+        }
+    }
+}
+
+function showBlockBannerPickerModal() {
+    document.getElementById('modal-block-banner-picker').style.display = 'flex';
+}
+function closeBlockBannerPickerModal() {
+    document.getElementById('modal-block-banner-picker').style.display = 'none';
+    const checkboxes = document.querySelectorAll('.banner-picker-cb');
+    checkboxes.forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('banner-picker-search');
+    if (searchInput) {
+        searchInput.value = '';
+        filterPickerItems('banner');
+    }
+}
+function addSelectedBannersToBlock() {
+    const checkboxes = document.querySelectorAll('.banner-picker-cb');
+    const tbody = document.querySelector('#blk-banner-section tbody');
+    if (!tbody) return;
+    
+    let addedCount = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            const parts = cb.value.split('|');
+            const name = parts[0];
+            const img = parts[1];
+            
+            // Check trùng lặp
+            let isDuplicate = false;
+            tbody.querySelectorAll('tr').forEach(tr => {
+                const trName = tr.querySelector('strong')?.innerText;
+                if (trName === name) isDuplicate = true;
+            });
+            
+            if (!isDuplicate) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                    <td style="padding:10px;"><strong>${name}</strong></td>
+                    <td style="padding:10px; font-size:12px; color:var(--text-muted);">${img}</td>
+                    <td style="padding:10px;"><span class="badge active">Hoạt động</span></td>
+                    <td style="text-align:center; padding:10px;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;" onclick="this.closest('tr').remove();">🗑️ Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                addedCount++;
+            }
+        }
+    });
+    
+    closeBlockBannerPickerModal();
+    if (addedCount > 0) {
+        showLdpToast(`Đã thêm thành công ${addedCount} Banner vào Block!`);
+    } else {
+        showLdpToast('Không có Banner mới nào được thêm.');
+    }
+}
+
+function showBlockPopupPickerModal() {
+    document.getElementById('modal-block-popup-picker').style.display = 'flex';
+}
+function closeBlockPopupPickerModal() {
+    document.getElementById('modal-block-popup-picker').style.display = 'none';
+    const checkboxes = document.querySelectorAll('.popup-picker-cb');
+    checkboxes.forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('popup-picker-search');
+    if (searchInput) {
+        searchInput.value = '';
+        filterPickerItems('popup');
+    }
+}
+function addSelectedPopupsToBlock() {
+    const checkboxes = document.querySelectorAll('.popup-picker-cb');
+    const tbody = document.querySelector('#blk-popup-section tbody');
+    if (!tbody) return;
+    
+    let addedCount = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            const parts = cb.value.split('|');
+            const name = parts[0];
+            const img = parts[1];
+            
+            // Check trùng lặp
+            let isDuplicate = false;
+            tbody.querySelectorAll('tr').forEach(tr => {
+                const trName = tr.querySelector('strong')?.innerText;
+                if (trName === name) isDuplicate = true;
+            });
+            
+            if (!isDuplicate) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                    <td style="padding:10px;"><strong>${name}</strong></td>
+                    <td style="padding:10px; font-size:12px; color:var(--text-muted);">${img}</td>
+                    <td style="padding:10px;"><span class="badge active">Hoạt động</span></td>
+                    <td style="text-align:center; padding:10px;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;" onclick="this.closest('tr').remove();">🗑️ Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                addedCount++;
+            }
+        }
+    });
+    
+    closeBlockPopupPickerModal();
+    if (addedCount > 0) {
+        showLdpToast(`Đã thêm thành công ${addedCount} Popup vào Block!`);
+    } else {
+        showLdpToast('Không có Popup mới nào được thêm.');
+    }
+}
+
+// JS cho Article Picker Modal trong Block Form
+function showBlockArticlePickerModal() {
+    document.getElementById('modal-block-article-picker').style.display = 'flex';
+}
+function closeBlockArticlePickerModal() {
+    document.getElementById('modal-block-article-picker').style.display = 'none';
+    const checkboxes = document.querySelectorAll('.article-picker-cb');
+    checkboxes.forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('article-picker-search');
+    if (searchInput) searchInput.value = '';
+    const catSelect = document.getElementById('article-picker-category');
+    if (catSelect) catSelect.value = '';
+    const selectAllCb = document.getElementById('article-select-all');
+    if (selectAllCb) selectAllCb.checked = false;
+    filterPickerItems('article');
+}
+function addSelectedArticlesToBlock() {
+    const checkboxes = document.querySelectorAll('.article-picker-cb');
+    const tbody = document.querySelector('#blk-article-section tbody');
+    if (!tbody) return;
+    
+    let addedCount = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            const val = cb.value.split('|');
+            const title = val[0];
+            const category = val[1];
+            const pubDate = val[2];
+            
+            // Check trùng lặp
+            let isDuplicate = false;
+            tbody.querySelectorAll('tr').forEach(tr => {
+                const trTitle = tr.querySelector('strong')?.innerText;
+                if (trTitle === title) isDuplicate = true;
+            });
+            
+            if (!isDuplicate) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                    <td style="padding:10px;"><strong>${title}</strong></td>
+                    <td style="padding:10px;"><span class="badge active">${category}</span></td>
+                    <td style="padding:10px; color:var(--text-muted);">${pubDate}</td>
+                    <td style="text-align:center; padding:10px;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;" onclick="this.closest('tr').remove();">🗑️ Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                addedCount++;
+            }
+        }
+    });
+    
+    closeBlockArticlePickerModal();
+    if (addedCount > 0) {
+        showLdpToast(`Đã thêm thành công ${addedCount} Bài viết vào Block!`);
+    } else {
+        showLdpToast('Không có Bài viết mới nào được thêm.');
+    }
+}
+
+// JS cho FAQ Picker Modal trong Block Form
+function showBlockFaqPickerModal() {
+    document.getElementById('modal-block-faq-picker').style.display = 'flex';
+}
+function closeBlockFaqPickerModal() {
+    document.getElementById('modal-block-faq-picker').style.display = 'none';
+    const checkboxes = document.querySelectorAll('.faq-picker-cb');
+    checkboxes.forEach(cb => cb.checked = false);
+    const searchInput = document.getElementById('faq-picker-search');
+    if (searchInput) searchInput.value = '';
+    const catSelect = document.getElementById('faq-picker-category');
+    if (catSelect) catSelect.value = '';
+    const selectAllCb = document.getElementById('faq-select-all');
+    if (selectAllCb) selectAllCb.checked = false;
+    filterPickerItems('faq');
+}
+function addSelectedFaqsToBlock() {
+    const checkboxes = document.querySelectorAll('.faq-picker-cb');
+    const tbody = document.querySelector('#blk-faq-section tbody');
+    if (!tbody) return;
+    
+    let addedCount = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) {
+            const val = cb.value.split('|');
+            const question = val[0];
+            const category = val[1];
+            
+            // Check trùng lặp
+            let isDuplicate = false;
+            tbody.querySelectorAll('tr').forEach(tr => {
+                const trQuestion = tr.querySelector('strong')?.innerText;
+                if (trQuestion === question) isDuplicate = true;
+            });
+            
+            if (!isDuplicate) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="cursor:move; text-align:center; padding:10px;">↕️ Kéo thả</td>
+                    <td style="padding:10px;"><strong>${question}</strong></td>
+                    <td style="padding:10px;"><span class="badge warning">${category}</span></td>
+                    <td style="text-align:center; padding:10px;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); padding:2px 6px; font-size:11px;" onclick="this.closest('tr').remove();">🗑️ Xóa</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                addedCount++;
+            }
+        }
+    });
+    
+    closeBlockFaqPickerModal();
+    if (addedCount > 0) {
+        showLdpToast(`Đã thêm thành công ${addedCount} Câu hỏi FAQ vào Block!`);
+    } else {
+        showLdpToast('Không có Câu hỏi FAQ mới nào được thêm.');
+    }
+}
+
+function filterPickerItems(type) {
+    const kwInput = document.getElementById(type + '-picker-search');
+    const catSelect = document.getElementById(type + '-picker-category');
+    const table = document.getElementById(type + '-picker-table');
+    if (!table) return;
+    
+    const kw = kwInput ? kwInput.value.toLowerCase().trim() : '';
+    const cat = catSelect ? catSelect.value.toLowerCase().trim() : '';
+    
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const nameText = row.querySelector('strong')?.innerText.toLowerCase() || '';
+        const badge = row.querySelector('.badge');
+        const catText = badge ? badge.innerText.toLowerCase() : '';
+        
+        const matchesKw = nameText.includes(kw);
+        const matchesCat = cat === '' || catText === cat;
+        
+        if (matchesKw && matchesCat) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+            const cb = row.querySelector('input[type="checkbox"]');
+            if (cb) cb.checked = false;
+        }
+    });
+    
+    const selectAllCb = document.getElementById(type + '-select-all');
+    if (selectAllCb) {
+        selectAllCb.checked = false;
+    }
+}
+
+function toggleSelectAllPickerItems(type) {
+    const selectAllCb = document.getElementById(type + '-select-all');
+    if (!selectAllCb) return;
+    const checked = selectAllCb.checked;
+    
+    const table = document.getElementById(type + '-picker-table');
+    if (!table) return;
+    
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        if (row.style.display !== 'none') {
+            const cb = row.querySelector('.' + type + '-picker-cb');
+            if (cb) {
+                cb.checked = checked;
+            }
+        }
+    });
+}
+
 function toggleForm(modPrefix, isFormOpen) {
     if (isFormOpen) {
         document.getElementById(modPrefix + '-list').style.display = 'none';

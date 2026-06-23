@@ -127,6 +127,16 @@ Ensure solution works for users, not just business.
 - Efficiency
 - Consistency
 
+### CMS & Back-office Operation UX Principles (Nguyên tắc thiết kế cho Vận hành)
+Đối với các hệ thống CMS/Back-office cho Vận hành (VH), hiệu suất làm việc là yếu tố tối quan trọng. Cần thiết kế tối ưu hóa thao tác:
+- **Giảm thiểu ma sát dữ liệu đầu vào:** Tránh bắt người dùng điền mã ID thủ công khi cấu hình. Hãy tích hợp Modal Picker trực quan cho phép tìm kiếm và tích chọn trực tiếp (như chọn Bài viết, Câu hỏi FAQ, SKU, Banner).
+- **Bộ lọc đa chiều thời gian thực (Real-time Filter):** Tích hợp cả ô tìm kiếm từ khóa và Dropdown lọc theo Danh mục (Category) / Loại dịch vụ (Service Type) để người dùng nhanh chóng thu hẹp phạm vi tìm kiếm.
+- **Thao tác chọn nhanh hàng loạt (Batch Operations & Select All):**
+  * Tích hợp checkbox "Chọn tất cả" tại Header bảng dữ liệu trong các Modal Picker.
+  * Chỉ áp dụng "Chọn tất cả" cho các bản ghi đang hiển thị (được lọc), tự động reset checkbox Header khi thay đổi bộ lọc để tránh tích nhầm.
+- **Xem trước trực quan và quản lý trực tiếp:** Dữ liệu sau khi chọn xong cần được hiển thị rõ ràng dưới dạng các dòng preview đầy đủ thông tin (kèm badge, trạng thái) và có nút **Xóa nhanh** (`🗑️ Xóa` hoặc `✕`) trên từng dòng thay vì bắt người dùng vào màn hình chỉnh sửa phức tạp.
+- **Thay đổi thứ tự trực quan (Sortable/Draggable):** Hỗ trợ kéo thả hoặc nút chuyển đổi thứ tự hiển thị của các khối cấu hình (như vị trí các câu hỏi FAQ hay slider ảnh) trực tiếp trên giao diện thiết kế.
+
 ### BA role
 - Validate UX against business goals
 - Suggest improvements, not just follow design

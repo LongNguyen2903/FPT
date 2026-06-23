@@ -134,6 +134,13 @@ Ensure product solves real user problems.
 - Pain points
 - Behavior patterns
 
+**CMS & Back-office Operation UX Principles (Nguyên tắc thiết kế cho Vận hành)**
+Khi định nghĩa sản phẩm hoặc tính năng (scoping & requirement definition) cho CMS/Vận hành:
+- Luôn ưu tiên hiệu suất vận hành (Frictionless Flow): Giảm thiểu thao tác nhập tay ID/Mã code. Thiết kế Picker Modal trực quan cho phép tìm kiếm, tích chọn.
+- Luôn cung cấp bộ lọc kết hợp (Tìm kiếm chữ + Chọn danh mục cha) để tối ưu việc tìm kiếm trên tệp dữ liệu lớn.
+- Bắt buộc thiết kế cơ chế Chọn hàng loạt (Select All) các bản ghi đang hiển thị để tối giản thời gian thao tác click chuột.
+- Hiển thị trực quan dữ liệu đã chọn ngay trong Form (visual preview) kèm hành động xóa nhanh một chạm.
+
 **Actions**
 - Validate assumptions
 - Incorporate feedback
