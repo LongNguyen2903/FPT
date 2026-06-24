@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 
 <head>
@@ -20080,10 +20080,91 @@
                         value="Đăng ký ngay"></div>
                 <div class="form-group"><label>URL Nút CTA chính</label><input type="text" class="form-input"
                         value="/dang-ky"></div>
-                <div class="form-group"><label>Text Nút CTA phụ</label><input type="text" class="form-input"
-                        value="Xem chi tiết"></div>
-                <div class="form-group"><label>URL Nút CTA phụ</label><input type="text" class="form-input"
-                        value="#cac-goi-cuoc"></div>
+                                                <div class="form-group"><label>Text Nút CTA phụ</label><input type="text" class="form-input"
+                        value="Nhận tư vấn" id="inet-hero-cta-sub-text"></div>
+                <div class="form-group"><label>Hành động Nút CTA phụ</label>
+                    <select class="form-select" id="inet-hero-cta-sub-action" onchange="ldpToggleCtaSubAction(this)">
+                        <option value="popup">Bật Popup Form tư vấn</option>
+                        <option value="redirect">Chuyển hướng liên kết</option>
+                    </select>
+                </div>
+                
+                <!-- URL chuyển hướng khi chọn Action = redirect -->
+                <div class="form-group" id="inet-hero-cta-sub-url-group" style="grid-column: span 2; display: none;">
+                    <label>URL Nút CTA phụ (Redirect)</label>
+                    <input type="text" class="form-input" value="#cac-goi-cuoc" id="inet-hero-cta-sub-url">
+                </div>
+
+                <!-- Cấu hình chi tiết Form Popup khi chọn Action = popup -->
+                <div class="form-group" id="inet-hero-popup-config" style="grid-column: span 2; border-top: 1px dashed rgba(255,255,255,0.08); margin-top: 10px; padding-top: 10px; display: block;">
+                    <div style="font-size:11px; color:var(--warning); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:700;">
+                        Cấu hình Popup Form tư vấn
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>Tiêu đề Popup Form</label>
+                            <input type="text" class="form-input" value="NHẬN TƯ VẤN MIỄN PHÍ" id="inet-hero-popup-title">
+                        </div>
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label>Mô tả ngắn (Subheadline)</label>
+                            <input type="text" class="form-input" value="Nhận ưu đãi tốt nhất hôm nay" id="inet-hero-popup-sub">
+                        </div>
+                        <div class="form-group">
+                            <label>Text nút gửi (CTA)</label>
+                            <input type="text" class="form-input" value="Đăng ký tư vấn" id="inet-hero-popup-btn">
+                        </div>
+                        <div class="form-group" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="checkbox-group" style="margin-top:20px;">
+                                <input type="checkbox" id="inet-hero-popup-show-services" checked onchange="ldpTogglePopupServices(this)">
+                                <label for="inet-hero-popup-show-services" style="margin:0; cursor:pointer;">Hiển thị Chọn dịch vụ</label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="inet-hero-popup-services-list" style="grid-column: span 2; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
+                            <label style="margin-bottom:6px; display:block;">Danh sách dịch vụ hiển thị</label>
+                            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;">
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                                    <input type="checkbox" value="internet" checked style="accent-color:var(--primary);"> Internet
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                                    <input type="checkbox" value="tv" checked style="accent-color:var(--primary);"> Truyền hình
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                                    <input type="checkbox" value="camera" checked style="accent-color:var(--primary);"> Camera
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                                    <input type="checkbox" value="combo_tv" checked style="accent-color:var(--primary);"> Combo Net-Play
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                                    <input type="checkbox" value="combo_cam" checked style="accent-color:var(--primary);"> Combo Net-Cam
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function ldpToggleCtaSubAction(select) {
+                        const urlGroup = document.getElementById('inet-hero-cta-sub-url-group');
+                        const popupConfig = document.getElementById('inet-hero-popup-config');
+                        if (select.value === 'redirect') {
+                            urlGroup.style.display = 'block';
+                            popupConfig.style.display = 'none';
+                        } else {
+                            urlGroup.style.display = 'none';
+                            popupConfig.style.display = 'block';
+                        }
+                    }
+                    function ldpTogglePopupServices(checkbox) {
+                        const list = document.getElementById('inet-hero-popup-services-list');
+                        if (checkbox.checked) {
+                            list.style.display = 'block';
+                        } else {
+                            list.style.display = 'none';
+                        }
+                    }
+                </script>
+
+
             </div>
         </div>
 
