@@ -172,13 +172,14 @@
         // Dựa vào tab active hiện tại để hiển thị lại danh sách phù hợp
         const activeTab = document.querySelector('#mod-news .tabs .tab.active');
         if (activeTab) {
-            if (activeTab.textContent.includes('Danh sách')) {
+            const tabText = activeTab.innerText || activeTab.textContent;
+            if (tabText.includes('Danh sách')) {
                 const el = document.getElementById('news-list'); if (el) el.style.display = 'block';
-            } else if (activeTab.textContent.includes('Chuyên mục')) {
+            } else if (tabText.includes('Chuyên mục')) {
                 const el = document.getElementById('news-cat-list'); if (el) el.style.display = 'block';
-            } else if (activeTab.textContent.includes('Tác giả')) {
+            } else if (tabText.includes('Tác giả')) {
                 const el = document.getElementById('news-author-list'); if (el) el.style.display = 'block';
-            } else if (activeTab.textContent.includes('Tags Mapping')) {
+            } else if (tabText.includes('Tags Mapping') || tabText.includes('Cấu hình Thông tin hay')) {
                 const el = document.getElementById('news-tag-mapping'); if (el) el.style.display = 'block';
             } else {
                 const el = document.getElementById('news-tag-list'); if (el) el.style.display = 'block';

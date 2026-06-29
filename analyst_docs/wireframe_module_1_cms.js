@@ -2648,6 +2648,20 @@ function ldpEditSection(sectionId) {
     var activeRow = document.querySelector('.ldp-section-row[data-section-id="' + sectionId + '"]');
     if (activeRow) activeRow.classList.add('active');
 
+    if (sectionId === 'camp-products') {
+        if (typeof campInitProducts === 'function') {
+            campInitProducts();
+        }
+    } else if (sectionId === 'inet-products') {
+        if (typeof inetInitAllTabs === 'function') {
+            inetInitAllTabs();
+        }
+    } else if (sectionId === 'sa-pricing') {
+        if (typeof leadInitAllTabs === 'function') {
+            leadInitAllTabs();
+        }
+    }
+
     var titles = {
         // Internet
         'inet-hero': 'Hero Banner + Form đăng ký', 'inet-stats': 'Thanh số liệu nổi bật',
@@ -2819,53 +2833,1181 @@ function ldpAddProductCard(btnEl) {
     if (arrow) arrow.textContent = '▲';
 }
 
+// Mock data from PDH
+var pdhPackagesMock = [
+    {
+        code: 'PKG-WIFI7-GIGA',
+        name: 'Gói Internet FPT Play Giga Wi-Fi 7',
+        price: '220.000',
+        download: '300 Mbps',
+        upload: '300 Mbps',
+        banner: '/media/banner-giga-wf7.png',
+        features: 'Sử dụng chuẩn Wi-Fi 7 thế hệ mới nhất\nTốc độ download/upload 300 Mbps\nPhù hợp cá nhân và hộ gia đình nhỏ\nTặng kèm modem Wi-Fi 7 thế hệ mới',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van-giga',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky-giga'
+    },
+    {
+        code: 'PKG-WIFI7-SKY',
+        name: 'Gói Internet FPT Play Sky Wi-Fi 7',
+        price: '280.000',
+        download: '1 Gbps',
+        upload: '300 Mbps',
+        banner: '/media/banner-sky-wf7.png',
+        features: 'Băng thông download lên đến 1 Gbps\nTốc độ upload vượt trội 300 Mbps\nPhù hợp gia đình đông người, nhà nhiều tầng\nTrải nghiệm mượt mà không lo giật lag',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van-sky',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky-sky'
+    },
+    {
+        code: 'PKG-WIFI7-META',
+        name: 'Gói Internet FPT Play Meta Wi-Fi 7',
+        price: '350.000',
+        download: '1 Gbps',
+        upload: '1 Gbps',
+        banner: '/media/banner-meta-wf7.png',
+        features: 'Tốc độ không giới hạn download & upload 1 Gbps\nTrải nghiệm chuẩn Wi-Fi 7 cực đỉnh\nTối ưu cho livestreamer, game thủ chuyên nghiệp\nKết nối đồng thời lên đến 50 thiết bị',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van-meta',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky-meta'
+    },
+    {
+        code: 'PKG-WIFI7-ULTRA',
+        name: 'Gói Internet FPT Play Ultra Wi-Fi 7',
+        price: '450.000',
+        download: '2 Gbps',
+        upload: '1 Gbps',
+        banner: '/media/banner-ultra-wf7.png',
+        features: 'Băng thông download lên đến 2 Gbps siêu tốc\nTốc độ upload 1 Gbps cực nhanh\nCông nghệ XGS-PON thế mới nhất\nTặng kèm 01 AP mở rộng sóng Wi-Fi 7',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van-ultra',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky-ultra'
+    },
+    {
+        code: 'PKG-FPT-SPEED-X2',
+        name: 'FPT Speed X2',
+        price: '999.000',
+        download: '2Gbps',
+        upload: '2Gbps',
+        banner: '/media/banner-x2-wf7.png',
+        features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ 2 Gbps\nKết nối đến 100 thiết bị\nTặng 01 Mesh Wi-Fi 7 mở rộng vùng',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Mua ngay',
+        ctaMainUrl: '#dang-ky-x2'
+    },
+    {
+        code: 'PKG-FPT-SPEED-X2-PRO',
+        name: 'FPT Speed X2 Pro',
+        price: '1.099.000',
+        download: '2Gbps',
+        upload: '2Gbps',
+        banner: '/media/banner-x2pro-wf7.png',
+        features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ 2 Gbps\nKết nối đến 100 thiết bị\nTặng 01 Mesh Wi-Fi 7 mở rộng vùng',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Mua ngay',
+        ctaMainUrl: '#dang-ky-x2pro'
+    },
+    {
+        code: 'PKG-FPT-SPEED-X10',
+        name: 'FPT Speed X10',
+        price: '1.599.000',
+        download: '10Gbps',
+        upload: '10Gbps',
+        banner: '/media/banner-x10-wf7.png',
+        features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps\nKết nối đến 100 thiết bị',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Mua ngay',
+        ctaMainUrl: '#dang-ky-x10'
+    },
+    {
+        code: 'PKG-FPT-SPEED-X10-PRO',
+        name: 'FPT Speed X10 Pro',
+        price: '1.690.000',
+        download: '10Gbps',
+        upload: '10Gbps',
+        banner: '/media/banner-x10pro-wf7.png',
+        features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps\nKết nối đến 100 thiết bị',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Mua ngay',
+        ctaMainUrl: '#dang-ky-x10pro'
+    }
+];
+
+var campProductsData = [];
+var campActiveIndex = -1;
+
+function campInitProducts() {
+    if (campProductsData.length > 0) {
+        campRenderProductsList();
+        return;
+    }
+
+    var defaultPackages = [
+        {
+            banner: '',
+            name: 'FPT Speed X2',
+            price: '999.000',
+            download: '2Gbps',
+            upload: '2Gbps',
+            features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ 2 Gbps\nKết nối đến 100 thiết bị\nTặng 01 Mesh Wi-Fi 7 mở rộng vùng',
+            ctaSubText: 'Nhận tư vấn',
+            ctaSubUrl: '#tu-van',
+            ctaMainText: 'Mua ngay',
+            ctaMainUrl: '#dang-ky-x2',
+            highlight: false
+        },
+        {
+            banner: '',
+            name: 'FPT Speed X2 Pro',
+            price: '1.099.000',
+            download: '2Gbps',
+            upload: '2Gbps',
+            features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ 2 Gbps\nKết nối đến 100 thiết bị\nTặng 01 Mesh Wi-Fi 7 mở rộng vùng',
+            ctaSubText: 'Nhận tư vấn',
+            ctaSubUrl: '#tu-van',
+            ctaMainText: 'Mua ngay',
+            ctaMainUrl: '#dang-ky-x2pro',
+            highlight: false
+        },
+        {
+            banner: '',
+            name: 'FPT Speed X10',
+            price: '1.599.000',
+            download: '10Gbps',
+            upload: '10Gbps',
+            features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps\nKết nối đến 100 thiết bị',
+            ctaSubText: 'Nhận tư vấn',
+            ctaSubUrl: '#tu-van',
+            ctaMainText: 'Mua ngay',
+            ctaMainUrl: '#dang-ky-x10',
+            highlight: false
+        },
+        {
+            banner: '',
+            name: 'FPT Speed X10 Pro',
+            price: '1.690.000',
+            download: '10Gbps',
+            upload: '10Gbps',
+            features: 'Wi-Fi 7 tăng khả năng tải gấp 4 lần\nCông nghệ XGS-PON tốc độ vượt trội lên đến 10 Gbps\nKết nối đến 100 thiết bị',
+            ctaSubText: 'Nhận tư vấn',
+            ctaSubUrl: '#tu-van',
+            ctaMainText: 'Mua ngay',
+            ctaMainUrl: '#dang-ky-x10pro',
+            highlight: false
+        }
+    ];
+
+    var container = document.getElementById('camp-products-list');
+    if (container) {
+        var cards = container.querySelectorAll('.inet-product-card');
+        if (cards.length > 0) {
+            cards.forEach(function (card, i) {
+                var bannerInput = card.querySelector('input[placeholder="URL ảnh banner"]') || card.querySelectorAll('input[type="text"]')[0];
+                var nameInput = card.querySelector('.inet-product-name-input') || card.querySelectorAll('input[type="text"]')[1];
+                var priceInput = card.querySelector('.inet-product-price-input') || card.querySelectorAll('input[type="text"]')[2];
+                
+                var inputs = card.querySelectorAll('input[type="text"]');
+                var download = inputs[3] ? inputs[3].value : '2Gbps';
+                var upload = inputs[4] ? inputs[4].value : '2Gbps';
+                var featuresTextarea = card.querySelector('textarea');
+                var features = featuresTextarea ? featuresTextarea.value : '';
+                
+                var ctaSubText = inputs[5] ? inputs[5].value : 'Nhận tư vấn';
+                var ctaSubUrl = inputs[6] ? inputs[6].value : '#tu-van';
+                var ctaMainText = inputs[7] ? inputs[7].value : 'Mua ngay';
+                var ctaMainUrl = inputs[8] ? inputs[8].value : '';
+
+                var highlightCb = card.querySelector('input[type="checkbox"]');
+                var highlight = highlightCb ? highlightCb.checked : false;
+
+                campProductsData.push({
+                    banner: bannerInput ? bannerInput.value : '',
+                    name: nameInput ? nameInput.value : ('Gói ' + (i+1)),
+                    price: priceInput ? priceInput.value : '0',
+                    download: download,
+                    upload: upload,
+                    features: features,
+                    ctaSubText: ctaSubText,
+                    ctaSubUrl: ctaSubUrl,
+                    ctaMainText: ctaMainText,
+                    ctaMainUrl: ctaMainUrl,
+                    highlight: highlight
+                });
+            });
+        } else {
+            campProductsData = defaultPackages;
+        }
+    } else {
+        campProductsData = defaultPackages;
+    }
+
+    var pdhOptsContainer = document.getElementById('camp-pdh-list-options');
+    if (pdhOptsContainer) {
+        var html = '';
+        pdhPackagesMock.forEach(function(pkg, index) {
+            html += '<div onclick="campSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+                + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+                + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+                + '</div>';
+        });
+        pdhOptsContainer.innerHTML = html;
+
+        var style = document.createElement('style');
+        style.innerHTML = '.pdh-dropdown-item:hover { background: rgba(255,255,255,0.08) !important; } .camp-product-list-item:hover { background: rgba(255,255,255,0.06) !important; } .camp-product-list-item.active { background: rgba(249,115,22,0.15) !important; border-color: var(--primary) !important; }';
+        document.head.appendChild(style);
+    }
+
+    campRenderProductsList();
+}
+
+var campProductsPerPage = 10;
+var campCurrentPage = 1;
+
+function campRenderProductsList() {
+    var container = document.getElementById('camp-products-nav-list');
+    if (!container) return;
+
+    var searchVal = document.getElementById('camp-product-search') ? document.getElementById('camp-product-search').value.toLowerCase() : '';
+
+    // Lọc danh sách theo từ khóa tìm kiếm
+    var filtered = campProductsData.map(function(pkg, idx) {
+        return { pkg: pkg, originalIdx: idx };
+    }).filter(function(item) {
+        return !searchVal || item.pkg.name.toLowerCase().indexOf(searchVal) > -1 || item.pkg.price.toLowerCase().indexOf(searchVal) > -1;
+    });
+
+    // Tính toán tổng số trang
+    var totalPages = Math.ceil(filtered.length / campProductsPerPage) || 1;
+    if (campCurrentPage > totalPages) {
+        campCurrentPage = totalPages;
+    }
+    if (campCurrentPage < 1) {
+        campCurrentPage = 1;
+    }
+
+    // Lấy item trang hiện hành
+    var start = (campCurrentPage - 1) * campProductsPerPage;
+    var end = start + campProductsPerPage;
+    var pageItems = filtered.slice(start, end);
+
+    var html = '';
+    pageItems.forEach(function (item) {
+        var pkg = item.pkg;
+        var idx = item.originalIdx;
+        var activeClass = idx === campActiveIndex ? 'active' : '';
+        var highlightChecked = pkg.highlight ? 'checked' : '';
+        var displayIdx = idx + 1;
+
+        html += '<div class="camp-product-list-item ' + activeClass + '" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="campSelectProduct(' + idx + ')">'
+            + '<div style="display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden;">'
+            + '<span style="font-size: 11px; font-weight: 700; color: var(--primary); min-width: 45px;">Gói ' + displayIdx + '</span>'
+            + '<span style="font-size: 12px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;" class="item-title">' + pkg.name + '</span>'
+            + '</div>'
+            + '<div style="display: flex; align-items: center; gap: 6px;" onclick="event.stopPropagation()">'
+            + '<input type="checkbox" ' + highlightChecked + ' onchange="campToggleHighlight(' + idx + ', this)" title="Nổi bật" style="accent-color: var(--warning); cursor: pointer; width: 13px; height: 13px; margin: 0;">'
+            + '<span onclick="campMoveProduct(' + idx + ', -1)" title="Di chuyển lên" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▲</span>'
+            + '<span onclick="campMoveProduct(' + idx + ', 1)" title="Di chuyển xuống" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▼</span>'
+            + '<span onclick="campDeleteProduct(' + idx + ')" title="Xóa gói cước" style="cursor: pointer; font-size: 12px; color: var(--danger); font-weight: bold; padding: 2px 4px; margin-left: 2px;">✕</span>'
+            + '</div>'
+            + '</div>';
+    });
+
+    if (filtered.length === 0) {
+        html = '<div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 20px 0;">Không tìm thấy gói cước</div>';
+    }
+
+    container.innerHTML = html;
+
+    campRenderPagination(filtered.length, totalPages);
+    campSyncHiddenDom();
+}
+
+function campRenderPagination(totalItems, totalPages) {
+    var pagContainer = document.getElementById('camp-products-pagination');
+    if (!pagContainer) return;
+
+    if (totalItems <= campProductsPerPage) {
+        pagContainer.style.display = 'none';
+        return;
+    }
+
+    pagContainer.style.display = 'flex';
+    var prevDisabled = campCurrentPage === 1 ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+    var nextDisabled = campCurrentPage === totalPages ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+
+    var html = '<button class="btn btn-secondary btn-sm" onclick="campPrevPage()" ' + prevDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">◀</button>'
+        + '<span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Trang ' + campCurrentPage + ' / ' + totalPages + '</span>'
+        + '<button class="btn btn-secondary btn-sm" onclick="campNextPage()" ' + nextDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">▶</button>';
+
+    pagContainer.innerHTML = html;
+}
+
+function campPrevPage() {
+    if (campCurrentPage > 1) {
+        campCurrentPage--;
+        campRenderProductsList();
+    }
+}
+
+function campNextPage() {
+    var searchVal = document.getElementById('camp-product-search') ? document.getElementById('camp-product-search').value.toLowerCase() : '';
+    var filteredCount = campProductsData.filter(function(pkg) {
+        return !searchVal || pkg.name.toLowerCase().indexOf(searchVal) > -1 || pkg.price.toLowerCase().indexOf(searchVal) > -1;
+    }).length;
+    var totalPages = Math.ceil(filteredCount / campProductsPerPage) || 1;
+    if (campCurrentPage < totalPages) {
+        campCurrentPage++;
+        campRenderProductsList();
+    }
+}
+
+function campSelectProduct(idx) {
+    campActiveIndex = idx;
+    
+    var items = document.querySelectorAll('#camp-products-nav-list .camp-product-list-item');
+    items.forEach(function(item) {
+        item.classList.remove('active');
+    });
+    
+    var clickedItem = Array.from(document.querySelectorAll('#camp-products-nav-list .camp-product-list-item')).find(function(item) {
+        return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('campSelectProduct(' + idx + ')') > -1;
+    });
+    if (clickedItem) clickedItem.classList.add('active');
+
+    var pkg = campProductsData[idx];
+    if (!pkg) return;
+
+    document.getElementById('camp-product-detail-empty').style.display = 'none';
+    document.getElementById('camp-product-detail-form').style.display = 'block';
+
+    document.getElementById('camp-edit-idx').value = idx;
+    document.getElementById('camp-edit-banner').value = pkg.banner || '';
+    document.getElementById('camp-edit-name').value = pkg.name || '';
+    document.getElementById('camp-edit-price').value = pkg.price || '';
+    document.getElementById('camp-edit-download').value = pkg.download || '';
+    document.getElementById('camp-edit-upload').value = pkg.upload || '';
+    document.getElementById('camp-edit-features').value = pkg.features || '';
+    document.getElementById('camp-edit-cta-sub-text').value = pkg.ctaSubText || '';
+    document.getElementById('camp-edit-cta-sub-url').value = pkg.ctaSubUrl || '';
+    document.getElementById('camp-edit-cta-main-text').value = pkg.ctaMainText || '';
+    document.getElementById('camp-edit-cta-main-url').value = pkg.ctaMainUrl || '';
+}
+
+function campSaveDetailField(fieldName) {
+    var idx = parseInt(document.getElementById('camp-edit-idx').value);
+    if (isNaN(idx) || idx < 0 || idx >= campProductsData.length) return;
+
+    var pkg = campProductsData[idx];
+    if (!pkg) return;
+
+    if (fieldName === 'banner') pkg.banner = document.getElementById('camp-edit-banner').value;
+    else if (fieldName === 'name') {
+        pkg.name = document.getElementById('camp-edit-name').value;
+        var items = document.querySelectorAll('#camp-products-nav-list .camp-product-list-item');
+        var clickedItem = Array.from(items).find(function(item) {
+            return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('campSelectProduct(' + idx + ')') > -1;
+        });
+        if (clickedItem) {
+            var titleSpan = clickedItem.querySelector('.item-title');
+            if (titleSpan) titleSpan.textContent = pkg.name || 'Gói chưa đặt tên';
+        }
+    }
+    else if (fieldName === 'price') pkg.price = document.getElementById('camp-edit-price').value;
+    else if (fieldName === 'download') pkg.download = document.getElementById('camp-edit-download').value;
+    else if (fieldName === 'upload') pkg.upload = document.getElementById('camp-edit-upload').value;
+    else if (fieldName === 'features') pkg.features = document.getElementById('camp-edit-features').value;
+    else if (fieldName === 'ctaSubText') pkg.ctaSubText = document.getElementById('camp-edit-cta-sub-text').value;
+    else if (fieldName === 'ctaSubUrl') pkg.ctaSubUrl = document.getElementById('camp-edit-cta-sub-url').value;
+    else if (fieldName === 'ctaMainText') pkg.ctaMainText = document.getElementById('camp-edit-cta-main-text').value;
+    else if (fieldName === 'ctaMainUrl') pkg.ctaMainUrl = document.getElementById('camp-edit-cta-main-url').value;
+
+    campSyncHiddenDom();
+}
+
+function campAddProductCardGóiMới() {
+    var idx = campProductsData.length;
+    campProductsData.push({
+        banner: '',
+        name: 'Gói mới ' + (idx + 1),
+        price: '200.000',
+        download: '1Gbps',
+        upload: '1Gbps',
+        features: 'Wi-Fi 7 thế hệ mới\nKết nối tốc độ cao',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky',
+        highlight: false
+    });
+    campCurrentPage = Math.ceil(campProductsData.length / campProductsPerPage) || 1;
+    campRenderProductsList();
+    campSelectProduct(idx);
+}
+
 function campAddProductCard() {
+    campAddProductCardGóiMới();
+}
+
+function campToggleHighlight(idx, checkbox) {
+    if (campProductsData[idx]) {
+        campProductsData[idx].highlight = checkbox.checked;
+        campSyncHiddenDom();
+    }
+}
+
+// Đóng dropdown khi click ngoài
+document.addEventListener('click', function (event) {
+    var dropdown = document.getElementById('camp-pdh-dropdown');
+    var btn = document.querySelector('button[onclick="campTogglePdhDropdown()"]');
+    if (dropdown && dropdown.style.display === 'block' && btn && !btn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+function campMoveProduct(idx, direction) {
+    var targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= campProductsData.length) return;
+
+    var temp = campProductsData[idx];
+    campProductsData[idx] = campProductsData[targetIdx];
+    campProductsData[targetIdx] = temp;
+
+    if (campActiveIndex === idx) {
+        campActiveIndex = targetIdx;
+    } else if (campActiveIndex === targetIdx) {
+        campActiveIndex = idx;
+    }
+
+    campCurrentPage = Math.ceil((campActiveIndex + 1) / campProductsPerPage) || 1;
+
+    campRenderProductsList();
+    if (campActiveIndex >= 0) {
+        campSelectProduct(campActiveIndex);
+    }
+}
+
+function campDeleteProduct(idx) {
+    campProductsData.splice(idx, 1);
+    if (campActiveIndex === idx) {
+        campActiveIndex = -1;
+        document.getElementById('camp-product-detail-empty').style.display = 'flex';
+        document.getElementById('camp-product-detail-form').style.display = 'none';
+    } else if (campActiveIndex > idx) {
+        campActiveIndex--;
+    }
+
+    var totalPages = Math.ceil(campProductsData.length / campProductsPerPage) || 1;
+    if (campCurrentPage > totalPages) {
+        campCurrentPage = totalPages;
+    }
+
+    campRenderProductsList();
+    if (campActiveIndex >= 0) {
+        campSelectProduct(campActiveIndex);
+    }
+}
+
+function campTogglePdhDropdown() {
+    var dropdown = document.getElementById('camp-pdh-dropdown');
+    if (dropdown) {
+        var isHidden = dropdown.style.display === 'none';
+        dropdown.style.display = isHidden ? 'block' : 'none';
+    }
+}
+
+function campSyncPdhPackage(pdhIndex) {
+    var pkgMock = pdhPackagesMock[pdhIndex];
+    if (!pkgMock) return;
+
+    var idx = campProductsData.length;
+    campProductsData.push({
+        banner: pkgMock.banner,
+        name: pkgMock.name,
+        price: pkgMock.price,
+        download: pkgMock.download,
+        upload: pkgMock.upload,
+        features: pkgMock.features,
+        ctaSubText: pkgMock.ctaSubText,
+        ctaSubUrl: pkgMock.ctaSubUrl,
+        ctaMainText: pkgMock.ctaMainText,
+        ctaMainUrl: pkgMock.ctaMainUrl,
+        highlight: false
+    });
+
+    var dropdown = document.getElementById('camp-pdh-dropdown');
+    if (dropdown) dropdown.style.display = 'none';
+
+    campCurrentPage = Math.ceil(campProductsData.length / campProductsPerPage) || 1;
+
+    campRenderProductsList();
+    campSelectProduct(idx);
+}
+
+function campFilterProducts() {
+    campCurrentPage = 1;
+    campRenderProductsList();
+    if (campActiveIndex >= 0) {
+        var searchVal = document.getElementById('camp-product-search') ? document.getElementById('camp-product-search').value.toLowerCase() : '';
+        var pkg = campProductsData[campActiveIndex];
+        if (pkg && searchVal && pkg.name.toLowerCase().indexOf(searchVal) === -1 && pkg.price.toLowerCase().indexOf(searchVal) === -1) {
+            document.getElementById('camp-product-detail-empty').style.display = 'flex';
+            document.getElementById('camp-product-detail-form').style.display = 'none';
+        } else {
+            var filteredIdx = campProductsData.map(function(p, i) {
+                return { p: p, i: i };
+            }).filter(function(item) {
+                return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
+            }).findIndex(function(item) {
+                return item.i === campActiveIndex;
+            });
+            if (filteredIdx >= 0) {
+                campCurrentPage = Math.ceil((filteredIdx + 1) / campProductsPerPage) || 1;
+                campRenderProductsList();
+                campSelectProduct(campActiveIndex);
+            }
+        }
+    }
+}
+
+function campSyncHiddenDom() {
     var container = document.getElementById('camp-products-list');
     if (!container) return;
-    var cards = container.querySelectorAll('.inet-product-card');
-    var idx = cards.length + 1;
-    var warningColor = 'var(--primary)';
 
-    var card = document.createElement('div');
-    card.className = 'inet-product-card';
-    card.style.cssText = 'border:1px solid var(--border); border-radius:8px; margin-bottom:10px; background:var(--bg-secondary); overflow:hidden;';
+    container.innerHTML = '';
+    
+    campProductsData.forEach(function (pkg, i) {
+        var card = document.createElement('div');
+        card.className = 'inet-product-card';
+        card.style.display = 'none';
+        
+        var highlightChecked = pkg.highlight ? 'checked' : '';
+        
+        var html = '<div class="inet-product-card-header">'
+            + '<span class="inet-product-card-idx">Gói ' + (i+1) + '</span>'
+            + '<span class="inet-product-card-title">' + pkg.name + '</span>'
+            + '<span class="inet-product-card-price-summary"> - ' + pkg.price + ' VNĐ/tháng</span>'
+            + '<input type="checkbox" ' + highlightChecked + '>'
+            + '</div>'
+            + '<div class="inet-product-card-body">'
+            + '<input type="text" value="' + pkg.banner + '">'
+            + '<input type="text" class="inet-product-name-input" value="' + pkg.name + '">'
+            + '<input type="text" class="inet-product-price-input" value="' + pkg.price + '">'
+            + '<input type="text" value="' + pkg.download + '">'
+            + '<input type="text" value="' + pkg.upload + '">'
+            + '<textarea>' + pkg.features + '</textarea>'
+            + '<input type="text" value="' + pkg.ctaSubText + '">'
+            + '<input type="text" value="' + pkg.ctaSubUrl + '">'
+            + '<input type="text" value="' + pkg.ctaMainText + '">'
+            + '<input type="text" value="' + pkg.ctaMainUrl + '">'
+            + '</div>';
+        
+        card.innerHTML = html;
+        container.appendChild(card);
+    });
+}
 
-    var html = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
-        + '<div style="display:flex; align-items:center; gap:8px; flex:1;">'
-        + '<span style="font-size:12px; font-weight:700; color:\' + warningColor + \';" class="inet-product-card-idx">Gói ' + idx + '</span>'
-        + '<span style="font-size:13px; font-weight:600; color:#fff;" class="inet-product-card-title">Gói mới</span>'
-        + '<span style="font-size:12px; color:var(--text-muted);" class="inet-product-card-price-summary"></span>'
+// --- TAB-BASED SPLIT VIEW & PAGINATION FOR INTERNET & THU LEAD ---
+var tabProductsPerPage = 10;
+
+function tabInit(tabEl, type) {
+    if (!tabEl) return;
+    if (tabEl.dataset.initialized === 'true') return;
+    tabEl.dataset.initialized = 'true';
+
+    // 1. Tạo container ẩn chứa cards gốc
+    var hiddenContainer = tabEl.querySelector('.inet-tab-hidden-cards-container');
+    if (!hiddenContainer) {
+        hiddenContainer = document.createElement('div');
+        hiddenContainer.className = 'inet-tab-hidden-cards-container';
+        hiddenContainer.style.display = 'none';
+        
+        // Di chuyển các card cũ vào hiddenContainer
+        var oldCards = tabEl.querySelectorAll('.inet-product-card');
+        oldCards.forEach(function(card) {
+            hiddenContainer.appendChild(card);
+        });
+        
+        // Xóa nút thêm cũ
+        var oldAddBtn = tabEl.querySelector('button[onclick*="ldpAddProductCard"]');
+        if (oldAddBtn) oldAddBtn.remove();
+        
+        tabEl.appendChild(hiddenContainer);
+    }
+
+    tabEl.productsData = [];
+    tabEl.activeIndex = -1;
+    tabEl.currentPage = 1;
+    tabEl.type = type;
+
+    var cards = hiddenContainer.querySelectorAll('.inet-product-card');
+    cards.forEach(function(card, idx) {
+        var data = {};
+        if (type === 'inet') {
+            var bannerInput = card.querySelector('input[placeholder="URL ảnh banner"]') || card.querySelectorAll('input[type="text"]')[0];
+            var nameInput = card.querySelector('.inet-product-name-input') || card.querySelectorAll('input[type="text"]')[1];
+            var priceInput = card.querySelector('.inet-product-price-input') || card.querySelectorAll('input[type="text"]')[2];
+            var inputs = card.querySelectorAll('input[type="text"]');
+            var download = inputs[3] ? inputs[3].value : '';
+            var upload = inputs[4] ? inputs[4].value : '';
+            var badge = inputs[5] ? inputs[5].value : '';
+            var featuresTextarea = card.querySelector('textarea');
+            var features = featuresTextarea ? featuresTextarea.value : '';
+            var ctaSubText = inputs[6] ? inputs[6].value : '';
+            var ctaSubUrl = inputs[7] ? inputs[7].value : '';
+            var ctaMainText = inputs[8] ? inputs[8].value : '';
+            var ctaMainUrl = inputs[9] ? inputs[9].value : '';
+            var highlightCb = card.querySelector('input[type="checkbox"]');
+            var highlight = highlightCb ? highlightCb.checked : false;
+
+            data = {
+                banner: bannerInput ? bannerInput.value : '',
+                name: nameInput ? nameInput.value : 'Gói ' + (idx + 1),
+                price: priceInput ? priceInput.value : '',
+                download: download,
+                upload: upload,
+                badge: badge,
+                features: features,
+                ctaSubText: ctaSubText,
+                ctaSubUrl: ctaSubUrl,
+                ctaMainText: ctaMainText,
+                ctaMainUrl: ctaMainUrl,
+                highlight: highlight
+            };
+        } else {
+            // lead
+            var nameInput = card.querySelector('.inet-product-name-input') || card.querySelectorAll('input[type="text"]')[0];
+            var inputs = card.querySelectorAll('input[type="text"]');
+            var price = inputs[1] ? inputs[1].value : '';
+            var download = inputs[2] ? inputs[2].value : '';
+            var upload = inputs[3] ? inputs[3].value : '';
+            var badge = inputs[4] ? inputs[4].value : '';
+            var featuresTextarea = card.querySelector('textarea');
+            var features = featuresTextarea ? featuresTextarea.value : '';
+            var ctaSubText = inputs[5] ? inputs[5].value : '';
+            var ctaSubUrl = inputs[6] ? inputs[6].value : '';
+            var ctaMainText = inputs[7] ? inputs[7].value : '';
+            var ctaMainUrl = inputs[8] ? inputs[8].value : '';
+            var highlightCb = card.querySelector('input[type="checkbox"]');
+            var highlight = highlightCb ? highlightCb.checked : false;
+
+            data = {
+                banner: '',
+                name: nameInput ? nameInput.value : 'Gói ' + (idx + 1),
+                price: price,
+                download: download,
+                upload: upload,
+                badge: badge,
+                features: features,
+                ctaSubText: ctaSubText,
+                ctaSubUrl: ctaSubUrl,
+                ctaMainText: ctaMainText,
+                ctaMainUrl: ctaMainUrl,
+                highlight: highlight
+            };
+        }
+        tabEl.productsData.push(data);
+    });
+
+    // 2. Tạo giao diện Split View
+    var splitViewContainer = document.createElement('div');
+    splitViewContainer.className = 'tab-split-view-container';
+    splitViewContainer.style.cssText = 'display: grid; grid-template-columns: 240px 1fr; gap: 16px; min-height: 380px; padding: 14px;';
+
+    // Cột trái
+    var leftCol = document.createElement('div');
+    leftCol.style.cssText = 'display: flex; flex-direction: column; gap: 8px; border-right: 1px solid rgba(255,255,255,0.06); padding-right: 16px;';
+    leftCol.innerHTML = 
+          '<div style="display: flex; gap: 8px; margin-bottom: 2px; align-items: center;">'
+        + '  <button class="btn btn-primary tab-add-pkg-btn" style="flex: 1; font-size: 11px; padding: 6px 10px; background: var(--primary-gradient); font-weight: 600; border: none; border-radius: 6px; color: #fff; cursor: pointer; height: 28px; line-height: 1;">+ Thêm gói trống</button>'
+        + '  <div style="position: relative;">'
+        + '    <button class="btn btn-secondary btn-sm tab-sync-pdh-btn" style="font-size: 11px; padding: 4px 10px; height: 28px; display: flex; align-items: center; gap: 4px; white-space: nowrap;">Sync PDH ▾</button>'
+        + '    <div class="tab-pdh-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100; min-width: 220px; padding: 6px; max-height: 200px; overflow-y: auto; margin-top: 4px;"></div>'
+        + '  </div>'
         + '</div>'
-        + '<div style="display:flex; align-items:center; gap:12px;" onclick="event.stopPropagation()">'
-        + '<label style="font-size:11px; display:flex; align-items:center; gap:4px; margin:0;"><input type="checkbox" style="accent-color:var(--warning);"> Nổi bật</label>'
-        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:10px; margin-left:4px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+        + '<div style="margin-bottom: 4px;">'
+        + '  <input type="text" class="form-input tab-search-input" placeholder="🔍 Tìm kiếm gói cước..." style="font-size: 11px; padding: 6px 10px; width: 100%;">'
         + '</div>'
-        + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px; margin-left:12px;">▲</span>'
-        + '</div>'
-        + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06);">'
-        + '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
-        + '<div style="display:flex; gap:6px;"><input type="text" class="form-input" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>'
-        + '</div>'
+        + '<div class="tab-nav-list" style="display: flex; flex-direction: column; gap: 6px; max-height: 280px; overflow-y: auto; flex: 1; padding-right: 2px; scrollbar-width: thin;"></div>'
+        + '<div class="tab-pagination" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06);"></div>';
+
+    // Cột phải
+    var rightCol = document.createElement('div');
+    rightCol.style.cssText = 'display: flex; flex-direction: column;';
+    
+    var emptyState = document.createElement('div');
+    emptyState.className = 'tab-detail-empty';
+    emptyState.style.cssText = 'display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; border: 1px dashed var(--border); border-radius: 6px; color: var(--text-muted); font-size: 11px; min-height: 300px;';
+    emptyState.textContent = 'Chọn hoặc thêm gói cước để chỉnh sửa';
+
+    var detailForm = document.createElement('div');
+    detailForm.className = 'tab-detail-form';
+    detailForm.style.display = 'none';
+    
+    var bannerFieldHtml = type === 'inet' ? 
+          '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
+        + '  <div style="display:flex; gap:6px;"><input type="text" class="form-input tab-edit-banner" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>'
+        + '</div>' : '';
+
+    detailForm.innerHTML = 
+          '<input type="hidden" class="tab-edit-idx">'
+        + bannerFieldHtml
         + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input inet-product-name-input" placeholder="vd: FPT Speed X2" oninput="ldpUpdateProductCardHeader(this)"></div>'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input inet-product-price-input" placeholder="vd: 999.000" oninput="ldpUpdateProductCardHeader(this)"></div>'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input" placeholder="vd: 2Gbps"></div>'
-        + '<div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea" rows="3" placeholder="Wi-Fi 7 tăng khả năng tải gấp 4 lần&#10;Kết nối đến 100 thiết bị"></textarea></div>'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input" placeholder="Nhận tư vấn"></div>'
-        + '<div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input" placeholder="#tu-van"></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input" value="Mua ngay"></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input" placeholder="#dang-ky"></div>'
-        + '</div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input tab-edit-name" placeholder="vd: Internet GIGA"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Giá (VNĐ/tháng)</label><input type="text" class="form-input tab-edit-price" placeholder="vd: 165.000"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Download</label><input type="text" class="form-input tab-edit-download" placeholder="vd: 150 Mbps"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tốc độ Upload</label><input type="text" class="form-input tab-edit-upload" placeholder="vd: 150 Mbps"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Badge text</label><input type="text" class="form-input tab-edit-badge" placeholder="VD: Phổ biến nhất"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"></div>'
+        + '  <div class="form-group" style="grid-column:1/-1; margin-bottom:6px;"><label style="font-size:11px;">Tính năng (mỗi dòng 1 mục)</label><textarea class="form-textarea tab-edit-features" rows="3" placeholder="Wifi Router miễn phí\nHỗ trợ 24/7"></textarea></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (text)</label><input type="text" class="form-input tab-edit-cta-sub-text" placeholder="Xem chi tiết"></div>'
+        + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">CTA phụ (URL)</label><input type="text" class="form-input tab-edit-cta-sub-url" placeholder="/goi-giga"></div>'
+        + '  <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (text)</label><input type="text" class="form-input tab-edit-cta-main-text" value="Đăng ký ngay"></div>'
+        + '  <div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">CTA chính (URL)</label><input type="text" class="form-input tab-edit-cta-main-url" placeholder="/dang-ky?goi=giga"></div>'
         + '</div>';
 
-    card.innerHTML = html;
-    container.appendChild(card);
+    rightCol.appendChild(emptyState);
+    rightCol.appendChild(detailForm);
 
-    var body = card.querySelector('.inet-product-card-body');
-    var arrow = card.querySelector('.arrow-indicator');
-    if (body) body.style.display = 'block';
-    if (arrow) arrow.textContent = '▲';
+    splitViewContainer.appendChild(leftCol);
+    splitViewContainer.appendChild(rightCol);
+
+    tabEl.appendChild(splitViewContainer);
+
+    // Gán các sự kiện điều khiển
+    var searchInput = leftCol.querySelector('.tab-search-input');
+    searchInput.addEventListener('input', function() {
+        tabEl.currentPage = 1;
+        tabRenderProducts(tabEl);
+    });
+
+    var syncBtn = leftCol.querySelector('.tab-sync-pdh-btn');
+    syncBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var dropdown = leftCol.querySelector('.tab-pdh-dropdown');
+        if (dropdown) {
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+
+    // Populate Sync PDH options
+    var pdhDropdown = leftCol.querySelector('.tab-pdh-dropdown');
+    var pdhHtml = '';
+    pdhPackagesMock.forEach(function(pkg, idx) {
+        pdhHtml += '<div onclick="tabSyncPdh(' + idx + ', this)" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+            + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+            + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+            + '</div>';
+    });
+    pdhDropdown.innerHTML = pdhHtml;
+
+    // Lắng nghe thay đổi trên form để tự lưu
+    var fields = ['banner', 'name', 'price', 'download', 'upload', 'badge', 'features', 'ctaSubText', 'ctaSubUrl', 'ctaMainText', 'ctaMainUrl'];
+    fields.forEach(function(field) {
+        var el = detailForm.querySelector('.tab-edit-' + field);
+        if (el) {
+            el.addEventListener('input', function() {
+                var idx = parseInt(detailForm.querySelector('.tab-edit-idx').value);
+                if (!isNaN(idx) && tabEl.productsData[idx]) {
+                    tabEl.productsData[idx][field] = el.value;
+                    if (field === 'name') {
+                        var clickedItem = leftCol.querySelector('.camp-product-list-item[data-idx="' + idx + '"]');
+                        if (clickedItem) {
+                            var titleSpan = clickedItem.querySelector('.item-title');
+                            if (titleSpan) titleSpan.textContent = el.value || 'Gói chưa đặt tên';
+                        }
+                    }
+                    tabSyncHiddenDom(tabEl);
+                }
+            });
+        }
+    });
+
+    leftCol.querySelector('.tab-add-pkg-btn').addEventListener('click', function() {
+        tabAddProduct(tabEl);
+    });
+
+    tabRenderProducts(tabEl);
+}
+
+function tabRenderProducts(tabEl) {
+    var container = tabEl.querySelector('.tab-nav-list');
+    if (!container) return;
+
+    var searchVal = tabEl.querySelector('.tab-search-input').value.toLowerCase();
+
+    var filtered = tabEl.productsData.map(function(pkg, idx) {
+        return { pkg: pkg, originalIdx: idx };
+    }).filter(function(item) {
+        return !searchVal || item.pkg.name.toLowerCase().indexOf(searchVal) > -1 || item.pkg.price.toLowerCase().indexOf(searchVal) > -1;
+    });
+
+    var totalPages = Math.ceil(filtered.length / tabProductsPerPage) || 1;
+    if (tabEl.currentPage > totalPages) tabEl.currentPage = totalPages;
+    if (tabEl.currentPage < 1) tabEl.currentPage = 1;
+
+    var start = (tabEl.currentPage - 1) * tabProductsPerPage;
+    var end = start + tabProductsPerPage;
+    var pageItems = filtered.slice(start, end);
+
+    var html = '';
+    pageItems.forEach(function(item) {
+        var pkg = item.pkg;
+        var idx = item.originalIdx;
+        var activeClass = idx === tabEl.activeIndex ? 'active' : '';
+        var activeStyle = idx === tabEl.activeIndex ? 'background: rgba(249,115,22,0.15) !important; border-color: var(--primary) !important;' : '';
+        var highlightChecked = pkg.highlight ? 'checked' : '';
+        var displayIdx = idx + 1;
+
+        html += '<div class="camp-product-list-item ' + activeClass + '" data-idx="' + idx + '" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: all 0.2s; ' + activeStyle + '" onclick="tabSelectProduct(' + idx + ', this)">'
+            + '<div style="display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden; white-space: nowrap;">'
+            + '<span style="font-size: 11px; font-weight: 700; color: var(--primary); min-width: 45px;">Gói ' + displayIdx + '</span>'
+            + '<span style="font-size: 12px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;" class="item-title">' + pkg.name + '</span>'
+            + '</div>'
+            + '<div style="display: flex; align-items: center; gap: 6px;" onclick="event.stopPropagation()">'
+            + '<input type="checkbox" ' + highlightChecked + ' onchange="tabToggleHighlight(' + idx + ', this)" title="Nổi bật" style="accent-color: var(--warning); cursor: pointer; width: 13px; height: 13px; margin: 0;">'
+            + '<span onclick="tabMoveProduct(' + idx + ', -1, this)" title="Di chuyển lên" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▲</span>'
+            + '<span onclick="tabMoveProduct(' + idx + ', 1, this)" title="Di chuyển xuống" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▼</span>'
+            + '<span onclick="tabDeleteProduct(' + idx + ', this)" title="Xóa gói" style="cursor: pointer; font-size: 12px; color: var(--danger); font-weight: bold; padding: 2px 4px; margin-left: 2px;">✕</span>'
+            + '</div>'
+            + '</div>';
+    });
+
+    if (filtered.length === 0) {
+        html = '<div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 20px 0;">Không tìm thấy gói</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Render Pagination
+    var pagContainer = tabEl.querySelector('.tab-pagination');
+    if (pagContainer) {
+        if (filtered.length <= tabProductsPerPage) {
+            pagContainer.style.display = 'none';
+        } else {
+            pagContainer.style.display = 'flex';
+            var prevDisabled = tabEl.currentPage === 1 ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+            var nextDisabled = tabEl.currentPage === totalPages ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+
+            pagContainer.innerHTML = '<button class="btn btn-secondary btn-sm" onclick="tabPrevPage(this)" ' + prevDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">◀</button>'
+                + '<span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Trang ' + tabEl.currentPage + ' / ' + totalPages + '</span>'
+                + '<button class="btn btn-secondary btn-sm" onclick="tabNextPage(this)" ' + nextDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">▶</button>';
+        }
+    }
+}
+
+function tabSelectProduct(idx, childEl) {
+    var tabEl = childEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+    
+    tabEl.activeIndex = idx;
+    
+    var navList = tabEl.querySelector('.tab-nav-list');
+    navList.querySelectorAll('.camp-product-list-item').forEach(function(item) {
+        item.classList.remove('active');
+        item.style.borderColor = 'var(--border)';
+        item.style.background = 'rgba(255,255,255,0.03)';
+    });
+    
+    var clickedItem = navList.querySelector('.camp-product-list-item[data-idx="' + idx + '"]');
+    if (clickedItem) {
+        clickedItem.classList.add('active');
+        clickedItem.style.background = 'rgba(249,115,22,0.15)';
+        clickedItem.style.borderColor = 'var(--primary)';
+    }
+
+    var pkg = tabEl.productsData[idx];
+    if (!pkg) return;
+
+    var emptyState = tabEl.querySelector('.tab-detail-empty');
+    var detailForm = tabEl.querySelector('.tab-detail-form');
+    
+    emptyState.style.display = 'none';
+    detailForm.style.display = 'block';
+
+    detailForm.querySelector('.tab-edit-idx').value = idx;
+    if (tabEl.type === 'inet') {
+        detailForm.querySelector('.tab-edit-banner').value = pkg.banner || '';
+    }
+    detailForm.querySelector('.tab-edit-name').value = pkg.name || '';
+    detailForm.querySelector('.tab-edit-price').value = pkg.price || '';
+    detailForm.querySelector('.tab-edit-download').value = pkg.download || '';
+    detailForm.querySelector('.tab-edit-upload').value = pkg.upload || '';
+    detailForm.querySelector('.tab-edit-badge').value = pkg.badge || '';
+    detailForm.querySelector('.tab-edit-features').value = pkg.features || '';
+    detailForm.querySelector('.tab-edit-cta-sub-text').value = pkg.ctaSubText || '';
+    detailForm.querySelector('.tab-edit-cta-sub-url').value = pkg.ctaSubUrl || '';
+    detailForm.querySelector('.tab-edit-cta-main-text').value = pkg.ctaMainText || '';
+    detailForm.querySelector('.tab-edit-cta-main-url').value = pkg.ctaMainUrl || '';
+}
+
+function tabPrevPage(btnEl) {
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (tabEl && tabEl.currentPage > 1) {
+        tabEl.currentPage--;
+        tabRenderProducts(tabEl);
+    }
+}
+
+document.addEventListener('click', function (event) {
+    var dropdowns = document.querySelectorAll('.tab-pdh-dropdown');
+    dropdowns.forEach(function(dropdown) {
+        var btn = dropdown.parentElement.querySelector('.tab-sync-pdh-btn');
+        if (dropdown.style.display === 'block' && btn && !btn.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+});
+
+function tabNextPage(btnEl) {
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+    var searchVal = tabEl.querySelector('.tab-search-input').value.toLowerCase();
+    var filteredCount = tabEl.productsData.filter(function(pkg) {
+        return !searchVal || pkg.name.toLowerCase().indexOf(searchVal) > -1 || pkg.price.toLowerCase().indexOf(searchVal) > -1;
+    }).length;
+    var totalPages = Math.ceil(filteredCount / tabProductsPerPage) || 1;
+    if (tabEl.currentPage < totalPages) {
+        tabEl.currentPage++;
+        tabRenderProducts(tabEl);
+    }
+}
+
+function tabAddProduct(tabEl) {
+    var idx = tabEl.productsData.length;
+    tabEl.productsData.push({
+        banner: '',
+        name: 'Gói mới ' + (idx + 1),
+        price: '200.000',
+        download: '1Gbps',
+        upload: '1Gbps',
+        badge: '',
+        features: 'Tính năng gói cước mới',
+        ctaSubText: 'Nhận tư vấn',
+        ctaSubUrl: '#tu-van',
+        ctaMainText: 'Đăng ký ngay',
+        ctaMainUrl: '#dang-ky',
+        highlight: false
+    });
+    tabEl.currentPage = Math.ceil(tabEl.productsData.length / tabProductsPerPage) || 1;
+    tabRenderProducts(tabEl);
+    tabSelectProduct(idx, tabEl.querySelector('.tab-nav-list'));
+    tabSyncHiddenDom(tabEl);
+}
+
+function tabToggleHighlight(idx, checkbox) {
+    var tabEl = checkbox.closest('div[style*="border-radius:10px"]');
+    if (tabEl && tabEl.productsData[idx]) {
+        tabEl.productsData[idx].highlight = checkbox.checked;
+        tabSyncHiddenDom(tabEl);
+    }
+}
+
+function tabMoveProduct(idx, direction, btnEl) {
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+    
+    var targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= tabEl.productsData.length) return;
+
+    var temp = tabEl.productsData[idx];
+    tabEl.productsData[idx] = tabEl.productsData[targetIdx];
+    tabEl.productsData[targetIdx] = temp;
+
+    if (tabEl.activeIndex === idx) {
+        tabEl.activeIndex = targetIdx;
+    } else if (tabEl.activeIndex === targetIdx) {
+        tabEl.activeIndex = idx;
+    }
+
+    tabEl.currentPage = Math.ceil((tabEl.activeIndex + 1) / tabProductsPerPage) || 1;
+
+    tabRenderProducts(tabEl);
+    if (tabEl.activeIndex >= 0) {
+        tabSelectProduct(tabEl.activeIndex, tabEl.querySelector('.tab-nav-list'));
+    }
+    tabSyncHiddenDom(tabEl);
+}
+
+function tabDeleteProduct(idx, btnEl) {
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+
+    tabEl.productsData.splice(idx, 1);
+    if (tabEl.activeIndex === idx) {
+        tabEl.activeIndex = -1;
+        tabEl.querySelector('.tab-detail-empty').style.display = 'flex';
+        tabEl.querySelector('.tab-detail-form').style.display = 'none';
+    } else if (tabEl.activeIndex > idx) {
+        tabEl.activeIndex--;
+    }
+
+    var totalPages = Math.ceil(tabEl.productsData.length / tabProductsPerPage) || 1;
+    if (tabEl.currentPage > totalPages) tabEl.currentPage = totalPages;
+
+    tabRenderProducts(tabEl);
+    if (tabEl.activeIndex >= 0) {
+        tabSelectProduct(tabEl.activeIndex, tabEl.querySelector('.tab-nav-list'));
+    }
+    tabSyncHiddenDom(tabEl);
+}
+
+function inetTogglePdhDropdown(btnEl) {
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+    var dropdown = tabEl.querySelector('.tab-pdh-dropdown');
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+function tabSyncPdh(pdhIndex, itemEl) {
+    var tabEl = itemEl.closest('div[style*="border-radius:10px"]');
+    if (!tabEl) return;
+    
+    var pkgMock = pdhPackagesMock[pdhIndex];
+    if (!pkgMock) return;
+
+    var idx = tabEl.productsData.length;
+    tabEl.productsData.push({
+        banner: pkgMock.banner || '',
+        name: pkgMock.name,
+        price: pkgMock.price,
+        download: pkgMock.download,
+        upload: pkgMock.upload,
+        badge: '',
+        features: pkgMock.features,
+        ctaSubText: pkgMock.ctaSubText,
+        ctaSubUrl: pkgMock.ctaSubUrl,
+        ctaMainText: pkgMock.ctaMainText,
+        ctaMainUrl: pkgMock.ctaMainUrl,
+        highlight: false
+    });
+
+    var dropdown = tabEl.querySelector('.tab-pdh-dropdown');
+    if (dropdown) dropdown.style.display = 'none';
+
+    tabEl.currentPage = Math.ceil(tabEl.productsData.length / tabProductsPerPage) || 1;
+
+    tabRenderProducts(tabEl);
+    tabSelectProduct(idx, tabEl.querySelector('.tab-nav-list'));
+    tabSyncHiddenDom(tabEl);
+}
+
+function inetFilterProducts(inputEl) {
+    var tabEl = inputEl.closest('div[style*="border-radius:10px"]');
+    if (tabEl) {
+        tabEl.currentPage = 1;
+        tabRenderProducts(tabEl);
+        
+        if (tabEl.activeIndex >= 0) {
+            var searchVal = inputEl.value.toLowerCase();
+            var pkg = tabEl.productsData[tabEl.activeIndex];
+            if (pkg && searchVal && pkg.name.toLowerCase().indexOf(searchVal) === -1 && pkg.price.toLowerCase().indexOf(searchVal) === -1) {
+                tabEl.querySelector('.tab-detail-empty').style.display = 'flex';
+                tabEl.querySelector('.tab-detail-form').style.display = 'none';
+            } else {
+                var filteredIdx = tabEl.productsData.map(function(p, i) {
+                    return { p: p, i: i };
+                }).filter(function(item) {
+                    return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
+                }).findIndex(function(item) {
+                    return item.i === tabEl.activeIndex;
+                });
+                if (filteredIdx >= 0) {
+                    tabEl.currentPage = Math.ceil((filteredIdx + 1) / tabProductsPerPage) || 1;
+                    tabRenderProducts(tabEl);
+                    tabSelectProduct(tabEl.activeIndex, tabEl.querySelector('.tab-nav-list'));
+                }
+            }
+        }
+    }
+}
+
+function tabSyncHiddenDom(tabEl) {
+    var container = tabEl.querySelector('.inet-tab-hidden-cards-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+    
+    tabEl.productsData.forEach(function (pkg, i) {
+        var card = document.createElement('div');
+        card.className = 'inet-product-card';
+        card.style.display = 'none';
+        
+        var highlightChecked = pkg.highlight ? 'checked' : '';
+        
+        var html = '';
+        if (tabEl.type === 'inet') {
+            html = '<div class="inet-product-card-header">'
+                + '<span class="inet-product-card-idx">Gói ' + (i+1) + '</span>'
+                + '<span class="inet-product-card-title">' + pkg.name + '</span>'
+                + '<span class="inet-product-card-price-summary"> - ' + pkg.price + ' VNĐ/tháng</span>'
+                + '<input type="checkbox" ' + highlightChecked + '>'
+                + '</div>'
+                + '<div class="inet-product-card-body">'
+                + '<input type="text" value="' + pkg.banner + '">'
+                + '<input type="text" class="inet-product-name-input" value="' + pkg.name + '">'
+                + '<input type="text" class="inet-product-price-input" value="' + pkg.price + '">'
+                + '<input type="text" value="' + pkg.download + '">'
+                + '<input type="text" value="' + pkg.upload + '">'
+                + '<input type="text" value="' + pkg.badge + '">'
+                + '<textarea>' + pkg.features + '</textarea>'
+                + '<input type="text" value="' + pkg.ctaSubText + '">'
+                + '<input type="text" value="' + pkg.ctaSubUrl + '">'
+                + '<input type="text" value="' + pkg.ctaMainText + '">'
+                + '<input type="text" value="' + pkg.ctaMainUrl + '">'
+                + '</div>';
+        } else {
+            // lead
+            html = '<div class="inet-product-card-header">'
+                + '<span class="inet-product-card-title">' + pkg.name + '</span>'
+                + '<input type="checkbox" ' + highlightChecked + '>'
+                + '</div>'
+                + '<div class="inet-product-card-body">'
+                + '<input type="text" class="inet-product-name-input" value="' + pkg.name + '">'
+                + '<input type="text" value="' + pkg.price + '">'
+                + '<input type="text" value="' + pkg.download + '">'
+                + '<input type="text" value="' + pkg.upload + '">'
+                + '<input type="text" value="' + pkg.badge + '">'
+                + '<textarea>' + pkg.features + '</textarea>'
+                + '<input type="text" value="' + pkg.ctaSubText + '">'
+                + '<input type="text" value="' + pkg.ctaSubUrl + '">'
+                + '<input type="text" value="' + pkg.ctaMainText + '">'
+                + '<input type="text" value="' + pkg.ctaMainUrl + '">'
+                + '</div>';
+        }
+        
+        card.innerHTML = html;
+        container.appendChild(card);
+    });
+}
+
+function inetInitAllTabs() {
+    var section = document.getElementById('ldpsec-inet-products');
+    if (!section) return;
+    
+    var tabs = section.querySelectorAll('div[style*="border-radius:10px"]');
+    tabs.forEach(function(tab) {
+        tabInit(tab, 'inet');
+    });
+}
+
+function leadInitAllTabs() {
+    var section = document.getElementById('ldpsec-lead-pricing');
+    if (!section) return;
+    
+    var tabs = section.querySelectorAll('div[style*="border-radius:10px"]');
+    tabs.forEach(function(tab) {
+        tabInit(tab, 'lead');
+    });
 }
 
 function ldpAddProductTab(btnEl) {
@@ -2874,7 +4016,6 @@ function ldpAddProductTab(btnEl) {
     var tabs = container.querySelectorAll('div[style*="border-radius:10px"]');
     var idx = tabs.length + 1;
 
-    // Chọn màu sắc xoay vòng
     var borderColor = 'rgba(16,185,129,0.4)';
     var bgColor = 'rgba(16,185,129,0.1)';
     var textColor = '#34d399';
@@ -2898,22 +4039,36 @@ function ldpAddProductTab(btnEl) {
     var tabDiv = document.createElement('div');
     tabDiv.style.cssText = 'border:2px solid ' + borderColor + '; border-radius:10px; margin-bottom:14px; overflow:hidden;';
 
+    var sectionId = btnEl.closest('.ldp-sec-form') ? btnEl.closest('.ldp-sec-form').id : '';
+    var type = sectionId === 'ldpsec-lead-pricing' ? 'lead' : 'inet';
+
     var html = '<div style="background:' + bgColor + '; padding:10px 14px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">'
         + '<span style="font-weight:700; font-size:13px; color:' + textColor + '; flex:1;">Tab: ' + name + '</span>'
         + '<input type="text" class="form-input" value="' + slug + '" placeholder="slug" style="width:120px; font-size:11px; padding:3px 6px;">'
         + '<label style="font-size:11px; display:flex; align-items:center; gap:4px;"><input type="checkbox" style="accent-color:var(--success);"> Mặc định</label>'
         + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 7px; color:var(--danger); border-color:var(--danger);" onclick="this.closest(\'div\').parentElement.remove()">Xóa tab</button>'
-        + '</div>'
-        + '<div style="padding:14px;">'
-        + '<button class="btn btn-secondary btn-sm" style="width:100%; border-style:dashed; font-size:12px;" onclick="ldpAddProductCard(this)">+ Thêm gói vào tab này</button>'
         + '</div>';
 
     tabDiv.innerHTML = html;
     container.insertBefore(tabDiv, btnEl);
 
-    // Tự động thêm 1 gói trống vào tab mới để tăng trải nghiệm người dùng
-    var addPkgBtn = tabDiv.querySelector('button[onclick*="ldpAddProductCard"]');
-    if (addPkgBtn) ldpAddProductCard(addPkgBtn);
+    tabInit(tabDiv, type);
+    tabAddProduct(tabDiv);
+}
+
+function ldpAddProductCard(btnEl) {
+    // Để tương thích ngược nếu còn chỗ nào gọi trực tiếp ldpAddProductCard(btnEl) mà chưa được nâng cấp
+    var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
+    if (tabEl) {
+        if (tabEl.dataset.initialized === 'true') {
+            tabAddProduct(tabEl);
+        } else {
+            var sectionId = btnEl.closest('.ldp-sec-form') ? btnEl.closest('.ldp-sec-form').id : '';
+            var type = sectionId === 'ldpsec-lead-pricing' ? 'lead' : 'inet';
+            tabInit(tabEl, type);
+            tabAddProduct(tabEl);
+        }
+    }
 }
 
 function campAddCompareRow() {
@@ -3748,8 +4903,6 @@ function renderTagMappingTable() {
         tr.innerHTML = `
                     <td style="font-weight:600; color:var(--primary); font-size:13px;">#${displayTagName}${draftBadge}</td>
                     <td><div style="display:flex; flex-wrap:wrap; gap:2px;">${skuBadges}</div></td>
-                    <td>${fallbackBadge}</td>
-                    <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
                     <td style="text-align:right;" onclick="event.stopPropagation();">
                         <button class="btn btn-sm" style="background:rgba(249,115,22,0.15); color:#FB923C; padding:4px 8px; border:none; margin-right:4px;" onclick="selectTagForConfig('${tag}')">✏️ Cấu hình</button>
                         <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 8px; border:none;" onclick="deleteTagMapping('${tag}')">🗑</button>
@@ -3759,7 +4912,7 @@ function renderTagMappingTable() {
     }
 
     if (tbody.children.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
     }
 }
 
