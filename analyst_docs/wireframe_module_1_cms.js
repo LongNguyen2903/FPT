@@ -569,8 +569,8 @@ const sysPermByRole = {
     'Quản lý FAQ': [[1, 1], [1, 1], [1, 1], [1, 0]],
     'Cấu hình Thông tin hay': [[1, 1], [1, 1], [1, 1], [0, 0]],
     'Thông tin checkout': [[1, 1], [1, 1], [0, 0], [0, 0]],
-    'Quản lý Người dùng': [[1, 1], [1, 1], [0, 0], [0, 0]],
-    'Phân quyền tính năng': [[1, 1], [1, 1], [0, 0], [0, 0]],
+    'Quản lý Người dùng': [[1, 1], [1, 0], [0, 0], [0, 0]],
+    'Phân quyền tính năng': [[1, 1], [1, 0], [0, 0], [0, 0]],
 };
 
 // roleColors: [superAdmin, adminCMS, bienTap, viewer]
@@ -2574,7 +2574,6 @@ function ldpEditPage(tplId, campaignName, slug) {
     if (slugInput) {
         slugInput.value = slug;
         if (typeof updateLdpSeoPreview === 'function') updateLdpSeoPreview();
-        if (typeof updateLdpUtmPreview === 'function') updateLdpUtmPreview();
     }
     ldpChooseTemplate(tplId);
 }
@@ -2660,19 +2659,37 @@ function ldpEditSection(sectionId) {
         if (typeof leadInitAllTabs === 'function') {
             leadInitAllTabs();
         }
+        if (typeof ldpUpdateAllPricingFeatures === 'function') {
+            ldpUpdateAllPricingFeatures();
+        }
+    } else if (sectionId === 'cam-select') {
+        if (typeof camInitSelect === 'function') {
+            camInitSelect();
+        }
     }
+
+    // Tự động thu gọn giao diện tất cả các block FAQ Accordion thành flex row 1 dòng cực kỳ gọn
+    if (typeof ldpRefactorFaqItems === 'function') {
+        ldpRefactorFaqItems();
+    }
+
+    // Đảm bảo tất cả các trường FAQ tĩnh và động đều là readonly để người dùng chỉ được đồng bộ từ kho FAQ chung
+    document.querySelectorAll('.faq-question-input, .faq-answer-textarea').forEach(function (el) {
+        el.readOnly = true;
+        el.placeholder = 'Đồng bộ từ kho FAQ chung...';
+    });
 
     var titles = {
         // Internet
-        'inet-hero': 'Hero Banner + Form đăng ký', 'inet-stats': 'Thanh số liệu nổi bật',
+        'inet-hero': 'Hero Banner + Form đăng ký (kèm Countdown Case 1)', 'inet-countdown': 'Dải Countdown độc lập (Case 2)', 'inet-stats': 'Thanh số liệu nổi bật',
         'inet-products': 'Danh sách gói Internet', 'inet-playbox': 'FPT Play Box — Giải trí không giới hạn',
         'inet-review': 'Video Review', 'inet-testimonials': 'Đánh giá khách hàng',
         'inet-steps': 'Hướng dẫn thủ tục', 'inet-promo': 'Ưu đãi khuyến mãi',
         'inet-faq': 'Câu hỏi thường gặp', 'inet-form': 'Form đăng ký (cuối trang)',
         // SA
-        'sa-hero': 'Hero Banner khuyến mãi', 'sa-offer': 'Dải ưu đãi & Countdown',
-        'sa-sports': 'Thể thao trực tiếp', 'sa-features': 'Highlight tính năng',
-        'sa-categories': 'Danh mục nội dung giải trí', 'sa-pricing': 'Bảng giá & Đăng ký',
+        'sa-hero': 'Hero Banner khuyến mãi (kèm Countdown Case 1)', 'sa-offer': 'Dải ưu đãi & Countdown',
+        'sa-sports': 'Thể thao trực tiếp',
+        'sa-categories': 'Danh mục nội dung giải trí', 'sa-experience': 'Trải nghiệm giải trí đỉnh cao', 'sa-pricing': 'Bảng giá & Đăng ký',
         'sa-commentators': 'Bình luận viên & chuyên gia', 'sa-faq-support': 'FAQ & Hỗ trợ',
         'sa-sticky': 'Sticky ưu đãi cuối trang',
         'sa-footer': 'Footer CTA',
@@ -2683,7 +2700,7 @@ function ldpEditSection(sectionId) {
         'cam-awards': 'Thương hiệu & Giải thưởng', 'cam-faq': 'FAQ Accordion',
         'cam-sticky': 'Sticky Bottom Bar',
         // Campaign
-        'camp-hero': 'Hero Wi-Fi 7 (Countdown & CTA chính/phụ)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
+        'camp-hero': 'Hero Wi-Fi 7 (kèm Countdown Case 1)', 'camp-countdown': 'Dải Countdown độc lập (Case 2)',
         'camp-usp': 'Vì sao chọn SpeedX – Wi-Fi 7 của FPT', 'camp-products': 'Các gói cước Wi-Fi 7',
         'camp-compare': 'Bảng so sánh thế hệ Wi-Fi', 'camp-targets': 'Đối tượng mục tiêu',
         'camp-videos': 'Video Review thực tế', 'camp-form': 'Form đăng ký tư vấn',
@@ -3051,14 +3068,10 @@ function campInitProducts() {
 
     var pdhOptsContainer = document.getElementById('camp-pdh-list-options');
     if (pdhOptsContainer) {
-        var html = '';
-        pdhPackagesMock.forEach(function(pkg, index) {
-            html += '<div onclick="campSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
-                + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
-                + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
-                + '</div>';
-        });
-        pdhOptsContainer.innerHTML = html;
+        campPdhCurrentPage = 1;
+        var searchInput = document.getElementById('camp-pdh-search');
+        if (searchInput) searchInput.value = '';
+        campRenderPdhDropdownList();
 
         var style = document.createElement('style');
         style.innerHTML = '.pdh-dropdown-item:hover { background: rgba(255,255,255,0.08) !important; } .camp-product-list-item:hover { background: rgba(255,255,255,0.06) !important; } .camp-product-list-item.active { background: rgba(249,115,22,0.15) !important; border-color: var(--primary) !important; }';
@@ -3066,6 +3079,63 @@ function campInitProducts() {
     }
 
     campRenderProductsList();
+}
+
+var campPdhCurrentPage = 1;
+var campPdhItemsPerPage = 10;
+
+function campRenderPdhDropdownList() {
+    var searchInput = document.getElementById('camp-pdh-search');
+    var searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+    var filtered = pdhPackagesMock.map(function(pkg, idx) {
+        return { pkg: pkg, originalIdx: idx };
+    }).filter(function(item) {
+        return !searchVal || item.pkg.code.toLowerCase().indexOf(searchVal) > -1 || item.pkg.name.toLowerCase().indexOf(searchVal) > -1;
+    });
+
+    var totalPages = Math.ceil(filtered.length / campPdhItemsPerPage) || 1;
+    if (campPdhCurrentPage > totalPages) campPdhCurrentPage = totalPages;
+    if (campPdhCurrentPage < 1) campPdhCurrentPage = 1;
+
+    var start = (campPdhCurrentPage - 1) * campPdhItemsPerPage;
+    var end = start + campPdhItemsPerPage;
+    var pageItems = filtered.slice(start, end);
+
+    var container = document.getElementById('camp-pdh-list-options');
+    if (container) {
+        var html = '';
+        pageItems.forEach(function(item) {
+            var pkg = item.pkg;
+            var index = item.originalIdx;
+            html += '<div onclick="campSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+                + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+                + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+                + '</div>';
+        });
+        if (filtered.length === 0) {
+            html = '<div style="font-size: 10px; color: var(--text-muted); padding: 10px; text-align: center;">Không tìm thấy gói</div>';
+        }
+        container.innerHTML = html;
+    }
+
+    var pagContainer = document.getElementById('camp-pdh-pagination');
+    if (pagContainer) {
+        var pagHtml = '';
+        if (totalPages > 1) {
+            var prevDisabled = campPdhCurrentPage === 1 ? 'pointer-events:none; opacity:0.4;' : 'cursor:pointer;';
+            var nextDisabled = campPdhCurrentPage === totalPages ? 'pointer-events:none; opacity:0.4;' : 'cursor:pointer;';
+            pagHtml += '<span onclick="campPdhChangePage(-1)" style="padding: 2px 6px; background: rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-weight: bold; ' + prevDisabled + '">◀</span>';
+            pagHtml += '<span style="color: var(--text-muted); margin: 0 4px;">Trang ' + campPdhCurrentPage + '/' + totalPages + '</span>';
+            pagHtml += '<span onclick="campPdhChangePage(1)" style="padding: 2px 6px; background: rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-weight: bold; ' + nextDisabled + '">▶</span>';
+        }
+        pagContainer.innerHTML = pagHtml;
+    }
+}
+
+function campPdhChangePage(dir) {
+    campPdhCurrentPage += dir;
+    campRenderPdhDropdownList();
 }
 
 var campProductsPerPage = 10;
@@ -3320,6 +3390,12 @@ function campTogglePdhDropdown() {
     if (dropdown) {
         var isHidden = dropdown.style.display === 'none';
         dropdown.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+            campPdhCurrentPage = 1;
+            var searchInput = document.getElementById('camp-pdh-search');
+            if (searchInput) searchInput.value = '';
+            campRenderPdhDropdownList();
+        }
     }
 }
 
@@ -3529,7 +3605,14 @@ function tabInit(tabEl, type) {
         + '  <button class="btn btn-primary tab-add-pkg-btn" style="flex: 1; font-size: 11px; padding: 6px 10px; background: var(--primary-gradient); font-weight: 600; border: none; border-radius: 6px; color: #fff; cursor: pointer; height: 28px; line-height: 1;">+ Thêm gói trống</button>'
         + '  <div style="position: relative;">'
         + '    <button class="btn btn-secondary btn-sm tab-sync-pdh-btn" style="font-size: 11px; padding: 4px 10px; height: 28px; display: flex; align-items: center; gap: 4px; white-space: nowrap;">Sync PDH ▾</button>'
-        + '    <div class="tab-pdh-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100; min-width: 220px; padding: 6px; max-height: 200px; overflow-y: auto; margin-top: 4px;"></div>'
+        + '    <div class="tab-pdh-dropdown" style="display: none; position: absolute; top: 100%; right: 0; background: #1e293b; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); z-index: 1000; min-width: 240px; padding: 8px; max-height: 380px; overflow-y: auto; margin-top: 4px;">'
+        + '       <div style="font-size: 10px; font-weight: 600; color: var(--text-muted); padding: 4px 8px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 6px;">Chọn gói từ PDH</div>'
+        + '       <div style="padding: 4px 8px; margin-bottom: 6px;">'
+        + '         <input type="text" class="tab-pdh-search" placeholder="🔍 Lọc mã / tên gói..." style="width: 100%; font-size: 11px; padding: 6px 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: #fff;">'
+        + '       </div>'
+        + '       <div class="tab-pdh-list-options" style="display: flex; flex-direction: column; gap: 4px;"></div>'
+        + '       <div class="tab-pdh-pagination" style="display: flex; align-items: center; justify-content: center; gap: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 6px; font-size: 10px;"></div>'
+        + '    </div>'
         + '  </div>'
         + '</div>'
         + '<div style="margin-bottom: 4px;">'
@@ -3588,25 +3671,101 @@ function tabInit(tabEl, type) {
         tabRenderProducts(tabEl);
     });
 
+    tabEl.pdhCurrentPage = 1;
+    tabEl.pdhItemsPerPage = 10;
+
+    function tabRenderPdhDropdown(el) {
+        var searchInput = el.querySelector('.tab-pdh-search');
+        var searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        var filtered = pdhPackagesMock.map(function(pkg, idx) {
+            return { pkg: pkg, originalIdx: idx };
+        }).filter(function(item) {
+            return !searchVal || item.pkg.code.toLowerCase().indexOf(searchVal) > -1 || item.pkg.name.toLowerCase().indexOf(searchVal) > -1;
+        });
+
+        var totalPages = Math.ceil(filtered.length / el.pdhItemsPerPage) || 1;
+        if (el.pdhCurrentPage > totalPages) el.pdhCurrentPage = totalPages;
+        if (el.pdhCurrentPage < 1) el.pdhCurrentPage = 1;
+
+        var start = (el.pdhCurrentPage - 1) * el.pdhItemsPerPage;
+        var end = start + el.pdhItemsPerPage;
+        var pageItems = filtered.slice(start, end);
+
+        var optionsContainer = el.querySelector('.tab-pdh-list-options');
+        if (optionsContainer) {
+            var html = '';
+            pageItems.forEach(function(item) {
+                var pkg = item.pkg;
+                var idx = item.originalIdx;
+                html += '<div onclick="tabSyncPdh(' + idx + ', this)" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+                    + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+                    + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+                    + '</div>';
+            });
+            if (filtered.length === 0) {
+                html = '<div style="font-size: 10px; color: var(--text-muted); padding: 10px; text-align: center;">Không tìm thấy gói</div>';
+            }
+            optionsContainer.innerHTML = html;
+        }
+
+        var pagContainer = el.querySelector('.tab-pdh-pagination');
+        if (pagContainer) {
+            var pagHtml = '';
+            if (totalPages > 1) {
+                var prevDisabled = el.pdhCurrentPage === 1 ? 'pointer-events:none; opacity:0.4;' : 'cursor:pointer;';
+                var nextDisabled = el.pdhCurrentPage === totalPages ? 'pointer-events:none; opacity:0.4;' : 'cursor:pointer;';
+                pagHtml += '<span class="tab-pdh-prev" style="padding: 2px 6px; background: rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-weight: bold; ' + prevDisabled + '">◀</span>';
+                pagHtml += '<span style="color: var(--text-muted); margin: 0 4px;">Trang ' + el.pdhCurrentPage + '/' + totalPages + '</span>';
+                pagHtml += '<span class="tab-pdh-next" style="padding: 2px 6px; background: rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-weight: bold; ' + nextDisabled + '">▶</span>';
+            }
+            pagContainer.innerHTML = pagHtml;
+
+            var prevBtn = pagContainer.querySelector('.tab-pdh-prev');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function(ev) {
+                    ev.stopPropagation();
+                    el.pdhCurrentPage--;
+                    tabRenderPdhDropdown(el);
+                });
+            }
+            var nextBtn = pagContainer.querySelector('.tab-pdh-next');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function(ev) {
+                    ev.stopPropagation();
+                    el.pdhCurrentPage++;
+                    tabRenderPdhDropdown(el);
+                });
+            }
+        }
+    }
+
     var syncBtn = leftCol.querySelector('.tab-sync-pdh-btn');
     syncBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         var dropdown = leftCol.querySelector('.tab-pdh-dropdown');
         if (dropdown) {
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            var isHidden = dropdown.style.display === 'none';
+            dropdown.style.display = isHidden ? 'block' : 'none';
+            if (isHidden) {
+                tabEl.pdhCurrentPage = 1;
+                var sInput = leftCol.querySelector('.tab-pdh-search');
+                if (sInput) sInput.value = '';
+                tabRenderPdhDropdown(tabEl);
+            }
         }
     });
 
-    // Populate Sync PDH options
-    var pdhDropdown = leftCol.querySelector('.tab-pdh-dropdown');
-    var pdhHtml = '';
-    pdhPackagesMock.forEach(function(pkg, idx) {
-        pdhHtml += '<div onclick="tabSyncPdh(' + idx + ', this)" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
-            + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
-            + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
-            + '</div>';
-    });
-    pdhDropdown.innerHTML = pdhHtml;
+    var pdhSearchInput = leftCol.querySelector('.tab-pdh-search');
+    if (pdhSearchInput) {
+        pdhSearchInput.addEventListener('input', function(e) {
+            tabEl.pdhCurrentPage = 1;
+            tabRenderPdhDropdown(tabEl);
+        });
+        pdhSearchInput.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 
     // Lắng nghe thay đổi trên form để tự lưu
     var fields = ['banner', 'name', 'price', 'download', 'upload', 'badge', 'features', 'ctaSubText', 'ctaSubUrl', 'ctaMainText', 'ctaMainUrl'];
@@ -4174,11 +4333,11 @@ function ldpAddPricingCard() {
         + '<div class="form-group"><label>Giá hiển thị</label><input type="text" class="form-input pricing-price-input" placeholder="vd: 150.000đ" oninput="ldpUpdatePricingCardHeader(this)"></div>'
         + '<div class="form-group"><label>Chu kỳ</label><input type="text" class="form-input pricing-cycle-input" value="/tháng" oninput="ldpUpdatePricingCardHeader(this)"></div>'
         + '<div class="form-group"><label>Chu kỳ phụ / Khuyến mãi</label><input type="text" class="form-input pricing-subcycle-input" placeholder="vd: Mua 3 tháng còn 133k/ tháng"></div>'
-        + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input pricing-originalprice-input" placeholder="vd: 180.000đ"></div>'
         + '<div class="form-group"><label>Thứ tự vị trí</label><input type="number" class="form-input pricing-position-input" value="' + idx + '" min="1" style="width:80px;"></div>'
-        + '<div class="form-group" style="grid-column:1/-1;"><label>Mô tả / điều kiện ưu đãi</label><textarea class="form-textarea pricing-desc-input" rows="2" placeholder="Điều kiện, ưu đãi..."></textarea></div>'
-        + '<div class="form-group" style="grid-column:1/-1;"><label>Thông số so sánh (Mỗi dòng một tiêu chí: Tên tiêu chí | Giá trị)</label>'
-        + '<textarea class="form-textarea pricing-features-input" rows="5" placeholder="vd: Xem Ngoại hạng Anh | Xem đồng thời trên 2 thiết bị&#10;Nền tảng hỗ trợ | TV, Box, Mobile, Web&#10;Thể thao giải trí | check&#10;Chất lượng xem | check"></textarea></div>'
+        + '<div class="form-group" style="grid-column:1/-1; margin-bottom: 0;">'
+        + '<label style="font-weight: 600; color: var(--primary);">Giá trị so sánh (tương ứng với các tiêu chí bên trái)</label>'
+        + '<div class="pricing-features-values-container" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;"></div></div>'
+        + '<textarea class="form-textarea pricing-features-input" style="display:none;"></textarea>'
         + '<div class="form-group"><label>Nút CTA chính — Text</label><input type="text" class="form-input pricing-cta-text-input" value="Đăng ký ngay"></div>'
         + '<div class="form-group"><label>Nút CTA chính — URL</label><input type="text" class="form-input pricing-cta-url-input" placeholder="/dang-ky-..."></div>'
         + '</div>'
@@ -4187,50 +4346,520 @@ function ldpAddPricingCard() {
         + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3);" onclick="this.closest(\'.pricing-card-item\').remove()">🗑 Xoá gói</button>'
         + '</div></div>';
     list.appendChild(card);
-}
-
-function ldpUpdateCamSelectCardHeader(inputEl) {
-    var card = inputEl.closest('.cam-select-card-item');
-    if (!card) return;
-    var headerTitleEl = card.querySelector('.cam-select-card-title');
-    if (headerTitleEl) {
-        headerTitleEl.textContent = inputEl.value || 'Sản phẩm / Combo mới';
+    if (typeof ldpUpdatePricingFeaturesInputs === 'function') {
+        ldpUpdatePricingFeaturesInputs(card);
     }
 }
 
-function ldpAddCamSelectCard() {
-    var list = document.getElementById('cam-select-list');
-    if (!list) return;
-    var idx = list.querySelectorAll('.cam-select-card-item').length + 1;
-    var card = document.createElement('div');
-    card.className = 'cam-select-card-item';
-    card.style.cssText = 'border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;';
-    card.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
-        + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">Combo mới ' + idx + '</span>'
-        + '<div style="display:flex; gap:12px; align-items:center;">'
-        + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input type="checkbox" class="cam-select-show-checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>'
-        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;" onclick="this.closest(\'.cam-select-card-item\').remove()">🗑 Xoá</button>'
-        + '</div>'
-        + '</div>'
-        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
-        + '<div class="form-group"><label>Tên combo <span style="color:var(--danger)">*</span></label><input type="text" class="form-input cam-select-name-input" placeholder="vd: 3 Camera Ngoài trời" oninput="ldpUpdateCamSelectCardHeader(this)"></div>'
-        + '<div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text" class="form-input cam-select-badge-input" placeholder="Để trống nếu không có"></div>'
-        + '<div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>'
-        + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
-        + '<input type="text" class="form-input media-url cam-select-image-input" placeholder="URL ảnh minh họa" style="flex:1;">'
-        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
-        + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button></div></div>'
-        + '<div class="form-group"><label>Giá khuyến mãi</label><input type="text" class="form-input cam-select-price-input" placeholder="vd: 999.999đ"></div>'
-        + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input cam-select-originalprice-input" placeholder="vd: 1.200.000đ"></div>'
-        + '<div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text" class="form-input cam-select-discount-input" placeholder="vd: -16%"></div>'
-        + '<div class="form-group"><label>Badge ưu đãi phụ</label><input type="text" class="form-input cam-select-promo-input" placeholder="vd: Ưu đãi 1 TRIỆU 3 CAM"></div>'
-        + '<div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input cam-select-cta-text-input" value="Mua ngay"></div>'
-        + '<div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input cam-select-cta-url-input" placeholder="vd: #register"></div>'
-        + '<div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>'
-        + '<textarea class="form-textarea cam-select-desc-input" rows="2" placeholder="Nhập mô tả combo..."></textarea></div>'
-        + '</div>';
-    list.appendChild(card);
+function ldpUpdatePricingFeaturesInputs(cardItem) {
+    var container = cardItem.querySelector('.pricing-features-values-container');
+    var hiddenTextarea = cardItem.querySelector('.pricing-features-input');
+    var featuresListTextarea = document.getElementById('sa-pricing-features-list');
+    
+    if (!container || !hiddenTextarea || !featuresListTextarea) return;
+    
+    var features = featuresListTextarea.value.split('\n').map(function(f) {
+        return f.trim();
+    }).filter(function(f) {
+        return f !== '';
+    });
+    
+    var currentValuesMap = {};
+    var lines = hiddenTextarea.value.split('\n');
+    lines.forEach(function(line) {
+        var parts = line.split('|');
+        if (parts.length >= 2) {
+            var featureName = parts[0].trim();
+            var val = parts.slice(1).join('|').trim();
+            currentValuesMap[featureName] = val;
+        }
+    });
+    
+    var html = '';
+    features.forEach(function(feature, index) {
+        var val = currentValuesMap[feature] || '';
+        if (val === '') {
+            if (lines[index]) {
+                var parts = lines[index].split('|');
+                if (parts.length >= 2) {
+                    val = parts.slice(1).join('|').trim();
+                } else if (lines[index].trim() !== '') {
+                    val = lines[index].trim();
+                }
+            }
+        }
+        
+        html += '<div class="form-group" style="margin-bottom:8px; display:flex; align-items:center; gap:8px;">'
+            + '<span style="font-size:12px; color:var(--text-muted); width:150px; font-weight:500; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + feature + '">' + feature + '</span>'
+            + '<input type="text" class="form-input pricing-feature-value-input" data-feature="' + feature + '" value="' + val + '" oninput="ldpSavePricingFeatures(this)" placeholder="Nhập giá trị (vd: check, TV...)" style="flex:1;">'
+            + '</div>';
+    });
+    
+    container.innerHTML = html;
+    
+    var compositeValue = '';
+    var inputEls = container.querySelectorAll('.pricing-feature-value-input');
+    inputEls.forEach(function(input) {
+        var fName = input.getAttribute('data-feature');
+        var fVal = input.value.trim();
+        compositeValue += fName + ' | ' + fVal + '\n';
+    });
+    hiddenTextarea.value = compositeValue.trim();
 }
+
+function ldpSavePricingFeatures(inputEl) {
+    var cardItem = inputEl.closest('.pricing-card-item');
+    if (!cardItem) return;
+    
+    var hiddenTextarea = cardItem.querySelector('.pricing-features-input');
+    var container = cardItem.querySelector('.pricing-features-values-container');
+    if (!hiddenTextarea || !container) return;
+    
+    var compositeValue = '';
+    var inputEls = container.querySelectorAll('.pricing-feature-value-input');
+    inputEls.forEach(function(input) {
+        var fName = input.getAttribute('data-feature');
+        var fVal = input.value.trim();
+        compositeValue += fName + ' | ' + fVal + '\n';
+    });
+    hiddenTextarea.value = compositeValue.trim();
+}
+
+function ldpUpdateAllPricingFeatures() {
+    var cards = document.querySelectorAll('#sa-pricing-list .pricing-card-item');
+    cards.forEach(function(card) {
+        ldpUpdatePricingFeaturesInputs(card);
+    });
+}
+
+var camSelectData = [];
+var camActiveSelectIndex = -1;
+var camProductsPerPage = 10;
+var camCurrentPage = 1;
+
+function camInitSelect() {
+    if (camSelectData.length > 0) {
+        camRenderSelectList();
+        return;
+    }
+
+    var defaultCombos = [
+        {
+            show: true,
+            name: '3 Camera Ngoài trời',
+            badge: 'COMBO',
+            image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1',
+            price: '999.999đ',
+            originalPrice: '1.200.000đ',
+            discount: '-16%',
+            promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+            ctaText: 'Mua ngay',
+            ctaUrl: '#',
+            desc: 'Phù hợp nhà có nhiều mặt tiếp cận, biệt thự mini, cơ sở kinh doanh'
+        },
+        {
+            show: true,
+            name: '3 camera trong nhà',
+            badge: 'COMBO',
+            image: 'https://images.unsplash.com/photo-1557318041-1ce374d55ebf',
+            price: '999.999đ',
+            originalPrice: '1.200.000đ',
+            discount: '-16%',
+            promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+            ctaText: 'Mua ngay',
+            ctaUrl: '#',
+            desc: 'Phù hợp nhà nhiều tầng/phòng, có trẻ nhỏ và người già cần quan sát'
+        },
+        {
+            show: true,
+            name: '1 trong - 2 ngoài',
+            badge: 'COMBO',
+            image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8',
+            price: '999.999đ',
+            originalPrice: '1.200.000đ',
+            discount: '-16%',
+            promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+            ctaText: 'Mua ngay',
+            ctaUrl: '#',
+            desc: 'Phù hợp giám sát chính bao quát bên ngoài, quan sát cơ bản bên trong.'
+        }
+    ];
+
+    camSelectData = defaultCombos;
+    
+    var pdhOptsContainer = document.getElementById('cam-pdh-list-options');
+    if (pdhOptsContainer) {
+        var html = '';
+        pdhPackagesMock.forEach(function(pkg, index) {
+            html += '<div onclick="camSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+                + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+                + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+                + '</div>';
+        });
+        pdhOptsContainer.innerHTML = html;
+
+        var style = document.createElement('style');
+        style.innerHTML = '.pdh-dropdown-item:hover { background: rgba(255,255,255,0.08) !important; } .cam-product-list-item:hover { background: rgba(255,255,255,0.06) !important; } .cam-product-list-item.active { background: rgba(249,115,22,0.15) !important; border-color: var(--primary) !important; }';
+        document.head.appendChild(style);
+    }
+
+    camRenderSelectList();
+}
+
+function camRenderSelectList() {
+    var container = document.getElementById('cam-products-nav-list');
+    if (!container) return;
+
+    var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+
+    var filtered = camSelectData.map(function(combo, idx) {
+        return { combo: combo, originalIdx: idx };
+    }).filter(function(item) {
+        return !searchVal || item.combo.name.toLowerCase().indexOf(searchVal) > -1 || item.combo.price.toLowerCase().indexOf(searchVal) > -1;
+    });
+
+    var totalPages = Math.ceil(filtered.length / camProductsPerPage) || 1;
+    if (camCurrentPage > totalPages) camCurrentPage = totalPages;
+    if (camCurrentPage < 1) camCurrentPage = 1;
+
+    var start = (camCurrentPage - 1) * camProductsPerPage;
+    var end = start + camProductsPerPage;
+    var pageItems = filtered.slice(start, end);
+
+    var html = '';
+    pageItems.forEach(function (item) {
+        var combo = item.combo;
+        var idx = item.originalIdx;
+        var activeClass = idx === camActiveSelectIndex ? 'active' : '';
+        var showChecked = combo.show ? 'checked' : '';
+        var displayIdx = idx + 1;
+
+        html += '<div class="cam-product-list-item ' + activeClass + '" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="camSelectProduct(' + idx + ')">'
+            + '<div style="display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden;">'
+            + '<span style="font-size: 11px; font-weight: 700; color: var(--primary); min-width: 45px;">Combo ' + displayIdx + '</span>'
+            + '<span style="font-size: 12px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;" class="item-title">' + combo.name + '</span>'
+            + '</div>'
+            + '<div style="display: flex; align-items: center; gap: 6px;" onclick="event.stopPropagation()">'
+            + '<input type="checkbox" ' + showChecked + ' onchange="camToggleShow(' + idx + ', this)" title="Hiển thị" style="accent-color: var(--success); cursor: pointer; width: 13px; height: 13px; margin: 0;">'
+            + '<span onclick="camMoveProduct(' + idx + ', -1)" title="Di chuyển lên" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▲</span>'
+            + '<span onclick="camMoveProduct(' + idx + ', 1)" title="Di chuyển xuống" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▼</span>'
+            + '<span onclick="camDeleteProduct(' + idx + ')" title="Xóa combo" style="cursor: pointer; font-size: 12px; color: var(--danger); font-weight: bold; padding: 2px 4px; margin-left: 2px;">✕</span>'
+            + '</div>'
+            + '</div>';
+    });
+
+    if (filtered.length === 0) {
+        html = '<div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 20px 0;">Không tìm thấy combo nào</div>';
+    }
+
+    container.innerHTML = html;
+
+    camRenderPagination(filtered.length, totalPages);
+    camSyncHiddenDom();
+}
+
+function camRenderPagination(totalItems, totalPages) {
+    var pagContainer = document.getElementById('cam-products-pagination');
+    if (!pagContainer) return;
+
+    if (totalItems <= camProductsPerPage) {
+        pagContainer.style.display = 'none';
+        return;
+    }
+
+    pagContainer.style.display = 'flex';
+    var prevDisabled = camCurrentPage === 1 ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+    var nextDisabled = camCurrentPage === totalPages ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+
+    var html = '<button class="btn btn-secondary btn-sm" onclick="camPrevPage()" ' + prevDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">◀</button>'
+        + '<span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Trang ' + camCurrentPage + ' / ' + totalPages + '</span>'
+        + '<button class="btn btn-secondary btn-sm" onclick="camNextPage()" ' + nextDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">▶</button>';
+
+    pagContainer.innerHTML = html;
+}
+
+function camPrevPage() {
+    if (camCurrentPage > 1) {
+        camCurrentPage--;
+        camRenderSelectList();
+    }
+}
+
+function camNextPage() {
+    var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+    var filteredCount = camSelectData.filter(function(combo) {
+        return !searchVal || combo.name.toLowerCase().indexOf(searchVal) > -1 || combo.price.toLowerCase().indexOf(searchVal) > -1;
+    }).length;
+    var totalPages = Math.ceil(filteredCount / camProductsPerPage) || 1;
+    if (camCurrentPage < totalPages) {
+        camCurrentPage++;
+        camRenderSelectList();
+    }
+}
+
+function camSelectProduct(idx) {
+    camActiveSelectIndex = idx;
+    
+    var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
+    items.forEach(function(item) {
+        item.classList.remove('active');
+    });
+    
+    var clickedItem = Array.from(document.querySelectorAll('#cam-products-nav-list .cam-product-list-item')).find(function(item) {
+        return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
+    });
+    if (clickedItem) clickedItem.classList.add('active');
+
+    var combo = camSelectData[idx];
+    if (!combo) return;
+
+    document.getElementById('cam-product-detail-empty').style.display = 'none';
+    document.getElementById('cam-product-detail-form').style.display = 'block';
+
+    document.getElementById('cam-edit-idx').value = idx;
+    document.getElementById('cam-edit-header-title').textContent = combo.name || 'Combo mới';
+    document.getElementById('cam-edit-show').checked = combo.show;
+    document.getElementById('cam-edit-name').value = combo.name || '';
+    document.getElementById('cam-edit-badge').value = combo.badge || '';
+    document.getElementById('cam-edit-image').value = combo.image || '';
+    document.getElementById('cam-edit-price').value = combo.price || '';
+    document.getElementById('cam-edit-originalprice').value = combo.originalPrice || '';
+    document.getElementById('cam-edit-discount').value = combo.discount || '';
+    document.getElementById('cam-edit-promo').value = combo.promo || '';
+    document.getElementById('cam-edit-cta-text').value = combo.ctaText || 'Mua ngay';
+    document.getElementById('cam-edit-cta-url').value = combo.ctaUrl || '';
+    document.getElementById('cam-edit-desc').value = combo.desc || '';
+}
+
+function camSaveDetailField(fieldName) {
+    var idx = parseInt(document.getElementById('cam-edit-idx').value);
+    if (isNaN(idx) || idx < 0 || idx >= camSelectData.length) return;
+
+    var combo = camSelectData[idx];
+    if (!combo) return;
+
+    if (fieldName === 'show') combo.show = document.getElementById('cam-edit-show').checked;
+    else if (fieldName === 'name') {
+        combo.name = document.getElementById('cam-edit-name').value;
+        document.getElementById('cam-edit-header-title').textContent = combo.name || 'Combo mới';
+        var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
+        var clickedItem = Array.from(items).find(function(item) {
+            return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
+        });
+        if (clickedItem) {
+            var titleSpan = clickedItem.querySelector('.item-title');
+            if (titleSpan) titleSpan.textContent = combo.name || 'Combo chưa đặt tên';
+        }
+    }
+    else if (fieldName === 'badge') combo.badge = document.getElementById('cam-edit-badge').value;
+    else if (fieldName === 'image') combo.image = document.getElementById('cam-edit-image').value;
+    else if (fieldName === 'price') combo.price = document.getElementById('cam-edit-price').value;
+    else if (fieldName === 'originalPrice') combo.originalPrice = document.getElementById('cam-edit-originalprice').value;
+    else if (fieldName === 'discount') combo.discount = document.getElementById('cam-edit-discount').value;
+    else if (fieldName === 'promo') combo.promo = document.getElementById('cam-edit-promo').value;
+    else if (fieldName === 'ctaText') combo.ctaText = document.getElementById('cam-edit-cta-text').value;
+    else if (fieldName === 'ctaUrl') combo.ctaUrl = document.getElementById('cam-edit-cta-url').value;
+    else if (fieldName === 'desc') combo.desc = document.getElementById('cam-edit-desc').value;
+
+    camSyncHiddenDom();
+}
+
+function camAddSelectCardGóiMới() {
+    var idx = camSelectData.length;
+    camSelectData.push({
+        show: true,
+        name: 'Combo mới ' + (idx + 1),
+        badge: 'COMBO',
+        image: '',
+        price: '1.000.000đ',
+        originalPrice: '1.200.000đ',
+        discount: '-16%',
+        promo: 'Ưu đãi hấp dẫn',
+        ctaText: 'Mua ngay',
+        ctaUrl: '#',
+        desc: 'Mô tả chi tiết combo mới...'
+    });
+    camCurrentPage = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+    camRenderSelectList();
+    camSelectProduct(idx);
+}
+
+function camToggleShow(idx, checkbox) {
+    if (camSelectData[idx]) {
+        camSelectData[idx].show = checkbox.checked;
+        if (idx === camActiveSelectIndex) {
+            document.getElementById('cam-edit-show').checked = checkbox.checked;
+        }
+        camSyncHiddenDom();
+    }
+}
+
+function camMoveProduct(idx, direction) {
+    var targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= camSelectData.length) return;
+
+    var temp = camSelectData[idx];
+    camSelectData[idx] = camSelectData[targetIdx];
+    camSelectData[targetIdx] = temp;
+
+    if (camActiveSelectIndex === idx) {
+        camActiveSelectIndex = targetIdx;
+    } else if (camActiveSelectIndex === targetIdx) {
+        camActiveSelectIndex = idx;
+    }
+
+    camCurrentPage = Math.ceil((camActiveSelectIndex + 1) / camProductsPerPage) || 1;
+    camRenderSelectList();
+    if (camActiveSelectIndex >= 0) {
+        camSelectProduct(camActiveSelectIndex);
+    }
+}
+
+function camDeleteProduct(idx) {
+    camSelectData.splice(idx, 1);
+    if (camActiveSelectIndex === idx) {
+        camActiveSelectIndex = -1;
+        document.getElementById('cam-product-detail-empty').style.display = 'flex';
+        document.getElementById('cam-product-detail-form').style.display = 'none';
+    } else if (camActiveSelectIndex > idx) {
+        camActiveSelectIndex--;
+    }
+
+    var totalPages = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+    if (camCurrentPage > totalPages) {
+        camCurrentPage = totalPages;
+    }
+
+    camRenderSelectList();
+    if (camActiveSelectIndex >= 0) {
+        camSelectProduct(camActiveSelectIndex);
+    }
+}
+
+function camDeleteActiveProduct() {
+    var idx = parseInt(document.getElementById('cam-edit-idx').value);
+    if (!isNaN(idx) && idx >= 0) {
+        camDeleteProduct(idx);
+    }
+}
+
+function camTogglePdhDropdown() {
+    var dropdown = document.getElementById('cam-pdh-dropdown');
+    if (dropdown) {
+        var isHidden = dropdown.style.display === 'none';
+        dropdown.style.display = isHidden ? 'block' : 'none';
+    }
+}
+
+function camSyncPdhPackage(pdhIndex) {
+    var pkgMock = pdhPackagesMock[pdhIndex];
+    if (!pkgMock) return;
+
+    var idx = camSelectData.length;
+    
+    // Tính toán giá gốc mock = giá khuyến mãi * 1.2
+    var cleanedPriceStr = pkgMock.price.replace(/\./g, '');
+    var priceNum = parseInt(cleanedPriceStr) || 1000000;
+    var origPriceNum = Math.round(priceNum * 1.2);
+    
+    // Format dạng e.g. 1.200.000đ
+    var formatPrice = function(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+    };
+
+    camSelectData.push({
+        show: true,
+        name: pkgMock.name,
+        badge: 'COMBO',
+        image: pkgMock.banner || '',
+        price: formatPrice(priceNum),
+        originalPrice: formatPrice(origPriceNum),
+        discount: '-16%',
+        promo: 'Đồng bộ từ PDH',
+        ctaText: 'Mua ngay',
+        ctaUrl: '#',
+        desc: pkgMock.features ? pkgMock.features.replace(/\n/g, ', ') : 'Mô tả chi tiết combo mới...'
+    });
+
+    var dropdown = document.getElementById('cam-pdh-dropdown');
+    if (dropdown) dropdown.style.display = 'none';
+
+    camCurrentPage = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+    camRenderSelectList();
+    camSelectProduct(idx);
+}
+
+function camFilterProducts() {
+    camCurrentPage = 1;
+    camRenderSelectList();
+    if (camActiveSelectIndex >= 0) {
+        var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+        var combo = camSelectData[camActiveSelectIndex];
+        if (combo && searchVal && combo.name.toLowerCase().indexOf(searchVal) === -1 && combo.price.toLowerCase().indexOf(searchVal) === -1) {
+            document.getElementById('cam-product-detail-empty').style.display = 'flex';
+            document.getElementById('cam-product-detail-form').style.display = 'none';
+        } else {
+            var filteredIdx = camSelectData.map(function(p, i) {
+                return { p: p, i: i };
+            }).filter(function(item) {
+                return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
+            }).findIndex(function(item) {
+                return item.i === camActiveSelectIndex;
+            });
+            if (filteredIdx >= 0) {
+                camCurrentPage = Math.ceil((filteredIdx + 1) / camProductsPerPage) || 1;
+                camRenderSelectList();
+                camSelectProduct(camActiveSelectIndex);
+            }
+        }
+    }
+}
+
+function camSyncHiddenDom() {
+    var container = document.getElementById('cam-select-list');
+    if (!container) return;
+
+    container.innerHTML = '';
+    
+    camSelectData.forEach(function (combo, i) {
+        var card = document.createElement('div');
+        card.className = 'cam-select-card-item';
+        card.style.display = 'none';
+        
+        var showChecked = combo.show ? 'checked' : '';
+        
+        var html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
+            + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">' + combo.name + '</span>'
+            + '<div style="display:flex; gap:12px; align-items:center;">'
+            + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input type="checkbox" class="cam-select-show-checkbox" ' + showChecked + ' style="accent-color:var(--success);"> Hiển thị</label>'
+            + '</div>'
+            + '</div>'
+            + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
+            + '<input type="text" class="cam-select-name-input" value="' + combo.name + '">'
+            + '<input type="text" class="cam-select-badge-input" value="' + combo.badge + '">'
+            + '<input type="text" class="cam-select-image-input" value="' + combo.image + '">'
+            + '<input type="text" class="cam-select-price-input" value="' + combo.price + '">'
+            + '<input type="text" class="cam-select-originalprice-input" value="' + combo.originalPrice + '">'
+            + '<input type="text" class="cam-select-discount-input" value="' + combo.discount + '">'
+            + '<input type="text" class="cam-select-promo-input" value="' + combo.promo + '">'
+            + '<input type="text" class="cam-select-cta-text-input" value="' + combo.ctaText + '">'
+            + '<input type="text" class="cam-select-cta-url-input" value="' + combo.ctaUrl + '">'
+            + '<textarea class="cam-select-desc-input">' + combo.desc + '</textarea>'
+            + '</div>';
+        
+        card.innerHTML = html;
+        container.appendChild(card);
+    });
+}
+
+// Đóng dropdown khi click ngoài cho Camera PDH
+document.addEventListener('click', function (event) {
+    var dropdown = document.getElementById('cam-pdh-dropdown');
+    var btn = document.querySelector('button[onclick="camTogglePdhDropdown()"]');
+    if (dropdown && dropdown.style.display === 'block' && btn && !btn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
 
 function ldpCloseSection() {
     document.querySelectorAll('.ldp-section-row').forEach(function (row) {
@@ -4277,6 +4906,12 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'inet-countdown') {
+        var chk = document.querySelector('#ldpsec-inet-countdown .countdown-enable-chk');
+        var isEnabled = chk ? chk.checked : false;
+        var titleInput = document.querySelector('#ldpsec-inet-countdown .countdown-title');
+        var title = titleInput ? titleInput.value : '';
+        summaryText = (isEnabled ? '[Bật] ' : '[Tắt] ') + 'Section độc lập · Ưu đãi: "' + title + '"';
     } else if (sectionId === 'inet-stats') {
         var inputs = document.querySelectorAll('#ldpsec-inet-stats input[type="text"]');
         var count = 0;
@@ -4323,11 +4958,11 @@ function ldpSaveSection() {
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Tiêu đề: "' + text + '"';
     } else if (sectionId === 'sa-hero') {
-        var group = Array.from(document.querySelectorAll('#ldpsec-sa-hero .form-group')).find(function (g) {
-            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline');
-        });
-        var text = group ? group.querySelector('input').value : '';
-        summaryText = 'Headline: "' + text + '"';
+        var chk = document.querySelector('#ldpsec-sa-hero .countdown-enable-chk');
+        var isEnabled = chk ? chk.checked : false;
+        var titleInput = document.querySelector('#ldpsec-sa-hero .countdown-title');
+        var title = titleInput ? titleInput.value : '';
+        summaryText = (isEnabled ? '[Bật Countdown] ' : '[Tắt Countdown] ') + 'Nhãn: "' + title + '"';
     } else if (sectionId === 'cam-usp') {
         var group = Array.from(document.querySelectorAll('#ldpsec-cam-usp .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
@@ -4387,24 +5022,24 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Sticky: "' + text + '"';
-    } else if (sectionId === 'sa-features') {
-        var group = Array.from(document.querySelectorAll('#ldpsec-sa-features .form-group')).find(function (g) {
-            return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline');
-        });
-        var text = group ? group.querySelector('input').value : '';
-        summaryText = 'Tiêu đề: "' + text + '"';
     } else if (sectionId === 'sa-categories') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-categories .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Tiêu đề: "' + text + '"';
+    } else if (sectionId === 'sa-experience') {
+        var group = Array.from(document.querySelectorAll('#ldpsec-sa-experience .form-group')).find(function (g) {
+            return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề section');
+        });
+        var text = group ? group.querySelector('input').value : '';
+        summaryText = 'Tiêu đề: "' + text + '" · 4 đặc điểm giải trí';
     } else if (sectionId === 'sa-pricing') {
         var group = Array.from(document.querySelectorAll('#ldpsec-sa-pricing .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
         });
         var text = group ? group.querySelector('input').value : '';
-        summaryText = 'Tiêu đề: "' + text + '"';
+        summaryText = 'Tiêu đề: "' + text + '" · ' + document.querySelectorAll('#sa-pricing-list .pricing-card-item').length + ' gói cước';
     } else if (sectionId === 'sa-offer') {
         var title = document.querySelector('#ldpsec-sa-offer input.form-input');
         summaryText = 'Offer: "' + (title ? title.value : '') + '"';
@@ -4436,6 +5071,12 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Headline: "' + text + '"';
+    } else if (sectionId === 'camp-countdown') {
+        var chk = document.querySelector('#ldpsec-camp-countdown .countdown-enable-chk');
+        var isEnabled = chk ? chk.checked : false;
+        var titleInput = document.querySelector('#ldpsec-camp-countdown .countdown-title');
+        var title = titleInput ? titleInput.value : '';
+        summaryText = (isEnabled ? '[Bật] ' : '[Tắt] ') + 'Section độc lập · Ưu đãi: "' + title + '"';
     } else if (sectionId === 'lead-hero') {
         var group = Array.from(document.querySelectorAll('#ldpsec-lead-hero .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
@@ -4465,7 +5106,7 @@ function ldpSaveSection() {
 
     var row = document.querySelector('.ldp-section-row[data-section-id="' + sectionId + '"]');
     if (row) {
-        var descEl = row.querySelector('span[style*="var(--text-muted)"]') || row.querySelector('div > span:last-child');
+        var descEl = row.querySelector('.section-desc') || row.querySelector('span[style*="var(--text-muted)"]') || row.querySelector('div[style*="color:var(--text-muted)"]') || row.querySelector('div > span:last-child');
         if (descEl) {
             descEl.textContent = summaryText;
         }
@@ -4490,72 +5131,7 @@ function updateLdpSeoPreview() {
     if (slugInput && prevSlug) prevSlug.textContent = slugInput.value || 'km-internet-t5';
 }
 
-// Realtime UTM Preview
-function updateLdpUtmPreview() {
-    var slug = document.getElementById('ldp-url-slug') ? document.getElementById('ldp-url-slug').value : 'km-internet-t5';
-    var source = document.getElementById('ldp-utm-source') ? document.getElementById('ldp-utm-source').value : '';
-    var medium = document.getElementById('ldp-utm-medium') ? document.getElementById('ldp-utm-medium').value : '';
-    var campaign = document.getElementById('ldp-utm-campaign') ? document.getElementById('ldp-utm-campaign').value : '';
 
-    var url = 'fpt.vn/' + slug;
-    var params = [];
-    if (source) params.push('utm_source=' + encodeURIComponent(source));
-    if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
-    if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
-
-    var fullUrl = url + (params.length > 0 ? '?' + params.join('&') : '');
-    var previewText = document.getElementById('ldp-utm-preview-text');
-    if (previewText) previewText.textContent = fullUrl;
-}
-
-// Copy UTM URL to clipboard
-function ldpCopyUtm() {
-    var previewText = document.getElementById('ldp-utm-preview-text');
-    if (!previewText) return;
-    var text = previewText.textContent || previewText.innerText;
-    navigator.clipboard.writeText(text).then(function () {
-        var btn = document.querySelector('#ldp-utm-preview-box button');
-        if (btn) {
-            var originalText = btn.textContent;
-            btn.textContent = '✅ Đã chép!';
-            btn.style.background = 'rgba(16, 185, 129, 0.15)';
-            btn.style.color = '#10b981';
-            btn.style.borderColor = 'rgba(16, 185, 129, 0.3)';
-            setTimeout(function () {
-                btn.textContent = originalText;
-                btn.style.background = '';
-                btn.style.color = '';
-                btn.style.borderColor = '';
-            }, 1500);
-        }
-    }).catch(function (err) {
-        console.error('Không thể sao chép URL: ', err);
-    });
-}
-
-// Generate UTM automatically
-function ldpGenerateUtm() {
-    var campaignName = document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '';
-    if (!campaignName) return;
-    var slug = campaignName.toLowerCase()
-        .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
-        .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
-        .replace(/ì|í|ị|ỉ|ĩ/g, "i")
-        .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
-        .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
-        .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
-        .replace(/đ/g, "d")
-        .replace(/[^a-z0-9\s]/g, "")
-        .replace(/\s+/g, "-");
-
-    var sourceEl = document.getElementById('ldp-utm-source');
-    var mediumEl = document.getElementById('ldp-utm-medium');
-    var campaignEl = document.getElementById('ldp-utm-campaign');
-    if (sourceEl) sourceEl.value = 'direct';
-    if (mediumEl) mediumEl.value = 'referral';
-    if (campaignEl) campaignEl.value = slug;
-    updateLdpUtmPreview();
-}
 
 function ldpImportHtmlFile(input) {
     if (!input.files || !input.files[0]) return;
@@ -4681,6 +5257,55 @@ function ldpAddPromo() {
     list.appendChild(div);
 }
 
+function ldpRefactorFaqItems() {
+    document.querySelectorAll('.faq-item, div[style*="border-glass"][style*="padding:14px"]').forEach(function(item, idx) {
+        var selectEl = item.querySelector('.faq-sync-select');
+        var qInput = item.querySelector('.faq-question-input');
+        var aTextarea = item.querySelector('.faq-answer-textarea');
+        var deleteBtn = item.querySelector('button[title="Xóa câu hỏi"], button[onclick*="remove"]');
+        
+        if (selectEl && qInput && aTextarea && qInput.type !== 'hidden') {
+            // Chuyển sang dạng input ẩn
+            qInput.type = 'hidden';
+            var qGroup = qInput.closest('.form-group');
+            if (qGroup) qGroup.style.display = 'none';
+
+            // Chuyển textarea thành input ẩn hoặc ẩn hẳn form-group
+            aTextarea.style.display = 'none';
+            var aGroup = aTextarea.closest('.form-group');
+            if (aGroup) aGroup.style.display = 'none';
+            
+            var selectGroup = selectEl.closest('.form-group');
+            if (selectGroup) {
+                selectGroup.style.display = 'none';
+            }
+
+            // Thiết lập style flex row cực gọn cho item
+            item.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
+            
+            if (deleteBtn) deleteBtn.remove();
+            
+            var label = document.createElement('span');
+            label.style.cssText = 'font-size:11px; font-weight:700; color:var(--primary); min-width:70px;';
+            label.textContent = 'Câu hỏi ' + (idx + 1);
+            
+            var newDelBtn = document.createElement('button');
+            newDelBtn.className = 'btn btn-secondary btn-sm';
+            newDelBtn.style.cssText = 'color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;';
+            newDelBtn.textContent = '🗑 Xóa';
+            newDelBtn.onclick = function() {
+                item.remove();
+            };
+            
+            // Sắp xếp lại DOM các phần tử hiển thị
+            item.prepend(label);
+            item.appendChild(selectEl);
+            selectEl.style.cssText = 'flex:1; padding:6px 8px; font-size:12px; margin:0; display:block;';
+            item.appendChild(newDelBtn);
+        }
+    });
+}
+
 // Sync FAQ database to specific fields
 function ldpSyncFaqToFields(selectEl) {
     var faqId = selectEl.value;
@@ -4715,20 +5340,19 @@ function ldpAddFaqItem(listId, qText, aText) {
     var idx = list.children.length + 1;
     var div = document.createElement('div');
     div.className = 'faq-item';
-    div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-top:10px; background:var(--bg-secondary);';
+    div.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
 
     var optionsHtml = '<option value="">-- Chọn câu hỏi từ FAQ chung để đồng bộ --</option>';
     for (var key in faqArticlesData) {
-        optionsHtml += '<option value="' + key + '">' + faqArticlesData[key].question + '</option>';
+        var selected = (actualQ && faqArticlesData[key].question === actualQ) ? 'selected' : '';
+        optionsHtml += '<option value="' + key + '" ' + selected + '>' + faqArticlesData[key].question + '</option>';
     }
 
-    div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa câu hỏi">🗑</button>'
-        + '<div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px; display:block; margin-bottom:4px;">Đồng bộ từ kho FAQ chung</label>'
-        + '<select class="form-input faq-sync-select" onchange="ldpSyncFaqToFields(this)" style="padding:6px 8px; font-size:12px;">' + optionsHtml + '</select></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Câu hỏi ' + idx + '</label><input type="text" class="form-input faq-question-input" value="' + (actualQ || '') + '" placeholder="Nhập câu hỏi..."></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Trả lời ' + idx + '</label><textarea class="form-textarea faq-answer-textarea" rows="2" placeholder="Nhập câu trả lời...">' + (actualA || '') + '</textarea></div>'
-        + '</div>';
+    div.innerHTML = '<span style="font-size:11px; font-weight:700; color:var(--primary); min-width:70px;">Câu hỏi ' + idx + '</span>'
+        + '<select class="form-input faq-sync-select" onchange="ldpSyncFaqToFields(this)" style="flex:1; padding:6px 8px; font-size:12px; margin:0;">' + optionsHtml + '</select>'
+        + '<input type="hidden" class="faq-question-input" value="' + (actualQ || '') + '">'
+        + '<input type="hidden" class="faq-answer-textarea" value="' + (actualA || '') + '">'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;" onclick="this.parentElement.remove()" title="Xóa câu hỏi">🗑 Xóa</button>';
     list.appendChild(div);
 }
 
@@ -4791,10 +5415,10 @@ var newsTagsData = {
 };
 
 var tagMappingData = {
-    'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: true },
-    'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: true },
+    'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: false },
+    'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: false },
     'wifi6': { skus: ['MODEM-AX3000GZ', 'INT-SKY'], fallback: false },
-    'truyenhinh': { skus: ['PLAY-MAX'], fallback: true }
+    'truyenhinh': { skus: ['PLAY-MAX'], fallback: false }
 };
 
 var skuTagsData = {};
@@ -4895,14 +5519,10 @@ function renderTagMappingTable() {
             }
         }
 
-        // Trạng thái fallback
-        const fallbackBadge = data.fallback
-            ? '<span class="badge" style="background:rgba(16,185,129,0.15); color:var(--success); border:1px solid rgba(16,185,129,0.3); font-size:10px;">Bật</span>'
-            : '<span class="badge" style="background:rgba(255,255,255,0.05); color:var(--text-muted); border:1px solid rgba(255,255,255,0.1); font-size:10px;">Tắt</span>';
-
         tr.innerHTML = `
                     <td style="font-weight:600; color:var(--primary); font-size:13px;">#${displayTagName}${draftBadge}</td>
                     <td><div style="display:flex; flex-wrap:wrap; gap:2px;">${skuBadges}</div></td>
+                    <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
                     <td style="text-align:right;" onclick="event.stopPropagation();">
                         <button class="btn btn-sm" style="background:rgba(249,115,22,0.15); color:#FB923C; padding:4px 8px; border:none; margin-right:4px;" onclick="selectTagForConfig('${tag}')">✏️ Cấu hình</button>
                         <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 8px; border:none;" onclick="deleteTagMapping('${tag}')">🗑</button>
@@ -4912,7 +5532,7 @@ function renderTagMappingTable() {
     }
 
     if (tbody.children.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
     }
 }
 
@@ -4975,9 +5595,7 @@ function selectTagForConfig(tag) {
 
     renderSelectedSkusPreview();
 
-    // Fallback toggle
-    const fallbackToggle = document.getElementById('tag-fallback-toggle');
-    fallbackToggle.checked = tagMappingData[tag] ? tagMappingData[tag].fallback : false;
+
 
     // Update preview status
     document.getElementById('tag-preview-status').className = 'badge active';
@@ -4985,11 +5603,9 @@ function selectTagForConfig(tag) {
 
     updateTagMappingPreview();
 
-    // Mở modal cấu hình (dạng drawer trượt từ phải qua)
-    var overlay = document.getElementById('tag-config-modal');
-    var drawerContent = document.getElementById('tag-config-drawer-content');
-    overlay.style.display = 'flex';
-    setTimeout(function () { drawerContent.style.transform = 'translateX(0)'; }, 10);
+    // Chuyển hướng giao diện (hiển thị trang cấu hình inline, ẩn danh sách mapping)
+    document.getElementById('news-tag-mapping').style.display = 'none';
+    document.getElementById('tag-config-modal').style.display = 'block';
 }
 
 function renderSelectedSkusPreview() {
@@ -5168,7 +5784,6 @@ function updateTagMappingPreview() {
 
     // Lấy các bài viết trùng tag
     let matched = mockArticles.filter(art => art.tag === tag);
-    const fallbackEnabled = document.getElementById('tag-fallback-toggle').checked;
 
     if (matched.length > 0) {
         matched.forEach(art => {
@@ -5199,54 +5814,15 @@ function updateTagMappingPreview() {
             previewList.appendChild(item);
         });
     } else {
-        if (fallbackEnabled) {
-            let fallbacks = mockArticles.filter(art => art.tag === 'khuyenmai');
-            if (fallbacks.length > 0) {
-                fallbacks.forEach(art => {
-                    const item = document.createElement('div');
-                    item.style.padding = '8px';
-                    item.style.background = 'rgba(245,158,11,0.04)';
-                    item.style.border = '1px dashed rgba(245,158,11,0.2)';
-                    item.style.borderRadius = '5px';
-                    item.style.display = 'flex';
-                    item.style.flexDirection = 'column';
-                    item.style.gap = '4px';
-
-                    item.innerHTML = `
-                                <div style="font-size:12.5px; font-weight:500; color:#eee; display:flex; align-items:flex-start; gap:6px;">
-                                    <span style="font-size:12px;">🎁</span>
-                                    <span>${art.title}</span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:6px; font-size:10px;">
-                                    <span class="badge" style="background:rgba(245,158,11,0.15); color:var(--warning); padding:1px 4px; border-radius:3px;">Khuyến mãi Hot</span>
-                                    <span style="color:var(--text-muted); font-style:italic;">Fallback logic kích hoạt</span>
-                                </div>
-                            `;
-                    previewList.appendChild(item);
-                });
-            } else {
-                previewList.innerHTML = '<div style="color:var(--danger); font-size:11px; text-align:center; padding:15px; border:1px dashed rgba(239,68,68,0.2); border-radius:6px; background:rgba(239,68,68,0.02);">Chưa cấu hình bài viết Fallback.</div>';
-            }
-        } else {
-            previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp và quy tắc Fallback đang tắt.</div>';
-        }
+        previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp với tag #' + tag + '.</div>';
     }
 }
-
-function saveTagConfig() {
-    const tag = document.getElementById('selected-tag-name').value;
-    if (!tag) {
-        alert('Vui lòng chọn Tag để lưu cấu hình.');
-        return;
-    }
-
-    const fallback = document.getElementById('tag-fallback-toggle').checked;
 
     if (!tagMappingData[tag]) {
         tagMappingData[tag] = {};
     }
     tagMappingData[tag].skus = [...tempSelectedSkus];
-    tagMappingData[tag].fallback = fallback;
+    tagMappingData[tag].fallback = false;
 
     syncTagMappingToSku();
     renderTagMappingTable();
@@ -5265,21 +5841,16 @@ function resetTagConfig() {
     document.getElementById('selected-tag-name').value = '';
     document.getElementById('tag-config-title').innerText = 'Chọn một Tag để cấu hình';
     renderSelectedSkusPreview();
-    document.getElementById('tag-fallback-toggle').checked = false;
+
 
     document.getElementById('tag-preview-status').className = 'badge';
     document.getElementById('tag-preview-status').innerText = 'Vui lòng chọn Tag';
 
     updateTagMappingPreview();
 
-    // Đóng modal cấu hình (dạng drawer trượt từ phải qua)
-    var drawerContent = document.getElementById('tag-config-drawer-content');
-    if (drawerContent) {
-        drawerContent.style.transform = 'translateX(100%)';
-    }
-    setTimeout(function () {
-        document.getElementById('tag-config-modal').style.display = 'none';
-    }, 260);
+    // Quay lại trang danh sách (hiển thị danh sách mapping, ẩn trang cấu hình inline)
+    document.getElementById('news-tag-mapping').style.display = 'block';
+    document.getElementById('tag-config-modal').style.display = 'none';
 }
 
 function showAddTagMappingModal() {

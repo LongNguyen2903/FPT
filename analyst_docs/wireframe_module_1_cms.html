@@ -5441,43 +5441,7 @@
                                     </div>
                                 </div>
 
-                                <div
-                                    style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 14px;">
-                                    Tracking & UTM</div>
-                                <div class="form-grid"
-                                    style="grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:8px;">
-                                    <div class="form-group">
-                                        <label>UTM Source</label>
-                                        <input type="text" id="ldp-utm-source" class="form-input" value="facebook"
-                                            placeholder="facebook / google / zalo" oninput="updateLdpUtmPreview()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>UTM Medium</label>
-                                        <input type="text" id="ldp-utm-medium" class="form-input" value="cpc"
-                                            placeholder="cpc / banner / email" oninput="updateLdpUtmPreview()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>UTM Campaign</label>
-                                        <input type="text" id="ldp-utm-campaign" class="form-input"
-                                            value="km-internet-t5" oninput="updateLdpUtmPreview()">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Facebook Pixel ID</label>
-                                        <input type="text" class="form-input" placeholder="123456789012345">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>GA4 Event Name</label>
-                                        <input type="text" class="form-input" placeholder="ldp_view">
-                                    </div>
-                                </div>
-                                <div id="ldp-utm-preview-box"
-                                    style="background:rgba(249,115,22,0.07); border:1px solid rgba(249,115,22,0.2); border-radius:8px; padding:12px 14px; font-size:12px; color:var(--text-muted); margin-bottom:20px; word-break:break-all; display:flex; align-items:center; justify-content:space-between; gap:12px;">
-                                    🔗 <strong style="color:var(--primary);">UTM Preview:</strong> <span
-                                        id="ldp-utm-preview-text">fpt.vn/km-internet-t5?utm_source=facebook&utm_medium=cpc&utm_campaign=km-internet-t5</span>
-                                    <button class="btn btn-secondary btn-sm"
-                                        style="flex-shrink:0; padding:6px 12px; font-size:12px;"
-                                        onclick="ldpCopyUtm()">📋 Sao chép</button>
-                                </div>
+
 
                                 <div
                                     style="display:flex; justify-content:space-between; gap:10px; padding-top:16px; border-top:1px solid var(--border-glass);">
@@ -5599,16 +5563,13 @@
                                                     ① Hero Wi-Fi 7 (Countdown)</div>
                                                 <div
                                                     style="font-size:11px; padding:3px 6px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
-                                                    ② Branding Bar</div>
+                                                    ② USP Công nghệ Wi-Fi 7</div>
                                                 <div
                                                     style="font-size:11px; padding:3px 6px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
-                                                    ③ USP Công nghệ Wi-Fi 7</div>
+                                                    ③ Các gói cước Wi-Fi 7</div>
                                                 <div
                                                     style="font-size:11px; padding:3px 6px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
-                                                    ④ Các gói cước Wi-Fi 7</div>
-                                                <div
-                                                    style="font-size:11px; padding:3px 6px; background:rgba(255,255,255,0.04); border-radius:4px; color:var(--text-secondary);">
-                                                    ⑤ Bảng so sánh thế hệ Wi-Fi</div>
+                                                    ④ Bảng so sánh thế hệ Wi-Fi</div>
                                             </div>
                                             <button class="btn btn-primary"
                                                 style="width:100%; background:linear-gradient(135deg,#1e3a8a,#3b82f6); border-color:#3b82f6;"
@@ -5826,11 +5787,9 @@
                                                 style="width:32px; height:32px; background:rgba(255,107,0,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 🖼</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">① Hero Banner + Form đăng
-                                                    ký</div>
+                                                <div style="font-weight:600; font-size:14px;">① Hero Internet (kèm Countdown Case 1)</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
-                                                    Background, Headline, Subheadline, CTA button, Tiêu đề form, Nút
-                                                    Submit</div>
+                                                    Background, Headline, Subheadline, CTA chính & phụ, dải Countdown dính liền (Case 1)</div>
                                             </div>
                                             <span
                                                 style="background:rgba(249,115,22,0.12); color:var(--primary); padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Hero</span>
@@ -5841,6 +5800,37 @@
                                             <button class="btn btn-secondary btn-sm"
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('inet-hero')">✏ Sửa</button>
+                                        </div>
+                                        <!-- inet-countdown -->
+                                        <div class="ldp-section-row" data-section-id="inet-countdown">
+                                            <span
+                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
+                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'up')"
+                                                    title="Di chuyển lên">▲</button>
+                                                <button class="btn btn-secondary btn-sm"
+                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
+                                                    onclick="ldpMoveSection(this, 'down')"
+                                                    title="Di chuyển xuống">▼</button>
+                                            </div>
+                                            <div
+                                                style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                ⏰</div>
+                                            <div style="flex:1; min-width:0;">
+                                                <div style="font-weight:600; font-size:14px;">② Dải Countdown độc lập (Case 2)</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">[Tắt] Section độc lập · Ưu đãi: ""</div>
+                                            </div>
+                                            <span
+                                                style="background:rgba(239,68,68,0.12); color:#ef4444; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Countdown</span>
+                                            <label
+                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
+                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
+                                                thị</label>
+                                            <button class="btn btn-secondary btn-sm"
+                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
+                                                onclick="ldpEditSection('inet-countdown')">✏ Sửa</button>
                                         </div>
                                         <div class="ldp-section-row" data-section-id="inet-stats">
                                             <span
@@ -5859,7 +5849,7 @@
                                                 style="width:32px; height:32px; background:rgba(16,185,129,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 📊</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">② Thanh số liệu nổi bật
+                                                <div style="font-weight:600; font-size:14px;">③ Thanh số liệu nổi bật
                                                 </div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">6
                                                     chỉ số: icon + text (tốc độ, số khách hàng, đánh giá sao…)</div>
@@ -5891,7 +5881,7 @@
                                                 style="width:32px; height:32px; background:rgba(245,158,11,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 📦</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">③ Danh sách gói Internet
+                                                <div style="font-weight:600; font-size:14px;">④ Danh sách gói Internet
                                                 </div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Tiêu đề section, các card gói: tên, giá, tốc độ, specs, nút đăng ký
@@ -5924,7 +5914,7 @@
                                                 style="width:32px; height:32px; background:rgba(99,102,241,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 &#128250;</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">&#9315; FPT Play Box
+                                                <div style="font-weight:600; font-size:14px;">⑤ FPT Play Box
                                                     &#8212; Gi&#7843;i tr&#237; kh&#244;ng gi&#7899;i h&#7841;n</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     &#7840;nh s&#7843;n ph&#7849;m, t&#237;nh n&#259;ng n&#7893;i
@@ -5958,7 +5948,7 @@
                                                 style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 🎬</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑤ Video Review FPT
+                                                <div style="font-weight:600; font-size:14px;">⑥ Video Review FPT
                                                     Internet</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Tiêu đề section, danh sách video (thumbnail + link YouTube)</div>
@@ -5990,7 +5980,7 @@
                                                 style="width:32px; height:32px; background:rgba(249,115,22,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 ⭐</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑥ Đánh giá khách hàng
+                                                <div style="font-weight:600; font-size:14px;">⑦ Đánh giá khách hàng
                                                 </div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Tiêu đề, danh sách review: avatar, tên, rating, nội dung</div>
@@ -6022,7 +6012,7 @@
                                                 style="width:32px; height:32px; background:rgba(20,184,166,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 &#128221;</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">&#9318; H&#432;&#7899;ng
+                                                <div style="font-weight:600; font-size:14px;">⑧ H&#432;&#7899;ng
                                                     d&#7851;n th&#7911; t&#7909;c &#273;&#259;ng k&#253;</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     C&#225;c b&#432;&#7899;c &#273;&#259;ng k&#253; FPT Internet</div>
@@ -6055,7 +6045,7 @@
                                                 style="width:32px; height:32px; background:rgba(234,179,8,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 &#127873;</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">&#9319; &#431;u
+                                                <div style="font-weight:600; font-size:14px;">⑨ &#431;u
                                                     &#273;&#227;i khuy&#7871;n m&#227;i</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     C&#225;c ch&#432;&#417;ng tr&#236;nh khuy&#7871;n m&#227;i
@@ -6089,7 +6079,7 @@
                                                 style="width:32px; height:32px; background:rgba(168,85,247,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 &#10067;</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">&#9320; C&#226;u h&#7887;i
+                                                <div style="font-weight:600; font-size:14px;">⑩ C&#226;u h&#7887;i
                                                     th&#432;&#7901;ng g&#7863;p</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Danh s&#225;ch FAQ v&#7873; FPT Internet</div>
@@ -6122,8 +6112,7 @@
                                                 style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 📝</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑩ Banner ưu đãi (cuối
-                                                    trang)</div>
+                                                <div style="font-weight:600; font-size:14px;">⑪ Form đăng ký (cuối trang)</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Ảnh nền, icon hộp quà, tiêu đề, mô tả ngắn, nút hành động (CTA)
                                                 </div>
@@ -6138,6 +6127,20 @@
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('inet-form')">✏ Sửa</button>
                                         </div>
+                                    </div>
+                                    <!-- Cấu hình Popup Form đăng ký tư vấn chung (Internet) -->
+                                    <div style="margin-top:16px; padding:12px; background:rgba(255,107,0,0.06); border:1px dashed rgba(255,107,0,0.3); border-radius:8px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                                        <div style="flex:1; min-width:0;">
+                                            <div style="font-weight:600; font-size:13px; color:#ff8c42; display:flex; align-items:center; gap:6px;">
+                                                💬 Cấu hình Popup Form tư vấn chung
+                                            </div>
+                                            <div id="inet-popup-form-summary" style="font-size:11px; color:var(--text-muted); margin-top:2px;">
+                                                Tiêu đề Popup: "NHẬN TƯ VẤN MIỄN PHÍ"
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#ff8c42; border-color:#ff8c42; flex-shrink:0;"
+                                            onclick="ldpEditSection('inet-popup-form')">✏ Cấu hình Popup</button>
                                     </div>
                                 </div>
 
@@ -6778,8 +6781,8 @@
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('camp-hero')">✏ Sửa</button>
                                         </div>
-                                        <!-- camp-branding -->
-                                        <div class="ldp-section-row" data-section-id="camp-branding">
+                                        <!-- camp-countdown -->
+                                        <div class="ldp-section-row" data-section-id="camp-countdown">
                                             <span
                                                 style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
                                             <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
@@ -6793,24 +6796,21 @@
                                                     title="Di chuyển xuống">▼</button>
                                             </div>
                                             <div
-                                                style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
-                                                🎪</div>
+                                                style="width:32px; height:32px; background:rgba(239,68,68,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
+                                                ⏰</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">② Thanh biểu ngữ thương
-                                                    hiệu</div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
-                                                    Logo FPT Telecom & Wi-Fi 7 chạy ngang (marquee), tagline thông điệp
-                                                    chính</div>
+                                                <div style="font-weight:600; font-size:14px;">② Dải Countdown độc lập (Case 2)</div>
+                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">[Tắt] Section độc lập · Ưu đãi: ""</div>
                                             </div>
                                             <span
-                                                style="background:rgba(139,92,246,0.12); color:#a78bfa; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Branding</span>
+                                                style="background:rgba(239,68,68,0.12); color:#ef4444; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Countdown</span>
                                             <label
                                                 style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
                                                     type="checkbox" checked style="accent-color:var(--success);"> Hiển
                                                 thị</label>
                                             <button class="btn btn-secondary btn-sm"
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
-                                                onclick="ldpEditSection('camp-branding')">✏ Sửa</button>
+                                                onclick="ldpEditSection('camp-countdown')">✏ Sửa</button>
                                         </div>
                                         <!-- camp-usp -->
                                         <div class="ldp-section-row" data-section-id="camp-usp">
@@ -6979,39 +6979,6 @@
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('camp-videos')">✏ Sửa</button>
                                         </div>
-                                        <!-- camp-form -->
-                                        <div class="ldp-section-row" data-section-id="camp-form">
-                                            <span
-                                                style="color:var(--text-muted); font-size:18px; cursor:grab; user-select:none;">☰</span>
-                                            <div style="display:flex; flex-direction:column; gap:2px; flex-shrink:0;">
-                                                <button class="btn btn-secondary btn-sm"
-                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
-                                                    onclick="ldpMoveSection(this, 'up')"
-                                                    title="Di chuyển lên">▲</button>
-                                                <button class="btn btn-secondary btn-sm"
-                                                    style="padding:2px 4px; font-size:8px; line-height:1; border-color:rgba(255,255,255,0.1); color:var(--text-muted);"
-                                                    onclick="ldpMoveSection(this, 'down')"
-                                                    title="Di chuyển xuống">▼</button>
-                                            </div>
-                                            <div
-                                                style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
-                                                📝</div>
-                                            <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑧ Form đăng ký tư vấn
-                                                </div>
-                                                <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
-                                                    Form đăng ký tư vấn nhận ưu đãi Wi-Fi 7 (Họ tên, SĐT, Địa chỉ)</div>
-                                            </div>
-                                            <span
-                                                style="background:rgba(139,92,246,0.12); color:#a78bfa; padding:2px 8px; border-radius:10px; font-size:11px; white-space:nowrap;">Form</span>
-                                            <label
-                                                style="display:flex; align-items:center; gap:5px; font-size:12px; color:var(--text-muted); cursor:pointer; white-space:nowrap; flex-shrink:0;"><input
-                                                    type="checkbox" checked style="accent-color:var(--success);"> Hiển
-                                                thị</label>
-                                            <button class="btn btn-secondary btn-sm"
-                                                style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
-                                                onclick="ldpEditSection('camp-form')">✏ Sửa</button>
-                                        </div>
                                         <!-- camp-sticky -->
                                         <div class="ldp-section-row" data-section-id="camp-sticky">
                                             <span
@@ -7030,7 +6997,7 @@
                                                 style="width:32px; height:32px; background:rgba(236,72,153,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 📌</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑨ Sticky Bottom Bar
+                                                <div style="font-weight:600; font-size:14px;">⑧ Sticky Bottom Bar
                                                 </div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Thanh ưu đãi/đăng ký nhanh dính chân trang (Icon, Tiêu đề, CTA)
@@ -7064,7 +7031,7 @@
                                                 style="width:32px; height:32px; background:rgba(139,92,246,0.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;">
                                                 ❓</div>
                                             <div style="flex:1; min-width:0;">
-                                                <div style="font-weight:600; font-size:14px;">⑩ FAQ Accordion</div>
+                                                <div style="font-weight:600; font-size:14px;">⑨ FAQ Accordion</div>
                                                 <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">
                                                     Các thắc mắc về thiết bị Wi-Fi 7, phí hòa mạng, chuyển đổi từ gói cũ
                                                 </div>
@@ -7079,6 +7046,20 @@
                                                 style="color:var(--primary); border-color:var(--primary); flex-shrink:0;"
                                                 onclick="ldpEditSection('camp-faq')">✏ Sửa</button>
                                         </div>
+                                    </div>
+                                    <!-- Cấu hình Popup Form đăng ký tư vấn chung (Campaign) -->
+                                    <div style="margin-top:16px; padding:12px; background:rgba(255,107,0,0.06); border:1px dashed rgba(255,107,0,0.3); border-radius:8px; display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                                        <div style="flex:1; min-width:0;">
+                                            <div style="font-weight:600; font-size:13px; color:#ff8c42; display:flex; align-items:center; gap:6px;">
+                                                💬 Cấu hình Popup Form tư vấn chung
+                                            </div>
+                                            <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">
+                                                Hiển thị dạng popup khi click các nút CTA trỏ liên kết về <strong style="color:var(--primary);">#register-form</strong>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#ff8c42; border-color:#ff8c42; flex-shrink:0;"
+                                            onclick="ldpEditSection('camp-form')">✏ Cấu hình Popup</button>
                                     </div>
                                 </div>
 
@@ -9825,7 +9806,6 @@
                                             <tr>
                                                 <th>Tag</th>
                                                 <th>SKUs Liên Kết</th>
-                                                <th>Trạng thái Fallback</th>
                                                 <th>Bài viết khớp Tag</th>
                                                 <th style="text-align:right;">Thao tác</th>
                                             </tr>
@@ -9835,6 +9815,97 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trang Cấu hình Tag Mapping (Tag Config Page - Hiển thị chi tiết inline) -->
+                    <div id="tag-config-modal" style="display:none; margin-top:20px;">
+                        <div class="card" id="tag-config-drawer-content"
+                            style="padding:0; margin:0; background:none; border:none; box-shadow:none; display:flex; flex-direction:column; gap:16px;">
+                            <div
+                                style="display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:10px;">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="resetTagConfig()" style="padding:4px 8px; font-size:12px; display:inline-flex; align-items:center; gap:4px;">
+                                    <span>← Quay lại danh sách</span>
+                                </button>
+                                <h3 id="tag-config-title"
+                                    style="margin:0; color:#fff; font-size:16px; display:flex; align-items:center; gap:8px;">
+                                    <span>⚙️ Cấu hình Tag Mapping</span>
+                                </h3>
+                            </div>
+
+                            <input type="hidden" id="selected-tag-name" value="">
+
+                            <!-- Layout 2 cột bên trong Modal -->
+                            <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap:20px;">
+                                <!-- Cột Trái: Các trường cấu hình -->
+                                <div
+                                    style="display:flex; flex-direction:column; gap:16px; border-right: 1px solid rgba(255,255,255,0.08); padding-right:20px;">
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <div
+                                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                            <label
+                                                style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh
+                                                sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                onclick="openSkuSelectorModal()"
+                                                style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
+                                                <span>✏️ Quản lý SKUs</span>
+                                            </button>
+                                        </div>
+                                        <div id="tag-selected-skus-preview"
+                                            style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.25); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px; min-height:100px; max-height:160px; overflow-y:auto;">
+                                            <span
+                                                style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa
+                                                có SKU nào được liên kết</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Cột Phải: Live Preview -->
+                                <div style="display:flex; flex-direction:column; gap:12px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span
+                                            style="font-size:13px; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                            👁️ Live Preview: Khối "Thông tin hay" của Tag
+                                        </span>
+                                        <span id="tag-preview-status" class="badge" style="font-size:10px;">Vui lòng chọn
+                                            Tag</span>
+                                    </div>
+
+                                    <div
+                                        style="display:flex; gap:12px; background:rgba(0,0,0,0.25); border:1px dashed rgba(255,255,255,0.08); border-radius:8px; padding:12px; min-height:180px; flex:1;">
+                                        <!-- Cột trái: Mockup Content SKU -->
+                                        <div
+                                            style="flex:1; background:rgba(255,255,255,0.01); border:1px dashed rgba(255,255,255,0.06); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:6px; opacity:0.3; pointer-events:none;">
+                                            <div style="width:60%; height:8px; background:#fff; border-radius:2px;"></div>
+                                            <div
+                                                style="width:100%; height:60px; background:rgba(255,255,255,0.03); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">
+                                                [ Nội dung trang chi tiết sản phẩm ]</div>
+                                        </div>
+
+                                        <!-- Cột phải: Live Preview thực tế Sticky Sidebar -->
+                                        <div
+                                            style="flex:1.5; border-left:1px solid rgba(255,255,255,0.06); padding-left:12px; display:flex; flex-direction:column; gap:8px;">
+                                            <div
+                                                style="font-size:9.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px;">
+                                                💡 THÔNG TIN HAY</div>
+                                            <div id="tag-article-preview-list"
+                                                style="display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:140px; padding-right:4px;">
+                                                <!-- Render bài viết preview động -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Page -->
+                            <div
+                                style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid rgba(255,255,255,0.08); padding-top:16px; margin-top:8px;">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="resetTagConfig()">Hủy</button>
+                                <button type="button" class="btn btn-primary btn-sm" id="btn-save-tag-config"
+                                    onclick="saveTagConfig()">Lưu cấu hình</button>
                             </div>
                         </div>
                     </div>
@@ -10039,110 +10110,7 @@
 
 
 
-            <!-- Modal Cấu hình Tag Mapping (Tag Config Modal - Drawer trượt từ phải qua) -->
-            <div id="tag-config-modal" class="modal" onclick="if(event.target===this) resetTagConfig();"
-                style="display:none; position:fixed; z-index:9999; inset:0; background-color:rgba(0,0,0,0.5); align-items:stretch; justify-content:flex-end;">
-                <div class="card" id="tag-config-drawer-content"
-                    style="position:fixed; right:0; top:0; bottom:0; width:60%; max-width:90%; padding:24px; margin:0; border-radius:0; border-top-left-radius:16px; border-bottom-left-radius:16px; box-shadow: -10px 0 30px rgba(0,0,0,0.5); background: var(--bg-panel); border:none; border-left: 1px solid var(--border-glass); display:flex; flex-direction:column; gap:16px; overflow-y:auto; transform:translateX(100%); transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
-                        <h3 id="tag-config-title"
-                            style="margin:0; color:#fff; font-size:16px; display:flex; align-items:center; gap:8px;">
-                            <span>⚙️ Cấu hình Tag Mapping</span>
-                        </h3>
-                        <span style="cursor:pointer; font-size:20px; color:var(--text-muted);"
-                            onclick="resetTagConfig()">✕</span>
-                    </div>
 
-                    <input type="hidden" id="selected-tag-name" value="">
-
-                    <!-- Layout 2 cột bên trong Modal -->
-                    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap:20px;">
-                        <!-- Cột Trái: Các trường cấu hình -->
-                        <div
-                            style="display:flex; flex-direction:column; gap:16px; border-right: 1px solid rgba(255,255,255,0.08); padding-right:20px;">
-                            <div class="form-group" style="margin-bottom:0;">
-                                <div
-                                    style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                                    <label
-                                        style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh
-                                        sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
-                                    <button type="button" class="btn btn-secondary btn-sm"
-                                        onclick="openSkuSelectorModal()"
-                                        style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
-                                        <span>✏️ Quản lý SKUs</span>
-                                    </button>
-                                </div>
-                                <div id="tag-selected-skus-preview"
-                                    style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.25); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px; min-height:100px; max-height:160px; overflow-y:auto;">
-                                    <span
-                                        style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa
-                                        có SKU nào được liên kết</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group" style="margin-bottom:0;">
-                                <div
-                                    style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); padding:10px 12px; border-radius:6px;">
-                                    <div
-                                        style="display:flex; flex-direction:column; gap:2px; flex:1; padding-right:10px;">
-                                        <span style="font-size:12.5px; font-weight:500;">Quy tắc Fallback khi không
-                                            khớp</span>
-                                        <span style="font-size:11px; color:var(--text-muted);">Hiển thị Bài viết Khuyến
-                                            mãi Hot khi không khớp bài trùng tag.</span>
-                                    </div>
-                                    <label class="switch"><input type="checkbox" id="tag-fallback-toggle"
-                                            onchange="updateTagMappingPreview()"><span class="slider"></span></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Cột Phải: Live Preview -->
-                        <div style="display:flex; flex-direction:column; gap:12px;">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <span
-                                    style="font-size:13px; font-weight:600; color:var(--text-main); display:flex; align-items:center; gap:6px;">
-                                    👁️ Live Preview: Khối "Thông tin hay" của Tag
-                                </span>
-                                <span id="tag-preview-status" class="badge" style="font-size:10px;">Vui lòng chọn
-                                    Tag</span>
-                            </div>
-
-                            <div
-                                style="display:flex; gap:12px; background:rgba(0,0,0,0.25); border:1px dashed rgba(255,255,255,0.08); border-radius:8px; padding:12px; min-height:180px; flex:1;">
-                                <!-- Cột trái: Mockup Content SKU -->
-                                <div
-                                    style="flex:1; background:rgba(255,255,255,0.01); border:1px dashed rgba(255,255,255,0.06); border-radius:6px; padding:10px; display:flex; flex-direction:column; gap:6px; opacity:0.3; pointer-events:none;">
-                                    <div style="width:60%; height:8px; background:#fff; border-radius:2px;"></div>
-                                    <div
-                                        style="width:100%; height:60px; background:rgba(255,255,255,0.03); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; text-align:center;">
-                                        [ Nội dung trang chi tiết sản phẩm ]</div>
-                                </div>
-
-                                <!-- Cột phải: Live Preview thực tế Sticky Sidebar -->
-                                <div
-                                    style="flex:1.5; border-left:1px solid rgba(255,255,255,0.06); padding-left:12px; display:flex; flex-direction:column; gap:8px;">
-                                    <div
-                                        style="font-size:9.5px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px;">
-                                        💡 THÔNG TIN HAY</div>
-                                    <div id="tag-article-preview-list"
-                                        style="display:flex; flex-direction:column; gap:6px; overflow-y:auto; max-height:140px; padding-right:4px;">
-                                        <!-- Render bài viết preview động -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footer Modal -->
-                    <div
-                        style="display:flex; justify-content:flex-end; gap:8px; border-top:1px solid rgba(255,255,255,0.08); padding-top:16px; margin-top:8px;">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="resetTagConfig()">Hủy</button>
-                        <button type="button" class="btn btn-primary btn-sm" id="btn-save-tag-config"
-                            onclick="saveTagConfig()">Lưu cấu hình</button>
-                    </div>
-                </div>
-            </div>
 
             <!-- Modal Thêm Thông tin hay mới (Chọn Tag để cấu hình Mapping) -->
             <div id="add-tag-mapping-modal" class="modal"
@@ -15606,8 +15574,8 @@
             'Quản lý FAQ': [[1, 1], [1, 1], [1, 1], [1, 0]],
             'Cấu hình Thông tin hay': [[1, 1], [1, 1], [1, 1], [0, 0]],
             'Thông tin checkout': [[1, 1], [1, 1], [0, 0], [0, 0]],
-            'Quản lý Người dùng': [[1, 1], [1, 1], [0, 0], [0, 0]],
-            'Phân quyền tính năng': [[1, 1], [1, 1], [0, 0], [0, 0]],
+            'Quản lý Người dùng': [[1, 1], [1, 0], [0, 0], [0, 0]],
+            'Phân quyền tính năng': [[1, 1], [1, 0], [0, 0], [0, 0]],
         };
 
         // roleColors: [superAdmin, adminCMS, bienTap, viewer]
@@ -17779,7 +17747,6 @@
             if (slugInput) {
                 slugInput.value = slug;
                 if (typeof updateLdpSeoPreview === 'function') updateLdpSeoPreview();
-                if (typeof updateLdpUtmPreview === 'function') updateLdpUtmPreview();
             }
             ldpChooseTemplate(tplId);
         }
@@ -17865,14 +17832,29 @@
                 if (typeof leadInitAllTabs === 'function') {
                     leadInitAllTabs();
                 }
+            } else if (sectionId === 'cam-select') {
+                if (typeof camInitSelect === 'function') {
+                    camInitSelect();
+                }
             }
+
+            // Tự động thu gọn giao diện tất cả các block FAQ Accordion thành flex row 1 dòng cực kỳ gọn
+            if (typeof ldpRefactorFaqItems === 'function') {
+                ldpRefactorFaqItems();
+            }
+
+            // Đảm bảo tất cả các trường FAQ tĩnh và động đều là readonly để người dùng chỉ được đồng bộ từ kho FAQ chung
+            document.querySelectorAll('.faq-question-input, .faq-answer-textarea').forEach(function (el) {
+                el.readOnly = true;
+                el.placeholder = 'Đồng bộ từ kho FAQ chung...';
+            });
 
             var titles = {
                 // Internet
-                'inet-hero': 'Hero Banner + Form đăng ký', 'inet-stats': 'Thanh số liệu nổi bật',
+                'inet-hero': 'Hero Internet (Countdown Case 1)', 'inet-countdown': 'Dải Countdown độc lập (Case 2)', 'inet-stats': 'Thanh số liệu nổi bật',
                 'inet-products': 'Danh sách gói Internet', 'inet-playbox': 'FPT Play Box', 'inet-review': 'Video Review',
                 'inet-testimonials': 'Đánh giá khách hàng', 'inet-steps': 'Hướng dẫn đăng ký', 'inet-promo': 'Ưu đãi khuyến mãi',
-                'inet-faq': 'Câu hỏi thường gặp', 'inet-form': 'Form đăng ký (cuối trang)',
+                'inet-faq': 'Câu hỏi thường gặp', 'inet-form': 'Form đăng ký (cuối trang)', 'inet-popup-form': 'Popup Form đăng ký tư vấn chung',
                 // SA
                 'sa-hero': 'Hero Banner khuyến mãi', 'sa-offer': 'Dải ưu đãi & Countdown',
                 'sa-sports': 'Thể thao trực tiếp', 'sa-features': 'Highlight tính năng',
@@ -17887,7 +17869,7 @@
                 'cam-awards': 'Thương hiệu & Giải thưởng', 'cam-faq': 'FAQ Accordion',
                 'cam-sticky': 'Sticky Bottom Bar',
                 // Campaign
-                'camp-hero': 'Hero Wi-Fi 7 (Countdown & CTA chính/phụ)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
+                'camp-hero': 'Hero Wi-Fi 7 (Countdown & CTA chính/phụ)', 'camp-countdown': 'Dải Countdown độc lập (Case 2)', 'camp-branding': 'Thanh biểu ngữ thương hiệu',
                 'camp-usp': 'Vì sao chọn SpeedX – Wi-Fi 7 của FPT', 'camp-products': 'Các gói cước Wi-Fi 7',
                 'camp-compare': 'Bảng so sánh thế hệ Wi-Fi', 'camp-targets': 'Đối tượng mục tiêu',
                 'camp-videos': 'Video Review thực tế', 'camp-form': 'Form đăng ký tư vấn',
@@ -19386,48 +19368,434 @@
             if (overlay) { setTimeout(function () { overlay.style.display = 'none'; }, 260); }
         }
 
-        function ldpUpdateCamSelectCardHeader(inputEl) {
-            var card = inputEl.closest('.cam-select-card-item');
-            if (!card) return;
-            var headerTitleEl = card.querySelector('.cam-select-card-title');
-            if (headerTitleEl) {
-                headerTitleEl.textContent = inputEl.value || 'Sản phẩm / Combo mới';
+        var camSelectData = [];
+        var camActiveSelectIndex = -1;
+        var camProductsPerPage = 10;
+        var camCurrentPage = 1;
+
+        function camInitSelect() {
+            if (camSelectData.length > 0) {
+                camRenderSelectList();
+                return;
+            }
+
+            var defaultCombos = [
+                {
+                    show: true,
+                    name: '3 Camera Ngoài trời',
+                    badge: 'COMBO',
+                    image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1',
+                    price: '999.999đ',
+                    originalPrice: '1.200.000đ',
+                    discount: '-16%',
+                    promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+                    ctaText: 'Mua ngay',
+                    ctaUrl: '#',
+                    desc: 'Phù hợp nhà có nhiều mặt tiếp cận, biệt thự mini, cơ sở kinh doanh'
+                },
+                {
+                    show: true,
+                    name: '3 camera trong nhà',
+                    badge: 'COMBO',
+                    image: 'https://images.unsplash.com/photo-1557318041-1ce374d55ebf',
+                    price: '999.999đ',
+                    originalPrice: '1.200.000đ',
+                    discount: '-16%',
+                    promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+                    ctaText: 'Mua ngay',
+                    ctaUrl: '#',
+                    desc: 'Phù hợp nhà nhiều tầng/phòng, có trẻ nhỏ và người già cần quan sát'
+                },
+                {
+                    show: true,
+                    name: '1 trong - 2 ngoài',
+                    badge: 'COMBO',
+                    image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8',
+                    price: '999.999đ',
+                    originalPrice: '1.200.000đ',
+                    discount: '-16%',
+                    promo: 'Ưu đãi 1 TRIỆU 3 CAM',
+                    ctaText: 'Mua ngay',
+                    ctaUrl: '#',
+                    desc: 'Phù hợp giám sát chính bao quát bên ngoài, quan sát cơ bản bên trong.'
+                }
+            ];
+
+            camSelectData = defaultCombos;
+            
+            var pdhOptsContainer = document.getElementById('cam-pdh-list-options');
+            if (pdhOptsContainer) {
+                var html = '';
+                pdhPackagesMock.forEach(function(pkg, index) {
+                    html += '<div onclick="camSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
+                        + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
+                        + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
+                        + '</div>';
+                });
+                pdhOptsContainer.innerHTML = html;
+
+                var style = document.createElement('style');
+                style.innerHTML = '.pdh-dropdown-item:hover { background: rgba(255,255,255,0.08) !important; } .cam-product-list-item:hover { background: rgba(255,255,255,0.06) !important; } .cam-product-list-item.active { background: rgba(249,115,22,0.15) !important; border-color: var(--primary) !important; }';
+                document.head.appendChild(style);
+            }
+
+            camRenderSelectList();
+        }
+
+        function camRenderSelectList() {
+            var container = document.getElementById('cam-products-nav-list');
+            if (!container) return;
+
+            var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+
+            var filtered = camSelectData.map(function(combo, idx) {
+                return { combo: combo, originalIdx: idx };
+            }).filter(function(item) {
+                return !searchVal || item.combo.name.toLowerCase().indexOf(searchVal) > -1 || item.combo.price.toLowerCase().indexOf(searchVal) > -1;
+            });
+
+            var totalPages = Math.ceil(filtered.length / camProductsPerPage) || 1;
+            if (camCurrentPage > totalPages) camCurrentPage = totalPages;
+            if (camCurrentPage < 1) camCurrentPage = 1;
+
+            var start = (camCurrentPage - 1) * camProductsPerPage;
+            var end = start + camProductsPerPage;
+            var pageItems = filtered.slice(start, end);
+
+            var html = '';
+            pageItems.forEach(function (item) {
+                var combo = item.combo;
+                var idx = item.originalIdx;
+                var activeClass = idx === camActiveSelectIndex ? 'active' : '';
+                var showChecked = combo.show ? 'checked' : '';
+                var displayIdx = idx + 1;
+
+                html += '<div class="cam-product-list-item ' + activeClass + '" style="display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="camSelectProduct(' + idx + ')">'
+                    + '<div style="display: flex; align-items: center; gap: 8px; flex: 1; overflow: hidden;">'
+                    + '<span style="font-size: 11px; font-weight: 700; color: var(--primary); min-width: 45px;">Combo ' + displayIdx + '</span>'
+                    + '<span style="font-size: 12px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500;" class="item-title">' + combo.name + '</span>'
+                    + '</div>'
+                    + '<div style="display: flex; align-items: center; gap: 6px;" onclick="event.stopPropagation()">'
+                    + '<input type="checkbox" ' + showChecked + ' onchange="camToggleShow(' + idx + ', this)" title="Hiển thị" style="accent-color: var(--success); cursor: pointer; width: 13px; height: 13px; margin: 0;">'
+                    + '<span onclick="camMoveProduct(' + idx + ', -1)" title="Di chuyển lên" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▲</span>'
+                    + '<span onclick="camMoveProduct(' + idx + ', 1)" title="Di chuyển xuống" style="cursor: pointer; font-size: 10px; color: var(--text-muted); padding: 2px;">▼</span>'
+                    + '<span onclick="camDeleteProduct(' + idx + ')" title="Xóa combo" style="cursor: pointer; font-size: 12px; color: var(--danger); font-weight: bold; padding: 2px 4px; margin-left: 2px;">✕</span>'
+                    + '</div>'
+                    + '</div>';
+            });
+
+            if (filtered.length === 0) {
+                html = '<div style="text-align: center; color: var(--text-muted); font-size: 12px; padding: 20px 0;">Không tìm thấy combo nào</div>';
+            }
+
+            container.innerHTML = html;
+
+            camRenderPagination(filtered.length, totalPages);
+            camSyncHiddenDom();
+        }
+
+        function camRenderPagination(totalItems, totalPages) {
+            var pagContainer = document.getElementById('cam-products-pagination');
+            if (!pagContainer) return;
+
+            if (totalItems <= camProductsPerPage) {
+                pagContainer.style.display = 'none';
+                return;
+            }
+
+            pagContainer.style.display = 'flex';
+            var prevDisabled = camCurrentPage === 1 ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+            var nextDisabled = camCurrentPage === totalPages ? 'disabled style="opacity: 0.3; cursor: not-allowed;"' : '';
+
+            var html = '<button class="btn btn-secondary btn-sm" onclick="camPrevPage()" ' + prevDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">◀</button>'
+                + '<span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Trang ' + camCurrentPage + ' / ' + totalPages + '</span>'
+                + '<button class="btn btn-secondary btn-sm" onclick="camNextPage()" ' + nextDisabled + ' style="padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 4px;">▶</button>';
+
+            pagContainer.innerHTML = html;
+        }
+
+        function camPrevPage() {
+            if (camCurrentPage > 1) {
+                camCurrentPage--;
+                camRenderSelectList();
             }
         }
 
-        function ldpAddCamSelectCard() {
-            var list = document.getElementById('cam-select-list');
-            if (!list) return;
-            var idx = list.querySelectorAll('.cam-select-card-item').length + 1;
-            var card = document.createElement('div');
-            card.className = 'cam-select-card-item';
-            card.style.cssText = 'border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative; margin-top: 10px;';
-            card.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
-                + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">Combo mới ' + idx + '</span>'
-                + '<div style="display:flex; gap:12px; align-items:center;">'
-                + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input type="checkbox" class="cam-select-show-checkbox" checked style="accent-color:var(--success);"> Hiển thị</label>'
-                + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;" onclick="this.closest(\'.cam-select-card-item\').remove()">🗑 Xoá</button>'
-                + '</div>'
-                + '</div>'
-                + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
-                + '<div class="form-group"><label>Tên combo <span style="color:var(--danger)">*</span></label><input type="text" class="form-input cam-select-name-input" placeholder="vd: 3 Camera Ngoài trời" oninput="ldpUpdateCamSelectCardHeader(this)"></div>'
-                + '<div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text" class="form-input cam-select-badge-input" placeholder="Để trống nếu không có"></div>'
-                + '<div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>'
-                + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
-                + '<input type="text" class="form-input media-url cam-select-image-input" placeholder="URL ảnh minh họa" style="flex:1;">'
-                + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
-                + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button></div></div>'
-                + '<div class="form-group"><label>Giá khuyến mãi</label><input type="text" class="form-input cam-select-price-input" placeholder="vd: 999.999đ"></div>'
-                + '<div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text" class="form-input cam-select-originalprice-input" placeholder="vd: 1.200.000đ"></div>'
-                + '<div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text" class="form-input cam-select-discount-input" placeholder="vd: -16%"></div>'
-                + '<div class="form-group"><label>Badge ưu đãi phụ</label><input type="text" class="form-input cam-select-promo-input" placeholder="vd: Ưu đãi 1 TRIỆU 3 CAM"></div>'
-                + '<div class="form-group"><label>Nút CTA — Text</label><input type="text" class="form-input cam-select-cta-text-input" value="Mua ngay"></div>'
-                + '<div class="form-group"><label>Nút CTA — URL</label><input type="text" class="form-input cam-select-cta-url-input" placeholder="vd: #register"></div>'
-                + '<div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>'
-                + '<textarea class="form-textarea cam-select-desc-input" rows="2" placeholder="Nhập mô tả combo..."></textarea></div>'
-                + '</div>';
-            list.appendChild(card);
+        function camNextPage() {
+            var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+            var filteredCount = camSelectData.filter(function(combo) {
+                return !searchVal || combo.name.toLowerCase().indexOf(searchVal) > -1 || combo.price.toLowerCase().indexOf(searchVal) > -1;
+            }).length;
+            var totalPages = Math.ceil(filteredCount / camProductsPerPage) || 1;
+            if (camCurrentPage < totalPages) {
+                camCurrentPage++;
+                camRenderSelectList();
+            }
         }
+
+        function camSelectProduct(idx) {
+            camActiveSelectIndex = idx;
+            
+            var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
+            items.forEach(function(item) {
+                item.classList.remove('active');
+            });
+            
+            var clickedItem = Array.from(document.querySelectorAll('#cam-products-nav-list .cam-product-list-item')).find(function(item) {
+                return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
+            });
+            if (clickedItem) clickedItem.classList.add('active');
+
+            var combo = camSelectData[idx];
+            if (!combo) return;
+
+            document.getElementById('cam-product-detail-empty').style.display = 'none';
+            document.getElementById('cam-product-detail-form').style.display = 'block';
+
+            document.getElementById('cam-edit-idx').value = idx;
+            document.getElementById('cam-edit-header-title').textContent = combo.name || 'Combo mới';
+            document.getElementById('cam-edit-show').checked = combo.show;
+            document.getElementById('cam-edit-name').value = combo.name || '';
+            document.getElementById('cam-edit-badge').value = combo.badge || '';
+            document.getElementById('cam-edit-image').value = combo.image || '';
+            document.getElementById('cam-edit-price').value = combo.price || '';
+            document.getElementById('cam-edit-originalprice').value = combo.originalPrice || '';
+            document.getElementById('cam-edit-discount').value = combo.discount || '';
+            document.getElementById('cam-edit-promo').value = combo.promo || '';
+            document.getElementById('cam-edit-cta-text').value = combo.ctaText || 'Mua ngay';
+            document.getElementById('cam-edit-cta-url').value = combo.ctaUrl || '';
+            document.getElementById('cam-edit-desc').value = combo.desc || '';
+        }
+
+        function camSaveDetailField(fieldName) {
+            var idx = parseInt(document.getElementById('cam-edit-idx').value);
+            if (isNaN(idx) || idx < 0 || idx >= camSelectData.length) return;
+
+            var combo = camSelectData[idx];
+            if (!combo) return;
+
+            if (fieldName === 'show') combo.show = document.getElementById('cam-edit-show').checked;
+            else if (fieldName === 'name') {
+                combo.name = document.getElementById('cam-edit-name').value;
+                document.getElementById('cam-edit-header-title').textContent = combo.name || 'Combo mới';
+                var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
+                var clickedItem = Array.from(items).find(function(item) {
+                    return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
+                });
+                if (clickedItem) {
+                    var titleSpan = clickedItem.querySelector('.item-title');
+                    if (titleSpan) titleSpan.textContent = combo.name || 'Combo chưa đặt tên';
+                }
+            }
+            else if (fieldName === 'badge') combo.badge = document.getElementById('cam-edit-badge').value;
+            else if (fieldName === 'image') combo.image = document.getElementById('cam-edit-image').value;
+            else if (fieldName === 'price') combo.price = document.getElementById('cam-edit-price').value;
+            else if (fieldName === 'originalPrice') combo.originalPrice = document.getElementById('cam-edit-originalprice').value;
+            else if (fieldName === 'discount') combo.discount = document.getElementById('cam-edit-discount').value;
+            else if (fieldName === 'promo') combo.promo = document.getElementById('cam-edit-promo').value;
+            else if (fieldName === 'ctaText') combo.ctaText = document.getElementById('cam-edit-cta-text').value;
+            else if (fieldName === 'ctaUrl') combo.ctaUrl = document.getElementById('cam-edit-cta-url').value;
+            else if (fieldName === 'desc') combo.desc = document.getElementById('cam-edit-desc').value;
+
+            camSyncHiddenDom();
+        }
+
+        function camAddSelectCardGóiMới() {
+            var idx = camSelectData.length;
+            camSelectData.push({
+                show: true,
+                name: 'Combo mới ' + (idx + 1),
+                badge: 'COMBO',
+                image: '',
+                price: '1.000.000đ',
+                originalPrice: '1.200.000đ',
+                discount: '-16%',
+                promo: 'Ưu đãi hấp dẫn',
+                ctaText: 'Mua ngay',
+                ctaUrl: '#',
+                desc: 'Mô tả chi tiết combo mới...'
+            });
+            camCurrentPage = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+            camRenderSelectList();
+            camSelectProduct(idx);
+        }
+
+        function camToggleShow(idx, checkbox) {
+            if (camSelectData[idx]) {
+                camSelectData[idx].show = checkbox.checked;
+                if (idx === camActiveSelectIndex) {
+                    document.getElementById('cam-edit-show').checked = checkbox.checked;
+                }
+                camSyncHiddenDom();
+            }
+        }
+
+        function camMoveProduct(idx, direction) {
+            var targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= camSelectData.length) return;
+
+            var temp = camSelectData[idx];
+            camSelectData[idx] = camSelectData[targetIdx];
+            camSelectData[targetIdx] = temp;
+
+            if (camActiveSelectIndex === idx) {
+                camActiveSelectIndex = targetIdx;
+            } else if (camActiveSelectIndex === targetIdx) {
+                camActiveSelectIndex = idx;
+            }
+
+            camCurrentPage = Math.ceil((camActiveSelectIndex + 1) / camProductsPerPage) || 1;
+            camRenderSelectList();
+            if (camActiveSelectIndex >= 0) {
+                camSelectProduct(camActiveSelectIndex);
+            }
+        }
+
+        function camDeleteProduct(idx) {
+            camSelectData.splice(idx, 1);
+            if (camActiveSelectIndex === idx) {
+                camActiveSelectIndex = -1;
+                document.getElementById('cam-product-detail-empty').style.display = 'flex';
+                document.getElementById('cam-product-detail-form').style.display = 'none';
+            } else if (camActiveSelectIndex > idx) {
+                camActiveSelectIndex--;
+            }
+
+            var totalPages = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+            if (camCurrentPage > totalPages) {
+                camCurrentPage = totalPages;
+            }
+
+            camRenderSelectList();
+            if (camActiveSelectIndex >= 0) {
+                camSelectProduct(camActiveSelectIndex);
+            }
+        }
+
+        function camDeleteActiveProduct() {
+            var idx = parseInt(document.getElementById('cam-edit-idx').value);
+            if (!isNaN(idx) && idx >= 0) {
+                camDeleteProduct(idx);
+            }
+        }
+
+        function camTogglePdhDropdown() {
+            var dropdown = document.getElementById('cam-pdh-dropdown');
+            if (dropdown) {
+                var isHidden = dropdown.style.display === 'none';
+                dropdown.style.display = isHidden ? 'block' : 'none';
+            }
+        }
+
+        function camSyncPdhPackage(pdhIndex) {
+            var pkgMock = pdhPackagesMock[pdhIndex];
+            if (!pkgMock) return;
+
+            var idx = camSelectData.length;
+            
+            // Tính toán giá gốc mock = giá khuyến mãi * 1.2
+            var cleanedPriceStr = pkgMock.price.replace(/\./g, '');
+            var priceNum = parseInt(cleanedPriceStr) || 1000000;
+            var origPriceNum = Math.round(priceNum * 1.2);
+            
+            // Format dạng e.g. 1.200.000đ
+            var formatPrice = function(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+            };
+
+            camSelectData.push({
+                show: true,
+                name: pkgMock.name,
+                badge: 'COMBO',
+                image: pkgMock.banner || '',
+                price: formatPrice(priceNum),
+                originalPrice: formatPrice(origPriceNum),
+                discount: '-16%',
+                promo: 'Đồng bộ từ PDH',
+                ctaText: 'Mua ngay',
+                ctaUrl: '#',
+                desc: pkgMock.features ? pkgMock.features.replace(/\n/g, ', ') : 'Mô tả chi tiết combo mới...'
+            });
+
+            var dropdown = document.getElementById('cam-pdh-dropdown');
+            if (dropdown) dropdown.style.display = 'none';
+
+            camCurrentPage = Math.ceil(camSelectData.length / camProductsPerPage) || 1;
+            camRenderSelectList();
+            camSelectProduct(idx);
+        }
+
+        function camFilterProducts() {
+            camCurrentPage = 1;
+            camRenderSelectList();
+            if (camActiveSelectIndex >= 0) {
+                var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
+                var combo = camSelectData[camActiveSelectIndex];
+                if (combo && searchVal && combo.name.toLowerCase().indexOf(searchVal) === -1 && combo.price.toLowerCase().indexOf(searchVal) === -1) {
+                    document.getElementById('cam-product-detail-empty').style.display = 'flex';
+                    document.getElementById('cam-product-detail-form').style.display = 'none';
+                } else {
+                    var filteredIdx = camSelectData.map(function(p, i) {
+                        return { p: p, i: i };
+                    }).filter(function(item) {
+                        return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
+                    }).findIndex(function(item) {
+                        return item.i === camActiveSelectIndex;
+                    });
+                    if (filteredIdx >= 0) {
+                        camCurrentPage = Math.ceil((filteredIdx + 1) / camProductsPerPage) || 1;
+                        camRenderSelectList();
+                        camSelectProduct(camActiveSelectIndex);
+                    }
+                }
+            }
+        }
+
+        function camSyncHiddenDom() {
+            var container = document.getElementById('cam-select-list');
+            if (!container) return;
+
+            container.innerHTML = '';
+            
+            camSelectData.forEach(function (combo, i) {
+                var card = document.createElement('div');
+                card.className = 'cam-select-card-item';
+                card.style.display = 'none';
+                
+                var showChecked = combo.show ? 'checked' : '';
+                
+                var html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
+                    + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">' + combo.name + '</span>'
+                    + '<div style="display:flex; gap:12px; align-items:center;">'
+                    + '<label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input type="checkbox" class="cam-select-show-checkbox" ' + showChecked + ' style="accent-color:var(--success);"> Hiển thị</label>'
+                    + '</div>'
+                    + '</div>'
+                    + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
+                    + '<input type="text" class="cam-select-name-input" value="' + combo.name + '">'
+                    + '<input type="text" class="cam-select-badge-input" value="' + combo.badge + '">'
+                    + '<input type="text" class="cam-select-image-input" value="' + combo.image + '">'
+                    + '<input type="text" class="cam-select-price-input" value="' + combo.price + '">'
+                    + '<input type="text" class="cam-select-originalprice-input" value="' + combo.originalPrice + '">'
+                    + '<input type="text" class="cam-select-discount-input" value="' + combo.discount + '">'
+                    + '<input type="text" class="cam-select-promo-input" value="' + combo.promo + '">'
+                    + '<input type="text" class="cam-select-cta-text-input" value="' + combo.ctaText + '">'
+                    + '<input type="text" class="cam-select-cta-url-input" value="' + combo.ctaUrl + '">'
+                    + '<textarea class="cam-select-desc-input">' + combo.desc + '</textarea>'
+                    + '</div>';
+                
+                card.innerHTML = html;
+                container.appendChild(card);
+            });
+        }
+
+        // Đóng dropdown khi click ngoài cho Camera PDH
+        document.addEventListener('click', function (event) {
+            var dropdown = document.getElementById('cam-pdh-dropdown');
+            var btn = document.querySelector('button[onclick="camTogglePdhDropdown()"]');
+            if (dropdown && dropdown.style.display === 'block' && btn && !btn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
 
         function ldpUpdateCamAwardHeader(inputEl) {
             var card = inputEl.closest('.cam-award-item');
@@ -19496,7 +19864,18 @@
                     return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline');
                 });
                 var text = group ? group.querySelector('input').value : '';
-                summaryText = 'Headline: "' + text + '"';
+                var chk = document.querySelector('#ldpsec-inet-hero .countdown-enable-chk');
+                var hasCountdown = chk ? chk.checked : false;
+                summaryText = 'Headline: "' + text + '"' + (hasCountdown ? ' (Kèm Countdown)' : '');
+            } else if (sectionId === 'inet-popup-form') {
+                var titleVal = document.getElementById('inet-popup-form-title') ? document.getElementById('inet-popup-form-title').value : '';
+                summaryText = 'Tiêu đề Popup: "' + titleVal + '"';
+            } else if (sectionId === 'inet-countdown') {
+                var chk = document.querySelector('#ldpsec-inet-countdown .countdown-enable-chk');
+                var isEnabled = chk ? chk.checked : false;
+                var titleInput = document.querySelector('#ldpsec-inet-countdown .countdown-title');
+                var title = titleInput ? titleInput.value : '';
+                summaryText = (isEnabled ? '[Bật] ' : '[Tắt] ') + 'Section độc lập · Ưu đãi: "' + title + '"';
             } else if (sectionId === 'inet-stats') {
                 var inputs = document.querySelectorAll('#ldpsec-inet-stats input[type="text"]');
                 var count = 0;
@@ -19671,6 +20050,12 @@
                 });
                 var text = group ? group.querySelector('input').value : '';
                 summaryText = 'Headline: "' + text + '"';
+            } else if (sectionId === 'camp-countdown') {
+                var chk = document.querySelector('#ldpsec-camp-countdown .countdown-enable-chk');
+                var isEnabled = chk ? chk.checked : false;
+                var titleInput = document.querySelector('#ldpsec-camp-countdown .countdown-title');
+                var title = titleInput ? titleInput.value : '';
+                summaryText = (isEnabled ? '[Bật] ' : '[Tắt] ') + 'Section độc lập · Ưu đãi: "' + title + '"';
             } else if (sectionId === 'lead-hero') {
                 var group = Array.from(document.querySelectorAll('#ldpsec-lead-hero .form-group')).find(function (g) {
                     return g.querySelector('label') && g.querySelector('label').textContent.includes('Headline chính');
@@ -19744,72 +20129,7 @@
             if (slugInput && prevSlug) prevSlug.textContent = slugInput.value || 'km-internet-t5';
         }
 
-        // Realtime UTM Preview
-        function updateLdpUtmPreview() {
-            var slug = document.getElementById('ldp-url-slug') ? document.getElementById('ldp-url-slug').value : 'km-internet-t5';
-            var source = document.getElementById('ldp-utm-source') ? document.getElementById('ldp-utm-source').value : '';
-            var medium = document.getElementById('ldp-utm-medium') ? document.getElementById('ldp-utm-medium').value : '';
-            var campaign = document.getElementById('ldp-utm-campaign') ? document.getElementById('ldp-utm-campaign').value : '';
 
-            var url = 'fpt.vn/' + slug;
-            var params = [];
-            if (source) params.push('utm_source=' + encodeURIComponent(source));
-            if (medium) params.push('utm_medium=' + encodeURIComponent(medium));
-            if (campaign) params.push('utm_campaign=' + encodeURIComponent(campaign));
-
-            var fullUrl = url + (params.length > 0 ? '?' + params.join('&') : '');
-            var previewText = document.getElementById('ldp-utm-preview-text');
-            if (previewText) previewText.textContent = fullUrl;
-        }
-
-        // Copy UTM URL to clipboard
-        function ldpCopyUtm() {
-            var previewText = document.getElementById('ldp-utm-preview-text');
-            if (!previewText) return;
-            var text = previewText.textContent || previewText.innerText;
-            navigator.clipboard.writeText(text).then(function () {
-                var btn = document.querySelector('#ldp-utm-preview-box button');
-                if (btn) {
-                    var originalText = btn.textContent;
-                    btn.textContent = '✅ Đã chép!';
-                    btn.style.background = 'rgba(16, 185, 129, 0.15)';
-                    btn.style.color = '#10b981';
-                    btn.style.borderColor = 'rgba(16, 185, 129, 0.3)';
-                    setTimeout(function () {
-                        btn.textContent = originalText;
-                        btn.style.background = '';
-                        btn.style.color = '';
-                        btn.style.borderColor = '';
-                    }, 1500);
-                }
-            }).catch(function (err) {
-                console.error('Không thể sao chép URL: ', err);
-            });
-        }
-
-        // Generate UTM automatically
-        function ldpGenerateUtm() {
-            var campaignName = document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '';
-            if (!campaignName) return;
-            var slug = campaignName.toLowerCase()
-                .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
-                .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
-                .replace(/ì|í|ị|ỉ|ĩ/g, "i")
-                .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
-                .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
-                .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
-                .replace(/đ/g, "d")
-                .replace(/[^a-z0-9\s]/g, "")
-                .replace(/\s+/g, "-");
-
-            var sourceEl = document.getElementById('ldp-utm-source');
-            var mediumEl = document.getElementById('ldp-utm-medium');
-            var campaignEl = document.getElementById('ldp-utm-campaign');
-            if (sourceEl) sourceEl.value = 'direct';
-            if (mediumEl) mediumEl.value = 'referral';
-            if (campaignEl) campaignEl.value = slug;
-            updateLdpUtmPreview();
-        }
 
         function ldpImportHtmlFile(input) {
             if (!input.files || !input.files[0]) return;
@@ -19965,6 +20285,55 @@
             list.appendChild(div);
         }
 
+        function ldpRefactorFaqItems() {
+            document.querySelectorAll('.faq-sync-select').forEach(function(selectEl, idx) {
+                var item = selectEl.closest('.faq-item') || selectEl.closest('div[style*="border-glass"]') || selectEl.parentElement.parentElement;
+                if (!item) return;
+                
+                var qInput = item.querySelector('.faq-question-input');
+                var aTextarea = item.querySelector('.faq-answer-textarea');
+                var deleteBtn = item.querySelector('button[title="Xóa câu hỏi"], button[onclick*="remove"]');
+                
+                if (qInput && qInput.type === 'hidden') return;
+                
+                if (qInput && aTextarea) {
+                    qInput.type = 'hidden';
+                    var qGroup = qInput.closest('.form-group');
+                    if (qGroup) qGroup.style.display = 'none';
+
+                    aTextarea.style.display = 'none';
+                    var aGroup = aTextarea.closest('.form-group');
+                    if (aGroup) aGroup.style.display = 'none';
+                    
+                    var selectGroup = selectEl.closest('.form-group');
+                    if (selectGroup) {
+                        selectGroup.style.display = 'none';
+                    }
+
+                    item.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
+                    
+                    if (deleteBtn) deleteBtn.remove();
+                    
+                    var label = document.createElement('span');
+                    label.style.cssText = 'font-size:11px; font-weight:700; color:var(--primary); min-width:70px;';
+                    label.textContent = 'Câu hỏi ' + (idx + 1);
+                    
+                    var newDelBtn = document.createElement('button');
+                    newDelBtn.className = 'btn btn-secondary btn-sm';
+                    newDelBtn.style.cssText = 'color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;';
+                    newDelBtn.textContent = '🗑 Xóa';
+                    newDelBtn.onclick = function() {
+                        item.remove();
+                    };
+                    
+                    item.prepend(label);
+                    item.appendChild(selectEl);
+                    selectEl.style.cssText = 'flex:1; padding:6px 8px; font-size:12px; margin:0; display:block;';
+                    item.appendChild(newDelBtn);
+                }
+            });
+        }
+
         // Sync FAQ database to specific fields
         function ldpSyncFaqToFields(selectEl) {
             var faqId = selectEl.value;
@@ -20010,8 +20379,8 @@
                 + '<div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">'
                 + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px; display:block; margin-bottom:4px;">Đồng bộ từ kho FAQ chung</label>'
                 + '<select class="form-input faq-sync-select" onchange="ldpSyncFaqToFields(this)" style="padding:6px 8px; font-size:12px;">' + optionsHtml + '</select></div>'
-                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Câu hỏi ' + idx + '</label><input type="text" class="form-input faq-question-input" value="' + (actualQ || '') + '" placeholder="Nhập câu hỏi..."></div>'
-                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Trả lời ' + idx + '</label><textarea class="form-textarea faq-answer-textarea" rows="2" placeholder="Nhập câu trả lời...">' + (actualA || '') + '</textarea></div>'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Câu hỏi ' + idx + '</label><input type="text" class="form-input faq-question-input" value="' + (actualQ || '') + '" placeholder="Đồng bộ từ kho FAQ chung..." readonly></div>'
+                + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Trả lời ' + idx + '</label><textarea class="form-textarea faq-answer-textarea" rows="2" placeholder="Đồng bộ từ kho FAQ chung..." readonly>' + (actualA || '') + '</textarea></div>'
                 + '</div>';
             list.appendChild(div);
         }
@@ -20199,7 +20568,7 @@
             }
 
             if (tbody.children.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
             }
         }
 
@@ -20262,9 +20631,7 @@
 
             renderSelectedSkusPreview();
 
-            // Fallback toggle
-            const fallbackToggle = document.getElementById('tag-fallback-toggle');
-            fallbackToggle.checked = tagMappingData[tag] ? tagMappingData[tag].fallback : false;
+
 
             // Update preview status
             document.getElementById('tag-preview-status').className = 'badge active';
@@ -20272,11 +20639,9 @@
 
             updateTagMappingPreview();
 
-            // Mở modal cấu hình (dạng drawer trượt từ phải qua)
-            var overlay = document.getElementById('tag-config-modal');
-            var drawerContent = document.getElementById('tag-config-drawer-content');
-            overlay.style.display = 'flex';
-            setTimeout(function () { drawerContent.style.transform = 'translateX(0)'; }, 10);
+            // Chuyển hướng giao diện (hiển thị trang cấu hình inline, ẩn danh sách mapping)
+            document.getElementById('news-tag-mapping').style.display = 'none';
+            document.getElementById('tag-config-modal').style.display = 'block';
         }
 
         function renderSelectedSkusPreview() {
@@ -20455,7 +20820,6 @@
 
             // Lấy các bài viết trùng tag
             let matched = mockArticles.filter(art => art.tag === tag);
-            const fallbackEnabled = document.getElementById('tag-fallback-toggle').checked;
 
             if (matched.length > 0) {
                 matched.forEach(art => {
@@ -20486,54 +20850,14 @@
                     previewList.appendChild(item);
                 });
             } else {
-                if (fallbackEnabled) {
-                    let fallbacks = mockArticles.filter(art => art.tag === 'khuyenmai');
-                    if (fallbacks.length > 0) {
-                        fallbacks.forEach(art => {
-                            const item = document.createElement('div');
-                            item.style.padding = '8px';
-                            item.style.background = 'rgba(245,158,11,0.04)';
-                            item.style.border = '1px dashed rgba(245,158,11,0.2)';
-                            item.style.borderRadius = '5px';
-                            item.style.display = 'flex';
-                            item.style.flexDirection = 'column';
-                            item.style.gap = '4px';
-
-                            item.innerHTML = `
-                                <div style="font-size:12.5px; font-weight:500; color:#eee; display:flex; align-items:flex-start; gap:6px;">
-                                    <span style="font-size:12px;">🎁</span>
-                                    <span>${art.title}</span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:6px; font-size:10px;">
-                                    <span class="badge" style="background:rgba(245,158,11,0.15); color:var(--warning); padding:1px 4px; border-radius:3px;">Khuyến mãi Hot</span>
-                                    <span style="color:var(--text-muted); font-style:italic;">Fallback logic kích hoạt</span>
-                                </div>
-                            `;
-                            previewList.appendChild(item);
-                        });
-                    } else {
-                        previewList.innerHTML = '<div style="color:var(--danger); font-size:11px; text-align:center; padding:15px; border:1px dashed rgba(239,68,68,0.2); border-radius:6px; background:rgba(239,68,68,0.02);">Chưa cấu hình bài viết Fallback.</div>';
-                    }
-                } else {
-                    previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp và quy tắc Fallback đang tắt.</div>';
-                }
+                previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp với tag #' + tag + '.</div>';
             }
-        }
-
-        function saveTagConfig() {
-            const tag = document.getElementById('selected-tag-name').value;
-            if (!tag) {
-                alert('Vui lòng chọn Tag để lưu cấu hình.');
-                return;
-            }
-
-            const fallback = document.getElementById('tag-fallback-toggle').checked;
 
             if (!tagMappingData[tag]) {
                 tagMappingData[tag] = {};
             }
             tagMappingData[tag].skus = [...tempSelectedSkus];
-            tagMappingData[tag].fallback = fallback;
+            tagMappingData[tag].fallback = false;
 
             syncTagMappingToSku();
             renderTagMappingTable();
@@ -20552,21 +20876,16 @@
             document.getElementById('selected-tag-name').value = '';
             document.getElementById('tag-config-title').innerText = 'Chọn một Tag để cấu hình';
             renderSelectedSkusPreview();
-            document.getElementById('tag-fallback-toggle').checked = false;
+
 
             document.getElementById('tag-preview-status').className = 'badge';
             document.getElementById('tag-preview-status').innerText = 'Vui lòng chọn Tag';
 
             updateTagMappingPreview();
 
-            // Đóng modal cấu hình (dạng drawer trượt từ phải qua)
-            var drawerContent = document.getElementById('tag-config-drawer-content');
-            if (drawerContent) {
-                drawerContent.style.transform = 'translateX(100%)';
-            }
-            setTimeout(function () {
-                document.getElementById('tag-config-modal').style.display = 'none';
-            }, 260);
+            // Quay lại trang danh sách (hiển thị danh sách mapping, ẩn trang cấu hình inline)
+            document.getElementById('news-tag-mapping').style.display = 'block';
+            document.getElementById('tag-config-modal').style.display = 'none';
         }
 
         function showAddTagMappingModal() {
@@ -21332,80 +21651,154 @@
                     <input type="text" class="form-input" value="#cac-goi-cuoc" id="inet-hero-cta-sub-url">
                 </div>
 
-                <!-- Cấu hình chi tiết Form Popup khi chọn Action = popup -->
-                <div class="form-group" id="inet-hero-popup-config" style="grid-column: span 2; border-top: 1px dashed rgba(255,255,255,0.08); margin-top: 10px; padding-top: 10px; display: block;">
-                    <div style="font-size:11px; color:var(--warning); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; font-weight:700;">
-                        Cấu hình Popup Form tư vấn
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group" style="grid-column: span 2;">
-                            <label>Tiêu đề Popup Form</label>
-                            <input type="text" class="form-input" value="NHẬN TƯ VẤN MIỄN PHÍ" id="inet-hero-popup-title">
-                        </div>
-                        <div class="form-group" style="grid-column: span 2;">
-                            <label>Mô tả ngắn (Subheadline)</label>
-                            <input type="text" class="form-input" value="Nhận ưu đãi tốt nhất hôm nay" id="inet-hero-popup-sub">
-                        </div>
-                        <div class="form-group">
-                            <label>Text nút gửi (CTA)</label>
-                            <input type="text" class="form-input" value="Đăng ký tư vấn" id="inet-hero-popup-btn">
-                        </div>
-                        <div class="form-group" style="display:flex; flex-direction:column; justify-content:center;">
-                            <div class="checkbox-group" style="margin-top:20px;">
-                                <input type="checkbox" id="inet-hero-popup-show-services" checked onchange="ldpTogglePopupServices(this)">
-                                <label for="inet-hero-popup-show-services" style="margin:0; cursor:pointer;">Hiển thị Chọn dịch vụ</label>
-                            </div>
-                        </div>
-                        <div class="form-group" id="inet-hero-popup-services-list" style="grid-column: span 2; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
-                            <label style="margin-bottom:6px; display:block;">Danh sách dịch vụ hiển thị</label>
-                            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;">
-                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
-                                    <input type="checkbox" value="internet" checked style="accent-color:var(--primary);"> Internet
-                                </label>
-                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
-                                    <input type="checkbox" value="tv" checked style="accent-color:var(--primary);"> Truyền hình
-                                </label>
-                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
-                                    <input type="checkbox" value="camera" checked style="accent-color:var(--primary);"> Camera
-                                </label>
-                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
-                                    <input type="checkbox" value="combo_tv" checked style="accent-color:var(--primary);"> Combo Net-Play
-                                </label>
-                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
-                                    <input type="checkbox" value="combo_cam" checked style="accent-color:var(--primary);"> Combo Net-Cam
-                                </label>
-                            </div>
-                        </div>
+            </div>
+            
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:16px 0 12px; border-top: 1px dashed rgba(255,255,255,0.08); padding-top:16px;">
+                Dải Countdown hẹn giờ (Case 1 — Dính liền Hero)</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2; display:flex; align-items:center; gap:8px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:0;">
+                        <input type="checkbox" class="countdown-enable-chk" style="accent-color:var(--primary);"
+                            checked> Bật dải Countdown hẹn giờ dính liền Hero
+                    </label>
+                </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Ảnh / Icon quà tặng / Thiết bị</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh quà tặng / thiết bị"
+                            style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
                     </div>
                 </div>
+                <div class="form-group" style="grid-column: span 2;"><label>Tiêu đề dải Countdown / Nhãn Countdown ưu
+                        đãi</label><input type="text" class="form-input"
+                        value="Đăng ký lắp đặt Internet nhận ngay Modem Wi-Fi 6 + 1 tháng cước miễn phí"></div>
+                <div class="form-group"><label>Thời gian Countdown kết thúc</label><input type="datetime-local"
+                        class="form-input" value="2026-06-30T23:59"></div>
+                <div class="form-group"><label>Nút CTA Countdown — Text</label><input type="text" class="form-input"
+                        value="Đăng ký ngay"></div>
+                <div class="form-group" style="grid-column: span 2;"><label>Nút CTA Countdown — URL</label><input
+                        type="text" class="form-input" value="#register-form"></div>
+            </div>
 
-                <script>
-                    function ldpToggleCtaSubAction(select) {
-                        const urlGroup = document.getElementById('inet-hero-cta-sub-url-group');
-                        const popupConfig = document.getElementById('inet-hero-popup-config');
-                        if (select.value === 'redirect') {
-                            urlGroup.style.display = 'block';
-                            popupConfig.style.display = 'none';
-                        } else {
-                            urlGroup.style.display = 'none';
-                            popupConfig.style.display = 'block';
-                        }
+            <script>
+                function ldpToggleCtaSubAction(select) {
+                    const urlGroup = document.getElementById('inet-hero-cta-sub-url-group');
+                    if (select.value === 'redirect') {
+                        urlGroup.style.display = 'block';
+                    } else {
+                        urlGroup.style.display = 'none';
                     }
-                    function ldpTogglePopupServices(checkbox) {
-                        const list = document.getElementById('inet-hero-popup-services-list');
-                        if (checkbox.checked) {
-                            list.style.display = 'block';
-                        } else {
-                            list.style.display = 'none';
-                        }
-                    }
-                </script>
+                }
+            </script>
+        </div>
 
-
+        <!-- inet-countdown -->
+        <div id="ldpsec-inet-countdown" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:700;">
+                Dải Countdown độc lập (Case 2)</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2; display:flex; align-items:center; gap:8px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:0;">
+                        <input type="checkbox" class="countdown-enable-chk" style="accent-color:var(--primary);"
+                            checked> Bật dải Countdown hẹn giờ độc lập
+                    </label>
+                </div>
+                <div class="form-group" style="grid-column:span 2;"><label>Ảnh / Icon quà tặng / Thiết bị</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh quà tặng / thiết bị"
+                            style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
+                    </div>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Tiêu đề dải Countdown / Nhãn Countdown ưu đãi</label>
+                    <input type="text" class="form-input countdown-title"
+                        value="Đăng ký lắp đặt Internet nhận ngay ưu đãi sốc">
+                </div>
+                <div class="form-group">
+                    <label>Thời gian Countdown kết thúc</label>
+                    <input type="datetime-local" class="form-input" value="2026-06-30T23:59">
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA Countdown — Text</label>
+                    <input type="text" class="form-input" value="Nhận ưu đãi">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Nút CTA Countdown — URL</label>
+                    <input type="text" class="form-input" value="#register-form">
+                </div>
             </div>
         </div>
 
-        <!-- ② Stats Bar (Internet) -->
+        <!-- Popup Form (Internet) -->
+        <div id="ldpsec-inet-popup-form" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:700;">
+                Cấu hình Popup Form đăng ký tư vấn</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Tiêu đề Popup Form</label>
+                    <input type="text" class="form-input" value="NHẬN TƯ VẤN MIỄN PHÍ" id="inet-popup-form-title">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Mô tả ngắn (Subheadline)</label>
+                    <input type="text" class="form-input" value="Nhận ưu đãi tốt nhất hôm nay" id="inet-popup-form-sub">
+                </div>
+                <div class="form-group">
+                    <label>Text nút gửi (CTA)</label>
+                    <input type="text" class="form-input" value="Đăng ký tư vấn" id="inet-popup-form-btn">
+                </div>
+                <div class="form-group" style="display:flex; flex-direction:column; justify-content:center;">
+                    <div class="checkbox-group" style="margin-top:20px;">
+                        <input type="checkbox" id="inet-popup-form-show-services" checked onchange="ldpToggleInetPopupServices(this)">
+                        <label for="inet-popup-form-show-services" style="margin:0; cursor:pointer;">Hiển thị Chọn dịch vụ</label>
+                    </div>
+                </div>
+                <div class="form-group" id="inet-popup-form-services-list" style="grid-column: span 2; background:rgba(0,0,0,0.2); padding:10px; border-radius:8px; border:1px solid var(--border-glass);">
+                    <label style="margin-bottom:6px; display:block;">Danh sách dịch vụ hiển thị</label>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:8px;">
+                        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                            <input type="checkbox" value="internet" checked style="accent-color:var(--primary);"> Internet
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                            <input type="checkbox" value="tv" checked style="accent-color:var(--primary);"> Truyền hình
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                            <input type="checkbox" value="camera" checked style="accent-color:var(--primary);"> Camera
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                            <input type="checkbox" value="combo_tv" checked style="accent-color:var(--primary);"> Combo Net-Play
+                        </label>
+                        <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; color:#fff;">
+                            <input type="checkbox" value="combo_cam" checked style="accent-color:var(--primary);"> Combo Net-Cam
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                    <label>Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead</label>
+                    <input type="text" class="form-input" value="https://fpt.vn/vi/khach-hang-ca-nhan/thank-you" placeholder="Nhập link trang cảm ơn hoặc link thu thập Lead...">
+                </div>
+            </div>
+            <script>
+                function ldpToggleInetPopupServices(checkbox) {
+                    const list = document.getElementById('inet-popup-form-services-list');
+                    if (checkbox.checked) {
+                        list.style.display = 'block';
+                    } else {
+                        list.style.display = 'none';
+                    }
+                }
+            </script>
+        </div>
+
+        <!-- ③ Stats Bar (Internet) -->
         <div id="ldpsec-inet-stats" class="ldp-sec-form" style="padding:20px; display:none;">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; margin-bottom:16px;">
                 <div class="form-group"><label>Ti&#234;u &#273;&#7873; section</label><input type="text"
@@ -23229,236 +23622,114 @@ Full HD - Miễn phí</textarea></div>
 
         <!-- ④ Camera Selection (Camera) -->
         <div id="ldpsec-cam-select" class="ldp-sec-form" style="padding:20px; display:none;">
-            <div class="form-group"><label>Tiêu đề Section chọn camera</label><input type="text" class="form-input"
-                    value="Chọn Camera phù hợp cho gia đình bạn"></div>
-            <div class="form-group"><label>Giá bắt đầu (text mô tả phụ)</label><input type="text" class="form-input"
-                    value="Combo lắp đặt trọn gói từ 1.000.000đ · Camera đơn lẻ từ 500.000đ"></div>
+            <div class="form-group" style="margin-bottom:16px;">
+                <label>Tiêu đề Section chọn camera</label>
+                <input type="text" class="form-input" value="Chọn Camera phù hợp cho gia đình bạn">
+            </div>
+            <div class="form-group" style="margin-bottom:16px;">
+                <label>Giá bắt đầu (text mô tả phụ)</label>
+                <input type="text" class="form-input" value="Combo lắp đặt trọn gói từ 1.000.000đ · Camera đơn lẻ từ 500.000đ">
+            </div>
 
             <div
                 style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin:20px 0 8px; border-top:1px dashed var(--border-glass); padding-top:10px;">
                 Danh sách combo camera hiển thị (Không chia Tab theo Figma)</div>
 
-            <div id="cam-select-list" style="display:flex; flex-direction:column; gap:16px; margin-top:10px;">
-                <!-- Combo 1 -->
-                <div class="cam-select-card-item"
-                    style="border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
-                        <span style="font-weight:700; color:var(--warning); font-size:14px;"
-                            class="cam-select-card-title">3 Camera Ngoài trời</span>
-                        <div style="display:flex; gap:12px; align-items:center;">
-                            <label
-                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input
-                                    type="checkbox" class="cam-select-show-checkbox" checked
-                                    style="accent-color:var(--success);"> Hiển thị</label>
-                            <button class="btn btn-secondary btn-sm"
-                                style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;"
-                                onclick="this.closest('.cam-select-card-item').remove()">🗑 Xoá</button>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Tên combo <span
-                                    style="color:var(--danger)">*</span></label><input type="text"
-                                class="form-input cam-select-name-input" value="3 Camera Ngoài trời"
-                                oninput="ldpUpdateCamSelectCardHeader(this)"></div>
-                        <div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text"
-                                class="form-input cam-select-badge-input" value="COMBO"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>
-                            <div class="media-upload-wrapper"
-                                style="display:flex; gap:8px; align-items:center; width:100%;">
-                                <input type="text" class="form-input media-url cam-select-image-input"
-                                    value="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1"
-                                    style="flex:1;">
-                                <input type="file" class="media-file-input" style="display:none;" accept="image/*"
-                                    onchange="ldpHandleFileUpload(this)">
-                                <button class="btn btn-secondary btn-sm"
-                                    onclick="this.previousElementSibling.click()">Upload</button>
+            <!-- DOM ẩn để phục vụ tương thích ngược với các logic thống kê/đếm card -->
+            <div id="cam-select-list" style="display:none;"></div>
+
+            <!-- Split View Layout -->
+            <div style="display: grid; grid-template-columns: 310px 1fr; gap: 20px; margin-top: 15px;">
+                <!-- CỘT BÊN TRÁI: DANH SÁCH COMBO (Scrollable) -->
+                <div style="border-right: 1px solid var(--border-glass); padding-right: 15px; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; gap: 8px; z-index: 50; position: relative; width: 100%;">
+                        <div style="position: relative; width: 100%;">
+                            <button class="btn btn-secondary btn-sm" onclick="camTogglePdhDropdown()" style="width: 100%; font-size: 11px; padding: 6px 8px; display: flex; align-items: center; justify-content: center; gap: 4px; font-weight: 600;">
+                                📥 Sync PDH <span style="font-size: 8px;">▼</span>
+                            </button>
+                            <!-- Dropdown chọn gói PDH để sync -->
+                            <div id="cam-pdh-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 100; margin-top: 5px; padding: 8px; max-height: 250px; overflow-y: auto;">
+                                <div style="font-size: 10px; font-weight: 600; color: var(--text-muted); padding: 4px 8px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 6px;">Chọn gói từ PDH</div>
+                                <div style="display: flex; flex-direction: column; gap: 4px;" id="cam-pdh-list-options">
+                                    <!-- Options populated by JS -->
+                                </div>
+                                <div id="cam-pdh-pagination" style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 9px;"></div>
                             </div>
                         </div>
-                        <div class="form-group"><label>Giá khuyến mãi</label><input type="text"
-                                class="form-input cam-select-price-input" value="999.999đ"></div>
-                        <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
-                                class="form-input cam-select-originalprice-input" value="1.200.000đ"></div>
-                        <div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text"
-                                class="form-input cam-select-discount-input" value="-16%"></div>
-                        <div class="form-group"><label>Badge ưu đãi phụ</label><input type="text"
-                                class="form-input cam-select-promo-input" value="Ưu đãi 1 TRIỆU 3 CAM"></div>
-                        <div class="form-group"><label>Nút CTA — Text</label><input type="text"
-                                class="form-input cam-select-cta-text-input" value="Mua ngay"></div>
-                        <div class="form-group"><label>Nút CTA — URL</label><input type="text"
-                                class="form-input cam-select-cta-url-input" value="#"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>
-                            <textarea class="form-textarea cam-select-desc-input"
-                                rows="2">Phù hợp nhà có nhiều mặt tiếp cận, biệt thự mini, cơ sở kinh doanh</textarea>
-                        </div>
+                    </div>
+
+                    <!-- Tìm kiếm combo -->
+                    <input type="text" class="form-input" id="cam-product-search" placeholder="🔍 Tìm kiếm combo..." oninput="camFilterProducts()" style="font-size: 12px; padding: 6px 10px;">
+
+                    <!-- Danh sách combo -->
+                    <div id="cam-products-nav-list" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;">
+                        <!-- Items rendered by JS -->
+                    </div>
+
+                    <!-- Phân trang danh sách -->
+                    <div id="cam-products-pagination" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: auto; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);">
+                        <!-- Nút điều hướng được sinh động bằng JS -->
                     </div>
                 </div>
 
-                <!-- Combo 2 -->
-                <div class="cam-select-card-item"
-                    style="border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
-                        <span style="font-weight:700; color:var(--warning); font-size:14px;"
-                            class="cam-select-card-title">3 camera trong nhà</span>
-                        <div style="display:flex; gap:12px; align-items:center;">
-                            <label
-                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input
-                                    type="checkbox" class="cam-select-show-checkbox" checked
-                                    style="accent-color:var(--success);"> Hiển thị</label>
-                            <button class="btn btn-secondary btn-sm"
-                                style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;"
-                                onclick="this.closest('.cam-select-card-item').remove()">🗑 Xoá</button>
-                        </div>
+                <!-- CỘT BÊN PHẢI: FORM CHỈNH SỬA CHI TIẾT -->
+                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 15px;" id="cam-product-detail-container">
+                    <div id="cam-product-detail-empty" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 350px; color: var(--text-muted); text-align: center;">
+                        <span style="font-size: 32px; margin-bottom: 10px;">📦</span>
+                        <div style="font-size: 13px;">Chọn combo ở danh sách bên trái hoặc<br>đồng bộ từ PDH để bắt đầu chỉnh sửa</div>
                     </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Tên combo <span
-                                    style="color:var(--danger)">*</span></label><input type="text"
-                                class="form-input cam-select-name-input" value="3 camera trong nhà"
-                                oninput="ldpUpdateCamSelectCardHeader(this)"></div>
-                        <div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text"
-                                class="form-input cam-select-badge-input" value="COMBO"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>
-                            <div class="media-upload-wrapper"
-                                style="display:flex; gap:8px; align-items:center; width:100%;">
-                                <input type="text" class="form-input media-url cam-select-image-input"
-                                    value="https://images.unsplash.com/photo-1557318041-1ce374d55ebf" style="flex:1;">
-                                <input type="file" class="media-file-input" style="display:none;" accept="image/*"
-                                    onchange="ldpHandleFileUpload(this)">
-                                <button class="btn btn-secondary btn-sm"
-                                    onclick="this.previousElementSibling.click()">Upload</button>
+                    <div id="cam-product-detail-form" style="display: none;">
+                        <input type="hidden" id="cam-edit-idx">
+                        
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
+                            <span style="font-weight:700; color:var(--warning); font-size:14px;" id="cam-edit-header-title">Combo mới</span>
+                            <div style="display:flex; gap:12px; align-items:center;">
+                                <label style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;">
+                                    <input type="checkbox" id="cam-edit-show" style="accent-color:var(--success);" onchange="camSaveDetailField('show')"> Hiển thị
+                                </label>
+                                <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;" onclick="camDeleteActiveProduct()">🗑 Xoá</button>
                             </div>
                         </div>
-                        <div class="form-group"><label>Giá khuyến mãi</label><input type="text"
-                                class="form-input cam-select-price-input" value="999.999đ"></div>
-                        <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
-                                class="form-input cam-select-originalprice-input" value="1.200.000đ"></div>
-                        <div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text"
-                                class="form-input cam-select-discount-input" value="-16%"></div>
-                        <div class="form-group"><label>Badge ưu đãi phụ</label><input type="text"
-                                class="form-input cam-select-promo-input" value="Ưu đãi 1 TRIỆU 3 CAM"></div>
-                        <div class="form-group"><label>Nút CTA — Text</label><input type="text"
-                                class="form-input cam-select-cta-text-input" value="Mua ngay"></div>
-                        <div class="form-group"><label>Nút CTA — URL</label><input type="text"
-                                class="form-input cam-select-cta-url-input" value="#"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>
-                            <textarea class="form-textarea cam-select-desc-input"
-                                rows="2">Phù hợp nhà nhiều tầng/phòng, có trẻ nhỏ và người già cần quan sát</textarea>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Combo 3 -->
-                <div class="cam-select-card-item"
-                    style="border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
-                        <span style="font-weight:700; color:var(--warning); font-size:14px;"
-                            class="cam-select-card-title">1 trong - 2 ngoài</span>
-                        <div style="display:flex; gap:12px; align-items:center;">
-                            <label
-                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input
-                                    type="checkbox" class="cam-select-show-checkbox" checked
-                                    style="accent-color:var(--success);"> Hiển thị</label>
-                            <button class="btn btn-secondary btn-sm"
-                                style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;"
-                                onclick="this.closest('.cam-select-card-item').remove()">🗑 Xoá</button>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Tên combo <span
-                                    style="color:var(--danger)">*</span></label><input type="text"
-                                class="form-input cam-select-name-input" value="1 trong - 2 ngoài"
-                                oninput="ldpUpdateCamSelectCardHeader(this)"></div>
-                        <div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text"
-                                class="form-input cam-select-badge-input" value="COMBO"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>
-                            <div class="media-upload-wrapper"
-                                style="display:flex; gap:8px; align-items:center; width:100%;">
-                                <input type="text" class="form-input media-url cam-select-image-input"
-                                    value="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" style="flex:1;">
-                                <input type="file" class="media-file-input" style="display:none;" accept="image/*"
-                                    onchange="ldpHandleFileUpload(this)">
-                                <button class="btn btn-secondary btn-sm"
-                                    onclick="this.previousElementSibling.click()">Upload</button>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div class="form-group"><label>Tên combo <span style="color:var(--danger)">*</span></label>
+                                <input type="text" id="cam-edit-name" class="form-input" placeholder="vd: 3 Camera Ngoài trời" oninput="camSaveDetailField('name')">
                             </div>
-                        </div>
-                        <div class="form-group"><label>Giá khuyến mãi</label><input type="text"
-                                class="form-input cam-select-price-input" value="999.999đ"></div>
-                        <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
-                                class="form-input cam-select-originalprice-input" value="1.200.000đ"></div>
-                        <div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text"
-                                class="form-input cam-select-discount-input" value="-16%"></div>
-                        <div class="form-group"><label>Badge ưu đãi phụ</label><input type="text"
-                                class="form-input cam-select-promo-input" value="Ưu đãi 1 TRIỆU 3 CAM"></div>
-                        <div class="form-group"><label>Nút CTA — Text</label><input type="text"
-                                class="form-input cam-select-cta-text-input" value="Mua ngay"></div>
-                        <div class="form-group"><label>Nút CTA — URL</label><input type="text"
-                                class="form-input cam-select-cta-url-input" value="#"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>
-                            <textarea class="form-textarea cam-select-desc-input"
-                                rows="2">Phù hợp giám sát chính bao quát bên ngoài, quan sát cơ bản bên trong.</textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 4 -->
-                <div class="cam-select-card-item"
-                    style="border:1px solid var(--border-glass); padding:16px; border-radius:12px; background: var(--bg-secondary); position: relative;">
-                    <div
-                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">
-                        <span style="font-weight:700; color:var(--warning); font-size:14px;"
-                            class="cam-select-card-title">1 trong - 2 ngoài</span>
-                        <div style="display:flex; gap:12px; align-items:center;">
-                            <label
-                                style="display:flex; align-items:center; gap:6px; font-size:12px; cursor:pointer; margin:0;"><input
-                                    type="checkbox" class="cam-select-show-checkbox" checked
-                                    style="accent-color:var(--success);"> Hiển thị</label>
-                            <button class="btn btn-secondary btn-sm"
-                                style="color:var(--danger); border-color:transparent; background:transparent; padding:2px 4px; font-size:12px;"
-                                onclick="this.closest('.cam-select-card-item').remove()">🗑 Xoá</button>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                        <div class="form-group"><label>Tên combo <span
-                                    style="color:var(--danger)">*</span></label><input type="text"
-                                class="form-input cam-select-name-input" value="1 trong - 2 ngoài"
-                                oninput="ldpUpdateCamSelectCardHeader(this)"></div>
-                        <div class="form-group"><label>Badge nhãn (vd: COMBO)</label><input type="text"
-                                class="form-input cam-select-badge-input" value="COMBO"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>
-                            <div class="media-upload-wrapper"
-                                style="display:flex; gap:8px; align-items:center; width:100%;">
-                                <input type="text" class="form-input media-url cam-select-image-input"
-                                    value="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" style="flex:1;">
-                                <input type="file" class="media-file-input" style="display:none;" accept="image/*"
-                                    onchange="ldpHandleFileUpload(this)">
-                                <button class="btn btn-secondary btn-sm"
-                                    onclick="this.previousElementSibling.click()">Upload</button>
+                            <div class="form-group"><label>Badge nhãn (vd: COMBO)</label>
+                                <input type="text" id="cam-edit-badge" class="form-input" placeholder="Để trống nếu không có" oninput="camSaveDetailField('badge')">
                             </div>
-                        </div>
-                        <div class="form-group"><label>Giá khuyến mãi</label><input type="text"
-                                class="form-input cam-select-price-input" value="999.999đ"></div>
-                        <div class="form-group"><label>Giá gốc (gạch ngang)</label><input type="text"
-                                class="form-input cam-select-originalprice-input" value="1.200.000đ"></div>
-                        <div class="form-group"><label>Phần trăm giảm (vd: -16%)</label><input type="text"
-                                class="form-input cam-select-discount-input" value="-16%"></div>
-                        <div class="form-group"><label>Badge ưu đãi phụ</label><input type="text"
-                                class="form-input cam-select-promo-input" value="Ưu đãi 1 TRIỆU 3 CAM"></div>
-                        <div class="form-group"><label>Nút CTA — Text</label><input type="text"
-                                class="form-input cam-select-cta-text-input" value="Mua ngay"></div>
-                        <div class="form-group"><label>Nút CTA — URL</label><input type="text"
-                                class="form-input cam-select-cta-url-input" value="#"></div>
-                        <div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>
-                            <textarea class="form-textarea cam-select-desc-input"
-                                rows="2">Phù hợp giám sát chính bao quát bên ngoài, quan sát cơ bản bên trong.</textarea>
+                            <div class="form-group" style="grid-column: 1/-1;"><label>Ảnh minh họa URL</label>
+                                <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                                    <input type="text" id="cam-edit-image" class="form-input media-url" placeholder="URL ảnh minh họa" style="flex:1;" oninput="camSaveDetailField('image')">
+                                    <input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">
+                                    <button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>
+                                </div>
+                            </div>
+                            <div class="form-group"><label>Giá khuyến mãi</label>
+                                <input type="text" id="cam-edit-price" class="form-input" placeholder="vd: 999.999đ" oninput="camSaveDetailField('price')">
+                            </div>
+                            <div class="form-group"><label>Giá gốc (gạch ngang)</label>
+                                <input type="text" id="cam-edit-originalprice" class="form-input" placeholder="vd: 1.200.000đ" oninput="camSaveDetailField('originalPrice')">
+                            </div>
+                            <div class="form-group"><label>Phần trăm giảm (vd: -16%)</label>
+                                <input type="text" id="cam-edit-discount" class="form-input" placeholder="vd: -16%" oninput="camSaveDetailField('discount')">
+                            </div>
+                            <div class="form-group"><label>Badge ưu đãi phụ</label>
+                                <input type="text" id="cam-edit-promo" class="form-input" placeholder="vd: Ưu đãi 1 TRIỆU 3 CAM" oninput="camSaveDetailField('promo')">
+                            </div>
+                            <div class="form-group"><label>Nút CTA — Text</label>
+                                <input type="text" id="cam-edit-cta-text" class="form-input" value="Mua ngay" oninput="camSaveDetailField('ctaText')">
+                            </div>
+                            <div class="form-group"><label>Nút CTA — URL</label>
+                                <input type="text" id="cam-edit-cta-url" class="form-input" placeholder="vd: #register" oninput="camSaveDetailField('ctaUrl')">
+                            </div>
+                            <div class="form-group" style="grid-column: 1/-1;"><label>Mô tả ngắn</label>
+                                <textarea id="cam-edit-desc" class="form-textarea" rows="2" placeholder="Nhập mô tả combo..." oninput="camSaveDetailField('desc')"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <button class="btn btn-secondary btn-sm" style="margin-top:14px; width:100%; border-style:dashed;"
-                onclick="ldpAddCamSelectCard()">➕ Thêm combo sản phẩm mới</button>
 
             <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">* Giá cước và SKU sản phẩm của các gói
                 sẽ tự động đồng bộ từ Product Hub tương ứng với các SKU được chọn.</p>
@@ -23798,21 +24069,49 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
         </div>
 
-        <!-- ② Branding Bar (Campaign) -->
-        <div id="ldpsec-camp-branding" class="ldp-sec-form" style="padding:20px; display:none;">
-            <p style="color:var(--text-muted); font-size:13px; margin-top:0;">4 nhãn dịch vụ chạy ngang dưới hero
-                banner.</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div class="form-group"><label>Chỉ số 1</label><input type="text" class="form-input"
-                        value="👑 Nhà mạng đầu tiên triển khai Wi-Fi 7 tại VN"></div>
-                <div class="form-group"><label>Chỉ số 2</label><input type="text" class="form-input"
-                        value="⚡ Hạ tầng XGS-PON tiên tiến nhất"></div>
-                <div class="form-group"><label>Chỉ số 3</label><input type="text" class="form-input"
-                        value="🔒 Bảo mật WPA3 chuẩn mới nhất"></div>
-                <div class="form-group"><label>Chỉ số 4</label><input type="text" class="form-input"
-                        value="🎁 Tặng modem Wi-Fi 7 cao cấp"></div>
+        <!-- camp-countdown -->
+        <div id="ldpsec-camp-countdown" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div
+                style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:700;">
+                Dải Countdown độc lập (Case 2)</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px 16px;">
+                <div class="form-group" style="grid-column: span 2; display:flex; align-items:center; gap:8px;">
+                    <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:0;">
+                        <input type="checkbox" class="countdown-enable-chk" style="accent-color:var(--primary);"
+                            checked> Bật dải Countdown hẹn giờ độc lập
+                    </label>
+                </div>
+                <div class="form-group" style="grid-column:span 2;"><label>Ảnh / Icon quà tặng / Thiết bị</label>
+                    <div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">
+                        <input type="text" class="form-input media-url" placeholder="URL ảnh quà tặng / thiết bị"
+                            style="flex:1;">
+                        <input type="file" class="media-file-input" style="display:none;" accept="image/*"
+                            onchange="ldpHandleFileUpload(this)">
+                        <button class="btn btn-secondary btn-sm"
+                            onclick="this.previousElementSibling.click()">Upload</button>
+                    </div>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Tiêu đề dải Countdown / Nhãn Countdown ưu đãi</label>
+                    <input type="text" class="form-input countdown-title"
+                        value="Đăng ký lắp đặt Wi-Fi 7 nhận ngay bộ sạc dự phòng + Camera Play 3">
+                </div>
+                <div class="form-group">
+                    <label>Thời gian Countdown kết thúc</label>
+                    <input type="datetime-local" class="form-input" value="2026-06-30T23:59">
+                </div>
+                <div class="form-group">
+                    <label>Nút CTA Countdown — Text</label>
+                    <input type="text" class="form-input" value="Đăng ký ngay">
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Nút CTA Countdown — URL</label>
+                    <input type="text" class="form-input" value="#register-form">
+                </div>
             </div>
         </div>
+
+
 
         <!-- ③ USP (Campaign) -->
         <div id="ldpsec-camp-usp" class="ldp-sec-form" style="padding:20px; display:none;">
@@ -24495,8 +24794,10 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 Thêm video review</button>
         </div>
 
-        <!-- ⑧ Lead Form (Campaign) -->
+        <!-- Popup Form (Campaign) -->
         <div id="ldpsec-camp-form" class="ldp-sec-form" style="padding:20px; display:none;">
+            <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:700;">
+                Cấu hình Popup Form đăng ký tư vấn</div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                 <div class="form-group"><label>Tiêu đề trên Form</label><input type="text" class="form-input"
                         value="Đăng ký lắp đặt Wi-Fi 7 ngay hôm nay"></div>
@@ -24504,6 +24805,10 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                         value="Đăng ký ngay"></div>
                 <div class="form-group" style="grid-column:1/-1;"><label>Mô tả phụ</label><input type="text"
                         class="form-input" value="Điền đầy đủ thông tin, kỹ thuật viên sẽ liên hệ lắp đặt nhanh chóng.">
+                </div>
+                <div class="form-group" style="grid-column:1/-1;">
+                    <label>Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead</label>
+                    <input type="text" class="form-input" value="https://fpt.vn/vi/khach-hang-ca-nhan/thank-you" placeholder="Nhập link trang cảm ơn hoặc link thu thập Lead...">
                 </div>
             </div>
         </div>
@@ -26168,6 +26473,12 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 if (arrowEl) arrowEl.textContent = '▼';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof ldpRefactorFaqItems === 'function') {
+                ldpRefactorFaqItems();
+            }
+        });
     </script>
     <!-- Modal Cấu hình Chi tiết SKU (Thiết bị & Dịch vụ đi kèm) -->
     <div id="sku-details-modal"
