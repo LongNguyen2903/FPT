@@ -1985,21 +1985,21 @@ function addSelectedBannersToBlock() {
     const checkboxes = document.querySelectorAll('.banner-picker-cb');
     const tbody = document.querySelector('#blk-banner-section tbody');
     if (!tbody) return;
-    
+
     let addedCount = 0;
     checkboxes.forEach(cb => {
         if (cb.checked) {
             const parts = cb.value.split('|');
             const name = parts[0];
             const img = parts[1];
-            
+
             // Check trùng lặp
             let isDuplicate = false;
             tbody.querySelectorAll('tr').forEach(tr => {
                 const trName = tr.querySelector('strong')?.innerText;
                 if (trName === name) isDuplicate = true;
             });
-            
+
             if (!isDuplicate) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2016,7 +2016,7 @@ function addSelectedBannersToBlock() {
             }
         }
     });
-    
+
     closeBlockBannerPickerModal();
     if (addedCount > 0) {
         showLdpToast(`Đã thêm thành công ${addedCount} Banner vào Block!`);
@@ -2042,21 +2042,21 @@ function addSelectedPopupsToBlock() {
     const checkboxes = document.querySelectorAll('.popup-picker-cb');
     const tbody = document.querySelector('#blk-popup-section tbody');
     if (!tbody) return;
-    
+
     let addedCount = 0;
     checkboxes.forEach(cb => {
         if (cb.checked) {
             const parts = cb.value.split('|');
             const name = parts[0];
             const img = parts[1];
-            
+
             // Check trùng lặp
             let isDuplicate = false;
             tbody.querySelectorAll('tr').forEach(tr => {
                 const trName = tr.querySelector('strong')?.innerText;
                 if (trName === name) isDuplicate = true;
             });
-            
+
             if (!isDuplicate) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2073,7 +2073,7 @@ function addSelectedPopupsToBlock() {
             }
         }
     });
-    
+
     closeBlockPopupPickerModal();
     if (addedCount > 0) {
         showLdpToast(`Đã thêm thành công ${addedCount} Popup vào Block!`);
@@ -2102,7 +2102,7 @@ function addSelectedArticlesToBlock() {
     const checkboxes = document.querySelectorAll('.article-picker-cb');
     const tbody = document.querySelector('#blk-article-section tbody');
     if (!tbody) return;
-    
+
     let addedCount = 0;
     checkboxes.forEach(cb => {
         if (cb.checked) {
@@ -2110,14 +2110,14 @@ function addSelectedArticlesToBlock() {
             const title = val[0];
             const category = val[1];
             const pubDate = val[2];
-            
+
             // Check trùng lặp
             let isDuplicate = false;
             tbody.querySelectorAll('tr').forEach(tr => {
                 const trTitle = tr.querySelector('strong')?.innerText;
                 if (trTitle === title) isDuplicate = true;
             });
-            
+
             if (!isDuplicate) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2134,7 +2134,7 @@ function addSelectedArticlesToBlock() {
             }
         }
     });
-    
+
     closeBlockArticlePickerModal();
     if (addedCount > 0) {
         showLdpToast(`Đã thêm thành công ${addedCount} Bài viết vào Block!`);
@@ -2163,21 +2163,21 @@ function addSelectedFaqsToBlock() {
     const checkboxes = document.querySelectorAll('.faq-picker-cb');
     const tbody = document.querySelector('#blk-faq-section tbody');
     if (!tbody) return;
-    
+
     let addedCount = 0;
     checkboxes.forEach(cb => {
         if (cb.checked) {
             const val = cb.value.split('|');
             const question = val[0];
             const category = val[1];
-            
+
             // Check trùng lặp
             let isDuplicate = false;
             tbody.querySelectorAll('tr').forEach(tr => {
                 const trQuestion = tr.querySelector('strong')?.innerText;
                 if (trQuestion === question) isDuplicate = true;
             });
-            
+
             if (!isDuplicate) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -2193,7 +2193,7 @@ function addSelectedFaqsToBlock() {
             }
         }
     });
-    
+
     closeBlockFaqPickerModal();
     if (addedCount > 0) {
         showLdpToast(`Đã thêm thành công ${addedCount} Câu hỏi FAQ vào Block!`);
@@ -2207,19 +2207,19 @@ function filterPickerItems(type) {
     const catSelect = document.getElementById(type + '-picker-category');
     const table = document.getElementById(type + '-picker-table');
     if (!table) return;
-    
+
     const kw = kwInput ? kwInput.value.toLowerCase().trim() : '';
     const cat = catSelect ? catSelect.value.toLowerCase().trim() : '';
-    
+
     const rows = table.querySelectorAll('tbody tr');
     rows.forEach(row => {
         const nameText = row.querySelector('strong')?.innerText.toLowerCase() || '';
         const badge = row.querySelector('.badge');
         const catText = badge ? badge.innerText.toLowerCase() : '';
-        
+
         const matchesKw = nameText.includes(kw);
         const matchesCat = cat === '' || catText === cat;
-        
+
         if (matchesKw && matchesCat) {
             row.style.display = '';
         } else {
@@ -2228,7 +2228,7 @@ function filterPickerItems(type) {
             if (cb) cb.checked = false;
         }
     });
-    
+
     const selectAllCb = document.getElementById(type + '-select-all');
     if (selectAllCb) {
         selectAllCb.checked = false;
@@ -2239,10 +2239,10 @@ function toggleSelectAllPickerItems(type) {
     const selectAllCb = document.getElementById(type + '-select-all');
     if (!selectAllCb) return;
     const checked = selectAllCb.checked;
-    
+
     const table = document.getElementById(type + '-picker-table');
     if (!table) return;
-    
+
     const rows = table.querySelectorAll('tbody tr');
     rows.forEach(row => {
         if (row.style.display !== 'none') {
@@ -2692,7 +2692,7 @@ function ldpEditSection(sectionId) {
         'sa-categories': 'Danh mục nội dung giải trí', 'sa-experience': 'Trải nghiệm giải trí đỉnh cao', 'sa-pricing': 'Bảng giá & Đăng ký',
         'sa-commentators': 'Bình luận viên & chuyên gia', 'sa-faq-support': 'FAQ & Hỗ trợ',
         'sa-sticky': 'Sticky ưu đãi cuối trang',
-        'sa-footer': 'Footer CTA',
+        'sa-popup-form': 'Popup Form đăng ký tư vấn chung', 'sa-footer-main': 'Footer',
         // Camera
         'cam-hero': 'Hero Banner + Nút CTA chính & phụ', 'cam-usp': 'Công nghệ nổi bật',
         'cam-detail': 'Chi tiết FPT Camera AI', 'cam-select': 'Danh mục & Chọn mua',
@@ -3030,13 +3030,13 @@ function campInitProducts() {
                 var bannerInput = card.querySelector('input[placeholder="URL ảnh banner"]') || card.querySelectorAll('input[type="text"]')[0];
                 var nameInput = card.querySelector('.inet-product-name-input') || card.querySelectorAll('input[type="text"]')[1];
                 var priceInput = card.querySelector('.inet-product-price-input') || card.querySelectorAll('input[type="text"]')[2];
-                
+
                 var inputs = card.querySelectorAll('input[type="text"]');
                 var download = inputs[3] ? inputs[3].value : '2Gbps';
                 var upload = inputs[4] ? inputs[4].value : '2Gbps';
                 var featuresTextarea = card.querySelector('textarea');
                 var features = featuresTextarea ? featuresTextarea.value : '';
-                
+
                 var ctaSubText = inputs[5] ? inputs[5].value : 'Nhận tư vấn';
                 var ctaSubUrl = inputs[6] ? inputs[6].value : '#tu-van';
                 var ctaMainText = inputs[7] ? inputs[7].value : 'Mua ngay';
@@ -3047,7 +3047,7 @@ function campInitProducts() {
 
                 campProductsData.push({
                     banner: bannerInput ? bannerInput.value : '',
-                    name: nameInput ? nameInput.value : ('Gói ' + (i+1)),
+                    name: nameInput ? nameInput.value : ('Gói ' + (i + 1)),
                     price: priceInput ? priceInput.value : '0',
                     download: download,
                     upload: upload,
@@ -3088,9 +3088,9 @@ function campRenderPdhDropdownList() {
     var searchInput = document.getElementById('camp-pdh-search');
     var searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-    var filtered = pdhPackagesMock.map(function(pkg, idx) {
+    var filtered = pdhPackagesMock.map(function (pkg, idx) {
         return { pkg: pkg, originalIdx: idx };
-    }).filter(function(item) {
+    }).filter(function (item) {
         return !searchVal || item.pkg.code.toLowerCase().indexOf(searchVal) > -1 || item.pkg.name.toLowerCase().indexOf(searchVal) > -1;
     });
 
@@ -3105,7 +3105,7 @@ function campRenderPdhDropdownList() {
     var container = document.getElementById('camp-pdh-list-options');
     if (container) {
         var html = '';
-        pageItems.forEach(function(item) {
+        pageItems.forEach(function (item) {
             var pkg = item.pkg;
             var index = item.originalIdx;
             html += '<div onclick="campSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
@@ -3148,9 +3148,9 @@ function campRenderProductsList() {
     var searchVal = document.getElementById('camp-product-search') ? document.getElementById('camp-product-search').value.toLowerCase() : '';
 
     // Lọc danh sách theo từ khóa tìm kiếm
-    var filtered = campProductsData.map(function(pkg, idx) {
+    var filtered = campProductsData.map(function (pkg, idx) {
         return { pkg: pkg, originalIdx: idx };
-    }).filter(function(item) {
+    }).filter(function (item) {
         return !searchVal || item.pkg.name.toLowerCase().indexOf(searchVal) > -1 || item.pkg.price.toLowerCase().indexOf(searchVal) > -1;
     });
 
@@ -3229,7 +3229,7 @@ function campPrevPage() {
 
 function campNextPage() {
     var searchVal = document.getElementById('camp-product-search') ? document.getElementById('camp-product-search').value.toLowerCase() : '';
-    var filteredCount = campProductsData.filter(function(pkg) {
+    var filteredCount = campProductsData.filter(function (pkg) {
         return !searchVal || pkg.name.toLowerCase().indexOf(searchVal) > -1 || pkg.price.toLowerCase().indexOf(searchVal) > -1;
     }).length;
     var totalPages = Math.ceil(filteredCount / campProductsPerPage) || 1;
@@ -3241,13 +3241,13 @@ function campNextPage() {
 
 function campSelectProduct(idx) {
     campActiveIndex = idx;
-    
+
     var items = document.querySelectorAll('#camp-products-nav-list .camp-product-list-item');
-    items.forEach(function(item) {
+    items.forEach(function (item) {
         item.classList.remove('active');
     });
-    
-    var clickedItem = Array.from(document.querySelectorAll('#camp-products-nav-list .camp-product-list-item')).find(function(item) {
+
+    var clickedItem = Array.from(document.querySelectorAll('#camp-products-nav-list .camp-product-list-item')).find(function (item) {
         return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('campSelectProduct(' + idx + ')') > -1;
     });
     if (clickedItem) clickedItem.classList.add('active');
@@ -3282,7 +3282,7 @@ function campSaveDetailField(fieldName) {
     else if (fieldName === 'name') {
         pkg.name = document.getElementById('camp-edit-name').value;
         var items = document.querySelectorAll('#camp-products-nav-list .camp-product-list-item');
-        var clickedItem = Array.from(items).find(function(item) {
+        var clickedItem = Array.from(items).find(function (item) {
             return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('campSelectProduct(' + idx + ')') > -1;
         });
         if (clickedItem) {
@@ -3437,11 +3437,11 @@ function campFilterProducts() {
             document.getElementById('camp-product-detail-empty').style.display = 'flex';
             document.getElementById('camp-product-detail-form').style.display = 'none';
         } else {
-            var filteredIdx = campProductsData.map(function(p, i) {
+            var filteredIdx = campProductsData.map(function (p, i) {
                 return { p: p, i: i };
-            }).filter(function(item) {
+            }).filter(function (item) {
                 return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
-            }).findIndex(function(item) {
+            }).findIndex(function (item) {
                 return item.i === campActiveIndex;
             });
             if (filteredIdx >= 0) {
@@ -3458,16 +3458,16 @@ function campSyncHiddenDom() {
     if (!container) return;
 
     container.innerHTML = '';
-    
+
     campProductsData.forEach(function (pkg, i) {
         var card = document.createElement('div');
         card.className = 'inet-product-card';
         card.style.display = 'none';
-        
+
         var highlightChecked = pkg.highlight ? 'checked' : '';
-        
+
         var html = '<div class="inet-product-card-header">'
-            + '<span class="inet-product-card-idx">Gói ' + (i+1) + '</span>'
+            + '<span class="inet-product-card-idx">Gói ' + (i + 1) + '</span>'
             + '<span class="inet-product-card-title">' + pkg.name + '</span>'
             + '<span class="inet-product-card-price-summary"> - ' + pkg.price + ' VNĐ/tháng</span>'
             + '<input type="checkbox" ' + highlightChecked + '>'
@@ -3484,7 +3484,7 @@ function campSyncHiddenDom() {
             + '<input type="text" value="' + pkg.ctaMainText + '">'
             + '<input type="text" value="' + pkg.ctaMainUrl + '">'
             + '</div>';
-        
+
         card.innerHTML = html;
         container.appendChild(card);
     });
@@ -3504,17 +3504,17 @@ function tabInit(tabEl, type) {
         hiddenContainer = document.createElement('div');
         hiddenContainer.className = 'inet-tab-hidden-cards-container';
         hiddenContainer.style.display = 'none';
-        
+
         // Di chuyển các card cũ vào hiddenContainer
         var oldCards = tabEl.querySelectorAll('.inet-product-card');
-        oldCards.forEach(function(card) {
+        oldCards.forEach(function (card) {
             hiddenContainer.appendChild(card);
         });
-        
+
         // Xóa nút thêm cũ
         var oldAddBtn = tabEl.querySelector('button[onclick*="ldpAddProductCard"]');
         if (oldAddBtn) oldAddBtn.remove();
-        
+
         tabEl.appendChild(hiddenContainer);
     }
 
@@ -3524,7 +3524,7 @@ function tabInit(tabEl, type) {
     tabEl.type = type;
 
     var cards = hiddenContainer.querySelectorAll('.inet-product-card');
-    cards.forEach(function(card, idx) {
+    cards.forEach(function (card, idx) {
         var data = {};
         if (type === 'inet') {
             var bannerInput = card.querySelector('input[placeholder="URL ảnh banner"]') || card.querySelectorAll('input[type="text"]')[0];
@@ -3600,8 +3600,8 @@ function tabInit(tabEl, type) {
     // Cột trái
     var leftCol = document.createElement('div');
     leftCol.style.cssText = 'display: flex; flex-direction: column; gap: 8px; border-right: 1px solid rgba(255,255,255,0.06); padding-right: 16px;';
-    leftCol.innerHTML = 
-          '<div style="display: flex; gap: 8px; margin-bottom: 2px; align-items: center;">'
+    leftCol.innerHTML =
+        '<div style="display: flex; gap: 8px; margin-bottom: 2px; align-items: center;">'
         + '  <button class="btn btn-primary tab-add-pkg-btn" style="flex: 1; font-size: 11px; padding: 6px 10px; background: var(--primary-gradient); font-weight: 600; border: none; border-radius: 6px; color: #fff; cursor: pointer; height: 28px; line-height: 1;">+ Thêm gói trống</button>'
         + '  <div style="position: relative;">'
         + '    <button class="btn btn-secondary btn-sm tab-sync-pdh-btn" style="font-size: 11px; padding: 4px 10px; height: 28px; display: flex; align-items: center; gap: 4px; white-space: nowrap;">Sync PDH ▾</button>'
@@ -3624,7 +3624,7 @@ function tabInit(tabEl, type) {
     // Cột phải
     var rightCol = document.createElement('div');
     rightCol.style.cssText = 'display: flex; flex-direction: column;';
-    
+
     var emptyState = document.createElement('div');
     emptyState.className = 'tab-detail-empty';
     emptyState.style.cssText = 'display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; border: 1px dashed var(--border); border-radius: 6px; color: var(--text-muted); font-size: 11px; min-height: 300px;';
@@ -3633,14 +3633,14 @@ function tabInit(tabEl, type) {
     var detailForm = document.createElement('div');
     detailForm.className = 'tab-detail-form';
     detailForm.style.display = 'none';
-    
-    var bannerFieldHtml = type === 'inet' ? 
-          '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
+
+    var bannerFieldHtml = type === 'inet' ?
+        '<div class="form-group" style="margin-bottom:8px;"><label style="font-size:11px;">Ảnh banner gói</label>'
         + '  <div style="display:flex; gap:6px;"><input type="text" class="form-input tab-edit-banner" placeholder="URL ảnh banner" style="flex:1;"><button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button></div>'
         + '</div>' : '';
 
-    detailForm.innerHTML = 
-          '<input type="hidden" class="tab-edit-idx">'
+    detailForm.innerHTML =
+        '<input type="hidden" class="tab-edit-idx">'
         + bannerFieldHtml
         + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
         + '  <div class="form-group" style="margin-bottom:6px;"><label style="font-size:11px;">Tên gói</label><input type="text" class="form-input tab-edit-name" placeholder="vd: Internet GIGA"></div>'
@@ -3666,7 +3666,7 @@ function tabInit(tabEl, type) {
 
     // Gán các sự kiện điều khiển
     var searchInput = leftCol.querySelector('.tab-search-input');
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
         tabEl.currentPage = 1;
         tabRenderProducts(tabEl);
     });
@@ -3678,9 +3678,9 @@ function tabInit(tabEl, type) {
         var searchInput = el.querySelector('.tab-pdh-search');
         var searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-        var filtered = pdhPackagesMock.map(function(pkg, idx) {
+        var filtered = pdhPackagesMock.map(function (pkg, idx) {
             return { pkg: pkg, originalIdx: idx };
-        }).filter(function(item) {
+        }).filter(function (item) {
             return !searchVal || item.pkg.code.toLowerCase().indexOf(searchVal) > -1 || item.pkg.name.toLowerCase().indexOf(searchVal) > -1;
         });
 
@@ -3695,7 +3695,7 @@ function tabInit(tabEl, type) {
         var optionsContainer = el.querySelector('.tab-pdh-list-options');
         if (optionsContainer) {
             var html = '';
-            pageItems.forEach(function(item) {
+            pageItems.forEach(function (item) {
                 var pkg = item.pkg;
                 var idx = item.originalIdx;
                 html += '<div onclick="tabSyncPdh(' + idx + ', this)" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
@@ -3723,7 +3723,7 @@ function tabInit(tabEl, type) {
 
             var prevBtn = pagContainer.querySelector('.tab-pdh-prev');
             if (prevBtn) {
-                prevBtn.addEventListener('click', function(ev) {
+                prevBtn.addEventListener('click', function (ev) {
                     ev.stopPropagation();
                     el.pdhCurrentPage--;
                     tabRenderPdhDropdown(el);
@@ -3731,7 +3731,7 @@ function tabInit(tabEl, type) {
             }
             var nextBtn = pagContainer.querySelector('.tab-pdh-next');
             if (nextBtn) {
-                nextBtn.addEventListener('click', function(ev) {
+                nextBtn.addEventListener('click', function (ev) {
                     ev.stopPropagation();
                     el.pdhCurrentPage++;
                     tabRenderPdhDropdown(el);
@@ -3741,7 +3741,7 @@ function tabInit(tabEl, type) {
     }
 
     var syncBtn = leftCol.querySelector('.tab-sync-pdh-btn');
-    syncBtn.addEventListener('click', function(e) {
+    syncBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         var dropdown = leftCol.querySelector('.tab-pdh-dropdown');
         if (dropdown) {
@@ -3758,21 +3758,21 @@ function tabInit(tabEl, type) {
 
     var pdhSearchInput = leftCol.querySelector('.tab-pdh-search');
     if (pdhSearchInput) {
-        pdhSearchInput.addEventListener('input', function(e) {
+        pdhSearchInput.addEventListener('input', function (e) {
             tabEl.pdhCurrentPage = 1;
             tabRenderPdhDropdown(tabEl);
         });
-        pdhSearchInput.addEventListener('click', function(e) {
+        pdhSearchInput.addEventListener('click', function (e) {
             e.stopPropagation();
         });
     }
 
     // Lắng nghe thay đổi trên form để tự lưu
     var fields = ['banner', 'name', 'price', 'download', 'upload', 'badge', 'features', 'ctaSubText', 'ctaSubUrl', 'ctaMainText', 'ctaMainUrl'];
-    fields.forEach(function(field) {
+    fields.forEach(function (field) {
         var el = detailForm.querySelector('.tab-edit-' + field);
         if (el) {
-            el.addEventListener('input', function() {
+            el.addEventListener('input', function () {
                 var idx = parseInt(detailForm.querySelector('.tab-edit-idx').value);
                 if (!isNaN(idx) && tabEl.productsData[idx]) {
                     tabEl.productsData[idx][field] = el.value;
@@ -3789,7 +3789,7 @@ function tabInit(tabEl, type) {
         }
     });
 
-    leftCol.querySelector('.tab-add-pkg-btn').addEventListener('click', function() {
+    leftCol.querySelector('.tab-add-pkg-btn').addEventListener('click', function () {
         tabAddProduct(tabEl);
     });
 
@@ -3802,9 +3802,9 @@ function tabRenderProducts(tabEl) {
 
     var searchVal = tabEl.querySelector('.tab-search-input').value.toLowerCase();
 
-    var filtered = tabEl.productsData.map(function(pkg, idx) {
+    var filtered = tabEl.productsData.map(function (pkg, idx) {
         return { pkg: pkg, originalIdx: idx };
-    }).filter(function(item) {
+    }).filter(function (item) {
         return !searchVal || item.pkg.name.toLowerCase().indexOf(searchVal) > -1 || item.pkg.price.toLowerCase().indexOf(searchVal) > -1;
     });
 
@@ -3817,7 +3817,7 @@ function tabRenderProducts(tabEl) {
     var pageItems = filtered.slice(start, end);
 
     var html = '';
-    pageItems.forEach(function(item) {
+    pageItems.forEach(function (item) {
         var pkg = item.pkg;
         var idx = item.originalIdx;
         var activeClass = idx === tabEl.activeIndex ? 'active' : '';
@@ -3865,16 +3865,16 @@ function tabRenderProducts(tabEl) {
 function tabSelectProduct(idx, childEl) {
     var tabEl = childEl.closest('div[style*="border-radius:10px"]');
     if (!tabEl) return;
-    
+
     tabEl.activeIndex = idx;
-    
+
     var navList = tabEl.querySelector('.tab-nav-list');
-    navList.querySelectorAll('.camp-product-list-item').forEach(function(item) {
+    navList.querySelectorAll('.camp-product-list-item').forEach(function (item) {
         item.classList.remove('active');
         item.style.borderColor = 'var(--border)';
         item.style.background = 'rgba(255,255,255,0.03)';
     });
-    
+
     var clickedItem = navList.querySelector('.camp-product-list-item[data-idx="' + idx + '"]');
     if (clickedItem) {
         clickedItem.classList.add('active');
@@ -3887,7 +3887,7 @@ function tabSelectProduct(idx, childEl) {
 
     var emptyState = tabEl.querySelector('.tab-detail-empty');
     var detailForm = tabEl.querySelector('.tab-detail-form');
-    
+
     emptyState.style.display = 'none';
     detailForm.style.display = 'block';
 
@@ -3917,7 +3917,7 @@ function tabPrevPage(btnEl) {
 
 document.addEventListener('click', function (event) {
     var dropdowns = document.querySelectorAll('.tab-pdh-dropdown');
-    dropdowns.forEach(function(dropdown) {
+    dropdowns.forEach(function (dropdown) {
         var btn = dropdown.parentElement.querySelector('.tab-sync-pdh-btn');
         if (dropdown.style.display === 'block' && btn && !btn.contains(event.target) && !dropdown.contains(event.target)) {
             dropdown.style.display = 'none';
@@ -3929,7 +3929,7 @@ function tabNextPage(btnEl) {
     var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
     if (!tabEl) return;
     var searchVal = tabEl.querySelector('.tab-search-input').value.toLowerCase();
-    var filteredCount = tabEl.productsData.filter(function(pkg) {
+    var filteredCount = tabEl.productsData.filter(function (pkg) {
         return !searchVal || pkg.name.toLowerCase().indexOf(searchVal) > -1 || pkg.price.toLowerCase().indexOf(searchVal) > -1;
     }).length;
     var totalPages = Math.ceil(filteredCount / tabProductsPerPage) || 1;
@@ -3972,7 +3972,7 @@ function tabToggleHighlight(idx, checkbox) {
 function tabMoveProduct(idx, direction, btnEl) {
     var tabEl = btnEl.closest('div[style*="border-radius:10px"]');
     if (!tabEl) return;
-    
+
     var targetIdx = idx + direction;
     if (targetIdx < 0 || targetIdx >= tabEl.productsData.length) return;
 
@@ -4030,7 +4030,7 @@ function inetTogglePdhDropdown(btnEl) {
 function tabSyncPdh(pdhIndex, itemEl) {
     var tabEl = itemEl.closest('div[style*="border-radius:10px"]');
     if (!tabEl) return;
-    
+
     var pkgMock = pdhPackagesMock[pdhIndex];
     if (!pkgMock) return;
 
@@ -4065,7 +4065,7 @@ function inetFilterProducts(inputEl) {
     if (tabEl) {
         tabEl.currentPage = 1;
         tabRenderProducts(tabEl);
-        
+
         if (tabEl.activeIndex >= 0) {
             var searchVal = inputEl.value.toLowerCase();
             var pkg = tabEl.productsData[tabEl.activeIndex];
@@ -4073,11 +4073,11 @@ function inetFilterProducts(inputEl) {
                 tabEl.querySelector('.tab-detail-empty').style.display = 'flex';
                 tabEl.querySelector('.tab-detail-form').style.display = 'none';
             } else {
-                var filteredIdx = tabEl.productsData.map(function(p, i) {
+                var filteredIdx = tabEl.productsData.map(function (p, i) {
                     return { p: p, i: i };
-                }).filter(function(item) {
+                }).filter(function (item) {
                     return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
-                }).findIndex(function(item) {
+                }).findIndex(function (item) {
                     return item.i === tabEl.activeIndex;
                 });
                 if (filteredIdx >= 0) {
@@ -4095,18 +4095,18 @@ function tabSyncHiddenDom(tabEl) {
     if (!container) return;
 
     container.innerHTML = '';
-    
+
     tabEl.productsData.forEach(function (pkg, i) {
         var card = document.createElement('div');
         card.className = 'inet-product-card';
         card.style.display = 'none';
-        
+
         var highlightChecked = pkg.highlight ? 'checked' : '';
-        
+
         var html = '';
         if (tabEl.type === 'inet') {
             html = '<div class="inet-product-card-header">'
-                + '<span class="inet-product-card-idx">Gói ' + (i+1) + '</span>'
+                + '<span class="inet-product-card-idx">Gói ' + (i + 1) + '</span>'
                 + '<span class="inet-product-card-title">' + pkg.name + '</span>'
                 + '<span class="inet-product-card-price-summary"> - ' + pkg.price + ' VNĐ/tháng</span>'
                 + '<input type="checkbox" ' + highlightChecked + '>'
@@ -4143,7 +4143,7 @@ function tabSyncHiddenDom(tabEl) {
                 + '<input type="text" value="' + pkg.ctaMainUrl + '">'
                 + '</div>';
         }
-        
+
         card.innerHTML = html;
         container.appendChild(card);
     });
@@ -4152,9 +4152,9 @@ function tabSyncHiddenDom(tabEl) {
 function inetInitAllTabs() {
     var section = document.getElementById('ldpsec-inet-products');
     if (!section) return;
-    
+
     var tabs = section.querySelectorAll('div[style*="border-radius:10px"]');
-    tabs.forEach(function(tab) {
+    tabs.forEach(function (tab) {
         tabInit(tab, 'inet');
     });
 }
@@ -4162,9 +4162,9 @@ function inetInitAllTabs() {
 function leadInitAllTabs() {
     var section = document.getElementById('ldpsec-lead-pricing');
     if (!section) return;
-    
+
     var tabs = section.querySelectorAll('div[style*="border-radius:10px"]');
-    tabs.forEach(function(tab) {
+    tabs.forEach(function (tab) {
         tabInit(tab, 'lead');
     });
 }
@@ -4309,6 +4309,74 @@ function leadAddVideoCard() {
     container.appendChild(card);
 }
 
+function inetAddVideoCard() {
+    var container = document.getElementById('inet-review-list');
+    if (!container) return;
+    var idx = container.querySelectorAll('.inet-product-card').length + 1;
+    var card = document.createElement('div');
+    card.className = 'inet-product-card';
+    card.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; background:var(--bg-secondary); overflow:hidden;';
+    card.innerHTML = '<div class="inet-product-card-header" style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(255,255,255,0.03); cursor:pointer;" onclick="ldpToggleProductCard(this)">'
+        + '<div style="display:flex; align-items:center; gap:8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'
+        + '<span class="video-preview-thumb" style="width:24px; height:16px; border-radius:2px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; overflow:hidden; border:1px solid rgba(255,255,255,0.15);">'
+        + '<span style="color:var(--text-muted); font-size:8px;">▶</span>'
+        + '</span>'
+        + '<span style="font-weight:600; font-size:13px; color:#fff;" class="inet-product-card-title">Video mới ' + idx + '</span>'
+        + '</div>'
+        + '<div style="display:flex; align-items:center; gap:8px;" onclick="event.stopPropagation()">'
+        + '<span onclick="ldpMoveCard(this, -1)" title="Di chuyển lên" style="cursor:pointer; font-size:12px; color:var(--text-muted); padding:4px;">▲</span>'
+        + '<span onclick="ldpMoveCard(this, 1)" title="Di chuyển xuống" style="cursor:pointer; font-size:12px; color:var(--text-muted); padding:4px;">▼</span>'
+        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px;" onclick="this.closest(\'.inet-product-card\').remove()">Xóa</button>'
+        + '<span class="arrow-indicator" style="color:var(--text-muted); font-size:12px;">▼</span>'
+        + '</div>'
+        + '</div>'
+        + '<div class="inet-product-card-body" style="padding:12px; border-top:1px solid rgba(255,255,255,0.06); display:block;">'
+        + '<div class="form-group" style="margin-bottom:8px;">'
+        + '<label style="font-size:11px;">Thumbnail (ảnh đại diện)</label>'
+        + '<div style="display:flex; gap:6px;">'
+        + '<input type="text" class="form-input video-thumbnail-input" placeholder="URL ảnh" style="flex:1;" oninput="ldpUpdateVideoThumbnail(this)">'
+        + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:2px 6px;">Upload</button>'
+        + '</div>'
+        + '</div>'
+        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Link YouTube</label><input type="text" class="form-input" placeholder="https://youtube.com/..."></div>'
+        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Mô tả ngắn</label><input type="text" class="form-input inet-product-name-input" placeholder="Nhập mô tả ngắn" oninput="ldpUpdateProductCardHeader(this)"></div>'
+        + '</div>'
+        + '</div>';
+    container.appendChild(card);
+}
+
+function ldpMoveCard(btnEl, direction) {
+    var card = btnEl.closest('.inet-product-card');
+    if (!card) return;
+    var container = card.parentElement;
+    if (direction === -1) {
+        var prev = card.previousElementSibling;
+        if (prev && prev.classList.contains('inet-product-card')) {
+            container.insertBefore(card, prev);
+        }
+    } else if (direction === 1) {
+        var next = card.nextElementSibling;
+        if (next && next.classList.contains('inet-product-card')) {
+            container.insertBefore(next, card);
+        }
+    }
+}
+
+function ldpUpdateVideoThumbnail(inputEl) {
+    var card = inputEl.closest('.inet-product-card');
+    if (!card) return;
+    var previewEl = card.querySelector('.video-preview-thumb');
+    if (!previewEl) return;
+    var url = inputEl.value.trim();
+    if (url) {
+        previewEl.innerHTML = '<img src="' + url + '" style="width:100%; height:100%; object-fit:cover;">';
+    } else {
+        previewEl.innerHTML = '<span style="color:var(--text-muted); font-size:8px;">▶</span>';
+    }
+}
+
+
 function ldpAddPricingCard() {
     var list = document.getElementById('sa-pricing-list');
     if (!list) return;
@@ -4355,18 +4423,18 @@ function ldpUpdatePricingFeaturesInputs(cardItem) {
     var container = cardItem.querySelector('.pricing-features-values-container');
     var hiddenTextarea = cardItem.querySelector('.pricing-features-input');
     var featuresListTextarea = document.getElementById('sa-pricing-features-list');
-    
+
     if (!container || !hiddenTextarea || !featuresListTextarea) return;
-    
-    var features = featuresListTextarea.value.split('\n').map(function(f) {
+
+    var features = featuresListTextarea.value.split('\n').map(function (f) {
         return f.trim();
-    }).filter(function(f) {
+    }).filter(function (f) {
         return f !== '';
     });
-    
+
     var currentValuesMap = {};
     var lines = hiddenTextarea.value.split('\n');
-    lines.forEach(function(line) {
+    lines.forEach(function (line) {
         var parts = line.split('|');
         if (parts.length >= 2) {
             var featureName = parts[0].trim();
@@ -4374,9 +4442,9 @@ function ldpUpdatePricingFeaturesInputs(cardItem) {
             currentValuesMap[featureName] = val;
         }
     });
-    
+
     var html = '';
-    features.forEach(function(feature, index) {
+    features.forEach(function (feature, index) {
         var val = currentValuesMap[feature] || '';
         if (val === '') {
             if (lines[index]) {
@@ -4388,18 +4456,18 @@ function ldpUpdatePricingFeaturesInputs(cardItem) {
                 }
             }
         }
-        
+
         html += '<div class="form-group" style="margin-bottom:8px; display:flex; align-items:center; gap:8px;">'
             + '<span style="font-size:12px; color:var(--text-muted); width:150px; font-weight:500; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" title="' + feature + '">' + feature + '</span>'
             + '<input type="text" class="form-input pricing-feature-value-input" data-feature="' + feature + '" value="' + val + '" oninput="ldpSavePricingFeatures(this)" placeholder="Nhập giá trị (vd: check, TV...)" style="flex:1;">'
             + '</div>';
     });
-    
+
     container.innerHTML = html;
-    
+
     var compositeValue = '';
     var inputEls = container.querySelectorAll('.pricing-feature-value-input');
-    inputEls.forEach(function(input) {
+    inputEls.forEach(function (input) {
         var fName = input.getAttribute('data-feature');
         var fVal = input.value.trim();
         compositeValue += fName + ' | ' + fVal + '\n';
@@ -4410,14 +4478,14 @@ function ldpUpdatePricingFeaturesInputs(cardItem) {
 function ldpSavePricingFeatures(inputEl) {
     var cardItem = inputEl.closest('.pricing-card-item');
     if (!cardItem) return;
-    
+
     var hiddenTextarea = cardItem.querySelector('.pricing-features-input');
     var container = cardItem.querySelector('.pricing-features-values-container');
     if (!hiddenTextarea || !container) return;
-    
+
     var compositeValue = '';
     var inputEls = container.querySelectorAll('.pricing-feature-value-input');
-    inputEls.forEach(function(input) {
+    inputEls.forEach(function (input) {
         var fName = input.getAttribute('data-feature');
         var fVal = input.value.trim();
         compositeValue += fName + ' | ' + fVal + '\n';
@@ -4427,7 +4495,7 @@ function ldpSavePricingFeatures(inputEl) {
 
 function ldpUpdateAllPricingFeatures() {
     var cards = document.querySelectorAll('#sa-pricing-list .pricing-card-item');
-    cards.forEach(function(card) {
+    cards.forEach(function (card) {
         ldpUpdatePricingFeaturesInputs(card);
     });
 }
@@ -4486,11 +4554,11 @@ function camInitSelect() {
     ];
 
     camSelectData = defaultCombos;
-    
+
     var pdhOptsContainer = document.getElementById('cam-pdh-list-options');
     if (pdhOptsContainer) {
         var html = '';
-        pdhPackagesMock.forEach(function(pkg, index) {
+        pdhPackagesMock.forEach(function (pkg, index) {
             html += '<div onclick="camSyncPdhPackage(' + index + ')" style="padding: 6px 8px; font-size: 11px; cursor: pointer; color: #fff; border-radius: 4px; transition: background 0.15s;" class="pdh-dropdown-item">'
                 + '<div style="font-weight: 700; color: var(--warning);">' + pkg.code + '</div>'
                 + '<div style="font-size: 10px; color: var(--text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + pkg.name + ' - ' + pkg.price + 'đ</div>'
@@ -4512,9 +4580,9 @@ function camRenderSelectList() {
 
     var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
 
-    var filtered = camSelectData.map(function(combo, idx) {
+    var filtered = camSelectData.map(function (combo, idx) {
         return { combo: combo, originalIdx: idx };
-    }).filter(function(item) {
+    }).filter(function (item) {
         return !searchVal || item.combo.name.toLowerCase().indexOf(searchVal) > -1 || item.combo.price.toLowerCase().indexOf(searchVal) > -1;
     });
 
@@ -4587,7 +4655,7 @@ function camPrevPage() {
 
 function camNextPage() {
     var searchVal = document.getElementById('cam-product-search') ? document.getElementById('cam-product-search').value.toLowerCase() : '';
-    var filteredCount = camSelectData.filter(function(combo) {
+    var filteredCount = camSelectData.filter(function (combo) {
         return !searchVal || combo.name.toLowerCase().indexOf(searchVal) > -1 || combo.price.toLowerCase().indexOf(searchVal) > -1;
     }).length;
     var totalPages = Math.ceil(filteredCount / camProductsPerPage) || 1;
@@ -4599,13 +4667,13 @@ function camNextPage() {
 
 function camSelectProduct(idx) {
     camActiveSelectIndex = idx;
-    
+
     var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
-    items.forEach(function(item) {
+    items.forEach(function (item) {
         item.classList.remove('active');
     });
-    
-    var clickedItem = Array.from(document.querySelectorAll('#cam-products-nav-list .cam-product-list-item')).find(function(item) {
+
+    var clickedItem = Array.from(document.querySelectorAll('#cam-products-nav-list .cam-product-list-item')).find(function (item) {
         return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
     });
     if (clickedItem) clickedItem.classList.add('active');
@@ -4643,7 +4711,7 @@ function camSaveDetailField(fieldName) {
         combo.name = document.getElementById('cam-edit-name').value;
         document.getElementById('cam-edit-header-title').textContent = combo.name || 'Combo mới';
         var items = document.querySelectorAll('#cam-products-nav-list .cam-product-list-item');
-        var clickedItem = Array.from(items).find(function(item) {
+        var clickedItem = Array.from(items).find(function (item) {
             return item.getAttribute('onclick') && item.getAttribute('onclick').indexOf('camSelectProduct(' + idx + ')') > -1;
         });
         if (clickedItem) {
@@ -4756,14 +4824,14 @@ function camSyncPdhPackage(pdhIndex) {
     if (!pkgMock) return;
 
     var idx = camSelectData.length;
-    
+
     // Tính toán giá gốc mock = giá khuyến mãi * 1.2
     var cleanedPriceStr = pkgMock.price.replace(/\./g, '');
     var priceNum = parseInt(cleanedPriceStr) || 1000000;
     var origPriceNum = Math.round(priceNum * 1.2);
-    
+
     // Format dạng e.g. 1.200.000đ
-    var formatPrice = function(num) {
+    var formatPrice = function (num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
     };
 
@@ -4799,11 +4867,11 @@ function camFilterProducts() {
             document.getElementById('cam-product-detail-empty').style.display = 'flex';
             document.getElementById('cam-product-detail-form').style.display = 'none';
         } else {
-            var filteredIdx = camSelectData.map(function(p, i) {
+            var filteredIdx = camSelectData.map(function (p, i) {
                 return { p: p, i: i };
-            }).filter(function(item) {
+            }).filter(function (item) {
                 return !searchVal || item.p.name.toLowerCase().indexOf(searchVal) > -1 || item.p.price.toLowerCase().indexOf(searchVal) > -1;
-            }).findIndex(function(item) {
+            }).findIndex(function (item) {
                 return item.i === camActiveSelectIndex;
             });
             if (filteredIdx >= 0) {
@@ -4820,14 +4888,14 @@ function camSyncHiddenDom() {
     if (!container) return;
 
     container.innerHTML = '';
-    
+
     camSelectData.forEach(function (combo, i) {
         var card = document.createElement('div');
         card.className = 'cam-select-card-item';
         card.style.display = 'none';
-        
+
         var showChecked = combo.show ? 'checked' : '';
-        
+
         var html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">'
             + '<span style="font-weight:700; color:var(--warning); font-size:14px;" class="cam-select-card-title">' + combo.name + '</span>'
             + '<div style="display:flex; gap:12px; align-items:center;">'
@@ -4846,7 +4914,7 @@ function camSyncHiddenDom() {
             + '<input type="text" class="cam-select-cta-url-input" value="' + combo.ctaUrl + '">'
             + '<textarea class="cam-select-desc-input">' + combo.desc + '</textarea>'
             + '</div>';
-        
+
         card.innerHTML = html;
         container.appendChild(card);
     });
@@ -4930,7 +4998,8 @@ function ldpSaveSection() {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
         });
         var text = group ? group.querySelector('input').value : '';
-        summaryText = 'Tiêu đề: "' + text + '"';
+        var count = document.querySelectorAll('#inet-review-list .inet-product-card').length;
+        summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' video review';
     } else if (sectionId === 'inet-testimonials') {
         var group = Array.from(document.querySelectorAll('#ldpsec-inet-testimonials .form-group')).find(function (g) {
             return g.querySelector('label') && g.querySelector('label').textContent.includes('Tiêu đề');
@@ -4957,6 +5026,9 @@ function ldpSaveSection() {
         });
         var text = group ? group.querySelector('input').value : '';
         summaryText = 'Tiêu đề: "' + text + '"';
+    } else if (sectionId === 'sa-popup-form') {
+        var titleVal = document.getElementById('sa-popup-form-title') ? document.getElementById('sa-popup-form-title').value : '';
+        summaryText = 'Tiêu đề Popup: "' + titleVal + '"';
     } else if (sectionId === 'sa-hero') {
         var chk = document.querySelector('#ldpsec-sa-hero .countdown-enable-chk');
         var isEnabled = chk ? chk.checked : false;
@@ -5096,430 +5168,429 @@ function ldpSaveSection() {
         var text = group ? group.querySelector('input').value : '';
         var count = document.querySelectorAll('#lead-videos-list .inet-product-card').length;
         summaryText = 'Tiêu đề: "' + text + '" · ' + count + ' video review';
-    } else if (sectionId === 'sa-footer') {
-        var group = Array.from(document.querySelectorAll('#ldpsec-sa-footer .form-group')).find(function (g) {
-            return g.querySelector('label') && g.querySelector('label').textContent.includes('Text kêu gọi');
-        });
-        var text = group ? group.querySelector('textarea').value : '';
-        summaryText = 'Text: "' + text + '"';
-    }
-
-    var row = document.querySelector('.ldp-section-row[data-section-id="' + sectionId + '"]');
-    if (row) {
-        var descEl = row.querySelector('.section-desc') || row.querySelector('span[style*="var(--text-muted)"]') || row.querySelector('div[style*="color:var(--text-muted)"]') || row.querySelector('div > span:last-child');
-        if (descEl) {
-            descEl.textContent = summaryText;
-        }
-    }
-
-    showLdpToast('Đã lưu thay đổi cho section thành công!');
-    ldpCloseSection();
-}
-
-// Realtime SEO Preview
-function updateLdpSeoPreview() {
-    var titleInput = document.getElementById('ldp-meta-title');
-    var descInput = document.getElementById('ldp-meta-desc');
-    var slugInput = document.getElementById('ldp-url-slug');
-
-    var prevTitle = document.getElementById('ldp-seo-prev-title');
-    var prevDesc = document.getElementById('ldp-seo-prev-desc');
-    var prevSlug = document.getElementById('ldp-seo-prev-slug');
-
-    if (titleInput && prevTitle) prevTitle.textContent = titleInput.value || 'Khuyến mãi Internet Tháng 5 - FPT Telecom';
-    if (descInput && prevDesc) prevDesc.textContent = descInput.value || 'Đăng ký lắp đặt cáp quang FPT...';
-    if (slugInput && prevSlug) prevSlug.textContent = slugInput.value || 'km-internet-t5';
-}
 
 
-
-function ldpImportHtmlFile(input) {
-    if (!input.files || !input.files[0]) return;
-    var reader = new FileReader();
-    reader.onload = function (e) {
-        var ta = document.getElementById('ldp-html-editor');
-        if (ta) { ta.value = e.target.result; showLdpToast('Import HTML OK'); }
-    };
-    reader.readAsText(input.files[0]);
-    input.value = '';
-}
-
-function ldpFormatHtml() {
-    var ta = document.getElementById('ldp-html-editor');
-    if (!ta) return;
-    var indent = 0;
-    var formatted = ta.value
-        .replace(/>\s*</g, '>\n<')
-        .split('\n')
-        .map(function (line) {
-            line = line.trim();
-            if (!line) return '';
-            if (/^<\//.test(line)) indent = Math.max(0, indent - 1);
-            var out = '    '.repeat(indent) + line;
-            if (/^<[^\/!][^>]*[^\/]>$/.test(line) && !/^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(line)) indent++;
-            return out;
-        })
-        .join('\n');
-    ta.value = formatted;
-    showLdpToast('Format HTML OK');
-}
-
-// Move section up/down
-function ldpMoveSection(btn, dir) {
-    var item = btn.closest('.ldp-sections-list > div > div') || btn.parentElement.parentElement;
-    if (!item) return;
-    var parent = item.parentElement;
-    if (dir === 'up') {
-        var prev = item.previousElementSibling;
-        if (prev) parent.insertBefore(item, prev);
-    } else {
-        var next = item.nextElementSibling;
-        if (next) parent.insertBefore(next, item);
-    }
-}
-
-// File upload mockup
-function ldpHandleFileUpload(input) {
-    var file = input.files[0];
-    if (!file) return;
-    var url = URL.createObjectURL(file);
-    var wrapper = input.closest('.media-upload-wrapper');
-    if (wrapper) {
-        var urlInput = wrapper.querySelector('.media-url');
-        if (urlInput) urlInput.value = '/media/uploads/' + file.name;
-        var preview = wrapper.querySelector('.media-preview');
-        if (preview) {
-            preview.style.display = 'flex';
-            var img = preview.querySelector('img');
-            if (img) img.src = url;
-        }
-    }
-}
-
-function ldpRemoveUploadedFile(crossBtn) {
-    event.stopPropagation();
-    var wrapper = crossBtn.closest('.media-upload-wrapper');
-    if (wrapper) {
-        var urlInput = wrapper.querySelector('.media-url');
-        if (urlInput) urlInput.value = '';
-        var fileInput = wrapper.querySelector('.media-file-input');
-        if (fileInput) fileInput.value = '';
-        var preview = wrapper.querySelector('.media-preview');
-        if (preview) preview.style.display = 'none';
-    }
-}
-
-// Dynamic Testimonials
-function ldpAddTestimonial() {
-    var list = document.getElementById('inet-testimonials-list');
-    if (!list) return;
-    var idx = list.children.length + 1;
-    var div = document.createElement('div');
-    div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-bottom:10px;';
-    div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>'
-        + '<div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">'
-        + '<div class="form-group"><label>Avatar</label>'
-        + '<div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">'
-        + '<input type="text" class="form-input media-url" placeholder="URL">'
-        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
-        + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>'
-        + '<div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative; margin-top:4px;">'
-        + '<img src="" style="width:100%; height:100%; object-fit:cover;"><span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span></div></div></div>'
-        + '<div>'
-        + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
-        + '<div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input" placeholder="Tên khách hàng ' + idx + '"></div>'
-        + '<div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:100%;"></div>'
-        + '</div>'
-        + '<div class="form-group"><label>Nội dung đánh giá</label><textarea class="form-textarea" rows="2" placeholder="Nội dung đánh giá..."></textarea></div>'
-        + '</div></div>';
-    list.appendChild(div);
-}
-
-// Dynamic Promo Cards
-function ldpAddPromo() {
-    var list = document.getElementById('inet-promo-list');
-    if (!list) return;
-    var idx = list.children.length + 1;
-    var div = document.createElement('div');
-    div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-top:10px; background:var(--bg-secondary);';
-    div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa khuyến mãi">🗑</button>'
-        + '<div style="display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px;">'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề KM ' + idx + '</label><input type="text" class="form-input" placeholder="Nhập tiêu đề khuyến mãi..."></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Ảnh banner KM ' + idx + '</label>'
-        + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
-        + '<input type="text" class="form-input media-url" placeholder="/media/uploads/..." style="flex:1;">'
-        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
-        + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>'
-        + '<div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">'
-        + '<img src="" style="width:100%; height:100%; object-fit:cover;"><span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span></div></div></div>'
-        + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Link URL KM ' + idx + '</label><input type="text" class="form-input" placeholder="Nhập link liên kết (vd: /dang-ky)..."></div>'
-        + '</div>';
-    list.appendChild(div);
-}
-
-function ldpRefactorFaqItems() {
-    document.querySelectorAll('.faq-item, div[style*="border-glass"][style*="padding:14px"]').forEach(function(item, idx) {
-        var selectEl = item.querySelector('.faq-sync-select');
-        var qInput = item.querySelector('.faq-question-input');
-        var aTextarea = item.querySelector('.faq-answer-textarea');
-        var deleteBtn = item.querySelector('button[title="Xóa câu hỏi"], button[onclick*="remove"]');
-        
-        if (selectEl && qInput && aTextarea && qInput.type !== 'hidden') {
-            // Chuyển sang dạng input ẩn
-            qInput.type = 'hidden';
-            var qGroup = qInput.closest('.form-group');
-            if (qGroup) qGroup.style.display = 'none';
-
-            // Chuyển textarea thành input ẩn hoặc ẩn hẳn form-group
-            aTextarea.style.display = 'none';
-            var aGroup = aTextarea.closest('.form-group');
-            if (aGroup) aGroup.style.display = 'none';
-            
-            var selectGroup = selectEl.closest('.form-group');
-            if (selectGroup) {
-                selectGroup.style.display = 'none';
+        var row = document.querySelector('.ldp-section-row[data-section-id="' + sectionId + '"]');
+        if (row) {
+            var descEl = row.querySelector('.section-desc') || row.querySelector('span[style*="var(--text-muted)"]') || row.querySelector('div[style*="color:var(--text-muted)"]') || row.querySelector('div > span:last-child');
+            if (descEl) {
+                descEl.textContent = summaryText;
             }
-
-            // Thiết lập style flex row cực gọn cho item
-            item.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
-            
-            if (deleteBtn) deleteBtn.remove();
-            
-            var label = document.createElement('span');
-            label.style.cssText = 'font-size:11px; font-weight:700; color:var(--primary); min-width:70px;';
-            label.textContent = 'Câu hỏi ' + (idx + 1);
-            
-            var newDelBtn = document.createElement('button');
-            newDelBtn.className = 'btn btn-secondary btn-sm';
-            newDelBtn.style.cssText = 'color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;';
-            newDelBtn.textContent = '🗑 Xóa';
-            newDelBtn.onclick = function() {
-                item.remove();
-            };
-            
-            // Sắp xếp lại DOM các phần tử hiển thị
-            item.prepend(label);
-            item.appendChild(selectEl);
-            selectEl.style.cssText = 'flex:1; padding:6px 8px; font-size:12px; margin:0; display:block;';
-            item.appendChild(newDelBtn);
-        }
-    });
-}
-
-// Sync FAQ database to specific fields
-function ldpSyncFaqToFields(selectEl) {
-    var faqId = selectEl.value;
-    if (!faqId) return;
-    var faqData = faqArticlesData[faqId];
-    if (!faqData) return;
-    var parentDiv = selectEl.closest('.faq-item') || selectEl.closest('div[style*="border-glass"]') || selectEl.parentElement.parentElement;
-    if (parentDiv) {
-        var questionInput = parentDiv.querySelector('.faq-question-input');
-        var answerTextarea = parentDiv.querySelector('.faq-answer-textarea');
-        if (questionInput) questionInput.value = faqData.question;
-        if (answerTextarea) answerTextarea.value = faqData.answer;
-        showLdpToast('Đã đồng bộ từ kho FAQ: ' + faqData.question);
-    }
-}
-
-// Add FAQ Item Dynamically
-function ldpAddFaqItem(listId, qText, aText) {
-    var targetListId = 'inet-faq-list';
-    var actualQ = qText;
-    var actualA = aText;
-
-    if (listId && typeof listId === 'string' && document.getElementById(listId)) {
-        targetListId = listId;
-    } else {
-        actualQ = listId;
-        actualA = qText;
-    }
-
-    var list = document.getElementById(targetListId);
-    if (!list) return;
-    var idx = list.children.length + 1;
-    var div = document.createElement('div');
-    div.className = 'faq-item';
-    div.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
-
-    var optionsHtml = '<option value="">-- Chọn câu hỏi từ FAQ chung để đồng bộ --</option>';
-    for (var key in faqArticlesData) {
-        var selected = (actualQ && faqArticlesData[key].question === actualQ) ? 'selected' : '';
-        optionsHtml += '<option value="' + key + '" ' + selected + '>' + faqArticlesData[key].question + '</option>';
-    }
-
-    div.innerHTML = '<span style="font-size:11px; font-weight:700; color:var(--primary); min-width:70px;">Câu hỏi ' + idx + '</span>'
-        + '<select class="form-input faq-sync-select" onchange="ldpSyncFaqToFields(this)" style="flex:1; padding:6px 8px; font-size:12px; margin:0;">' + optionsHtml + '</select>'
-        + '<input type="hidden" class="faq-question-input" value="' + (actualQ || '') + '">'
-        + '<input type="hidden" class="faq-answer-textarea" value="' + (actualA || '') + '">'
-        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;" onclick="this.parentElement.remove()" title="Xóa câu hỏi">🗑 Xóa</button>';
-    list.appendChild(div);
-}
-
-function ldpAddSaMovieItem(btnEl, movieTitle, moviePoster, movieUrl) {
-    var container = btnEl.previousElementSibling;
-    if (!container) return;
-    var idx = container.querySelectorAll('.sa-movie-item').length + 1;
-
-    var mTitle = movieTitle || '';
-    var mPoster = moviePoster || '';
-    var mUrl = movieUrl || '';
-
-    var item = document.createElement('div');
-    item.className = 'sa-movie-item';
-    item.style.cssText = 'border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:8px; background:rgba(255,255,255,0.02); display:flex; flex-direction:column; gap:6px; margin-bottom:6px;';
-    item.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center;">'
-        + '<span style="font-size:10px; font-weight:600; color:var(--warning);">Phim ' + idx + '</span>'
-        + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:0; font-size:10px;" onclick="this.closest(\'.sa-movie-item\').remove()">Xóa</button>'
-        + '</div>'
-        + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">Tên phim</label><input type="text" class="form-input form-input-sm movie-title" value="' + mTitle + '" placeholder="vd: Bạch Nhật Đề Đăng"></div>'
-        + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">Poster phim</label>'
-        + '<div class="media-upload-wrapper" style="display:flex; gap:4px; align-items:center; width:100%;">'
-        + '<input type="text" class="form-input form-input-sm media-url movie-poster" value="' + mPoster + '" placeholder="URL poster" style="flex:1;">'
-        + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
-        + '<button class="btn btn-secondary btn-sm" style="padding:2px 6px; font-size:10px;" onclick="this.previousElementSibling.click()">Upload</button>'
-        + '</div></div>'
-        + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">URL Phim / Đăng ký</label><input type="text" class="form-input form-input-sm movie-url" value="' + mUrl + '" placeholder="vd: /xem-phim/bach-nhat-de-dang"></div>';
-
-    container.appendChild(item);
-}
-
-// ===== Tag-based Mapping & Article Sync Logic =====
-var mockArticles = [
-    { title: "Hướng dẫn cài đặt modem Wi-Fi 6 thế hệ mới", tag: "wifi6", type: "tin-tuc" },
-    { title: "Ưu đãi lắp đặt cáp quang FPT giá cực rẻ tháng này", tag: "internet", type: "khuyen-mai" },
-    { title: "Top 5 tính năng đột phá trên FPT Camera IQ3", tag: "camera", type: "tin-tuc" },
-    { title: "Gói FPT Play SMAX có gì hot mà giới trẻ mê mệt?", tag: "truyenhinh", type: "tin-tuc" },
-    { title: "Khắc phục lỗi mạng chập chờn tại nhà đơn giản", tag: "internet", type: "tin-tuc" },
-    { title: "Sử dụng camera an ninh sao cho an toàn bảo mật?", tag: "camera", type: "faq" },
-    { title: "[Khuyến mãi] Tặng ngay voucher 100k khi lắp Internet", tag: "khuyenmai", type: "khuyen-mai" },
-    { title: "Đại hội thể thao phát sóng trực tiếp trên FPT Play", tag: "truyenhinh", type: "tin-tuc" },
-    { title: "Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam", tag: "wifi7", type: "tin-tuc" },
-    { title: "Hướng dẫn nâng cấp lên thiết bị Wi-Fi 7 của FPT", tag: "wifi7", type: "faq" },
-    { title: "Độc quyền phát sóng giải bóng đá Ngoại Hạng Anh trên FPT Play", tag: "thethao", type: "tin-tuc" },
-    { title: "Giải pháp lưu trữ đám mây Cloud Camera bảo mật tuyệt đối", tag: "cloud", type: "tin-tuc" },
-    { title: "Ưu đãi lắp đặt gói cước Lux Wi-Fi 6 tốc độ cao", tag: "lux", type: "khuyen-mai" }
-];
-
-var newsTagsData = {
-    'tag-1': { id: 'tag-1', name: 'internet', slug: 'internet', count: 2, status: 'Active' },
-    'tag-2': { id: 'tag-2', name: 'camera', slug: 'camera', count: 2, status: 'Active' },
-    'tag-3': { id: 'tag-3', name: 'wifi6', slug: 'wifi6', count: 1, status: 'Active' },
-    'tag-4': { id: 'tag-4', name: 'truyenhinh', slug: 'truyenhinh', count: 2, status: 'Active' },
-    'tag-5': { id: 'tag-5', name: 'khuyenmai', slug: 'khuyenmai', count: 1, status: 'Active' },
-    'tag-6': { id: 'tag-6', name: 'wifi7', slug: 'wifi7', count: 2, status: 'Active' },
-    'tag-7': { id: 'tag-7', name: 'thethao', slug: 'thethao', count: 1, status: 'Active' },
-    'tag-8': { id: 'tag-8', name: 'cloud', slug: 'cloud', count: 1, status: 'Active' },
-    'tag-9': { id: 'tag-9', name: 'lux', slug: 'lux', count: 1, status: 'Active' },
-    'tag-10': { id: 'tag-10', name: 'hotro-kythuat', slug: 'hotro-kythuat', count: 0, status: 'Draft' }
-};
-
-var tagMappingData = {
-    'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: false },
-    'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: false },
-    'wifi6': { skus: ['MODEM-AX3000GZ', 'INT-SKY'], fallback: false },
-    'truyenhinh': { skus: ['PLAY-MAX'], fallback: false }
-};
-
-var skuTagsData = {};
-
-function syncTagMappingToSku() {
-    skuTagsData = {};
-    for (let tag in tagMappingData) {
-        tagMappingData[tag].skus.forEach(sku => {
-            if (!skuTagsData[sku]) {
-                skuTagsData[sku] = [];
-            }
-            if (!skuTagsData[sku].includes(tag)) {
-                skuTagsData[sku].push(tag);
-            }
-        });
-    }
-}
-
-// Render danh sách tag chỉ đọc ở tab Content của SKU Detail
-function renderSkuTagsReadonly(skuCode) {
-    const listEl = document.getElementById('sku-tag-readonly-list');
-    if (!listEl) return;
-    listEl.innerHTML = '';
-
-    syncTagMappingToSku();
-    const tags = skuTagsData[skuCode] || [];
-    if (tags.length === 0) {
-        listEl.innerHTML = '<span style="color:var(--text-muted); font-style:italic;">Không có tag nào liên kết.</span>';
-        return;
-    }
-
-    tags.forEach(tag => {
-        const badge = document.createElement('span');
-        badge.className = 'badge';
-        badge.style.background = 'rgba(249, 115, 22, 0.15)';
-        badge.style.color = '#FB923C';
-        badge.style.border = '1px solid rgba(249, 115, 22, 0.3)';
-        badge.style.padding = '3px 8px';
-        badge.style.borderRadius = '4px';
-        badge.style.fontSize = '11px';
-        badge.innerText = '#' + tag;
-        listEl.appendChild(badge);
-    });
-}
-
-function renderTagMappingTable() {
-    const tbody = document.getElementById('tag-mapping-tbody');
-    if (!tbody) return;
-    tbody.innerHTML = '';
-
-    const searchValue = document.getElementById('tag-mapping-search').value.trim().toLowerCase();
-
-    for (let tag in tagMappingData) {
-        if (searchValue && !tag.toLowerCase().includes(searchValue)) {
-            continue;
-        }
-
-        const data = tagMappingData[tag];
-
-        // Tra cứu thông tin hiển thị và trạng thái của Tag từ newsTagsData
-        let displayTagName = tag;
-        let tagObj = null;
-        for (let id in newsTagsData) {
-            if (newsTagsData[id].slug === tag) {
-                tagObj = newsTagsData[id];
-                displayTagName = newsTagsData[id].name;
-                break;
-            }
-        }
-
-        const draftBadge = (tagObj && tagObj.status === 'Draft')
-            ? ' <span class="badge warning" style="font-size:9.5px; padding:1px 4px; vertical-align:middle; border-radius:3px; font-weight:normal; margin-left:4px;">Nháp</span>'
-            : '';
-
-        // Đếm số bài viết trùng khớp
-        const matchedCount = mockArticles.filter(art => art.tag === tag).length;
-
-        const tr = document.createElement('tr');
-        tr.style.cursor = 'pointer';
-        tr.onclick = function () { selectTagForConfig(tag); };
-
-        // Tạo badges cho SKUs (Thu gọn khi > 3 SKUs)
-        let skuBadges = '';
-        if (data.skus.length === 0) {
-            skuBadges = '<span style="color:var(--text-muted); font-style:italic; font-size:11px;">Chưa gán</span>';
         } else {
-            const maxDisplay = 3;
-            const displayedSkus = data.skus.slice(0, maxDisplay);
-            const remainingCount = data.skus.length - maxDisplay;
-
-            displayedSkus.forEach(sku => {
-                skuBadges += `<span class="badge" style="background:rgba(245,158,11,0.1); color:var(--warning); margin-right:4px; font-size:10px; padding:2px 5px; border-radius:3px;">${sku}</span>`;
-            });
-
-            if (remainingCount > 0) {
-                const allSkusString = data.skus.join(', ');
-                skuBadges += `<span class="badge" style="background:rgba(255,255,255,0.08); color:var(--text-muted); font-size:10px; padding:2px 5px; border-radius:3px; cursor:help;" title="${allSkusString}">+${remainingCount} SKUs...</span>`;
+            var summaryEl = document.getElementById(sectionId + '-summary');
+            if (summaryEl) {
+                summaryEl.textContent = summaryText;
             }
         }
 
-        tr.innerHTML = `
+        showLdpToast('Đã lưu thay đổi cho section thành công!');
+        ldpCloseSection();
+    }
+
+    // Realtime SEO Preview
+    function updateLdpSeoPreview() {
+        var titleInput = document.getElementById('ldp-meta-title');
+        var descInput = document.getElementById('ldp-meta-desc');
+        var slugInput = document.getElementById('ldp-url-slug');
+
+        var prevTitle = document.getElementById('ldp-seo-prev-title');
+        var prevDesc = document.getElementById('ldp-seo-prev-desc');
+        var prevSlug = document.getElementById('ldp-seo-prev-slug');
+
+        if (titleInput && prevTitle) prevTitle.textContent = titleInput.value || 'Khuyến mãi Internet Tháng 5 - FPT Telecom';
+        if (descInput && prevDesc) prevDesc.textContent = descInput.value || 'Đăng ký lắp đặt cáp quang FPT...';
+        if (slugInput && prevSlug) prevSlug.textContent = slugInput.value || 'km-internet-t5';
+    }
+
+
+
+    function ldpImportHtmlFile(input) {
+        if (!input.files || !input.files[0]) return;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var ta = document.getElementById('ldp-html-editor');
+            if (ta) { ta.value = e.target.result; showLdpToast('Import HTML OK'); }
+        };
+        reader.readAsText(input.files[0]);
+        input.value = '';
+    }
+
+    function ldpFormatHtml() {
+        var ta = document.getElementById('ldp-html-editor');
+        if (!ta) return;
+        var indent = 0;
+        var formatted = ta.value
+            .replace(/>\s*</g, '>\n<')
+            .split('\n')
+            .map(function (line) {
+                line = line.trim();
+                if (!line) return '';
+                if (/^<\//.test(line)) indent = Math.max(0, indent - 1);
+                var out = '    '.repeat(indent) + line;
+                if (/^<[^\/!][^>]*[^\/]>$/.test(line) && !/^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/.test(line)) indent++;
+                return out;
+            })
+            .join('\n');
+        ta.value = formatted;
+        showLdpToast('Format HTML OK');
+    }
+
+    // Move section up/down
+    function ldpMoveSection(btn, dir) {
+        var item = btn.closest('.ldp-sections-list > div > div') || btn.parentElement.parentElement;
+        if (!item) return;
+        var parent = item.parentElement;
+        if (dir === 'up') {
+            var prev = item.previousElementSibling;
+            if (prev) parent.insertBefore(item, prev);
+        } else {
+            var next = item.nextElementSibling;
+            if (next) parent.insertBefore(next, item);
+        }
+    }
+
+    // File upload mockup
+    function ldpHandleFileUpload(input) {
+        var file = input.files[0];
+        if (!file) return;
+        var url = URL.createObjectURL(file);
+        var wrapper = input.closest('.media-upload-wrapper');
+        if (wrapper) {
+            var urlInput = wrapper.querySelector('.media-url');
+            if (urlInput) urlInput.value = '/media/uploads/' + file.name;
+            var preview = wrapper.querySelector('.media-preview');
+            if (preview) {
+                preview.style.display = 'flex';
+                var img = preview.querySelector('img');
+                if (img) img.src = url;
+            }
+        }
+    }
+
+    function ldpRemoveUploadedFile(crossBtn) {
+        event.stopPropagation();
+        var wrapper = crossBtn.closest('.media-upload-wrapper');
+        if (wrapper) {
+            var urlInput = wrapper.querySelector('.media-url');
+            if (urlInput) urlInput.value = '';
+            var fileInput = wrapper.querySelector('.media-file-input');
+            if (fileInput) fileInput.value = '';
+            var preview = wrapper.querySelector('.media-preview');
+            if (preview) preview.style.display = 'none';
+        }
+    }
+
+    // Dynamic Testimonials
+    function ldpAddTestimonial() {
+        var list = document.getElementById('inet-testimonials-list');
+        if (!list) return;
+        var idx = list.children.length + 1;
+        var div = document.createElement('div');
+        div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-bottom:10px;';
+        div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa đánh giá">🗑</button>'
+            + '<div style="display:grid; grid-template-columns:80px 1fr; gap:12px; margin-top:10px;">'
+            + '<div class="form-group"><label>Avatar</label>'
+            + '<div class="media-upload-wrapper" style="display:flex; flex-direction:column; gap:4px;">'
+            + '<input type="text" class="form-input media-url" placeholder="URL">'
+            + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+            + '<button class="btn btn-secondary btn-sm" style="font-size:10px; padding:4px;" onclick="this.previousElementSibling.click()">Upload</button>'
+            + '<div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative; margin-top:4px;">'
+            + '<img src="" style="width:100%; height:100%; object-fit:cover;"><span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span></div></div></div>'
+            + '<div>'
+            + '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">'
+            + '<div class="form-group"><label>Tên khách hàng</label><input type="text" class="form-input" placeholder="Tên khách hàng ' + idx + '"></div>'
+            + '<div class="form-group"><label>Rating (1–5 ⭐)</label><input type="number" class="form-input" value="5" min="1" max="5" style="width:100%;"></div>'
+            + '</div>'
+            + '<div class="form-group"><label>Nội dung đánh giá</label><textarea class="form-textarea" rows="2" placeholder="Nội dung đánh giá..."></textarea></div>'
+            + '</div></div>';
+        list.appendChild(div);
+    }
+
+    // Dynamic Promo Cards
+    function ldpAddPromo() {
+        var list = document.getElementById('inet-promo-list');
+        if (!list) return;
+        var idx = list.children.length + 1;
+        var div = document.createElement('div');
+        div.style.cssText = 'border:1px solid var(--border-glass); border-radius:8px; padding:14px; position:relative; margin-top:10px; background:var(--bg-secondary);';
+        div.innerHTML = '<button class="btn btn-secondary btn-sm" style="position:absolute; top:8px; right:8px; color:var(--danger); border-color:rgba(239,68,68,0.2); padding:2px 6px;" onclick="this.parentElement.remove()" title="Xóa khuyến mãi">🗑</button>'
+            + '<div style="display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px;">'
+            + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Tiêu đề KM ' + idx + '</label><input type="text" class="form-input" placeholder="Nhập tiêu đề khuyến mãi..."></div>'
+            + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Ảnh banner KM ' + idx + '</label>'
+            + '<div class="media-upload-wrapper" style="display:flex; gap:8px; align-items:center; width:100%;">'
+            + '<input type="text" class="form-input media-url" placeholder="/media/uploads/..." style="flex:1;">'
+            + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+            + '<button class="btn btn-secondary btn-sm" onclick="this.previousElementSibling.click()">Upload</button>'
+            + '<div class="media-preview" style="width:30px; height:30px; border-radius:4px; border:1px solid var(--border-glass); background:rgba(0,0,0,0.2); display:none; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; position:relative;">'
+            + '<img src="" style="width:100%; height:100%; object-fit:cover;"><span style="position:absolute; top:-2px; right:-2px; background:rgba(239,68,68,0.85); color:#fff; font-size:8px; width:10px; height:10px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="ldpRemoveUploadedFile(this)">✕</span></div></div></div>'
+            + '<div class="form-group" style="margin-bottom:0;"><label style="font-size:11px;">Link URL KM ' + idx + '</label><input type="text" class="form-input" placeholder="Nhập link liên kết (vd: /dang-ky)..."></div>'
+            + '</div>';
+        list.appendChild(div);
+    }
+
+    function ldpRefactorFaqItems() {
+        document.querySelectorAll('.faq-item, div[style*="border-glass"][style*="padding:14px"]').forEach(function (item, idx) {
+            var selectEl = item.querySelector('.faq-sync-select');
+            var qInput = item.querySelector('.faq-question-input');
+            var aTextarea = item.querySelector('.faq-answer-textarea');
+            var deleteBtn = item.querySelector('button[title="Xóa câu hỏi"], button[onclick*="remove"]');
+
+            if (selectEl && qInput && aTextarea && qInput.type !== 'hidden') {
+                // Chuyển sang dạng input ẩn
+                qInput.type = 'hidden';
+                var qGroup = qInput.closest('.form-group');
+                if (qGroup) qGroup.style.display = 'none';
+
+                // Chuyển textarea thành input ẩn hoặc ẩn hẳn form-group
+                aTextarea.style.display = 'none';
+                var aGroup = aTextarea.closest('.form-group');
+                if (aGroup) aGroup.style.display = 'none';
+
+                var selectGroup = selectEl.closest('.form-group');
+                if (selectGroup) {
+                    selectGroup.style.display = 'none';
+                }
+
+                // Thiết lập style flex row cực gọn cho item
+                item.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
+
+                if (deleteBtn) deleteBtn.remove();
+
+                var label = document.createElement('span');
+                label.style.cssText = 'font-size:11px; font-weight:700; color:var(--primary); min-width:70px;';
+                label.textContent = 'Câu hỏi ' + (idx + 1);
+
+                var newDelBtn = document.createElement('button');
+                newDelBtn.className = 'btn btn-secondary btn-sm';
+                newDelBtn.style.cssText = 'color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;';
+                newDelBtn.textContent = '🗑 Xóa';
+                newDelBtn.onclick = function () {
+                    item.remove();
+                };
+
+                // Sắp xếp lại DOM các phần tử hiển thị
+                item.prepend(label);
+                item.appendChild(selectEl);
+                selectEl.style.cssText = 'flex:1; padding:6px 8px; font-size:12px; margin:0; display:block;';
+                item.appendChild(newDelBtn);
+            }
+        });
+    }
+
+    // Sync FAQ database to specific fields
+    function ldpSyncFaqToFields(selectEl) {
+        var faqId = selectEl.value;
+        if (!faqId) return;
+        var faqData = faqArticlesData[faqId];
+        if (!faqData) return;
+        var parentDiv = selectEl.closest('.faq-item') || selectEl.closest('div[style*="border-glass"]') || selectEl.parentElement.parentElement;
+        if (parentDiv) {
+            var questionInput = parentDiv.querySelector('.faq-question-input');
+            var answerTextarea = parentDiv.querySelector('.faq-answer-textarea');
+            if (questionInput) questionInput.value = faqData.question;
+            if (answerTextarea) answerTextarea.value = faqData.answer;
+            showLdpToast('Đã đồng bộ từ kho FAQ: ' + faqData.question);
+        }
+    }
+
+    // Add FAQ Item Dynamically
+    function ldpAddFaqItem(listId, qText, aText) {
+        var targetListId = 'inet-faq-list';
+        var actualQ = qText;
+        var actualA = aText;
+
+        if (listId && typeof listId === 'string' && document.getElementById(listId)) {
+            targetListId = listId;
+        } else {
+            actualQ = listId;
+            actualA = qText;
+        }
+
+        var list = document.getElementById(targetListId);
+        if (!list) return;
+        var idx = list.children.length + 1;
+        var div = document.createElement('div');
+        div.className = 'faq-item';
+        div.style.cssText = 'display:flex; align-items:center; gap:10px; margin-top:8px; background:rgba(255,255,255,0.02); padding:8px 10px; border:1px solid var(--border-glass); border-radius:6px; position:relative;';
+
+        var optionsHtml = '<option value="">-- Chọn câu hỏi từ FAQ chung để đồng bộ --</option>';
+        for (var key in faqArticlesData) {
+            var selected = (actualQ && faqArticlesData[key].question === actualQ) ? 'selected' : '';
+            optionsHtml += '<option value="' + key + '" ' + selected + '>' + faqArticlesData[key].question + '</option>';
+        }
+
+        div.innerHTML = '<span style="font-size:11px; font-weight:700; color:var(--primary); min-width:70px;">Câu hỏi ' + idx + '</span>'
+            + '<select class="form-input faq-sync-select" onchange="ldpSyncFaqToFields(this)" style="flex:1; padding:6px 8px; font-size:12px; margin:0;">' + optionsHtml + '</select>'
+            + '<input type="hidden" class="faq-question-input" value="' + (actualQ || '') + '">'
+            + '<input type="hidden" class="faq-answer-textarea" value="' + (actualA || '') + '">'
+            + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:4px 8px; font-size:12px; margin:0;" onclick="this.parentElement.remove()" title="Xóa câu hỏi">🗑 Xóa</button>';
+        list.appendChild(div);
+    }
+
+    function ldpAddSaMovieItem(btnEl, movieTitle, moviePoster, movieUrl) {
+        var container = btnEl.previousElementSibling;
+        if (!container) return;
+        var idx = container.querySelectorAll('.sa-movie-item').length + 1;
+
+        var mTitle = movieTitle || '';
+        var mPoster = moviePoster || '';
+        var mUrl = movieUrl || '';
+
+        var item = document.createElement('div');
+        item.className = 'sa-movie-item';
+        item.style.cssText = 'border:1px solid rgba(255,255,255,0.06); border-radius:6px; padding:8px; background:rgba(255,255,255,0.02); display:flex; flex-direction:column; gap:6px; margin-bottom:6px;';
+        item.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center;">'
+            + '<span style="font-size:10px; font-weight:600; color:var(--warning);">Phim ' + idx + '</span>'
+            + '<button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:transparent; background:transparent; padding:0; font-size:10px;" onclick="this.closest(\'.sa-movie-item\').remove()">Xóa</button>'
+            + '</div>'
+            + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">Tên phim</label><input type="text" class="form-input form-input-sm movie-title" value="' + mTitle + '" placeholder="vd: Bạch Nhật Đề Đăng"></div>'
+            + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">Poster phim</label>'
+            + '<div class="media-upload-wrapper" style="display:flex; gap:4px; align-items:center; width:100%;">'
+            + '<input type="text" class="form-input form-input-sm media-url movie-poster" value="' + mPoster + '" placeholder="URL poster" style="flex:1;">'
+            + '<input type="file" class="media-file-input" style="display:none;" accept="image/*" onchange="ldpHandleFileUpload(this)">'
+            + '<button class="btn btn-secondary btn-sm" style="padding:2px 6px; font-size:10px;" onclick="this.previousElementSibling.click()">Upload</button>'
+            + '</div></div>'
+            + '<div class="form-group" style="margin:0;"><label style="font-size:9px; margin-bottom:2px;">URL Phim / Đăng ký</label><input type="text" class="form-input form-input-sm movie-url" value="' + mUrl + '" placeholder="vd: /xem-phim/bach-nhat-de-dang"></div>';
+
+        container.appendChild(item);
+    }
+
+    // ===== Tag-based Mapping & Article Sync Logic =====
+    var mockArticles = [
+        { title: "Hướng dẫn cài đặt modem Wi-Fi 6 thế hệ mới", tag: "wifi6", type: "tin-tuc" },
+        { title: "Ưu đãi lắp đặt cáp quang FPT giá cực rẻ tháng này", tag: "internet", type: "khuyen-mai" },
+        { title: "Top 5 tính năng đột phá trên FPT Camera IQ3", tag: "camera", type: "tin-tuc" },
+        { title: "Gói FPT Play SMAX có gì hot mà giới trẻ mê mệt?", tag: "truyenhinh", type: "tin-tuc" },
+        { title: "Khắc phục lỗi mạng chập chờn tại nhà đơn giản", tag: "internet", type: "tin-tuc" },
+        { title: "Sử dụng camera an ninh sao cho an toàn bảo mật?", tag: "camera", type: "faq" },
+        { title: "[Khuyến mãi] Tặng ngay voucher 100k khi lắp Internet", tag: "khuyenmai", type: "khuyen-mai" },
+        { title: "Đại hội thể thao phát sóng trực tiếp trên FPT Play", tag: "truyenhinh", type: "tin-tuc" },
+        { title: "Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam", tag: "wifi7", type: "tin-tuc" },
+        { title: "Hướng dẫn nâng cấp lên thiết bị Wi-Fi 7 của FPT", tag: "wifi7", type: "faq" },
+        { title: "Độc quyền phát sóng giải bóng đá Ngoại Hạng Anh trên FPT Play", tag: "thethao", type: "tin-tuc" },
+        { title: "Giải pháp lưu trữ đám mây Cloud Camera bảo mật tuyệt đối", tag: "cloud", type: "tin-tuc" },
+        { title: "Ưu đãi lắp đặt gói cước Lux Wi-Fi 6 tốc độ cao", tag: "lux", type: "khuyen-mai" }
+    ];
+
+    var newsTagsData = {
+        'tag-1': { id: 'tag-1', name: 'internet', slug: 'internet', count: 2, status: 'Active' },
+        'tag-2': { id: 'tag-2', name: 'camera', slug: 'camera', count: 2, status: 'Active' },
+        'tag-3': { id: 'tag-3', name: 'wifi6', slug: 'wifi6', count: 1, status: 'Active' },
+        'tag-4': { id: 'tag-4', name: 'truyenhinh', slug: 'truyenhinh', count: 2, status: 'Active' },
+        'tag-5': { id: 'tag-5', name: 'khuyenmai', slug: 'khuyenmai', count: 1, status: 'Active' },
+        'tag-6': { id: 'tag-6', name: 'wifi7', slug: 'wifi7', count: 2, status: 'Active' },
+        'tag-7': { id: 'tag-7', name: 'thethao', slug: 'thethao', count: 1, status: 'Active' },
+        'tag-8': { id: 'tag-8', name: 'cloud', slug: 'cloud', count: 1, status: 'Active' },
+        'tag-9': { id: 'tag-9', name: 'lux', slug: 'lux', count: 1, status: 'Active' },
+        'tag-10': { id: 'tag-10', name: 'hotro-kythuat', slug: 'hotro-kythuat', count: 0, status: 'Draft' }
+    };
+
+    var tagMappingData = {
+        'internet': { skus: ['INT-GIGA', 'INT-SKY', 'MODEM-AX3000GZ'], fallback: false },
+        'camera': { skus: ['CAM-IQ3', 'CAM-SE'], fallback: false },
+        'wifi6': { skus: ['MODEM-AX3000GZ', 'INT-SKY'], fallback: false },
+        'truyenhinh': { skus: ['PLAY-MAX'], fallback: false }
+    };
+
+    var skuTagsData = {};
+
+    function syncTagMappingToSku() {
+        skuTagsData = {};
+        for (let tag in tagMappingData) {
+            tagMappingData[tag].skus.forEach(sku => {
+                if (!skuTagsData[sku]) {
+                    skuTagsData[sku] = [];
+                }
+                if (!skuTagsData[sku].includes(tag)) {
+                    skuTagsData[sku].push(tag);
+                }
+            });
+        }
+    }
+
+    // Render danh sách tag chỉ đọc ở tab Content của SKU Detail
+    function renderSkuTagsReadonly(skuCode) {
+        const listEl = document.getElementById('sku-tag-readonly-list');
+        if (!listEl) return;
+        listEl.innerHTML = '';
+
+        syncTagMappingToSku();
+        const tags = skuTagsData[skuCode] || [];
+        if (tags.length === 0) {
+            listEl.innerHTML = '<span style="color:var(--text-muted); font-style:italic;">Không có tag nào liên kết.</span>';
+            return;
+        }
+
+        tags.forEach(tag => {
+            const badge = document.createElement('span');
+            badge.className = 'badge';
+            badge.style.background = 'rgba(249, 115, 22, 0.15)';
+            badge.style.color = '#FB923C';
+            badge.style.border = '1px solid rgba(249, 115, 22, 0.3)';
+            badge.style.padding = '3px 8px';
+            badge.style.borderRadius = '4px';
+            badge.style.fontSize = '11px';
+            badge.innerText = '#' + tag;
+            listEl.appendChild(badge);
+        });
+    }
+
+    function renderTagMappingTable() {
+        const tbody = document.getElementById('tag-mapping-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const searchValue = document.getElementById('tag-mapping-search').value.trim().toLowerCase();
+
+        for (let tag in tagMappingData) {
+            if (searchValue && !tag.toLowerCase().includes(searchValue)) {
+                continue;
+            }
+
+            const data = tagMappingData[tag];
+
+            // Tra cứu thông tin hiển thị và trạng thái của Tag từ newsTagsData
+            let displayTagName = tag;
+            let tagObj = null;
+            for (let id in newsTagsData) {
+                if (newsTagsData[id].slug === tag) {
+                    tagObj = newsTagsData[id];
+                    displayTagName = newsTagsData[id].name;
+                    break;
+                }
+            }
+
+            const draftBadge = (tagObj && tagObj.status === 'Draft')
+                ? ' <span class="badge warning" style="font-size:9.5px; padding:1px 4px; vertical-align:middle; border-radius:3px; font-weight:normal; margin-left:4px;">Nháp</span>'
+                : '';
+
+            // Đếm số bài viết trùng khớp
+            const matchedCount = mockArticles.filter(art => art.tag === tag).length;
+
+            const tr = document.createElement('tr');
+            tr.style.cursor = 'pointer';
+            tr.onclick = function () { selectTagForConfig(tag); };
+
+            // Tạo badges cho SKUs (Thu gọn khi > 3 SKUs)
+            let skuBadges = '';
+            if (data.skus.length === 0) {
+                skuBadges = '<span style="color:var(--text-muted); font-style:italic; font-size:11px;">Chưa gán</span>';
+            } else {
+                const maxDisplay = 3;
+                const displayedSkus = data.skus.slice(0, maxDisplay);
+                const remainingCount = data.skus.length - maxDisplay;
+
+                displayedSkus.forEach(sku => {
+                    skuBadges += `<span class="badge" style="background:rgba(245,158,11,0.1); color:var(--warning); margin-right:4px; font-size:10px; padding:2px 5px; border-radius:3px;">${sku}</span>`;
+                });
+
+                if (remainingCount > 0) {
+                    const allSkusString = data.skus.join(', ');
+                    skuBadges += `<span class="badge" style="background:rgba(255,255,255,0.08); color:var(--text-muted); font-size:10px; padding:2px 5px; border-radius:3px; cursor:help;" title="${allSkusString}">+${remainingCount} SKUs...</span>`;
+                }
+            }
+
+            tr.innerHTML = `
                     <td style="font-weight:600; color:var(--primary); font-size:13px;">#${displayTagName}${draftBadge}</td>
                     <td><div style="display:flex; flex-wrap:wrap; gap:2px;">${skuBadges}</div></td>
                     <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">${matchedCount} bài</span></td>
@@ -5528,177 +5599,177 @@ function renderTagMappingTable() {
                         <button class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:#ef4444; padding:4px 8px; border:none;" onclick="deleteTagMapping('${tag}')">🗑</button>
                     </td>
                 `;
-        tbody.appendChild(tr);
+            tbody.appendChild(tr);
+        }
+
+        if (tbody.children.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
+        }
     }
 
-    if (tbody.children.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); font-style:italic; padding:20px;">Không tìm thấy tag nào khớp.</td></tr>';
-    }
-}
-
-function filterTagMappingTable() {
-    renderTagMappingTable();
-}
-
-const availableSkus = [
-    'INT-GIGA', 'INT-SKY', 'CAM-IQ3', 'CAM-SE', 'PLAY-MAX', 'MODEM-AX3000GZ',
-    'INT-META', 'INT-LUX500', 'INT-LUX800', 'INT-F1-GIGA', 'INT-F1-SKY', 'INT-F1-META',
-    'CAM-OUTDOOR', 'CAM-PLAY', 'CAM-IQ2', 'CAM-IQ25', 'CAM-DOME',
-    'PLAY-VIP', 'PLAY-SPORT', 'PLAY-KPLUS', 'PLAY-PREMIUM',
-    'DEV-ONT-AC1000C', 'DEV-AP-AX1800C', 'DEV-MESH-AC1200', 'DEV-MESH-AX1500', 'DEV-STB-FPTPLAY'
-];
-const skuNames = {
-    'INT-GIGA': 'Internet Giga (150Mbps)',
-    'INT-SKY': 'Internet Sky (1Gbps/150Mbps)',
-    'CAM-IQ3': 'FPT Camera IQ3',
-    'CAM-SE': 'FPT Camera SE',
-    'PLAY-MAX': 'Gói FPT Play SMAX',
-    'MODEM-AX3000GZ': 'Modem Wi-Fi 6 AX3000GZ',
-    'INT-META': 'Internet Meta (1Gbps)',
-    'INT-LUX500': 'Internet LUX 500 (500Mbps Wi-Fi 6)',
-    'INT-LUX800': 'Internet LUX 800 (800Mbps Wi-Fi 6)',
-    'INT-F1-GIGA': 'Internet Giga F1',
-    'INT-F1-SKY': 'Internet Sky F1',
-    'INT-F1-META': 'Internet Meta F1',
-    'CAM-OUTDOOR': 'FPT Camera Outdoor',
-    'CAM-PLAY': 'FPT Camera Play (Wi-Fi)',
-    'CAM-IQ2': 'FPT Camera IQ 2',
-    'CAM-IQ25': 'FPT Camera IQ 2.5',
-    'CAM-DOME': 'FPT Camera Dome',
-    'PLAY-VIP': 'Gói FPT Play VIP',
-    'PLAY-SPORT': 'Gói FPT Play SPORT',
-    'PLAY-KPLUS': 'Gói FPT Play K+',
-    'PLAY-PREMIUM': 'Gói FPT Play Premium',
-    'DEV-ONT-AC1000C': 'Modem ONT AC1000C V2',
-    'DEV-AP-AX1800C': 'Access Point Wi-Fi 6 AX1800C',
-    'DEV-MESH-AC1200': 'Thiết bị Access Point Mesh AC1200',
-    'DEV-MESH-AX1500': 'Thiết bị Access Point Mesh AX1500 Wi-Fi 6',
-    'DEV-STB-FPTPLAY': 'FPT Play Box 2026 (STB)'
-};
-
-var tempSelectedSkus = [];
-
-function getSkuServiceType(sku) {
-    if (sku.startsWith('INT-')) return 'Internet';
-    if (sku.startsWith('CAM-')) return 'Camera';
-    if (sku.startsWith('PLAY-')) return 'Truyền hình';
-    if (sku.startsWith('MODEM-') || sku.startsWith('DEV-')) return 'Thiết bị';
-    return 'Khác';
-}
-
-function selectTagForConfig(tag) {
-    document.getElementById('selected-tag-name').value = tag;
-    document.getElementById('tag-config-title').innerHTML = `Cấu hình Tag: <span style="color:#fff; font-weight:700;">#${tag}</span>`;
-
-    const linkedSkus = tagMappingData[tag] ? tagMappingData[tag].skus : [];
-    tempSelectedSkus = [...linkedSkus];
-
-    renderSelectedSkusPreview();
-
-
-
-    // Update preview status
-    document.getElementById('tag-preview-status').className = 'badge active';
-    document.getElementById('tag-preview-status').innerText = 'Đang Preview Tag: #' + tag;
-
-    updateTagMappingPreview();
-
-    // Chuyển hướng giao diện (hiển thị trang cấu hình inline, ẩn danh sách mapping)
-    document.getElementById('news-tag-mapping').style.display = 'none';
-    document.getElementById('tag-config-modal').style.display = 'block';
-}
-
-function renderSelectedSkusPreview() {
-    const previewDiv = document.getElementById('tag-selected-skus-preview');
-    if (!previewDiv) return;
-    previewDiv.innerHTML = '';
-
-    if (tempSelectedSkus.length === 0) {
-        previewDiv.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>';
-        return;
+    function filterTagMappingTable() {
+        renderTagMappingTable();
     }
 
-    tempSelectedSkus.forEach(sku => {
-        const badge = document.createElement('span');
-        badge.className = 'badge';
-        badge.style.background = 'rgba(255,255,255,0.06)';
-        badge.style.border = '1px solid rgba(255,255,255,0.1)';
-        badge.style.color = '#fff';
-        badge.style.display = 'inline-flex';
-        badge.style.alignItems = 'center';
-        badge.style.gap = '6px';
-        badge.style.padding = '4px 8px';
-        badge.style.borderRadius = '4px';
-        badge.style.fontSize = '12px';
+    const availableSkus = [
+        'INT-GIGA', 'INT-SKY', 'CAM-IQ3', 'CAM-SE', 'PLAY-MAX', 'MODEM-AX3000GZ',
+        'INT-META', 'INT-LUX500', 'INT-LUX800', 'INT-F1-GIGA', 'INT-F1-SKY', 'INT-F1-META',
+        'CAM-OUTDOOR', 'CAM-PLAY', 'CAM-IQ2', 'CAM-IQ25', 'CAM-DOME',
+        'PLAY-VIP', 'PLAY-SPORT', 'PLAY-KPLUS', 'PLAY-PREMIUM',
+        'DEV-ONT-AC1000C', 'DEV-AP-AX1800C', 'DEV-MESH-AC1200', 'DEV-MESH-AX1500', 'DEV-STB-FPTPLAY'
+    ];
+    const skuNames = {
+        'INT-GIGA': 'Internet Giga (150Mbps)',
+        'INT-SKY': 'Internet Sky (1Gbps/150Mbps)',
+        'CAM-IQ3': 'FPT Camera IQ3',
+        'CAM-SE': 'FPT Camera SE',
+        'PLAY-MAX': 'Gói FPT Play SMAX',
+        'MODEM-AX3000GZ': 'Modem Wi-Fi 6 AX3000GZ',
+        'INT-META': 'Internet Meta (1Gbps)',
+        'INT-LUX500': 'Internet LUX 500 (500Mbps Wi-Fi 6)',
+        'INT-LUX800': 'Internet LUX 800 (800Mbps Wi-Fi 6)',
+        'INT-F1-GIGA': 'Internet Giga F1',
+        'INT-F1-SKY': 'Internet Sky F1',
+        'INT-F1-META': 'Internet Meta F1',
+        'CAM-OUTDOOR': 'FPT Camera Outdoor',
+        'CAM-PLAY': 'FPT Camera Play (Wi-Fi)',
+        'CAM-IQ2': 'FPT Camera IQ 2',
+        'CAM-IQ25': 'FPT Camera IQ 2.5',
+        'CAM-DOME': 'FPT Camera Dome',
+        'PLAY-VIP': 'Gói FPT Play VIP',
+        'PLAY-SPORT': 'Gói FPT Play SPORT',
+        'PLAY-KPLUS': 'Gói FPT Play K+',
+        'PLAY-PREMIUM': 'Gói FPT Play Premium',
+        'DEV-ONT-AC1000C': 'Modem ONT AC1000C V2',
+        'DEV-AP-AX1800C': 'Access Point Wi-Fi 6 AX1800C',
+        'DEV-MESH-AC1200': 'Thiết bị Access Point Mesh AC1200',
+        'DEV-MESH-AX1500': 'Thiết bị Access Point Mesh AX1500 Wi-Fi 6',
+        'DEV-STB-FPTPLAY': 'FPT Play Box 2026 (STB)'
+    };
 
-        badge.innerHTML = `
+    var tempSelectedSkus = [];
+
+    function getSkuServiceType(sku) {
+        if (sku.startsWith('INT-')) return 'Internet';
+        if (sku.startsWith('CAM-')) return 'Camera';
+        if (sku.startsWith('PLAY-')) return 'Truyền hình';
+        if (sku.startsWith('MODEM-') || sku.startsWith('DEV-')) return 'Thiết bị';
+        return 'Khác';
+    }
+
+    function selectTagForConfig(tag) {
+        document.getElementById('selected-tag-name').value = tag;
+        document.getElementById('tag-config-title').innerHTML = `Cấu hình Tag: <span style="color:#fff; font-weight:700;">#${tag}</span>`;
+
+        const linkedSkus = tagMappingData[tag] ? tagMappingData[tag].skus : [];
+        tempSelectedSkus = [...linkedSkus];
+
+        renderSelectedSkusPreview();
+
+
+
+        // Update preview status
+        document.getElementById('tag-preview-status').className = 'badge active';
+        document.getElementById('tag-preview-status').innerText = 'Đang Preview Tag: #' + tag;
+
+        updateTagMappingPreview();
+
+        // Chuyển hướng giao diện (hiển thị trang cấu hình inline, ẩn danh sách mapping)
+        document.getElementById('news-tag-mapping').style.display = 'none';
+        document.getElementById('tag-config-modal').style.display = 'block';
+    }
+
+    function renderSelectedSkusPreview() {
+        const previewDiv = document.getElementById('tag-selected-skus-preview');
+        if (!previewDiv) return;
+        previewDiv.innerHTML = '';
+
+        if (tempSelectedSkus.length === 0) {
+            previewDiv.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>';
+            return;
+        }
+
+        tempSelectedSkus.forEach(sku => {
+            const badge = document.createElement('span');
+            badge.className = 'badge';
+            badge.style.background = 'rgba(255,255,255,0.06)';
+            badge.style.border = '1px solid rgba(255,255,255,0.1)';
+            badge.style.color = '#fff';
+            badge.style.display = 'inline-flex';
+            badge.style.alignItems = 'center';
+            badge.style.gap = '6px';
+            badge.style.padding = '4px 8px';
+            badge.style.borderRadius = '4px';
+            badge.style.fontSize = '12px';
+
+            badge.innerHTML = `
                     <strong style="color:var(--warning); font-family:monospace;">${sku}</strong>
                     <span onclick="removeSkuFromSelection('${sku}')" style="cursor:pointer; color:#ef4444; font-weight:bold; font-size:14px; line-height:1; display:inline-block; padding:0 2px;" title="Xóa nhanh">&times;</span>
                 `;
-        previewDiv.appendChild(badge);
-    });
-}
-
-function removeSkuFromSelection(sku) {
-    const index = tempSelectedSkus.indexOf(sku);
-    if (index > -1) {
-        tempSelectedSkus.splice(index, 1);
-    }
-    renderSelectedSkusPreview();
-}
-
-function openSkuSelectorModal() {
-    const tag = document.getElementById('selected-tag-name').value;
-    if (!tag) {
-        alert('Vui lòng chọn hoặc tạo một Tag trước khi cấu hình SKU liên kết.');
-        return;
-    }
-    document.getElementById('sku-selector-modal').style.display = 'flex';
-    document.getElementById('sku-selector-search').value = '';
-    document.getElementById('sku-selector-filter-type').value = '';
-    renderSkuSelectorList();
-}
-
-function closeSkuSelectorModal() {
-    document.getElementById('sku-selector-modal').style.display = 'none';
-}
-
-function renderSkuSelectorList() {
-    const listDiv = document.getElementById('sku-selector-list');
-    if (!listDiv) return;
-    listDiv.innerHTML = '';
-
-    const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
-    const typeFilter = document.getElementById('sku-selector-filter-type').value;
-
-    let filtered = availableSkus.filter(sku => {
-        const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
-        const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
-        return matchesSearch && matchesType;
-    });
-
-    document.getElementById('sku-selector-total-found').innerText = `Tìm thấy ${filtered.length} SKUs`;
-    document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
-
-    if (filtered.length === 0) {
-        listDiv.innerHTML = '<div style="grid-column: span 2; color:var(--text-muted); font-style:italic; font-size:12px; text-align:center; padding:20px;">Không tìm thấy SKU nào phù hợp</div>';
-        return;
+            previewDiv.appendChild(badge);
+        });
     }
 
-    filtered.forEach(sku => {
-        const isChecked = tempSelectedSkus.includes(sku) ? 'checked' : '';
-        const item = document.createElement('div');
-        item.style.display = 'flex';
-        item.style.alignItems = 'center';
-        item.style.gap = '8px';
-        item.style.padding = '8px 10px';
-        item.style.background = isChecked ? 'rgba(249, 115, 22, 0.08)' : 'rgba(255,255,255,0.02)';
-        item.style.border = '1px solid';
-        item.style.borderColor = isChecked ? 'rgba(249, 115, 22, 0.2)' : 'rgba(255,255,255,0.04)';
-        item.style.borderRadius = '6px';
-        item.style.transition = '0.2s';
+    function removeSkuFromSelection(sku) {
+        const index = tempSelectedSkus.indexOf(sku);
+        if (index > -1) {
+            tempSelectedSkus.splice(index, 1);
+        }
+        renderSelectedSkusPreview();
+    }
 
-        item.innerHTML = `
+    function openSkuSelectorModal() {
+        const tag = document.getElementById('selected-tag-name').value;
+        if (!tag) {
+            alert('Vui lòng chọn hoặc tạo một Tag trước khi cấu hình SKU liên kết.');
+            return;
+        }
+        document.getElementById('sku-selector-modal').style.display = 'flex';
+        document.getElementById('sku-selector-search').value = '';
+        document.getElementById('sku-selector-filter-type').value = '';
+        renderSkuSelectorList();
+    }
+
+    function closeSkuSelectorModal() {
+        document.getElementById('sku-selector-modal').style.display = 'none';
+    }
+
+    function renderSkuSelectorList() {
+        const listDiv = document.getElementById('sku-selector-list');
+        if (!listDiv) return;
+        listDiv.innerHTML = '';
+
+        const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
+        const typeFilter = document.getElementById('sku-selector-filter-type').value;
+
+        let filtered = availableSkus.filter(sku => {
+            const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
+            const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
+            return matchesSearch && matchesType;
+        });
+
+        document.getElementById('sku-selector-total-found').innerText = `Tìm thấy ${filtered.length} SKUs`;
+        document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
+
+        if (filtered.length === 0) {
+            listDiv.innerHTML = '<div style="grid-column: span 2; color:var(--text-muted); font-style:italic; font-size:12px; text-align:center; padding:20px;">Không tìm thấy SKU nào phù hợp</div>';
+            return;
+        }
+
+        filtered.forEach(sku => {
+            const isChecked = tempSelectedSkus.includes(sku) ? 'checked' : '';
+            const item = document.createElement('div');
+            item.style.display = 'flex';
+            item.style.alignItems = 'center';
+            item.style.gap = '8px';
+            item.style.padding = '8px 10px';
+            item.style.background = isChecked ? 'rgba(249, 115, 22, 0.08)' : 'rgba(255,255,255,0.02)';
+            item.style.border = '1px solid';
+            item.style.borderColor = isChecked ? 'rgba(249, 115, 22, 0.2)' : 'rgba(255,255,255,0.04)';
+            item.style.borderRadius = '6px';
+            item.style.transition = '0.2s';
+
+            item.innerHTML = `
                     <input type="checkbox" id="sel-sku-${sku}" value="${sku}" ${isChecked} onchange="toggleSkuInSelector('${sku}', this.checked)" style="accent-color:var(--primary); cursor:pointer; width:16px; height:16px;">
                     <label for="sel-sku-${sku}" style="font-size:12px; cursor:pointer; color:#ccc; display:flex; flex-direction:column; gap:2px; flex:1; margin:0;">
                         <span style="font-weight:600; color:var(--warning); font-family:monospace;">${sku}</span>
@@ -5706,53 +5777,13 @@ function renderSkuSelectorList() {
                         <span style="font-size:10px; color:#666;">Phân loại: ${getSkuServiceType(sku)}</span>
                     </label>
                 `;
-        listDiv.appendChild(item);
-    });
-}
-
-function toggleSkuInSelector(sku, isChecked) {
-    const index = tempSelectedSkus.indexOf(sku);
-    if (isChecked) {
-        if (index === -1) {
-            tempSelectedSkus.push(sku);
-        }
-    } else {
-        if (index > -1) {
-            tempSelectedSkus.splice(index, 1);
-        }
+            listDiv.appendChild(item);
+        });
     }
-    document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
 
-    const chk = document.getElementById(`sel-sku-${sku}`);
-    if (chk) {
-        const parent = chk.parentElement;
-        if (isChecked) {
-            parent.style.background = 'rgba(249, 115, 22, 0.08)';
-            parent.style.borderColor = 'rgba(249, 115, 22, 0.2)';
-        } else {
-            parent.style.background = 'rgba(255,255,255,0.02)';
-            parent.style.borderColor = 'rgba(255,255,255,0.04)';
-        }
-    }
-}
-
-function filterSkuSelectorList() {
-    renderSkuSelectorList();
-}
-
-function bulkSelectSkus(selectAll) {
-    const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
-    const typeFilter = document.getElementById('sku-selector-filter-type').value;
-
-    let filtered = availableSkus.filter(sku => {
-        const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
-        const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
-        return matchesSearch && matchesType;
-    });
-
-    filtered.forEach(sku => {
+    function toggleSkuInSelector(sku, isChecked) {
         const index = tempSelectedSkus.indexOf(sku);
-        if (selectAll) {
+        if (isChecked) {
             if (index === -1) {
                 tempSelectedSkus.push(sku);
             }
@@ -5761,47 +5792,87 @@ function bulkSelectSkus(selectAll) {
                 tempSelectedSkus.splice(index, 1);
             }
         }
-    });
+        document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
 
-    renderSkuSelectorList();
-}
-
-function confirmSkuSelection() {
-    closeSkuSelectorModal();
-    renderSelectedSkusPreview();
-}
-
-function updateTagMappingPreview() {
-    const tag = document.getElementById('selected-tag-name').value;
-    const previewList = document.getElementById('tag-article-preview-list');
-    if (!previewList) return;
-    previewList.innerHTML = '';
-
-    if (!tag) {
-        previewList.innerHTML = '<div style="color:var(--text-muted); font-style:italic; font-size:11px; text-align:center; padding-top:30px;">Vui lòng chọn một Tag từ danh sách để xem Live Preview bài viết.</div>';
-        return;
+        const chk = document.getElementById(`sel-sku-${sku}`);
+        if (chk) {
+            const parent = chk.parentElement;
+            if (isChecked) {
+                parent.style.background = 'rgba(249, 115, 22, 0.08)';
+                parent.style.borderColor = 'rgba(249, 115, 22, 0.2)';
+            } else {
+                parent.style.background = 'rgba(255,255,255,0.02)';
+                parent.style.borderColor = 'rgba(255,255,255,0.04)';
+            }
+        }
     }
 
-    // Lấy các bài viết trùng tag
-    let matched = mockArticles.filter(art => art.tag === tag);
+    function filterSkuSelectorList() {
+        renderSkuSelectorList();
+    }
 
-    if (matched.length > 0) {
-        matched.forEach(art => {
-            const icon = art.type === 'faq' ? '❓' : '📄';
-            const typeText = art.type === 'faq' ? 'FAQ' : art.type === 'khuyen-mai' ? 'Ưu đãi' : 'Tin tức';
-            const badgeColor = art.type === 'faq' ? 'rgba(168,85,247,0.15)' : art.type === 'khuyen-mai' ? 'rgba(239,68,68,0.15)' : 'rgba(249,115,22,0.15)';
-            const textColor = art.type === 'faq' ? '#d946ef' : art.type === 'khuyen-mai' ? '#ef4444' : '#FB923C';
+    function bulkSelectSkus(selectAll) {
+        const searchVal = document.getElementById('sku-selector-search').value.toLowerCase().trim();
+        const typeFilter = document.getElementById('sku-selector-filter-type').value;
 
-            const item = document.createElement('div');
-            item.style.padding = '8px';
-            item.style.background = 'rgba(255,255,255,0.03)';
-            item.style.border = '1px solid rgba(255,255,255,0.06)';
-            item.style.borderRadius = '5px';
-            item.style.display = 'flex';
-            item.style.flexDirection = 'column';
-            item.style.gap = '4px';
+        let filtered = availableSkus.filter(sku => {
+            const matchesSearch = sku.toLowerCase().includes(searchVal) || (skuNames[sku] && skuNames[sku].toLowerCase().includes(searchVal));
+            const matchesType = !typeFilter || getSkuServiceType(sku) === typeFilter;
+            return matchesSearch && matchesType;
+        });
 
-            item.innerHTML = `
+        filtered.forEach(sku => {
+            const index = tempSelectedSkus.indexOf(sku);
+            if (selectAll) {
+                if (index === -1) {
+                    tempSelectedSkus.push(sku);
+                }
+            } else {
+                if (index > -1) {
+                    tempSelectedSkus.splice(index, 1);
+                }
+            }
+        });
+
+        renderSkuSelectorList();
+    }
+
+    function confirmSkuSelection() {
+        closeSkuSelectorModal();
+        renderSelectedSkusPreview();
+    }
+
+    function updateTagMappingPreview() {
+        const tag = document.getElementById('selected-tag-name').value;
+        const previewList = document.getElementById('tag-article-preview-list');
+        if (!previewList) return;
+        previewList.innerHTML = '';
+
+        if (!tag) {
+            previewList.innerHTML = '<div style="color:var(--text-muted); font-style:italic; font-size:11px; text-align:center; padding-top:30px;">Vui lòng chọn một Tag từ danh sách để xem Live Preview bài viết.</div>';
+            return;
+        }
+
+        // Lấy các bài viết trùng tag
+        let matched = mockArticles.filter(art => art.tag === tag);
+
+        if (matched.length > 0) {
+            matched.forEach(art => {
+                const icon = art.type === 'faq' ? '❓' : '📄';
+                const typeText = art.type === 'faq' ? 'FAQ' : art.type === 'khuyen-mai' ? 'Ưu đãi' : 'Tin tức';
+                const badgeColor = art.type === 'faq' ? 'rgba(168,85,247,0.15)' : art.type === 'khuyen-mai' ? 'rgba(239,68,68,0.15)' : 'rgba(249,115,22,0.15)';
+                const textColor = art.type === 'faq' ? '#d946ef' : art.type === 'khuyen-mai' ? '#ef4444' : '#FB923C';
+
+                const item = document.createElement('div');
+                item.style.padding = '8px';
+                item.style.background = 'rgba(255,255,255,0.03)';
+                item.style.border = '1px solid rgba(255,255,255,0.06)';
+                item.style.borderRadius = '5px';
+                item.style.display = 'flex';
+                item.style.flexDirection = 'column';
+                item.style.gap = '4px';
+
+                item.innerHTML = `
                         <div style="font-size:12.5px; font-weight:500; color:#fff; display:flex; align-items:flex-start; gap:6px;">
                             <span style="font-size:12px;">${icon}</span>
                             <span>${art.title}</span>
@@ -5811,12 +5882,12 @@ function updateTagMappingPreview() {
                             <span style="color:var(--text-muted);">Khớp tag: #${tag}</span>
                         </div>
                     `;
-            previewList.appendChild(item);
-        });
-    } else {
-        previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp với tag #' + tag + '.</div>';
+                previewList.appendChild(item);
+            });
+        } else {
+            previewList.innerHTML = '<div style="color:var(--text-muted); font-size:11.5px; text-align:center; padding:20px; border:1px dashed rgba(255,255,255,0.06); border-radius:6px; background:rgba(255,255,255,0.01);">Không tìm thấy bài viết trùng khớp với tag #' + tag + '.</div>';
+        }
     }
-}
 
     if (!tagMappingData[tag]) {
         tagMappingData[tag] = {};
@@ -5951,6 +6022,10 @@ var titleEl = document.getElementById('art-title');
 var slugBar = document.getElementById('preview-slug-bar');
 var titleBc = document.getElementById('prev-art-title-breadcrumb');
 if (slugBar && slugEl) slugBar.textContent = slugEl.value || 'url-slug';
+if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
+if (_origPreviewNewsArticle) _origPreviewNewsArticle();
+document.getElementById('news-preview-modal').style.display = 'flex';
+};
 if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
 if (_origPreviewNewsArticle) _origPreviewNewsArticle();
 document.getElementById('news-preview-modal').style.display = 'flex';
