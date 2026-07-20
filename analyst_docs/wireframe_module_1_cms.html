@@ -2131,8 +2131,8 @@
             <div class="menu-item" onclick="switchModule('dashboards', 'primary')" id="menu-dashboards">📊 Dashboards
             </div>
 
-            <div class="menu-category" style="color: #fbbf24;">QUẢN LÝ SẢN PHẨM</div>
-            <div class="menu-item pdh" onclick="switchModule('pdh-sku', 'warning')" id="menu-pdh-sku">📦 Thông tin sản
+            <div class="menu-category" style="color: #fbbf24;">CẤU HÌNH SẢN PHẨM</div>
+            <div class="menu-item pdh" onclick="switchModule('pdh-sku', 'warning')" id="menu-pdh-sku">📦 Nội dung sản
                 phẩm</div>
             <div class="menu-item pdh" onclick="switchModule('cms-display', 'warning')" id="menu-cms-display">⚙️ Thông
                 tin checkout</div>
@@ -2547,38 +2547,7 @@
                                 <span
                                     style="font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); padding:5px 12px; border-radius:8px;">🔗
                                     Dữ liệu đồng bộ từ hệ thống QLCS</span>
-                                <button class="btn btn-secondary" style="font-size:13px;">📥 Export</button>
                                 <button class="btn btn-secondary" style="font-size:13px;">🔄 Sync</button>
-                            </div>
-                        </div>
-
-                        <!-- Stats Cards (style) -->
-                        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:20px;">
-                            <div
-                                style="background:linear-gradient(135deg,#f59e0b,#ef4444); border-radius:10px; padding:16px 20px; display:flex; align-items:center; gap:14px;">
-                                <div style="font-size:28px;">📦</div>
-                                <div>
-                                    <div style="font-size:12px; opacity:0.85; font-weight:500;">Tổng mã SKU</div>
-                                    <div style="font-size:26px; font-weight:800;">12.847</div>
-                                </div>
-                            </div>
-                            <div
-                                style="background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:16px 20px; display:flex; align-items:center; gap:14px;">
-                                <div style="font-size:24px; color:var(--success);">✅</div>
-                                <div>
-                                    <div style="font-size:12px; color:var(--text-muted); font-weight:500;">Hoạt động
-                                    </div>
-                                    <div style="font-size:26px; font-weight:800; color:var(--success);">11.203</div>
-                                </div>
-                            </div>
-                            <div
-                                style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); border-radius:10px; padding:16px 20px; display:flex; align-items:center; gap:14px;">
-                                <div style="font-size:24px; color:var(--danger);">⊘</div>
-                                <div>
-                                    <div style="font-size:12px; color:var(--text-muted); font-weight:500;">Không hoạt
-                                        động</div>
-                                    <div style="font-size:26px; font-weight:800; color:var(--danger);">1.644</div>
-                                </div>
                             </div>
                         </div>
 
@@ -2588,33 +2557,34 @@
                             <div style="flex:2; min-width:220px; position:relative;">
                                 <span
                                     style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-muted);">🔍</span>
-                                <input type="text" class="form-input" placeholder="Tìm kiếm tên SKU, tên hiển thị..."
-                                    style="padding-left:32px;">
+                                <input type="text" id="sku-filter-search" class="form-input" placeholder="Tìm kiếm tên SKU, tên hiển thị..."
+                                    style="padding-left:32px;" onkeyup="if(event.key === 'Enter') filterSkuTable()">
                             </div>
                             <div style="flex:1; min-width:150px;">
-                                <select class="form-select">
+                                <select id="sku-filter-type" class="form-select" onchange="filterSkuTable()">
                                     <option value="">Loại sản phẩm</option>
-                                    <option>Thiết bị</option>
-                                    <option>Dịch vụ</option>
+                                    <option value="Thiết bị">Thiết bị</option>
+                                    <option value="Dịch vụ">Dịch vụ</option>
+                                    <option value="SA">SA</option>
                                 </select>
                             </div>
                             <div style="flex:1; min-width:150px;">
-                                <select class="form-select">
+                                <select id="sku-filter-service" class="form-select" onchange="filterSkuTable()">
                                     <option value="">Dịch vụ</option>
-                                    <option>Internet</option>
-                                    <option>Truyền hình</option>
-                                    <option>Camera</option>
-                                    <option>Cloud</option>
+                                    <option value="Internet">Internet</option>
+                                    <option value="Truyền hình">Truyền hình</option>
+                                    <option value="Camera">Camera</option>
+                                    <option value="Cloud">Cloud</option>
                                 </select>
                             </div>
                             <div style="flex:1; min-width:140px;">
-                                <select class="form-select">
+                                <select id="sku-filter-status" class="form-select" onchange="filterSkuTable()">
                                     <option value="">Trạng thái</option>
-                                    <option>Hoạt động</option>
-                                    <option>Ngừng hoạt động</option>
+                                    <option value="Hoạt động">Hoạt động</option>
+                                    <option value="Ngừng hoạt động">Ngừng hoạt động</option>
                                 </select>
                             </div>
-                            <button class="btn btn-warning" style="flex-shrink:0;">Tìm Kiếm</button>
+                            <button class="btn btn-warning" style="flex-shrink:0;" onclick="filterSkuTable()">Tìm Kiếm</button>
                         </div>
 
                         <!-- Bulk actions -->
@@ -2647,254 +2617,18 @@
                                             nhanh</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('INT-GIGA','Gói Internet Giga (150Mbps)','Dịch vụ','Internet')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('INT-GIGA','Gói Internet Giga (150Mbps)','Dịch vụ','Internet')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">INT-GIGA</a>
-                                        </td>
-                                        <td style="font-size:13px;">Gói Internet Giga (150Mbps)</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Internet</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Dịch
-                                                vụ</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">150.000 đ
-                                        </td>
-                                        <td><span class="badge active">Hoạt động</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">20/05/2026 13:40</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">24092 - Nguyễn</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" checked onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-1">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:var(--warning); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('INT-GIGA','Gói Internet Giga (150Mbps)','Dịch vụ','Internet')">✏️</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('INT-SKY','Gói Internet Sky (1Gbps/150Mbps)','Dịch vụ','Internet')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('INT-SKY','Gói Internet Sky (1Gbps/150Mbps)','Dịch vụ','Internet')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">INT-SKY</a>
-                                        </td>
-                                        <td style="font-size:13px;">Gói Internet Sky (1Gbps/150Mbps)</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Internet</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Dịch
-                                                vụ</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">250.000 đ
-                                        </td>
-                                        <td><span class="badge active">Hoạt động</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">20/05/2026 14:00</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">24092 - Nguyễn</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" checked onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-2">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:var(--warning); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('INT-SKY','Gói Internet Sky (1Gbps/150Mbps)','Dịch vụ','Internet')">✏️</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('CAM-IQ3','FPT Camera IQ3','Thiết bị','Camera')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('CAM-IQ3','FPT Camera IQ3','Thiết bị','Camera')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">CAM-IQ3</a>
-                                        </td>
-                                        <td style="font-size:13px;">FPT Camera IQ3</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Camera</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Thiết
-                                                bị</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">900.000 đ
-                                        </td>
-                                        <td><span class="badge active">Hoạt động</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">20/05/2026 09:30</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">FI-25128</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" checked onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-3">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:var(--warning); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('CAM-IQ3','FPT Camera IQ3','Thiết bị','Camera')">✏️</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('CAM-SE','FPT Camera SE','Thiết bị','Camera')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('CAM-SE','FPT Camera SE','Thiết bị','Camera')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">CAM-SE</a>
-                                        </td>
-                                        <td style="font-size:13px;">FPT Camera SE</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Camera</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Thiết
-                                                bị</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">700.000 đ
-                                        </td>
-                                        <td><span class="badge active">Hoạt động</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">20/05/2026 09:40</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">FI-25128</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" checked onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-4">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:var(--warning); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('CAM-SE','FPT Camera SE','Thiết bị','Camera')">✏️</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('PLAY-MAX','Gói FPT Play SMAX','Dịch vụ','Truyền hình')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('PLAY-MAX','Gói FPT Play SMAX','Dịch vụ','Truyền hình')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">PLAY-MAX</a>
-                                        </td>
-                                        <td style="font-size:13px;">Gói FPT Play SMAX</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Truyền
-                                                hình</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Dịch
-                                                vụ</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">88.000 đ
-                                        </td>
-                                        <td><span class="badge active">Hoạt động</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">18/05/2026 15:30</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">24092 - Nguyễn</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" checked onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-5">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:var(--warning); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:2px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('PLAY-MAX','Gói FPT Play SMAX','Dịch vụ','Truyền hình')">✏️</button>
-                                        </td>
-                                    </tr>
-                                    <tr style="cursor:pointer;"
-                                        onclick="skuOpenDetail('MODEM-AX3000GZ','Modem Wi-Fi 6 AX3000GZ','Thiết bị','Internet')">
-                                        <td onclick="event.stopPropagation();"><input type="checkbox"
-                                                style="accent-color:var(--primary);"></td>
-                                        <td
-                                            onclick="event.stopPropagation(); skuOpenDetail('MODEM-AX3000GZ','Modem Wi-Fi 6 AX3000GZ','Thiết bị','Internet')">
-                                            <a
-                                                style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">MODEM-AX3000GZ</a>
-                                        </td>
-                                        <td style="font-size:13px;">Modem Wi-Fi 6 AX3000GZ</td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Internet</span>
-                                        </td>
-                                        <td><span
-                                                style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">Thiết
-                                                bị</span></td>
-                                        <td style="font-size:13px; color:var(--warning); font-weight:600;">500.000 đ
-                                        </td>
-                                        <td><span class="badge inactive">Ngừng</span></td>
-                                        <td style="font-size:13px; color:var(--text-muted);">15/05/2026 10:10</td>
-                                        <td style="font-size:13px; color:var(--text-muted);">FI-25128</td>
-                                        <td onclick="event.stopPropagation();"
-                                            style="text-align:center; white-space:nowrap;">
-                                            <label
-                                                style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;"
-                                                title="Kích hoạt/Tắt">
-                                                <input type="checkbox" onchange="event.stopPropagation();"
-                                                    style="display:none;" id="toggle-6">
-                                                <span
-                                                    onclick="this.previousElementSibling.click(); this.style.background=this.previousElementSibling.checked?'var(--warning)':'rgba(255,255,255,0.2)';"
-                                                    style="display:inline-block; width:34px; height:18px; background:rgba(255,255,255,0.2); border-radius:9px; transition:0.3s; position:relative;"><span
-                                                        style="position:absolute; top:2px; left:16px; width:14px; height:14px; background:#fff; border-radius:50%;"></span></span>
-                                            </label>
-                                            <button class="btn btn-sm"
-                                                style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;"
-                                                title="Xem nhanh"
-                                                onclick="skuOpenPreview('MODEM-AX3000GZ','Modem Wi-Fi 6 AX3000GZ','Thiết bị','Internet')">✏️</button>
-                                        </td>
-                                    </tr>
+                                <tbody id="sku-tbody">
+                                    <!-- RENDER ĐỘNG QUA JS -->
                                 </tbody>
                             </table>
                         </div>
                         <!-- Pagination -->
                         <div
                             style="display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--border-glass); margin-top:10px;">
-                            <span style="font-size:13px; color:var(--text-muted);">Hiển thị 1–3 / 12.847 kết quả</span>
+                            <span id="sku-count-text" style="font-size:13px; color:var(--text-muted);">Hiển thị 1-8 / 8 kết quả</span>
                             <div style="display:flex; gap:6px;">
                                 <button class="btn btn-secondary btn-sm">‹</button>
                                 <button class="btn btn-sm" style="background:var(--pdh-gradient);">1</button>
-                                <button class="btn btn-secondary btn-sm">2</button>
-                                <button class="btn btn-secondary btn-sm">3</button>
                                 <button class="btn btn-secondary btn-sm">›</button>
                             </div>
                         </div>
@@ -2931,7 +2665,7 @@
                             style="display:flex; border-bottom:2px solid var(--border-glass); margin-top:20px;">
                             <div onclick="skuSwitchTab('chung')" id="sku-tab-btn-chung"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:#fff; border-bottom:3px solid var(--warning); background:rgba(245,158,11,0.1); border-radius:6px 6px 0 0; margin-bottom:-2px;">
-                                Thông tin sản phẩm</div>
+                                Nội dung sản phẩm</div>
                             <div onclick="skuSwitchTab('dactinh')" id="sku-tab-btn-dactinh"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Đặc tính & TB đi kèm</div>
@@ -2956,7 +2690,7 @@
                                     style="color:var(--warning); text-decoration:underline; cursor:pointer;">MODEM-AX1800GZ</a></span>
                         </div>
 
-                        <!-- TAB 1: Thông tin sản phẩm (QLCS read-only) -->
+                        <!-- TAB 1: Nội dung sản phẩm (QLCS read-only) -->
                         <div id="sku-tab-chung">
                             <div class="form-section">
                                 <div
@@ -2973,7 +2707,7 @@
                                         style="margin-left:auto; color:var(--primary); border-color:var(--primary); flex-shrink:0;">↗
                                         Mở QLCS</button>
                                 </div>
-                                <h3>▾ 1. Thông tin sản phẩm (QLCS)</h3>
+                                <h3>▾ 1. Nội dung sản phẩm (QLCS)</h3>
                                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
                                     <div class="form-group">
                                         <label>Dịch vụ</label>
@@ -3058,8 +2792,8 @@
                                         Dịch vụ không dùng Nổi bật — xem <strong>Ưu đãi & Đặc quyền</strong> ở Tab Quản
                                         lý Content.</span>
                                     <span id="dactinh-hint-thietbi" style="font-size:11px; color:var(--text-muted);">☆
-                                        Tick <strong style="color:var(--primary);">Nổi bật</strong> → thông số hiển thị
-                                        nổi bật dưới gallery trên web</span>
+                                        Tick <strong style="color:var(--primary);">Nổi bật (Tối đa 3 thông số)</strong> → thông số hiển thị
+                                        nổi bật dưới gallery trên web <span id="dactinh-noibat-counter" style="margin-left:8px; font-weight:700; color:var(--warning); background:rgba(245,158,11,0.08); padding:2px 6px; border-radius:4px; border:1px solid rgba(245,158,11,0.2); transition: all 0.2s;">(Đã chọn: 0/3)</span></span>
                                 </div>
 
                                 <!-- Attribute list — JS renders rows via skuRenderDactinh() -->
@@ -3512,6 +3246,76 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- TAB 5: FAQ Sản phẩm (Ngân hàng FAQ Mapping) -->
+                        <div id="sku-tab-faq" style="display:none;">
+                            <!-- Danh sách FAQ liên kết -->
+                            <div class="form-section">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                                    <h3 style="margin:0;">▾ Cấu hình FAQ hiển thị cho SKU</h3>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:6px; padding:4px 10px;">
+                                        🔗 FAQ Liên kết · Read-only nội dung
+                                    </span>
+                                </div>
+                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px; line-height:1.6;">
+                                    Chọn và liên kết các câu hỏi thường gặp từ Ngân hàng FAQ hiển thị trên trang chi tiết của SKU sản phẩm này. Nội dung câu hỏi và câu trả lời được quản lý tập trung tại module quản lý FAQ (chỉ đọc tại đây).
+                                </p>
+
+                                <!-- Toolbar nút hành động nhanh -->
+                                <div style="display:flex; gap:10px; margin-bottom:15px;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="openFaqBankModal()" style="display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 12px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.05); color:#fff;">
+                                        <span style="color:var(--warning);">🔍</span> Chọn từ Ngân hàng FAQ
+                                    </button>
+                                </div>
+
+                                <!-- Danh sách FAQ liên kết -->
+                                <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass);">
+                                    <table style="width:100%; border-collapse:collapse; font-size:13px;" id="custom-faq-table">
+                                        <thead>
+                                            <tr style="background:rgba(0,0,0,0.25);">
+                                                <th style="padding:10px; text-align:center; color:var(--text-muted); font-size:10px; text-transform:uppercase; width:80px; border-bottom:1px solid var(--border-glass);">Thứ tự</th>
+                                                <th style="padding:10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; border-bottom:1px solid var(--border-glass);">Câu hỏi</th>
+                                                <th style="padding:10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; border-bottom:1px solid var(--border-glass);">Câu trả lời hiển thị web</th>
+                                                <th style="padding:10px; text-align:center; color:var(--text-muted); font-size:10px; text-transform:uppercase; border-bottom:1px solid var(--border-glass); width:80px;">Xóa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="custom-faq-tbody">
+                                            <!-- Row 1 -->
+                                            <tr>
+                                                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass); cursor:move;" title="Kéo thả để sắp xếp">
+                                                    ☰ <input type="number" class="form-input" value="1" style="width:45px; display:inline-block; text-align:center; padding:2px; height:24px; font-size:12px; margin-left:5px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass);">
+                                                </td>
+                                                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-main); font-weight:600;">
+                                                    Thủ tục đăng ký lắp đặt dịch vụ cần những giấy tờ gì?
+                                                </td>
+                                                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:12px; line-height:1.5;">
+                                                    Cá nhân chỉ cần CCCD. Doanh nghiệp cần Giấy phép kinh doanh và CCCD người đại diện pháp luật.
+                                                </td>
+                                                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass);">
+                                                    <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:4px 8px;">🗑️ Xóa</button>
+                                                </td>
+                                            </tr>
+                                            <!-- Row 2 -->
+                                            <tr style="background:rgba(255,255,255,0.01);">
+                                                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass); cursor:move;" title="Kéo thả để sắp xếp">
+                                                    ☰ <input type="number" class="form-input" value="2" style="width:45px; display:inline-block; text-align:center; padding:2px; height:24px; font-size:12px; margin-left:5px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass);">
+                                                </td>
+                                                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-main); font-weight:600;">
+                                                    Thời gian triển khai lắp đặt hoàn tất là bao lâu?
+                                                </td>
+                                                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:12px; line-height:1.5;">
+                                                    Trong vòng 12 đến 24 giờ kể từ thời điểm hoàn tất ký kết hợp đồng cung cấp dịch vụ.
+                                                </td>
+                                                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass);">
+                                                    <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:4px 8px;">🗑️ Xóa</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- TAB 4: Gói bán (ẩn theo yêu cầu) -->
                         <div id="sku-tab-banhang" style="display:none !important;">
                             <div class="form-section">
@@ -15807,7 +15611,7 @@
         }
 
         const sysPermModules = [
-            { group: 'QUẢN LÝ SẢN PHẨM', name: 'Thông tin sản phẩm' },
+            { group: 'CẤU HÌNH SẢN PHẨM', name: 'Nội dung sản phẩm' },
             { group: 'CẤU TRÚC TRANG', name: 'Quản lý Trang (Pages)' },
             { group: '', name: 'Quản lý Sections' },
             { group: '', name: 'Quản lý Blocks' },
@@ -15826,7 +15630,7 @@
         // Ma trận quyền theo vai trò: { màn hình: [superAdmin[4], adminCMS[4], bienTap[4], viewer[4]] }
         // Mỗi mảng con: [xem, tao, sua, xoa]
         const sysPermByRole = {
-            'Thông tin sản phẩm': [[1, 1], [1, 1], [1, 0], [1, 0]],
+            'Nội dung sản phẩm': [[1, 1], [1, 1], [1, 0], [1, 0]],
             'Quản lý Trang (Pages)': [[1, 1], [1, 1], [1, 1], [1, 0]],
             'Quản lý Sections': [[1, 1], [1, 1], [1, 1], [1, 0]],
             'Quản lý Blocks': [[1, 1], [1, 1], [1, 1], [1, 0]],
@@ -16996,6 +16800,55 @@
             }
         }
 
+        function updateDactinhNoibatLimit() {
+            var list = document.getElementById('dactinh-attr-list');
+            if (!list) return;
+
+            var checkedBoxes = list.querySelectorAll('.dactinh-noibat-chk:checked');
+            var totalChecked = checkedBoxes.length;
+
+            // Cập nhật badge đếm
+            var counterEl = document.getElementById('dactinh-noibat-counter');
+            if (counterEl) {
+                counterEl.textContent = '(Đã chọn: ' + totalChecked + '/3)';
+                if (totalChecked >= 3) {
+                    counterEl.style.color = '#10b981'; // Green
+                    counterEl.style.borderColor = 'rgba(16,185,129,0.3)';
+                    counterEl.style.background = 'rgba(16,185,129,0.08)';
+                } else {
+                    counterEl.style.color = 'var(--warning)'; // Yellow
+                    counterEl.style.borderColor = 'rgba(245,158,11,0.25)';
+                    counterEl.style.background = 'rgba(245,158,11,0.08)';
+                }
+            }
+
+            // Khóa/mở khóa các checkbox khác
+            list.querySelectorAll('.dactinh-noibat-chk').forEach(function (chk) {
+                var labelSpan = chk.nextElementSibling;
+                if (!chk.checked) {
+                    if (totalChecked >= 3) {
+                        chk.disabled = true;
+                        if (labelSpan) {
+                            labelSpan.style.color = 'rgba(255,255,255,0.2)';
+                            labelSpan.textContent = 'Khóa (Max 3)';
+                        }
+                    } else {
+                        chk.disabled = false;
+                        if (labelSpan) {
+                            labelSpan.style.color = 'var(--text-muted)';
+                            labelSpan.textContent = 'Nổi bật';
+                        }
+                    }
+                } else {
+                    chk.disabled = false;
+                    if (labelSpan) {
+                        labelSpan.style.color = 'var(--primary)';
+                        labelSpan.textContent = 'Nổi bật';
+                    }
+                }
+            });
+        }
+
         function skuRenderDactinh(dataKey) {
             var list = document.getElementById('dactinh-attr-list');
             var sel = document.getElementById('dactinh-nhom-select-dropdown');
@@ -17034,12 +16887,12 @@
 
                 var noibatCol = isService ? '<span class="col-noibat"></span>' :
                     '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
-                    + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;">'
+                    + '<input type="checkbox" class="dactinh-noibat-chk"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
                     + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
                     + '</label>';
 
                 var actionCol = '<div style="display:flex;justify-content:center;">'
-                    + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
+                    + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button>'
                     + '</div>';
 
                 var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
@@ -17054,6 +16907,9 @@
                     + actionCol;
                 list.appendChild(div);
             });
+
+            // Cập nhật trạng thái sau khi render
+            updateDactinhNoibatLimit();
         }
 
         function skuAddDactinhRow() {
@@ -17065,12 +16921,12 @@
             div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
 
             var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
-                + '<input type="checkbox" style="accent-color:var(--primary);width:15px;height:15px;">'
+                + '<input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
                 + '<span style="font-size:11px;color:var(--text-muted);">Nổi bật</span>'
                 + '</label>';
 
             var actionCol = '<div style="display:flex;justify-content:center;">'
-                + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
+                + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button>'
                 + '</div>';
 
             var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
@@ -17081,6 +16937,9 @@
                 + noibatCol
                 + actionCol;
             list.appendChild(div);
+
+            // Cập nhật trạng thái sau khi thêm dòng
+            updateDactinhNoibatLimit();
         }
 
         function applyDactinhTemplate() {
@@ -17105,6 +16964,8 @@
             input.accept = '.xlsx, .xls';
             input.onchange = function () {
                 showLdpToast('Đã phân tích file Excel. Import 6 đặc tính thành công!');
+                // Kích hoạt lại đếm khi import xong (nếu có dữ liệu thật)
+                setTimeout(updateDactinhNoibatLimit, 100);
             };
             input.click();
         }
@@ -17716,6 +17577,108 @@
 
             document.getElementById('price-step-1').style.display = step === 1 ? 'block' : 'none';
             document.getElementById('price-step-2').style.display = step === 2 ? 'block' : 'none';
+        }
+
+        // ===== Mock SKU Data & Dynamic Filter Logic =====
+        var mockSkuData = [
+            { code: 'INT-GIGA', name: 'Gói Internet Giga (150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '150.000 đ', status: 'Hoạt động', time: '20/05/2026 13:40', user: '24092 - Nguyễn', active: true },
+            { code: 'INT-SKY', name: 'Gói Internet Sky (1Gbps/150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '250.000 đ', status: 'Hoạt động', time: '20/05/2026 14:00', user: '24092 - Nguyễn', active: true },
+            { code: 'CAM-IQ3', name: 'FPT Camera IQ3', type: 'Thiết bị', service: 'Camera', price: '900.000 đ', status: 'Hoạt động', time: '20/05/2026 09:30', user: 'FI-25128', active: true },
+            { code: 'CAM-SE', name: 'FPT Camera SE', type: 'Thiết bị', service: 'Camera', price: '700.000 đ', status: 'Hoạt động', time: '20/05/2026 09:40', user: 'FI-25128', active: true },
+            { code: 'PLAY-MAX', name: 'Gói FPT Play SMAX', type: 'Dịch vụ', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '18/05/2026 15:30', user: '24092 - Nguyễn', active: true },
+            { code: 'MODEM-AX3000GZ', name: 'Modem Wi-Fi 6 AX3000GZ', type: 'Thiết bị', service: 'Internet', price: '500.000 đ', status: 'Ngừng hoạt động', time: '15/05/2026 10:10', user: 'FI-25128', active: false },
+            { code: 'SA-SMAX', name: 'FPT Play SMAX (SA)', type: 'SA', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '20/05/2026 10:30', user: '24092 - Nguyễn', active: true },
+            { code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true }
+        ];
+
+        function initSkuTable() {
+            renderSkuTable(mockSkuData);
+        }
+
+        function renderSkuTable(list) {
+            var tbody = document.getElementById('sku-tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy mã SKU nào phù hợp</td></tr>';
+                var countEl = document.getElementById('sku-count-text');
+                if (countEl) countEl.textContent = 'Hiển thị 0 / 0 kết quả';
+                return;
+            }
+
+            list.forEach(function(item) {
+                var tr = document.createElement('tr');
+                tr.style.cursor = 'pointer';
+                tr.onclick = function() {
+                    skuOpenDetail(item.code, item.name, item.type, item.service);
+                };
+
+                var checkboxTd = '<td onclick="event.stopPropagation();"><input type="checkbox" style="accent-color:var(--primary);"></td>';
+                var codeTd = '<td onclick="event.stopPropagation(); skuOpenDetail(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">'
+                    + '<a style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">' + item.code + '</a>'
+                    + '</td>';
+                var nameTd = '<td style="font-size:13px;">' + item.name + '</td>';
+                var serviceTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.service + '</span></td>';
+                var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.type + '</span></td>';
+                var priceTd = '<td style="font-size:13px; color:var(--warning); font-weight:600;">' + item.price + '</td>';
+                var statusBadge = item.status === 'Hoạt động' ? '<span class="badge active">Hoạt động</span>' : '<span class="badge inactive">Ngừng</span>';
+                var statusTd = '<td>' + statusBadge + '</td>';
+                var timeTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.time + '</td>';
+                var userTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.user + '</td>';
+
+                var toggleChecked = item.active ? 'checked' : '';
+                var toggleBackground = item.active ? 'var(--warning)' : 'rgba(255,255,255,0.2)';
+                var toggleDotLeft = item.active ? '16px' : '2px';
+                
+                var actionTd = '<td onclick="event.stopPropagation();" style="text-align:center; white-space:nowrap;">'
+                    + '<label style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;" title="Kích hoạt/Tắt">'
+                    + '<input type="checkbox" ' + toggleChecked + ' onchange="event.stopPropagation(); toggleSkuActiveStatus(\'' + item.code + '\', this.checked)" style="display:none;" id="toggle-' + item.code + '">'
+                    + '<span onclick="this.previousElementSibling.click();" style="display:inline-block; width:34px; height:18px; background:' + toggleBackground + '; border-radius:9px; transition:0.3s; position:relative;">'
+                    + '<span style="position:absolute; top:2px; left:' + toggleDotLeft + '; width:14px; height:14px; background:#fff; border-radius:50%; transition: 0.3s;"></span>'
+                    + '</span>'
+                    + '</label>'
+                    + '<button class="btn btn-sm" style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;" title="Xem nhanh" onclick="skuOpenPreview(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">✏️</button>'
+                    + '</td>';
+
+                tr.innerHTML = checkboxTd + codeTd + nameTd + serviceTd + typeTd + priceTd + statusTd + timeTd + userTd + actionTd;
+                tbody.appendChild(tr);
+            });
+
+            var countEl = document.getElementById('sku-count-text');
+            if (countEl) countEl.textContent = 'Hiển thị 1-' + list.length + ' / ' + list.length + ' kết quả';
+        }
+
+        function filterSkuTable() {
+            var searchVal = document.getElementById('sku-filter-search').value.toLowerCase().trim();
+            var typeVal = document.getElementById('sku-filter-type').value;
+            var serviceVal = document.getElementById('sku-filter-service').value;
+            var statusVal = document.getElementById('sku-filter-status').value;
+
+            var filtered = mockSkuData.filter(function(item) {
+                var matchSearch = !searchVal || 
+                                  item.code.toLowerCase().indexOf(searchVal) >= 0 || 
+                                  item.name.toLowerCase().indexOf(searchVal) >= 0;
+                
+                var matchType = !typeVal || item.type === typeVal;
+                var matchService = !serviceVal || item.service === serviceVal;
+                var matchStatus = !statusVal || item.status === statusVal;
+
+                return matchSearch && matchType && matchService && matchStatus;
+            });
+
+            renderSkuTable(filtered);
+        }
+
+        function toggleSkuActiveStatus(code, isChecked) {
+            var item = mockSkuData.find(function(s) { return s.code === code; });
+            if (item) {
+                item.active = isChecked;
+                item.status = isChecked ? 'Hoạt động' : 'Ngừng hoạt động';
+                item.time = new Date().toLocaleString('vi-VN', { hour12: false }).replace(/\//g, '-').replace(',', '');
+                filterSkuTable();
+                showLdpToast('Đã ' + (isChecked ? 'kích hoạt' : 'ngừng kích hoạt') + ' SKU ' + code + ' thành công!');
+            }
         }
 
         // ===== -Style SKU Detail Functions =====
@@ -21272,7 +21235,7 @@
             style="display:flex; border-bottom:1px solid rgba(255,255,255,0.08); padding:0 20px; overflow-x:auto; flex-shrink:0;">
             <div onclick="skuPrevTab(this,'tab-chung')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#fff; border-bottom:2px solid var(--warning); white-space:nowrap;">
-                Thông tin sản phẩm</div>
+                Nội dung sản phẩm</div>
             <div onclick="skuPrevTab(this,'tab-dactinh')" class="prev-tab"
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Đặc tính & TB đi kèm</div>
@@ -21280,10 +21243,10 @@
                 style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 Quản lý Content</div>
             <div onclick="skuPrevTab(this,'tab-faq')" class="prev-tab"
-                style="padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
+                style="display:none !important; padding:10px 14px; cursor:pointer; font-size:13px; color:#888; border-bottom:2px solid transparent; white-space:nowrap;">
                 FAQ</div>
         </div>
-        <!-- Tab: Thông tin sản phẩm — mirror Tab 1 internal (QLCS read-only) -->
+        <!-- Tab: Nội dung sản phẩm — mirror Tab 1 internal (QLCS read-only) -->
         <div id="tab-chung" style="padding:20px; flex:1;">
             <!-- QLCS sync banner -->
             <div
@@ -21300,10 +21263,10 @@
                     QLCS</button>
             </div>
 
-            <!-- Section: Thông tin sản phẩm (QLCS) -->
+            <!-- Section: Nội dung sản phẩm (QLCS) -->
             <div
                 style="font-size:13px; font-weight:600; color:#e2e8f0; margin-bottom:14px; display:flex; align-items:center; gap:6px;">
-                <span style="color:var(--warning);">▾</span> 1. Thông tin sản phẩm (QLCS)
+                <span style="color:var(--warning);">▾</span> 1. Nội dung sản phẩm (QLCS)
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 16px;">
                 <div>
@@ -26876,7 +26839,217 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             if (typeof ldpRefactorFaqItems === 'function') {
                 ldpRefactorFaqItems();
             }
+            if (typeof initSkuTable === 'function') {
+                initSkuTable();
+            }
         });
+
+        // Inline FAQ handlers to bypass browser cache
+        function addLinkedFaqRow(question, answer) {
+            var tbody = document.getElementById('custom-faq-tbody');
+            if (!tbody) return;
+            var rowCount = tbody.getElementsByTagName('tr').length + 1;
+            var tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass); cursor:move;" title="Kéo thả để sắp xếp">
+                    ☰ <input type="number" class="form-input" value="${rowCount}" style="width:45px; display:inline-block; text-align:center; padding:2px; height:24px; font-size:12px; margin-left:5px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass);">
+                </td>
+                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-main); font-weight:600;">
+                    ${question}
+                </td>
+                <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:12px; line-height:1.5;">
+                    ${answer}
+                </td>
+                <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass);">
+                    <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:4px 8px;">🗑️ Xóa</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+
+        // Cấu hình mock data ngân hàng FAQ và logic phân trang + tìm kiếm
+        var mockFaqBank = [
+            { id: 1, q: "Gói cước có áp dụng phí lắp đặt ban đầu không?", a: "Phí lắp đặt mặc định là 300,000đ. Tuy nhiên khi tham gia trả trước 6 hoặc 12 tháng cước, quý khách hàng sẽ được miễn phí hoàn toàn 100% phí lắp đặt." },
+            { id: 2, q: "Thiết bị Modem Wifi 6 được bảo hành trong bao lâu?", a: "Thiết bị Modem Wifi 6 thế hệ mới được bảo hành chính hãng 12 tháng kể từ thời điểm nghiệm thu lắp đặt thành công." },
+            { id: 3, q: "Chính sách hoàn trả thiết bị khi ngưng sử dụng?", a: "Khách hàng cần trả lại thiết bị Modem và Bộ giải mã truyền hình (nếu có) tại văn phòng giao dịch FPT Telecom gần nhất khi thanh lý hợp đồng." },
+            { id: 4, q: "Gói cước Internet Giga có hỗ trợ băng tần kép 5G không?", a: "Có. Khi lắp đặt thiết bị modem mới AX3000GZ đi kèm gói cước Giga, khách hàng sẽ được phát đồng thời 2 băng tần 2.4GHz và 5GHz." },
+            { id: 5, q: "Làm thế nào để thanh toán cước hàng tháng?", a: "Khách hàng có thể thanh toán qua ứng dụng Hi FPT, chuyển khoản ngân hàng, ví điện tử (Momo, VNPAY) hoặc tại các điểm giao dịch FPT." },
+            { id: 6, q: "Gói cước Sky và Meta khác nhau như thế nào?", a: "Gói Sky có tốc độ download tối đa 150Mbps, gói Meta có tốc độ download và upload không giới hạn lên đến 1Gbps phù hợp cho streamer/gamer." },
+            { id: 7, q: "Camera FPT có hỗ trợ lưu trữ cloud không?", a: "Có. Camera FPT hỗ trợ lưu trữ Cloud an toàn tuyệt đối, máy chủ đặt tại Việt Nam, không lo mất dữ liệu khi thiết bị bị hỏng hoặc mất trộm." },
+            { id: 8, q: "Thủ tục chuyển địa điểm lắp đặt mạng FPT?", a: "Khách hàng chính chủ cần mang CCCD qua văn phòng giao dịch gần nhất hoặc đăng ký chuyển địa điểm trực tiếp trên ứng dụng Hi FPT." },
+            { id: 9, q: "Làm sao để đổi mật khẩu wifi FPT tại nhà?", a: "Quý khách có thể dễ dàng đổi mật khẩu wifi và tên wifi thông qua ứng dụng Hi FPT cài đặt trên điện thoại di động." },
+            { id: 10, q: "Dịch vụ truyền hình FPT Play có bao nhiêu kênh?", a: "Truyền hình FPT Play cung cấp hơn 170 kênh truyền hình trong nước và quốc tế chất lượng HD, cùng kho phim truyện giải trí khổng lồ." },
+            { id: 11, q: "Gói cước Internet FPT cho doanh nghiệp có những gói nào?", a: "FPT cung cấp các gói cước tốc độ cao cho doanh nghiệp như Super200, Super300, Super400 đi kèm IP tĩnh miễn phí." },
+            { id: 12, q: "Có hỗ trợ đăng ký dịch vụ trực tuyến không?", a: "Có. Quý khách hàng có thể đăng ký dịch vụ và ký hợp đồng điện tử trực tuyến nhanh chóng trong vòng 5 phút ngay trên website FPT." }
+        ];
+
+        var faqSelectedItems = {}; // Lưu trữ trạng thái chọn tạm thời của các câu hỏi (id -> boolean)
+        var faqCurrentPage = 1;
+        var faqPageSize = 5;
+        var faqFilteredList = [];
+
+        function openFaqBankModal() {
+            var oldModal = document.getElementById('faq-bank-modal');
+            if (oldModal) oldModal.remove();
+
+            // Reset trạng thái
+            faqSelectedItems = {};
+            faqCurrentPage = 1;
+            faqFilteredList = [...mockFaqBank];
+
+            var modal = document.createElement('div');
+            modal.id = 'faq-bank-modal';
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.background = 'rgba(0, 0, 0, 0.75)';
+            modal.style.backdropFilter = 'blur(4px)';
+            modal.style.display = 'flex';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.zIndex = '99999';
+
+            var box = document.createElement('div');
+            box.style.background = '#111827';
+            box.style.border = '1px solid var(--border-glass)';
+            box.style.borderRadius = '12px';
+            box.style.width = '600px';
+            box.style.maxWidth = '90%';
+            box.style.padding = '24px';
+            box.style.color = '#fff';
+            box.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.5)';
+            box.style.display = 'flex';
+            box.style.flexDirection = 'column';
+            box.style.gap = '14px';
+
+            box.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-glass); padding-bottom:12px;">
+                    <h3 style="margin:0; color:var(--warning); font-size:16px; display:flex; align-items:center; gap:8px;">🔍 Chọn FAQ từ Ngân hàng câu hỏi</h3>
+                    <span onclick="document.getElementById('faq-bank-modal').remove()" style="cursor:pointer; font-size:20px; opacity:0.6;">&times;</span>
+                </div>
+                
+                <!-- Thanh tìm kiếm (Filter) -->
+                <div>
+                    <input type="text" id="faq-bank-search" placeholder="Nhập từ khóa tìm kiếm câu hỏi, câu trả lời..." 
+                        style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.05); color:#fff; font-size:13px; outline:none; transition:0.2s;"
+                        oninput="filterFaqBankList()">
+                </div>
+                
+                <p style="font-size:12px; color:var(--text-muted); margin:0;">Tích chọn câu hỏi thường gặp dưới đây để liên kết hiển thị vào trang chi tiết SKU hiện tại.</p>
+                
+                <!-- Danh sách câu hỏi hiển thị theo trang -->
+                <div id="faq-bank-list-container" style="max-height:280px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding-right:5px; min-height:180px;">
+                    <!-- Sẽ render động qua javascript -->
+                </div>
+                
+                <!-- Thanh phân trang (Pagination) -->
+                <div id="faq-bank-pagination" style="display:flex; justify-content:center; gap:6px; align-items:center; border-top:1px solid var(--border-glass); padding-top:12px; margin-top:5px;">
+                    <!-- Sẽ render động qua javascript -->
+                </div>
+                
+                <div style="display:flex; justify-content:flex-end; gap:10px; border-top:1px solid var(--border-glass); padding-top:12px; margin-top:5px;">
+                    <button type="button" onclick="document.getElementById('faq-bank-modal').remove()" class="btn btn-secondary btn-sm" style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass); font-size:12px; padding:6px 12px;">Hủy</button>
+                    <button type="button" onclick="submitFaqBankSelection()" class="btn btn-warning btn-sm" style="font-size:12px; padding:6px 16px;">Xác nhận liên kết</button>
+                </div>
+            `;
+
+            modal.appendChild(box);
+            document.body.appendChild(modal);
+
+            renderFaqBankPage();
+        }
+
+        function filterFaqBankList() {
+            var keyword = document.getElementById('faq-bank-search').value.toLowerCase().trim();
+            faqFilteredList = mockFaqBank.filter(function(item) {
+                return item.q.toLowerCase().includes(keyword) || item.a.toLowerCase().includes(keyword);
+            });
+            faqCurrentPage = 1; // reset về trang 1 khi lọc
+            renderFaqBankPage();
+        }
+
+        function renderFaqBankPage() {
+            var container = document.getElementById('faq-bank-list-container');
+            var pagination = document.getElementById('faq-bank-pagination');
+            if (!container || !pagination) return;
+
+            container.innerHTML = "";
+
+            if (faqFilteredList.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:30px 10px; color:var(--text-muted); font-size:13px;">Không tìm thấy câu hỏi phù hợp.</div>`;
+                pagination.innerHTML = "";
+                return;
+            }
+
+            var startIndex = (faqCurrentPage - 1) * faqPageSize;
+            var endIndex = Math.min(startIndex + faqPageSize, faqFilteredList.length);
+            var pageItems = faqFilteredList.slice(startIndex, endIndex);
+
+            pageItems.forEach(function(item) {
+                var isChecked = faqSelectedItems[item.id] ? "checked" : "";
+                var label = document.createElement('label');
+                label.style.cssText = "display:flex; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px; cursor:pointer; align-items:flex-start; transition:0.2s;";
+                label.onmouseover = function() { this.style.background = 'rgba(255,255,255,0.06)'; };
+                label.onmouseout = function() { this.style.background = 'rgba(255,255,255,0.03)'; };
+                
+                label.innerHTML = `
+                    <input type="checkbox" class="faq-bank-chk-item" data-id="${item.id}" ${isChecked} style="margin-top:3px; accent-color:var(--primary);" onchange="toggleFaqSelection(${item.id}, this.checked)">
+                    <div style="flex:1;">
+                        <div style="font-size:13px; font-weight:600; color:#fff; line-height:1.4;">${item.q}</div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:4px; line-height:1.4;">Trả lời: ${item.a}</div>
+                    </div>
+                `;
+                container.appendChild(label);
+            });
+
+            var totalPages = Math.ceil(faqFilteredList.length / faqPageSize);
+            var pagHTML = "";
+            if (totalPages > 1) {
+                var prevDisabled = faqCurrentPage === 1 ? "disabled style='opacity:0.4; cursor:not-allowed; padding:4px 8px; font-size:11px; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid var(--border-glass); color:#fff;'" : "style='padding:4px 8px; font-size:11px; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid var(--border-glass); color:#fff; cursor:pointer;'";
+                pagHTML += `<button type="button" onclick="changeFaqPage(${faqCurrentPage - 1})" ${prevDisabled}>Trước</button>`;
+                
+                for (var i = 1; i <= totalPages; i++) {
+                    var activeStyle = i === faqCurrentPage ? "background:var(--primary); color:#fff; border-color:var(--primary);" : "background:rgba(255,255,255,0.05); color:#fff; border-color:var(--border-glass);";
+                    pagHTML += `<button type="button" onclick="changeFaqPage(${i})" style="padding:4px 8px; font-size:11px; border-radius:4px; ${activeStyle} cursor:pointer; width:26px;">${i}</button>`;
+                }
+
+                var nextDisabled = faqCurrentPage === totalPages ? "disabled style='opacity:0.4; cursor:not-allowed; padding:4px 8px; font-size:11px; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid var(--border-glass); color:#fff;'" : "style='padding:4px 8px; font-size:11px; border-radius:4px; background:rgba(255,255,255,0.05); border:1px solid var(--border-glass); color:#fff; cursor:pointer;'";
+                pagHTML += `<button type="button" onclick="changeFaqPage(${faqCurrentPage + 1})" ${nextDisabled}>Tiếp</button>`;
+                
+                pagHTML += `<span style="font-size:11px; color:var(--text-muted); margin-left:8px;">(Trang ${faqCurrentPage}/${totalPages} · ${faqFilteredList.length} kết quả)</span>`;
+            } else {
+                pagHTML = `<span style="font-size:11px; color:var(--text-muted);">${faqFilteredList.length} kết quả</span>`;
+            }
+            pagination.innerHTML = pagHTML;
+        }
+
+        function toggleFaqSelection(id, checked) {
+            faqSelectedItems[id] = checked;
+        }
+
+        function changeFaqPage(page) {
+            faqCurrentPage = page;
+            renderFaqBankPage();
+        }
+
+        function submitFaqBankSelection() {
+            var selectedIds = Object.keys(faqSelectedItems).filter(function(key) { return faqSelectedItems[key] === true; });
+            if (selectedIds.length === 0) {
+                alert("Vui lòng tích chọn ít nhất một câu hỏi để liên kết.");
+                return;
+            }
+            
+            selectedIds.forEach(function(id) {
+                var item = mockFaqBank.find(function(f) { return f.id == id; });
+                if (item) {
+                    addLinkedFaqRow(item.q, item.a);
+                }
+            });
+
+            document.getElementById('faq-bank-modal').remove();
+        }
     </script>
     <!-- Modal Cấu hình Chi tiết SKU (Thiết bị & Dịch vụ đi kèm) -->
     <div id="sku-details-modal"

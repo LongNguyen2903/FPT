@@ -538,7 +538,7 @@ function saveSysUser() {
 }
 
 const sysPermModules = [
-    { group: 'QUẢN LÝ SẢN PHẨM', name: 'Thông tin sản phẩm' },
+    { group: 'CẤU HÌNH SẢN PHẨM', name: 'Nội dung sản phẩm' },
     { group: 'CẤU TRÚC TRANG', name: 'Quản lý Trang (Pages)' },
     { group: '', name: 'Quản lý Sections' },
     { group: '', name: 'Quản lý Blocks' },
@@ -557,7 +557,7 @@ const sysPermModules = [
 // Ma trận quyền theo vai trò: { màn hình: [superAdmin[4], adminCMS[4], bienTap[4], viewer[4]] }
 // Mỗi mảng con: [xem, tao, sua, xoa]
 const sysPermByRole = {
-    'Thông tin sản phẩm': [[1, 1], [1, 1], [1, 0], [1, 0]],
+    'Nội dung sản phẩm': [[1, 1], [1, 1], [1, 0], [1, 0]],
     'Quản lý Trang (Pages)': [[1, 1], [1, 1], [1, 1], [1, 0]],
     'Quản lý Sections': [[1, 1], [1, 1], [1, 1], [1, 0]],
     'Quản lý Blocks': [[1, 1], [1, 1], [1, 1], [1, 0]],
@@ -1541,6 +1541,55 @@ function renderFaqTable() {
     }
 }
 
+function updateDactinhNoibatLimit() {
+    var list = document.getElementById('dactinh-attr-list');
+    if (!list) return;
+
+    var checkedBoxes = list.querySelectorAll('.dactinh-noibat-chk:checked');
+    var totalChecked = checkedBoxes.length;
+
+    // Cập nhật badge đếm
+    var counterEl = document.getElementById('dactinh-noibat-counter');
+    if (counterEl) {
+        counterEl.textContent = '(Đã chọn: ' + totalChecked + '/3)';
+        if (totalChecked >= 3) {
+            counterEl.style.color = '#10b981'; // Green
+            counterEl.style.borderColor = 'rgba(16,185,129,0.3)';
+            counterEl.style.background = 'rgba(16,185,129,0.08)';
+        } else {
+            counterEl.style.color = 'var(--warning)'; // Yellow
+            counterEl.style.borderColor = 'rgba(245,158,11,0.25)';
+            counterEl.style.background = 'rgba(245,158,11,0.08)';
+        }
+    }
+
+    // Khóa/mở khóa các checkbox khác
+    list.querySelectorAll('.dactinh-noibat-chk').forEach(function (chk) {
+        var labelSpan = chk.nextElementSibling;
+        if (!chk.checked) {
+            if (totalChecked >= 3) {
+                chk.disabled = true;
+                if (labelSpan) {
+                    labelSpan.style.color = 'rgba(255,255,255,0.2)';
+                    labelSpan.textContent = 'Khóa (Max 3)';
+                }
+            } else {
+                chk.disabled = false;
+                if (labelSpan) {
+                    labelSpan.style.color = 'var(--text-muted)';
+                    labelSpan.textContent = 'Nổi bật';
+                }
+            }
+        } else {
+            chk.disabled = false;
+            if (labelSpan) {
+                labelSpan.style.color = 'var(--primary)';
+                labelSpan.textContent = 'Nổi bật';
+            }
+        }
+    });
+}
+
 function skuRenderDactinh(dataKey) {
     var list = document.getElementById('dactinh-attr-list');
     var sel = document.getElementById('dactinh-nhom-select-dropdown');
@@ -1579,13 +1628,11 @@ function skuRenderDactinh(dataKey) {
 
         var noibatCol = isService ? '<span class="col-noibat"></span>' :
             '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
-            + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;">'
+            + '<input type="checkbox" class="dactinh-noibat-chk"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
             + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
             + '</label>';
 
-        var actionCol = '<div style="display:flex;justify-content:center;">'
-            + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
-            + '</div>';
+        var actionCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);font-size:12px;" title="Được đồng bộ từ QLCS">🔒</div>';
 
         var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
 
@@ -1599,6 +1646,9 @@ function skuRenderDactinh(dataKey) {
             + actionCol;
         list.appendChild(div);
     });
+
+    // Cập nhật trạng thái sau khi render
+    updateDactinhNoibatLimit();
 }
 
 function skuAddDactinhRow() {
@@ -1610,12 +1660,12 @@ function skuAddDactinhRow() {
     div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
 
     var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
-        + '<input type="checkbox" style="accent-color:var(--primary);width:15px;height:15px;">'
+        + '<input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
         + '<span style="font-size:11px;color:var(--text-muted);">Nổi bật</span>'
         + '</label>';
 
     var actionCol = '<div style="display:flex;justify-content:center;">'
-        + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove()" title="Xóa">🗑️</button>'
+        + '<button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button>'
         + '</div>';
 
     var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
@@ -1626,6 +1676,9 @@ function skuAddDactinhRow() {
         + noibatCol
         + actionCol;
     list.appendChild(div);
+
+    // Cập nhật trạng thái sau khi thêm dòng
+    updateDactinhNoibatLimit();
 }
 
 function applyDactinhTemplate() {
@@ -1650,6 +1703,8 @@ function triggerImportExcel() {
     input.accept = '.xlsx, .xls';
     input.onchange = function () {
         showLdpToast('Đã phân tích file Excel. Import 6 đặc tính thành công!');
+        // Kích hoạt lại đếm khi import xong (nếu có dữ liệu thật)
+        setTimeout(updateDactinhNoibatLimit, 100);
     };
     input.click();
 }
@@ -2281,6 +2336,108 @@ function togglePriceStep(step) {
     document.getElementById('price-step-2').style.display = step === 2 ? 'block' : 'none';
 }
 
+// ===== Mock SKU Data & Dynamic Filter Logic =====
+var mockSkuData = [
+    { code: 'INT-GIGA', name: 'Gói Internet Giga (150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '150.000 đ', status: 'Hoạt động', time: '20/05/2026 13:40', user: '24092 - Nguyễn', active: true },
+    { code: 'INT-SKY', name: 'Gói Internet Sky (1Gbps/150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '250.000 đ', status: 'Hoạt động', time: '20/05/2026 14:00', user: '24092 - Nguyễn', active: true },
+    { code: 'CAM-IQ3', name: 'FPT Camera IQ3', type: 'Thiết bị', service: 'Camera', price: '900.000 đ', status: 'Hoạt động', time: '20/05/2026 09:30', user: 'FI-25128', active: true },
+    { code: 'CAM-SE', name: 'FPT Camera SE', type: 'Thiết bị', service: 'Camera', price: '700.000 đ', status: 'Hoạt động', time: '20/05/2026 09:40', user: 'FI-25128', active: true },
+    { code: 'PLAY-MAX', name: 'Gói FPT Play SMAX', type: 'Dịch vụ', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '18/05/2026 15:30', user: '24092 - Nguyễn', active: true },
+    { code: 'MODEM-AX3000GZ', name: 'Modem Wi-Fi 6 AX3000GZ', type: 'Thiết bị', service: 'Internet', price: '500.000 đ', status: 'Ngừng hoạt động', time: '15/05/2026 10:10', user: 'FI-25128', active: false },
+    { code: 'SA-SMAX', name: 'FPT Play SMAX (SA)', type: 'SA', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '20/05/2026 10:30', user: '24092 - Nguyễn', active: true },
+    { code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true }
+];
+
+function initSkuTable() {
+    renderSkuTable(mockSkuData);
+}
+
+function renderSkuTable(list) {
+    var tbody = document.getElementById('sku-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy mã SKU nào phù hợp</td></tr>';
+        var countEl = document.getElementById('sku-count-text');
+        if (countEl) countEl.textContent = 'Hiển thị 0 / 0 kết quả';
+        return;
+    }
+
+    list.forEach(function(item) {
+        var tr = document.createElement('tr');
+        tr.style.cursor = 'pointer';
+        tr.onclick = function() {
+            skuOpenDetail(item.code, item.name, item.type, item.service);
+        };
+
+        var checkboxTd = '<td onclick="event.stopPropagation();"><input type="checkbox" style="accent-color:var(--primary);"></td>';
+        var codeTd = '<td onclick="event.stopPropagation(); skuOpenDetail(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">'
+            + '<a style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">' + item.code + '</a>'
+            + '</td>';
+        var nameTd = '<td style="font-size:13px;">' + item.name + '</td>';
+        var serviceTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.service + '</span></td>';
+        var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.type + '</span></td>';
+        var priceTd = '<td style="font-size:13px; color:var(--warning); font-weight:600;">' + item.price + '</td>';
+        var statusBadge = item.status === 'Hoạt động' ? '<span class="badge active">Hoạt động</span>' : '<span class="badge inactive">Ngừng</span>';
+        var statusTd = '<td>' + statusBadge + '</td>';
+        var timeTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.time + '</td>';
+        var userTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.user + '</td>';
+
+        var toggleChecked = item.active ? 'checked' : '';
+        var toggleBackground = item.active ? 'var(--warning)' : 'rgba(255,255,255,0.2)';
+        var toggleDotLeft = item.active ? '16px' : '2px';
+        
+        var actionTd = '<td onclick="event.stopPropagation();" style="text-align:center; white-space:nowrap;">'
+            + '<label style="display:inline-flex; align-items:center; cursor:pointer; margin-right:6px;" title="Kích hoạt/Tắt">'
+            + '<input type="checkbox" ' + toggleChecked + ' onchange="event.stopPropagation(); toggleSkuActiveStatus(\'' + item.code + '\', this.checked)" style="display:none;" id="toggle-' + item.code + '">'
+            + '<span onclick="this.previousElementSibling.click();" style="display:inline-block; width:34px; height:18px; background:' + toggleBackground + '; border-radius:9px; transition:0.3s; position:relative;">'
+            + '<span style="position:absolute; top:2px; left:' + toggleDotLeft + '; width:14px; height:14px; background:#fff; border-radius:50%; transition: 0.3s;"></span>'
+            + '</span>'
+            + '</label>'
+            + '<button class="btn btn-sm" style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;" title="Xem nhanh" onclick="skuOpenPreview(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">✏️</button>'
+            + '</td>';
+
+        tr.innerHTML = checkboxTd + codeTd + nameTd + serviceTd + typeTd + priceTd + statusTd + timeTd + userTd + actionTd;
+        tbody.appendChild(tr);
+    });
+
+    var countEl = document.getElementById('sku-count-text');
+    if (countEl) countEl.textContent = 'Hiển thị 1-' + list.length + ' / ' + list.length + ' kết quả';
+}
+
+function filterSkuTable() {
+    var searchVal = document.getElementById('sku-filter-search').value.toLowerCase().trim();
+    var typeVal = document.getElementById('sku-filter-type').value;
+    var serviceVal = document.getElementById('sku-filter-service').value;
+    var statusVal = document.getElementById('sku-filter-status').value;
+
+    var filtered = mockSkuData.filter(function(item) {
+        var matchSearch = !searchVal || 
+                          item.code.toLowerCase().indexOf(searchVal) >= 0 || 
+                          item.name.toLowerCase().indexOf(searchVal) >= 0;
+        
+        var matchType = !typeVal || item.type === typeVal;
+        var matchService = !serviceVal || item.service === serviceVal;
+        var matchStatus = !statusVal || item.status === statusVal;
+
+        return matchSearch && matchType && matchService && matchStatus;
+    });
+
+    renderSkuTable(filtered);
+}
+
+function toggleSkuActiveStatus(code, isChecked) {
+    var item = mockSkuData.find(function(s) { return s.code === code; });
+    if (item) {
+        item.active = isChecked;
+        item.status = isChecked ? 'Hoạt động' : 'Ngừng hoạt động';
+        item.time = new Date().toLocaleString('vi-VN', { hour12: false }).replace(/\//g, '-').replace(',', '');
+        filterSkuTable();
+        showLdpToast('Đã ' + (isChecked ? 'kích hoạt' : 'ngừng kích hoạt') + ' SKU ' + code + ' thành công!');
+    }
+}
+
 // ===== -Style SKU Detail Functions =====
 // Data QLCS (Tab 1) theo từng SKU code
 var qlcsData = {
@@ -2422,6 +2579,114 @@ function skuSwitchTab(tabName) {
         }
     });
 }
+
+function addLinkedFaqRow(question, answer) {
+    var tbody = document.getElementById('custom-faq-tbody');
+    if (!tbody) return;
+    var rowCount = tbody.getElementsByTagName('tr').length + 1;
+    var tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass); cursor:move;" title="Kéo thả để sắp xếp">
+            ☰ <input type="number" class="form-input" value="${rowCount}" style="width:45px; display:inline-block; text-align:center; padding:2px; height:24px; font-size:12px; margin-left:5px; background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass);">
+        </td>
+        <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-main); font-weight:600;">
+            ${question}
+        </td>
+        <td style="padding:10px; border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02); color:var(--text-muted); font-size:12px; line-height:1.5;">
+            ${answer}
+        </td>
+        <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border-glass);">
+            <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:4px 8px;">🗑️ Xóa</button>
+        </td>
+    `;
+    tbody.appendChild(tr);
+}
+
+function openFaqBankModal() {
+    var oldModal = document.getElementById('faq-bank-modal');
+    if (oldModal) oldModal.remove();
+
+    var modal = document.createElement('div');
+    modal.id = 'faq-bank-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.background = 'rgba(0, 0, 0, 0.75)';
+    modal.style.backdropFilter = 'blur(4px)';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.zIndex = '99999';
+
+    var box = document.createElement('div');
+    box.style.background = '#111827';
+    box.style.border = '1px solid var(--border-glass)';
+    box.style.borderRadius = '12px';
+    box.style.width = '600px';
+    box.style.maxWidth = '90%';
+    box.style.padding = '24px';
+    box.style.color = '#fff';
+    box.style.boxShadow = '0 20px 25px -5px rgba(0,0,0,0.5)';
+
+    box.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--border-glass); padding-bottom:12px;">
+            <h3 style="margin:0; color:var(--warning); font-size:16px;">🔍 Chọn FAQ từ Ngân hàng câu hỏi</h3>
+            <span onclick="document.getElementById('faq-bank-modal').remove()" style="cursor:pointer; font-size:20px; opacity:0.6;">&times;</span>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Tích chọn câu hỏi thường gặp dưới đây để liên kết hiển thị vào trang chi tiết SKU hiện tại.</p>
+        
+        <div style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; margin-bottom:20px; padding-right:5px;">
+            <label style="display:flex; gap:10px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:6px; cursor:pointer; align-items:flex-start;">
+                <input type="checkbox" class="faq-bank-chk" data-q="Gói cước có áp dụng phí lắp đặt ban đầu không?" data-a="Phí lắp đặt mặc định là 300,000đ. Tuy nhiên khi tham gia trả trước 6 hoặc 12 tháng cước, quý khách hàng sẽ được miễn phí hoàn toàn 100% phí lắp đặt." style="margin-top:3px; accent-color:var(--primary);">
+                <div>
+                    <div style="font-size:13px; font-weight:600; color:#fff;">Gói cước có áp dụng phí lắp đặt ban đầu không?</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Trả lời: Phí lắp đặt mặc định là 300,000đ. Tuy nhiên khi tham gia trả trước...</div>
+                </div>
+            </label>
+            <label style="display:flex; gap:10px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:6px; cursor:pointer; align-items:flex-start;">
+                <input type="checkbox" class="faq-bank-chk" data-q="Thiết bị Modem Wifi 6 được bảo hành trong bao lâu?" data-a="Thiết bị Modem Wifi 6 thế hệ mới được bảo hành chính hãng 12 tháng kể từ thời điểm nghiệm thu lắp đặt thành công." style="margin-top:3px; accent-color:var(--primary);">
+                <div>
+                    <div style="font-size:13px; font-weight:600; color:#fff;">Thiết bị Modem Wifi 6 được bảo hành trong bao lâu?</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Trả lời: Thiết bị Modem Wifi 6 thế hệ mới được bảo hành chính hãng 12 tháng...</div>
+                </div>
+            </label>
+            <label style="display:flex; gap:10px; padding:10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:6px; cursor:pointer; align-items:flex-start;">
+                <input type="checkbox" class="faq-bank-chk" data-q="Chính sách hoàn trả thiết bị khi ngưng sử dụng?" data-a="Khách hàng cần trả lại thiết bị Modem và Bộ giải mã truyền hình (nếu có) tại văn phòng giao dịch FPT Telecom gần nhất khi thanh lý hợp đồng." style="margin-top:3px; accent-color:var(--primary);">
+                <div>
+                    <div style="font-size:13px; font-weight:600; color:#fff;">Chính sách hoàn trả thiết bị khi ngưng sử dụng?</div>
+                    <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Trả lời: Khách hàng cần trả lại thiết bị Modem và Bộ giải mã truyền hình...</div>
+                </div>
+            </label>
+        </div>
+        
+        <div style="display:flex; justify-content:end; gap:10px;">
+            <button type="button" onclick="document.getElementById('faq-bank-modal').remove()" class="btn btn-secondary btn-sm" style="background:rgba(255,255,255,0.05); color:#fff; border:1px solid var(--border-glass);">Hủy</button>
+            <button type="button" onclick="submitFaqBankSelection()" class="btn btn-warning btn-sm">Xác nhận liên kết</button>
+        </div>
+    `;
+
+    modal.appendChild(box);
+    document.body.appendChild(modal);
+}
+
+function submitFaqBankSelection() {
+    var checkboxes = document.querySelectorAll('.faq-bank-chk:checked');
+    if (checkboxes.length === 0) {
+        alert("Vui lòng chọn ít nhất một câu hỏi để liên kết.");
+        return;
+    }
+    
+    checkboxes.forEach(function(chk) {
+        var question = chk.getAttribute('data-q');
+        var answer = chk.getAttribute('data-a');
+        addLinkedFaqRow(question, answer);
+    });
+
+    document.getElementById('faq-bank-modal').remove();
+}
+
 // ===== Light / Dark Mode Toggle =====
 // Design system: Untitled UI PRO VARIABLES v5.0
 // Motion spec: 200ms ease-out (dropdown tier)
@@ -6016,17 +6281,4 @@ window.previewNewsArticle = function () {
     if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
     if (_origPreviewNewsArticle) _origPreviewNewsArticle();
     document.getElementById('news-preview-modal').style.display = 'flex';
-};
-var slugEl = document.getElementById('art-slug');
-var titleEl = document.getElementById('art-title');
-var slugBar = document.getElementById('preview-slug-bar');
-var titleBc = document.getElementById('prev-art-title-breadcrumb');
-if (slugBar && slugEl) slugBar.textContent = slugEl.value || 'url-slug';
-if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
-if (_origPreviewNewsArticle) _origPreviewNewsArticle();
-document.getElementById('news-preview-modal').style.display = 'flex';
-};
-if (titleBc && titleEl) titleBc.textContent = titleEl.value || 'Tiêu đề bài viết';
-if (_origPreviewNewsArticle) _origPreviewNewsArticle();
-document.getElementById('news-preview-modal').style.display = 'flex';
 };

@@ -970,6 +970,8 @@
         const searchKw = (document.querySelector('#news-list input[placeholder="Tìm kiếm bài viết..."]')?.value || '').toLowerCase().trim();
         const channelVal = document.querySelector('#news-list select')?.value || 'all';
 
+        let index = 1;
+
         for (let id in window.newsArticlesData) {
             const art = window.newsArticlesData[id];
 
@@ -984,7 +986,6 @@
             tr.setAttribute('data-id', art.id);
             tr.setAttribute('data-channel', art.channel);
 
-            const isChecked = window.selectedNewsIds.includes(art.id) ? 'checked' : '';
             const starIcon = art.featured ? '⭐' : '☆';
             const starColor = art.featured ? '#f59e0b' : '#94a3b8';
 
@@ -999,37 +1000,35 @@
                 statusBadge = '<span class="badge" style="background:rgba(239,68,68,0.15); color:#ef4444;">Hidden</span>';
             }
 
-            let chanBadge = '';
-            if (art.channel === 'fpt-telecom') {
-                chanBadge = '<span class="badge" style="background:rgba(255,107,0,0.15); color:#ff8c42;">FPT Telecom</span>';
-            } else if (art.channel === 'fpt-camera') {
-                chanBadge = '<span class="badge" style="background:rgba(245,158,11,0.15); color:#fbbf24;">FPT Camera</span>';
-            } else if (art.channel === 'fpt-play') {
-                chanBadge = '<span class="badge" style="background:rgba(167,139,250,0.15); color:#a78bfa;">FPT Play</span>';
-            }
-
             const catBadge = `<span class="badge news-art-cat" style="background:rgba(249,115,22,0.15); color:#FB923C;">${art.category}</span>`;
 
+            const finalThumbUrl = art.bannerId && window.cmsBannersData && window.cmsBannersData[art.bannerId]
+                ? window.cmsBannersData[art.bannerId].desktopUrl
+                : art.thumbUrl;
+
+            let bannerBadge = '';
+            if (art.bannerId) {
+                bannerBadge = `<div style="font-size:10px; margin-top:2px; display:inline-block;"><span class="badge" style="background:rgba(245,158,11,0.15); color:#f59e0b; padding:1px 6px;">🏷️ Banner: ${art.bannerId}</span></div>`;
+            }
+
             tr.innerHTML = `
-                <td style="text-align:center;">
-                    <input type="checkbox" class="news-row-check news-select-item" data-id="${art.id}" ${isChecked} onclick="window.onNewsSelectChange(); if(window.onNewsRowCheck) window.onNewsRowCheck();" style="width:16px; height:16px; accent-color:var(--primary); cursor:pointer;">
-                </td>
+                <td style="text-align:center;font-weight:600;color:var(--text-muted);">${index++}</td>
                 <td>
-                    <img src="${art.thumbUrl}" alt="News Thumbnail" style="width:60px; height:40px; border-radius:4px; object-fit:cover; border:1px solid var(--border-glass);">
+                    <img src="${finalThumbUrl}" alt="News Thumbnail" style="width:60px; height:40px; border-radius:4px; object-fit:cover; border:1px solid var(--border-glass);">
                 </td>
                 <td>
                     <div style="font-weight:700; color:#fff;" class="news-art-title">${art.title}</div>
                     <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">/tin-tuc/${art.slug}</div>
+                    ${bannerBadge}
                 </td>
+                <td>${catBadge}</td>
+                <td>Bai viet</td>
                 <td style="text-align:center;">
                     <span class="news-art-featured-star" style="cursor:pointer; font-size:15px; color:${starColor};" onclick="window.toggleNewsFeaturedDirect('${art.id}')" title="Bật/Tắt nổi bật">${starIcon}</span>
                 </td>
-                <td>${chanBadge}</td>
-                <td>${catBadge}</td>
-                <td class="news-art-author">${art.author}</td>
-                <td class="news-art-date">${art.date}</td>
                 <td style="text-align:center;" class="news-art-views">${art.views || 0}</td>
                 <td>${statusBadge}</td>
+                <td class="news-art-date">${art.date}</td>
                 <td style="text-align:right; white-space:nowrap;">
                     <div style="display:inline-flex; gap:6px; justify-content:flex-end; align-items:center;">
                         <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); margin:0;" onclick="window.editNewsArticle('${art.id}')">Sửa</button>
@@ -1292,6 +1291,7 @@
         const elMediaUrl = document.getElementById('art-media-url'); const mediaUrl = elMediaUrl ? elMediaUrl.value : '';
         const elSeoKeywords = document.getElementById('art-seo-keywords'); const seoKeywords = elSeoKeywords ? elSeoKeywords.value : '';
         const elSeoRobot = document.getElementById('art-seo-robot'); const seoRobot = elSeoRobot ? elSeoRobot.value : 'index, follow';
+        const bannerId = document.getElementById('art-banner-id') ? document.getElementById('art-banner-id').value : '';
 
         if (!title || !slug || !content || !sapo) {
             showLdpToast('Vui lòng nhập đầy đủ các thông tin bắt buộc (*)!');
@@ -1370,6 +1370,7 @@
             mediaUrl: mediaUrl,
             seoKeywords: seoKeywords,
             seoRobot: seoRobot,
+            bannerId: bannerId,
             views: window.newsArticlesData[id] ? (window.newsArticlesData[id].views || 0) : 0
         };
 
@@ -1922,7 +1923,425 @@
         window.selectNewsStatusFilter(statusValue, null);
     };
 
-    // Scheduler quét tự động cho các bài viết Đặt lịch
+    // =========================================================================
+    //                    PHÂN HỆ QUẢN LÝ CMS BANNER ĐỘNG
+    // =========================================================================
+    
+    window.cmsBannersData = {
+        '001': {
+            id: '001',
+            name: 'Banner Hero Trang Chủ T5',
+            desktopUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80',
+            mobileUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80',
+            redirectUrl: '/khuyen-mai-thang-5',
+            target: '_self',
+            pages: ['Trang chủ'],
+            order: 1,
+            startDate: '2026-05-01T00:00',
+            endDate: '2026-05-31T23:59',
+            status: 'Active',
+            createdDate: '2026-05-01T10:12'
+        },
+        '002': {
+            id: '002',
+            name: 'Banner Khuyến Mãi Hè FPT Play',
+            desktopUrl: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80',
+            mobileUrl: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=400&q=80',
+            redirectUrl: '/fpt-play-goi-cuoc',
+            target: '_blank',
+            pages: ['Khuyến mãi'],
+            order: 2,
+            startDate: '2026-06-01T00:00',
+            endDate: '2026-08-31T23:59',
+            status: 'Active',
+            createdDate: '2026-06-01T08:03'
+        }
+    };
+
+    // Render Bảng Banner chính
+    window.renderCmsBannersTable = function (data = window.cmsBannersData) {
+        const tbody = document.querySelector('#cms-banner-table tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const searchKw = (document.getElementById('search-banner-name')?.value || '').toLowerCase().trim();
+        const statusVal = document.getElementById('search-banner-status')?.value || '';
+
+        const formatDateString = function (isoStr, includeTime = false) {
+            if (!isoStr) return '—';
+            try {
+                const d = new Date(isoStr);
+                if (isNaN(d.getTime())) return isoStr;
+                const day = d.getDate().toString().padStart(2, '0');
+                const month = (d.getMonth() + 1).toString().padStart(2, '0');
+                const year = d.getFullYear();
+                if (includeTime) {
+                    const hours = d.getHours().toString().padStart(2, '0');
+                    const mins = d.getMinutes().toString().padStart(2, '0');
+                    return `${day}/${month}/${year} ${hours}:${mins}`;
+                }
+                return `${day}/${month}/${year}`;
+            } catch (e) {
+                return isoStr;
+            }
+        };
+
+        let rowIndex = 1;
+        for (let id in data) {
+            const banner = data[id];
+
+            if (searchKw && !banner.id.includes(searchKw) && !banner.name.toLowerCase().includes(searchKw)) {
+                continue;
+            }
+            if (statusVal && banner.status !== statusVal) {
+                continue;
+            }
+
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-id', banner.id);
+
+            let statusBadge = '';
+            if (banner.status === 'Active') {
+                statusBadge = '<span class="badge active" style="background:rgba(16,185,129,0.15); color:var(--success); padding:3px 8px; border-radius:12px; font-size:12px;">Active</span>';
+            } else if (banner.status === 'Inactive') {
+                statusBadge = '<span class="badge" style="background:rgba(239,68,68,0.15); color:var(--danger); padding:3px 8px; border-radius:12px; font-size:12px;">Tạm ngưng</span>';
+            } else if (banner.status === 'Expired') {
+                statusBadge = '<span class="badge warning" style="background:rgba(245,158,11,0.15); color:var(--warning); padding:3px 8px; border-radius:12px; font-size:12px;">Hết hạn</span>';
+            }
+
+            const startStr = formatDateString(banner.startDate);
+            const endStr = formatDateString(banner.endDate);
+            const createdStr = formatDateString(banner.createdDate, true);
+
+            tr.innerHTML = `
+                <td style="text-align:center; font-weight:bold; color:var(--text-muted); font-size:13px;">${rowIndex++}</td>
+                <td style="text-align:center; font-weight:bold; color:var(--primary); font-size:13px;">${banner.id}</td>
+                <td>
+                    <img src="${banner.desktopUrl}" style="width:80px; height:45px; border-radius:4px; object-fit:cover; border:1px solid var(--border-glass);">
+                </td>
+                <td>
+                    <strong style="color:#fff;">${banner.name}</strong>
+                </td>
+                <td>
+                    <span style="font-size:11px; color:#60a5fa; word-break:break-all;">${banner.redirectUrl || '—'}</span>
+                </td>
+                <td>
+                    <span class="badge" style="background:rgba(168,85,247,0.15); color:#c084fc; font-size:11px; padding:2px 6px;">${banner.target || '_self'}</span>
+                </td>
+                <td><span style="font-size:12px; color:#fff;">${startStr}</span></td>
+                <td><span style="font-size:12px; color:var(--text-muted);">${endStr}</span></td>
+                <td style="text-align:center; font-weight:600; color:#fbbf24;">${banner.order || 0}</td>
+                <td>${banner.pages.map(p => `<span class="badge" style="background:rgba(255,255,255,0.08); font-size:11px; margin-right:3px;">${p}</span>`).join('')}</td>
+                <td style="text-align:center;">${statusBadge}</td>
+                <td style="font-size:11px; color:var(--text-muted); white-space:nowrap;">${createdStr}</td>
+                <td style="text-align:right; white-space:nowrap;">
+                    <div style="display:inline-flex; gap:6px; justify-content:flex-end;">
+                        <button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); margin:0;" onclick="window.editCmsBanner('${banner.id}')">Sửa</button>
+                        <button class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:var(--danger); margin:0;" onclick="window.deleteCmsBanner('${banner.id}')">Xóa</button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+    };
+
+    window.filterCmsBannersTable = function () {
+        window.renderCmsBannersTable();
+    };
+
+    window.openCreateCmsBannerForm = function () {
+        document.getElementById('banner-form-title').innerText = 'Tạo Banner mới';
+        
+        // Phát sinh ID tự động (max ID + 1)
+        let maxId = 0;
+        for (let id in window.cmsBannersData) {
+            let num = parseInt(id, 10);
+            if (!isNaN(num) && num > maxId) maxId = num;
+        }
+        let nextId = (maxId + 1).toString().padStart(3, '0');
+        
+        const idInput = document.getElementById('banner-id-input');
+        if (idInput) {
+            idInput.value = nextId;
+            idInput.removeAttribute('readonly');
+            idInput.style.background = 'transparent';
+            idInput.style.color = '#fff';
+        }
+        document.getElementById('banner-name-input').value = '';
+        document.getElementById('banner-order-input').value = '1';
+        document.getElementById('banner-desktop-url').value = '';
+        document.getElementById('banner-mobile-url').value = '';
+        document.getElementById('banner-redirect-url').value = '';
+        document.getElementById('banner-target').value = '_self';
+        document.getElementById('banner-status-input').value = 'Active';
+        document.getElementById('banner-start-date').value = '';
+        document.getElementById('banner-end-date').value = '';
+        
+        // Reset preview
+        document.getElementById('banner-desktop-preview').style.display = 'none';
+        document.getElementById('banner-desktop-no-img').style.display = 'block';
+        document.getElementById('banner-mobile-preview').style.display = 'none';
+        document.getElementById('banner-mobile-no-img').style.display = 'block';
+
+        // Reset multiselect
+        const pagesSelect = document.getElementById('banner-pages');
+        if (pagesSelect) {
+            for (let i = 0; i < pagesSelect.options.length; i++) {
+                pagesSelect.options[i].selected = (i === 0);
+            }
+        }
+
+        document.getElementById('banner-list').style.display = 'none';
+        document.getElementById('banner-form').style.display = 'block';
+    };
+
+    window.closeCmsBannerForm = function () {
+        document.getElementById('banner-form').style.display = 'none';
+        document.getElementById('banner-list').style.display = 'block';
+    };
+
+    window.updateBannerFormPreview = function (type) {
+        const urlInput = document.getElementById(`banner-${type}-url`);
+        const imgPreview = document.getElementById(`banner-${type}-preview`);
+        const noImgSpan = document.getElementById(`banner-${type}-no-img`);
+        if (urlInput && imgPreview && noImgSpan) {
+            const url = urlInput.value.trim();
+            if (url) {
+                imgPreview.src = url;
+                imgPreview.style.display = 'block';
+                noImgSpan.style.display = 'none';
+            } else {
+                imgPreview.src = '';
+                imgPreview.style.display = 'none';
+                noImgSpan.style.display = 'block';
+            }
+        }
+    };
+
+    window.editCmsBanner = function (id) {
+        const banner = window.cmsBannersData[id];
+        if (!banner) return;
+
+        document.getElementById('banner-form-title').innerText = 'Chỉnh sửa Banner #' + id;
+        
+        const idInput = document.getElementById('banner-id-input');
+        if (idInput) {
+            idInput.value = banner.id;
+            idInput.setAttribute('readonly', 'true');
+            idInput.style.background = 'rgba(255,255,255,0.04)';
+            idInput.style.color = '#aaa';
+        }
+        document.getElementById('banner-name-input').value = banner.name;
+        document.getElementById('banner-order-input').value = banner.order || 1;
+        document.getElementById('banner-desktop-url').value = banner.desktopUrl;
+        document.getElementById('banner-mobile-url').value = banner.mobileUrl;
+        document.getElementById('banner-redirect-url').value = banner.redirectUrl || '';
+        document.getElementById('banner-target').value = banner.target || '_self';
+        document.getElementById('banner-status-input').value = banner.status || 'Active';
+        document.getElementById('banner-start-date').value = banner.startDate || '';
+        document.getElementById('banner-end-date').value = banner.endDate || '';
+
+        const pagesSelect = document.getElementById('banner-pages');
+        if (pagesSelect) {
+            for (let i = 0; i < pagesSelect.options.length; i++) {
+                pagesSelect.options[i].selected = banner.pages.includes(pagesSelect.options[i].value);
+            }
+        }
+
+        window.updateBannerFormPreview('desktop');
+        window.updateBannerFormPreview('mobile');
+
+        document.getElementById('banner-list').style.display = 'none';
+        document.getElementById('banner-form').style.display = 'block';
+    };
+
+    window.saveCmsBannerAction = function () {
+        const id = document.getElementById('banner-id-input').value.trim();
+        const name = document.getElementById('banner-name-input').value.trim();
+        const order = parseInt(document.getElementById('banner-order-input').value, 10) || 1;
+        const desktopUrl = document.getElementById('banner-desktop-url').value.trim();
+        const mobileUrl = document.getElementById('banner-mobile-url').value.trim();
+        const redirectUrl = document.getElementById('banner-redirect-url').value.trim();
+        const target = document.getElementById('banner-target').value;
+        const status = document.getElementById('banner-status-input').value;
+        const startDate = document.getElementById('banner-start-date').value;
+        const endDate = document.getElementById('banner-end-date').value;
+
+        if (!id) {
+            alert('Vui lòng nhập Mã ID cho Banner!');
+            return;
+        }
+
+        const isCreateMode = document.getElementById('banner-form-title').innerText.includes('Tạo Banner mới');
+        if (isCreateMode && window.cmsBannersData[id]) {
+            alert(`Mã ID "${id}" đã tồn tại trong hệ thống. Vui lòng nhập Mã ID khác hoặc sử dụng ID tự sinh!`);
+            return;
+        }
+
+        if (!name || !desktopUrl || !mobileUrl) {
+            alert('Vui lòng điền các trường bắt buộc (Tên, Ảnh Desktop, Ảnh Mobile)!');
+            return;
+        }
+
+        const pagesSelect = document.getElementById('banner-pages');
+        const pages = [];
+        if (pagesSelect) {
+            for (let i = 0; i < pagesSelect.options.length; i++) {
+                if (pagesSelect.options[i].selected) pages.push(pagesSelect.options[i].value);
+            }
+        }
+
+        if (pages.length === 0) {
+            alert('Vui lòng chọn ít nhất một Trang áp dụng!');
+            return;
+        }
+
+        const isNew = !window.cmsBannersData[id];
+        const existingBanner = window.cmsBannersData[id];
+        const createdDate = existingBanner && existingBanner.createdDate
+            ? existingBanner.createdDate
+            : new Date().toISOString();
+
+        window.cmsBannersData[id] = {
+            id, name, order, desktopUrl, mobileUrl, redirectUrl, target, status, startDate, endDate, pages, createdDate
+        };
+
+        window.renderCmsBannersTable();
+        window.closeCmsBannerForm();
+        showLdpToast(isNew ? 'Đã tạo Banner thành công!' : 'Đã cập nhật Banner thành công!');
+
+        // Cascade Update: Đồng bộ hóa ảnh đại diện của bài viết liên kết Banner này
+        if (!isNew) {
+            window.syncBannerImagesToArticles(id);
+        }
+    };
+
+    window.deleteCmsBanner = function (id) {
+        if (confirm(`Bạn có chắc chắn muốn xóa Banner ID "${id}" không?`)) {
+            // Cascade update in articles: Hủy liên kết
+            let unlinkCount = 0;
+            for (let artId in window.newsArticlesData) {
+                if (window.newsArticlesData[artId].bannerId === id) {
+                    window.newsArticlesData[artId].bannerId = '';
+                    unlinkCount++;
+                }
+            }
+            delete window.cmsBannersData[id];
+            window.renderCmsBannersTable();
+            showLdpToast('Đã xóa Banner thành công!');
+            
+            if (unlinkCount > 0) {
+                window.renderNewsTableHTML();
+                showLdpToast(`Đã tự động gỡ liên kết Banner ID ${id} khỏi ${unlinkCount} bài viết!`);
+            }
+        }
+    };
+
+    // =========================================================================
+    //                        BANNER PICKER MODAL LOGIC
+    // =========================================================================
+    window.openBannerPickerModal = function () {
+        document.getElementById('banner-picker-modal').style.display = 'flex';
+        window.renderPickerBannersTable();
+    };
+
+    window.closeBannerPickerModal = function () {
+        document.getElementById('banner-picker-modal').style.display = 'none';
+    };
+
+    window.renderPickerBannersTable = function () {
+        const tbody = document.getElementById('picker-banner-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        const searchKw = (document.getElementById('search-picker-banner-name')?.value || '').toLowerCase().trim();
+
+        for (let id in window.cmsBannersData) {
+            const banner = window.cmsBannersData[id];
+            if (banner.status !== 'Active') continue; // Chỉ cho phép chọn banner đang hoạt động
+
+            if (searchKw && !banner.id.includes(searchKw) && !banner.name.toLowerCase().includes(searchKw)) {
+                continue;
+            }
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="text-align:center; font-weight:bold; color:var(--primary);">${banner.id}</td>
+                <td>
+                    <img src="${banner.desktopUrl}" style="width:60px; height:30px; border-radius:3px; object-fit:cover; border:1px solid var(--border-glass);">
+                </td>
+                <td><strong style="color:#fff;">${banner.name}</strong></td>
+                <td>${banner.pages.map(p => `<span class="badge" style="background:rgba(255,255,255,0.08); font-size:10px; padding:2px 4px; margin-right:2px;">${p}</span>`).join('')}</td>
+                <td style="text-align:center;"><span class="badge active" style="font-size:11px; padding:2px 6px;">Active</span></td>
+                <td style="text-align:center;">
+                    <button type="button" class="btn btn-primary btn-sm" style="margin:0; padding:4px 10px; font-size:11px;" onclick="window.selectBannerForArticle('${banner.id}')">Chọn</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        }
+    };
+
+    window.filterPickerBannersTable = function () {
+        window.renderPickerBannersTable();
+    };
+
+    window.selectBannerForArticle = function (bannerId) {
+        const banner = window.cmsBannersData[bannerId];
+        if (!banner) return;
+
+        document.getElementById('art-banner-id').value = bannerId;
+        document.getElementById('art-banner-selected-info').innerText = `ID: ${banner.id} - ${banner.name}`;
+        
+        const previewImg = document.getElementById('art-banner-selected-preview');
+        if (previewImg) previewImg.src = banner.desktopUrl;
+        
+        document.getElementById('art-banner-preview-box').style.display = 'block';
+        document.getElementById('art-banner-no-link').style.display = 'none';
+
+        // Tự động điền link ảnh banner vào ảnh đại diện của bài viết để đồng bộ trực quan
+        document.getElementById('art-thumbnail-url').value = banner.desktopUrl;
+        
+        const previewThumb = document.getElementById('art-thumb-preview');
+        if (previewThumb) previewThumb.src = banner.desktopUrl;
+        
+        const filenameSpan = document.getElementById('art-thumb-filename');
+        if (filenameSpan) filenameSpan.innerText = banner.desktopUrl.substring(banner.desktopUrl.lastIndexOf('/') + 1);
+
+        window.closeBannerPickerModal();
+        showLdpToast(`Đã liên kết với Banner ID: ${bannerId}`);
+    };
+
+    window.removeLinkedBanner = function () {
+        document.getElementById('art-banner-id').value = '';
+        document.getElementById('art-banner-preview-box').style.display = 'none';
+        document.getElementById('art-banner-no-link').style.display = 'block';
+        showLdpToast('Đã hủy liên kết Banner');
+    };
+
+    window.syncBannerImagesToArticles = function (bannerId) {
+        const banner = window.cmsBannersData[bannerId];
+        if (!banner) return;
+        
+        let count = 0;
+        for (let artId in window.newsArticlesData) {
+            const art = window.newsArticlesData[artId];
+            if (art.bannerId === bannerId) {
+                art.thumbUrl = banner.desktopUrl; // đồng bộ ảnh đại diện
+                count++;
+            }
+        }
+        if (count > 0) {
+            window.renderNewsTableHTML();
+            showLdpToast(`Cascade: Tự động cập nhật ảnh cho ${count} bài viết liên kết Banner ${bannerId}!`);
+        }
+    };
+    
+    // Tự động render bảng banner khi tải xong trang
+    setTimeout(() => {
+        window.renderCmsBannersTable();
+    }, 100);
+    
+    // Đảm bảo chạy interval đặt lịch
     if (!window.newsScheduleInterval) {
         window.newsScheduleInterval = setInterval(function () {
             const now = new Date();
