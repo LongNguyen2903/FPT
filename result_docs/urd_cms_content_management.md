@@ -1,4 +1,4 @@
-| ![FPT Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg) | FPT.VN URD – User requirements document |
+﻿| ![FPT Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg) | FPT.VN URD – User requirements document |
 | ----------------------------------------------------------------------------- | --------------------------------------- |
 | **Mã hiệu:** URD-CMS-01 **Phiên bản:** 1.3 **Ngày:** 27/05/2026               |
 
@@ -414,7 +414,7 @@ Phân hệ Quản lý Tin tức gồm **4 Tab chức năng chính**:
 | Actor          | Biên tập viên, Người duyệt, Admin.                                                                                                               |
 | Trigger        | Người dùng chọn menu "Quản lý FAQ" và click "+ Thêm Câu hỏi (FAQ)" hoặc "+ Thêm Danh Mục".                                                         |
 | Pre-condition  | Người dùng đã đăng nhập thành công vào hệ thống.                                                                                                  |
-| Post-condition | Câu hỏi FAQ được lưu thành công vào thư viện dùng chung, sẵn sàng để gán hiển thị lên các trang hoặc blocks.                                       |
+| Post-condition | Câu hỏi FAQ được lưu thành công vào thư viện dùng chung, sẵn sàng để gán hiển thị lên các trang hoặc blocks.                                      |
 
 Module FAQ gồm **2 Tab chức năng chính**:
 1.  **Danh sách Câu hỏi (FAQ):** Quản trị danh sách câu hỏi và câu trả lời.
@@ -524,7 +524,7 @@ Module FAQ gồm **2 Tab chức năng chính**:
 | Actor          | Tất cả người dùng hệ thống (Admin, BTV, Duyệt bài, nhân sự vận hành...).                                                                                                                          |
 | Trigger        | Người dùng click chọn mục "Thông tin tài khoản", "Đổi mật khẩu" hoặc "Đăng xuất" từ dropdown cá nhân ở góc phải trên của Header.                                                                   |
 | Pre-condition  | Người dùng đã đăng nhập thành công vào hệ thống.                                                                                                                                                  |
-| Post-condition | Thông tin cá nhân hoặc mật khẩu được lưu cập nhật thành công; hoặc người dùng đăng xuất thành công khỏi phiên làm việc (hiển thị thông báo).                                                      |
+| Post-condition | Submited... |
 
 *   **Workflow Cập nhật Thông tin tài khoản:**
     *   **Bước 1:** Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.
@@ -583,86 +583,262 @@ Module FAQ gồm **2 Tab chức năng chính**:
 
 # VI. PHỤ LỤC VI: ĐẶC TẢ CẤU TRÚC & CÁC SECTIONS CỦA 5 LDP TEMPLATE TIÊU CHUẨN
 
-## 1. Template: LDP Camera AI (9 Sections)
+## 1. Nguyên tắc thiết kế giao diện chung cho LDP (Layout, Mobile & Background)
 
-* **Mục tiêu:** Giới thiệu và thúc đẩy đăng ký/chọn mua thiết bị FPT Camera AI cùng các gói lưu trữ Cloud đi kèm.
-* **Danh sách các Sections và các trường thông tin cấu hình:**
+Để đảm bảo tính đồng bộ hệ thống và tối ưu hóa trải nghiệm người dùng (UX) trên đa nền tảng, tất cả 5 template LDP tiêu chuẩn đều phải tuân thủ các nguyên tắc thiết kế chung sau:
 
-| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS |
-| :--- | :--- | :--- | :--- |
-| 1 | Hero Banner + Nút CTA | `cam-hero` | - Ảnh nền (Background Image) (Desktop & Mobile)<br>- Headline (Tiêu đề chính) và Subheadline (Tiêu đề phụ)<br>- Text trên nút CTA (ví dụ: "Đăng ký ngay")<br>- Link điều hướng của nút CTA<br>- Ảnh sản phẩm nổi bật (Camera) |
-| 2 | Tính năng nổi bật (USP) | `cam-usp` | - Headline Section (ví dụ: "Công nghệ thông minh vượt trội")<br>- Danh sách 3-4 tính năng nổi bật. Mỗi tính năng gồm: Icon, Tiêu đề tính năng, Nội dung mô tả chi tiết |
-| 3 | Chi tiết FPT Camera AI | `cam-detail` | - Headline Section<br>- Tabs thông tin sản phẩm (Camera IQ3, Camera SE, Camera Play)<br>- Với mỗi dòng sản phẩm: Ảnh sản phẩm, Tên dòng, Giá bán lẻ, Mô tả chi tiết specs (Độ phân giải, Hồng ngoại, Đàm thoại, Kháng nước...) |
-| 4 | Danh mục & Chọn mua | `cam-select` | - Headline Section<br>- Danh sách các dòng Camera để tick chọn bán lẻ<br>- Danh sách gói Cloud lưu trữ (1 ngày, 3 ngày, 7 ngày) kèm đơn giá tháng/năm<br>- Cấu hình logic tính tổng tiền ước tính (Tự động cộng tiền Camera + Cloud) |
-| 5 | Ứng dụng FPT Camera | `cam-app` | - Headline Section & Subtitle<br>- Ảnh mockup màn hình App điện thoại<br>- Danh sách tính năng của App (Xem trực tiếp, Phân quyền chia sẻ, Cảnh báo thông minh...)<br>- Link tải App Store và Google Play |
-| 6 | Lợi thế công nghệ | `cam-value` | - Headline Section<br>- 3 khối giá trị cốt lõi: Độ trễ thấp (khắc phục mạng yếu), Lưu trữ Cloud bảo mật tại Việt Nam, Dịch vụ hỗ trợ 24/7 của FPT |
-| 7 | Thương hiệu & Giải thưởng | `cam-awards` | - Tiêu đề Section<br>- Danh sách ảnh các cúp/logo giải thưởng (Sao Khuê, Sản phẩm tiêu biểu...) kèm text mô tả giải thưởng |
-| 8 | FAQ Accordion | `cam-faq` | - Headline Section<br>- Danh sách các câu hỏi thường gặp (Q&A) hỗ trợ đóng/mở (Collapse/Expand) |
-| 9 | Sticky Bottom Bar | `cam-sticky` | - Text thông báo khuyến mãi rút gọn<br>- Text nút CTA trên thanh bar<br>- SĐT Hotline tư vấn nhanh |
+### a. Cấu hình Ảnh nền / Màu nền toàn trang (Page Background Config)
 
----
+- Hệ thống CMS cung cấp tính năng cấu hình nền chung cho toàn bộ Landing Page (Page-wide Background) tại phần thiết lập LDP Builder.
+- **Trường cấu hình:** Vận hành có thể upload tệp ảnh trực tiếp tại trường `Ảnh nền toàn trang (Page Background Image)` (không hỗ trợ dán URL ảnh thủ công) và chọn mã màu tại trường `Màu nền toàn trang (Page Background Color)`.
+- **Hiệu ứng hiển thị:**
+  - Ảnh nền toàn trang sẽ trải dài liên tục trên toàn bộ phần thân (Body) của Landing Page, không bao phủ hay ảnh hưởng đến Header và Footer. Thuộc tính CSS mặc định: `background-size: cover; background-attachment: fixed; background-position: center;`.
+  - Nếu không upload ảnh nền, hệ thống sẽ sử dụng màu nền được cấu hình.
+  - Nếu cả hai trường đều để trống, hệ thống sẽ tự động áp dụng màu nền mặc định theo từng loại Template:
+    - **LDP SA - FPT Play:** Mặc định sử dụng màu tím sẫm (Deep Purple `#1a0933` hoặc dải gradient tím/đen) làm màu nền trải dài liên tục trên phần thân (Body) kết hợp ảnh pattern thể thao chìm. Giao diện phần thân luôn đảm bảo tính liền mạch, không bị đứt đoạn màu nền giữa các section.
+    - **LDP Wi-Fi 7:** Mặc định sử dụng màu xám tối / đen sang trọng (`#111111`).
+    - **LDP Camera, Internet, Thu Lead:** Mặc định sử dụng màu trắng sáng (`#ffffff`) hoặc xám nhạt (`#f8f9fa`).
 
-## 2. Template: LDP Campaign Wi-Fi 7 (9 Sections)
+### b. Đặc tả hiển thị trên Thiết bị di động (Mobile Responsive Layouts)
 
-* **Mục tiêu:** Quảng bá chiến dịch công nghệ Wi-Fi 7 thế hệ mới, thu thập thông tin đăng ký tư vấn/lắp đặt gói Lux/Ultra Fast Wi-Fi 7.
-* **Danh sách các Sections và các trường thông tin cấu hình:**
+- **Tự động chuyển đổi bố cục (Grid-to-Slider/Single-column):**
+  - Các Section hiển thị dạng lưới (Grid) từ 3-4 cột trên Desktop (như USP, Tính năng, Giải thưởng, Feedback, và đặc biệt là danh sách gói cước) khi chuyển sang giao diện Mobile sẽ tự động chuyển đổi sang dạng **Single Column** (1 cột cuộn dọc) hoặc **Swipeable Carousel** (Slider cuộn ngang hỗ trợ vuốt tay, kèm dấu chấm tròn chỉ số trang ở dưới) để tránh làm giao diện bị bóp nhỏ hoặc kéo dài trang quá mức.
+- **Tách biệt hình ảnh Banner Hero:**
+  - Đối với các Section Hero banner đầu trang, bắt buộc Vận hành phải tải lên 2 phiên bản ảnh: `Ảnh nền Desktop` (tối ưu kích thước 1920x800px) và `Ảnh nền Mobile` (tối ưu kích thước 768x800px) để đảm bảo hình ảnh không bị méo, text trên banner mobile rõ ràng, dễ đọc.
+- **Tối ưu hóa các dải Countdown và Sticky Bar:**
+  - Trên giao diện Mobile, dải countdown hẹn giờ và sticky bottom bar sẽ tự động thu gọn các khoảng đệm (padding) và cỡ chữ, ẩn bớt các mô tả phụ không cần thiết, chỉ hiển thị tiêu đề chính, bộ đếm ngược và nút CTA hành động để tiết kiệm diện tích màn hình.
+- **Bảng so sánh (Compare Table):**
+  - Các bảng so sánh thông số (như bảng so sánh Wi-Fi, bảng giá FPT Play) trên Mobile sẽ tự động kích hoạt thanh cuộn ngang (Horizontal scroll table) hoặc chuyển thành dạng slide chọn 1-1 giữa các đối tượng để người dùng dễ so khớp.
 
-| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS |
-| :--- | :--- | :--- | :--- |
-| 1 | Hero Wi-Fi 7 (Countdown) | `camp-hero` | - Ảnh/Video nền (Background)<br>- Headline chiến dịch (ví dụ: "Khai phá sức mạnh Wi-Fi 7")<br>- Thời gian kết thúc đếm ngược (Countdown DateTime)<br>- Form liên hệ nhanh (Tiêu đề form, placeholders, nút submit) |
-| 2 | Thanh biểu ngữ thương hiệu | `camp-branding` | - Danh sách ảnh logo đối tác/công nghệ chạy ngang (Marquee)<br>- Text chạy chữ khẩu hiệu của chiến dịch |
-| 3 | USP Công nghệ Wi-Fi 7 | `camp-usp` | - Headline Section<br>- 4 đặc tính vượt trội: Tốc độ (Gbps), Độ trễ (Latency), Kết nối thiết bị đồng thời, Công nghệ MLO (Multi-Link Operation). Cấu hình gồm: Icon, Chỉ số số liệu, Tên thông số, Mô tả ngắn |
-| 4 | Các gói cước Wi-Fi 7 | `camp-products` | - Headline Section<br>- Danh sách các gói cước trang bị Wi-Fi 7 (Lux 500, Lux 800, Ultra Fast)<br>- Cấu hình mỗi card gói cước: Tên gói, Băng thông, Thiết bị đi kèm, Giá bán, Nút đăng ký (link hoặc anchor cuộn xuống form) |
-| 5 | Bảng so sánh thế hệ Wi-Fi | `camp-compare` | - Headline Section<br>- Bảng so sánh thông số (băng tần, tốc độ tối đa lý thuyết, độ trễ) giữa Wi-Fi 5, Wi-Fi 6 và Wi-Fi 7 để làm nổi bật giá trị nâng cấp |
-| 6 | Đối tượng mục tiêu | `camp-targets` | - Headline Section<br>- 4 khối đối tượng (Doanh nghiệp, Gamer/Streamer, Nhà thông minh, Gia đình đông người). Cấu hình gồm: Ảnh minh họa, Tên đối tượng, Giải pháp Wi-Fi khuyến nghị tương ứng |
-| 7 | Video Review thực tế | `camp-videos` | - Headline Section<br>- Danh sách các video trải nghiệm thực tế (Thumbnail, Link nhúng YouTube/TikTok) |
-| 8 | Form đăng ký tư vấn | `camp-form` | - Ảnh nền/Màu nền khối Form<br>- Headline Form & Mô tả ngắn<br>- Danh sách trường nhập liệu (Họ tên, SĐT, Địa chỉ, Gói cước quan tâm)<br>- Lời cảm ơn sau khi gửi (Thank-you Message) |
-| 9 | FAQ Accordion | `camp-faq` | - Headline Section<br>- Danh sách câu hỏi thường gặp về thiết bị Wi-Fi 7, phí nâng cấp và cách hòa mạng |
+### c. Quy định giới hạn số lượng ảnh tải lên & hiển thị (Image Upload & Display Limits)
 
----
+Để tối ưu hóa tốc độ tải trang (Page Load Speed/Lighthouse SEO), đảm bảo tính ổn định của hệ thống và tránh lỗi tràn vỡ bố cục giao diện, CMS áp dụng quy tắc giới hạn nghiêm ngặt số lượng ảnh tải lên và hiển thị đối với từng khối component như sau:
 
-## 3. Template: LDP Internet (6 Sections)
+| STT | Khối Component / Section | Số lượng ảnh tối đa cho phép tải lên | Bố cục hiển thị ngoài trang (Desktop) | Bố cục hiển thị ngoài trang (Mobile) |
+| --- | --- | --- | --- | --- |
+| 1 | **Banner Hero - Khối**<br/>(`banner-cam-hero`...) | - 1 ảnh nền Desktop (1920x800px)<br/>- 1 ảnh nền Mobile (768x800px) | Phủ kín toàn chiều rộng khối đầu trang (100% width). | Phủ kín toàn chiều rộng khối đầu trang (100% width). |
+| 2 | **Đặc tính nổi bật / Ưu đãi - Khối**<br/>(`info-cam-usp`...) | Tối đa **4 ảnh/icon** (mỗi đặc tính 1 ảnh/icon, chỉ hỗ trợ upload tệp trực tiếp). | Dạng lưới Grid ngang 4 cột. | Dạng Slider cuộn ngang (Swipeable) hoặc xếp dọc 1 cột. |
+| 3 | **Quy trình / Các bước thực hiện - Khối**<br/>(`procedure-lead`...) | Cố định **3 ảnh/icon** (mỗi bước 1 ảnh/icon). | Xếp ngang 3 cột tương ứng 3 bước. | Xếp dọc 1 cột từ bước 1 đến bước 3. |
+| 4 | **Khối Chi tiết FPT Camera AI**<br/>(`cam-detail`) | Tối đa **4 ảnh** tính năng phụ cho mỗi dòng sản phẩm. | Dạng Grid lưới cố định 2x2 ở bên phải ảnh sản phẩm chính. | Dạng Slider cuộn ngang hỗ trợ vuốt tay. |
+| 5 | **Card combo thiết bị - Khối**<br/>(`combo-cam` / `combo-cam`) | Tối đa **6 ảnh combo** (mỗi combo 1 ảnh sản phẩm). | Dạng lưới Grid ngang 3 cột. | Dạng Slider cuộn ngang (Swipeable). |
+| 6 | **Giải thưởng - Khối**<br/>(`awards-cam` / `awards-cam`) | Tối đa **10 ảnh giải thưởng** (mỗi giải thưởng 1 ảnh cúp/chứng nhận). | Dạng lưới Grid ngang 4 cột. | Dạng Slider cuộn ngang. |
+| 7 | **Bộ sưu tập Video - Khối**<br/>(`reviews-lead` / `reviews-lead`) | Tối đa **10 ảnh Thumbnail** (tương ứng tối đa 10 video review). | Dạng lưới Grid hoặc hàng ngang có thể scroll ngang. | Dạng Slider cuộn ngang. |
+| 8 | **Danh sách ưu đãi (Slider) - Khối**<br/>(`promo-inet` / `promo-inet`) | Tối đa **12 ảnh banner** khuyến mãi. | Dạng Slider (Carousel) trượt ngang tự động. | Dạng Slider trượt ngang tự động, hiển thị duy nhất 1 banner. |
+| 9 | **Slide trượt đánh giá khách hàng - Khối**<br/>(`feedback-lead` / `feedback-lead`) | Tối đa **10 ảnh đại diện (avatar)** khách hàng. | Dạng Slider hiển thị 3 nhận xét cùng lúc. | Dạng Slider hiển thị duy nhất 1 nhận xét, vuốt ngang. |
+| 10 | **Đối tượng - Khối**<br/>(`targets-camp` / `targets-camp`) | Tối đa **4 ảnh đối tượng** (mỗi nhóm đối tượng 1 ảnh). | Dạng lưới Grid ngang 4 cột. | Dạng Slider cuộn ngang. |
+| 11 | **Khối Danh mục nội dung giải trí**<br/>(`categories-sa`) | - Tối đa **3 ảnh Banner tab**<br/>- Tối đa **12 ảnh Poster phim** cho mỗi tab. | - Banner tab hiển thị dạng dải lớn đầu tab.<br/>- Poster phim xếp dạng lưới Grid 4-6 cột. | - Banner tab hiển thị dạng dải nhỏ.<br/>- Poster phim chuyển thành Slider cuộn ngang nhiều hàng. |
+| 12 | **Khối Thể thao trực tiếp**<br/>(`sports-sa`) | Tối đa **6 ảnh/logo giải đấu**. | Dạng lưới Grid 3 cột x 2 hàng. | Dạng Slider cuộn ngang. |
+| 13 | **Khối Dàn bình luận viên**<br/>(`commentators-sa`) | Tối đa **8 ảnh đại diện** bình luận viên. | Dạng lưới Grid 4 cột x 2 hàng. | Dạng Slider cuộn ngang. |
 
-* **Mục tiêu:** Giới thiệu các gói cước cáp quang cá nhân/gia đình của FPT Telecom và thu thập Lead đăng ký.
-* **Danh sách các Sections và các trường thông tin cấu hình:**
+### d. Ràng buộc độ dài các trường dữ liệu và hành vi hệ thống (Data Length Restrictions & System Behavior)
 
-| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS |
-| :--- | :--- | :--- | :--- |
-| 1 | Hero Banner + Form đăng ký | `inet-hero` | - Ảnh nền (Desktop & Mobile)<br>- Headline (Tiêu đề chính) và Subheadline<br>- Form đăng ký nhanh đi kèm (Tiêu đề form, Danh sách trường: Họ tên, SĐT, Nút gửi) |
-| 2 | Thanh số liệu nổi bật | `inet-stats` | - 6 chỉ số tiêu biểu (ví dụ: 100% Cáp quang, Hỗ trợ 24/7, Phủ sóng 63 tỉnh thành...). Mỗi chỉ số gồm: Icon/Số liệu và Nhãn mô tả ngắn bên dưới |
-| 3 | Danh sách gói Internet | `inet-products` | - Headline Section<br>- Danh sách các gói cước gia đình (Giga, Sky, Meta)<br>- Cấu hình mỗi gói: Tên gói, Băng thông, Thiết bị Modem kèm theo, Giá cước tháng, Giá trả trước, Nút CTA đăng ký |
-| 4 | Video Review | `inet-review` | - Headline Section & Subtitle<br>- Danh sách link video đánh giá dịch vụ (Thumbnail, Link YouTube) |
-| 5 | Đánh giá khách hàng | `inet-testimonials` | - Headline Section<br>- Danh sách các feedback của khách hàng: Ảnh chân dung/Avatar, Họ tên, Đánh giá xếp hạng sao (Rating), Nội dung nhận xét thực tế |
-| 6 | Form đăng ký (cuối trang) | `inet-form` | - Headline Form & Mô tả quy trình tư vấn<br>- Nút Gửi thông tin (Submit)<br>- Lời chúc/Lời cảm ơn sau khi đăng ký thành công |
+Để đảm bảo tính toàn vẹn dữ liệu, tránh lỗi vỡ layout trên các thiết bị và tối ưu hóa SEO, CMS áp dụng các quy định ràng buộc độ dài đầu vào trên giao diện quản trị (UI) như sau:
 
----
+*   **Tất cả các trường văn bản đầu vào trên CMS phải có thuộc tính `maxlength` tương ứng để chặn cứng hành vi nhập vượt quá giới hạn trên UI.**
+*   **Ngoại lệ đối với Trình soạn thảo văn bản (Text Editor):** Đối với các trường sử dụng Trình soạn thảo văn bản Rich Text (Rich Text Editor / WYSIWYG) để soạn thảo văn bản định dạng (như Nội dung chi tiết bài viết, Câu trả lời FAQ...), hệ thống **sẽ không áp dụng giới hạn số lượng ký tự nhập vào** để đảm bảo tính linh hoạt khi định cấu hình.
 
-## 4. Template: LDP SA - FPT Play (5 Sections)
+#### Quy định chung về giới hạn ký tự (LDP Sections & Components):
+*   **Nhãn ngắn / Badge:** Tối đa **20 ký tự** (Chặn cứng khi nhập).
+*   **Tiêu đề ngắn:** Tên gói cước, tiêu đề đặc tính, tên combo, tiêu đề video... Tối đa **50 ký tự** (Chặn cứng khi nhập).
+*   **Tiêu đề chính / Headline / H1:** Tiêu đề section lớn. Tối đa **80 ký tự** (Chặn cứng khi nhập).
+*   **Mô tả ngắn:** Mô tả phụ dưới tiêu đề, mô tả gói cước, mô tả bước... Tối đa **150 ký tự** (Hiển thị bộ đếm ngược và chặn cứng khi nhập).
+*   **Mô tả chi tiết:** Nội dung feedback khách hàng, đoạn văn bản mô tả. Tối đa **300 ký tự** (Hiển thị bộ đếm ngược ký tự).
 
-* **Mục tiêu:** Quảng bá và đăng ký thuê bao gói dịch vụ truyền hình giải trí FPT Play (Sự kiện thể thao, Phim độc quyền).
-* **Danh sách các Sections và các trường thông tin cấu hình:**
+#### SEO Metadata (Cấu hình SEO cho Landing Page):
+*   **Meta Title:** Khuyến nghị dưới **60 ký tự** (Hiển thị cảnh báo màu vàng khi vượt quá và chặn cứng tại **100 ký tự**).
+*   **Meta Description:** Khuyến nghị độ dài tối ưu từ **150 - 160 ký tự** (Hiển thị bộ đếm ký tự thời gian thực và chặn cứng tại **200 ký tự**).
 
-| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS |
-| :--- | :--- | :--- | :--- |
-| 1 | Hero Banner khuyến mãi | `sa-hero` | - Ảnh nền Fullscreen cuốn hút<br>- Nhãn Badge khuyến mãi (ví dụ: "MUA 6 THÁNG TẶNG 2 THÁNG")<br>- Headline quảng bá nội dung hot<br>- Giá gói cước chỉ từ...<br>- Nút CTA & Ảnh thiết bị FPT Play Box |
-| 2 | Highlight tính năng | `sa-features` | - Headline Section<br>- Mô tả danh sách tính năng (Xem cùng lúc trên nhiều thiết bị, Đa nền tảng, Giao diện thân thiện, Chất lượng 4K...) |
-| 3 | Danh mục nội dung giải trí | `sa-categories` | - Headline Section<br>- Các tab phân loại nội dung (Thể thao, Phim truyện, Thiếu nhi, Shows)<br>- Mỗi tab cấu hình: Grid ảnh các bộ phim/trận đấu nổi bật kèm mô tả ngắn |
-| 4 | Bảng giá & Đăng ký | `sa-pricing` | - Headline Section & Bảng giá so sánh các gói FPT Play (gói SMax, gói SVip)<br>- Các quyền lợi của từng gói (Quyền lợi thể thao, Số thiết bị xem đồng thời, Quảng cáo...) |
-| 5 | Footer CTA | `sa-footer` | - Ảnh nền Footer<br>- Headline kêu gọi hành động cuối trang<br>- Nút đăng ký nhanh |
+## 2. Thư viện Khối Component Tái sử dụng (Shared Component Library)
 
----
+Để tối ưu hóa việc phát triển và cho phép Vận hành tái cấu hình, tái sử dụng linh hoạt các phần tử giao diện trên bất kỳ Landing Page nào, toàn bộ hệ thống LDP Builder được xây dựng dựa trên **16 khối component độc lập** sau:
 
-## 5. Template: LDP Thu Lead (7 Sections)
+| STT | Tên Khối Component | Mã Component | Khả năng Tái sử dụng & Phạm vi áp dụng | Mô tả & Các trường cấu hình chính có thể chỉnh sửa (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- | --- |
+| 1 | **Banner Hero - Khối**<br/>(`banner-cam-hero`...) | banner-cam-hero | **Tái sử dụng chung** cho tất cả các Landing Page. | Khối biểu ngữ lớn đầu trang. Cấu hình: Ảnh nền (Background Image) (1920×800px - Chỉ hỗ trợ upload), Ảnh nền Mobile (768x800px - Chỉ hỗ trợ upload), URL ảnh nền (Desktop & Mobile), Text Nút CTA chính (Tối đa 30 ký tự), URL Nút CTA chính (Tối đa 255 ký tự), Text Nút CTA phụ (Tối đa 30 ký tự), URL Nút CTA phụ (Tối đa 255 ký tự - cho phép bật/tắt 2 nút). |
+| 2 | **Đặc tính nổi bật / Ưu đãi - Khối**<br/>(`info-cam-usp`...) | info-cam-usp | **Tái sử dụng chung** cho tất cả các LDP để tối ưu code. | Khối đặc tính nổi bật/ ưu đãi dạng lưới (Grid) 4 cột. Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Icon/Ảnh cho từng lợi ích, Tiêu đề ngắn (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 200 ký tự), Màu nền, Ảnh bg. |
+| 3 | **Card gói cước tiêu chuẩn (Internet) - Khối**<br/>(`products-inet` / `products-inet`...) | products-inet | **Tái sử dụng chung** cho LDP Internet, Wi-Fi 7 và LDP Thu Lead. | Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tốc độ Download, Tốc độ Upload, Icon Tốc độ, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 4 | **Card gói cước tiêu chuẩn (SA) - Khối**<br/>(`products-sa` / `products-sa`...) | products-sa | **Đặc thù** cho FPT Play. | Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 5 | **Card combo thiết bị - Khối**<br/>(`combo-cam`...) | combo-cam | **Tái sử dụng** cho các trang bán thiết bị kèm gói dịch vụ (như LDP Camera AI). | Khối sản phẩm bán thiết bị vật lý kết hợp dịch vụ đi kèm (giới hạn 100). Cấu hình:<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (không chỉnh sửa), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa (không chỉnh sửa), Giá khuyến mãi (không chỉnh sửa), Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (không chỉnh sửa - Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo. |
+| 6 | **Bộ đếm ngược - Khối**<br/>(`timer-camp-countdown`...) | timer-camp-countdown | **Tái sử dụng chung** cho các trang có thời hạn chiến dịch/sự kiện. | Khối đồng hồ đếm ngược. Hỗ trợ 2 chế độ hiển thị: Dính liền chân Hero Banner (Case 1) hoặc Dải countdown độc lập giữa trang (Case 2). Cấu hình:<br/>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg. |
+| 7 | **Form popup thu thập Lead - Khối**<br/>(`form-lead-popup`...) | form-lead-popup | **Tái sử dụng chung** cho tất cả các hành động thu lead của LDP. | Modal popup thu thập thông tin đăng ký. Cấu hình: Tiêu đề popup (Tối đa 80 ký tự), mô tả phụ (Tối đa 150 ký tự), text nút Submit (Tối đa 30 ký tự), Màu nền, Ảnh bg. |
+| 8 | **Bộ sưu tập Video - Khối**<br/>(`reviews-lead`...) | reviews-lead | **Tái sử dụng chung** cho các trang cần chèn review của KOLs/khách hàng. | Khối hiển thị video dạng Grid (tối đa 10 video). Cấu hình mỗi video gồm: Ảnh thumbnail, Tiêu đề section video (Tối đa 80 ký tự), URL Video (Tối đa 255 ký tự), có thể scroll ngang được, Màu nền, Ảnh bg. |
+| 9 | **Slide trượt đánh giá khách hàng - Khối**<br/>(`feedback-lead`...) | feedback-lead | **Tái sử dụng chung** cho nhận xét của khách hàng. | Khối slider nhận xét của khách hàng (tối đa 10 đánh giá). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Avatar, Tên khách hàng (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Nội dung nhận xét (Tối đa 300 ký tự), Đánh giá số sao (1-5 sao), Khu vực / Phụ đề (Tối đa 50 ký tự), Màu nền, Ảnh bg. |
+| 10 | **Accordion câu hỏi thường gặp (FAQ) - Khối**<br/>(`faq-cam`...) | faq-cam | **Tái sử dụng chung** cho các trang cần giải đáp thắc mắc khách hàng. | Khối câu hỏi thường gặp dạng đóng/mở (tối đa 6 câu). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Dropdown (Danh mục) liên kết trực tiếp theo ID từ kho FAQ chung của hệ thống (không nhập text trực tiếp ngoài CMS), Upload bg bên phải (Desktop & Mobile - Tối đa 255 ký tự) + Link URL (Tối đa 255 ký tự), Màu nền, Ảnh bg. |
+| 11 | **Thanh thông báo neo chân trang (Sticky Bar) - Khối**<br/>(`sticky-cam`...) | sticky-cam | **Tái sử dụng chung** để neo giữ nút đăng ký ở chân trang. | Thanh neo dưới cùng màn hình. Cấu hình: Ảnh nền banner (cuối trang) (tối đa 1MB), Link URL (Tối đa 255 ký tự). |
+| 12 | **Quy trình / Các bước thực hiện - Khối**<br/>(`procedure-lead`...) | procedure-lead | **Tái sử dụng** cho các LDP cần mô tả quy trình mua/lắp đặt. | Khối hiển thị quy trình (mặc định 3 bước). Cấu hình:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Mỗi bước gồm: Icon bước, Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự)<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg. |
+| 13 | **Dải chữ chạy ngang đăng ký thành công - Khối**<br/>(`runner-lead-proof`...) | runner-lead-proof | **Tái sử dụng chung** để tạo hiệu ứng kích thích mua hàng (Social Proof). | Dải chữ chạy ngang vô tận (marquee style) hiển thị thông báo đăng ký thành công ảo (ví dụ: "Nguyễn Văn A - vừa đăng ký gói Lux..."). Cấu hình: Danh sách Tên khách hàng, Khu vực, nội dung, tốc độ chạy, Màu nền, Ảnh bg. |
+| 14 | **Danh sách ưu đãi (Slider) - Khối**<br/>(`promo-inet`...) | promo-inet | **Tái sử dụng chung** cho các banner quảng cáo khuyến mãi phụ. | Khối slider banner trượt (tối đa 12). Cấu hình: Tiêu đề section (Tối đa 80 ký tự), ảnh banner (chỉ hỗ trợ upload), URL liên kết khi click (Tối đa 255 ký tự), Màu nền, Ảnh bg. |
+| 15 | **Đối tượng - Khối**<br/>(`targets-camp`...) | targets-camp | **Tái sử dụng** cho các LDP cần phân loại đối tượng khách hàng. | Khối đối tượng gồm 4 card: Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Danh sách nhóm đối tượng. Mỗi nhóm gồm: Ảnh đối tượng, Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Màu nền, Ảnh bg. |
+| 16 | **Giải thưởng - Khối**<br/>(`awards-cam`...) | awards-cam | **Tái sử dụng** cho các LDP cần vinh danh chất lượng thương hiệu. | Tiêu đề Section giải thưởng (Tối đa 80 ký tự), Danh sách giải thưởng vinh danh (Tối đa 10 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng, Màu nền, Ảnh bg. |
 
-* **Mục tiêu:** Tối ưu hóa chuyển đổi thu thập thông tin khách hàng tiềm năng thông qua các chương trình khuyến mãi/quà tặng đặc biệt.
-* **Danh sách các Sections và các trường thông tin cấu hình:**
+## 3. Đặc tả cấu trúc chi tiết theo từng Template
 
-| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS |
-| :--- | :--- | :--- | :--- |
-| 1 | Hero + Form thu Lead | `lead-hero` | - Ảnh nền bắt mắt kích thích thị giác<br>- Headline giật tít ưu đãi độc quyền (ví dụ: "Nhận voucher 500k khi lắp mạng")<br>- Khung Form thu Lead trực diện: Họ tên, Số điện thoại, Địa chỉ, Nút đăng ký nhận quà |
-| 2 | Social Proof chạy chữ | `lead-proof` | - Dải thông báo chạy liên tục (Marquee) hiển thị danh sách người dùng vừa đăng ký thành công (ví dụ: "Trần Văn B - 096*** vừa đăng ký thành công 1 phút trước") |
-| 3 | Bảng giá & So sánh gói | `lead-pricing` | - Headline Section<br>- Bảng giá so sánh 2-3 gói cước kèm nhấn mạnh ưu đãi đặc biệt nhất của từng gói (như miễn phí lắp đặt, tặng modem) |
-| 4 | Lợi ích & Quy trình | `lead-steps` | - Headline Section<br>- Quy trình 3 bước nhận ưu đãi: Bước 1: Để lại thông tin -> Bước 2: Tổng đài gọi lại tư vấn sau 5 phút -> Bước 3: Lắp đặt siêu tốc trong 12h |
-| 5 | Đánh giá khách hàng | `lead-reviews` | - Headline Section<br>- Grid nhận xét xếp hạng sao (Rating) kèm ảnh chụp thực nghiệm lắp đặt thiết bị tại nhà khách hàng |
-| 6 | FAQ Accordion | `lead-faq` | - Headline Section<br>- Danh sách câu hỏi ngắn giải đáp thắc mắc về thời gian nhận ưu đãi, cam kết và thủ tục |
-| 7 | Sticky Bottom Bar | `lead-sticky` | - Thanh bar thu gọn dính chân trang trên Mobile, chứa Hotline bấm gọi ngay và nút nhận ưu đãi nhanh |
+### a. Template: LDP Camera AI (8 Sections)
+
+- **Mục tiêu:** Giới thiệu và thúc đẩy đăng ký/chọn mua thiết bị FPT Camera AI cùng các gói lưu trữ Cloud đi kèm.
+- **Danh sách các Sections và các trường thông tin cấu hình:**
+
+| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- |
+| 1 | Banner hero - Camera AI | `banner-cam-hero` | - Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop & Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự) |
+| 2 | Info - Đặc tính nổi bật | `info-cam-usp` | - Tiêu đề chính Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 công nghệ nổi bật. Với mỗi công nghệ: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload) |
+| 3 | Detail - Chi tiết Camera | `cam-detail` | - Tiêu đề Section (Tối đa 80 ký tự)<br/>- Cấu hình chi tiết 2 dòng sản phẩm Camera chính (Trong nhà & Ngoài trời). Với mỗi dòng: Tên sản phẩm (Tối đa 50 ký tự), Mô tả phụ (Subtitle - Tối đa 150 ký tự), Ảnh sản phẩm chính, Giá bán lẻ thiết bị, Nhãn ưu đãi (Badge - Tối đa 20 ký tự), Text nút CTA (Tối đa 30 ký tự), URL nút CTA (Tối đa 255 ký tự), danh sách ảnh tính năng phụ (cho phép upload tối đa 4 ảnh; hiển thị dạng Grid cố định 2x2 trên Desktop, hiển thị dạng Slider cuộn ngang trên Mobile) |
+| 4 | Combo - Chọn mua Camera | `combo-cam` | - Tiêu đề Section chọn camera (Headline - Tối đa 80 ký tự)<br/>- Giá bắt đầu (text mô tả phụ - Tối đa 100 ký tự)<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (Tối đa 50 ký tự), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa URL, Giá khuyến mãi, Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo |
+| 5 | Detail - Ứng dụng FPT Camera | `app-cam` | - Tiêu đề giới thiệu App (Tối đa 80 ký tự)<br/>- Ảnh Mockup điện thoại<br/>- Link App Store (Tối đa 255 ký tự)<br/>- Link Google Play (Tối đa 255 ký tự)<br/>- Danh sách tính năng App (Textarea nhập nhiều dòng, mỗi dòng tối đa 150 ký tự) |
+| 6 | Awards - Giải thưởng & Thương hiệu | `awards-cam` | - Tiêu đề Section giải thưởng (Tối đa 80 ký tự)<br/>- Danh sách giải thưởng vinh danh (Tối đa 4 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng |
+| 7 | FAQ - Câu hỏi thường gặp | `faq-cam` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi & Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS |
+| 8 | Sticky - Thanh đăng ký nhanh | `sticky-cam` | - Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề thông báo ưu đãi (Tối đa 50 ký tự)<br/>- Giá/Thông tin ưu đãi (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự) |
+
+### b. Template: LDP Campaign Wi-Fi 7 (9 Sections)
+
+- **Mục tiêu:** Quảng bá chiến dịch công nghệ Wi-Fi 7 thế hệ mới, thu thập thông tin đăng ký tư vấn/lắp đặt gói Lux/Ultra Fast Wi-Fi 7.
+- **Danh sách các Sections và các trường thông tin cấu hình:**
+
+| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- |
+| 1 | Banner hero - Wi-Fi 7 | `banner-cam-hero` | - Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop & Mobile - Tối đa 255 ký tự)<br/>- Ảnh sản phẩm nổi bật (nếu có)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự) |
+| 2 | Timer - Countdown độc lập | `timer-camp-countdown` | - Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/>*Lưu ý thiết kế:* Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác. |
+| 3 | Info - Công nghệ nổi bật | `info-cam-usp` | - Headline Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 đặc tính vượt trội. Với mỗi đặc tính: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload) |
+| 4 | Products - Gói cước Wi-Fi 7 | `products-inet` | - Tiêu đề Section gói Wi-Fi 7 (Headline - Tối đa 80 ký tự)<br/>- Danh sách gói cước hiển thị đồng bộ từ PDH (không cho phép thêm gói cước trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 5 | Compare - Bảng so sánh thế hệ Wi-Fi | `compare-camp` | - Tiêu đề Section bảng so sánh (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Nút CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Nút CTA phụ - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách tiêu chí so sánh dạng bảng. Mỗi hàng gồm: Tính năng/Tiêu chí (Tối đa 50 ký tự), Wi-Fi 7 (Tối đa 50 ký tự), Wi-Fi 6E (Tối đa 50 ký tự), Wi-Fi 6 (Tối đa 50 ký tự), Wi-Fi 5 (Tối đa 50 ký tự) |
+| 6 | Targets - Đối tượng mục tiêu | `targets-camp` | - Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự)<br/>- CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách nhóm đối tượng (Tối đa 4 đối tượng; hiển thị Grid ngang 4 cột trên Desktop, Slider trên Mobile). Mỗi nhóm gồm: Ảnh đối tượng (Chỉ hỗ trợ upload), Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự) |
+| 7 | Video - Video Review | `reviews-lead` | - Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video |
+| 8 | Sticky - Thanh đăng ký nhanh | `sticky-cam` | - Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự) |
+| 9 | FAQ - Câu hỏi thường gặp | `faq-cam` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi & Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS |
+
+- **Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):**
+  - **Mã hiệu (ID):** `form-lead-popup` (Được thiết kế hiển thị dạng modal popup đè trên màn hình khi click các nút CTA trên trang trỏ liên kết về `#register-form`).
+  - **Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):**
+    - Tiêu đề trên Form (Headline): Ví dụ "Đăng ký lắp đặt Wi-Fi 7 ngay hôm nay" (Tối đa 80 ký tự)
+    - Mô tả phụ (Subheadline): Ví dụ "Điền đầy đủ thông tin, kỹ thuật viên sẽ liên hệ lắp đặt nhanh chóng." (Tối đa 150 ký tự)
+    - Nút gửi (Submit text): Ví dụ "Đăng ký ngay" (Tối đa 30 ký tự)
+    - Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự) để phục vụ đo lường chuyển đổi và đồng bộ Lead.
+
+### c. Template: LDP Internet (10 Sections)
+
+- **Mục tiêu:** Giới thiệu các gói cước cáp quang cá nhân/gia đình của FPT Telecom và thu thập Lead đăng ký.
+- **Danh sách các Sections và các trường thông tin cấu hình:**
+
+| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- |
+| 1 | Banner hero - Internet | `banner-cam-hero` | - Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop & Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự) |
+| 2 | Timer - Countdown độc lập | `timer-camp-countdown` | - Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/>*Lưu ý thiết kế:* Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác. |
+| 3 | Stats - Thanh số liệu nổi bật | `stats-inet` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Từ khóa highlight (in đậm - Tối đa 30 ký tự)<br/>- Cấu hình 4 chỉ số nổi bật. Mỗi chỉ số gồm: Icon (Ảnh), Số / Tiêu đề (in đậm - Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự) |
+| 4 | Products - Gói cước Internet | `products-inet` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Cá nhân, Gia đình, Combo). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 5 | Detail - Chi tiết FPT Play Box | `playbox-inet` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Ảnh sản phẩm Play Box<br/>- 4 tính năng nổi bật. Mỗi tính năng gồm: Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự)<br/>- Cấu hình Nút CTA - Đăng ký: Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút CTA - Tư vấn: Text (Tối đa 30 ký tự), Số điện thoại/Link (Tối đa 255 ký tự) |
+| 6 | Video - Video Review | `reviews-lead` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách video. Mỗi video gồm: Thumbnail, Link YouTube (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Hỗ trợ thêm/xóa video |
+| 7 | Procedure - Hướng dẫn thủ tục | `procedure-lead` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục. Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự) |
+| 8 | Promo - Danh sách ưu đãi | `promo-inet` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách khuyến mãi dạng Slider (tối đa 8 ảnh banner khuyến mãi, tự động slide sau 5 giây, hiển thị đồng thời 1 banner trên Mobile và tối đa 3 banner trên Desktop). Mỗi khuyến mãi gồm: Tiêu đề khuyến mãi (Tối đa 100 ký tự), Ảnh banner khuyến mãi, Link URL khuyến mãi (Tối đa 255 ký tự), Hỗ trợ thêm/xóa khuyến mãi |
+| 9 | FAQ - Câu hỏi thường gặp | `faq-cam` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi & Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS |
+| 10 | Form - Đăng ký tư vấn | `form-inet` | - Ảnh nền banner (cuối trang)<br/>- Icon minh họa (Hộp quà)<br/>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Text nút hành động (CTA) (Tối đa 30 ký tự)<br/>- Link URL nút (Tối đa 255 ký tự) |
+
+- **Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):**
+  - **Mã hiệu (ID):** `form-lead-popup` (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về `#register-form`).
+  - **Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):**
+    - Tiêu đề trên Popup (Headline): Ví dụ "NHẬN TƯ VẤN MIỄN PHÍ" (Tối đa 80 ký tự)
+    - Mô tả phụ (Subheadline): Ví dụ "Nhận ưu đãi tốt nhất hôm nay" (Tối đa 150 ký tự)
+    - Nút gửi (Submit text): Ví dụ "Đăng ký tư vấn" (Tối đa 30 ký tự)
+    - Checkbox Hiển thị Chọn dịch vụ (Bật/Tắt hiển thị danh sách checkbox các gói dịch vụ)
+    - Danh sách dịch vụ đính kèm: Cho phép check chọn các dịch vụ muốn hiển thị lựa chọn (Internet, Truyền hình, Camera, Combo Net-Play, Combo Net-Cam...) với nhãn dịch vụ tối đa 50 ký tự.
+
+### d. Template: LDP SA - FPT Play (9 Sections)
+
+- **Mục tiêu:** Quảng bá và đăng ký thuê bao gói dịch vụ truyền hình giải trí FPT Play (Sự kiện thể thao, Phim độc quyền).
+- **Danh sách các Sections và các trường thông tin cấu hình:**
+
+| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- |
+| 1 | Banner hero - FPT Play | `banner-cam-hero` | - Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop & Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Tiêu đề ưu đãi (Tối đa 80 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Ảnh banner giữa dải countdown, Thời gian kết thúc, Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự) |
+| 2 | Experience - Trải nghiệm giải trí | `experience-sa` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Ảnh minh họa bên phải (hỗ trợ upload)<br/>- Danh sách 4 đặc điểm giải trí. Mỗi đặc điểm gồm: Icon/Emoji, Tiêu đề đặc điểm (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự) |
+| 3 | Categories - Danh mục nội dung | `categories-sa` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Nút Đăng ký ngay - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách các tab danh mục (3 tab mặc định). Mỗi tab gồm: Tiêu đề tab (Tối đa 30 ký tự), Ảnh Banner tab, Danh sách phim (Mỗi phim có: Tên phim - Tối đa 50 ký tự, Poster phim, URL Phim / Đăng ký - Tối đa 255 ký tự, hỗ trợ thêm/xóa phim)<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 4 | Products - Bảng giá gói cước | `products-sa` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Danh sách tiêu chí so sánh (textarea dùng chung để định nghĩa nhãn, tối đa 50 ký tự/tiêu chí)<br/>- Danh sách gói cước (Basic, Premium, VIP, có kéo thả sắp xếp vị trí). Mỗi gói gồm: Tên gói (Tối đa 30 ký tự), Badge nhãn (Tối đa 20 ký tự), Giá hiển thị (Tối đa 20 ký tự), Chu kỳ (Tối đa 20 ký tự), Thứ tự vị trí, Giá trị tương ứng theo từng tiêu chí so sánh (động - Tối đa 50 ký tự), Tính năng nổi bật (textarea - tối đa 150 ký tự/dòng), Nút CTA - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự), Checkbox Hiển thị gói cước |
+| 5 | Timer - Countdown độc lập | `timer-camp-countdown` | - Tiêu đề ưu đãi (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 100 ký tự)<br/>- Ảnh banner giữa dải countdown<br/>- Thời gian kết thúc (datetime-local)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự) |
+| 6 | Sports - Thể thao trực tiếp | `sports-sa` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách giải đấu/quyền lợi. Mỗi giải đấu gồm: Tên giải đấu (Tối đa 50 ký tự), Ảnh/Logo card, Gạch đầu dòng quyền lợi (textarea - tối đa 100 ký tự/dòng), Hỗ trợ thêm/xóa giải đấu |
+| 7 | Commentators - Dàn bình luận viên | `commentators-sa` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách bình luận viên. Mỗi BLV gồm: Tên BLV (Tối đa 50 ký tự), Ảnh đại diện BLV, Mô tả BLV (textarea - tối đa 150 ký tự), Hỗ trợ thêm/xóa bình luận viên |
+| 8 | FAQ - Câu hỏi thường gặp | `faq-cam` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi & Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS |
+| 9 | Sticky - Thanh đăng ký nhanh | `sticky-cam` | - Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon sticky (Hộp quà/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự) |
+
+- **Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):**
+  - **Mã hiệu (ID):** `form-lead-popup` (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về `#register-form`).
+  - **Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):**
+    - Tiêu đề trên Popup (Headline): Ví dụ "NHẬN TƯ VẤN MIỄN PHÍ" (Tối đa 80 ký tự)
+    - Mô tả phụ (Subheadline): Ví dụ "Nhận thông tin ưu đãi FPT Play mới nhất" (Tối đa 150 ký tự)
+    - Nút gửi (Submit text): Ví dụ "Gửi thông tin" (Tối đa 30 ký tự)
+    - Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự).
+
+### e. Template: LDP Thu Lead (9 Sections)
+
+- **Mục tiêu:** Tối ưu hóa chuyển đổi thu thập thông tin khách hàng tiềm năng thông qua các chương trình khuyến mãi/quà tặng đặc biệt.
+- **Danh sách các Sections và các trường thông tin cấu hình:**
+
+| STT | Tên Section | Mã Section (ID) | Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự) |
+| --- | --- | --- | --- |
+| 1 | Banner hero - Thu Lead | `banner-cam-hero` | - Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop & Mobile - Tối đa 255 ký tự)<br/>- Text nút CTA chính (Tối đa 30 ký tự)<br/>- URL nút CTA chính (Tối đa 255 ký tự)<br/>- Text nút CTA phụ (Tối đa 30 ký tự)<br/>- URL nút CTA phụ (Tối đa 255 ký tự) |
+| 2 | Runner - Social Proof chạy chữ | `runner-lead-proof` | - Danh sách khách hàng đăng ký ảo (chạy chữ ngang, cách nhau bởi dấu phẩy, hỗ trợ chạy vòng lặp liên tục ngoài trang, tối đa 100 ký tự/dòng thông báo) |
+| 3 | Products - Bảng giá & So sánh | `pricing-lead` | - Tiêu đề bảng giá (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Internet gia đình, Combo Internet truyền hình, Internet doanh nghiệp). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Tên gói (Tối đa 50 ký tự), Giá bán (đ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>*Quy tắc hiển thị Tab trên UI:* Khi cấu hình từ 2 tab trở lên (n >= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình. |
+| 4 | Info - Lợi ích nổi bật | `info-cam-usp` | - Tiêu đề Section Lợi ích (Tối đa 80 ký tự)<br/>- Cấu hình 6 mục Lợi ích nổi bật. Mỗi mục gồm: Icon Lợi ích, Tiêu đề lợi ích (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 150 ký tự) |
+| 5 | Procedure - Hướng dẫn thủ tục | `procedure-lead` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục (3 bước mặc định). Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự) |
+| 6 | Video - Video Review | `reviews-lead` | - Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video |
+| 7 | Feedback - Đánh giá khách hàng | `feedback-lead` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách đánh giá dạng Slider (tối đa 10 đánh giá, hiển thị đồng thời 1 đánh giá trên Mobile và tối đa 3 đánh giá trên Desktop). Mỗi đánh giá gồm: Avatar, Tên khách hàng (Tối đa 50 ký tự), Khu vực / Phụ đề (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Rating (1-5 ⭐), Nội dung nhận xét (Tối đa 300 ký tự), Hỗ trợ thêm/xóa đánh giá |
+| 8 | FAQ - Câu hỏi thường gặp | `faq-cam` | - Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi & Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS |
+| 9 | Sticky - Thanh đăng ký nhanh | `sticky-cam` | - Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon / Ảnh đại diện (3D Gift/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Text nút CTA Đăng ký (Tối đa 30 ký tự)<br/>- URL nút CTA Đăng ký (Tối đa 255 ký tự) |
+
+- **Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):**
+  - **Mã hiệu (ID):** `form-lead-popup` (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về `#register-form`).
+  - **Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):**
+    - Tiêu đề trên Popup (Headline): Ví dụ "Đăng ký nhận quà tặng ngay hôm nay" (Tối đa 80 ký tự)
+    - Mô tả phụ (Subheadline): Ví dụ "Điền đầy đủ thông tin để nhận quà tặng miễn phí." (Tối đa 150 ký tự)
+    - Nút gửi (Submit text): Ví dụ "Đăng ký ngay" (Tối đa 30 ký tự)
+    - Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự).
+
+### f. Tính năng Custom LDP mới (Lắp ghép tự do từ thư viện mẫu)
+
+- **Mục tiêu:** Cho phép người dùng tự do thiết kế Landing Page (LDP) tùy chỉnh dựa trên việc chọn lọc, kéo thả và sắp xếp các section mẫu có sẵn từ thư viện tổng hợp của 5 LDP mẫu (Internet, Camera AI, Wi-Fi 7, FPT Play, Thu Lead), gia tăng tính linh hoạt và tối ưu hóa thời gian triển khai chiến dịch Marketing.
+- **Quy trình tạo Custom LDP (3 bước phụ):**
+  - **Bước 1 - Chọn Template:** Chọn card "Custom LDP mới" nổi bật nằm ngang ở ngay đầu danh sách template mẫu.
+  - **Bước 2 - Thông tin trang:** Nhập các thông tin cơ bản của LDP (Tên chiến dịch, URL Slug, Mục tiêu trang, SEO Metadata, OG Image).
+  - **Bước 3 - Nội dung sections:** Lắp ghép các section từ thư viện mẫu và tiến hành biên tập nội dung, sắp xếp thứ tự hiển thị.
+- **Đặc tả Giao diện Step 3 (LDP Builder - Giao diện 2 cột):**
+  - **Cột trái (32%) - Thư viện Sections:**
+    - Ô tìm kiếm: Nhập từ khóa để lọc nhanh tên section (ví dụ: Hero, Countdown...).
+    - Tab phân loại: Bộ lọc section theo nguồn gốc LDP mẫu gồm *"Tất cả"*, *"Internet"*, *"Camera AI"*, *"Wi-Fi 7"*, *"FPT Play"*, *"Thu Lead"*.
+    - Danh sách Card section mẫu: Mỗi card hiển thị biểu tượng đại diện (Icon), Tên section, Mô tả ngắn chi tiết các trường cấu hình bên trong, Badge màu phân loại (ví dụ: `Hero · Internet`, `Countdown · Wi-Fi 7`) và nút thêm nhanh `+` màu cam.
+  - **Cột phải (68%) - Canvas cấu trúc LDP:**
+    - Bộ đếm số lượng: Hiển thị chỉ số trực quan dạng `X sections đã chọn` ở góc trên cùng.
+    - Trạng thái trống (Empty state): Khi LDP chưa có section nào được chọn, hiển thị một khung lớn nét đứt, ở giữa có biểu tượng `+` lớn và dòng chữ *"Chưa có section nào. Kéo sections từ thư viện bên trái vào đây, hoặc nhấn + trên từng section."* để hướng dẫn người dùng.
+    - Danh sách section đã chọn: Hiển thị các section được kéo thả hoặc chèn từ thư viện theo dạng hàng ngang (Section Row). Mỗi hàng hỗ trợ:
+      - Nút kéo thả di chuyển thứ tự (Drag Handle `☰` hoặc nút di chuyển nhanh `▲`/`▼`).
+      - Checkbox hiển thị/ẩn trên trang.
+      - Nút **"✏ Sửa"** mở Slide-over Drawer cấu hình chi tiết nội dung của section đó.
+      - Badge trạng thái: Mặc định hiển thị badge **"Thư viện"** màu tím. Khi người dùng click nút **"Tách"**, section sẽ chuyển thành badge **"Tự do (Độc lập)"** (chỉnh sửa độc lập mà không ảnh hưởng đến template chung).
+      - Nút **"🗑 Xóa"** để gỡ section khỏi LDP hiện tại.
+    - Khối cấu hình Popup Form chung: Nằm cố định ở chân Canvas, cho phép cấu hình Modal đăng ký tư vấn chung toàn trang (Headline, Subheadline, Submit text, Redirect URL) được kích hoạt thông qua mã anchor link `#register-form`.
+  - **Business Rules (BR):**
+    - **BR01 (Giới hạn sections):** Mỗi Landing Page Custom cho phép lắp ghép tối đa 20 sections để đảm bảo tốc độ tải trang tối ưu cho thiết bị di động.
+    - **BR02 (Cơ chế Tách liên kết - Detach Block):** Khi chèn từ thư viện, section kế thừa cấu hình mẫu. Khi người dùng click **"Tách"**, hệ thống sẽ clone cấu hình và lưu thành một bản ghi độc lập cho trang LDP này, cho phép chỉnh sửa nội dung riêng biệt mà không làm thay đổi dữ liệu của khối mẫu ban đầu.
+
+## 4. Đặc tả tính năng đồng bộ dữ liệu sản phẩm từ Product Data Hub (PDH)
+
+Để tối ưu hóa quy trình cấu hình các gói cước trên Landing Page và đảm bảo tính nhất quán dữ liệu sản phẩm trên toàn hệ thống FPT Telecom, CMS tích hợp công cụ đồng bộ nhanh từ kho dữ liệu **Product Data Hub (PDH)**.
+
+### a. Phạm vi áp dụng
+
+- **Template LDP Campaign Wi-Fi 7:** Section Gói cước Wi-Fi 7 (`products-inet`).
+- **Template LDP Internet:** Gói cước trong các Tab của Section Danh sách gói Internet (`products-inet`).
+
+### b. Cơ chế hoạt động & Trải nghiệm Người dùng (UX)
+
+- **Dropdown Sync PDH:** Khi người dùng nhấn nút "Sync PDH ▾", một menu thả xuống sẽ hiển thị danh sách toàn bộ các gói cước có sẵn trong kho PDH (hơn 220 gói cước của FPT Telecom).
+- **Bộ lọc Tìm kiếm Nhanh (Search Filter):**
+  - Tích hợp ô nhập liệu tìm kiếm ở đầu Dropdown.
+  - Hỗ trợ tìm kiếm thời gian thực (real-time filtering) không phân biệt chữ hoa/chữ thường.
+  - Phạm vi tìm kiếm: Khớp một phần theo **Mã gói cước (Product Code)** hoặc **Tên gói cước (Product Name)**.
+- **Cơ chế Phân trang Dropdown (Pagination):**
+  - Do danh sách gói cước PDH rất lớn (trên 220 gói), danh sách được phân thành các trang nhỏ để tránh tràn màn hình và cải thiện hiệu năng.
+  - Số lượng gói cước hiển thị tối đa trên một trang: **10 gói cước / trang**.
+  - Cung cấp thanh điều hướng phân trang ở cuối Dropdown (nút mũi tên ◀ / ▶ và chỉ số trang hiện tại, ví dụ: "Trang 1/23").
+  - Tự động vô hiệu hóa (disabled) nút chuyển trang khi người dùng đang ở trang đầu hoặc trang cuối cùng.
+- **Tự động đặt lại trạng thái (Auto Reset):**
+  - Mỗi khi người dùng đóng Dropdown và mở lại, ô nhập liệu tìm kiếm sẽ được tự động xóa rỗng (clear).
+  - Bộ phân trang tự động quay về trang 1 để đảm bảo giao diện luôn hiển thị các gói cước phổ biến nhất từ đầu.
+- **Đồng bộ Dữ liệu (Data Binding):** Khi người dùng click chọn một gói cước bất kỳ từ danh sách Dropdown PDH, hệ thống sẽ tự động map và điền đầy đủ các thông tin của gói cước đó vào form chỉnh sửa chi tiết (bao gồm: Tên gói, Giá cước, Tốc độ Download, Tốc độ Upload, các Tính năng/USP đi kèm) giúp giảm thiểu sai sót khi nhập liệu thủ công.

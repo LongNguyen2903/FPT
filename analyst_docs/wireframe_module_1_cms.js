@@ -538,7 +538,7 @@ function saveSysUser() {
 }
 
 const sysPermModules = [
-    { group: 'CẤU HÌNH SẢN PHẨM', name: 'Nội dung sản phẩm' },
+    { group: 'CẤU HÌNH SẢN PHẨM', name: 'Nội dung gói bán' },
     { group: 'CẤU TRÚC TRANG', name: 'Quản lý Trang (Pages)' },
     { group: '', name: 'Quản lý Sections' },
     { group: '', name: 'Quản lý Blocks' },
@@ -557,7 +557,7 @@ const sysPermModules = [
 // Ma trận quyền theo vai trò: { màn hình: [superAdmin[4], adminCMS[4], bienTap[4], viewer[4]] }
 // Mỗi mảng con: [xem, tao, sua, xoa]
 const sysPermByRole = {
-    'Nội dung sản phẩm': [[1, 1], [1, 1], [1, 0], [1, 0]],
+    'Nội dung gói bán': [[1, 1], [1, 1], [1, 0], [1, 0]],
     'Quản lý Trang (Pages)': [[1, 1], [1, 1], [1, 1], [1, 0]],
     'Quản lý Sections': [[1, 1], [1, 1], [1, 1], [1, 0]],
     'Quản lý Blocks': [[1, 1], [1, 1], [1, 1], [1, 0]],
@@ -1598,7 +1598,10 @@ function skuRenderDactinh(dataKey) {
     var isService = (dataKey === 'service');
 
     // Sync nhóm đặc tính dropdown/label
-    var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
+    var nhomLabel = dataKey === 'camera' ? 'Thông số Camera' 
+        : dataKey === 'modem' ? 'Thông số Router/Modem' 
+        : dataKey === 'play' ? 'Thông số Truyền hình FPT Play' 
+        : 'Thông số Dịch vụ Internet';
     if (sel) {
         if (sel.tagName === 'SELECT') {
             for (var i = 0; i < sel.options.length; i++) {
@@ -1626,8 +1629,7 @@ function skuRenderDactinh(dataKey) {
         // Dùng grid 5 cột cùng template với header mới
         div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
 
-        var noibatCol = isService ? '<span class="col-noibat"></span>' :
-            '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
+        var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
             + '<input type="checkbox" class="dactinh-noibat-chk"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
             + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
             + '</label>';
@@ -2338,14 +2340,14 @@ function togglePriceStep(step) {
 
 // ===== Mock SKU Data & Dynamic Filter Logic =====
 var mockSkuData = [
-    { code: 'INT-GIGA', name: 'Gói Internet Giga (150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '150.000 đ', status: 'Hoạt động', time: '20/05/2026 13:40', user: '24092 - Nguyễn', active: true },
-    { code: 'INT-SKY', name: 'Gói Internet Sky (1Gbps/150Mbps)', type: 'Dịch vụ', service: 'Internet', price: '250.000 đ', status: 'Hoạt động', time: '20/05/2026 14:00', user: '24092 - Nguyễn', active: true },
-    { code: 'CAM-IQ3', name: 'FPT Camera IQ3', type: 'Thiết bị', service: 'Camera', price: '900.000 đ', status: 'Hoạt động', time: '20/05/2026 09:30', user: 'FI-25128', active: true },
-    { code: 'CAM-SE', name: 'FPT Camera SE', type: 'Thiết bị', service: 'Camera', price: '700.000 đ', status: 'Hoạt động', time: '20/05/2026 09:40', user: 'FI-25128', active: true },
-    { code: 'PLAY-MAX', name: 'Gói FPT Play SMAX', type: 'Dịch vụ', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '18/05/2026 15:30', user: '24092 - Nguyễn', active: true },
-    { code: 'MODEM-AX3000GZ', name: 'Modem Wi-Fi 6 AX3000GZ', type: 'Thiết bị', service: 'Internet', price: '500.000 đ', status: 'Ngừng hoạt động', time: '15/05/2026 10:10', user: 'FI-25128', active: false },
-    { code: 'SA-SMAX', name: 'FPT Play SMAX (SA)', type: 'SA', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '20/05/2026 10:30', user: '24092 - Nguyễn', active: true },
-    { code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true }
+    { code: 'INT-GIGA', name: 'Gói Internet Giga (150Mbps)', type: 'Internet', service: 'Internet', price: '150.000 đ', status: 'Hoạt động', time: '20/05/2026 13:40', user: '24092 - Nguyễn', active: true },
+    { code: 'INT-SKY', name: 'Gói Internet Sky (1Gbps/150Mbps)', type: 'Internet', service: 'Internet', price: '250.000 đ', status: 'Hoạt động', time: '20/05/2026 14:00', user: '24092 - Nguyễn', active: true },
+    { code: 'CAM-IQ3', name: 'FPT Camera IQ3', type: 'FPT camera', service: 'Camera', price: '900.000 đ', status: 'Hoạt động', time: '20/05/2026 09:30', user: 'FI-25128', active: true },
+    { code: 'CAM-SE', name: 'FPT Camera SE', type: 'FPT camera', service: 'Camera', price: '700.000 đ', status: 'Hoạt động', time: '20/05/2026 09:40', user: 'FI-25128', active: true },
+    { code: 'PLAY-MAX', name: 'Gói FPT Play SMAX', type: 'FPT play', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '18/05/2026 15:30', user: '24092 - Nguyễn', active: true },
+    { code: 'MODEM-AX3000GZ', name: 'Modem Wi-Fi 6 AX3000GZ', type: 'AP', service: 'Internet', price: '500.000 đ', status: 'Ngừng hoạt động', time: '15/05/2026 10:10', user: 'FI-25128', active: false },
+    { code: 'SA-SMAX', name: 'FPT Play SMAX (SA)', type: 'FPT play', service: 'Truyền hình', price: '88.000 đ', status: 'Hoạt động', time: '20/05/2026 10:30', user: '24092 - Nguyễn', active: true },
+    { code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'FPT play', service: 'Truyền hình', price: '140.000 đ', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true }
 ];
 
 function initSkuTable() {
@@ -2358,7 +2360,7 @@ function renderSkuTable(list) {
     tbody.innerHTML = '';
 
     if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy mã SKU nào phù hợp</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy sản phẩm nào phù hợp</td></tr>';
         var countEl = document.getElementById('sku-count-text');
         if (countEl) countEl.textContent = 'Hiển thị 0 / 0 kết quả';
         return;
@@ -2372,15 +2374,11 @@ function renderSkuTable(list) {
         };
 
         var checkboxTd = '<td onclick="event.stopPropagation();"><input type="checkbox" style="accent-color:var(--primary);"></td>';
-        var codeTd = '<td onclick="event.stopPropagation(); skuOpenDetail(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">'
-            + '<a style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer;">' + item.code + '</a>'
+        var nameTd = '<td onclick="event.stopPropagation(); skuOpenDetail(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">'
+            + '<a style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer; font-size:13px;">' + item.name + '</a>'
             + '</td>';
-        var nameTd = '<td style="font-size:13px;">' + item.name + '</td>';
-        var serviceTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.service + '</span></td>';
         var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.type + '</span></td>';
         var priceTd = '<td style="font-size:13px; color:var(--warning); font-weight:600;">' + item.price + '</td>';
-        var statusBadge = item.status === 'Hoạt động' ? '<span class="badge active">Hoạt động</span>' : '<span class="badge inactive">Ngừng</span>';
-        var statusTd = '<td>' + statusBadge + '</td>';
         var timeTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.time + '</td>';
         var userTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.user + '</td>';
 
@@ -2398,7 +2396,7 @@ function renderSkuTable(list) {
             + '<button class="btn btn-sm" style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;" title="Xem nhanh" onclick="skuOpenPreview(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">✏️</button>'
             + '</td>';
 
-        tr.innerHTML = checkboxTd + codeTd + nameTd + serviceTd + typeTd + priceTd + statusTd + timeTd + userTd + actionTd;
+        tr.innerHTML = checkboxTd + nameTd + typeTd + priceTd + timeTd + userTd + actionTd;
         tbody.appendChild(tr);
     });
 
@@ -2407,10 +2405,15 @@ function renderSkuTable(list) {
 }
 
 function filterSkuTable() {
-    var searchVal = document.getElementById('sku-filter-search').value.toLowerCase().trim();
-    var typeVal = document.getElementById('sku-filter-type').value;
-    var serviceVal = document.getElementById('sku-filter-service').value;
-    var statusVal = document.getElementById('sku-filter-status').value;
+    var searchEl = document.getElementById('sku-filter-search');
+    var typeEl = document.getElementById('sku-filter-type');
+    var serviceEl = document.getElementById('sku-filter-service');
+    var statusEl = document.getElementById('sku-filter-status');
+
+    var searchVal = searchEl ? searchEl.value.toLowerCase().trim() : '';
+    var typeVal = typeEl ? typeEl.value : '';
+    var serviceVal = serviceEl ? serviceEl.value : '';
+    var statusVal = statusEl ? statusEl.value : '';
 
     var filtered = mockSkuData.filter(function(item) {
         var matchSearch = !searchVal || 
@@ -2467,27 +2470,40 @@ function skuFillQlcs(code) {
     });
 }
 
-// Data đặc tính theo từng loại SKU
+// Data đặc tính theo từng loại SKU (Rich Example Data)
 var dactinhData = {
     'camera': [
-        { name: 'Độ phân giải', value: '2MP (1920×1080)', unit: '', highlight: true },
-        { name: 'Góc quan sát', value: '110', unit: '°', highlight: true },
-        { name: 'Hỗ trợ ban đêm', value: 'Có (IR 30m)', unit: '', highlight: true },
-        { name: 'Loại kết nối', value: 'WiFi / LAN', unit: '', highlight: false },
-        { name: 'Chống nước', value: 'IP67', unit: '', highlight: false },
-        { name: 'Lưu trữ', value: 'Cloud + Thẻ nhớ tối đa 128GB', unit: '', highlight: false }
+        { name: 'Độ phân giải', value: '2MP Full HD (1920×1080)', unit: '', highlight: true },
+        { name: 'Góc quan sát', value: '107', unit: '° (Góc rộng)', highlight: true },
+        { name: 'Hồng ngoại ban đêm', value: 'Tầm xa 10m', unit: '', highlight: true },
+        { name: 'Phát hiện AI', value: 'Nhận diện người & phân biệt vật chuyển động', unit: '', highlight: false },
+        { name: 'Âm thanh', value: 'Đàm thoại 2 chiều (Micro & Loa tích hợp)', unit: '', highlight: false },
+        { name: 'Lưu trữ', value: 'FPT Cloud bảo mật cao', unit: '', highlight: false },
+        { name: 'Kháng nước & bụi', value: 'Chuẩn IP66 (Dùng trong nhà & ngoài trời)', unit: '', highlight: false }
     ],
     'modem': [
-        { name: 'Tốc độ WiFi', value: '1800', unit: 'Mbps', highlight: true },
-        { name: 'Chuẩn WiFi', value: 'WiFi 6 (802.11ax)', unit: '', highlight: true },
-        { name: 'Số cổng LAN', value: '4', unit: 'cổng', highlight: false },
-        { name: 'Băng tần', value: 'Dual Band 2.4GHz + 5GHz', unit: '', highlight: false }
+        { name: 'Tốc độ Wi-Fi', value: 'AX3000 (Up to 3000 Mbps)', unit: '', highlight: true },
+        { name: 'Chuẩn Wi-Fi', value: 'Wi-Fi 6 (802.11ax)', unit: '', highlight: true },
+        { name: 'Băng tần hỗ trợ', value: 'Dual-band (2.4GHz & 5GHz)', unit: '', highlight: true },
+        { name: 'Số cổng LAN', value: '4 x Gigabit LAN (1000Mbps)', unit: '', highlight: false },
+        { name: 'Khả năng chịu tải', value: '30 - 50 thiết bị kết nối đồng thời', unit: '', highlight: false },
+        { name: 'Tính năng Mesh', value: 'Hỗ trợ EasyMesh phủ sóng toàn nhà', unit: '', highlight: false }
     ],
     'service': [
-        { name: 'Tốc độ download', value: '100', unit: 'Mbps', highlight: true },
-        { name: 'Tốc độ upload', value: '50', unit: 'Mbps', highlight: true },
-        { name: 'Loại đường truyền', value: 'Cáp quang FTTH', unit: '', highlight: false },
-        { name: 'IP tĩnh', value: 'Không', unit: '', highlight: false }
+        { name: 'Tốc độ download', value: '150', unit: 'Mbps', highlight: true },
+        { name: 'Tốc độ upload', value: '150', unit: 'Mbps (Không giới hạn)', highlight: true },
+        { name: 'Loại đường truyền', value: 'Cáp quang FTTH 100%', unit: '', highlight: true },
+        { name: 'Thiết bị đi kèm', value: 'Modem Wi-Fi 6 thế hệ mới', unit: '', highlight: false },
+        { name: 'IP tĩnh', value: 'Hỗ trợ IP Động (Dynamic IP)', unit: '', highlight: false },
+        { name: 'Băng thông quốc tế', value: 'Tối thiểu 2 Mbps', unit: '', highlight: false }
+    ],
+    'play': [
+        { name: 'Số lượng kênh TV', value: '170+ Kênh (gồm 70+ kênh HD)', unit: '', highlight: true },
+        { name: 'Độ phân giải video', value: '4K Ultra HD', unit: '', highlight: true },
+        { name: 'Kho nội dung', value: 'Hàng ngàn Phim bộ, Phim điện ảnh & Show giải trí', unit: '', highlight: true },
+        { name: 'Đăng nhập đồng thời', value: 'Xem cùng lúc trên 3 thiết bị', unit: '', highlight: false },
+        { name: 'Bản quyền thể thao', value: 'Trực tiếp V-League, UEFA Champions League', unit: '', highlight: false },
+        { name: 'Tính năng xem lại', value: 'Hỗ trợ xem lại chương trình trong vòng 48h', unit: '', highlight: false }
     ]
 };
 
@@ -2548,11 +2564,20 @@ function skuOpenDetail(code, name, type, category) {
     // Fill Tab 1 — QLCS data theo SKU code
     skuFillQlcs(code);
 
-    // Swap đặc tính data theo category
+    // Swap đặc tính data theo category, type, code, name
     var cat = (category || '').toLowerCase();
-    var dataKey = cat.indexOf('camera') >= 0 ? 'camera'
-        : cat.indexOf('internet') >= 0 || cat.indexOf('dịch vụ') >= 0 ? 'service'
-            : 'modem';
+    var typeStr = (type || '').toLowerCase();
+    var codeStr = (code || '').toLowerCase();
+    var nameStr = (name || '').toLowerCase();
+
+    var dataKey = 'service';
+    if (cat.indexOf('camera') >= 0 || typeStr.indexOf('camera') >= 0 || codeStr.indexOf('cam') >= 0 || nameStr.indexOf('camera') >= 0) {
+        dataKey = 'camera';
+    } else if (cat.indexOf('play') >= 0 || typeStr.indexOf('play') >= 0 || codeStr.indexOf('play') >= 0 || nameStr.indexOf('play') >= 0) {
+        dataKey = 'play';
+    } else if (cat.indexOf('modem') >= 0 || typeStr.indexOf('ap') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+        dataKey = 'modem';
+    }
     skuRenderDactinh(dataKey);
 
     // Always start on Tab 1
@@ -2789,13 +2814,13 @@ function skuPrevTab(el, tabId) {
 }
 
 function toggleDactinhNoibat(val) {
-    var isService = val === 'dichvu';
     document.querySelectorAll('.col-noibat').forEach(function (el) {
-        el.style.display = isService ? 'none' : '';
+        el.style.display = '';
     });
-    document.getElementById('dactinh-hint-dichvu').style.display = isService ? '' : 'none';
-    document.getElementById('dactinh-hint-thietbi').style.display = isService ? 'none' : '';
-    document.getElementById('dactinh-header-row').style.display = isService ? 'none' : '';
+    var hintEl = document.getElementById('dactinh-hint-thietbi');
+    if (hintEl) hintEl.style.display = '';
+    var headerEl = document.getElementById('dactinh-header-row');
+    if (headerEl) headerEl.style.display = '';
 }
 
 function addPtttRowDrawer() {

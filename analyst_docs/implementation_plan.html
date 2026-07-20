@@ -223,8 +223,21 @@
                 </td>
                 <td><span class="badge badge-success">Đã cập nhật</span></td>
             </tr>
+            <tr>
+                <td><strong>[Yêu cầu #8]<br>Vận hành &amp; BA/PO</strong><br><small style="color:#94a3b8;">2026-07-14</small></td>
+                <td>Cần quản lý kho Banner bằng Mã ID độc nhất dạng chuỗi (ví dụ: 001, 002...) và liên kết các banner này vào bài viết tin tức. Khi cập nhật hình ảnh của Banner, hệ thống phải tự động đồng bộ (Cascade Update) hình ảnh của tất cả bài viết đang liên kết để giảm thao tác thủ công và tránh sai sót thông tin.</td>
+                <td>
+                    <ul>
+                        <li><strong>Mã ID tự sinh &amp; Tùy chỉnh linh hoạt:</strong> Bổ sung Mã ID độc nhất cho mỗi Banner. Cho phép hệ thống tự động phát sinh ID dạng chuỗi (max + 1) khi bấm Thêm mới, nhưng vẫn mở khóa cho phép tùy chỉnh ID theo mong muốn (tự động kiểm tra trùng lặp). Khóa cứng ID (readonly) ở chế độ Chỉnh sửa để bảo vệ liên kết.</li>
+                        <li><strong>Tích hợp Banner Picker Modal:</strong> Trong form soạn thảo bài viết Tin tức, bổ sung ô hiển thị Banner liên kết, nút bấm mở Modal tìm kiếm/chọn banner động và xem trước nhanh (preview) hoặc gỡ liên kết một chạm.</li>
+                        <li><strong>Cơ chế Cascade Update tự động:</strong> Triển khai hàm sync tự động quét và cập nhật lại URL ảnh đại diện của tất cả bài viết liên quan khi Banner nguồn thay đổi hình ảnh, hoặc tự động gỡ liên kết bannerId khi xóa banner khỏi hệ thống.</li>
+                        <li><strong>Tối ưu hóa Bảng Quản lý Banner:</strong> Bổ sung đầy đủ 13 cột thông tin theo chuẩn thiết kế mẫu (bao gồm số thứ tự, ID, ảnh preview, tên, URL link đích, target, ngày bắt đầu hiển thị, ngày kết thúc hiển thị, thứ tự ưu tiên, các trang áp dụng, trạng thái hoạt động, ngày tạo, thao tác).</li>
+                    </ul>
+                </td>
+                <td><span class="badge badge-success">Đã cập nhật</span></td>
+            </tr>
         </tbody>
-    </table>
+        </table>
 
     <h2>7. Kế hoạch Hành động Tiếp theo (Next Steps)</h2>
     <ol>
@@ -232,6 +245,7 @@
         <li>Xây dựng công cụ kéo thả trực quan cho LDP Builder.</li>
         <li>Tích hợp Form Constructor thu thập lead đăng ký chuyển tiếp về CRM.</li>
         <li>Kiểm thử khả năng tương thích Responsive hiển thị trên Mobile và Tablet.</li>
+        <li><strong>Quản lý Product Backlog Tổng hợp:</strong> Toàn bộ các User Story chi tiết và tiêu chí nghiệm thu (AC) cho Sprint hiện tại (Quản lý sản phẩm, Đặc tính, Gói bán, Banner, Tác giả) và Phase 2 (Wi-Fi 6 Swap, Mua thêm AP, Đơn hàng 0đ) được quản lý tập trung dành cho PO tại <a href="product_backlog.md" style="color:#FB923C; text-decoration:underline;">Product Backlog Tổng hợp</a>.</li>
     </ol>
 </body>
 </html>

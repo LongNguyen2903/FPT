@@ -1,7 +1,7 @@
 <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>FPT.VN URD - CMS Content Management</title>
+<title>FPT.VN URD</title>
 <style>
     body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000000; font-size: 12pt; }
     .header-table { width: 100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 20px; }
@@ -19,1164 +19,2268 @@
     ul, ol { margin-top: 5px; margin-bottom: 10px; padding-left: 20px; }
     li { margin-bottom: 4px; }
     p { margin-top: 0; margin-bottom: 8px; }
+    blockquote { margin-left: 20px; border-left: 3px solid #ccc; padding-left: 10px; color: #555; }
     .page-break { page-break-before: always; }
 </style>
 </head>
 <body>
-
-<!-- TRANG BÌA & HEADER -->
-<table class="header-table">
-    <tr>
-        <td rowspan="2" style="width: 120px; text-align: center; vertical-align: middle;"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg" alt="FPT Logo" style="width:80px;height:auto;"/></td>
-        <td style="font-size: 16pt; text-align: center; text-transform: uppercase;">FPT.VN URD – User requirements document</td>
-    </tr>
-    <tr>
-        <td style="font-size: 11pt;">
-            <strong>Mã hiệu:</strong> URD-CMS-01 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <strong>Phiên bản:</strong> 1.0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-            <strong>Ngày:</strong> 25/05/2026
-        </td>
-    </tr>
+<table class='data-table'>
+<thead><tr>
+<th>![FPT Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg)</th>
+<th>FPT.VN URD – User requirements document</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Mã hiệu:</strong> URD-CMS-01 <strong>Phiên bản:</strong> 1.3 <strong>Ngày:</strong> 27/05/2026</td>
+</tr>
+</tbody>
 </table>
 
 <h2>REVISION HISTORY</h2>
-<p><em>[A]: Add – Thêm mới | [U]: Update – Cập nhật, thay đổi | [D]: Delete - Xóa</em></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Version</th>
-            <th>Author</th>
-            <th>Reviewer</th>
-            <th>Approver</th>
-            <th>Change Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>25/05/2026</td>
-            <td>1.0</td>
-            <td>BA Team</td>
-            <td>QA Team</td>
-            <td>PM</td>
-            <td>[A] Khởi tạo tài liệu URD mới cho phân hệ Quản lý Nội dung (CMS) theo định dạng FPT.</td>
-        </tr>
-        <tr>
-            <td>26/05/2026</td>
-            <td>1.1</td>
-            <td>BA Team</td>
-            <td>QA Team</td>
-            <td>PM</td>
-            <td>[U] Cập nhật thiết kế Cấu hình Thông tin hay (Tag Mapping) gộp vào module Tin tức dạng Tab và đổi giao diện cấu hình sang cơ chế Slide-over Drawer.</td>
-        </tr>
-        <tr>
-            <td>27/05/2026</td>
-            <td>1.2</td>
-            <td>BA Team</td>
-            <td>QA Team</td>
-            <td>PM</td>
-            <td>[U] Tách biệt Cấu hình Thông tin hay thành 2 Tab trong Tin tức: Tab Quản lý Tags (CRUD tag) và Tab Tags Mapping (Thiết lập mapping qua Drawer bằng cách chọn Tag có sẵn từ dropdown).</td>
-        </tr>
-    </tbody>
+<table class='data-table'>
+<thead><tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Reviewer</th>
+<th>Approver</th>
+<th>Change Description</th>
+</tr></thead><tbody>
+<tr>
+<td>25/05/2026</td>
+<td>1.0</td>
+<td>BA Team</td>
+<td>QA Team</td>
+<td>PM</td>
+<td>[A] Khởi tạo tài liệu URD mới cho phân hệ Quản lý Nội dung (CMS) theo định dạng FPT.</td>
+</tr>
+<tr>
+<td>26/05/2026</td>
+<td>1.1</td>
+<td>BA Team</td>
+<td>QA Team</td>
+<td>PM</td>
+<td>[U] Cập nhật thiết kế Cấu hình Thông tin hay (Tag Mapping) gộp vào module Tin tức dạng Tab và đổi giao diện cấu hình sang cơ chế Slide-over Drawer.</td>
+</tr>
+<tr>
+<td>27/05/2026</td>
+<td>1.2</td>
+<td>BA Team</td>
+<td>QA Team</td>
+<td>PM</td>
+<td>[U] Tách biệt Cấu hình Thông tin hay thành 2 Tab trong Tin tức: Tab Quản lý Tags (CRUD tag) và Tab Tags Mapping (Thiết lập mapping qua Drawer bằng cách chọn Tag có sẵn từ dropdown).</td>
+</tr>
+<tr>
+<td>27/05/2026</td>
+<td>1.3</td>
+<td>BA Team</td>
+<td>QA Team</td>
+<td>PM</td>
+<td>[A] Bổ sung Phụ lục VI đặc tả cấu trúc &amp; sections chi tiết cho 5 LDP template tiêu chuẩn (Camera AI, Campaign Wi-Fi 7, Internet, SA, Thu Lead) và cơ chế tìm kiếm/phân loại.</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
-
+<p>---</p>
 <h1>MỤC LỤC</h1>
-<ol>
-    <li><strong>I. GIỚI THIỆU</strong></li>
-    <li><strong>II. TỔNG QUAN</strong></li>
-    <li><strong>III. ĐẶC TẢ CHI TIẾT 11 CHỨC NĂNG</strong></li>
-    <li><strong>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</strong></li>
-    <li><strong>V. PHỤ LỤC</strong></li>
-</ol>
-
-<div class="page-break"></div>
-
+<ul>
+<li><strong>I. GIỚI THIỆU</strong></li>
+<li><strong>II. TỔNG QUAN</strong></li>
+<li><strong>III. ĐẶC TẢ CHI TIẾT 12 CHỨC NĂNG</strong></li>
+<li><strong>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</strong></li>
+<li><strong>V. PHỤ LỤC</strong></li>
+</ul>
+<p>---</p>
 <h1>I. GIỚI THIỆU</h1>
-
 <h3>1. Mục đích tài liệu</h3>
-<p>Tài liệu này nhằm mô tả và làm rõ yêu cầu xây dựng phân hệ Quản lý Nội dung (CMS) phục vụ cho việc quản trị, cấu hình và tùy chỉnh nội dung trên chuỗi các website bán hàng của FPT.VN (bao gồm website chính fpt.vn và các kênh phụ như tongdaiwifi, hifpt).</p>
-<p>Hệ thống CMS được xây dựng với mục tiêu giúp các đơn vị nghiệp vụ (ĐVYC) có thể chủ động cập nhật nội dung, giao diện và cấu hình luồng checkout của từng kênh bán mà không cần phụ thuộc vào việc chỉnh sửa mã nguồn của lập trình viên.</p>
-
 <h3>2. Thông tin chung</h3>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 50px;">STT</th>
-            <th style="width: 200px;">HẠNG MỤC</th>
-            <th>MÔ TẢ</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Giới thiệu tổng quan</td>
-            <td>Xây dựng phân hệ Quản lý nội dung (CMS) cho phép cấu hình động giao diện (Pages, Sections, Blocks, Menu) và các chiến dịch (Banner, Popup, Tin tức, FAQ, Tag Mapping).</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Hiện trạng</td>
-            <td>Hệ thống cũ quản trị thủ công, các cấu hình trang Checkout bị gắn cứng (hard-code). Chưa hỗ trợ tùy chỉnh độc lập cho từng kênh bán phụ (như hifpt, tdw).</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Mục tiêu kỳ vọng</td>
-            <td>Số hóa 100% việc cấu hình giao diện và luồng checkout. Cho phép tùy chỉnh độc lập hoặc kế thừa cấu hình Global chỉ qua 1 click.</td>
-        </tr>
-    </tbody>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>HẠNG MỤC</th>
+<th>MÔ TẢ</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Giới thiệu tổng quan</td>
+<td>Xây dựng phân hệ Quản lý nội dung (CMS) cho phép cấu hình động giao diện (Pages, Sections, Blocks, Menu) và các chiến dịch (Banner, Popup, Tin tức, FAQ, Tag Mapping).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hiện trạng</td>
+<td>Hệ thống cũ quản trị thủ công, các cấu hình trang Checkout bị gắn cứng (hard-code). Chưa hỗ trợ tùy chỉnh độc lập cho từng kênh bán phụ (như hifpt, tdw).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mục tiêu kỳ vọng</td>
+<td>Số hóa 100% việc cấu hình giao diện và luồng checkout. Cho phép tùy chỉnh độc lập hoặc kế thừa cấu hình Global chỉ qua 1 click.</td>
+</tr>
+</tbody>
 </table>
 
 <h3>3. Thuật ngữ, từ ngữ viết tắt</h3>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 50px;">STT</th>
-            <th style="width: 150px;">THUẬT NGỮ</th>
-            <th>MÔ TẢ</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>PO</td><td>Product owner</td></tr>
-        <tr><td>2</td><td>ĐVYC</td><td>Đơn vị yêu cầu</td></tr>
-        <tr><td>3</td><td>PM</td><td>Project manager</td></tr>
-        <tr><td>4</td><td>BA</td><td>Business analyst</td></tr>
-        <tr><td>5</td><td>UC</td><td>Use case</td></tr>
-        <tr><td>6</td><td>SKU</td><td>Stock Keeping Unit (Mã sản phẩm từ Product Hub)</td></tr>
-    </tbody>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>THUẬT NGỮ</th>
+<th>MÔ TẢ</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>PO</td>
+<td>Product owner</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ĐVYC</td>
+<td>Đơn vị yêu cầu</td>
+</tr>
+<tr>
+<td>3</td>
+<td>PM</td>
+<td>Project manager</td>
+</tr>
+<tr>
+<td>4</td>
+<td>BA</td>
+<td>Business analyst</td>
+</tr>
+<tr>
+<td>5</td>
+<td>UC</td>
+<td>Use case</td>
+</tr>
+<tr>
+<td>6</td>
+<td>SKU</td>
+<td>Stock Keeping Unit (Mã sản phẩm từ Product Hub)</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
-
+<p>---</p>
 <h1>II. TỔNG QUAN</h1>
 <h3>1. Danh sách các chức năng</h3>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 50px;">STT</th>
-            <th>CHỨC NĂNG/MÀN HÌNH</th>
-            <th style="width: 80px;">VERSION</th>
-            <th style="width: 80px;">LOẠI</th>
-            <th>MÔ TẢ TÓM TẮT</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Quản lý cấu trúc các Trang (Pages)</td><td>1.0</td><td>New</td><td>Định nghĩa cấu trúc trang và liên kết Sections hiển thị.</td></tr>
-        <tr><td>2</td><td>Quản lý Sections</td><td>1.0</td><td>New</td><td>Quản lý các vùng layout lớn và liên kết kéo thả các Blocks.</td></tr>
-        <tr><td>3</td><td>Quản lý Blocks</td><td>1.0</td><td>New</td><td>Tạo lập khối nội dung con (gán sản phẩm, FAQ, hình ảnh, CTA).</td></tr>
-        <tr><td>4</td><td>Landing Page (LDP)</td><td>1.0</td><td>New</td><td>Tạo trang đích khuyến mãi độc lập với giao diện HTML tùy biến.</td></tr>
-        <tr><td>5</td><td>Quản lý Menu</td><td>1.0</td><td>New</td><td>Thiết lập thanh điều hướng đa cấp, kéo thả cha-con.</td></tr>
-        <tr><td>6</td><td>Quản lý Banner</td><td>1.0</td><td>New</td><td>Đăng tải banner, đặt lịch hiển thị và gắn link chuyển hướng.</td></tr>
-        <tr><td>7</td><td>Quản lý Popup</td><td>1.0</td><td>New</td><td>Tạo Popup quảng cáo/thông báo nổi, cấu hình tần suất hiển thị.</td></tr>
-        <tr><td>8</td><td>Quản lý Tin tức</td><td>1.0</td><td>New</td><td>Soạn thảo tin tức bài viết, phân loại chuyên mục và xuất bản.</td></tr>
-        <tr><td>9</td><td>Quản lý FAQ</td><td>1.0</td><td>New</td><td>Quản lý ngân hàng câu hỏi & câu trả lời thường gặp theo chủ đề.</td></tr>
-        <tr><td>10</td><td>Cấu hình Thông tin hay (Tag Mapping)</td><td>1.2</td><td>Update</td><td>Ánh xạ từ khóa bài viết đến sản phẩm. Tách biệt thành 2 Tab riêng biệt trong module Tin tức: Tab Quản lý Tags và Tab Tags Mapping (thiết lập liên kết qua Slide-over Drawer).</td></tr>
-        <tr><td>11</td><td>Cài đặt hiển thị (Checkout Config)</td><td>1.0</td><td>Update</td><td>Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị).</td></tr>
-        <tr><td>12</td><td>Quản lý tài khoản cá nhân & Đăng xuất</td><td>1.0</td><td>New</td><td>Hỗ trợ người dùng tự chỉnh sửa thông tin cá nhân (họ tên, email), đổi mật khẩu, cập nhật ảnh đại diện và đăng xuất tài khoản.</td></tr>
-    </tbody>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>CHỨC NĂNG/MÀN HÌNH</th>
+<th>VERSION</th>
+<th>LOẠI</th>
+<th>MÔ TẢ TÓM TẮT</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Quản lý cấu trúc các Trang (Pages)</td>
+<td>1.0</td>
+<td>New</td>
+<td>Định nghĩa cấu trúc trang và liên kết Sections hiển thị.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Quản lý Sections</td>
+<td>1.0</td>
+<td>New</td>
+<td>Quản lý các vùng layout lớn và liên kết kéo thả các Blocks.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Quản lý Blocks</td>
+<td>1.0</td>
+<td>New</td>
+<td>Tạo lập khối nội dung con (gán sản phẩm, FAQ, hình ảnh, CTA).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Landing Page (LDP)</td>
+<td>1.0</td>
+<td>New</td>
+<td>Tạo trang đích khuyến mãi độc lập với giao diện HTML tùy biến.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Quản lý Menu</td>
+<td>1.0</td>
+<td>New</td>
+<td>Thiết lập thanh điều hướng đa cấp, kéo thả cha-con.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Quản lý Banner</td>
+<td>1.0</td>
+<td>New</td>
+<td>Đăng tải banner, đặt lịch hiển thị và gắn link chuyển hướng.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Quản lý Popup</td>
+<td>1.0</td>
+<td>New</td>
+<td>Tạo Popup quảng cáo/thông báo nổi, cấu hình tần suất hiển thị.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Quản lý Tin tức</td>
+<td>1.0</td>
+<td>New</td>
+<td>Soạn thảo tin tức bài viết, phân loại chuyên mục và xuất bản.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Quản lý FAQ</td>
+<td>1.0</td>
+<td>New</td>
+<td>Quản lý ngân hàng câu hỏi &amp; câu trả lời thường gặp theo chủ đề.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Cấu hình Thông tin hay (Tag Mapping)</td>
+<td>1.1</td>
+<td>Update</td>
+<td>Ánh xạ từ khóa bài viết đến sản phẩm. Thiết kế mới tích hợp dạng Tab trong Quản lý Tin tức và sử dụng Slide-over Drawer để cấu hình.</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Cài đặt hiển thị (Checkout Config)</td>
+<td>1.0</td>
+<td>Update</td>
+<td>Cấu hình chi tiết luồng Checkout đa kênh (SKUs, Chu kỳ, Thiết bị). <strong>(Chuyển sang Phân hệ Quản lý sản phẩm)</strong></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Quản lý tài khoản cá nhân &amp; Đăng xuất</td>
+<td>1.0</td>
+<td>New</td>
+<td>Hỗ trợ người dùng tự chỉnh sửa thông tin cá nhân (họ tên, email), đổi mật khẩu, cập nhật ảnh đại diện và đăng xuất tài khoản.</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
-
-<h1>III. ĐẶC TẢ CHI TIẾT 11 CHỨC NĂNG</h1>
-
-<!-- CHỨC NĂNG 1 -->
+<p>---</p>
+<h1>III. ĐẶC TẢ CHI TIẾT 12 CHỨC NĂNG</h1>
 <h2>1. Quản lý cấu trúc các Trang (Pages)</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng tạo mới, chỉnh sửa thông tin cấu trúc, thiết lập URL định tuyến, SEO Metadata và gán các khối Sections hiển thị tương ứng của từng trang.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống (Super Admin, Admin CMS).</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Trang" và click tạo mới hoặc sửa một trang.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào trang quản trị và có quyền truy cập module Trang.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Cấu trúc trang được lưu thành công, URL hoạt động chính xác và giao diện hiển thị đúng các Sections đã được gán.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng tạo mới, chỉnh sửa thông tin cấu trúc, thiết lập URL định tuyến, SEO Metadata và gán các khối Sections hiển thị tương ứng của từng trang.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống (Super Admin, Admin CMS).</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Trang" và click tạo mới hoặc sửa một trang.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào trang quản trị và có quyền truy cập module Trang.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Cấu trúc trang được lưu thành công, URL hoạt động chính xác và giao diện hiển thị đúng các Sections đã được gán.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Trang".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo trang mới" hoặc chọn "Sửa" một trang có sẵn trên danh sách.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form cấu trúc trang (Tên trang, URL path, SEO Title, SEO Description).</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên trang (slug tự sinh), URL path, Tiêu đề SEO, Mô tả SEO.</li>
-    <li><strong>Bước 5:</strong> Người dùng thực hiện kéo thả gán các sections nội dung từ danh sách khả dụng sang danh sách áp dụng trên trang và sắp xếp thứ tự hiển thị.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu thông tin trang vào database và cập nhật hiển thị ngoài website.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Trang".</li>
+<li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo trang mới" hoặc chọn "Sửa" một trang có sẵn trên danh sách.</li>
+<li><strong>Bước 3:</strong> Hệ thống hiển thị Form cấu trúc trang (Tên trang, URL path, SEO Title, SEO Description).</li>
+<li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên trang (slug tự sinh), URL path, Tiêu đề SEO, Mô tả SEO.</li>
+<li><strong>Bước 5:</strong> Người dùng thực hiện kéo thả gán các sections nội dung từ danh sách khả dụng sang danh sách áp dụng trên trang và sắp xếp thứ tự hiển thị.</li>
+<li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
+<li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu thông tin trang vào database và cập nhật hiển thị ngoài website.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>URL path của trang phải là duy nhất trên toàn hệ thống (Unique constraint), không được trùng lặp.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Không cho phép người dùng xóa các trang hệ thống cốt lõi (như Trang chủ /, Trang lỗi /404).</td>
-        </tr>
-        <tr>
-            <td><strong>BR03</strong></td>
-            <td>Tên trang và URL path là hai trường bắt buộc nhập, không được để trống khi lưu.</td>
-        </tr>
-    </tbody>
+<ul>
+<li>Mã code (Slug) của trang phải là duy nhất trên toàn hệ thống (Unique constraint), không được trùng lặp.</li>
+<li>Không cho phép người dùng xóa các trang hệ thống cốt lõi (như Trang chủ, Trang lỗi 404).</li>
+<li>Tên trang, Mã code (Slug), và Tiêu đề (H1) là ba trường bắt buộc nhập, không được để trống khi lưu.</li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên trang</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên trang dùng nội bộ trong CMS.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mã code (Slug)</td>
+<td>Y</td>
+<td>Text</td>
+<td>Đường dẫn URL truy cập trang (VD: home, km-internet-t5).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tiêu đề (H1)</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tiêu đề chính hiển thị trên giao diện trang.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Tag tin tức</td>
+<td>N</td>
+<td>Text</td>
+<td>Tag để phân loại tin tức liên quan.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Meta tiêu đề</td>
+<td>N</td>
+<td>Text</td>
+<td>Tiêu đề hiển thị trên tab trình duyệt và kết quả tìm kiếm Google.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Meta từ khóa</td>
+<td>N</td>
+<td>Text</td>
+<td>Từ khóa phục vụ SEO, ngăn cách bằng dấu phẩy.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Trạng thái</td>
+<td>Y</td>
+<td>Select</td>
+<td>Lựa chọn trạng thái hiển thị: Active hoặc Draft.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tên trang</td><td>Y</td><td>Text</td><td>Tên trang dùng nội bộ trong CMS.</td></tr>
-        <tr><td>2</td><td>URL path</td><td>Y</td><td>Text</td><td>Đường dẫn truy cập trang (VD: /tin-khuyen-mai).</td></tr>
-        <tr><td>3</td><td>SEO Title</td><td>N</td><td>Text</td><td>Tiêu đề hiển thị trên tab trình duyệt (tối đa 70 ký tự).</td></tr>
-        <tr><td>4</td><td>SEO Description</td><td>N</td><td>Textarea</td><td>Mô tả tóm tắt của trang trên công cụ tìm kiếm (tối đa 160 ký tự).</td></tr>
-        <tr><td>5</td><td>Trạng thái</td><td>Y</td><td>Select</td><td>Lựa chọn trạng thái hiển thị: Active hoặc Draft.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 2 -->
+<p>---</p>
 <h2>2. Quản lý Sections</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng thiết kế và quản lý các vùng layout lớn của trang (như Header, Footer, Banner Hero, Body), hỗ trợ tái sử dụng một Section trên nhiều trang khác nhau.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Sections" và click tạo mới hoặc sửa Section.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào hệ thống quản trị.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Section được cập nhật thành công và tự động thay đổi hiển thị trên tất cả các Trang (Pages) có gán Section này.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng thiết kế và quản lý các vùng layout lớn của trang (như Header, Footer, Banner Hero, Body), hỗ trợ tái sử dụng một Section trên nhiều trang khác nhau.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Sections" và click tạo mới hoặc sửa Section.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống quản trị.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Section được cập nhật thành công và tự động thay đổi hiển thị trên tất cả các Trang (Pages) có gán Section này.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Sections".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo Section mới" hoặc chọn "Sửa" một section có sẵn.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form chi tiết cấu hình Section.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập thông tin: Tên section, chọn mẫu thiết kế layout hiển thị.</li>
-    <li><strong>Bước 5:</strong> Người dùng kéo thả và gán các khối Blocks nội dung con khả dụng vào bên trong Section.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống cập nhật cấu trúc section vào database và tự động đồng bộ sang tất cả các trang đang gán section này.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Sections".</li>
+<li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo Section mới" hoặc chọn "Sửa" một section có sẵn.</li>
+<li><strong>Bước 3:</strong> Hệ thống hiển thị Form chi tiết cấu hình Section.</li>
+<li><strong>Bước 4:</strong> Người dùng nhập thông tin: Tên section, chọn mẫu thiết kế layout hiển thị.</li>
+<li><strong>Bước 5:</strong> Người dùng kéo thả và gán các khối Blocks nội dung con khả dụng vào bên trong Section.</li>
+<li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
+<li><strong>Bước 7:</strong> Hệ thống cập nhật cấu trúc section vào database và tự động đồng bộ sang tất cả các trang đang gán section này.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Một Section là component dùng chung. Khi thay đổi cấu trúc/khối Block bên trong Section, các trang đang sử dụng Section đó sẽ được cập nhật đồng thời.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Mỗi Section bắt buộc phải chọn 1 mẫu layout định sẵn của hệ thống.</td>
-        </tr>
-    </tbody>
+<ul>
+<li>Một Section là component dùng chung. Khi thay đổi cấu trúc/khối Block bên trong Section, các trang đang sử dụng Section đó sẽ được cập nhật đồng thời.</li>
+<li>Tên Section (Quản trị), Tiêu đề Section, Mã Section, Loại Section, và Thứ tự hiển thị là các trường bắt buộc nhập.</li>
+<li>Mã Section phải là duy nhất, không trùng lặp và được viết dưới dạng snake-case hoặc kebab-case.</li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Chọn trang</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn trang chứa Section này (VD: Trang chủ, Khuyến mãi Tháng 5)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Tên Section</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên nhận diện Section dùng cho mục đích quản trị nội bộ.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tiêu đề Section</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tiêu đề hiển thị trực tiếp cho khách hàng trên giao diện UI.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Mã Section</td>
+<td>Y</td>
+<td>Text</td>
+<td>Mã định danh kỹ thuật duy nhất dùng trong code (VD: sec-hero).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Loại Section</td>
+<td>Y</td>
+<td>Select</td>
+<td>Loại bố cục/layout (VD: Hero Banner, Product List, Features).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Thứ tự hiển thị</td>
+<td>Y</td>
+<td>Number</td>
+<td>Thứ tự sắp xếp hiển thị của Section trên trang.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Mô tả ngắn</td>
+<td>N</td>
+<td>Textarea</td>
+<td>Ghi chú thêm về vai trò, mục đích của Section.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tên Section</td><td>Y</td><td>Text</td><td>Tên phân biệt Section dùng nội bộ (VD: Section Gói Cước).</td></tr>
-        <tr><td>2</td><td>Mẫu Layout</td><td>Y</td><td>Select</td><td>Chọn kiểu layout hiển thị (Grid 3 cột, Slider, FAQ List).</td></tr>
-        <tr><td>3</td><td>Mô tả</td><td>N</td><td>Textarea</td><td>Ghi chú ngắn về mục đích của Section.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 3 -->
+<p>---</p>
 <h2>3. Quản lý Blocks</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng định nghĩa nội dung các khối thông tin nhỏ (như gán sản phẩm từ Product Hub, chọn câu hỏi FAQ hiển thị, tải ảnh banner dọc hay thiết lập nút CTA).</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Blocks" và click tạo mới hoặc chỉnh sửa Block.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Khối Block được lưu thông tin thành công và sẵn sàng để kéo thả vào các Section tương ứng.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng định nghĩa nội dung các khối thông tin nhỏ (như gán sản phẩm từ Product Hub, chọn câu hỏi FAQ hiển thị, tải ảnh banner dọc hay thiết lập nút CTA).</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Blocks" và click tạo mới hoặc chỉnh sửa Block.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Khối Block được lưu thông tin thành công và sẵn sàng để kéo thả vào các Section tương ứng.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Blocks".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo Block mới" hoặc chọn "Sửa" một block có sẵn.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form cấu hình tương ứng với loại Block.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên block, chọn loại phân loại block (Package / FAQ / Banner Dọc / CTA).</li>
-    <li><strong>Bước 5:</strong> Người dùng gán nội dung thực tế (Tìm chọn Package từ Product Hub hoặc tìm chọn câu hỏi FAQ).</li>
-    <li><strong>Bước 6:</strong> Người dùng nhập text nút CTA và link chuyển hướng URL đích.</li>
-    <li><strong>Bước 7:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 8:</strong> Hệ thống lưu thông tin block vào kho dữ liệu dùng chung và cập nhật hiển thị.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Blocks".</li>
+<li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo Block mới" hoặc chọn "Sửa" một block có sẵn.</li>
+<li><strong>Bước 3:</strong> Hệ thống hiển thị Form cấu hình tương ứng với loại Block.</li>
+<li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên block, chọn loại phân loại block (Package / FAQ / Banner Dọc / CTA).</li>
+<li><strong>Bước 5:</strong> Người dùng gán nội dung thực tế (Tìm chọn Package từ Product Hub hoặc tìm chọn câu hỏi FAQ).</li>
+<li><strong>Bước 6:</strong> Người dùng nhập text nút CTA và link chuyển hướng URL đích.</li>
+<li><strong>Bước 7:</strong> Người dùng nhấn nút "Lưu".</li>
+<li><strong>Bước 8:</strong> Hệ thống lưu thông tin block vào kho dữ liệu dùng chung và cập nhật hiển thị.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Block loại Sản phẩm chỉ hiển thị các Package đang hoạt động (Active) được lấy từ Product Hub.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Block Banner dọc yêu cầu tải lên đủ 2 định dạng kích thước: Desktop (1920px) và Mobile (768px).</td>
-        </tr>
-    </tbody>
+<ul>
+<li>Block loại Sản phẩm chỉ hiển thị các Package đang hoạt động (Active) được lấy từ Product Hub.</li>
+<li>Block Banner dọc yêu cầu tải lên đủ 2 định dạng kích thước: Desktop (1920px) và Mobile (768px).</li>
+<li>Tên Block, Mã Block, Tên rút gọn, và Loại Block là các trường bắt buộc nhập, không được để trống.</li>
+<li>Mã Block phải là duy nhất, không trùng lặp và dùng để định danh trong code.</li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên Block</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên nhận diện Block (VD: Internet cá nhân trang danh mục).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mã Block</td>
+<td>Y</td>
+<td>Text</td>
+<td>Mã định danh kỹ thuật duy nhất (VD: internet-ca-nhan).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tên rút gọn</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên rút gọn hiển thị nội bộ (VD: Card Chuẩn).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Loại Block</td>
+<td>Y</td>
+<td>Select</td>
+<td>Bố cục hiển thị (VD: Slider, Grid, Accordion, Row, List).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Gán Gói cước</td>
+<td>N</td>
+<td>Select/Search</td>
+<td>Chọn gói cước từ Product Hub nếu block thuộc loại Package.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Đường dẫn nút</td>
+<td>N</td>
+<td>Text</td>
+<td>Đường dẫn URL chuyển hướng của nút Xem Thêm/Mua Ngay.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tên Block</td><td>Y</td><td>Text</td><td>Tên nhận diện Block.</td></tr>
-        <tr><td>2</td><td>Loại Block</td><td>Y</td><td>Select</td><td>Phân loại block (Package, FAQ, Banner Dọc, CTA).</td></tr>
-        <tr><td>3</td><td>Gán Gói cước</td><td>N</td><td>Select/Search</td><td>Chọn gói cước từ Product Hub nếu block thuộc loại Package.</td></tr>
-        <tr><td>4</td><td>Đường dẫn nút</td><td>N</td><td>Text</td><td>Đường dẫn URL chuyển hướng của nút Xem Thêm/Mua Ngay.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 4 -->
+<p>---</p>
 <h2>4. Landing Page (LDP)</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng xây dựng, chỉnh sửa giao diện và cấu hình các trang chiến dịch marketing độc lập bằng cách upload file HTML tùy biến hoặc dựng trang qua kéo thả sections.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Landing Page (LDP)" và click tạo mới hoặc sửa LDP.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công và có sẵn hình ảnh hoặc sections dựng trang.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Trang Landing Page được lưu và xuất bản thành công theo đúng URL định tuyến riêng biệt.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng xây dựng, chỉnh sửa giao diện và cấu hình các trang chiến dịch marketing độc lập bằng cách upload file HTML tùy biến hoặc dựng trang qua kéo thả sections.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Landing Page (LDP)" và click tạo mới hoặc sửa LDP.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công và có sẵn hình ảnh hoặc sections dựng trang.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Trang Landing Page được lưu và xuất bản thành công theo đúng URL định tuyến riêng biệt.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Landing Page (LDP)".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo LDP mới" hoặc chọn "Sửa" một chiến dịch LDP trên danh sách.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form thông tin LDP.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên LDP, đường dẫn URL đích riêng, chọn phương thức dựng giao diện (HTML custom hoặc gán Sections).</li>
-    <li><strong>Bước 5:</strong> Người dùng thiết lập trạng thái hoạt động (Lưu nháp / Xuất bản).</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống ghi nhận, tạo đường dẫn route độc lập và lưu trữ thông tin chiến dịch.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Landing Page (LDP)".</li>
+<li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo LDP mới" hoặc chọn "Sửa" một chiến dịch LDP trên danh sách.</li>
+<li><strong>Bước 3:</strong> Hệ thống hiển thị Form thông tin LDP.</li>
+<li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên LDP, đường dẫn URL đích riêng, chọn phương thức dựng giao diện (HTML custom hoặc gán Sections).</li>
+<li><strong>Bước 5:</strong> Người dùng thiết lập trạng thái hoạt động (Lưu nháp / Xuất bản).</li>
+<li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
+<li><strong>Bước 7:</strong> Hệ thống ghi nhận, tạo đường dẫn route độc lập và lưu trữ thông tin chiến dịch.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Landing Page có cấu trúc định tuyến (route) riêng biệt, bỏ qua cấu trúc header/footer mặc định của trang chủ nếu được cấu hình dạng "Full-blank".</td>
-        </tr>
-    </tbody>
+<ul>
+<li>Landing Page có cấu trúc định tuyến (route) riêng biệt, bỏ qua cấu trúc header/footer mặc định của trang chủ nếu được cấu hình dạng "Full-blank".</li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên LDP</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên chiến dịch Landing Page.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>URL path LDP</td>
+<td>Y</td>
+<td>Text</td>
+<td>URL đích truy cập (VD: /khuyen-mai-he-2026).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mã HTML tùy chọn</td>
+<td>N</td>
+<td>Textarea</td>
+<td>Nhập code HTML/CSS tùy biến (nếu chọn loại Upload HTML).</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tên LDP</td><td>Y</td><td>Text</td><td>Tên chiến dịch Landing Page.</td></tr>
-        <tr><td>2</td><td>URL path LDP</td><td>Y</td><td>Text</td><td>URL đích truy cập (VD: /khuyen-mai-he-2026).</td></tr>
-        <tr><td>3</td><td>Mã HTML tùy chọn</td><td>N</td><td>Textarea</td><td>Nhập code HTML/CSS tùy biến (nếu chọn loại Upload HTML).</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 5 -->
+<p>---</p>
 <h2>5. Quản lý Menu</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng chỉnh sửa cấu trúc thanh điều hướng điều hướng đa cấp (Header/Footer), kéo thả sắp xếp vị trí hoặc phân cấp menu cha-con.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Menu" và chọn vùng menu cần sửa.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công và có quyền hạn Admin.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Thanh điều hướng ngoài trang chủ cập nhật cấu trúc menu mới ngay lập tức sau khi lưu.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng cấu hình chi tiết thanh điều hướng đa cấp (Header / Footer / Sidebar), kéo thả sắp xếp thứ tự hiển thị và thiết lập phân cấp menu cha-con lên tới 3 cấp.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống (Super Admin, Admin CMS).</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Menu" và nhấp chọn "+ Tạo menu link" hoặc chọn "Sửa" một menu item trong danh sách sơ đồ cây.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào trang quản trị và có quyền truy cập module Menu.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Cấu trúc thanh điều hướng được lưu trữ thành công và cập nhật tức thì trên giao diện website tương ứng với vị trí đã cấu hình.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Menu".</li>
-    <li><strong>Bước 2:</strong> Người dùng chọn phân vùng menu cần sửa (Header / Footer).</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị giao diện sơ đồ cây menu hiện hữu.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhấn nút "+ Thêm Menu Item" hoặc chọn sửa menu có sẵn để cập nhật Tên hiển thị và liên kết URL đích.</li>
-    <li><strong>Bước 5:</strong> Người dùng thực hiện kéo thả di chuyển vị trí các item lên/xuống, hoặc kéo lùi sang phải dưới một menu cha để phân cấp menu con.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống cập nhật sơ đồ định tuyến menu ngoài website.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Menu".</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị bảng danh sách Menu dưới dạng sơ đồ cây, cho phép tìm kiếm theo Tên menu và phân trang.</li>
+<li><strong>Bước 3:</strong> Người dùng nhấn nút "+ Tạo menu link" hoặc chọn "Sửa" trên một dòng menu.</li>
+<li><strong>Bước 4:</strong> Hệ thống hiển thị Form thông tin menu gồm các trường cấu hình chi tiết.</li>
+<li><strong>Bước 5:</strong> Người dùng nhập các thông tin: Tên menu, Menu cha (nếu có), Thứ tự hiển thị, Loại (Page/Category/Link), Vị trí, Kiểu hiển thị, Ngôn ngữ, Target và upload Icon.</li>
+<li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
+<li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu thông tin vào database và đồng bộ thanh điều hướng ngoài website.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Hỗ trợ tối đa 3 cấp menu (Menu cha -> Menu con cấp 1 -> Menu con cấp 2) để đảm bảo hiển thị tối ưu trên giao diện.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Mỗi menu item bắt buộc phải điền đầy đủ nhãn hiển thị và URL liên kết.</td>
-        </tr>
-    </tbody>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li>Hỗ trợ cấu trúc phân cấp tối đa 3 cấp menu (Menu cha -&gt; Menu con cấp 1 -&gt; Menu con cấp 2) để đảm bảo giao diện hiển thị tối ưu (UX).</li>
+<li>Tên menu, Thứ tự hiển thị, Loại, Vị trí, Target là các trường bắt buộc nhập, không được để trống.</li>
+<li>Trường <strong>Đường dẫn URL</strong> (Link URL) sẽ bắt buộc nhập đối với menu có loại là <strong>Link</strong> để đảm bảo chuyển hướng chính xác. Với loại <strong>Page</strong> hoặc <strong>Category</strong>, hệ thống sẽ tự động liên kết tới trang hoặc chuyên mục được cấu hình.</li>
+<li>Hỗ trợ tải lên Icon menu với các định dạng JPG, PNG, GIF, WEBP, SVG và dung lượng tối đa 10MB.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin (Screen Description)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên menu</td>
+<td>Y</td>
+<td>Text</td>
+<td>Nhãn hiển thị trực tiếp của menu item trên giao diện (VD: "Sản phẩm", "Khuyến mãi").</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Menu cha</td>
+<td>N</td>
+<td>Select</td>
+<td>Chọn menu cấp cha từ danh sách cây phân cấp hiện có (để trống nếu là menu gốc).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Thứ tự</td>
+<td>Y</td>
+<td>Number</td>
+<td>Thứ tự sắp xếp hiển thị của menu item trong cùng cấp (giá trị &gt;= 0, mặc định 0).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Loại</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn phân loại nguồn: <strong>Page</strong> (Trang liên kết), <strong>Category</strong> (Chuyên mục bài viết), hoặc <strong>Link</strong> (URL tự do).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Vị trí</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn khu vực hiển thị menu: <strong>Header</strong> (Đầu trang), <strong>Footer</strong> (Chân trang), hoặc <strong>Sidebar</strong> (Cột bên).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Kiểu hiển thị</td>
+<td>N</td>
+<td>Select</td>
+<td>Chọn kiểu bố cục khi rê chuột: <strong>Mặc định</strong>, <strong>Mega Menu</strong>, hoặc <strong>Dropdown</strong>.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Ngôn ngữ</td>
+<td>N</td>
+<td>Select</td>
+<td>Lựa chọn ngôn ngữ hiển thị: Tiếng Việt hoặc English.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Target</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn cơ chế mở liên kết: <strong><em>self</strong> (Mở ở tab hiện tại) hoặc <strong></em>blank</strong> (Mở ở tab mới).</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Icon</td>
+<td>N</td>
+<td>File</td>
+<td>Tải lên file ảnh icon (JPG, PNG, GIF, WEBP, SVG, tối đa 10MB) đi kèm nhãn hiển thị menu.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Đường dẫn URL</td>
+<td>Y (loại Link)</td>
+<td>Text</td>
+<td>URL liên kết đích khi người dùng click (chỉ bắt buộc khi chọn Loại là Link).</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Vị trí Menu</td><td>Y</td><td>Select</td><td>Header Menu hoặc Footer Menu.</td></tr>
-        <tr><td>2</td><td>Nhãn hiển thị</td><td>Y</td><td>Text</td><td>Tên hiển thị trên thanh menu (VD: "Trang chủ").</td></tr>
-        <tr><td>3</td><td>URL liên kết</td><td>Y</td><td>Text</td><td>Đường dẫn khi nhấp chuột (VD: /tin-tuc).</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 6 -->
+<p>---</p>
 <h2>6. Quản lý Banner</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng đăng tải hình ảnh quảng cáo (Desktop/Mobile), thiết lập độ ưu tiên hiển thị, link liên kết đích và hẹn giờ tự động chạy slide trên các trang cụ thể.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Banner" và click tạo mới hoặc sửa banner.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công và có sẵn hình ảnh banner thiết kế.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Banner được hiển thị trên Slide ngoài trang chủ/trang chỉ định đúng khung giờ cài đặt.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng đăng tải hình ảnh banner (Desktop và Mobile), thiết lập thứ tự hiển thị, cấu hình trang áp dụng hiển thị, link chuyển hướng và hẹn giờ hiển thị banner.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Banner" và nhấp chọn "+ Tạo Banner mới" hoặc nút "Sửa" trên danh sách banner.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống quản trị.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Banner được lưu trữ thành công và tự động hiển thị trong Slider ngoài website theo đúng lịch và trang đã cài đặt.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Banner".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Tạo Banner mới" hoặc chọn "Sửa" một banner hiện tại.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form đăng tải thông tin Banner.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên banner, thứ tự hiển thị, liên kết URL đích, chọn cách mở trang (_self / _blank).</li>
-    <li><strong>Bước 5:</strong> Người dùng tải lên ảnh Banner Desktop, tải lên ảnh Banner Mobile, chọn các Trang áp dụng hiển thị và cấu hình lịch thời gian chạy.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống ghi nhận dữ liệu, thực hiện kiểm tra thời gian hiển thị và cập nhật slider ngoài website.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Banner".</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị danh sách các Banner hiện có kèm bộ lọc Tìm theo tên, Trạng thái (Đang chạy, Hết hạn) và bảng dữ liệu.</li>
+<li><strong>Bước 3:</strong> Người dùng nhấn nút "+ Tạo Banner mới" hoặc chọn "Sửa" một banner.</li>
+<li><strong>Bước 4:</strong> Hệ thống ẩn danh sách và hiển thị Form tạo/chỉnh sửa Banner.</li>
+<li><strong>Bước 5:</strong> Người dùng nhập các thông tin: Tên banner, Thứ tự hiển thị, tải lên ảnh Desktop, tải lên ảnh Mobile, nhập Link URL đích, chọn Target, chọn Trang áp dụng và cấu hình Khoảng thời gian hiển thị.</li>
+<li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu Banner" (hoặc chọn "Hủy" để quay lại).</li>
+<li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu thông tin vào database và cập nhật slider ngoài website.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Phải tải lên tối thiểu hình ảnh bản Desktop. Nếu không tải ảnh Mobile, hệ thống tự động co giãn ảnh Desktop theo tỉ lệ màn hình.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Banner chỉ hiển thị ngoài website nếu trạng thái là Active và thời gian hiện tại nằm trong khoảng thời gian cấu hình hiển thị.</td>
-        </tr>
-    </tbody>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li>Để đảm bảo hiển thị tối ưu trên đa thiết bị (Responsive), hệ thống <strong>bắt buộc người dùng tải lên cả 2 phiên bản hình ảnh</strong>: Ảnh Desktop (1920xauto) và Ảnh Mobile (768xauto).</li>
+<li>Tên Banner, Thứ tự hiển thị, Ảnh Desktop, Ảnh Mobile, Trang áp dụng là các trường bắt buộc nhập.</li>
+<li>Banner chỉ hiển thị ngoài website khi thời gian hiện tại nằm trong khoảng "Thời gian hiển thị" được cấu hình (nếu có cài đặt lịch) và trạng thái là hoạt động.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin (Screen Description)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên Banner</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên banner dùng để quản lý nội bộ trong CMS (VD: "Banner Hero Trang Chủ T5").</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Thứ tự hiển thị</td>
+<td>Y</td>
+<td>Number</td>
+<td>Thứ tự hiển thị trong slider chạy ảnh (giá trị &gt;= 1, mặc định 1).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ảnh Desktop</td>
+<td>Y</td>
+<td>File</td>
+<td>Upload file ảnh banner (PNG/JPG/WebP) cho giao diện máy tính (kích thước khuyến nghị 1920px).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Ảnh Mobile</td>
+<td>Y</td>
+<td>File</td>
+<td>Upload file ảnh banner (PNG/JPG/WebP) cho giao diện điện thoại (kích thước khuyến nghị 768px).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Link URL Đích</td>
+<td>N</td>
+<td>Text</td>
+<td>Đường dẫn điều hướng khi người dùng nhấp vào banner (VD: /khuyen-mai-thang-5).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Target</td>
+<td>N</td>
+<td>Select</td>
+<td>Cơ chế mở link điều hướng: <strong><em>self</strong> (Mở ở tab hiện tại) hoặc <strong></em>blank</strong> (Mở ở tab mới).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Trang áp dụng</td>
+<td>Y</td>
+<td>Multi-select</td>
+<td>Chọn một hoặc nhiều trang sẽ hiển thị banner này (VD: Trang chủ, Trang khuyến mãi).</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Thời gian hiển thị</td>
+<td>N</td>
+<td>DateTime Range</td>
+<td>Thiết lập ngày/giờ bắt đầu và kết thúc hiển thị banner (để trống nếu muốn chạy liên tục không hẹn giờ).</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Ảnh Desktop</td><td>Y</td><td>File</td><td>Upload file ảnh định dạng PNG/JPG/WebP cho màn hình máy tính.</td></tr>
-        <tr><td>2</td><td>Ảnh Mobile</td><td>N</td><td>File</td><td>Upload file ảnh định dạng PNG/JPG/WebP cho màn hình điện thoại.</td></tr>
-        <tr><td>3</td><td>Thời gian bắt đầu</td><td>N</td><td>DateTime</td><td>Thời gian bắt đầu hiển thị banner trên site.</td></tr>
-        <tr><td>4</td><td>Thời gian kết thúc</td><td>N</td><td>DateTime</td><td>Thời gian kết thúc hiển thị banner trên site.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 7 -->
+<p>---</p>
 <h2>7. Quản lý Popup</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng tạo lập và cấu hình các hộp thoại nổi (Modal popup) hiển thị ngoài website để thu thập thông tin khách hàng, quảng bá voucher hoặc gửi thông báo.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Popup" và chọn tạo mới/sửa Popup.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào trang quản trị.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Popup hiển thị đúng điều kiện cài đặt (trang áp dụng, tần suất, thời gian trễ) trên trình duyệt khách hàng.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng thiết lập và cấu hình các Popup quảng cáo nổi (Modal popup), cài đặt thời gian chạy, kênh bán áp dụng, tải ảnh và cấu hình link điều hướng kèm UTM Tracking.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Popup" và chọn "+ Tạo Popup mới" hoặc nút "Sửa" trên danh sách popup.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Cấu hình popup được lưu thành công, tự động hiển thị ngoài website đúng kênh bán và thời gian chỉ định.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Popup".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút tạo mới hoặc chọn "Sửa" một popup trong danh sách.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form chi tiết cấu hình Popup.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tên popup, chọn loại nội dung (Ảnh/HTML), tải lên ảnh hoặc nhập code HTML.</li>
-    <li><strong>Bước 5:</strong> Người dùng cấu hình điều kiện: Tần suất hiển thị, thời gian trễ hiển thị (số giây chờ) và đa chọn Trang áp dụng.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 7:</strong> Hệ thống ghi nhận cấu hình, lưu trữ thông tin và tự động hiển thị popup ngoài website.</li>
+<li><strong>Bước 1:</strong> Người dùng truy cập CMS -&gt; chọn menu "Quản lý Popup".</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị danh sách Popup (Tên popup, Vị trí hiển thị, Kênh áp dụng, Thời gian chạy, Trạng thái) kèm bộ lọc và phân trang.</li>
+<li><strong>Bước 3:</strong> Người dùng nhấn nút "+ Tạo Popup mới" hoặc chọn "Sửa" một popup.</li>
+<li><strong>Bước 4:</strong> Hệ thống hiển thị Form cấu hình Popup, góc trên bên phải có nút Toggle để Bật/Tắt trạng thái hoạt động nhanh.</li>
+<li><strong>Bước 5:</strong> Người dùng nhập các thông tin: Tên popup, Vị trí hiển thị, Thời gian bắt đầu, Thời gian kết thúc, chọn các Kênh áp dụng (Checkboxes), tải lên Ảnh Desktop, tải lên Ảnh Mobile, nhập URL đích khi click, nhập các tham số UTM (Source, Medium, Campaign).</li>
+<li><strong>Bước 6:</strong> Hệ thống hiển thị trực quan liên kết URL cuối cùng có chứa các tham số UTM tracking (Live Preview URL).</li>
+<li><strong>Bước 7:</strong> Người dùng nhấn nút "Lưu Popup".</li>
+<li><strong>Bước 8:</strong> Hệ thống thực hiện validate dữ liệu, lưu thông tin vào database và cập nhật hiển thị.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Mỗi trang tại một thời điểm chỉ cho phép kích hoạt tối đa 01 Popup để tránh gây phiền nhiễu cho trải nghiệm của khách hàng (UX).</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Tần suất hiển thị mặc định: 1 lần mỗi phiên làm việc của người dùng nếu không có cấu hình khác.</td>
-        </tr>
-    </tbody>
-</table>
-
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Nội dung Popup</td><td>Y</td><td>File/Text</td><td>Nội dung hiển thị (tải lên file ảnh hoặc mã HTML tùy biến).</td></tr>
-        <tr><td>2</td><td>Tần suất hiển thị</td><td>Y</td><td>Select</td><td>Lựa chọn: Mọi lúc / 1 lần mỗi Session / 1 lần mỗi ngày.</td></tr>
-        <tr><td>3</td><td>Thời gian trễ</td><td>Y</td><td>Number</td><td>Số giây chờ trước khi popup hiển thị (VD: 3 giây).</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 8 -->
-<h2>8. Quản lý Tin tức (News & Articles)</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép soạn thảo nội dung tin tức, bài viết khuyến mãi bằng Rich Text Editor, phân loại bài viết theo chuyên mục bài đăng và điều phối trạng thái xuất bản bài viết.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Biên tập viên (Tạo/Sửa nháp), Người duyệt (Xuất bản), Admin.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Tin tức" và click thêm mới hoặc sửa bài viết.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công và có quyền hạn biên tập/duyệt bài.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Bài viết được lưu nháp hoặc cập nhật hiển thị lên trang tin tức website tương ứng với trạng thái xuất bản.</td>
-    </tr>
-</table>
-
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Tin tức".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Thêm Bài Viết" hoặc chọn chỉnh sửa một bài viết hiện có.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form soạn thảo tin tức bài viết.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Tiêu đề (slug tự sinh), chọn chuyên mục bài đăng, upload ảnh Thumbnail đại diện và soạn thảo nội dung bài đăng qua Rich Text Editor.</li>
-    <li><strong>Bước 5:</strong> Người dùng cấu hình SEO Metadata cho bài viết.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu nháp" hoặc "Xuất bản" (tùy quyền hạn).</li>
-    <li><strong>Bước 7:</strong> Hệ thống ghi nhận trạng thái bài viết, cập nhật bảng danh sách bài viết quản trị và thay đổi thông tin ngoài trang tin tức website.</li>
+<li><strong>Trải nghiệm người dùng (UX)</strong>: Tại một thời điểm, trên một trang chỉ cho phép kích hoạt tối đa <strong>01 Popup hoạt động</strong> để tránh gây phiền hà cho khách hàng.</li>
+<li>Tên Popup, Vị trí hiển thị, Thời gian bắt đầu/kết thúc, Kênh áp dụng, Ảnh Desktop, Ảnh Mobile, URL đích là bắt buộc nhập.</li>
+<li>Hệ thống tự động ghép các tham số UTM (Source, Medium, Campaign) vào URL đích để tạo liên kết tracking đồng bộ khi người dùng click vào popup.</li>
+<li>Hình ảnh Desktop bắt buộc tỷ lệ 16:9 (tối đa 1MB), hình ảnh Mobile bắt buộc tỷ lệ 1:1 hoặc dạng đứng (tối đa 1MB).</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Ảnh đại diện bài viết (Thumbnail) bắt buộc tải lên và có định dạng tỉ lệ 3:2 hoặc 16:9 để hiển thị đồng bộ trên danh sách tin.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Hệ thống tự động lưu lịch sử biên tập (Version History) và ghi nhận tên tài khoản thực hiện chỉnh sửa gần nhất.</td>
-        </tr>
-    </tbody>
+<h3>Bảng mô tả trường thông tin (Screen Description)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Trạng thái</td>
+<td>Y</td>
+<td>Toggle Switch</td>
+<td>Bật/Tắt trạng thái hoạt động của popup (Bật/Tắt).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Tên Popup</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tên popup dùng quản trị nội bộ (VD: "Flash Sale T5").</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Vị trí hiển thị</td>
+<td>Y</td>
+<td>Select</td>
+<td>Nơi hiển thị popup: <strong>Trang chủ</strong>, <strong>Theo URL chỉ định</strong>, <strong>Theo Gói bán cụ thể (Trang Checkout)</strong>, <strong>Global</strong>.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Thời gian bắt đầu</td>
+<td>Y</td>
+<td>DateTime</td>
+<td>Ngày và giờ bắt đầu cho phép popup xuất hiện ngoài website.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thời gian kết thúc</td>
+<td>Y</td>
+<td>DateTime</td>
+<td>Ngày và giờ kết thúc chương trình popup.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Kênh áp dụng</td>
+<td>Y</td>
+<td>Checkbox List</td>
+<td>Tick chọn các kênh bán áp dụng (VD: tongdaiwifi, hifpt, fpt.vn, fptshop).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Ảnh Desktop</td>
+<td>Y</td>
+<td>File</td>
+<td>Tải lên ảnh popup định dạng JPG/PNG cho máy tính (tỷ lệ 16:9, tối đa 1MB).</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Ảnh Mobile</td>
+<td>Y</td>
+<td>File</td>
+<td>Tải lên ảnh popup định dạng JPG/PNG cho điện thoại/bottom sheet (tỷ lệ 1:1 hoặc dọc, tối đa 1MB).</td>
+</tr>
+<tr>
+<td>9</td>
+<td>URL đích</td>
+<td>Y</td>
+<td>Text</td>
+<td>Đường dẫn chuyển hướng khi khách hàng nhấp vào popup.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>UTM Source</td>
+<td>N</td>
+<td>Text</td>
+<td>Tham số nguồn quảng cáo (VD: popup_banner).</td>
+</tr>
+<tr>
+<td>11</td>
+<td>UTM Medium</td>
+<td>N</td>
+<td>Text</td>
+<td>Tham số phương tiện quảng cáo (VD: homepage).</td>
+</tr>
+<tr>
+<td>12</td>
+<td>UTM Campaign</td>
+<td>N</td>
+<td>Text</td>
+<td>Tham số tên chiến dịch quảng cáo (VD: flashsale_t5).</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tiêu đề bài viết</td><td>Y</td><td>Text</td><td>Tiêu đề bài viết (tự động gợi ý URL slug).</td></tr>
-        <tr><td>2</td><td>Chuyên mục</td><td>Y</td><td>Select</td><td>Lọc phân loại bài viết (Tin khuyến mãi, Tin công nghệ, Thông báo).</td></tr>
-        <tr><td>3</td><td>Nội dung bài viết</td><td>Y</td><td>Rich Text</td><td>Trình soạn thảo WYSIWYG nhập nội dung bài viết.</td></tr>
-    </tbody>
+<p>---</p>
+<h2>8. Quản lý Tin tức (News &amp; Articles)</h2>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép soạn thảo bài viết bằng Rich Text, phân loại chuyên mục đa cấp, quản lý danh sách Tags, và thiết lập cấu hình mapping bài viết theo Tags đến các SKU sản phẩm.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Biên tập viên, Người duyệt (Xuất bản), Admin.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Tin tức" và click chọn các Tab tương ứng, rồi nhấn các nút Thêm mới hoặc Sửa.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công và có quyền hạn biên tập hoặc quản trị tin tức.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Bài viết, chuyên mục, tags và cấu hình mapping được lưu thành công, cập nhật giao diện ngoài website.</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
+<p>Phân hệ Quản lý Tin tức gồm <strong>4 Tab chức năng chính</strong>:</p>
+<ol>
+<li><strong>Danh sách Bài viết:</strong> Soạn thảo, sửa đổi và xuất bản tin tức.</li>
+<li><strong>Chuyên mục (Categories):</strong> Thiết lập cấu trúc danh mục bài đăng.</li>
+<li><strong>Quản lý Tags:</strong> Quản trị thư viện thẻ từ khóa dùng chung.</li>
+<li><strong>Cấu hình Thông tin hay (Tags Mapping):</strong> Thiết lập liên kết tự động bài viết với gói cước SKU (Chi tiết tại Mục 10).</li>
+</ol>
+<h3>Luồng nghiệp vụ soạn thảo Bài viết</h3>
+<ul>
+<li><strong>Bước 1:</strong> Người dùng chọn tab "Danh sách Bài viết", nhấn "+ Thêm Bài Viết" hoặc chọn "Sửa" một bài viết.</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị Form soạn thảo bài viết.</li>
+<li><strong>Bước 3:</strong> Người dùng nhập: Tiêu đề bài viết (hệ thống tự sinh slug), URL Slug, Mô tả ngắn/Sa-po, soạn thảo nội dung chi tiết qua WYSIWYG Editor, nhập danh sách Tags (ngăn cách bằng dấu phẩy), chọn Chuyên mục, chọn Tác giả, Trạng thái (Active/Draft) và tải lên/nhập link ảnh đại diện (Thumbnail).</li>
+<li><strong>Bước 4:</strong> Người dùng mở rộng mục "TỐI ƯU HÓA SEO" để cấu hình thêm SEO Title, Meta Description và Meta Keywords.</li>
+<li><strong>Bước 5:</strong> Người dùng nhấn nút "Lưu Bài viết".</li>
+<li><strong>Bước 6:</strong> Hệ thống validate thông tin, lưu trữ bài viết và cập nhật ngoài site.</li>
+</ul>
+<h3>Luồng nghiệp vụ quản lý Chuyên mục (Categories)</h3>
+<ul>
+<li><strong>Bước 1:</strong> Người dùng chọn tab "Chuyên mục (Categories)", nhấn "+ Thêm Chuyên Mục" hoặc chọn "Sửa".</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị Form chi tiết Chuyên mục với bố cục 2 cột (Cột trái: Thông tin chính; Cột phải: Cấu hình phụ).</li>
+<li><strong>Bước 3:</strong> Người dùng nhập các trường thông tin chính (Tên chuyên mục, slug, mô tả, nội dung chi tiết) và các cấu hình phụ (Chuyên mục cha, kiểu giao diện layout, ngôn ngữ, vị trí hiển thị, thứ tự sắp xếp, màu sắc nhận diện, toggle trạng thái).</li>
+<li><strong>Bước 4:</strong> Người dùng tải lên các file hình ảnh (Icon, Icon hover, Logo chuyên mục, Hình đại diện) và nhập các thuộc tính SEO Metadata.</li>
+<li><strong>Bước 5:</strong> Người dùng nhấn "Lưu Chuyên mục".</li>
+</ul>
+<h3>Luồng nghiệp vụ quản lý Tags</h3>
+<ul>
+<li><strong>Bước 1:</strong> Người dùng chọn tab "Quản lý Tags", nhấn "+ Thêm Tag" hoặc chọn "Sửa".</li>
+<li><strong>Bước 2:</strong> Hệ thống hiển thị Form tạo mới/chỉnh sửa Tag tin tức.</li>
+<li><strong>Bước 3:</strong> Người dùng nhập Tên Tag, URL Slug, chọn Trạng thái hoạt động (Active/Draft).</li>
+<li><strong>Bước 4:</strong> Người dùng nhấn "Lưu Tag" để lưu vào cơ sở dữ liệu.</li>
+</ul>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li>Tiêu đề bài viết, URL Slug, Mô tả ngắn/Sa-po, Nội dung chi tiết, Chuyên mục là các trường bắt buộc nhập đối với Bài viết.</li>
+<li>Tên chuyên mục, Biệt danh (slug) là các trường bắt buộc đối với Chuyên mục.</li>
+<li>Tên Tag, URL Slug, Trạng thái là các trường bắt buộc đối với Tag.</li>
+<li>Ảnh đại diện bài viết khuyến nghị tỷ lệ 3:2 để đảm bảo hiển thị đồng bộ trên danh sách tin. Hệ thống tự động ghi nhận lịch sử biên tập bài viết (Version History) và tài khoản thực hiện sửa đổi gần nhất.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin Bài viết (Screen Description - Article Form)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tiêu đề bài viết</td>
+<td>Y</td>
+<td>Text</td>
+<td>Tiêu đề chính hiển thị trên website (hệ thống tự động gợi ý URL slug không dấu).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>URL Slug</td>
+<td>Y</td>
+<td>Text</td>
+<td>Đường dẫn truy cập bài viết (VD: /tin-tuc/lap-mang-fpt-he-2026).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Mô tả ngắn / Sa-po</td>
+<td>Y</td>
+<td>Textarea</td>
+<td>Đoạn văn bản ngắn dẫn dắt tin tức, tóm tắt nội dung chính (2-3 câu).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Nội dung chi tiết</td>
+<td>Y</td>
+<td>Rich Text</td>
+<td>Trình soạn thảo WYSIWYG cho phép chèn định dạng văn bản, chèn link, chèn ảnh trực tiếp vào nội dung.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thẻ / Tags</td>
+<td>N</td>
+<td>Text</td>
+<td>Danh sách thẻ từ khóa liên quan, ngăn cách bằng dấu phẩy (dùng để liên kết tự động bài viết với SKU).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Chuyên mục</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn chuyên mục phân loại bài viết (Tin khuyến mãi, Tin công nghệ, Thông báo, Sự kiện).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Tác giả</td>
+<td>N</td>
+<td>Text</td>
+<td>Tên tác giả bài đăng (mặc định lấy tên tài khoản đăng nhập, VD: "Admin").</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Trạng thái</td>
+<td>Y</td>
+<td>Select</td>
+<td>Trạng thái xuất bản của bài viết: <strong>Active</strong> (Hoạt động/Công khai) hoặc <strong>Draft</strong> (Lưu nháp).</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Ảnh đại diện</td>
+<td>N</td>
+<td>File/Text</td>
+<td>Upload file ảnh hoặc dán link ảnh đại diện (Thumbnail), khuyến nghị tỷ lệ 3:2.</td>
+</tr>
+<tr>
+<td>10</td>
+<td>SEO Title</td>
+<td>N</td>
+<td>Text</td>
+<td>Tiêu đề tối ưu hóa hiển thị trên Google (tối đa 70 ký tự).</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Meta Description</td>
+<td>N</td>
+<td>Textarea</td>
+<td>Mô tả ngắn hiển thị trên kết quả tìm kiếm Google (tối đa 160 ký tự).</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Meta Keywords</td>
+<td>N</td>
+<td>Text</td>
+<td>Các từ khóa phục vụ SEO, ngăn cách bằng dấu phẩy.</td>
+</tr>
+</tbody>
+</table>
 
-<!-- CHỨC NĂNG 9 -->
+<p>---</p>
 <h2>9. Quản lý FAQ</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng thiết lập ngân hàng các câu hỏi thường gặp và câu trả lời tương ứng theo từng danh mục hỗ trợ kỹ thuật, cước phí.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Biên tập viên, Người duyệt, Admin.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý FAQ" và click thêm mới/sửa câu hỏi.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Câu hỏi FAQ được lưu thành công vào thư viện dùng chung và sẵn sàng để gán hiển thị lên các trang.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng thiết lập ngân hàng các câu hỏi thường gặp (FAQ) và phân loại theo từng danh mục hỗ trợ cước phí, kỹ thuật, thủ tục.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Biên tập viên, Người duyệt, Admin.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý FAQ" và click "+ Thêm Câu hỏi (FAQ)" hoặc "+ Thêm Danh Mục".</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Câu hỏi FAQ được lưu thành công vào thư viện dùng chung, sẵn sàng để gán hiển thị lên các trang hoặc blocks.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
+<p>Module FAQ gồm <strong>2 Tab chức năng chính</strong>:</p>
+<ol>
+<li><strong>Danh sách Câu hỏi (FAQ):</strong> Quản trị danh sách câu hỏi và câu trả lời.</li>
+<li><strong>Danh mục (Categories):</strong> Phân loại chủ đề câu hỏi.</li>
+</ol>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý FAQ".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Thêm Câu hỏi" hoặc chọn "Sửa" câu hỏi hiện hữu.</li>
-    <li><strong>Bước 3:</strong> Hệ thống hiển thị Form chi tiết FAQ.</li>
-    <li><strong>Bước 4:</strong> Người dùng nhập các thông tin: Nội dung Câu hỏi, chọn danh mục chủ đề phân loại, soạn thảo nội dung câu trả lời.</li>
-    <li><strong>Bước 5:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 6:</strong> Hệ thống lưu thông tin câu hỏi vào thư viện dùng chung để có thể gán nhanh vào các blocks.</li>
+<li><strong>Tạo mới/Chỉnh sửa Danh mục FAQ:</strong></li>
+<li>Người dùng truy cập tab "Danh mục", nhấn "+ Thêm Danh Mục" hoặc "Sửa".</li>
+<li>Nhập các trường: Tên danh mục (*), Thứ tự hiển thị, Ngôn ngữ, Checkbox trạng thái hoạt động.</li>
+<li>Nhấn "Lưu Danh mục".</li>
+<li><strong>Tạo mới/Chỉnh sửa Câu hỏi FAQ:</strong></li>
+<li>Người dùng truy cập tab "Danh sách Câu hỏi", nhấn "+ Thêm Câu hỏi (FAQ)" hoặc "Sửa".</li>
+<li>Nhập các thông tin: Chọn Danh mục (<em>), Ngôn ngữ, Câu hỏi (</em>), Câu trả lời (Rich Text) (*), Thứ tự hiển thị, Checkbox trạng thái hoạt động.</li>
+<li>Nhấn "Lưu Câu hỏi".</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Hỗ trợ tìm kiếm nhanh câu hỏi theo từ khóa trong thư viện FAQ để phục vụ gán nhanh vào Block mà không cần tạo mới trùng lặp.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Cả câu hỏi và câu trả lời đều không được để trống khi thực hiện lưu.</td>
-        </tr>
-    </tbody>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li>Danh mục, Câu hỏi và Câu trả lời là các trường bắt buộc nhập, không được để trống khi thực hiện lưu.</li>
+<li>Hệ thống hỗ trợ tìm kiếm nhanh theo câu hỏi hoặc danh mục để biên tập viên dễ dàng tra cứu, tránh tạo câu hỏi trùng lặp trong thư viện dùng chung.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin Câu hỏi (Screen Description - FAQ Form)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Danh mục</td>
+<td>Y</td>
+<td>Select</td>
+<td>Chọn chủ đề liên quan để phân nhóm FAQ (Thanh toán cước, Khắc phục sự cố, Chính sách &amp; Thủ tục...).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ngôn ngữ</td>
+<td>N</td>
+<td>Select</td>
+<td>Ngôn ngữ hiển thị câu hỏi: Tiếng Việt hoặc English.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Câu hỏi</td>
+<td>Y</td>
+<td>Text</td>
+<td>Nội dung câu hỏi thường gặp (VD: "Làm thế nào để thanh toán cước trực tuyến?").</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Câu trả lời</td>
+<td>Y</td>
+<td>Rich Text</td>
+<td>Nội dung hướng dẫn giải quyết chi tiết, hỗ trợ định dạng văn bản và chèn link.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thứ tự hiển thị</td>
+<td>N</td>
+<td>Number</td>
+<td>Thứ tự sắp xếp câu hỏi khi hiển thị trên giao diện (mặc định 1).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Trạng thái hoạt động</td>
+<td>N</td>
+<td>Checkbox</td>
+<td>Tick chọn để cho phép câu hỏi được hiển thị và hoạt động ngoài website.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Câu hỏi</td><td>Y</td><td>Text</td><td>Nội dung câu hỏi thường gặp (VD: Làm thế nào đổi mật khẩu Wifi?).</td></tr>
-        <tr><td>2</td><td>Chủ đề / Danh mục</td><td>Y</td><td>Select</td><td>Chủ đề liên quan (Hỗ trợ kỹ thuật, Đóng cước, Khuyến mãi).</td></tr>
-        <tr><td>3</td><td>Câu trả lời</td><td>Y</td><td>Textarea</td><td>Nội dung hướng dẫn giải quyết chi tiết cho khách hàng.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 10 -->
+<p>---</p>
 <h2>10. Cấu hình Thông tin hay (Tag Mapping)</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng liên kết (map) các tin tức, bài viết hướng dẫn hoặc FAQ liên quan đến Tag cho các sản phẩm/gói cước tương ứng. Chức năng được tách biệt thành 2 Tab riêng trong module Quản lý Tin tức: Tab 3 "Quản lý Tags" để tạo/sửa/xóa tag và Tab 4 "Cấu hình Thông tin hay (Tags Mapping)" để cấu hình mapping SKU.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống, Biên tập viên.</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Quản lý Tin tức", chọn tab "Cấu hình Thông tin hay (Tags Mapping)" và click chọn nút "+ Thêm Thông tin hay mới" hoặc nhấp nút "Cấu hình" (⚙️) tại từng dòng Tag đã liên kết.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào CMS và truy cập module Quản lý Tin tức. Các tag mong muốn phải được tạo trước bên tab "Quản lý Tags".</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Ngoài website, các bài viết tin tức/FAQ liên quan tự động hiển thị ở chân trang chi tiết của sản phẩm tương ứng.</td>
-    </tr>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép ánh xạ (map) tự động các tin tức, bài viết hoặc câu hỏi FAQ đến các sản phẩm/gói cước tương ứng thông qua các Tag từ khóa. Chức năng được thiết lập dưới dạng một Tab chức năng trong module Quản lý Tin tức.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống, Biên tập viên.</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Quản lý Tin tức", chọn tab "Cấu hình Thông tin hay (Tags Mapping)", chọn "Cấu hình" (⚙️) tại dòng Tag tương ứng hoặc chọn "+ Thêm Thông tin hay mới".</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công và truy cập tab Tags Mapping.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Cấu hình ánh xạ được lưu thành công, hệ thống tự động hiển thị các bài viết tin tức/FAQ liên quan ở chân trang chi tiết của sản phẩm (SKU) tương ứng ngoài website.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Quản lý Tin tức" -> chọn tab "Cấu hình Thông tin hay (Tags Mapping)".</li>
-    <li><strong>Bước 2:</strong> Người dùng nhấp chọn nút "+ Thêm Thông tin hay mới" (hoặc chọn nút "Cấu hình" ⚙️ trên bảng).</li>
-    <li><strong>Bước 3:</strong> Nếu thêm mới, hệ thống hiển thị Modal "Thêm Thông tin hay mới" dạng dropdown. Người dùng chọn Tag muốn cấu hình từ danh sách và click "Xác nhận".</li>
-    <li><strong>Bước 4:</strong> Hệ thống mở **Panel cấu hình trượt từ bên phải qua (Slide-over Drawer)**, hiển thị Form cấu hình chi tiết (Tên Tag, bật/tắt Fallback, danh sách SKU liên kết, live preview bài viết liên quan).</li>
-    <li><strong>Bước 5:</strong> Người dùng cập nhật các thông tin liên kết: tìm kiếm và chọn các SKU sản phẩm liên quan đến Tag này.</li>
-    <li><strong>Bước 6:</strong> Người dùng nhấn nút "Lưu cấu hình".</li>
-    <li><strong>Bước 7:</strong> Hệ thống thực hiện validate dữ liệu, lưu cấu hình vào database, trượt đóng panel về bên phải, hiển thị thông báo thành công và cập nhật liên kết ngoài website.</li>
+<li><strong>Bước 1:</strong> Người dùng chọn tab "Cấu hình Thông tin hay (Tags Mapping)".</li>
+<li><strong>Bước 2:</strong> Người dùng nhấn nút "+ Thêm Thông tin hay mới" -&gt; Hệ thống hiển thị Modal nhỏ yêu cầu chọn một Tag có sẵn từ dropdown -&gt; Nhấn "Xác nhận".</li>
+<li><strong>Bước 3:</strong> Hệ thống mở <strong>Panel cấu hình trượt từ bên phải qua (Slide-over Drawer)</strong> chiếm 60% chiều rộng màn hình.</li>
+<li><strong>Bước 4:</strong> Giao diện panel chia làm 2 cột:</li>
+<li><strong>Cột Trái (Cấu hình):</strong> Hiển thị danh sách các SKU đang liên kết (người dùng nhấn "Quản lý SKUs" để mở modal bộ chọn SKU nâng cao); Toggle Bật/Tắt Quy tắc Fallback khi không khớp.</li>
+<li><strong>Cột Phải (Live Preview):</strong> Hiển thị trực quan khối "Thông tin hay" mô phỏng thực tế trên trang sản phẩm để người dùng kiểm tra nhanh các bài viết khớp Tag.</li>
+<li><strong>Bước 5:</strong> Trong modal chọn SKU nâng cao, người dùng tìm kiếm theo mã/tên SKU, lọc theo loại dịch vụ (Internet, Truyền hình, Camera, Thiết bị), chọn nhanh hoặc tick chọn thủ công các SKU áp dụng -&gt; Nhấn "Xác nhận chọn".</li>
+<li><strong>Bước 6:</strong> Người dùng kiểm tra Live Preview và nhấn nút "Lưu cấu hình" trong Drawer.</li>
+<li><strong>Bước 7:</strong> Hệ thống validate dữ liệu (bắt buộc chọn ít nhất 1 SKU), lưu cấu hình, hiển thị thông báo thành công và trượt đóng Drawer về bên phải.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Một bài viết hoặc FAQ có thể được gán vào nhiều Tag khác nhau. Một dòng sản phẩm cũng có thể ánh xạ đến nhiều Tag.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Tag phải viết dưới dạng không dấu, ngăn cách bằng dấu gạch ngang (VD: uu-dai-wifi-giga) và được quản lý tập trung tại Tab "Quản lý Tags".</td>
-        </tr>
-        <tr>
-            <td><strong>BR03</strong></td>
-            <td>Khi thêm mapping mới, người dùng bắt buộc phải chọn từ các tag đã định nghĩa sẵn.</td>
-        </tr>
-        <tr>
-            <td><strong>BR04</strong></td>
-            <td>Khi xóa một dòng mapping, hệ thống chỉ hủy ánh xạ Tag đó tới các SKU chứ không xóa Tag gốc khỏi danh mục Tag ở Tab 3.</td>
-        </tr>
-        <tr>
-            <td><strong>BR05</strong></td>
-            <td>**Quy tắc giao diện (UI/UX)**: Form cấu hình chi tiết của Tag sử dụng cơ chế Slide-over panel (trượt từ phải qua) chiếm 60% chiều rộng màn hình, cho phép thao tác nhanh mà không che khuất hoàn toàn danh sách bên dưới.</td>
-        </tr>
-    </tbody>
-</table>
-
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tên Tag</td><td>Y</td><td>Text</td><td>Mã tag nhận diện không dấu (VD: wifi-sky-family).</td></tr>
-        <tr><td>2</td><td>Gán bài viết</td><td>N</td><td>Multi-select</td><td>Chọn một hoặc nhiều bài viết tin tức liên quan.</td></tr>
-        <tr><td>3</td><td>Ánh xạ gói cước</td><td>Y</td><td>Multi-select</td><td>Chọn các gói cước (SKU) sẽ áp dụng hiển thị các bài viết này.</td></tr>
-    </tbody>
-</table>
-
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 11 -->
-<h2>11. Cài đặt hiển thị (Cấu hình Checkout đa kênh)</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng cấu hình chi tiết trang Checkout (chọn sản phẩm áp dụng, chu kỳ thanh toán, thiết bị đi kèm, phí lắp đặt) độc lập cho từng kênh bán (Global vs tdw, hifpt, fptvn).</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Quản trị viên hệ thống (Super Admin, Admin CMS).</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng chọn menu "Cài đặt Hiển thị" và click chỉnh sửa trên tab Cấu hình Checkout.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công và có quyền hạn Admin.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Cấu hình Checkout của kênh bán được cập nhật, hiển thị đúng luồng thanh toán ngoài website tương ứng.</td>
-    </tr>
-</table>
-
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
 <ul>
-    <li><strong>Bước 1:</strong> Người dùng truy cập CMS -> chọn menu "Cài đặt Hiển thị", tab "Cấu hình Checkout".</li>
-    <li><strong>Bước 2:</strong> Người dùng chọn Kênh bán cần cấu hình (Global hoặc các kênh con tdw, hifpt, fptvn).</li>
-    <li><strong>Bước 3:</strong> Người dùng chọn các mã SKU gói cước áp dụng từ danh sách cuộn dọc (danh sách này hỗ trợ tìm kiếm thời gian thực).</li>
-    <li><strong>Bước 4:</strong> Người dùng điền thông tin chi tiết: Thêm/Sửa/Bật/Tắt chu kỳ thanh toán, tích chọn thiết bị/dịch vụ đi kèm, điền ghi chú thanh toán và phí lắp đặt.</li>
-    <li><strong>Bước 5:</strong> Người dùng nhấn nút "Lưu".</li>
-    <li><strong>Bước 6:</strong> Hệ thống validate dữ liệu, ghi đè (nếu là tùy chỉnh riêng) hoặc đồng bộ dữ liệu thanh toán lên database và cập nhật giao diện ngoài website.</li>
+<li><strong>Quy tắc giao diện (UI/UX):</strong> Panel cấu hình chi tiết sử dụng cơ chế Slide-over (trượt từ phải sang trái) chiếm 60% chiều rộng màn hình, giúp biên tập viên thao tác nhanh mà không bị mất ngữ cảnh của danh sách bên dưới.</li>
+<li>Tên Tag và Danh sách SKUs liên kết là các trường bắt buộc (phải chọn ít nhất 1 SKU để lưu cấu hình).</li>
+<li><strong>Quy tắc Fallback:</strong> Khi bật toggle Quy tắc Fallback (ON), nếu tag đó tạm thời chưa có bài viết tin tức/FAQ nào được xuất bản, hệ thống sẽ tự động lấy các Bài viết Khuyến mãi Hot mặc định của hệ thống để hiển thị ngoài website, tránh để trống giao diện chân trang.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td>Bắt buộc chọn ít nhất 1 SKU gói cước áp dụng tại cấu hình Global để kích hoạt hiển thị cấu hình chi tiết bên dưới. Nếu không có SKU nào, hiển thị cảnh báo yêu cầu chọn SKU.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td>Danh sách SKU hiển thị dưới dạng list cuộn dọc giới hạn chiều cao tối đa 160px để tránh kéo giãn màn hình. Tích hợp thanh tìm kiếm thời gian thực theo mã và tên SKU.</td>
-        </tr>
-        <tr>
-            <td><strong>BR03</strong></td>
-            <td>Kênh con khi ở chế độ kế thừa (🌐 Dùng Global) sẽ bị vô hiệu hóa chỉnh sửa, các thông tin hiển thị mờ và ghi nhãn *(Kế thừa Global)*.</td>
-        </tr>
-        <tr>
-            <td><strong>BR04</strong></td>
-            <td>Khi có bất kỳ hành động chỉnh sửa nào trên kênh con, hệ thống tự động gọi hàm switchToCustom để nhân bản dữ liệu Global hiện tại sang và chuyển giao diện sang trạng thái Tùy chỉnh.</td>
-        </tr>
-    </tbody>
+<h3>Bảng mô tả trường thông tin (Screen Description - Tag Mapping Drawer)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tên Tag</td>
+<td>Y</td>
+<td>Text (Readonly)</td>
+<td>Tên Tag từ khóa đang cấu hình (đã được chọn sẵn từ danh sách).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SKUs liên kết</td>
+<td>Y</td>
+<td>Checkbox List</td>
+<td>Danh sách các gói cước (SKU) sẽ áp dụng hiển thị các bài viết có tag này (bắt buộc chọn tối thiểu 1 SKU).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Quy tắc Fallback</td>
+<td>N</td>
+<td>Toggle Switch</td>
+<td>Bật/Tắt chế độ tự động hiển thị tin khuyến mãi mặc định khi không tìm thấy bài viết nào khớp với tag (Bật/Tắt).</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th>STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Tìm kiếm SKU</td><td>N</td><td>Text</td><td>Ô tìm nhanh mã hoặc tên gói cước để chọn.</td></tr>
-        <tr><td>2</td><td>Chọn mã SKU</td><td>Y</td><td>Checkbox</td><td>Tick chọn các gói cước áp dụng cho trang Checkout của kênh.</td></tr>
-        <tr><td>3</td><td>Ghi chú thanh toán</td><td>N</td><td>Textarea</td><td>Dòng text ghi chú dưới phần thanh toán (tối đa 250 ký tự).</td></tr>
-        <tr><td>4</td><td>Chu kỳ thanh toán</td><td>Y</td><td>List</td><td>Thêm mới, sửa hoặc bật/tắt các chu kỳ (1T, 3T, 6T, 12T) áp dụng.</td></tr>
-        <tr><td>5</td><td>Thiết bị đi kèm</td><td>N</td><td>Checkbox List</td><td>Chọn các thiết bị (Modem WiFi, FPT Play Box) đi kèm mặc định.</td></tr>
-    </tbody>
+<p>---</p>
+<h2>11. Cài đặt hiển thị (Cấu hình Checkout đa kênh) - Thuộc Phân hệ Quản lý sản phẩm</h2>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng cấu hình chi tiết các thông tin hiển thị trên trang Checkout (SKUs áp dụng, chu kỳ thanh toán, mô tả khuyến mãi, thiết bị đi kèm, dịch vụ bổ sung, phương thức thanh toán và phí lắp đặt) độc lập cho từng kênh bán (Global vs tdw, hifpt, fptvn).</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Quản trị viên hệ thống (Super Admin, Admin CMS).</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng chọn menu "Cài đặt Hiển thị", tab "Cấu hình Checkout" và nhấp mở rộng vùng cấu hình của kênh tương ứng.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công và có quyền hạn Admin.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Cấu hình trang Checkout của kênh bán được cập nhật thành công, thay đổi luồng thanh toán ngoài website tương ứng ngay lập tức.</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
-
-<!-- CHỨC NĂNG 12 -->
-<h2>12. Quản lý tài khoản cá nhân & Đăng xuất</h2>
-<table class="usecase-table">
-    <tr>
-        <td class="label">Description</td>
-        <td>Chức năng cho phép người dùng tự cập nhật thông tin cá nhân (họ tên, email, ảnh đại diện), thay đổi mật khẩu tài khoản cá nhân trực tiếp trên giao diện CMS, và thực hiện đăng xuất khỏi hệ thống.</td>
-    </tr>
-    <tr>
-        <td class="label">Actor</td>
-        <td>Tất cả người dùng hệ thống (Admin, BTV, Duyệt bài, nhân sự vận hành...).</td>
-    </tr>
-    <tr>
-        <td class="label">Trigger</td>
-        <td>Người dùng click chọn mục "Thông tin tài khoản", "Đổi mật khẩu" hoặc "Đăng xuất" từ dropdown cá nhân ở góc phải trên của Header.</td>
-    </tr>
-    <tr>
-        <td class="label">Pre-condition</td>
-        <td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
-    </tr>
-    <tr>
-        <td class="label">Post-condition</td>
-        <td>Thông tin cá nhân hoặc mật khẩu được lưu cập nhật thành công; hoặc người dùng đăng xuất thành công khỏi phiên làm việc (hiển thị thông báo).</td>
-    </tr>
-</table>
-
-<p><strong>a. Workflow:</strong> N/A</p>
-<p><strong>b. Diễn giải các bước thực hiện:</strong></p>
 <ul>
-    <li><strong>Workflow Cập nhật Thông tin tài khoản:</strong>
-        <ul>
-            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
-            <li><strong>Bước 2:</strong> Người dùng chọn "Thông tin tài khoản", hệ thống chuyển hướng và hiển thị trang <strong>Thông tin tài khoản cá nhân</strong> trong vùng nội dung chính.</li>
-            <li><strong>Bước 3:</strong> Người dùng thay đổi Họ và tên mới, Email mới, hoặc nhập URL ảnh đại diện / Click chọn tải ảnh mới lên máy tính (giao diện hiển thị Live Preview tức thời).</li>
-            <li><strong>Bước 4:</strong> Người dùng nhấn nút "Lưu thay đổi".</li>
-            <li><strong>Bước 5:</strong> Hệ thống validate dữ liệu, cập nhật thông tin mới vào database và cập nhật avatar cùng tên hiển thị của người dùng ở góc phải trên Header đồng bộ.</li>
-        </ul>
-    </li>
-    <li><strong>Workflow Đổi mật khẩu:</strong>
-        <ul>
-            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
-            <li><strong>Bước 2:</strong> Người dùng chọn "Đổi mật khẩu", hệ thống chuyển hướng và hiển thị trang <strong>Thay đổi mật khẩu</strong> trong vùng nội dung chính.</li>
-            <li><strong>Bước 3:</strong> Người dùng nhập Mật khẩu hiện tại, Mật khẩu mới (tối thiểu 6 ký tự) và Xác nhận mật khẩu mới.</li>
-            <li><strong>Bước 4:</strong> Người dùng nhấn nút "Cập nhật mật khẩu".</li>
-            <li><strong>Bước 5:</strong> Hệ thống kiểm tra tính chính xác của mật khẩu hiện tại, tính trùng khớp của mật khẩu mới, cập nhật vào database và hiển thị Toast thông báo thành công.</li>
-        </ul>
-    </li>
-    <li><strong>Workflow Đăng xuất:</strong>
-        <ul>
-            <li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
-            <li><strong>Bước 2:</strong> Người dùng click chọn tùy chọn "Đăng xuất".</li>
-            <li><strong>Bước 3:</strong> Hệ thống ghi nhận yêu cầu, đóng menu dropdown, và hiển thị thông báo Toast: *"Đăng xuất tài khoản thành công! (Hệ thống Demo)"* để xác nhận hoàn tất phiên làm việc.</li>
-        </ul>
-    </li>
+<li><strong>Bước 1:</strong> Người dùng truy cập menu "Cài đặt Hiển thị", hệ thống hiển thị danh sách cấu hình Checkout được phân chia theo dạng Accordion của từng Kênh bán.</li>
+<li><strong>Bước 2:</strong> Trạng thái cấu hình của từng kênh con được ghi nhận trực quan bằng Badge màu sắc: <strong>🌐 Dùng Global</strong> (Kế thừa mặc định từ Global) hoặc <strong>✏️ Tùy chỉnh riêng</strong> (Có cấu hình ghi đè riêng).</li>
+<li><strong>Bước 3:</strong> Người dùng click vào tiêu đề Accordion để mở rộng vùng cấu hình của kênh bán:</li>
+<li><strong>Đối với Kênh Global (Cấu hình gốc):</strong> Người dùng tìm kiếm và chọn các mã SKU gói cước áp dụng từ danh sách cuộn dọc, điền Ghi chú thanh toán, Thêm/Sửa/Xóa các Chu kỳ thanh toán và nhập mô tả khuyến mãi tương ứng, tick chọn Thiết bị đi kèm &amp; Dịch vụ bổ sung mặc định, thêm mới và upload logo các Phương thức thanh toán, nhập Chú thích phí lắp đặt.</li>
+<li><strong>Đối với Kênh con (tdw, hifpt, fptvn):</strong> Mặc định khi chưa chỉnh sửa, giao diện sẽ ở chế độ kế thừa (🌐 Dùng Global), toàn bộ form bị mờ đi và vô hiệu hóa chỉnh sửa. Khi người dùng thực hiện bất kỳ thao tác chỉnh sửa nào, hệ thống tự động chuyển sang trạng thái Custom (nhân bản dữ liệu Global hiện tại sang kênh con để chỉnh sửa độc lập, badge chuyển thành ✏️ Tùy chỉnh riêng).</li>
+<li><strong>Bước 4:</strong> Người dùng nhấn nút "Lưu cấu hình" của kênh tương ứng để hoàn tất.</li>
 </ul>
-
-<p><strong>c. Business Rules:</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 100px;">Rule</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>BR01</strong></td>
-            <td><strong>Xác thực mật khẩu:</strong> Khi đổi mật khẩu, bắt buộc người dùng nhập đúng mật khẩu hiện tại đang sử dụng. Mật khẩu mới phải có tối thiểu 6 ký tự và trường xác nhận mật khẩu mới phải khớp 100% với mật khẩu mới.</td>
-        </tr>
-        <tr>
-            <td><strong>BR02</strong></td>
-            <td><strong>Thông tin bắt buộc:</strong> Họ tên và Email là các trường bắt buộc nhập, không được để trống khi lưu cập nhật thông tin cá nhân.</td>
-        </tr>
-        <tr>
-            <td><strong>BR03</strong></td>
-            <td><strong>Trạng thái Kênh & Vai trò:</strong> Các trường Kênh vận hành và Vai trò hệ thống chỉ hiển thị dạng đọc (Read-only), người dùng cá nhân không được phép tự ý thay đổi (chỉ có Admin hệ thống mới có quyền cấp phát thông qua phân quyền tài khoản).</td>
-        </tr>
-        <tr>
-            <td><strong>BR04</strong></td>
-            <td><strong>Avatar preview:</strong> Khi người dùng thay đổi URL ảnh hoặc upload file ảnh lên, vùng xem trước avatar (preview) phải hiển thị chính xác ảnh mới. Nếu không có ảnh, hệ thống hiển thị hai chữ cái đầu viết hoa của tên người dùng làm ký tự đại diện.</td>
-        </tr>
-    </tbody>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li><strong>Cơ chế kế thừa (Inheritance):</strong> Kênh con để trống sẽ kế thừa hoàn toàn cấu hình Global. Khi có tùy chỉnh riêng, hệ thống sẽ ghi đè và ưu tiên cấu hình riêng của kênh con đó.</li>
+<li><strong>Ràng buộc SKU:</strong> Đối với cấu hình Global, bắt buộc người dùng chọn ít nhất 1 SKU gói cước để kích hoạt hiển thị các cấu hình chi tiết bên dưới. Nếu bỏ chọn toàn bộ SKU, hệ thống hiển thị cảnh báo yêu cầu chọn SKU và khóa form bên dưới.</li>
+<li><strong>Danh sách SKU hiển thị:</strong> Sử dụng khung cuộn dọc giới hạn chiều cao tối đa 160px để tối ưu giao diện (UX), tích hợp ô tìm nhanh real-time theo mã/tên SKU.</li>
+<li><strong>Chu kỳ thanh toán:</strong> Hỗ trợ cấu hình động: loại chu kỳ (1T, 3T, 6T, 12T...), tên hiển thị, mô tả khuyến mãi (VD: "Tặng 1 tháng cước"), phí lắp đặt tương ứng và trạng thái hoạt động.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin (Screen Description - Checkout Config Form)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Tìm nhanh SKU</td>
+<td>N</td>
+<td>Text</td>
+<td>Ô tìm kiếm nhanh mã hoặc tên gói cước trong danh sách SKU.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Chọn mã SKU</td>
+<td>Y (ở Global)</td>
+<td>Checkbox List</td>
+<td>Tick chọn các gói cước áp dụng cho trang Checkout (Global bắt buộc chọn tối thiểu 1 SKU).</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ghi chú thanh toán</td>
+<td>N</td>
+<td>Textarea</td>
+<td>Dòng text ghi chú nhỏ hiển thị dưới phần tóm tắt thanh toán (tối đa 250 ký tự).</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chu kỳ thanh toán</td>
+<td>Y</td>
+<td>List</td>
+<td>Danh sách chu kỳ thanh toán áp dụng, bao gồm: Loại chu kỳ, Tên hiển thị, Khuyến mãi, Phí lắp đặt, Trạng thái.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thiết bị đi kèm</td>
+<td>N</td>
+<td>Checkbox List</td>
+<td>Các thiết bị modem/camera trang bị mặc định đi kèm gói cước (VD: ONT 1 port, Wi-Fi 6, IQ3).</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Dịch vụ bổ sung</td>
+<td>N</td>
+<td>Checkbox List</td>
+<td>Các dịch vụ giá trị gia tăng mua kèm (VD: Fsafe, Ultra Fast, FPT Play VIP).</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Phương thức thanh toán</td>
+<td>N</td>
+<td>List</td>
+<td>Cấu hình danh sách cổng thanh toán (Tên, Ảnh logo, Mô tả ngắn, Hoạt động).</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Chú thích phí lắp đặt</td>
+<td>N</td>
+<td>Text</td>
+<td>Dòng chữ chú thích nhỏ hiển thị dưới mục Phí lắp đặt ở trang Checkout.</td>
+</tr>
+</tbody>
 </table>
 
-<p><strong>d. Wireframe, screen description:</strong></p>
-<p><strong>Bảng mô tả trường thông tin Profile & Mật khẩu (Screen Description - Profile Form):</strong></p>
-<table class="data-table">
-    <thead>
-        <tr>
-            <th style="width: 50px;">STT</th>
-            <th>Tên trường</th>
-            <th>Bắt buộc? (Y/N)</th>
-            <th>Format</th>
-            <th>Mô tả</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td>1</td><td>Ảnh đại diện (URL)</td><td>N</td><td>Text/File</td><td>Đường dẫn URL ảnh đại diện hoặc upload file trực tiếp để cập nhật avatar.</td></tr>
-        <tr><td>2</td><td>Họ và tên</td><td>Y</td><td>Text</td><td>Họ và tên đầy đủ hiển thị trên hệ thống.</td></tr>
-        <tr><td>3</td><td>Email</td><td>Y</td><td>Text</td><td>Địa chỉ email liên hệ.</td></tr>
-        <tr><td>4</td><td>Kênh vận hành</td><td>Y</td><td>Readonly</td><td>Kênh bán người dùng đang trực tiếp quản lý/vận hành dữ liệu (VD: FPT Telecom, FPT Play).</td></tr>
-        <tr><td>5</td><td>Vai trò</td><td>Y</td><td>Readonly</td><td>Nhóm quyền hạn của tài khoản trên CMS.</td></tr>
-        <tr><td>6</td><td>Mật khẩu cũ</td><td>Y (khi đổi pass)</td><td>Password</td><td>Nhập mật khẩu hiện tại của tài khoản để xác thực.</td></tr>
-        <tr><td>7</td><td>Mật khẩu mới</td><td>Y (khi đổi pass)</td><td>Password</td><td>Mật khẩu mới mong muốn thay đổi (tối thiểu 6 ký tự).</td></tr>
-        <tr><td>8</td><td>Xác nhận mật khẩu</td><td>Y (khi đổi pass)</td><td>Password</td><td>Xác nhận lại mật khẩu mới vừa nhập.</td></tr>
-    </tbody>
+<p>---</p>
+<h2>12. Quản lý tài khoản cá nhân &amp; Đăng xuất</h2>
+<table class='usecase-table'>
+<thead><tr>
+<th>Description</th>
+<th>Chức năng cho phép người dùng tự cập nhật thông tin cá nhân (họ tên, email, ảnh đại diện), thay đổi mật khẩu tài khoản cá nhân trực tiếp trên giao diện CMS, và thực hiện đăng xuất khỏi hệ thống.</th>
+</tr></thead><tbody>
+<tr>
+<td class='label'>Actor</td>
+<td>Tất cả người dùng hệ thống (Admin, BTV, Duyệt bài, nhân sự vận hành...).</td>
+</tr>
+<tr>
+<td class='label'>Trigger</td>
+<td>Người dùng click chọn mục "Thông tin tài khoản", "Đổi mật khẩu" hoặc "Đăng xuất" từ dropdown cá nhân ở góc phải trên của Header.</td>
+</tr>
+<tr>
+<td class='label'>Pre-condition</td>
+<td>Người dùng đã đăng nhập thành công vào hệ thống.</td>
+</tr>
+<tr>
+<td class='label'>Post-condition</td>
+<td>Submited...</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
+<ul>
+<li><strong>Workflow Cập nhật Thông tin tài khoản:</strong></li>
+<li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+<li><strong>Bước 2:</strong> Người dùng chọn "Thông tin tài khoản", hệ thống chuyển hướng và hiển thị trang <strong>Thông tin tài khoản cá nhân</strong> trong vùng nội dung chính.</li>
+<li><strong>Bước 3:</strong> Người dùng thay đổi Họ và tên mới, Email mới, hoặc nhập URL ảnh đại diện / Click chọn tải ảnh mới lên máy tính (giao diện hiển thị Live Preview tức thời).</li>
+<li><strong>Bước 4:</strong> Người dùng nhấn nút "Lưu thay đổi".</li>
+<li><strong>Bước 5:</strong> Hệ thống validate dữ liệu, cập nhật thông tin mới vào database và cập nhật avatar cùng tên hiển thị của người dùng ở góc phải trên Header đồng bộ.</li>
+</ul>
+<ul>
+<li><strong>Workflow Đổi mật khẩu:</strong></li>
+<li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+<li><strong>Bước 2:</strong> Người dùng chọn "Đổi mật khẩu", hệ thống chuyển hướng và hiển thị trang <strong>Thay đổi mật khẩu</strong> trong vùng nội dung chính.</li>
+<li><strong>Bước 3:</strong> Người dùng nhập Mật khẩu hiện tại, Mật khẩu mới (tối thiểu 6 ký tự) và Xác nhận mật khẩu mới.</li>
+<li><strong>Bước 4:</strong> Người dùng nhấn nút "Cập nhật mật khẩu".</li>
+<li><strong>Bước 5:</strong> Hệ thống kiểm tra tính chính xác của mật khẩu hiện tại, tính trùng khớp của mật khẩu mới, cập nhật vào database và hiển thị Toast thông báo thành công.</li>
+</ul>
+<ul>
+<li><strong>Workflow Đăng xuất:</strong></li>
+<li><strong>Bước 1:</strong> Người dùng click vào Tên/Avatar cá nhân ở góc phải trên Header, hệ thống hiển thị Dropdown menu.</li>
+<li><strong>Bước 2:</strong> Người dùng click chọn tùy chọn "Đăng xuất".</li>
+<li><strong>Bước 3:</strong> Hệ thống ghi nhận yêu cầu, đóng menu dropdown, và hiển thị thông báo Toast: <em>"Đăng xuất tài khoản thành công! (Hệ thống Demo)"</em> để xác nhận hoàn tất phiên làm việc.</li>
+</ul>
+<h3>Quy tắc nghiệp vụ (Business Rules)</h3>
+<ul>
+<li><strong>Xác thực mật khẩu:</strong> Khi đổi mật khẩu, bắt buộc người dùng nhập đúng mật khẩu hiện tại đang sử dụng. Mật khẩu mới phải có tối thiểu 6 ký tự và trường xác nhận mật khẩu mới phải khớp 100% với mật khẩu mới.</li>
+<li><strong>Thông tin bắt buộc:</strong> Họ tên và Email là các trường bắt buộc nhập, không được để trống khi lưu cập nhật thông tin cá nhân.</li>
+<li><strong>Trạng thái Kênh &amp; Vai trò:</strong> Các trường Kênh vận hành và Vai trò hệ thống chỉ hiển thị dạng đọc (Read-only), người dùng cá nhân không được phép tự ý thay đổi (chỉ có Admin hệ thống mới có quyền cấp phát thông qua phân quyền tài khoản).</li>
+<li><strong>Avatar preview:</strong> Khi người dùng thay đổi URL ảnh hoặc upload file ảnh lên, vùng xem trước avatar (preview) phải hiển thị chính xác ảnh mới. Nếu không có ảnh, hệ thống hiển thị hai chữ cái đầu viết hoa của tên người dùng làm ký tự đại diện.</li>
+</ul>
+<h3>Bảng mô tả trường thông tin Profile &amp; Mật khẩu (Screen Description - Profile Form)</h3>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên trường</th>
+<th>Bắt buộc? (Y/N)</th>
+<th>Format</th>
+<th>Mô tả</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Ảnh đại diện (URL)</td>
+<td>N</td>
+<td>Text/File</td>
+<td>Đường dẫn URL ảnh đại diện hoặc upload file trực tiếp để cập nhật avatar.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Họ và tên</td>
+<td>Y</td>
+<td>Text</td>
+<td>Họ và tên đầy đủ hiển thị trên hệ thống.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Email</td>
+<td>Y</td>
+<td>Text</td>
+<td>Địa chỉ email liên hệ.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Kênh vận hành</td>
+<td>Y</td>
+<td>Readonly</td>
+<td>Kênh bán người dùng đang trực tiếp quản lý/vận hành dữ liệu (VD: FPT Telecom, FPT Play).</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Vai trò</td>
+<td>Y</td>
+<td>Readonly</td>
+<td>Nhóm quyền hạn của tài khoản trên CMS.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Mật khẩu cũ</td>
+<td>Y (khi đổi pass)</td>
+<td>Password</td>
+<td>Nhập mật khẩu hiện tại của tài khoản để xác thực.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Mật khẩu mới</td>
+<td>Y (khi đổi pass)</td>
+<td>Password</td>
+<td>Mật khẩu mới mong muốn thay đổi (tối thiểu 6 ký tự).</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Xác nhận mật khẩu</td>
+<td>Y (khi đổi pass)</td>
+<td>Password</td>
+<td>Xác nhận lại mật khẩu mới vừa nhập.</td>
+</tr>
+</tbody>
 </table>
 
-<div class="page-break"></div>
-
+<p>---</p>
 <h1>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</h1>
 <ul>
-    <li><strong>Hiệu năng:</strong> Tốc độ tải dữ liệu danh sách SKU và cập nhật cấu hình checkout phải dưới 1 giây. Việc render kéo thả không gây trễ hoặc đơ trình duyệt.</li>
-    <li><strong>Bảo mật:</strong> Kiểm tra token xác thực người dùng và quyền hạn (RBAC) trên Server trước khi cho phép lưu cấu hình hoặc cập nhật thông tin trang.</li>
-    <li><strong>Trải nghiệm (UI/UX):</strong> Giao diện CMS được xây dựng theo chuẩn Dark Mode mượt mà, phân tách các kênh con rõ ràng, trạng thái kế thừa/tùy chỉnh riêng trực quan bằng màu sắc tương phản.</li>
+<li><strong>Hiệu năng:</strong> Tốc độ tải dữ liệu danh sách SKU và cập nhật cấu hình checkout phải dưới 1 giây. Việc render kéo thả không gây trễ hoặc đơ trình duyệt.</li>
+<li><strong>Bảo mật:</strong> Kiểm tra token xác thực người dùng và quyền hạn (RBAC) trên Server trước khi cho phép lưu cấu hình hoặc cập nhật thông tin trang.</li>
+<li><strong>Trải nghiệm (UI/UX):</strong> Giao diện CMS được xây dựng theo chuẩn Dark Mode mượt mà, phân tách các kênh con rõ ràng, trạng thái kế thừa/tùy chỉnh riêng trực quan bằng màu sắc tương phản.</li>
 </ul>
-
-<div class="page-break"></div>
-
+<p>---</p>
 <h1>V. PHỤ LỤC</h1>
 <ul>
-    <li><strong>Link Wireframe tham chiếu:</strong> <a href="file:///c:/Users/Admin/OneDrive/Desktop/FPT/docs/wireframe_module_1_cms.html">wireframe_module_1_cms.html</a></li>
-    <li><strong>Tài liệu tham khảo hệ thống:</strong> Thiết kế hệ thống Product Hub (PDH) - FPT Telecom.</li>
+<li><strong>Link Wireframe tham chiếu:</strong> wireframe<em>module</em>1_cms.html</li>
+<li><strong>Tài liệu tham khảo hệ thống:</strong> Thiết kế hệ thống Product Hub (PDH) - FPT Telecom.</li>
+</ul>
+<p>---</p>
+<h1>VI. PHỤ LỤC VI: ĐẶC TẢ CẤU TRÚC &amp; CÁC SECTIONS CỦA 5 LDP TEMPLATE TIÊU CHUẨN</h1>
+<h2>1. Nguyên tắc thiết kế giao diện chung cho LDP (Layout, Mobile &amp; Background)</h2>
+<p>Để đảm bảo tính đồng bộ hệ thống và tối ưu hóa trải nghiệm người dùng (UX) trên đa nền tảng, tất cả 5 template LDP tiêu chuẩn đều phải tuân thủ các nguyên tắc thiết kế chung sau:</p>
+<h3>a. Cấu hình Ảnh nền / Màu nền toàn trang (Page Background Config)</h3>
+<ul>
+<li>Hệ thống CMS cung cấp tính năng cấu hình nền chung cho toàn bộ Landing Page (Page-wide Background) tại phần thiết lập LDP Builder.</li>
+<li><strong>Trường cấu hình:</strong> Vận hành có thể upload tệp ảnh trực tiếp tại trường <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Ảnh nền toàn trang (Page Background Image)</code> (không hỗ trợ dán URL ảnh thủ công) và chọn mã màu tại trường <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Màu nền toàn trang (Page Background Color)</code>.</li>
+<li><strong>Hiệu ứng hiển thị:</strong></li>
+<li>Ảnh nền toàn trang sẽ trải dài liên tục trên toàn bộ phần thân (Body) của Landing Page, không bao phủ hay ảnh hưởng đến Header và Footer. Thuộc tính CSS mặc định: <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">background-size: cover; background-attachment: fixed; background-position: center;</code>.</li>
+<li>Nếu không upload ảnh nền, hệ thống sẽ sử dụng màu nền được cấu hình.</li>
+<li>Nếu cả hai trường đều để trống, hệ thống sẽ tự động áp dụng màu nền mặc định theo từng loại Template:</li>
+<li><strong>LDP SA - FPT Play:</strong> Mặc định sử dụng màu tím sẫm (Deep Purple <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#1a0933</code> hoặc dải gradient tím/đen) làm màu nền trải dài liên tục trên phần thân (Body) kết hợp ảnh pattern thể thao chìm. Giao diện phần thân luôn đảm bảo tính liền mạch, không bị đứt đoạn màu nền giữa các section.</li>
+<li><strong>LDP Wi-Fi 7:</strong> Mặc định sử dụng màu xám tối / đen sang trọng (<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#111111</code>).</li>
+<li><strong>LDP Camera, Internet, Thu Lead:</strong> Mặc định sử dụng màu trắng sáng (<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#ffffff</code>) hoặc xám nhạt (<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#f8f9fa</code>).</li>
+</ul>
+<h3>b. Đặc tả hiển thị trên Thiết bị di động (Mobile Responsive Layouts)</h3>
+<ul>
+<li><strong>Tự động chuyển đổi bố cục (Grid-to-Slider/Single-column):</strong></li>
+<li>Các Section hiển thị dạng lưới (Grid) từ 3-4 cột trên Desktop (như USP, Tính năng, Giải thưởng, Feedback, và đặc biệt là danh sách gói cước) khi chuyển sang giao diện Mobile sẽ tự động chuyển đổi sang dạng <strong>Single Column</strong> (1 cột cuộn dọc) hoặc <strong>Swipeable Carousel</strong> (Slider cuộn ngang hỗ trợ vuốt tay, kèm dấu chấm tròn chỉ số trang ở dưới) để tránh làm giao diện bị bóp nhỏ hoặc kéo dài trang quá mức.</li>
+<li><strong>Tách biệt hình ảnh Banner Hero:</strong></li>
+<li>Đối với các Section Hero banner đầu trang, bắt buộc Vận hành phải tải lên 2 phiên bản ảnh: <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Ảnh nền Desktop</code> (tối ưu kích thước 1920x800px) và <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Ảnh nền Mobile</code> (tối ưu kích thước 768x800px) để đảm bảo hình ảnh không bị méo, text trên banner mobile rõ ràng, dễ đọc.</li>
+<li><strong>Tối ưu hóa các dải Countdown và Sticky Bar:</strong></li>
+<li>Trên giao diện Mobile, dải countdown hẹn giờ và sticky bottom bar sẽ tự động thu gọn các khoảng đệm (padding) và cỡ chữ, ẩn bớt các mô tả phụ không cần thiết, chỉ hiển thị tiêu đề chính, bộ đếm ngược và nút CTA hành động để tiết kiệm diện tích màn hình.</li>
+<li><strong>Bảng so sánh (Compare Table):</strong></li>
+<li>Các bảng so sánh thông số (như bảng so sánh Wi-Fi, bảng giá FPT Play) trên Mobile sẽ tự động kích hoạt thanh cuộn ngang (Horizontal scroll table) hoặc chuyển thành dạng slide chọn 1-1 giữa các đối tượng để người dùng dễ so khớp.</li>
+</ul>
+<h3>c. Quy định giới hạn số lượng ảnh tải lên &amp; hiển thị (Image Upload &amp; Display Limits)</h3>
+<p>Để tối ưu hóa tốc độ tải trang (Page Load Speed/Lighthouse SEO), đảm bảo tính ổn định của hệ thống và tránh lỗi tràn vỡ bố cục giao diện, CMS áp dụng quy tắc giới hạn nghiêm ngặt số lượng ảnh tải lên và hiển thị đối với từng khối component như sau:</p>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Khối Component / Section</th>
+<th>Số lượng ảnh tối đa cho phép tải lên</th>
+<th>Bố cục hiển thị ngoài trang (Desktop)</th>
+<th>Bố cục hiển thị ngoài trang (Mobile)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><strong>Banner Hero - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code>...)</td>
+<td>- 1 ảnh nền Desktop (1920x800px)<br/>- 1 ảnh nền Mobile (768x800px)</td>
+<td>Phủ kín toàn chiều rộng khối đầu trang (100% width).</td>
+<td>Phủ kín toàn chiều rộng khối đầu trang (100% width).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Đặc tính nổi bật / Ưu đãi - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code>...)</td>
+<td>Tối đa <strong>4 ảnh/icon</strong> (mỗi đặc tính 1 ảnh/icon, chỉ hỗ trợ upload tệp trực tiếp).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang (Swipeable) hoặc xếp dọc 1 cột.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Quy trình / Các bước thực hiện - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code>...)</td>
+<td>Cố định <strong>3 ảnh/icon</strong> (mỗi bước 1 ảnh/icon).</td>
+<td>Xếp ngang 3 cột tương ứng 3 bước.</td>
+<td>Xếp dọc 1 cột từ bước 1 đến bước 3.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Khối Chi tiết FPT Camera AI</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-detail</code>)</td>
+<td>Tối đa <strong>4 ảnh</strong> tính năng phụ cho mỗi dòng sản phẩm.</td>
+<td>Dạng Grid lưới cố định 2x2 ở bên phải ảnh sản phẩm chính.</td>
+<td>Dạng Slider cuộn ngang hỗ trợ vuốt tay.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Card combo thiết bị - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code>)</td>
+<td>Tối đa <strong>6 ảnh combo</strong> (mỗi combo 1 ảnh sản phẩm).</td>
+<td>Dạng lưới Grid ngang 3 cột.</td>
+<td>Dạng Slider cuộn ngang (Swipeable).</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Giải thưởng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code>)</td>
+<td>Tối đa <strong>10 ảnh giải thưởng</strong> (mỗi giải thưởng 1 ảnh cúp/chứng nhận).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Bộ sưu tập Video - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code>)</td>
+<td>Tối đa <strong>10 ảnh Thumbnail</strong> (tương ứng tối đa 10 video review).</td>
+<td>Dạng lưới Grid hoặc hàng ngang có thể scroll ngang.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Danh sách ưu đãi (Slider) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code>)</td>
+<td>Tối đa <strong>12 ảnh banner</strong> khuyến mãi.</td>
+<td>Dạng Slider (Carousel) trượt ngang tự động.</td>
+<td>Dạng Slider trượt ngang tự động, hiển thị duy nhất 1 banner.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Slide trượt đánh giá khách hàng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code>)</td>
+<td>Tối đa <strong>10 ảnh đại diện (avatar)</strong> khách hàng.</td>
+<td>Dạng Slider hiển thị 3 nhận xét cùng lúc.</td>
+<td>Dạng Slider hiển thị duy nhất 1 nhận xét, vuốt ngang.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Đối tượng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code>)</td>
+<td>Tối đa <strong>4 ảnh đối tượng</strong> (mỗi nhóm đối tượng 1 ảnh).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Khối Danh mục nội dung giải trí</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">categories-sa</code>)</td>
+<td>- Tối đa <strong>3 ảnh Banner tab</strong><br/>- Tối đa <strong>12 ảnh Poster phim</strong> cho mỗi tab.</td>
+<td>- Banner tab hiển thị dạng dải lớn đầu tab.<br/>- Poster phim xếp dạng lưới Grid 4-6 cột.</td>
+<td>- Banner tab hiển thị dạng dải nhỏ.<br/>- Poster phim chuyển thành Slider cuộn ngang nhiều hàng.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Khối Thể thao trực tiếp</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sports-sa</code>)</td>
+<td>Tối đa <strong>6 ảnh/logo giải đấu</strong>.</td>
+<td>Dạng lưới Grid 3 cột x 2 hàng.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Khối Dàn bình luận viên</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">commentators-sa</code>)</td>
+<td>Tối đa <strong>8 ảnh đại diện</strong> bình luận viên.</td>
+<td>Dạng lưới Grid 4 cột x 2 hàng.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>d. Ràng buộc độ dài các trường dữ liệu và hành vi hệ thống (Data Length Restrictions &amp; System Behavior)</h3>
+<p>Để đảm bảo tính toàn vẹn dữ liệu, tránh lỗi vỡ layout trên các thiết bị và tối ưu hóa SEO, CMS áp dụng các quy định ràng buộc độ dài đầu vào trên giao diện quản trị (UI) như sau:</p>
+<ul>
+<li><strong>Tất cả các trường văn bản đầu vào trên CMS phải có thuộc tính <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">maxlength</code> tương ứng để chặn cứng hành vi nhập vượt quá giới hạn trên UI.</strong></li>
+<li><strong>Ngoại lệ đối với Trình soạn thảo văn bản (Text Editor):</strong> Đối với các trường sử dụng Trình soạn thảo văn bản Rich Text (Rich Text Editor / WYSIWYG) để soạn thảo văn bản định dạng (như Nội dung chi tiết bài viết, Câu trả lời FAQ...), hệ thống <strong>sẽ không áp dụng giới hạn số lượng ký tự nhập vào</strong> để đảm bảo tính linh hoạt khi định cấu hình.</li>
+</ul>
+<h4>Quy định chung về giới hạn ký tự (LDP Sections &amp; Components):</h4>
+<ul>
+<li><strong>Nhãn ngắn / Badge:</strong> Tối đa <strong>20 ký tự</strong> (Chặn cứng khi nhập).</li>
+<li><strong>Tiêu đề ngắn:</strong> Tên gói cước, tiêu đề đặc tính, tên combo, tiêu đề video... Tối đa <strong>50 ký tự</strong> (Chặn cứng khi nhập).</li>
+<li><strong>Tiêu đề chính / Headline / H1:</strong> Tiêu đề section lớn. Tối đa <strong>80 ký tự</strong> (Chặn cứng khi nhập).</li>
+<li><strong>Mô tả ngắn:</strong> Mô tả phụ dưới tiêu đề, mô tả gói cước, mô tả bước... Tối đa <strong>150 ký tự</strong> (Hiển thị bộ đếm ngược và chặn cứng khi nhập).</li>
+<li><strong>Mô tả chi tiết:</strong> Nội dung feedback khách hàng, đoạn văn bản mô tả. Tối đa <strong>300 ký tự</strong> (Hiển thị bộ đếm ngược ký tự).</li>
+</ul>
+<h4>SEO Metadata (Cấu hình SEO cho Landing Page):</h4>
+<ul>
+<li><strong>Meta Title:</strong> Khuyến nghị dưới <strong>60 ký tự</strong> (Hiển thị cảnh báo màu vàng khi vượt quá và chặn cứng tại <strong>100 ký tự</strong>).</li>
+<li><strong>Meta Description:</strong> Khuyến nghị độ dài tối ưu từ <strong>150 - 160 ký tự</strong> (Hiển thị bộ đếm ký tự thời gian thực và chặn cứng tại <strong>200 ký tự</strong>).</li>
+</ul>
+<h2>2. Thư viện Khối Component Tái sử dụng (Shared Component Library)</h2>
+<p>Để tối ưu hóa việc phát triển và cho phép Vận hành tái cấu hình, tái sử dụng linh hoạt các phần tử giao diện trên bất kỳ Landing Page nào, toàn bộ hệ thống LDP Builder được xây dựng dựa trên <strong>16 khối component độc lập</strong> sau:</p>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Khối Component</th>
+<th>Mã Component</th>
+<th>Khả năng Tái sử dụng &amp; Phạm vi áp dụng</th>
+<th>Mô tả &amp; Các trường cấu hình chính có thể chỉnh sửa (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><strong>Banner Hero - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code>...)</td>
+<td>banner-cam-hero</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các Landing Page.</td>
+<td>Khối biểu ngữ lớn đầu trang. Cấu hình: Ảnh nền (Background Image) (1920×800px - Chỉ hỗ trợ upload), Ảnh nền Mobile (768x800px - Chỉ hỗ trợ upload), URL ảnh nền (Desktop &amp; Mobile), Text Nút CTA chính (Tối đa 30 ký tự), URL Nút CTA chính (Tối đa 255 ký tự), Text Nút CTA phụ (Tối đa 30 ký tự), URL Nút CTA phụ (Tối đa 255 ký tự - cho phép bật/tắt 2 nút).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Đặc tính nổi bật / Ưu đãi - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code>...)</td>
+<td>info-cam-usp</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các LDP để tối ưu code.</td>
+<td>Khối đặc tính nổi bật/ ưu đãi dạng lưới (Grid) 4 cột. Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Icon/Ảnh cho từng lợi ích, Tiêu đề ngắn (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 200 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Card gói cước tiêu chuẩn (Internet) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code>...)</td>
+<td>products-inet</td>
+<td><strong>Tái sử dụng chung</strong> cho LDP Internet, Wi-Fi 7 và LDP Thu Lead.</td>
+<td>Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tốc độ Download, Tốc độ Upload, Icon Tốc độ, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Card gói cước tiêu chuẩn (SA) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code>...)</td>
+<td>products-sa</td>
+<td><strong>Đặc thù</strong> cho FPT Play.</td>
+<td>Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Card combo thiết bị - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code>...)</td>
+<td>combo-cam</td>
+<td><strong>Tái sử dụng</strong> cho các trang bán thiết bị kèm gói dịch vụ (như LDP Camera AI).</td>
+<td>Khối sản phẩm bán thiết bị vật lý kết hợp dịch vụ đi kèm (giới hạn 100). Cấu hình:<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (không chỉnh sửa), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa (không chỉnh sửa), Giá khuyến mãi (không chỉnh sửa), Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (không chỉnh sửa - Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Bộ đếm ngược - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code>...)</td>
+<td>timer-camp-countdown</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang có thời hạn chiến dịch/sự kiện.</td>
+<td>Khối đồng hồ đếm ngược. Hỗ trợ 2 chế độ hiển thị: Dính liền chân Hero Banner (Case 1) hoặc Dải countdown độc lập giữa trang (Case 2). Cấu hình:<br/>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Form popup thu thập Lead - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code>...)</td>
+<td>form-lead-popup</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các hành động thu lead của LDP.</td>
+<td>Modal popup thu thập thông tin đăng ký. Cấu hình: Tiêu đề popup (Tối đa 80 ký tự), mô tả phụ (Tối đa 150 ký tự), text nút Submit (Tối đa 30 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Bộ sưu tập Video - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code>...)</td>
+<td>reviews-lead</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang cần chèn review của KOLs/khách hàng.</td>
+<td>Khối hiển thị video dạng Grid (tối đa 10 video). Cấu hình mỗi video gồm: Ảnh thumbnail, Tiêu đề section video (Tối đa 80 ký tự), URL Video (Tối đa 255 ký tự), có thể scroll ngang được, Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Slide trượt đánh giá khách hàng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code>...)</td>
+<td>feedback-lead</td>
+<td><strong>Tái sử dụng chung</strong> cho nhận xét của khách hàng.</td>
+<td>Khối slider nhận xét của khách hàng (tối đa 10 đánh giá). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Avatar, Tên khách hàng (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Nội dung nhận xét (Tối đa 300 ký tự), Đánh giá số sao (1-5 sao), Khu vực / Phụ đề (Tối đa 50 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Accordion câu hỏi thường gặp (FAQ) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code>...)</td>
+<td>faq-cam</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang cần giải đáp thắc mắc khách hàng.</td>
+<td>Khối câu hỏi thường gặp dạng đóng/mở (tối đa 6 câu). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Dropdown (Danh mục) liên kết trực tiếp theo ID từ kho FAQ chung của hệ thống (không nhập text trực tiếp ngoài CMS), Upload bg bên phải (Desktop &amp; Mobile - Tối đa 255 ký tự) + Link URL (Tối đa 255 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Thanh thông báo neo chân trang (Sticky Bar) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code>...)</td>
+<td>sticky-cam</td>
+<td><strong>Tái sử dụng chung</strong> để neo giữ nút đăng ký ở chân trang.</td>
+<td>Thanh neo dưới cùng màn hình. Cấu hình: Ảnh nền banner (cuối trang) (tối đa 1MB), Link URL (Tối đa 255 ký tự).</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Quy trình / Các bước thực hiện - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code>...)</td>
+<td>procedure-lead</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần mô tả quy trình mua/lắp đặt.</td>
+<td>Khối hiển thị quy trình (mặc định 3 bước). Cấu hình:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Mỗi bước gồm: Icon bước, Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự)<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Dải chữ chạy ngang đăng ký thành công - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">runner-lead-proof</code>...)</td>
+<td>runner-lead-proof</td>
+<td><strong>Tái sử dụng chung</strong> để tạo hiệu ứng kích thích mua hàng (Social Proof).</td>
+<td>Dải chữ chạy ngang vô tận (marquee style) hiển thị thông báo đăng ký thành công ảo (ví dụ: "Nguyễn Văn A - vừa đăng ký gói Lux..."). Cấu hình: Danh sách Tên khách hàng, Khu vực, nội dung, tốc độ chạy, Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Danh sách ưu đãi (Slider) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code>...)</td>
+<td>promo-inet</td>
+<td><strong>Tái sử dụng chung</strong> cho các banner quảng cáo khuyến mãi phụ.</td>
+<td>Khối slider banner trượt (tối đa 12). Cấu hình: Tiêu đề section (Tối đa 80 ký tự), ảnh banner (chỉ hỗ trợ upload), URL liên kết khi click (Tối đa 255 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Đối tượng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code>...)</td>
+<td>targets-camp</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần phân loại đối tượng khách hàng.</td>
+<td>Khối đối tượng gồm 4 card: Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Danh sách nhóm đối tượng. Mỗi nhóm gồm: Ảnh đối tượng, Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>Giải thưởng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code>...)</td>
+<td>awards-cam</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần vinh danh chất lượng thương hiệu.</td>
+<td>Tiêu đề Section giải thưởng (Tối đa 80 ký tự), Danh sách giải thưởng vinh danh (Tối đa 10 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng, Màu nền, Ảnh bg.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>3. Đặc tả cấu trúc chi tiết theo từng Template</h2>
+<h3>a. Template: LDP Camera AI (8 Sections)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Giới thiệu và thúc đẩy đăng ký/chọn mua thiết bị FPT Camera AI cùng các gói lưu trữ Cloud đi kèm.</li>
+<li><strong>Danh sách các Sections và các trường thông tin cấu hình:</strong></li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Section</th>
+<th>Mã Section (ID)</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Banner hero - Camera AI</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Info - Đặc tính nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Tiêu đề chính Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 công nghệ nổi bật. Với mỗi công nghệ: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Detail - Chi tiết Camera</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-detail</code></td>
+<td>- Tiêu đề Section (Tối đa 80 ký tự)<br/>- Cấu hình chi tiết 2 dòng sản phẩm Camera chính (Trong nhà &amp; Ngoài trời). Với mỗi dòng: Tên sản phẩm (Tối đa 50 ký tự), Mô tả phụ (Subtitle - Tối đa 150 ký tự), Ảnh sản phẩm chính, Giá bán lẻ thiết bị, Nhãn ưu đãi (Badge - Tối đa 20 ký tự), Text nút CTA (Tối đa 30 ký tự), URL nút CTA (Tối đa 255 ký tự), danh sách ảnh tính năng phụ (cho phép upload tối đa 4 ảnh; hiển thị dạng Grid cố định 2x2 trên Desktop, hiển thị dạng Slider cuộn ngang trên Mobile)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Combo - Chọn mua Camera</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code></td>
+<td>- Tiêu đề Section chọn camera (Headline - Tối đa 80 ký tự)<br/>- Giá bắt đầu (text mô tả phụ - Tối đa 100 ký tự)<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (Tối đa 50 ký tự), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa URL, Giá khuyến mãi, Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Detail - Ứng dụng FPT Camera</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">app-cam</code></td>
+<td>- Tiêu đề giới thiệu App (Tối đa 80 ký tự)<br/>- Ảnh Mockup điện thoại<br/>- Link App Store (Tối đa 255 ký tự)<br/>- Link Google Play (Tối đa 255 ký tự)<br/>- Danh sách tính năng App (Textarea nhập nhiều dòng, mỗi dòng tối đa 150 ký tự)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Awards - Giải thưởng &amp; Thương hiệu</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code></td>
+<td>- Tiêu đề Section giải thưởng (Tối đa 80 ký tự)<br/>- Danh sách giải thưởng vinh danh (Tối đa 4 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng</td>
+</tr>
+<tr>
+<td>7</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề thông báo ưu đãi (Tối đa 50 ký tự)<br/>- Giá/Thông tin ưu đãi (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
+</tr>
+</tbody>
+</table>
+
+<h3>b. Template: LDP Campaign Wi-Fi 7 (9 Sections)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Quảng bá chiến dịch công nghệ Wi-Fi 7 thế hệ mới, thu thập thông tin đăng ký tư vấn/lắp đặt gói Lux/Ultra Fast Wi-Fi 7.</li>
+<li><strong>Danh sách các Sections và các trường thông tin cấu hình:</strong></li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Section</th>
+<th>Mã Section (ID)</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Banner hero - Wi-Fi 7</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Ảnh sản phẩm nổi bật (nếu có)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/><em>Lưu ý thiết kế:</em> Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Info - Công nghệ nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Headline Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 đặc tính vượt trội. Với mỗi đặc tính: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Products - Gói cước Wi-Fi 7</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code></td>
+<td>- Tiêu đề Section gói Wi-Fi 7 (Headline - Tối đa 80 ký tự)<br/>- Danh sách gói cước hiển thị đồng bộ từ PDH (không cho phép thêm gói cước trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Compare - Bảng so sánh thế hệ Wi-Fi</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">compare-camp</code></td>
+<td>- Tiêu đề Section bảng so sánh (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Nút CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Nút CTA phụ - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách tiêu chí so sánh dạng bảng. Mỗi hàng gồm: Tính năng/Tiêu chí (Tối đa 50 ký tự), Wi-Fi 7 (Tối đa 50 ký tự), Wi-Fi 6E (Tối đa 50 ký tự), Wi-Fi 6 (Tối đa 50 ký tự), Wi-Fi 5 (Tối đa 50 ký tự)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Targets - Đối tượng mục tiêu</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code></td>
+<td>- Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự)<br/>- CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách nhóm đối tượng (Tối đa 4 đối tượng; hiển thị Grid ngang 4 cột trên Desktop, Slider trên Mobile). Mỗi nhóm gồm: Ảnh đối tượng (Chỉ hỗ trợ upload), Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><strong>Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):</strong></li>
+<li><strong>Mã hiệu (ID):</strong> <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code> (Được thiết kế hiển thị dạng modal popup đè trên màn hình khi click các nút CTA trên trang trỏ liên kết về <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#register-form</code>).</li>
+<li><strong>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):</strong></li>
+<li>Tiêu đề trên Form (Headline): Ví dụ "Đăng ký lắp đặt Wi-Fi 7 ngay hôm nay" (Tối đa 80 ký tự)</li>
+<li>Mô tả phụ (Subheadline): Ví dụ "Điền đầy đủ thông tin, kỹ thuật viên sẽ liên hệ lắp đặt nhanh chóng." (Tối đa 150 ký tự)</li>
+<li>Nút gửi (Submit text): Ví dụ "Đăng ký ngay" (Tối đa 30 ký tự)</li>
+<li>Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự) để phục vụ đo lường chuyển đổi và đồng bộ Lead.</li>
+</ul>
+<h3>c. Template: LDP Internet (10 Sections)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Giới thiệu các gói cước cáp quang cá nhân/gia đình của FPT Telecom và thu thập Lead đăng ký.</li>
+<li><strong>Danh sách các Sections và các trường thông tin cấu hình:</strong></li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Section</th>
+<th>Mã Section (ID)</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Banner hero - Internet</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/><em>Lưu ý thiết kế:</em> Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Stats - Thanh số liệu nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">stats-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Từ khóa highlight (in đậm - Tối đa 30 ký tự)<br/>- Cấu hình 4 chỉ số nổi bật. Mỗi chỉ số gồm: Icon (Ảnh), Số / Tiêu đề (in đậm - Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Products - Gói cước Internet</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Cá nhân, Gia đình, Combo). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Detail - Chi tiết FPT Play Box</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">playbox-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Ảnh sản phẩm Play Box<br/>- 4 tính năng nổi bật. Mỗi tính năng gồm: Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự)<br/>- Cấu hình Nút CTA - Đăng ký: Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút CTA - Tư vấn: Text (Tối đa 30 ký tự), Số điện thoại/Link (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách video. Mỗi video gồm: Thumbnail, Link YouTube (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Hỗ trợ thêm/xóa video</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Procedure - Hướng dẫn thủ tục</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục. Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Promo - Danh sách ưu đãi</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách khuyến mãi dạng Slider (tối đa 8 ảnh banner khuyến mãi, tự động slide sau 5 giây, hiển thị đồng thời 1 banner trên Mobile và tối đa 3 banner trên Desktop). Mỗi khuyến mãi gồm: Tiêu đề khuyến mãi (Tối đa 100 ký tự), Ảnh banner khuyến mãi, Link URL khuyến mãi (Tối đa 255 ký tự), Hỗ trợ thêm/xóa khuyến mãi</td>
+</tr>
+<tr>
+<td>9</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Form - Đăng ký tư vấn</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-inet</code></td>
+<td>- Ảnh nền banner (cuối trang)<br/>- Icon minh họa (Hộp quà)<br/>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Text nút hành động (CTA) (Tối đa 30 ký tự)<br/>- Link URL nút (Tối đa 255 ký tự)</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><strong>Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):</strong></li>
+<li><strong>Mã hiệu (ID):</strong> <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code> (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#register-form</code>).</li>
+<li><strong>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):</strong></li>
+<li>Tiêu đề trên Popup (Headline): Ví dụ "NHẬN TƯ VẤN MIỄN PHÍ" (Tối đa 80 ký tự)</li>
+<li>Mô tả phụ (Subheadline): Ví dụ "Nhận ưu đãi tốt nhất hôm nay" (Tối đa 150 ký tự)</li>
+<li>Nút gửi (Submit text): Ví dụ "Đăng ký tư vấn" (Tối đa 30 ký tự)</li>
+<li>Checkbox Hiển thị Chọn dịch vụ (Bật/Tắt hiển thị danh sách checkbox các gói dịch vụ)</li>
+<li>Danh sách dịch vụ đính kèm: Cho phép check chọn các dịch vụ muốn hiển thị lựa chọn (Internet, Truyền hình, Camera, Combo Net-Play, Combo Net-Cam...) với nhãn dịch vụ tối đa 50 ký tự.</li>
+</ul>
+<h3>d. Template: LDP SA - FPT Play (9 Sections)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Quảng bá và đăng ký thuê bao gói dịch vụ truyền hình giải trí FPT Play (Sự kiện thể thao, Phim độc quyền).</li>
+<li><strong>Danh sách các Sections và các trường thông tin cấu hình:</strong></li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Section</th>
+<th>Mã Section (ID)</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Banner hero - FPT Play</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Tiêu đề ưu đãi (Tối đa 80 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Ảnh banner giữa dải countdown, Thời gian kết thúc, Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Experience - Trải nghiệm giải trí</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">experience-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Ảnh minh họa bên phải (hỗ trợ upload)<br/>- Danh sách 4 đặc điểm giải trí. Mỗi đặc điểm gồm: Icon/Emoji, Tiêu đề đặc điểm (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Categories - Danh mục nội dung</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">categories-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Nút Đăng ký ngay - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách các tab danh mục (3 tab mặc định). Mỗi tab gồm: Tiêu đề tab (Tối đa 30 ký tự), Ảnh Banner tab, Danh sách phim (Mỗi phim có: Tên phim - Tối đa 50 ký tự, Poster phim, URL Phim / Đăng ký - Tối đa 255 ký tự, hỗ trợ thêm/xóa phim)<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Products - Bảng giá gói cước</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Danh sách tiêu chí so sánh (textarea dùng chung để định nghĩa nhãn, tối đa 50 ký tự/tiêu chí)<br/>- Danh sách gói cước (Basic, Premium, VIP, có kéo thả sắp xếp vị trí). Mỗi gói gồm: Tên gói (Tối đa 30 ký tự), Badge nhãn (Tối đa 20 ký tự), Giá hiển thị (Tối đa 20 ký tự), Chu kỳ (Tối đa 20 ký tự), Thứ tự vị trí, Giá trị tương ứng theo từng tiêu chí so sánh (động - Tối đa 50 ký tự), Tính năng nổi bật (textarea - tối đa 150 ký tự/dòng), Nút CTA - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự), Checkbox Hiển thị gói cước</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Tiêu đề ưu đãi (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 100 ký tự)<br/>- Ảnh banner giữa dải countdown<br/>- Thời gian kết thúc (datetime-local)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Sports - Thể thao trực tiếp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sports-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách giải đấu/quyền lợi. Mỗi giải đấu gồm: Tên giải đấu (Tối đa 50 ký tự), Ảnh/Logo card, Gạch đầu dòng quyền lợi (textarea - tối đa 100 ký tự/dòng), Hỗ trợ thêm/xóa giải đấu</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Commentators - Dàn bình luận viên</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">commentators-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách bình luận viên. Mỗi BLV gồm: Tên BLV (Tối đa 50 ký tự), Ảnh đại diện BLV, Mô tả BLV (textarea - tối đa 150 ký tự), Hỗ trợ thêm/xóa bình luận viên</td>
+</tr>
+<tr>
+<td>8</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon sticky (Hộp quà/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><strong>Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):</strong></li>
+<li><strong>Mã hiệu (ID):</strong> <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code> (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#register-form</code>).</li>
+<li><strong>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):</strong></li>
+<li>Tiêu đề trên Popup (Headline): Ví dụ "NHẬN TƯ VẤN MIỄN PHÍ" (Tối đa 80 ký tự)</li>
+<li>Mô tả phụ (Subheadline): Ví dụ "Nhận thông tin ưu đãi FPT Play mới nhất" (Tối đa 150 ký tự)</li>
+<li>Nút gửi (Submit text): Ví dụ "Gửi thông tin" (Tối đa 30 ký tự)</li>
+<li>Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự).</li>
+</ul>
+<h3>e. Template: LDP Thu Lead (9 Sections)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Tối ưu hóa chuyển đổi thu thập thông tin khách hàng tiềm năng thông qua các chương trình khuyến mãi/quà tặng đặc biệt.</li>
+<li><strong>Danh sách các Sections và các trường thông tin cấu hình:</strong></li>
+</ul>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Section</th>
+<th>Mã Section (ID)</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Banner hero - Thu Lead</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text nút CTA chính (Tối đa 30 ký tự)<br/>- URL nút CTA chính (Tối đa 255 ký tự)<br/>- Text nút CTA phụ (Tối đa 30 ký tự)<br/>- URL nút CTA phụ (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Runner - Social Proof chạy chữ</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">runner-lead-proof</code></td>
+<td>- Danh sách khách hàng đăng ký ảo (chạy chữ ngang, cách nhau bởi dấu phẩy, hỗ trợ chạy vòng lặp liên tục ngoài trang, tối đa 100 ký tự/dòng thông báo)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Products - Bảng giá &amp; So sánh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">pricing-lead</code></td>
+<td>- Tiêu đề bảng giá (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Internet gia đình, Combo Internet truyền hình, Internet doanh nghiệp). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Tên gói (Tối đa 50 ký tự), Giá bán (đ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Info - Lợi ích nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Tiêu đề Section Lợi ích (Tối đa 80 ký tự)<br/>- Cấu hình 6 mục Lợi ích nổi bật. Mỗi mục gồm: Icon Lợi ích, Tiêu đề lợi ích (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 150 ký tự)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Procedure - Hướng dẫn thủ tục</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục (3 bước mặc định). Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Feedback - Đánh giá khách hàng</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách đánh giá dạng Slider (tối đa 10 đánh giá, hiển thị đồng thời 1 đánh giá trên Mobile và tối đa 3 đánh giá trên Desktop). Mỗi đánh giá gồm: Avatar, Tên khách hàng (Tối đa 50 ký tự), Khu vực / Phụ đề (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Rating (1-5 ⭐), Nội dung nhận xét (Tối đa 300 ký tự), Hỗ trợ thêm/xóa đánh giá</td>
+</tr>
+<tr>
+<td>8</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon / Ảnh đại diện (3D Gift/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Text nút CTA Đăng ký (Tối đa 30 ký tự)<br/>- URL nút CTA Đăng ký (Tối đa 255 ký tự)</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><strong>Cấu hình Popup Form đăng ký tư vấn chung (Toàn trang):</strong></li>
+<li><strong>Mã hiệu (ID):</strong> <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code> (Được hiển thị dạng modal popup khi click các nút CTA trên trang trỏ liên kết về <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#register-form</code>).</li>
+<li><strong>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự):</strong></li>
+<li>Tiêu đề trên Popup (Headline): Ví dụ "Đăng ký nhận quà tặng ngay hôm nay" (Tối đa 80 ký tự)</li>
+<li>Mô tả phụ (Subheadline): Ví dụ "Điền đầy đủ thông tin để nhận quà tặng miễn phí." (Tối đa 150 ký tự)</li>
+<li>Nút gửi (Submit text): Ví dụ "Đăng ký ngay" (Tối đa 30 ký tự)</li>
+<li>Đường dẫn chuyển hướng sau submit (Redirect URL) / Trỏ về Lead: Ô nhập link trang cảm ơn (Thank You page) hoặc URL API thu thập Lead (Tối đa 255 ký tự).</li>
+</ul>
+<h3>f. Tính năng Custom LDP mới (Lắp ghép tự do từ thư viện mẫu)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Cho phép người dùng tự do thiết kế Landing Page (LDP) tùy chỉnh dựa trên việc chọn lọc, kéo thả và sắp xếp các section mẫu có sẵn từ thư viện tổng hợp của 5 LDP mẫu (Internet, Camera AI, Wi-Fi 7, FPT Play, Thu Lead), gia tăng tính linh hoạt và tối ưu hóa thời gian triển khai chiến dịch Marketing.</li>
+<li><strong>Quy trình tạo Custom LDP (3 bước phụ):</strong></li>
+<li><strong>Bước 1 - Chọn Template:</strong> Chọn card "Custom LDP mới" nổi bật nằm ngang ở ngay đầu danh sách template mẫu.</li>
+<li><strong>Bước 2 - Thông tin trang:</strong> Nhập các thông tin cơ bản của LDP (Tên chiến dịch, URL Slug, Mục tiêu trang, SEO Metadata, OG Image).</li>
+<li><strong>Bước 3 - Nội dung sections:</strong> Lắp ghép các section từ thư viện mẫu và tiến hành biên tập nội dung, sắp xếp thứ tự hiển thị.</li>
+<li><strong>Đặc tả Giao diện Step 3 (LDP Builder - Giao diện 2 cột):</strong></li>
+<li><strong>Cột trái (32%) - Thư viện Sections:</strong></li>
+<li>Ô tìm kiếm: Nhập từ khóa để lọc nhanh tên section (ví dụ: Hero, Countdown...).</li>
+<li>Tab phân loại: Bộ lọc section theo nguồn gốc LDP mẫu gồm <em>"Tất cả"</em>, <em>"Internet"</em>, <em>"Camera AI"</em>, <em>"Wi-Fi 7"</em>, <em>"FPT Play"</em>, <em>"Thu Lead"</em>.</li>
+<li>Danh sách Card section mẫu: Mỗi card hiển thị biểu tượng đại diện (Icon), Tên section, Mô tả ngắn chi tiết các trường cấu hình bên trong, Badge màu phân loại (ví dụ: <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Hero · Internet</code>, <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">Countdown · Wi-Fi 7</code>) và nút thêm nhanh <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">+</code> màu cam.</li>
+<li><strong>Cột phải (68%) - Canvas cấu trúc LDP:</strong></li>
+<li>Bộ đếm số lượng: Hiển thị chỉ số trực quan dạng <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">X sections đã chọn</code> ở góc trên cùng.</li>
+<li>Trạng thái trống (Empty state): Khi LDP chưa có section nào được chọn, hiển thị một khung lớn nét đứt, ở giữa có biểu tượng <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">+</code> lớn và dòng chữ <em>"Chưa có section nào. Kéo sections từ thư viện bên trái vào đây, hoặc nhấn + trên từng section."</em> để hướng dẫn người dùng.</li>
+<li>Danh sách section đã chọn: Hiển thị các section được kéo thả hoặc chèn từ thư viện theo dạng hàng ngang (Section Row). Mỗi hàng hỗ trợ:</li>
+<li>Nút kéo thả di chuyển thứ tự (Drag Handle <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">☰</code> hoặc nút di chuyển nhanh <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">▲</code>/<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">▼</code>).</li>
+<li>Checkbox hiển thị/ẩn trên trang.</li>
+<li>Nút <strong>"✏ Sửa"</strong> mở Slide-over Drawer cấu hình chi tiết nội dung của section đó.</li>
+<li>Badge trạng thái: Mặc định hiển thị badge <strong>"Thư viện"</strong> màu tím. Khi người dùng click nút <strong>"Tách"</strong>, section sẽ chuyển thành badge <strong>"Tự do (Độc lập)"</strong> (chỉnh sửa độc lập mà không ảnh hưởng đến template chung).</li>
+<li>Nút <strong>"🗑 Xóa"</strong> để gỡ section khỏi LDP hiện tại.</li>
+<li>Khối cấu hình Popup Form chung: Nằm cố định ở chân Canvas, cho phép cấu hình Modal đăng ký tư vấn chung toàn trang (Headline, Subheadline, Submit text, Redirect URL) được kích hoạt thông qua mã anchor link <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">#register-form</code>.</li>
+<li><strong>Business Rules (BR):</strong></li>
+<li><strong>BR01 (Giới hạn sections):</strong> Mỗi Landing Page Custom cho phép lắp ghép tối đa 20 sections để đảm bảo tốc độ tải trang tối ưu cho thiết bị di động.</li>
+<li><strong>BR02 (Cơ chế Tách liên kết - Detach Block):</strong> Khi chèn từ thư viện, section kế thừa cấu hình mẫu. Khi người dùng click <strong>"Tách"</strong>, hệ thống sẽ clone cấu hình và lưu thành một bản ghi độc lập cho trang LDP này, cho phép chỉnh sửa nội dung riêng biệt mà không làm thay đổi dữ liệu của khối mẫu ban đầu.</li>
+</ul>
+<h2>4. Đặc tả tính năng đồng bộ dữ liệu sản phẩm từ Product Data Hub (PDH)</h2>
+<p>Để tối ưu hóa quy trình cấu hình các gói cước trên Landing Page và đảm bảo tính nhất quán dữ liệu sản phẩm trên toàn hệ thống FPT Telecom, CMS tích hợp công cụ đồng bộ nhanh từ kho dữ liệu <strong>Product Data Hub (PDH)</strong>.</p>
+<h3>a. Phạm vi áp dụng</h3>
+<ul>
+<li><strong>Template LDP Campaign Wi-Fi 7:</strong> Section Gói cước Wi-Fi 7 (<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code>).</li>
+<li><strong>Template LDP Internet:</strong> Gói cước trong các Tab của Section Danh sách gói Internet (<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code>).</li>
+</ul>
+<h3>b. Cơ chế hoạt động &amp; Trải nghiệm Người dùng (UX)</h3>
+<ul>
+<li><strong>Dropdown Sync PDH:</strong> Khi người dùng nhấn nút "Sync PDH ▾", một menu thả xuống sẽ hiển thị danh sách toàn bộ các gói cước có sẵn trong kho PDH (hơn 220 gói cước của FPT Telecom).</li>
+<li><strong>Bộ lọc Tìm kiếm Nhanh (Search Filter):</strong></li>
+<li>Tích hợp ô nhập liệu tìm kiếm ở đầu Dropdown.</li>
+<li>Hỗ trợ tìm kiếm thời gian thực (real-time filtering) không phân biệt chữ hoa/chữ thường.</li>
+<li>Phạm vi tìm kiếm: Khớp một phần theo <strong>Mã gói cước (Product Code)</strong> hoặc <strong>Tên gói cước (Product Name)</strong>.</li>
+<li><strong>Cơ chế Phân trang Dropdown (Pagination):</strong></li>
+<li>Do danh sách gói cước PDH rất lớn (trên 220 gói), danh sách được phân thành các trang nhỏ để tránh tràn màn hình và cải thiện hiệu năng.</li>
+<li>Số lượng gói cước hiển thị tối đa trên một trang: <strong>10 gói cước / trang</strong>.</li>
+<li>Cung cấp thanh điều hướng phân trang ở cuối Dropdown (nút mũi tên ◀ / ▶ và chỉ số trang hiện tại, ví dụ: "Trang 1/23").</li>
+<li>Tự động vô hiệu hóa (disabled) nút chuyển trang khi người dùng đang ở trang đầu hoặc trang cuối cùng.</li>
+<li><strong>Tự động đặt lại trạng thái (Auto Reset):</strong></li>
+<li>Mỗi khi người dùng đóng Dropdown và mở lại, ô nhập liệu tìm kiếm sẽ được tự động xóa rỗng (clear).</li>
+<li>Bộ phân trang tự động quay về trang 1 để đảm bảo giao diện luôn hiển thị các gói cước phổ biến nhất từ đầu.</li>
+<li><strong>Đồng bộ Dữ liệu (Data Binding):</strong> Khi người dùng click chọn một gói cước bất kỳ từ danh sách Dropdown PDH, hệ thống sẽ tự động map và điền đầy đủ các thông tin của gói cước đó vào form chỉnh sửa chi tiết (bao gồm: Tên gói, Giá cước, Tốc độ Download, Tốc độ Upload, các Tính năng/USP đi kèm) giúp giảm thiểu sai sót khi nhập liệu thủ công.</li>
 </ul>
 
 </body>

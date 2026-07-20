@@ -859,98 +859,105 @@
 <td>Tên chiến dịch</td>
 <td>Y</td>
 <td>Text</td>
-<td>Tên của chiến dịch Landing Page để quản lý nội bộ.</td>
+<td>Tên c&#7911;a chi&#7871;n d&#7883;ch Landing Page &#273;&#7875; qu&#7843;n l&#253; n&#7899;i b&#7899;i CMS.</td>
 </tr>
 <tr>
 <td>2</td>
-<td>URL Slug</td>
+<td>Ti&#7875;n t&#7889; &#273;&#432;&#7901;ng d&#7851;n LDP (Subpath Prefix)</td>
 <td>Y</td>
-<td>Text</td>
-<td>Đường dẫn tĩnh của LDP (ví dụ: km-internet-t5). Hệ thống tự động ghép với tên miền chính dạng fpt.vn/[URL Slug].</td>
+<td>Select</td>
+<td>Ch&#7885;n nh&#243;m &#273;&#432;&#7901;ng d&#7851;n c&#7845;p 2 t&#7913; danh m&#7909;c c&#243; s&#7867;n tr&#234;n Dropdown (v&#237; d&#7909;: <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">khuyen-mai</code>, <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">landing</code>). H&#7879; th&#7889;ng kh&#243;a c&#7913;ng kh&#244;ng cho ph&#233;p nh&#7853;p t&#7921; do &#273;&#7875; tr&#225;nh xung &#273;&#7893;i &#273;&#7883;nh tuy&#7871;n v&#7899;i c&#225;c trang Portal.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Mục tiêu trang</td>
+<td>URL Slug</td>
 <td>Y</td>
-<td>Select</td>
-<td>Phân loại mục tiêu chuyển đổi của Landing Page (ví dụ: Lead Gen — Thu thập data đăng ký, Purchase — Mua hàng trực tiếp, Branding...).</td>
+<td>Text</td>
+<td>Nh&#7853;p tay ph&#7847;n &#273;&#432;&#7901;ng d&#7851;n chi ti&#7871;t c&#7845;p 3 c&#7911;a Landing Page (v&#237; d&#7909;: <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">uu-dai-wifi-7</code>). H&#7879; th&#7889;ng t&#7921; &#273;&#7899;ng chuy&#7875;n &#273;&#7893;i th&#224;nh ch&#7919; th&#432;&#7901;ng kh&#244;ng d&#7845;u, ng&#259;n c&#225;ch b&#7857;ng d&#7845;u g&#7841;ch ngang (-), v&#224; qu&#233;t ki&#7875;m tra tr&#249;ng l&#7841;i tr&#234;n database khi l&#432;u.</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Thời gian hiệu lực</td>
-<td>N</td>
-<td>Date Range</td>
-<td>Khoảng thời gian (Ngày bắt đầu - Ngày kết thúc) LDP được phép hoạt động. Để trống nếu không giới hạn thời gian.</td>
+<td>M&#7909;c ti&#234;u trang</td>
+<td>Y</td>
+<td>Select</td>
+<td>Ph&#226;n lo&#7841;i m&#7909;c ti&#234;u chuy&#7875;n &#273;&#7893;i c&#7911;a Landing Page (v&#237; d&#7909;: Lead Gen &mdash; Thu th&#7853;p data &#273;&#259;ng k&#253;, Purchase &mdash; Mua h&#224;ng tr&#7921;c ti&#7871;p, Branding...).</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Redirect khi hết hạn</td>
+<td>Th&#7901;i gian hi&#7879;u l&#7921;c</td>
 <td>N</td>
-<td>Text (URL)</td>
-<td>Đường dẫn URL chuyển hướng tự động khi truy cập LDP đã quá thời gian hiệu lực (ví dụ: chuyển hướng về trang chủ "/").</td>
+<td>Date Range</td>
+<td>Kho&#7843;ng th&#7901;i gian (Ng&#224;y b&#7855;t &#273;&#7847;u - Ng&#224;y k&#7871;t th&#250;c) LDP &#273;&#432;&#7903;c ph&#233;p ho&#7841;t &#273;&#7899;ng. &#272;&#7875; tr&#7889;ng n&#7871;u kh&#244;ng gi&#7899;i h&#7841;n th&#7901;i gian.</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Meta Title</td>
+<td>Redirect khi h&#7871;t h&#7841;n</td>
 <td>N</td>
-<td>Text</td>
-<td>Tiêu đề tối ưu hóa tìm kiếm (SEO) hiển thị trên thẻ tiêu đề trình duyệt và kết quả tìm kiếm Google.</td>
+<td>Text (URL)</td>
+<td>&#272;&#432;&#7901;ng d&#7851;n URL chuy&#7875;n h&#432;&#7899;ng t&#7921; &#273;&#7899;ng khi truy c&#7853;p LDP &#273;&#227; qu&#225; th&#7901;i gian hi&#7879;u l&#7921;c (v&#237; d&#7909;: chuy&#7875;n h&#432;&#7899;ng v&#7873; trang ch&#7911; "/").</td>
 </tr>
 <tr>
 <td>7</td>
-<td>OG Image</td>
+<td>Meta Title</td>
 <td>N</td>
-<td>Text (URL) / File</td>
-<td>Ảnh đại diện hiển thị khi chia sẻ liên kết LDP lên mạng xã hội (kích thước tiêu chuẩn gợi ý 1200x630px). Đi kèm nút <strong>Upload</strong> để tải ảnh lên.</td>
+<td>Text</td>
+<td>Ti&#234;u &#273;&#7873; t&#7889;i &#432;u h&#243;a t&#236;m ki&#7871;m (SEO) hi&#7875;n th&#7883; tr&#234;n th&#7867; ti&#234;u &#273;&#7873; tr&#236;nh duy&#7879;t v&#224; k&#7871;t qu&#7843; t&#236;m ki&#7871;m Google.</td>
 </tr>
 <tr>
 <td>8</td>
-<td>Meta Description</td>
+<td>OG Image</td>
 <td>N</td>
-<td>Textarea</td>
-<td>Đoạn mô tả ngắn nội dung Landing Page phục vụ SEO hiển thị trên Google.</td>
+<td>Text (URL) / File</td>
+<td>&#7842;nh &#273;&#7841;i di&#7879;n hi&#7875;n th&#7883; khi chia s&#7867; li&#234;n k&#7871;t LDP l&#234;n m&#7841;ng x&#227; h&#7899;i (k&#237;ch th&#432;&#7899;c ti&#234;u chu&#7875;n g&#7907;i &#253; 1200x630px). &#272;i k&#232;m n&#250;t <strong>Upload</strong> &#273;&#7875; t&#7843;i &#7842;nh l&#234;n.</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Google Search Preview (SEO Snippet Mockup)</td>
+<td>Meta Description</td>
 <td>N</td>
-<td>Read-only</td>
-<td>Bộ hiển thị trực quan giả lập kết quả tìm kiếm Google (gồm Title, URL, Description) cập nhật real-time theo thông tin SEO nhập ở trên.</td>
+<td>Textarea</td>
+<td>&#272;o&#7841;n m&#244; t&#7843; ng&#7855;n n&#7899;i dung Landing Page ph&#7909;c v&#7909; SEO hi&#7875;n th&#7883; tr&#234;n Google.</td>
 </tr>
 <tr>
 <td>10</td>
-<td>UTM Source</td>
+<td>Google Search Preview (SEO Snippet Mockup)</td>
 <td>N</td>
-<td>Text</td>
-<td>Nguồn truy cập phục vụ tracking chiến dịch (ví dụ: facebook, google, tiktok).</td>
+<td>Read-only</td>
+<td>B&#7899; hi&#7875;n th&#7883; tr&#7921;c quan gi&#7843; l&#7853;p k&#7871;t qu&#7843; t&#236;m ki&#7871;m Google (g&#7893;m Title, URL, Description) c&#7853;p nh&#7853;t real-time theo th&#244;ng tin SEO nh&#7853;p &#290; tr&#234;n.</td>
 </tr>
 <tr>
 <td>11</td>
-<td>UTM Medium</td>
+<td>UTM Source</td>
 <td>N</td>
 <td>Text</td>
-<td>Kênh quảng cáo/phương tiện truyền thông phục vụ tracking (ví dụ: cpc, email, banner).</td>
+<td>Ngu&#7891;n truy c&#7853;p ph&#7909;c v&#7909; tracking chi&#7871;n d&#7883;ch (v&#237; d&#7909;: facebook, google, tiktok).</td>
 </tr>
 <tr>
 <td>12</td>
-<td>UTM Campaign</td>
+<td>UTM Medium</td>
 <td>N</td>
 <td>Text</td>
-<td>Tên chiến dịch Marketing phục vụ tracking. Đi kèm nút <strong>Tạo nhanh</strong> để tự động lấy giá trị từ trường <strong>URL Slug</strong> điền vào.</td>
+<td>K&#234;nh qu&#7843;ng c&#225;o/ph&#432;&#417;ng ti&#7879;n truy&#7873;n th&#244;ng ph&#7909;c v&#7909; tracking (v&#237; d&#7909;: cpc, email, banner).</td>
 </tr>
 <tr>
 <td>13</td>
-<td>Facebook Pixel ID</td>
+<td>UTM Campaign</td>
 <td>N</td>
-<td>Number</td>
-<td>Mã ID tracking pixel của Facebook để theo dõi chuyển đổi quảng cáo trên LDP.</td>
+<td>Text</td>
+<td>T&#234;n chi&#7871;n d&#7883;ch Marketing ph&#7909;c v&#7909; tracking. &#272;i k&#232;m n&#250;t <strong>T&#7921; t&#7841;o</strong> &#273;&#7875; t&#7921; &#273;&#7899;ng l&#7845;y gi&#225; tr&#275; t&#7913; tr&#432;&#7901;ng <strong>URL Slug</strong> &#273;i&#7873;n v&#224;o.</td>
 </tr>
 <tr>
 <td>14</td>
+<td>Facebook Pixel ID</td>
+<td>N</td>
+<td>Number</td>
+<td>M&#227; ID tracking pixel c&#7911;a Facebook &#273;&#7875; theo d&#245;i chuy&#7875;n &#273;&#7893;i qu&#7843;ng c&#225;o tr&#234;n LDP.</td>
+</tr>
+<tr>
+<td>15</td>
 <td>GA4 Event Name</td>
 <td>N</td>
 <td>Text</td>
-<td>Tên sự kiện tùy chỉnh gửi về Google Analytics 4 khi truy cập trang (Mặc định: ldp_view).</td>
+<td>T&#234;n s&#7921; ki&#7879;n t&#249;y ch&#7889;nh g&#7903;i v&#7873; Google Analytics 4 khi truy c&#7853;p trang (M&#7863;c &#273;&#7883;nh: ldp_view).</td>
 </tr>
 <tr>
 <td>15</td>
@@ -2074,7 +2081,236 @@
 <li><strong>Biểu đồ luồng Sequence Diagram cấu hình Tag Mapping:</strong> <a href="file:///c:/Users/Admin/OneDrive/Desktop/FPT/diagrams/fpt-article-tag-seq.md">fpt-article-tag-seq.md</a></li>
 </ul>
 <p>---</p>
-<h3>Phụ lục VI: Đặc tả cấu trúc &amp; Sections của 5 LDP Template tiêu chuẩn</h3>
+<h3>c. Quy định giới hạn số lượng ảnh tải lên &amp; hiển thị (Image Upload &amp; Display Limits)</h3>
+<p>Để tối ưu hóa tốc độ tải trang, đảm bảo tính ổn định của hệ thống và tránh lỗi tràn vỡ bố cục giao diện, CMS áp dụng quy tắc giới hạn nghiêm ngặt số lượng ảnh tải lên và hiển thị đối với từng khối component như sau:</p>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Khối Component / Section</th>
+<th>Số lượng ảnh tối đa cho phép tải lên</th>
+<th>Bố cục hiển thị ngoài trang (Desktop)</th>
+<th>Bố cục hiển thị ngoài trang (Mobile)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><strong>Banner Hero - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code>...)</td>
+<td>- 1 ảnh nền Desktop (1920x800px)<br/>- 1 ảnh nền Mobile (768x800px)</td>
+<td>Phủ kín toàn chiều rộng khối đầu trang (100% width).</td>
+<td>Phủ kín toàn chiều rộng khối đầu trang (100% width).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Đặc tính nổi bật / Ưu đãi - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code>...)</td>
+<td>Tối đa <strong>4 ảnh/icon</strong> (mỗi đặc tính 1 ảnh/icon, chỉ hỗ trợ upload tệp trực tiếp).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang (Swipeable) hoặc xếp dọc 1 cột.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Quy trình / Các bước thực hiện - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code>...)</td>
+<td>Cố định <strong>3 ảnh/icon</strong> (mỗi bước 1 ảnh/icon).</td>
+<td>Xếp ngang 3 cột tương ứng 3 bước.</td>
+<td>Xếp dọc 1 cột từ bước 1 đến bước 3.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Khối Chi tiết FPT Camera AI</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-detail</code>)</td>
+<td>Tối đa <strong>4 ảnh</strong> tính năng phụ cho mỗi dòng sản phẩm.</td>
+<td>Dạng Grid lưới cố định 2x2 ở bên phải ảnh sản phẩm chính.</td>
+<td>Dạng Slider cuộn ngang hỗ trợ vuốt tay.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Card combo thiết bị - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code>)</td>
+<td>Tối đa <strong>6 ảnh combo</strong> (mỗi combo 1 ảnh sản phẩm).</td>
+<td>Dạng lưới Grid ngang 3 cột.</td>
+<td>Dạng Slider cuộn ngang (Swipeable).</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Giải thưởng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code>)</td>
+<td>Tối đa <strong>10 ảnh giải thưởng</strong> (mỗi giải thưởng 1 ảnh cúp/chứng nhận).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Bộ sưu tập Video - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code>)</td>
+<td>Tối đa <strong>10 ảnh Thumbnail</strong> (tương ứng tối đa 10 video review).</td>
+<td>Dạng lưới Grid hoặc hàng ngang có thể scroll ngang.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Danh sách ưu đãi (Slider) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code>)</td>
+<td>Tối đa <strong>12 ảnh banner</strong> khuyến mãi.</td>
+<td>Dạng Slider (Carousel) trượt ngang tự động.</td>
+<td>Dạng Slider trượt ngang tự động, hiển thị duy nhất 1 banner.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Slide trượt đánh giá khách hàng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code>)</td>
+<td>Tối đa <strong>10 ảnh đại diện (avatar)</strong> khách hàng.</td>
+<td>Dạng Slider hiển thị 3 nhận xét cùng lúc.</td>
+<td>Dạng Slider hiển thị duy nhất 1 nhận xét, vuốt ngang.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Đối tượng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code>)</td>
+<td>Tối đa <strong>4 ảnh đối tượng</strong> (mỗi nhóm đối tượng 1 ảnh).</td>
+<td>Dạng lưới Grid ngang 4 cột.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Khối Danh mục nội dung giải trí</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">categories-sa</code>)</td>
+<td>- Tối đa <strong>3 ảnh Banner tab</strong><br/>- Tối đa <strong>12 ảnh Poster phim</strong> cho mỗi tab.</td>
+<td>- Banner tab hiển thị dạng dải lớn đầu tab.<br/>- Poster phim xếp dạng lưới Grid 4-6 cột.</td>
+<td>- Banner tab hiển thị dạng dải nhỏ.<br/>- Poster phim chuyển thành Slider cuộn ngang nhiều hàng.</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Khối Thể thao trực tiếp</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sports-sa</code>)</td>
+<td>Tối đa <strong>6 ảnh/logo giải đấu</strong>.</td>
+<td>Dạng lưới Grid 3 cột x 2 hàng.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Khối Dàn bình luận viên</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">commentators-sa</code>)</td>
+<td>Tối đa <strong>8 ảnh đại diện</strong> bình luận viên.</td>
+<td>Dạng lưới Grid 4 cột x 2 hàng.</td>
+<td>Dạng Slider cuộn ngang.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>2. Thư viện Khối Component Tái sử dụng (Shared Component Library)</h2>
+<p>Để tối ưu hóa việc phát triển và cho phép Vận hành tái cấu hình, tái sử dụng linh hoạt các phần tử giao diện trên bất kỳ Landing Page nào, toàn bộ hệ thống LDP Builder được xây dựng dựa trên <strong>16 khối component độc lập</strong> sau:</p>
+<table class='data-table'>
+<thead><tr>
+<th>STT</th>
+<th>Tên Khối Component</th>
+<th>Mã Component</th>
+<th>Khả năng Tái sử dụng &amp; Phạm vi áp dụng</th>
+<th>Mô tả &amp; Các trường cấu hình chính có thể chỉnh sửa (Kèm giới hạn ký tự)</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><strong>Banner Hero - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code>...)</td>
+<td>banner-cam-hero</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các Landing Page.</td>
+<td>Khối biểu ngữ lớn đầu trang. Cấu hình: Ảnh nền (Background Image) (1920×800px - Chỉ hỗ trợ upload), Ảnh nền Mobile (768x800px - Chỉ hỗ trợ upload), URL ảnh nền (Desktop &amp; Mobile), Text Nút CTA chính (Tối đa 30 ký tự), URL Nút CTA chính (Tối đa 255 ký tự), Text Nút CTA phụ (Tối đa 30 ký tự), URL Nút CTA phụ (Tối đa 255 ký tự - cho phép bật/tắt 2 nút).</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Đặc tính nổi bật / Ưu đãi - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code>...)</td>
+<td>info-cam-usp</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các LDP để tối ưu code.</td>
+<td>Khối đặc tính nổi bật/ ưu đãi dạng lưới (Grid) 4 cột. Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Icon/Ảnh cho từng lợi ích, Tiêu đề ngắn (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 200 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Card gói cước tiêu chuẩn (Internet) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code>...)</td>
+<td>products-inet</td>
+<td><strong>Tái sử dụng chung</strong> cho LDP Internet, Wi-Fi 7 và LDP Thu Lead.</td>
+<td>Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tốc độ Download, Tốc độ Upload, Icon Tốc độ, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Card gói cước tiêu chuẩn (SA) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code> / <code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code>...)</td>
+<td>products-sa</td>
+<td><strong>Đặc thù</strong> cho FPT Play.</td>
+<td>Khối card gói cước hiển thị được lấy data từ PDH (giới hạn 100 gói), gồm:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Danh sách gói cước trong mỗi gói gồm: Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng) (những trường này không cho chỉnh sửa), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/>- Hỗ trợ cấu hình phân Tab: có tên tab có thể chỉnh sửa (Cá nhân, Gia đình, Combo,... - Tối đa 30 ký tự)<br/>- Màu nền, Ảnh bg.<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Card combo thiết bị - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code>...)</td>
+<td>combo-cam</td>
+<td><strong>Tái sử dụng</strong> cho các trang bán thiết bị kèm gói dịch vụ (như LDP Camera AI).</td>
+<td>Khối sản phẩm bán thiết bị vật lý kết hợp dịch vụ đi kèm (giới hạn 100). Cấu hình:<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (không chỉnh sửa), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa (không chỉnh sửa), Giá khuyến mãi (không chỉnh sửa), Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (không chỉnh sửa - Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Bộ đếm ngược - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code>...)</td>
+<td>timer-camp-countdown</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang có thời hạn chiến dịch/sự kiện.</td>
+<td>Khối đồng hồ đếm ngược. Hỗ trợ 2 chế độ hiển thị: Dính liền chân Hero Banner (Case 1) hoặc Dải countdown độc lập giữa trang (Case 2). Cấu hình:<br/>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Form popup thu thập Lead - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-lead-popup</code>...)</td>
+<td>form-lead-popup</td>
+<td><strong>Tái sử dụng chung</strong> cho tất cả các hành động thu lead của LDP.</td>
+<td>Modal popup thu thập thông tin đăng ký. Cấu hình: Tiêu đề popup (Tối đa 80 ký tự), mô tả phụ (Tối đa 150 ký tự), text nút Submit (Tối đa 30 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Bộ sưu tập Video - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code>...)</td>
+<td>reviews-lead</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang cần chèn review của KOLs/khách hàng.</td>
+<td>Khối hiển thị video dạng Grid (tối đa 10 video). Cấu hình mỗi video gồm: Ảnh thumbnail, Tiêu đề section video (Tối đa 80 ký tự), URL Video (Tối đa 255 ký tự), có thể scroll ngang được, Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>Slide trượt đánh giá khách hàng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code>...)</td>
+<td>feedback-lead</td>
+<td><strong>Tái sử dụng chung</strong> cho nhận xét của khách hàng.</td>
+<td>Khối slider nhận xét của khách hàng (tối đa 10 đánh giá). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Avatar, Tên khách hàng (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Nội dung nhận xét (Tối đa 300 ký tự), Đánh giá số sao (1-5 sao), Khu vực / Phụ đề (Tối đa 50 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>Accordion câu hỏi thường gặp (FAQ) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code>...)</td>
+<td>faq-cam</td>
+<td><strong>Tái sử dụng chung</strong> cho các trang cần giải đáp thắc mắc khách hàng.</td>
+<td>Khối câu hỏi thường gặp dạng đóng/mở (tối đa 6 câu). Cấu hình: Tiêu đề khối (Tối đa 80 ký tự), Dropdown (Danh mục) liên kết trực tiếp theo ID từ kho FAQ chung của hệ thống (không nhập text trực tiếp ngoài CMS), Upload bg bên phải (Desktop &amp; Mobile - Tối đa 255 ký tự) + Link URL (Tối đa 255 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>Thanh thông báo neo chân trang (Sticky Bar) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code>...)</td>
+<td>sticky-cam</td>
+<td><strong>Tái sử dụng chung</strong> để neo giữ nút đăng ký ở chân trang.</td>
+<td>Thanh neo dưới cùng màn hình. Cấu hình: Ảnh nền banner (cuối trang) (tối đa 1MB), Link URL (Tối đa 255 ký tự).</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>Quy trình / Các bước thực hiện - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code>...)</td>
+<td>procedure-lead</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần mô tả quy trình mua/lắp đặt.</td>
+<td>Khối hiển thị quy trình (mặc định 3 bước). Cấu hình:<br/>- Tiêu đề khối (Tối đa 80 ký tự)<br/>- Mỗi bước gồm: Icon bước, Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự)<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)<br/>- Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>Dải chữ chạy ngang đăng ký thành công - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">runner-lead-proof</code>...)</td>
+<td>runner-lead-proof</td>
+<td><strong>Tái sử dụng chung</strong> để tạo hiệu ứng kích thích mua hàng (Social Proof).</td>
+<td>Dải chữ chạy ngang vô tận (marquee style) hiển thị thông báo đăng ký thành công ảo (ví dụ: "Nguyễn Văn A - vừa đăng ký gói Lux..."). Cấu hình: Danh sách Tên khách hàng, Khu vực, nội dung, tốc độ chạy, Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Danh sách ưu đãi (Slider) - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code>...)</td>
+<td>promo-inet</td>
+<td><strong>Tái sử dụng chung</strong> cho các banner quảng cáo khuyến mãi phụ.</td>
+<td>Khối slider banner trượt (tối đa 12). Cấu hình: Tiêu đề section (Tối đa 80 ký tự), ảnh banner (chỉ hỗ trợ upload), URL liên kết khi click (Tối đa 255 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>Đối tượng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code>...)</td>
+<td>targets-camp</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần phân loại đối tượng khách hàng.</td>
+<td>Khối đối tượng gồm 4 card: Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Danh sách nhóm đối tượng. Mỗi nhóm gồm: Ảnh đối tượng, Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Màu nền, Ảnh bg.</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>Giải thưởng - Khối</strong><br/>(<code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code>...)</td>
+<td>awards-cam</td>
+<td><strong>Tái sử dụng</strong> cho các LDP cần vinh danh chất lượng thương hiệu.</td>
+<td>Tiêu đề Section giải thưởng (Tối đa 80 ký tự), Danh sách giải thưởng vinh danh (Tối đa 10 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng, Màu nền, Ảnh bg.</td>
+</tr>
+</tbody>
+</table>
+
+<p>---</p><h3>Phụ lục VI: Đặc tả cấu trúc &amp; Sections của 5 LDP Template tiêu chuẩn</h3>
 <h4>1. Template: LDP Camera AI (8 Sections)</h4>
 <ul>
 <li><strong>Mục tiêu:</strong> Giới thiệu và thúc đẩy đăng ký/chọn mua thiết bị FPT Camera AI cùng các gói lưu trữ Cloud đi kèm.</li>
@@ -2085,55 +2321,55 @@
 <th>STT</th>
 <th>Tên Section</th>
 <th>Mã Section (ID)</th>
-<th>Các trường thông tin cấu hình trong CMS</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
 </tr></thead><tbody>
 <tr>
 <td>1</td>
-<td>Hero Banner + Nút CTA</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-hero</code></td>
-<td>- Ảnh nền (Background Image) (Desktop &amp; Mobile)<br/>- Headline (Tiêu đề chính) và Subheadline (Tiêu đề phụ)<br/>- Text trên nút CTA (ví dụ: "Đăng ký ngay")<br/>- Link điều hướng của nút CTA<br/>- Ảnh sản phẩm nổi bật (Camera)</td>
+<td>Banner hero - Camera AI</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Tính năng nổi bật (USP)</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-usp</code></td>
-<td>- Headline Section (ví dụ: "Công nghệ thông minh vượt trội")<br/>- Danh sách 3-4 tính năng nổi bật. Mỗi tính năng gồm: Icon, Tiêu đề tính năng, Nội dung mô tả chi tiết</td>
+<td>Info - Đặc tính nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Tiêu đề chính Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 công nghệ nổi bật. Với mỗi công nghệ: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload)</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Chi tiết FPT Camera AI</td>
+<td>Detail - Chi tiết Camera</td>
 <td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-detail</code></td>
-<td>- Headline Section<br/>- Tabs thông tin sản phẩm (Camera IQ3, Camera SE, Camera Play)<br/>- Với mỗi dòng sản phẩm: Ảnh sản phẩm, Tên dòng, Giá bán lẻ, Mô tả chi tiết specs (Độ phân giải, Hồng ngoại, Đàm thoại, Kháng nước...)</td>
+<td>- Tiêu đề Section (Tối đa 80 ký tự)<br/>- Cấu hình chi tiết 2 dòng sản phẩm Camera chính (Trong nhà &amp; Ngoài trời). Với mỗi dòng: Tên sản phẩm (Tối đa 50 ký tự), Mô tả phụ (Subtitle - Tối đa 150 ký tự), Ảnh sản phẩm chính, Giá bán lẻ thiết bị, Nhãn ưu đãi (Badge - Tối đa 20 ký tự), Text nút CTA (Tối đa 30 ký tự), URL nút CTA (Tối đa 255 ký tự), danh sách ảnh tính năng phụ (cho phép upload tối đa 4 ảnh; hiển thị dạng Grid cố định 2x2 trên Desktop, hiển thị dạng Slider cuộn ngang trên Mobile)</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Danh mục &amp; Chọn mua</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-select</code></td>
-<td>- Headline Section<br/>- Danh sách các dòng Camera để tick chọn bán lẻ<br/>- Danh sách gói Cloud lưu trữ (1 ngày, 3 ngày, 7 ngày) kèm đơn giá tháng/năm<br/>- Cấu hình logic tính tổng tiền ước tính (Tự động cộng tiền Camera + Cloud)</td>
+<td>Combo - Chọn mua Camera</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">combo-cam</code></td>
+<td>- Tiêu đề Section chọn camera (Headline - Tối đa 80 ký tự)<br/>- Giá bắt đầu (text mô tả phụ - Tối đa 100 ký tự)<br/>- Danh sách Combo sản phẩm hiển thị đồng bộ từ PDH (không cho phép thêm gói/combo trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi combo gồm: Tên combo (Tối đa 50 ký tự), Badge nhãn (vd: COMBO - Tối đa 20 ký tự), Ảnh minh họa URL, Giá khuyến mãi, Giá gốc (gạch ngang), Phần trăm giảm, Badge ưu đãi phụ (Tối đa 30 ký tự), Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Checkbox Hiển thị/Ẩn, Hỗ trợ thêm/xóa combo</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Ứng dụng FPT Camera</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-app</code></td>
-<td>- Headline Section &amp; Subtitle<br/>- Ảnh mockup màn hình App điện thoại<br/>- Danh sách tính năng của App (Xem trực tiếp, Phân quyền chia sẻ, Cảnh báo thông minh...)<br/>- Link tải App Store và Google Play</td>
+<td>Detail - Ứng dụng FPT Camera</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">app-cam</code></td>
+<td>- Tiêu đề giới thiệu App (Tối đa 80 ký tự)<br/>- Ảnh Mockup điện thoại<br/>- Link App Store (Tối đa 255 ký tự)<br/>- Link Google Play (Tối đa 255 ký tự)<br/>- Danh sách tính năng App (Textarea nhập nhiều dòng, mỗi dòng tối đa 150 ký tự)</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Thương hiệu &amp; Giải thưởng</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-awards</code></td>
-<td>- Tiêu đề Section<br/>- Danh sách ảnh các cúp/logo giải thưởng (Sao Khuê, Sản phẩm tiêu biểu...) kèm text mô tả giải thưởng</td>
+<td>Awards - Giải thưởng &amp; Thương hiệu</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">awards-cam</code></td>
+<td>- Tiêu đề Section giải thưởng (Tối đa 80 ký tự)<br/>- Danh sách giải thưởng vinh danh (Tối đa 4 giải). Mỗi giải gồm: Nhãn giải thưởng (Label - Tối đa 50 ký tự), Tên giải thưởng / Danh hiệu (Tối đa 100 ký tự), Ảnh cúp / Chứng nhận, Mô tả ngắn ở chân card (Tối đa 150 ký tự), Hỗ trợ thêm/xóa giải thưởng</td>
 </tr>
 <tr>
 <td>7</td>
-<td>FAQ Accordion</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-faq</code></td>
-<td>- Headline Section<br/>- Danh sách các câu hỏi thường gặp (Q&amp;A) hỗ trợ đóng/mở (Collapse/Expand)</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
 </tr>
 <tr>
 <td>8</td>
-<td>Sticky Bottom Bar</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">cam-sticky</code></td>
-<td>- Text thông báo khuyến mãi rút gọn<br/>- Text nút CTA trên thanh bar<br/>- SĐT Hotline tư vấn nhanh</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề thông báo ưu đãi (Tối đa 50 ký tự)<br/>- Giá/Thông tin ưu đãi (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
 </tr>
 </tbody>
 </table>
@@ -2149,67 +2385,61 @@
 <th>STT</th>
 <th>Tên Section</th>
 <th>Mã Section (ID)</th>
-<th>Các trường thông tin cấu hình trong CMS</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
 </tr></thead><tbody>
 <tr>
 <td>1</td>
-<td>Hero Wi-Fi 7 (Countdown)</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-hero</code></td>
-<td>- Ảnh/Video nền (Background)<br/>- Headline chiến dịch (ví dụ: "Khai phá sức mạnh Wi-Fi 7")<br/>- Thời gian kết thúc đếm ngược (Countdown DateTime)<br/>- Form liên hệ nhanh (Tiêu đề form, placeholders, nút submit)</td>
+<td>Banner hero - Wi-Fi 7</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Ảnh sản phẩm nổi bật (nếu có)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Thanh biểu ngữ thương hiệu</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-branding</code></td>
-<td>- Danh sách ảnh logo đối tác/công nghệ chạy ngang (Marquee)<br/>- Text chạy chữ khẩu hiệu của chiến dịch</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/><em>Lưu ý thiết kế:</em> Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>USP Công nghệ Wi-Fi 7</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-usp</code></td>
-<td>- Headline Section<br/>- 4 đặc tính vượt trội: Tốc độ (Gbps), Độ trễ (Latency), Kết nối thiết bị đồng thời, Công nghệ MLO (Multi-Link Operation). Cấu hình gồm: Icon, Chỉ số số liệu, Tên thông số, Mô tả ngắn</td>
+<td>Info - Công nghệ nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Headline Section (Tối đa 80 ký tự)<br/>- Mô tả phụ Section (Tối đa 150 ký tự)<br/>- Cấu hình 4 đặc tính vượt trội. Với mỗi đặc tính: Tiêu đề (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự), Icon / Ảnh minh họa (Chỉ hỗ trợ upload)</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Các gói cước Wi-Fi 7</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-products</code></td>
-<td>- Headline Section<br/>- Danh sách các gói cước trang bị Wi-Fi 7 (Lux 500, Lux 800, Ultra Fast)<br/>- Cấu hình mỗi card gói cước: Tên gói, Băng thông, Thiết bị đi kèm, Giá bán, Nút đăng ký (link hoặc anchor cuộn xuống form)</td>
+<td>Products - Gói cước Wi-Fi 7</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code></td>
+<td>- Tiêu đề Section gói Wi-Fi 7 (Headline - Tối đa 80 ký tự)<br/>- Danh sách gói cước hiển thị đồng bộ từ PDH (không cho phép thêm gói cước trống thủ công, chỉ hỗ trợ đồng bộ dữ liệu sản phẩm từ PDH). Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Bảng so sánh thế hệ Wi-Fi</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-compare</code></td>
-<td>- Headline Section<br/>- Bảng so sánh thông số (băng tần, tốc độ tối đa lý thuyết, độ trễ) giữa Wi-Fi 5, Wi-Fi 6 và Wi-Fi 7 để làm nổi bật giá trị nâng cấp</td>
+<td>Compare - Bảng so sánh thế hệ Wi-Fi</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">compare-camp</code></td>
+<td>- Tiêu đề Section bảng so sánh (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Nút CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Nút CTA phụ - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách tiêu chí so sánh dạng bảng. Mỗi hàng gồm: Tính năng/Tiêu chí (Tối đa 50 ký tự), Wi-Fi 7 (Tối đa 50 ký tự), Wi-Fi 6E (Tối đa 50 ký tự), Wi-Fi 6 (Tối đa 50 ký tự), Wi-Fi 5 (Tối đa 50 ký tự)</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Đối tượng mục tiêu</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-targets</code></td>
-<td>- Headline Section<br/>- 4 khối đối tượng (Doanh nghiệp, Gamer/Streamer, Nhà thông minh, Gia đình đông người). Cấu hình gồm: Ảnh minh họa, Tên đối tượng, Giải pháp Wi-Fi khuyến nghị tương ứng</td>
+<td>Targets - Đối tượng mục tiêu</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">targets-camp</code></td>
+<td>- Tiêu đề mục tiêu (Headline - Tối đa 80 ký tự)<br/>- CTA chính - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách nhóm đối tượng (Tối đa 4 đối tượng; hiển thị Grid ngang 4 cột trên Desktop, Slider trên Mobile). Mỗi nhóm gồm: Ảnh đối tượng (Chỉ hỗ trợ upload), Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự)</td>
 </tr>
 <tr>
 <td>7</td>
-<td>Video Review thực tế</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-videos</code></td>
-<td>- Headline Section<br/>- Danh sách các video trải nghiệm thực tế (Thumbnail, Link nhúng YouTube/TikTok)</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video</td>
 </tr>
 <tr>
 <td>8</td>
-<td>Form đăng ký tư vấn</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-form</code></td>
-<td>- Ảnh nền/Màu nền khối Form<br/>- Headline Form &amp; Mô tả ngắn<br/>- Danh sách trường nhập liệu (Họ tên, SĐT, Địa chỉ, Gói cước quan tâm)<br/>- Lời cảm ơn sau khi gửi (Thank-you Message)</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Sticky Bottom Bar</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-sticky</code></td>
-<td>- Text thông báo khuyến mãi rút gọn<br/>- Hotline bấm gọi ngay và nút nhận ưu đãi nhanh</td>
-</tr>
-<tr>
-<td>10</td>
-<td>FAQ Accordion</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">camp-faq</code></td>
-<td>- Headline Section<br/>- Danh sách câu hỏi thường gặp về thiết bị Wi-Fi 7, phí nâng cấp và cách hòa mạng</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
 </tr>
 </tbody>
 </table>
@@ -2225,70 +2455,67 @@
 <th>STT</th>
 <th>Tên Section</th>
 <th>Mã Section (ID)</th>
-<th>Các trường thông tin cấu hình trong CMS</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
 </tr></thead><tbody>
 <tr>
 <td>1</td>
-<td>Hero Banner + Form đăng ký</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-hero</code></td>
-<td>- Ảnh nền (Desktop &amp; Mobile)<br/>- Headline (Tiêu đề chính) và Subheadline<br/>- Nút CTA chính (Text nút, URL chuyển hướng)<br/>- Nút CTA phụ - Nhận tư vấn (Text nút, Cấu hình hành động: <strong>Bật Popup Form tư vấn</strong> hoặc <strong>Chuyển hướng Redirect URL</strong>)<br/>- Cấu hình chi tiết Form tư vấn Popup (Tiêu đề, Mô tả, Text nút gửi, Lựa chọn Bật/Tắt hiển thị Chọn dịch vụ, Tích chọn danh sách dịch vụ cho phép hiển thị)</td>
-
-
-
+<td>Banner hero - Internet</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Ảnh / Icon quà tặng / Thiết bị, Tiêu đề dải (Tối đa 80 ký tự), Thời gian kết thúc, Nút CTA Countdown - Text (Tối đa 30 ký tự), Nút CTA Countdown - URL (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Thanh số liệu nổi bật</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-stats</code></td>
-<td>- 6 chỉ số tiêu biểu. Mỗi chỉ số gồm: Icon/Số liệu và Nhãn mô tả ngắn bên dưới</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Bật dải Countdown hẹn giờ độc lập (Checkbox)<br/>- Ảnh / Icon quà tặng / Thiết bị<br/>- Tiêu đề dải Countdown / Nhãn Countdown ưu đãi (Tối đa 80 ký tự)<br/>- Thời gian Countdown kết thúc (datetime-local)<br/>- Nút CTA Countdown — Text (Tối đa 30 ký tự)<br/>- Nút CTA Countdown — URL (Tối đa 255 ký tự)<br/><br/><em>Lưu ý thiết kế:</em> Section này hiển thị độc lập hoàn toàn (Case 2), CSS padding top/bottom sẽ cách ra giống như các section khác.</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Danh sách gói Internet</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-products</code></td>
-<td>- Headline Section<br/>- Danh sách các gói cước gia đình (Giga, Sky, Meta)<br/>- Cấu hình mỗi gói: Tên gói, Băng thông, Thiết bị Modem kèm theo, Giá cước tháng, Giá trả trước, Nút CTA đăng ký</td>
+<td>Stats - Thanh số liệu nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">stats-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Từ khóa highlight (in đậm - Tối đa 30 ký tự)<br/>- Cấu hình 4 chỉ số nổi bật. Mỗi chỉ số gồm: Icon (Ảnh), Số / Tiêu đề (in đậm - Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự)</td>
 </tr>
 <tr>
 <td>4</td>
-<td>FPT Play Box — Giải trí không giới hạn</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-playbox</code></td>
-<td>- Ảnh sản phẩm nổi bật (FPT Play Box)<br/>- Danh sách 3-4 tính năng nổi bật<br/>- Nút CTA đổi/mua Play Box</td>
+<td>Products - Gói cước Internet</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Cá nhân, Gia đình, Combo). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Checkbox Nổi bật, Ảnh banner gói, Tên gói (Tối đa 50 ký tự), Giá (VNĐ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Video Review</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-review</code></td>
-<td>- Headline Section &amp; Subtitle<br/>- Danh sách link video đánh giá dịch vụ (Thumbnail, Link YouTube)</td>
+<td>Detail - Chi tiết FPT Play Box</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">playbox-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Ảnh sản phẩm Play Box<br/>- 4 tính năng nổi bật. Mỗi tính năng gồm: Tiêu đề (Tối đa 50 ký tự), Mô tả (Tối đa 100 ký tự)<br/>- Cấu hình Nút CTA - Đăng ký: Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút CTA - Tư vấn: Text (Tối đa 30 ký tự), Số điện thoại/Link (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Đánh giá khách hàng</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-testimonials</code></td>
-<td>- Headline Section<br/>- Danh sách các feedback của khách hàng: Ảnh chân dung/Avatar, Họ tên, Đánh giá xếp hạng sao (Rating), Nội dung nhận xét thực tế</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách video. Mỗi video gồm: Thumbnail, Link YouTube (Tối đa 255 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Hỗ trợ thêm/xóa video</td>
 </tr>
 <tr>
 <td>7</td>
-<td>Hướng dẫn thủ tục đăng ký</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-steps</code></td>
-<td>- Tiêu đề Section<br/>- Các bước đăng ký FPT Internet</td>
+<td>Procedure - Hướng dẫn thủ tục</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục. Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>8</td>
-<td>Ưu đãi khuyến mãi</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-promo</code></td>
-<td>- Tiêu đề Section<br/>- Danh sách các chương trình khuyến mãi hiện hành</td>
+<td>Promo - Danh sách ưu đãi</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">promo-inet</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách khuyến mãi dạng Slider (tối đa 8 ảnh banner khuyến mãi, tự động slide sau 5 giây, hiển thị đồng thời 1 banner trên Mobile và tối đa 3 banner trên Desktop). Mỗi khuyến mãi gồm: Tiêu đề khuyến mãi (Tối đa 100 ký tự), Ảnh banner khuyến mãi, Link URL khuyến mãi (Tối đa 255 ký tự), Hỗ trợ thêm/xóa khuyến mãi</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Câu hỏi thường gặp</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-faq</code></td>
-<td>- Danh sách FAQ về FPT Internet</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
 </tr>
 <tr>
 <td>10</td>
-<td>Banner ưu đãi (cuối trang)</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">inet-form</code></td>
-<td>- Ảnh nền, icon hộp quà, tiêu đề, mô tả ngắn, nút hành động (CTA)</td>
+<td>Form - Đăng ký tư vấn</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">form-inet</code></td>
+<td>- Ảnh nền banner (cuối trang)<br/>- Icon minh họa (Hộp quà)<br/>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 150 ký tự)<br/>- Text nút hành động (CTA) (Tối đa 30 ký tự)<br/>- Link URL nút (Tối đa 255 ký tự)</td>
 </tr>
 </tbody>
 </table>
@@ -2304,67 +2531,61 @@
 <th>STT</th>
 <th>Tên Section</th>
 <th>Mã Section (ID)</th>
-<th>Các trường thông tin cấu hình trong CMS</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
 </tr></thead><tbody>
 <tr>
 <td>1</td>
-<td>Hero Banner khuyến mãi</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-hero</code></td>
-<td>- Ảnh nền Fullscreen cuốn hút<br/>- Nhãn Badge khuyến mãi (ví dụ: "MUA 6 THÁNG TẶNG 2 THÁNG")<br/>- Headline quảng bá nội dung hot<br/>- Giá gói cước chỉ từ...<br/>- Nút CTA &amp; Ảnh thiết bị FPT Play Box</td>
+<td>Banner hero - FPT Play</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text Nút CTA chính (Tối đa 30 ký tự)<br/>- URL Nút CTA chính (Tối đa 255 ký tự)<br/>- Text Nút CTA phụ (Tối đa 30 ký tự)<br/>- URL Nút CTA phụ (Tối đa 255 ký tự)<br/>- Dải Countdown hẹn giờ (Chỉ hiển thị dính liền chân Hero banner — Case 1): Checkbox bật, Tiêu đề ưu đãi (Tối đa 80 ký tự), Mô tả ngắn (Tối đa 100 ký tự), Ảnh banner giữa dải countdown, Thời gian kết thúc, Nút CTA - Text (Tối đa 30 ký tự), Nút CTA - URL (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Dải ưu đãi &amp; Countdown</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-offer</code></td>
-<td>- Ảnh banner ưu đãi ngắn hạn<br/>- Bộ đếm ngược thời gian kết thúc ưu đãi<br/>- Nút CTA nhận ưu đãi</td>
+<td>Experience - Trải nghiệm giải trí</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">experience-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Ảnh minh họa bên phải (hỗ trợ upload)<br/>- Danh sách 4 đặc điểm giải trí. Mỗi đặc điểm gồm: Icon/Emoji, Tiêu đề đặc điểm (Tối đa 50 ký tự), Mô tả ngắn (Tối đa 150 ký tự)</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Thể thao trực tiếp</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-sports</code></td>
-<td>- Tiêu đề Section<br/>- Danh sách giải đấu (Premier League, V.League, FA Cup, NBA...)<br/>- Card giải đấu, quyền lợi, carousel ảnh</td>
+<td>Categories - Danh mục nội dung</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">categories-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Nút Đăng ký ngay - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự)<br/>- Danh sách các tab danh mục (3 tab mặc định). Mỗi tab gồm: Tiêu đề tab (Tối đa 30 ký tự), Ảnh Banner tab, Danh sách phim (Mỗi phim có: Tên phim - Tối đa 50 ký tự, Poster phim, URL Phim / Đăng ký - Tối đa 255 ký tự, hỗ trợ thêm/xóa phim)<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Highlight tính năng</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-features</code></td>
-<td>- Headline Section<br/>- Mô tả danh sách tính năng (Xem cùng lúc trên nhiều thiết bị, Đa nền tảng, Giao diện thân thiện, Chất lượng 4K...)</td>
+<td>Products - Bảng giá gói cước</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">products-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả section (Tối đa 150 ký tự)<br/>- Danh sách tiêu chí so sánh (textarea dùng chung để định nghĩa nhãn, tối đa 50 ký tự/tiêu chí)<br/>- Danh sách gói cước (Basic, Premium, VIP, có kéo thả sắp xếp vị trí). Mỗi gói gồm: Tên gói (Tối đa 30 ký tự), Badge nhãn (Tối đa 20 ký tự), Giá hiển thị (Tối đa 20 ký tự), Chu kỳ (Tối đa 20 ký tự), Thứ tự vị trí, Giá trị tương ứng theo từng tiêu chí so sánh (động - Tối đa 50 ký tự), Tính năng nổi bật (textarea - tối đa 150 ký tự/dòng), Nút CTA - Text (Tối đa 30 ký tự), URL (Tối đa 255 ký tự), Checkbox Hiển thị gói cước</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Danh mục nội dung giải trí</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-categories</code></td>
-<td>- Headline Section<br/>- Các tab phân loại nội dung (Thể thao, Phim truyện, Thiếu nhi, Shows)<br/>- Mỗi tab cấu hình: Grid ảnh các bộ phim/trận đấu nổi bật kèm mô tả ngắn</td>
+<td>Timer - Countdown độc lập</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">timer-camp-countdown</code></td>
+<td>- Tiêu đề ưu đãi (Tối đa 80 ký tự)<br/>- Mô tả ngắn (Tối đa 100 ký tự)<br/>- Ảnh banner giữa dải countdown<br/>- Thời gian kết thúc (datetime-local)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Bảng giá &amp; Đăng ký</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-pricing</code></td>
-<td>- Headline Section &amp; Bảng giá so sánh các gói FPT Play (gói SMax, gói SVip)<br/>- Các quyền lợi của từng gói (Quyền lợi thể thao, Số thiết bị xem đồng thời, Quảng cáo...)</td>
+<td>Sports - Thể thao trực tiếp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sports-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách giải đấu/quyền lợi. Mỗi giải đấu gồm: Tên giải đấu (Tối đa 50 ký tự), Ảnh/Logo card, Gạch đầu dòng quyền lợi (textarea - tối đa 100 ký tự/dòng), Hỗ trợ thêm/xóa giải đấu</td>
 </tr>
 <tr>
 <td>7</td>
-<td>Bình luận viên &amp; chuyên gia</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-commentators</code></td>
-<td>- Danh sách BLV/chuyên gia: Ảnh đại diện, họ tên, chức danh, badge giải đấu</td>
+<td>Commentators - Dàn bình luận viên</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">commentators-sa</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Mô tả phụ (Tối đa 150 ký tự)<br/>- Danh sách bình luận viên. Mỗi BLV gồm: Tên BLV (Tối đa 50 ký tự), Ảnh đại diện BLV, Mô tả BLV (textarea - tối đa 150 ký tự), Hỗ trợ thêm/xóa bình luận viên</td>
 </tr>
 <tr>
 <td>8</td>
-<td>FAQ &amp; Hỗ trợ</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-faq-support</code></td>
-<td>- Accordion câu hỏi thường gặp, Hotline, website, khung hỗ trợ kèm ảnh thiết bị</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách câu hỏi. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Sticky ưu đãi cuối trang</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-sticky</code></td>
-<td>- Thanh ưu đãi dính chân trang, chứa icon quà, tiêu đề, mô tả, nút Mua ngay</td>
-</tr>
-<tr>
-<td>10</td>
-<td>Footer CTA</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sa-footer</code></td>
-<td>- Ảnh nền Footer<br/>- Headline kêu gọi hành động cuối trang<br/>- Nút đăng ký nhanh</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon sticky (Hộp quà/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Nút CTA - Text (Tối đa 30 ký tự)<br/>- Nút CTA - URL (Tối đa 255 ký tự)</td>
 </tr>
 </tbody>
 </table>
@@ -2380,61 +2601,61 @@
 <th>STT</th>
 <th>Tên Section</th>
 <th>Mã Section (ID)</th>
-<th>Các trường thông tin cấu hình trong CMS</th>
+<th>Các trường thông tin cấu hình trong CMS (Kèm giới hạn ký tự)</th>
 </tr></thead><tbody>
 <tr>
 <td>1</td>
-<td>Hero + Form thu Lead</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-hero</code></td>
-<td>- Ảnh nền bắt mắt kích thích thị giác<br/>- Headline giật tít ưu đãi độc quyền<br/>- Khung Form thu Lead trực diện: Họ tên, Số điện thoại, Địa chỉ, Nút đăng ký nhận quà</td>
+<td>Banner hero - Thu Lead</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">banner-cam-hero</code></td>
+<td>- Ảnh nền (Background Image) (1920×800px)<br/>- Ảnh nền Mobile (768x800px)<br/>- URL ảnh nền (Desktop &amp; Mobile - Tối đa 255 ký tự)<br/>- Text nút CTA chính (Tối đa 30 ký tự)<br/>- URL nút CTA chính (Tối đa 255 ký tự)<br/>- Text nút CTA phụ (Tối đa 30 ký tự)<br/>- URL nút CTA phụ (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Social Proof chạy chữ</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-proof</code></td>
-<td>- Dải thông báo chạy liên tục (Marquee) hiển thị danh sách người dùng vừa đăng ký thành công (ví dụ: "Trần Văn B - 096*** vừa đăng ký thành công 1 phút trước")</td>
+<td>Runner - Social Proof chạy chữ</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">runner-lead-proof</code></td>
+<td>- Danh sách khách hàng đăng ký ảo (chạy chữ ngang, cách nhau bởi dấu phẩy, hỗ trợ chạy vòng lặp liên tục ngoài trang, tối đa 100 ký tự/dòng thông báo)</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Bảng giá &amp; So sánh gói</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-pricing</code></td>
-<td>- Headline Section<br/>- Bảng giá so sánh 2-3 gói cước kèm nhấn mạnh ưu đãi đặc biệt nhất của từng gói</td>
+<td>Products - Bảng giá &amp; So sánh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">pricing-lead</code></td>
+<td>- Tiêu đề bảng giá (Tối đa 80 ký tự)<br/>- Cấu hình danh sách các Tab (ví dụ: Internet gia đình, Combo Internet truyền hình, Internet doanh nghiệp). Mỗi tab có: Tên tab (Tối đa 30 ký tự), Slug (Tối đa 50 ký tự), Checkbox Mặc định, nút Thêm/Xóa tab.<br/>- Danh sách gói cước trong mỗi tab. Mỗi gói gồm: Tên gói (Tối đa 50 ký tự), Giá bán (đ/tháng), Tốc độ Download, Tốc độ Upload, Badge text (Tối đa 20 ký tự), Tính năng (textarea - tối đa 150 ký tự/dòng), CTA phụ - Text (Tối đa 30 ký tự), CTA phụ - URL (Tối đa 255 ký tự), CTA chính - Text (Tối đa 30 ký tự), CTA chính - URL (Tối đa 255 ký tự), Hỗ trợ thêm/xóa gói<br/><em>Quy tắc hiển thị Tab trên UI:</em> Khi cấu hình từ 2 tab trở lên (n &gt;= 2), giao diện Landing Page hiển thị Menu Tab ở phía trên để người dùng click chuyển đổi qua lại. Khi chỉ cấu hình 1 tab duy nhất (n = 1), hệ thống sẽ ẩn hoàn toàn thanh Menu Tab này trên giao diện và tự động hiển thị trực tiếp danh sách các gói cước/sản phẩm lẻ thuộc tab đó ra màn hình.</td>
 </tr>
 <tr>
 <td>4</td>
-<td>Giá ưu đãi, nhiều tiện ích</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-steps</code></td>
-<td>- Headline Section<br/>- 6 lý do 3 triệu gia đình tin chọn FPT Telecom</td>
+<td>Info - Lợi ích nổi bật</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">info-cam-usp</code></td>
+<td>- Tiêu đề Section Lợi ích (Tối đa 80 ký tự)<br/>- Cấu hình 6 mục Lợi ích nổi bật. Mỗi mục gồm: Icon Lợi ích, Tiêu đề lợi ích (Tối đa 50 ký tự), Mô tả chi tiết (Tối đa 150 ký tự)</td>
 </tr>
 <tr>
 <td>5</td>
-<td>Review Internet FPT</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-reviews</code></td>
-<td>- Video review thực tế từ các KOLs/KOCs và khách hàng</td>
+<td>Procedure - Hướng dẫn thủ tục</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">procedure-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các bước thủ tục (3 bước mặc định). Mỗi bước gồm: Tiêu đề bước (Tối đa 50 ký tự), Mô tả (Tối đa 150 ký tự), Icon bước<br/>- Cấu hình Nút chính (Màu cam): Text nút (Tối đa 30 ký tự), Link URL (Tối đa 255 ký tự)<br/>- Cấu hình Nút phụ (Màu xanh): Text nút (Tối đa 30 ký tự), Số điện thoại / Link (Tối đa 255 ký tự)</td>
 </tr>
 <tr>
 <td>6</td>
-<td>Đánh giá khách hàng</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-feedback</code></td>
-<td>- Khách hàng nói gì sau khi lắp đặt (Slider feedback: Avatar, tên, rating, nội dung)</td>
+<td>Video - Video Review</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">reviews-lead</code></td>
+<td>- Tiêu đề Section video (Tối đa 80 ký tự)<br/>- Danh sách Video Review. Mỗi video gồm: Ảnh thumbnail, Tiêu đề video (Tối đa 100 ký tự), URL Video (Tối đa 255 ký tự), Hỗ trợ thêm/xóa video</td>
 </tr>
 <tr>
 <td>7</td>
-<td>Hướng dẫn thủ tục</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-procedure</code></td>
-<td>- Các bước chuẩn bị giấy tờ, thanh toán phí và lắp đặt mạng</td>
+<td>Feedback - Đánh giá khách hàng</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">feedback-lead</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách đánh giá dạng Slider (tối đa 10 đánh giá, hiển thị đồng thời 1 đánh giá trên Mobile và tối đa 3 đánh giá trên Desktop). Mỗi đánh giá gồm: Avatar, Tên khách hàng (Tối đa 50 ký tự), Khu vực / Phụ đề (Tối đa 50 ký tự), Tiêu đề nhận xét (Tối đa 50 ký tự), Rating (1-5 ⭐), Nội dung nhận xét (Tối đa 300 ký tự), Hỗ trợ thêm/xóa đánh giá</td>
 </tr>
 <tr>
 <td>8</td>
-<td>FAQ Accordion</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-faq</code></td>
-<td>- Headline Section<br/>- Danh sách câu hỏi ngắn giải đáp thắc mắc về thời gian nhận ưu đãi, cam kết và thủ tục</td>
+<td>FAQ - Câu hỏi thường gặp</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">faq-cam</code></td>
+<td>- Tiêu đề section (Tối đa 80 ký tự)<br/>- Danh sách các câu hỏi thường gặp. Mỗi câu hỏi thu gọn thành 1 dòng duy nhất gồm: Dropdown đồng bộ từ kho FAQ chung, nút Xóa dòng. Nội dung Câu hỏi &amp; Trả lời tự động liên kết hiển thị từ kho FAQ theo ID đã chọn mà không hiển thị trường nhập liệu trên CMS</td>
 </tr>
 <tr>
 <td>9</td>
-<td>Sticky Bottom Bar</td>
-<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">lead-sticky</code></td>
-<td>- Thanh bar thu gọn dính chân trang trên Mobile, chứa Hotline bấm gọi ngay và nút nhận ưu đãi nhanh</td>
+<td>Sticky - Thanh đăng ký nhanh</td>
+<td><code style="background-color:#f2f2f2;padding:2px 4px;font-family:Consolas;">sticky-cam</code></td>
+<td>- Duy nhất 1 background tĩnh (màu nền hoặc 1 ảnh nền, không hỗ trợ slide)<br/>- Icon / Ảnh đại diện (3D Gift/Emoji) (Chỉ hỗ trợ upload ảnh, không dán URL)<br/>- Tiêu đề sticky (Tối đa 50 ký tự)<br/>- Mô tả phụ (Tối đa 100 ký tự)<br/>- Text nút CTA Đăng ký (Tối đa 30 ký tự)<br/>- URL nút CTA Đăng ký (Tối đa 255 ký tự)</td>
 </tr>
 </tbody>
 </table>
