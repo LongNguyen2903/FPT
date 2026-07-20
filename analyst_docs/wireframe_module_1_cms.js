@@ -1626,8 +1626,8 @@ function skuRenderDactinh(dataKey) {
         var div = document.createElement('div');
         div.className = 'dactinh-row';
         var isLast = i === rows.length - 1;
-        // Dùng grid 5 cột cùng template với header mới
-        div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
+        // Dùng grid 6 cột cùng template với header mới
+        div.style.cssText = 'display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
 
         var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
             + '<input type="checkbox" class="dactinh-noibat-chk"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
@@ -1638,10 +1638,15 @@ function skuRenderDactinh(dataKey) {
 
         var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
 
+        var iconCol = '<div style="display:flex;justify-content:center;align-items:center;">'
+            + '<div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">📷</div>'
+            + '<input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var fr=new FileReader();fr.onload=function(e){p.innerHTML=\'<img src=\\\'\'+e.target.result+\'\\\' style=\\\'width:100%;height:100%;object-fit:contain;border-radius:4px;\\\'>\'};fr.readAsDataURL(this.files[0]);}"></div>';
+
         var nameVal = r.name;
         var valueVal = r.value + (r.unit ? ' ' + r.unit : '');
 
         div.innerHTML = dragCol
+            + iconCol
             + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="' + nameVal + '" placeholder="Tên đặc tính"></div>'
             + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="' + valueVal + '" placeholder="Giá trị"></div>'
             + noibatCol
@@ -1659,7 +1664,7 @@ function skuAddDactinhRow() {
 
     var div = document.createElement('div');
     div.className = 'dactinh-row';
-    div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
+    div.style.cssText = 'display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
 
     var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
         + '<input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
@@ -1672,7 +1677,12 @@ function skuAddDactinhRow() {
 
     var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
 
+    var iconCol = '<div style="display:flex;justify-content:center;align-items:center;">'
+        + '<div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">📷</div>'
+        + '<input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var fr=new FileReader();fr.onload=function(e){p.innerHTML=\'<img src=\\\'\'+e.target.result+\'\\\' style=\\\'width:100%;height:100%;object-fit:contain;border-radius:4px;\\\'>\'};fr.readAsDataURL(this.files[0]);}"></div>';
+
     div.innerHTML = dragCol
+        + iconCol
         + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="" placeholder="Tên đặc tính"></div>'
         + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="" placeholder="Giá trị"></div>'
         + noibatCol
@@ -2585,6 +2595,21 @@ function skuOpenDetail(code, name, type, category) {
     renderSkuTagsReadonly(code);
 }
 
+function toggleTreeRow(groupClass, btn) {
+    const rows = document.querySelectorAll('.' + groupClass);
+    let isCollapse = false;
+    if (btn.innerText === '▼') {
+        btn.innerText = '▶';
+        isCollapse = true;
+    } else {
+        btn.innerText = '▼';
+        isCollapse = false;
+    }
+    rows.forEach(row => {
+        row.style.display = isCollapse ? 'none' : '';
+    });
+}
+
 function skuSwitchTab(tabName) {
     const tabs = ['chung', 'dactinh', 'content', 'faq'];
     tabs.forEach(t => {
@@ -2603,6 +2628,17 @@ function skuSwitchTab(tabName) {
             }
         }
     });
+    if (tabName === 'dactinh') {
+        var list = document.getElementById('dactinh-attr-list');
+        if (list && list.querySelectorAll('.dactinh-row').length === 0) {
+            var skuCode = (document.getElementById('sku-hdr-code')?.innerText || 'CAM-IQ3').toLowerCase();
+            var skuCat = (document.getElementById('sku-bc-cat')?.innerText || '').toLowerCase();
+            var skuType = (document.getElementById('sku-bc-type')?.innerText || '').toLowerCase();
+            var catLower = skuCat + ' ' + skuType + ' ' + skuCode;
+            var dataKey = catLower.indexOf('camera') >= 0 || catLower.indexOf('cam') >= 0 ? 'camera' : catLower.indexOf('play') >= 0 ? 'play' : catLower.indexOf('modem') >= 0 || catLower.indexOf('ap') >= 0 || catLower.indexOf('wifi') >= 0 ? 'modem' : 'service';
+            if (typeof skuRenderDactinh === 'function') skuRenderDactinh(dataKey);
+        }
+    }
 }
 
 function addLinkedFaqRow(question, answer) {

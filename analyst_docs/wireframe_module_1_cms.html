@@ -2577,16 +2577,7 @@
                             <button class="btn btn-warning" style="flex-shrink:0;" onclick="filterSkuTable()">Tìm Kiếm</button>
                         </div>
 
-                        <!-- Bulk actions -->
-                        <div style="display:flex; gap:8px; margin-bottom:10px; align-items:center;">
-                            <span style="font-size:13px; color:var(--text-muted);">Thao tác nhanh:</span>
-                            <button class="btn btn-sm"
-                                style="background:rgba(16,185,129,0.2); color:var(--success); border:1px solid rgba(16,185,129,0.3);">✅
-                                Kích hoạt (F12)</button>
-                            <button class="btn btn-sm"
-                                style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.3);">🚫
-                                Hủy kích hoạt (Shift+F12)</button>
-                        </div>
+
 
                         <!-- Data Table (style) -->
                         <div style="overflow-x:auto;">
@@ -2748,19 +2739,11 @@
                                     </span>
                                 </div>
 
-                                <!-- Nhóm đặc tính & Upload Icon & Nổi bật -->
+                                <!-- Nhóm đặc tính & Nổi bật -->
                                 <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
                                     <span style="font-size:12px; color:var(--text-muted);">Nhóm đặc tính:</span>
                                     <span id="dactinh-nhom-select-dropdown"
                                         style="font-size:13px; font-weight:700; color:#ff6b00; background:rgba(255,107,0,0.08); border:1px solid rgba(255,107,0,0.2); border-radius:6px; padding:4px 12px; display:inline-block;">-</span>
-
-                                    <!-- Upload icon cho Nhóm đặc tính -->
-                                    <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.2); border-radius:6px; padding:3px 10px;">
-                                        <span style="font-size:12px; color:var(--text-muted);">Icon nhóm:</span>
-                                        <div id="dactinh-nhom-icon-preview" style="width:24px; height:24px; border-radius:4px; background:rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; font-size:12px; border:1px solid rgba(255,255,255,0.1);">⚙️</div>
-                                        <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('dactinh-nhom-icon-input').click()" style="padding:2px 8px; font-size:11px; background:rgba(255,255,255,0.08);">📤 Upload Icon</button>
-                                        <input type="file" id="dactinh-nhom-icon-input" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var r=new FileReader();r.onload=function(e){document.getElementById('dactinh-nhom-icon-preview').innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:cover;border-radius:3px;\'>'};r.readAsDataURL(this.files[0]);}">
-                                    </div>
 
                                     <!-- Tick Nổi bật cho Nhóm đặc tính -->
                                     <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12px; color:var(--warning); font-weight:600; background:rgba(245,158,11,0.08); padding:4px 10px; border-radius:6px; border:1px solid rgba(245,158,11,0.2);">
@@ -2773,14 +2756,16 @@
                                         nổi bật dưới gallery trên web <span id="dactinh-noibat-counter" style="margin-left:8px; font-weight:700; color:var(--warning); background:rgba(245,158,11,0.08); padding:2px 6px; border-radius:4px; border:1px solid rgba(245,158,11,0.2); transition: all 0.2s;">(Đã chọn: 0/3)</span></span>
                                 </div>
 
-                                <!-- Attribute list — JS renders rows via skuRenderDactinh() -->
+                                <!-- Attribute list — Static example rows + JS dynamic render -->
                                 <div id="dactinh-attr-list" style="display:flex; flex-direction:column; gap:0;">
-                                    <!-- Header row — chỉ hiện khi là thiết bị -->
+                                    <!-- Header row -->
                                     <div id="dactinh-header-row"
-                                        style="display:grid; grid-template-columns:30px 200px 1fr 110px 50px; align-items:center; padding:0 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:2px;">
+                                        style="display:grid; grid-template-columns:30px 60px 200px 1fr 110px 50px; align-items:center; padding:0 0 6px; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:2px;">
                                         <span
                                             style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Vị
                                             trí</span>
+                                        <span
+                                            style="font-size:10px; font-weight:600; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Icon ✏️</span>
                                         <span
                                             style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Đặc
                                             tính</span>
@@ -2794,35 +2779,78 @@
                                             style="font-size:10px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; text-align:center;">Hành
                                             động</span>
                                     </div>
-                                    <!-- Rows rendered by skuRenderDactinh() -->
+                                    <!-- Static Example Rows for Camera -->
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">📷</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Độ phân giải" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="2MP Full HD (1920×1080)" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" checked style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--primary);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">🔄</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Góc quan sát" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="107° (Góc rộng)" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" checked style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--primary);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">🌙</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Hồng ngoại ban đêm" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="Tầm xa 10m" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" checked style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--primary);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">🤖</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Phát hiện AI" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="Nhận diện người & phân biệt vật chuyển động" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--text-muted);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">🗣️</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Âm thanh" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="Đàm thoại 2 chiều (Micro & Loa tích hợp)" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--text-muted);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">☁️</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Lưu trữ" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="FPT Cloud bảo mật cao" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--text-muted);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
+                                    <div class="dactinh-row" style="display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;">
+                                        <div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>
+                                        <div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">🛡️</div><input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var r=new FileReader();r.onload=function(e){p.innerHTML='<img src=\''+e.target.result+'\' style=\'width:100%;height:100%;object-fit:contain;border-radius:4px;\'>'};r.readAsDataURL(this.files[0]);}"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="Kháng nước & bụi" placeholder="Tên đặc tính"></div>
+                                        <div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="Chuẩn IP66 (Dùng trong nhà & ngoài trời)" placeholder="Giá trị"></div>
+                                        <label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()"><span style="font-size:11px;color:var(--text-muted);">Nổi bật</span></label>
+                                        <div style="display:flex;justify-content:center;"><button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:2px 6px;" onclick="this.parentElement.parentElement.remove(); updateDactinhNoibatLimit();" title="Xóa">🗑️</button></div>
+                                    </div>
                                 </div>
-                                <div style="margin-top:10px;">
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="skuAddDactinhRow()"
-                                        style="border:1px dashed rgba(255,255,255,0.2); width:100%; justify-content:center; display:flex; align-items:center; gap:6px; padding:8px;"><span
-                                            style="color:var(--warning); font-weight:bold; font-size:14px; margin-right:4px;">+</span>
-                                        Th&#234;m d&#242;ng thu&#7897;c t&#237;nh m&#7899;i</button>
-                                </div>
-                                <p
-                                    style="font-size:11px; color:var(--text-muted); margin:12px 0 0; display:flex; align-items:center; gap:6px;">
-                                    <span style="color:var(--warning); margin-right:4px;">&#8505;&#65039;</span> VH
-                                    t&#7921; c&#7853;p nh&#7853;t &#273;&#7863;c t&#237;nh. H&#7879; th&#7889;ng
-                                    h&#7897; tr&#7907; import file Excel ho&#7863;c &#225;p d&#7909;ng template d&#7875;
-                                    nh&#7853;p nhanh.
-                                </p>
                             </div>
 
-                            <!-- Thiết bị đi kèm — Read-only, sync từ QLCS/PDH -->
+                            <!-- Sản phẩm đi kèm — Read-only, sync từ QLCS/PDH -->
                             <div class="form-section"
-                                style="margin-top:0; border-top:1px solid var(--border-glass); padding-top:20px;">
+                                style="margin-top:20px; border-top:1px solid var(--border-glass); padding-top:20px;">
                                 <div
                                     style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
-                                    <h3 style="margin:0;">▾ Thiết bị đi kèm</h3>
+                                    <h3 style="margin:0;">▾ Sản phẩm đi kèm</h3>
                                     <span
                                         style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--text-muted); background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); border-radius:6px; padding:4px 10px;">
                                         🔒 Dữ liệu đồng bộ từ QLCS · Read-only
                                     </span>
                                 </div>
-                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Danh sách thiết bị
+                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px;">Danh sách sản phẩm
                                     được bán / lắp đặt kèm theo SKU này. Dữ liệu được đồng bộ tự động từ hệ thống
                                     PDH/QLCS — không chỉnh sửa trực tiếp tại đây.</p>
 
@@ -2838,187 +2866,252 @@
                                         CMS.</span>
                                 </div>
                                 <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass);">
-                                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                                    <table style="width:100%; border-collapse:collapse; font-size:13px; min-width:900px;">
                                         <thead>
                                             <tr style="background:rgba(0,0,0,0.25);">
-                                                <th
-                                                    style="padding:8px 10px; text-align:center; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:36px; border-bottom:1px solid var(--border-glass);">
-                                                    #</th>
-                                                <!-- Ảnh — CMS editable -->
-                                                <th
-                                                    style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:64px;">
-                                                    Ảnh ✏️</th>
-                                                <th
-                                                    style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">
-                                                    Mã SKU</th>
-                                                <th
-                                                    style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">
-                                                    Tên QLCS <span style="opacity:0.4;">(raw)</span></th>
-                                                <!-- Tên hiển thị web — CMS editable -->
-                                                <th
-                                                    style="padding:8px 10px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05);">
+                                                <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:35%; border-bottom:1px solid var(--border-glass);">
+                                                    Sản phẩm / Gói cước (Phân cấp)</th>
+                                                <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:15%; border-bottom:1px solid var(--border-glass);">
+                                                    Phân loại từ QLCS</th>
+                                                <th style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:25%;">
                                                     Tên hiển thị web ✏️</th>
-                                                <th
-                                                    style="padding:8px 10px; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">
-                                                    Phân loại</th>
-                                                <!-- Hiển thị web — CMS editable (đổi từ "Bắt buộc") -->
-                                                <th
-                                                    style="padding:8px 10px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05);">
-                                                    Hiển thị web ✏️</th>
-                                                <!--
-                                                    SL Tạm ẩn — chưa xác định có lấy được từ QLCS/PDH không
-                                                    <th>SL mặc định</th>
-                                                    <th>SL tối thiểu</th>
-                                                    <th>SL tối đa</th>
-                                                -->
+                                                <th style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:15%;">
+                                                    Phương thức hiển thị ✏️</th>
+                                                <th style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:10%;">
+                                                    Nhận trong gói ✏️</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- Row 1 — CAM-1D-ONLY, Main -->
-                                            <tr>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">
-                                                    1</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;"
-                                                        title="Upload ảnh">📷</div>
+                                            <!-- NHÓM 1: Gói Giga -->
+                                            <tr style="background:rgba(255,255,255,0.04); font-weight:600;">
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px;">
+                                                    <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('giga-group', this)">▼</span>
+                                                    <span>📦 Gói Giga</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D-ONLY</span>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);">
+                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">
-                                                    1D FPT Camera Only</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <input type="text" class="form-input" value="Camera FPT 1 ngày"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="Gói Giga" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <label
-                                                        style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-                                                        <input type="checkbox" checked
-                                                            style="accent-color:var(--primary); width:15px; height:15px;">
-                                                        <span style="font-size:11px; color:var(--primary);">Hiện</span>
-                                                    </label>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
                                                 </td>
                                             </tr>
-                                            <!-- Row 2 — CAM-1D, Required -->
-                                            <tr style="background:rgba(255,255,255,0.01);">
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">
-                                                    2</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;"
-                                                        title="Upload ảnh">📷</div>
+                                            <!-- Nhóm 1 - Con 1 -->
+                                            <tr class="giga-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
+                                                    <span>🔌 Modem wifi 6 băng tần kép</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-1D</span>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">
-                                                    1D FPT Camera</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <input type="text" class="form-input"
-                                                        placeholder="Nhập tên hiển thị web..."
-                                                        style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;">
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="Modem wifi 6 băng tần kép" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="background:rgba(245,158,11,0.12); color:var(--warning); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Required</span>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <label
-                                                        style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-                                                        <input type="checkbox" checked
-                                                            style="accent-color:var(--primary); width:15px; height:15px;">
-                                                        <span style="font-size:11px; color:var(--primary);">Hiện</span>
-                                                    </label>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
                                                 </td>
                                             </tr>
-                                            <!-- Row 3 — CAM-14D-MOT, Extra -->
-                                            <tr>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; color:var(--text-muted); border-bottom:1px solid var(--border-glass);">
-                                                    3</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px dashed rgba(249,115,22,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px;"
-                                                        title="Upload ảnh">📷</div>
+                                            <!-- Nhóm 1 - Con 2 -->
+                                            <tr class="giga-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
+                                                    <span>💵 Phí lắp đặt</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">CAM-14D-MOT</span>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Phí đi kèm</span>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); color:var(--text-muted); font-size:12px;">
-                                                    14D - Motion</td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <input type="text" class="form-input"
-                                                        placeholder="Nhập tên hiển thị web..."
-                                                        style="font-size:12px; padding:5px 9px; height:30px; border-style:dashed;">
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="Phí lắp đặt" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; border-bottom:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="background:rgba(16,185,129,0.12); color:var(--success); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Extra</span>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.03);">
-                                                    <label
-                                                        style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-                                                        <input type="checkbox"
-                                                            style="accent-color:var(--primary); width:15px; height:15px;">
-                                                        <span style="font-size:11px; color:var(--text-muted);">Ẩn</span>
-                                                    </label>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
                                                 </td>
                                             </tr>
-                                            <!-- Row 4 — STB-HD01, Main -->
-                                            <tr style="background:rgba(255,255,255,0.01);">
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; color:var(--text-muted);">
-                                                    4</td>
-                                                <td style="padding:8px 10px; background:rgba(249,115,22,0.03);">
-                                                    <div style="width:44px; height:44px; background:rgba(255,255,255,0.07); border:1px solid rgba(249,115,22,0.35); border-radius:6px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; overflow:hidden;"
-                                                        title="Upload ảnh">📺</div>
+
+                                            <!-- NHÓM 2: VIP -->
+                                            <tr style="background:rgba(255,255,255,0.04); font-weight:600;">
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px; border-top:1px solid var(--border-glass);">
+                                                    <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('vip-group', this)">▼</span>
+                                                    <span>📦 VIP</span>
                                                 </td>
-                                                <td style="padding:8px 10px;"><span
-                                                        style="font-family:monospace; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 7px; border-radius:4px;">STB-HD01</span>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass);">
+                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
                                                 </td>
-                                                <td style="padding:8px 10px; color:var(--text-muted); font-size:12px;">
-                                                    Đầu thu HD FPT</td>
-                                                <td style="padding:8px 10px; background:rgba(249,115,22,0.03);"><input
-                                                        type="text" class="form-input" value="Đầu thu HD FPT"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;"></td>
-                                                <td style="padding:8px 10px;">
-                                                    <span
-                                                        style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Main</span>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="VIP" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
                                                 </td>
-                                                <td
-                                                    style="padding:8px 10px; text-align:center; background:rgba(249,115,22,0.03);">
-                                                    <label
-                                                        style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-                                                        <input type="checkbox" checked
-                                                            style="accent-color:var(--primary); width:15px; height:15px;">
-                                                        <span style="font-size:11px; color:var(--primary);">Hiện</span>
-                                                    </label>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+                                            <!-- Nhóm 2 - Con 1 -->
+                                            <tr class="vip-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
+                                                    <span>📺 FPT Play Box</span>
+                                                </td>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
+                                                </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="FPT Play Box" style="font-size:12px; padding:5px 9px; height:30px;">
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+                                            <!-- Nhóm 2 - Con 2 -->
+                                            <tr class="vip-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
+                                                    <span>📺 FPT Play Box 650</span>
+                                                </td>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
+                                                </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="FPT Play Box 650" style="font-size:12px; padding:5px 9px; height:30px;">
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+
+                                            <!-- NHÓM 3: Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng -->
+                                            <tr style="background:rgba(255,255,255,0.04); font-weight:600;">
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px; border-top:1px solid var(--border-glass);">
+                                                    <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('camera-group', this)">▼</span>
+                                                    <span>📦 Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng</span>
+                                                </td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass);">
+                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
+                                                </td>
+                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
+                                                </td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+                                            <!-- Nhóm 3 - Con 1 -->
+                                            <tr class="camera-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
+                                                    <span>📷 FPTCameraPlay4</span>
+                                                </td>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
+                                                </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="FPTCameraPlay4" style="font-size:12px; padding:5px 9px; height:30px;">
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+                                            <!-- Nhóm 3 - Con 2 -->
+                                            <tr class="camera-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
+                                                    <span>🔗 IQ3+ - combo</span>
+                                                </td>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(16,185,129,0.12); color:var(--success); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sản phẩm đi kèm</span>
+                                                </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="IQ3+ - combo" style="font-size:12px; padding:5px 9px; height:30px;">
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
+                                                </td>
+                                            </tr>
+                                            <!-- Nhóm 3 - Con 3 -->
+                                            <tr class="camera-group" style="border-bottom:1px solid var(--border-glass);">
+                                                <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
+                                                    <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
+                                                    <span>💵 Phí triển khai Camera Combo</span>
+                                                </td>
+                                                <td style="padding:10px 14px;">
+                                                    <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Phí đi kèm</span>
+                                                </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value="Phí triển khai Camera Combo" style="font-size:12px; padding:5px 9px; height:30px;">
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <select class="form-input" style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
+                                                        <option selected>Hiển thị toàn bộ</option>
+                                                        <option>Chỉ hiện khi click</option>
+                                                        <option>Ẩn</option>
+                                                    </select>
+                                                </td>
+                                                <td style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
+                                                    <input type="checkbox" checked style="accent-color:var(--primary); width:16px; height:16px;">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -3027,21 +3120,20 @@
                                 <!-- Legend phân loại -->
                                 <div
                                     style="display:flex; align-items:center; gap:16px; margin-top:10px; flex-wrap:wrap;">
-                                    <span style="font-size:11px; color:var(--text-muted);">Phân loại:</span>
+                                    <span style="font-size:11px; color:var(--text-muted);">Chú thích Phân loại:</span>
                                     <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(249,115,22,0.12); color:var(--primary); padding:1px 8px; border-radius:20px; font-weight:600;">Main</span>
-                                        — Thiết bị chính đi kèm SKU</span>
+                                            style="background:rgba(249,115,22,0.12); color:var(--primary); padding:1px 8px; border-radius:20px; font-weight:600;">Thiết bị</span>
+                                        — Modem, AP, Box, Camera đi kèm</span>
                                     <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(245,158,11,0.12); color:var(--warning); padding:1px 8px; border-radius:20px; font-weight:600;">Required</span>
-                                        — Bắt buộc, không tách rời</span>
+                                            style="background:rgba(16,185,129,0.12); color:var(--success); padding:1px 8px; border-radius:20px; font-weight:600;">Sản phẩm đi kèm</span>
+                                        — Dịch vụ Cloud, gói bổ trợ</span>
                                     <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(16,185,129,0.12); color:var(--success); padding:1px 8px; border-radius:20px; font-weight:600;">Extra</span>
-                                        — Tuỳ chọn thêm</span>
+                                            style="background:rgba(239,68,68,0.12); color:var(--danger); padding:1px 8px; border-radius:20px; font-weight:600;">Phí đi kèm</span>
+                                        — Phí triển khai, phí lắp đặt ban đầu</span>
                                 </div>
                                 <p
                                     style="font-size:11px; color:var(--text-muted); margin:8px 0 0; display:flex; align-items:center; gap:6px;">
-                                    🔒 Để thêm / sửa / xoá hàng, thao tác trực tiếp trên <strong>PDH / QLCS</strong>.
-                                    CMS chỉ lưu: Ảnh, Tên hiển thị web, Hiển thị web.
+                                    🔒 Danh sách cha-con và Phân loại đồng bộ tự động từ <strong>PDH/QLCS</strong>. VH chỉ chỉnh sửa: Tên hiển thị web, Phương thức hiển thị, Nhận trong gói.
                                 </p>
                             </div>
                         </div>
@@ -16832,10 +16924,11 @@
             var sel = document.getElementById('dactinh-nhom-select-dropdown');
             if (!list) return;
 
-            var isService = (dataKey === 'service');
+            var nhomLabel = dataKey === 'camera' ? 'Thông số Camera' 
+                : dataKey === 'modem' ? 'Thông số Router/Modem' 
+                : dataKey === 'play' ? 'Thông số Truyền hình FPT Play' 
+                : 'Thông số Dịch vụ Internet';
 
-            // Sync nhóm đặc tính dropdown/label
-            var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
             if (sel) {
                 if (sel.tagName === 'SELECT') {
                     for (var i = 0; i < sel.options.length; i++) {
@@ -16849,8 +16942,7 @@
                 }
             }
 
-            // Toggle Nổi bật column visibility
-            toggleDactinhNoibat(isService ? 'dichvu' : 'thietbi');
+            toggleDactinhNoibat(dataKey);
 
             // Render rows (remove old dynamic rows first, keep header)
             list.querySelectorAll('.dactinh-row').forEach(function (el) { el.remove(); });
@@ -16860,11 +16952,9 @@
                 var div = document.createElement('div');
                 div.className = 'dactinh-row';
                 var isLast = i === rows.length - 1;
-                // Dùng grid 5 cột cùng template với header mới
-                div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
+                div.style.cssText = 'display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
 
-                var noibatCol = isService ? '<span class="col-noibat"></span>' :
-                    '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
+                var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
                     + '<input type="checkbox" class="dactinh-noibat-chk"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
                     + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
                     + '</label>';
@@ -16874,11 +16964,16 @@
                     + '</div>';
 
                 var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
+                
+                var iconCol = '<div style="display:flex;justify-content:center;align-items:center;">'
+                    + '<div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">📷</div>'
+                    + '<input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var fr=new FileReader();fr.onload=function(e){p.innerHTML=\'<img src=\\\'\'+e.target.result+\'\\\' style=\\\'width:100%;height:100%;object-fit:contain;border-radius:4px;\\\'>\'};fr.readAsDataURL(this.files[0]);}"></div>';
 
                 var nameVal = r.name;
                 var valueVal = r.value + (r.unit ? ' ' + r.unit : '');
 
                 div.innerHTML = dragCol
+                    + iconCol
                     + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="' + nameVal + '" placeholder="Tên đặc tính"></div>'
                     + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="' + valueVal + '" placeholder="Giá trị"></div>'
                     + noibatCol
@@ -16886,7 +16981,6 @@
                 list.appendChild(div);
             });
 
-            // Cập nhật trạng thái sau khi render
             updateDactinhNoibatLimit();
         }
 
@@ -16896,7 +16990,7 @@
 
             var div = document.createElement('div');
             div.className = 'dactinh-row';
-            div.style.cssText = 'display:grid;grid-template-columns:30px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
+            div.style.cssText = 'display:grid;grid-template-columns:30px 60px 200px 1fr 110px 50px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);';
 
             var noibatCol = '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
                 + '<input type="checkbox" class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
@@ -16909,7 +17003,12 @@
 
             var dragCol = '<div style="display:flex;justify-content:center;color:var(--text-muted);cursor:move;" title="Kéo thả đổi vị trí">☰</div>';
 
+            var iconCol = '<div style="display:flex;justify-content:center;align-items:center;">'
+                + '<div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px dashed rgba(249,115,22,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Upload Icon đặc tính" onclick="this.nextElementSibling.click()">📷</div>'
+                + '<input type="file" accept="image/*" style="display:none;" onchange="if(this.files&&this.files[0]){var p=this.previousElementSibling;var fr=new FileReader();fr.onload=function(e){p.innerHTML=\'<img src=\\\'\'+e.target.result+\'\\\' style=\\\'width:100%;height:100%;object-fit:contain;border-radius:4px;\\\'>\'};fr.readAsDataURL(this.files[0]);}"></div>';
+
             div.innerHTML = dragCol
+                + iconCol
                 + '<div><input type="text" class="form-input" style="padding:4px 8px; width:90%; font-size:13px; color:#fff;" value="" placeholder="Tên đặc tính"></div>'
                 + '<div><input type="text" class="form-input" style="padding:4px 8px; width:95%; font-size:13px; color:#fff;" value="" placeholder="Giá trị"></div>'
                 + noibatCol
@@ -17324,6 +17423,81 @@
             const selectAllCb = document.getElementById('faq-select-all');
             if (selectAllCb) selectAllCb.checked = false;
             filterPickerItems('faq');
+        }
+
+        // Data đặc tính theo từng loại SKU (Rich Example Data)
+        var dactinhData = {
+            'camera': [
+                { name: 'Độ phân giải', value: '2MP Full HD (1920×1080)', unit: '', highlight: true },
+                { name: 'Góc quan sát', value: '107', unit: '° (Góc rộng)', highlight: true },
+                { name: 'Hồng ngoại ban đêm', value: 'Tầm xa 10m', unit: '', highlight: true },
+                { name: 'Phát hiện AI', value: 'Nhận diện người & phân biệt vật chuyển động', unit: '', highlight: false },
+                { name: 'Âm thanh', value: 'Đàm thoại 2 chiều (Micro & Loa tích hợp)', unit: '', highlight: false },
+                { name: 'Lưu trữ', value: 'FPT Cloud bảo mật cao', unit: '', highlight: false },
+                { name: 'Kháng nước & bụi', value: 'Chuẩn IP66 (Dùng trong nhà & ngoài trời)', unit: '', highlight: false }
+            ],
+            'modem': [
+                { name: 'Tốc độ Wi-Fi', value: 'AX3000 (Up to 3000 Mbps)', unit: '', highlight: true },
+                { name: 'Chuẩn Wi-Fi', value: 'Wi-Fi 6 (802.11ax)', unit: '', highlight: true },
+                { name: 'Băng tần hỗ trợ', value: 'Dual-band (2.4GHz & 5GHz)', unit: '', highlight: true },
+                { name: 'Số cổng LAN', value: '4 x Gigabit LAN (1000Mbps)', unit: '', highlight: false },
+                { name: 'Khả năng chịu tải', value: '30 - 50 thiết bị kết nối đồng thời', unit: '', highlight: false },
+                { name: 'Tính năng Mesh', value: 'Hỗ trợ EasyMesh phủ sóng toàn nhà', unit: '', highlight: false }
+            ],
+            'service': [
+                { name: 'Tốc độ download', value: '150', unit: 'Mbps', highlight: true },
+                { name: 'Tốc độ upload', value: '150', unit: 'Mbps (Không giới hạn)', highlight: true },
+                { name: 'Loại đường truyền', value: 'Cáp quang FTTH 100%', unit: '', highlight: true },
+                { name: 'Thiết bị đi kèm', value: 'Modem Wi-Fi 6 thế hệ mới', unit: '', highlight: false },
+                { name: 'IP tĩnh', value: 'Hỗ trợ IP Động (Dynamic IP)', unit: '', highlight: false },
+                { name: 'Băng thông quốc tế', value: 'Tối thiểu 2 Mbps', unit: '', highlight: false }
+            ],
+            'play': [
+                { name: 'Số lượng kênh TV', value: '170+ Kênh (gồm 70+ kênh HD)', unit: '', highlight: true },
+                { name: 'Độ phân giải video', value: '4K Ultra HD', unit: '', highlight: true },
+                { name: 'Kho nội dung', value: 'Hàng ngàn Phim bộ, Phim điện ảnh & Show giải trí', unit: '', highlight: true },
+                { name: 'Đăng nhập đồng thời', value: 'Xem cùng lúc trên 3 thiết bị', unit: '', highlight: false },
+                { name: 'Bản quyền thể thao', value: 'Trực tiếp V-League, UEFA Champions League', unit: '', highlight: false },
+                { name: 'Tính năng xem lại', value: 'Hỗ trợ xem lại chương trình trong vòng 48h', unit: '', highlight: false }
+            ]
+        };
+
+        function skuOpenDetail(code, name, type, category) {
+            // Show detail, hide list
+            document.getElementById('sku-list').style.display = 'none';
+            document.getElementById('sku-form').style.display = 'block';
+
+            // Fill Document Header
+            document.getElementById('sku-hdr-code').innerText = code;
+            document.getElementById('sku-hdr-name').innerText = name;
+
+            // Fill Breadcrumb
+            document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
+            document.getElementById('sku-bc-cat').innerText = category || '—';
+            document.getElementById('sku-bc-code').innerText = code;
+
+            // Fill Tab 1 — QLCS data theo SKU code
+            skuFillQlcs(code);
+
+            // Swap đặc tính data theo category, type, code, name
+            var cat = (category || '').toLowerCase();
+            var typeStr = (type || '').toLowerCase();
+            var codeStr = (code || '').toLowerCase();
+            var nameStr = (name || '').toLowerCase();
+
+            var dataKey = 'service';
+            if (cat.indexOf('camera') >= 0 || typeStr.indexOf('camera') >= 0 || codeStr.indexOf('cam') >= 0 || nameStr.indexOf('camera') >= 0) {
+                dataKey = 'camera';
+            } else if (cat.indexOf('play') >= 0 || typeStr.indexOf('play') >= 0 || codeStr.indexOf('play') >= 0 || nameStr.indexOf('play') >= 0) {
+                dataKey = 'play';
+            } else if (cat.indexOf('modem') >= 0 || typeStr.indexOf('ap') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+                dataKey = 'modem';
+            }
+            skuRenderDactinh(dataKey);
+
+            // Always start on Tab 1
+            skuSwitchTab('chung');
+            renderSkuTagsReadonly(code);
         }
 
         function filterPickerItems(type) {
@@ -17751,33 +17925,19 @@
             });
         }
 
-        function skuOpenDetail(code, name, type, category) {
-            // Show detail, hide list
-            document.getElementById('sku-list').style.display = 'none';
-            document.getElementById('sku-form').style.display = 'block';
-
-            // Fill Document Header
-            document.getElementById('sku-hdr-code').innerText = code;
-            document.getElementById('sku-hdr-name').innerText = name;
-
-            // Fill Breadcrumb
-            document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
-            document.getElementById('sku-bc-cat').innerText = category || '—';
-            document.getElementById('sku-bc-code').innerText = code;
-
-            // Fill Tab 1 — QLCS data theo SKU code
-            skuFillQlcs(code);
-
-            // Swap đặc tính data theo category
-            var cat = (category || '').toLowerCase();
-            var dataKey = cat.indexOf('camera') >= 0 ? 'camera'
-                : cat.indexOf('internet') >= 0 || cat.indexOf('dịch vụ') >= 0 ? 'service'
-                    : 'modem';
-            skuRenderDactinh(dataKey);
-
-            // Always start on Tab 1
-            skuSwitchTab('chung');
-            renderSkuTagsReadonly(code);
+        function toggleTreeRow(groupClass, btn) {
+            const rows = document.querySelectorAll('.' + groupClass);
+            let isCollapse = false;
+            if (btn.innerText === '▼') {
+                btn.innerText = '▶';
+                isCollapse = true;
+            } else {
+                btn.innerText = '▼';
+                isCollapse = false;
+            }
+            rows.forEach(row => {
+                row.style.display = isCollapse ? 'none' : '';
+            });
         }
 
         function skuSwitchTab(tabName) {
@@ -17798,6 +17958,17 @@
                     }
                 }
             });
+            if (tabName === 'dactinh') {
+                var list = document.getElementById('dactinh-attr-list');
+                if (list && list.querySelectorAll('.dactinh-row').length === 0) {
+                    var skuCode = (document.getElementById('sku-hdr-code')?.innerText || 'CAM-IQ3').toLowerCase();
+                    var skuCat = (document.getElementById('sku-bc-cat')?.innerText || '').toLowerCase();
+                    var skuType = (document.getElementById('sku-bc-type')?.innerText || '').toLowerCase();
+                    var catLower = skuCat + ' ' + skuType + ' ' + skuCode;
+                    var dataKey = catLower.indexOf('camera') >= 0 || catLower.indexOf('cam') >= 0 ? 'camera' : catLower.indexOf('play') >= 0 ? 'play' : catLower.indexOf('modem') >= 0 || catLower.indexOf('ap') >= 0 || catLower.indexOf('wifi') >= 0 ? 'modem' : 'service';
+                    if (typeof skuRenderDactinh === 'function') skuRenderDactinh(dataKey);
+                }
+            }
         }
         // ===== Light / Dark Mode Toggle =====
         // Design system: Untitled UI PRO VARIABLES v5.0
