@@ -2118,6 +2118,40 @@
         .remove-payment-btn:hover {
             background: rgba(239, 68, 68, 0.15);
         }
+
+        /* Custom Styles for Gallery & Video UX */
+        .gallery-item-wrapper {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            background: rgba(255, 255, 255, 0.02);
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+        .gallery-item-wrapper:hover {
+            border-color: var(--warning);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+        }
+        .gallery-item-wrapper:hover .gallery-overlay {
+            opacity: 1 !important;
+        }
+        .video-card-wrapper {
+            display: flex;
+            gap: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            padding: 12px;
+            border-radius: 8px;
+            position: relative;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+        .video-card-wrapper:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,0.04);
+        }
     </style>
 </head>
 
@@ -2359,20 +2393,20 @@
                     <div class="tree-container">
                         <div class="tree-node">
                             <div><strong>📂 Internet Cáp quang</strong> <span
-                                    style="color:#aaa; font-size:12px; margin-left:10px;">(15 SKUs)</span></div>
+                                    style="color:#aaa; font-size:12px; margin-left:10px;">(15 gói bán)</span></div>
                         </div>
                         <div class="tree-child tree-node">
                             <div>📄 Gói Doanh nghiệp <span style="color:#aaa; font-size:12px; margin-left:10px;">(5
-                                    SKUs)</span></div>
+                                    gói bán)</span></div>
                         </div>
                         <div class="tree-child tree-node">
                             <div>📄 Gói Gia đình <span style="color:#aaa; font-size:12px; margin-left:10px;">(10
-                                    SKUs)</span></div>
+                                    gói bán)</span></div>
                         </div>
 
                         <div class="tree-node">
                             <div><strong>📂 Dịch vụ Truyền hình</strong> <span
-                                    style="color:#aaa; font-size:12px; margin-left:10px;">(8 SKUs)</span></div>
+                                    style="color:#aaa; font-size:12px; margin-left:10px;">(8 gói bán)</span></div>
                         </div>
                     </div>
                 </div>
@@ -2556,7 +2590,7 @@
                             <div style="flex:2; min-width:220px; position:relative;">
                                 <span
                                     style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-muted);">🔍</span>
-                                <input type="text" id="sku-filter-search" class="form-input" placeholder="Tìm kiếm tên SKU, tên hiển thị..."
+                                <input type="text" id="sku-filter-search" class="form-input" placeholder="Tìm kiếm tên gói bán, tên hiển thị..."
                                     style="padding-left:32px;" onkeyup="if(event.key === 'Enter') filterSkuTable()">
                             </div>
                             <div style="flex:1; min-width:170px;">
@@ -2619,13 +2653,8 @@
                         <div
                             style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.25); border-radius:10px; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                             <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                                <span style="font-size:13px; color:var(--text-muted);">SKU:</span>
-                                <span id="sku-hdr-code"
-                                    style="font-size:15px; font-weight:700; color:var(--warning);">MODEM-AX1800GZ</span>
-                                <span style="color:var(--text-muted);">—</span>
-                                <span id="sku-hdr-name" style="font-size:15px; font-weight:600;">Modem Wifi 6
-                                    AX1800GZ</span>
-                                <span class="badge active">Kích hoạt</span>
+                                <span id="sku-hdr-code" style="display:none;">MODEM-AX1800GZ</span>
+                                <span id="sku-hdr-name" style="font-size:15px; font-weight:600;">Modem Wifi 6 AX1800GZ</span>
                             </div>
                             <div style="display:flex; gap:8px; flex-shrink:0;">
                                 <button class="btn btn-secondary btn-sm"
@@ -2634,7 +2663,7 @@
                                 <button class="btn btn-sm"
                                     style="background:rgba(239,68,68,0.15); border:1px solid var(--danger); color:var(--danger);">Hủy
                                     <small>(F8)</small></button>
-                                <button class="btn btn-warning btn-sm">💾 Lưu SKU <small>(F4)</small></button>
+                                <button class="btn btn-warning btn-sm">💾 Lưu gói bán <small>(F4)</small></button>
                             </div>
                         </div>
 
@@ -2643,10 +2672,10 @@
                             style="display:flex; border-bottom:2px solid var(--border-glass); margin-top:20px;">
                             <div onclick="skuSwitchTab('chung')" id="sku-tab-btn-chung"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:#fff; border-bottom:3px solid var(--warning); background:rgba(245,158,11,0.1); border-radius:6px 6px 0 0; margin-bottom:-2px;">
-                                Nội dung sản phẩm</div>
+                                Thông tin sản phẩm</div>
                             <div onclick="skuSwitchTab('dactinh')" id="sku-tab-btn-dactinh"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
-                                Đặc tính & TB đi kèm</div>
+                                Đặc tính, Thiết bị & Đặc quyền</div>
                             <div onclick="skuSwitchTab('content')" id="sku-tab-btn-content"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 Quản lý Content</div>
@@ -2658,14 +2687,8 @@
                         <!-- Breadcrumb -->
                         <div
                             style="display:flex; align-items:center; gap:18px; padding:12px 2px 18px; font-size:13px; color:var(--text-muted); border-bottom:1px solid var(--border-glass); margin-bottom:22px;">
-                            <span>Loại SP: <strong style="color:var(--text-main);" id="sku-bc-type">Thiết
+                            <span>Loại gói bán: <strong style="color:var(--text-main);" id="sku-bc-type">Thiết
                                     bị</strong></span>
-                            <span style="opacity:0.3;">|</span>
-                            <span>Danh mục: <strong style="color:var(--text-main);" id="sku-bc-cat">Modem &
-                                    Router</strong></span>
-                            <span style="opacity:0.3;">|</span>
-                            <span>Mã: <a id="sku-bc-code"
-                                    style="color:var(--warning); text-decoration:underline; cursor:pointer;">MODEM-AX1800GZ</a></span>
                         </div>
 
                         <!-- TAB 1: Nội dung sản phẩm (QLCS read-only) -->
@@ -2678,14 +2701,14 @@
                                         <div style="font-weight:600; font-size:13px; color:var(--primary);">Dữ liệu đồng
                                             bộ từ hệ thống QLCS</div>
                                         <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Thông tin
-                                            cơ bản của SKU được quản lý tập trung tại QLCS. Chỉ xem — không chỉnh sửa
+                                            cơ bản của gói bán được quản lý tập trung tại QLCS. Chỉ xem — không chỉnh sửa
                                             trực tiếp trên CMS.</div>
                                     </div>
                                     <button class="btn btn-secondary btn-sm"
                                         style="margin-left:auto; color:var(--primary); border-color:var(--primary); flex-shrink:0;">↗
                                         Mở QLCS</button>
                                 </div>
-                                <h3>▾ 1. Nội dung sản phẩm (QLCS)</h3>
+                                <h3>▾ 1. Thông tin sản phẩm (QLCS)</h3>
                                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
                                     <div class="form-group">
                                         <label>Dịch vụ</label>
@@ -2701,7 +2724,7 @@
                                         <input type="text" id="qlcs-loai" class="form-input" value="Thiết bị" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên SKU <span style="font-size:11px; color:var(--text-muted);">(tên raw
+                                        <label>Tên gói bán <span style="font-size:11px; color:var(--text-muted);">(tên raw
                                                 từ QLCS)</span></label>
                                         <input type="text" id="qlcs-tensku" class="form-input"
                                             value="Modem Wifi 6 AX1800GZ" readonly>
@@ -2869,11 +2892,9 @@
                                     <table style="width:100%; border-collapse:collapse; font-size:13px; min-width:900px;">
                                         <thead>
                                             <tr style="background:rgba(0,0,0,0.25);">
-                                                <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:35%; border-bottom:1px solid var(--border-glass);">
+                                                <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:45%; border-bottom:1px solid var(--border-glass);">
                                                     Sản phẩm / Gói cước (Phân cấp)</th>
-                                                <th style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:15%; border-bottom:1px solid var(--border-glass);">
-                                                    Phân loại từ QLCS</th>
-                                                <th style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:25%;">
+                                                <th style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:30%;">
                                                     Tên hiển thị web ✏️</th>
                                                 <th style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:15%;">
                                                     Phương thức hiển thị ✏️</th>
@@ -2887,9 +2908,6 @@
                                                 <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px;">
                                                     <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('giga-group', this)">▼</span>
                                                     <span>📦 Gói Giga</span>
-                                                </td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass);">
-                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
                                                 </td>
                                                 <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Gói Giga" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
@@ -2911,9 +2929,7 @@
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
                                                     <span>🔌 Modem wifi 6 băng tần kép</span>
                                                 </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
-                                                </td>
+
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Modem wifi 6 băng tần kép" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
@@ -2933,9 +2949,6 @@
                                                 <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
                                                     <span>💵 Phí lắp đặt</span>
-                                                </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Phí đi kèm</span>
                                                 </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Phí lắp đặt" style="font-size:12px; padding:5px 9px; height:30px;">
@@ -2958,9 +2971,6 @@
                                                     <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('vip-group', this)">▼</span>
                                                     <span>📦 VIP</span>
                                                 </td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass);">
-                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
-                                                </td>
                                                 <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="VIP" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
                                                 </td>
@@ -2981,9 +2991,6 @@
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
                                                     <span>📺 FPT Play Box</span>
                                                 </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
-                                                </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="FPT Play Box" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
@@ -3003,9 +3010,6 @@
                                                 <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
                                                     <span>📺 FPT Play Box 650</span>
-                                                </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
                                                 </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="FPT Play Box 650" style="font-size:12px; padding:5px 9px; height:30px;">
@@ -3028,9 +3032,6 @@
                                                     <span style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;" onclick="toggleTreeRow('camera-group', this)">▼</span>
                                                     <span>📦 Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng</span>
                                                 </td>
-                                                <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass);">
-                                                    <span style="background:rgba(255,255,255,0.08); color:var(--text-muted); padding:3px 10px; border-radius:20px; font-size:11px;">Gói cước gốc</span>
-                                                </td>
                                                 <td style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng" style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
                                                 </td>
@@ -3050,9 +3051,6 @@
                                                 <td style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
                                                     <span>📷 FPTCameraPlay4</span>
-                                                </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(249,115,22,0.12); color:var(--primary); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Thiết bị</span>
                                                 </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="FPTCameraPlay4" style="font-size:12px; padding:5px 9px; height:30px;">
@@ -3074,9 +3072,6 @@
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
                                                     <span>🔗 IQ3+ - combo</span>
                                                 </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(16,185,129,0.12); color:var(--success); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Sản phẩm đi kèm</span>
-                                                </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="IQ3+ - combo" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
@@ -3097,9 +3092,6 @@
                                                     <span style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
                                                     <span>💵 Phí triển khai Camera Combo</span>
                                                 </td>
-                                                <td style="padding:10px 14px;">
-                                                    <span style="background:rgba(239,68,68,0.12); color:var(--danger); padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600;">Phí đi kèm</span>
-                                                </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Phí triển khai Camera Combo" style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
@@ -3117,24 +3109,139 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- Legend phân loại -->
-                                <div
-                                    style="display:flex; align-items:center; gap:16px; margin-top:10px; flex-wrap:wrap;">
-                                    <span style="font-size:11px; color:var(--text-muted);">Chú thích Phân loại:</span>
-                                    <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(249,115,22,0.12); color:var(--primary); padding:1px 8px; border-radius:20px; font-weight:600;">Thiết bị</span>
-                                        — Modem, AP, Box, Camera đi kèm</span>
-                                    <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(16,185,129,0.12); color:var(--success); padding:1px 8px; border-radius:20px; font-weight:600;">Sản phẩm đi kèm</span>
-                                        — Dịch vụ Cloud, gói bổ trợ</span>
-                                    <span style="font-size:11px; display:flex; align-items:center; gap:5px;"><span
-                                            style="background:rgba(239,68,68,0.12); color:var(--danger); padding:1px 8px; border-radius:20px; font-weight:600;">Phí đi kèm</span>
-                                        — Phí triển khai, phí lắp đặt ban đầu</span>
-                                </div>
                                 <p
                                     style="font-size:11px; color:var(--text-muted); margin:8px 0 0; display:flex; align-items:center; gap:6px;">
                                     🔒 Danh sách cha-con và Phân loại đồng bộ tự động từ <strong>PDH/QLCS</strong>. VH chỉ chỉnh sửa: Tên hiển thị web, Phương thức hiển thị, Nhận trong gói.
                                 </p>
+                            </div>
+
+                            <!-- 3. Đặc quyền sản phẩm -->
+                            <div class="form-section" style="margin-top:20px; border-top:1px solid var(--border-glass); padding-top:20px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+                                    <h3 style="margin:0; display:flex; align-items:center; gap:8px;">
+                                        <span style="cursor:pointer;" onclick="togglePrivilegeCollapse(this)">▾</span> Đặc quyền
+                                    </h3>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:var(--warning); background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:6px; padding:4px 10px;">
+                                        ✏️ Vận hành tự quản lý
+                                    </span>
+                                </div>
+
+                                <div id="sku-privilege-section-body">
+                                    <!-- Tiêu đề chung đặc quyền -->
+                                    <div class="form-group" style="margin-bottom:16px;">
+                                        <label style="font-size:12.5px; color:var(--text-muted); font-weight:600; display:block; margin-bottom:6px;">
+                                            Tiêu đề chung đặc quyền <span style="color:var(--danger)">*</span>
+                                        </label>
+                                        <input type="text" class="form-input" id="sku-privilege-main-title" value="Đặc quyền" placeholder="Nhập tiêu đề chung đặc quyền..." style="max-width:480px; font-size:13px;">
+                                    </div>
+
+                                    <!-- Bảng danh sách Đặc quyền -->
+                                    <div style="overflow-x:auto; border-radius:8px; border:1px solid var(--border-glass); margin-bottom:14px;">
+                                        <table style="width:100%; border-collapse:collapse; font-size:13px; min-width:850px;" id="sku-privilege-table">
+                                            <thead>
+                                                <tr style="background:rgba(0,0,0,0.25);">
+                                                    <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; width:50px; border-bottom:1px solid var(--border-glass);">STT</th>
+                                                    <th style="padding:10px 12px; text-align:center; color:var(--primary); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; width:75px; border-bottom:1px solid var(--border-glass);">Icon ✏️</th>
+                                                    <th style="padding:10px 12px; text-align:left; color:var(--text-main); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; width:240px; border-bottom:1px solid var(--border-glass);">Tiêu đề đặc quyền <span style="color:var(--danger)">*</span></th>
+                                                    <th style="padding:10px 12px; text-align:left; color:var(--text-main); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass);">Nội dung đặc quyền <span style="color:var(--danger)">*</span></th>
+                                                    <th style="padding:10px 12px; text-align:center; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; width:55px; border-bottom:1px solid var(--border-glass);">Xóa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="sku-privilege-tbody">
+                                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                                    <td style="text-align:center; color:var(--text-muted); font-size:12px;" class="privilege-stt">1</td>
+                                                    <td style="text-align:center;">
+                                                        <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#60a5fa;" title="Tải/Chọn Icon" onclick="this.nextElementSibling.click()">📶</div>
+                                                        <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeIconUpload(this)">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Trang bị thiết bị hiện đại" placeholder="Nhập tiêu đề đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Trang bị miễn phí modem Wi-Fi công nghệ mới nhất, phủ sóng rộng và kết nối ổn định." placeholder="Nhập nội dung đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.12); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:3px 7px;" onclick="removePrivilegeRow(this)" title="Xóa đặc quyền">✕</button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                                    <td style="text-align:center; color:var(--text-muted); font-size:12px;" class="privilege-stt">2</td>
+                                                    <td style="text-align:center;">
+                                                        <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#60a5fa;" title="Tải/Chọn Icon" onclick="this.nextElementSibling.click()">⚡</div>
+                                                        <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeIconUpload(this)">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Trải nghiệm tốc độ vượt trội" placeholder="Nhập tiêu đề đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Đáp ứng mọi nhu cầu học tập, làm việc, giải trí và livestream chất lượng cao." placeholder="Nhập nội dung đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.12); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:3px 7px;" onclick="removePrivilegeRow(this)" title="Xóa đặc quyền">✕</button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                                    <td style="text-align:center; color:var(--text-muted); font-size:12px;" class="privilege-stt">3</td>
+                                                    <td style="text-align:center;">
+                                                        <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#60a5fa;" title="Tải/Chọn Icon" onclick="this.nextElementSibling.click()">📱</div>
+                                                        <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeIconUpload(this)">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Quản lý mọi tiện ích với Hi FPT" placeholder="Nhập tiêu đề đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Tích điểm đổi quà, quản lý hợp đồng, gia hạn dịch vụ hoặc yêu cầu hỗ trợ tức thì." placeholder="Nhập nội dung đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.12); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:3px 7px;" onclick="removePrivilegeRow(this)" title="Xóa đặc quyền">✕</button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid var(--border-glass);">
+                                                    <td style="text-align:center; color:var(--text-muted); font-size:12px;" class="privilege-stt">4</td>
+                                                    <td style="text-align:center;">
+                                                        <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#60a5fa;" title="Tải/Chọn Icon" onclick="this.nextElementSibling.click()">📞</div>
+                                                        <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeIconUpload(this)">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Ưu đãi & chăm sóc tận tâm" placeholder="Nhập tiêu đề đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-input" value="Tặng thêm 1 tháng sử dụng khi đăng ký gói 12 tháng, đội ngũ kỹ thuật hỗ trợ 24/7." placeholder="Nhập nội dung đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.12); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:3px 7px;" onclick="removePrivilegeRow(this)" title="Xóa đặc quyền">✕</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Nút Thêm & Đếm -->
+                                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+                                        <button type="button" class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:rgba(249,115,22,0.4); font-size:12.5px;" onclick="addPrivilegeRow()">+ Thêm Đặc Quyền</button>
+                                        <span style="font-size:11.5px; color:var(--text-muted);" id="sku-privilege-counter">Tối đa 10 đặc quyền (Hiện tại: 4/10)</span>
+                                    </div>
+
+                                    <!-- Hình ảnh đặc quyền -->
+                                    <div style="border-top:1px dashed var(--border-glass); padding-top:16px;">
+                                        <label style="display:block; font-size:12.5px; font-weight:600; color:var(--text-main); margin-bottom:8px;">Hình ảnh đặc quyền</label>
+                                        <div style="display:flex; gap:14px; align-items:flex-start;">
+                                            <div style="position:relative; width:110px; height:110px; border-radius:10px; border:2px dashed rgba(249,115,22,0.4); background:rgba(0,0,0,0.2); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; overflow:hidden;" title="Tải ảnh minh họa đặc quyền" onclick="this.querySelector('input').click()">
+                                                <div id="privilege-img-placeholder" style="text-align:center;">
+                                                    <span style="font-size:24px; color:var(--primary);">🖼️</span>
+                                                    <div style="font-size:11px; color:var(--text-muted); margin-top:4px;">Tải ảnh lên</div>
+                                                </div>
+                                                <img id="privilege-img-preview" src="" style="width:100%; height:100%; object-fit:cover; display:none;">
+                                                <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeBannerUpload(this)">
+                                                <button type="button" id="privilege-img-remove-btn" onclick="event.stopPropagation(); removePrivilegeBannerImage()" style="display:none; position:absolute; top:4px; right:4px; width:20px; height:20px; border-radius:50%; background:rgba(239,68,68,0.9); color:#fff; border:none; font-size:10px; cursor:pointer; align-items:center; justify-content:center;">✕</button>
+                                            </div>
+                                            <div style="font-size:11.5px; color:var(--text-muted); max-width:400px; line-height:1.5;">
+                                                <div>• Định dạng: <strong>JPG hoặc PNG</strong></div>
+                                                <div>• Số lượng: <strong>Tối đa 1 ảnh</strong> minh họa đặc quyền hiển thị ở góc phải trên website.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -3143,8 +3250,12 @@
                             <!-- Phần 1: Cài đặt web -->
                             <div class="form-section">
                                 <h3>▾ Cài đặt web</h3>
-                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
-                                    <div class="form-group" style="grid-column:1 / span 2;">
+                                <div style="display:grid; grid-template-columns:1fr 1.5fr 1fr; gap:16px;">
+                                    <div class="form-group">
+                                        <label>Kênh bán <span style="color:var(--danger)">*</span></label>
+                                        <input type="text" class="form-input" value="tongdaiwifi" disabled style="opacity:0.65; cursor:not-allowed; background:rgba(0,0,0,0.25);">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Tên hiển thị web <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-input" value="Modem Wifi 6 AX1800GZ">
                                     </div>
@@ -3156,11 +3267,7 @@
                                             <span style="font-size:13px; color:var(--success);">Đang hiện</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>URL slug <span style="color:var(--danger)">*</span></label>
-                                        <input type="text" class="form-input" placeholder="modem-wifi-6-ax1800gz">
-                                    </div>
-                                    <div class="form-group" style="grid-column:2 / span 2;">
+                                    <div class="form-group" style="grid-column:1 / span 3;">
                                         <label>Tag nổi bật</label>
                                         <input type="text" class="form-input" placeholder="HOT, NEW, SALE, ...">
                                     </div>
@@ -3169,56 +3276,206 @@
                             <!-- Phần 2: Hình ảnh -->
                             <div class="form-section"
                                 style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <h3>▾ Hình ảnh</h3>
-                                <div class="form-group" style="margin-bottom:20px;">
-                                    <label>Gallery ảnh sản phẩm <span
-                                            style="font-size:11px; color:var(--text-muted);">tối đa 15 ảnh — kéo để sắp
-                                            xếp</span></label>
-                                    <div
-                                        style="display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; padding:14px; background:rgba(255,255,255,0.03); border:1px dashed var(--border-glass); border-radius:8px;">
-                                        <div
-                                            style="position:relative; aspect-ratio:1; border-radius:6px; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); cursor:move; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-muted); font-size:12px;">
-                                            <span style="font-size:22px;">📷</span><span>Ảnh 1</span>
-                                            <span
-                                                style="position:absolute; top:3px; right:3px; font-size:10px; background:var(--warning); color:#fff; border-radius:3px; padding:1px 4px;">Chính</span>
-                                        </div>
-                                        <div
-                                            style="aspect-ratio:1; border-radius:6px; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); cursor:move; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-muted); font-size:12px;">
-                                            <span style="font-size:22px;">📷</span><span>Ảnh 2</span>
-                                        </div>
-                                        <div
-                                            style="aspect-ratio:1; border-radius:6px; background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); cursor:move; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-muted); font-size:12px;">
-                                            <span style="font-size:22px;">📷</span><span>Ảnh 3</span>
-                                        </div>
-                                        <div
-                                            style="aspect-ratio:1; border-radius:6px; border:2px dashed var(--border-glass); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--text-muted); font-size:12px;">
-                                            <span style="font-size:22px;">+</span><span>Thêm ảnh</span>
-                                        </div>
-                                    </div>
-                                    <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">3/15 ảnh ·
-                                        JPG/PNG ≤2MB · Kéo thả để sắp xếp · Ảnh đầu tiên là ảnh chính</div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                    <h3 style="margin:0;">▾ Hình ảnh sản phẩm & Banner</h3>
                                 </div>
-                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px;">
+                                
+                                <div id="sku-media-gallery-group" class="form-group" style="margin-bottom:24px;">
+                                    <label style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom:8px;">
+                                        <span style="font-weight:600;">Gallery ảnh sản phẩm <span style="font-size:11px; color:var(--text-muted); font-weight:normal;">(Tối đa 15 ảnh — kéo thả để sắp xếp thứ tự hiển thị)</span></span>
+                                        <span style="font-size:12px; color:var(--warning); font-weight:600; cursor:pointer;" onclick="alert('Đã kích hoạt chế độ upload hàng loạt! Chọn nhiều ảnh cùng lúc.')">⚡ Upload hàng loạt</span>
+                                    </label>
+                                    
+                                    <!-- Gallery Grid -->
+                                    <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; padding:16px; background:rgba(255,255,255,0.02); border:1px dashed var(--border-glass); border-radius:10px;">
+                                        <!-- Item 1 (Ảnh chính) -->
+                                        <div class="gallery-item-wrapper" style="position:relative; aspect-ratio:4/3; border-radius:8px; overflow:hidden; border:1px solid var(--warning); background:#1e293b; cursor:grab;">
+                                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300" style="width:100%; height:100%; object-fit:cover;" alt="Modem Wifi 6">
+                                            <span style="position:absolute; top:6px; left:6px; font-size:10px; font-weight:700; background:var(--warning); color:#000; border-radius:4px; padding:2px 6px; text-transform:uppercase; box-shadow:0 2px 4px rgba(0,0,0,0.3);">Chính</span>
+                                            <!-- Actions Overlay on Hover -->
+                                            <div class="gallery-overlay" style="position:absolute; inset:0; background:rgba(15,23,42,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; opacity:0; transition:all 0.2s ease;">
+                                                <button class="btn btn-xs" style="background:var(--warning); color:#000; font-size:11px; padding:4px 8px;" onclick="alert('Ảnh này đã là ảnh chính!')">★ Ảnh chính</button>
+                                                <button class="btn btn-xs btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="openAltTextModal(1, 'Modem Wifi 6 AX1800GZ thiết kế đứng tối ưu tản nhiệt')">✏️ Alt Text (SEO)</button>
+                                                <button class="btn btn-xs" style="background:rgba(239,68,68,0.2); border:1px solid var(--danger); color:var(--danger); font-size:11px; padding:4px 8px;" onclick="alert('Đã xóa ảnh!')">🗑️ Xóa</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Item 2 -->
+                                        <div class="gallery-item-wrapper" style="position:relative; aspect-ratio:4/3; border-radius:8px; overflow:hidden; border:1px solid var(--border-glass); background:#1e293b; cursor:grab;">
+                                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300" style="width:100%; height:100%; object-fit:cover;" alt="Modem Port">
+                                            <!-- Actions Overlay on Hover -->
+                                            <div class="gallery-overlay" style="position:absolute; inset:0; background:rgba(15,23,42,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; opacity:0; transition:all 0.2s ease;">
+                                                <button class="btn btn-xs btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="alert('Đã đặt làm ảnh chính!')">☆ Đặt ảnh chính</button>
+                                                <button class="btn btn-xs btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="openAltTextModal(2, 'Cổng kết nối LAN sau modem')">✏️ Alt Text (SEO)</button>
+                                                <button class="btn btn-xs" style="background:rgba(239,68,68,0.2); border:1px solid var(--danger); color:var(--danger); font-size:11px; padding:4px 8px;" onclick="alert('Đã xóa ảnh!')">🗑️ Xóa</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Item 3 -->
+                                        <div class="gallery-item-wrapper" style="position:relative; aspect-ratio:4/3; border-radius:8px; overflow:hidden; border:1px solid var(--border-glass); background:#1e293b; cursor:grab;">
+                                            <img src="https://images.unsplash.com/photo-1600697395593-e9dc66797e43?w=300" style="width:100%; height:100%; object-fit:cover;" alt="Full Box">
+                                            <!-- Actions Overlay on Hover -->
+                                            <div class="gallery-overlay" style="position:absolute; inset:0; background:rgba(15,23,42,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:8px; opacity:0; transition:all 0.2s ease;">
+                                                <button class="btn btn-xs btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="alert('Đã đặt làm ảnh chính!')">☆ Đặt ảnh chính</button>
+                                                <button class="btn btn-xs btn-secondary" style="font-size:11px; padding:4px 8px;" onclick="openAltTextModal(3, 'Hộp sản phẩm modem wifi FPT')">✏️ Alt Text (SEO)</button>
+                                                <button class="btn btn-xs" style="background:rgba(239,68,68,0.2); border:1px solid var(--danger); color:var(--danger); font-size:11px; padding:4px 8px;" onclick="alert('Đã xóa ảnh!')">🗑️ Xóa</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Upload Box Multi -->
+                                        <div style="aspect-ratio:4/3; border-radius:8px; border:2px dashed rgba(245,158,11,0.4); background:rgba(245,158,11,0.02); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--warning); font-size:12px; transition:all 0.2s;" onmouseover="this.style.background='rgba(245,158,11,0.06)'" onmouseout="this.style.background='rgba(245,158,11,0.02)'" onclick="alert('Mở file picker...')">
+                                            <span style="font-size:24px; margin-bottom:4px;">📥</span>
+                                            <span style="font-weight:600;">Kéo thả ảnh vào đây</span>
+                                            <span style="font-size:10px; color:var(--text-muted); margin-top:2px;">hoặc click để chọn</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); margin-top:8px;">
+                                        <span>Đã tải lên: <strong>3/15</strong> ảnh · Dung lượng tối đa: 2MB/ảnh · Định dạng: JPG, PNG, WEBP</span>
+                                        <span>💡 Kéo thả trực tiếp để thay đổi thứ tự hiển thị trên Web</span>
+                                    </div>
+                                </div>
+
+                                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:24px;">
                                     <div class="form-group">
-                                        <label>Thumb image <span
-                                                style="font-size:11px; color:var(--text-muted);">(≤1MB)</span></label>
-                                        <div
-                                            style="border:2px dashed var(--border-glass); padding:24px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted);">
-                                            📷<br><span style="font-size:13px;">+ Upload Thumb</span></div>
+                                        <label>Ảnh đại diện (Thumbnail) <span style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 1:1, ≤1MB)</span></label>
+                                        <div style="position:relative; border:1px solid var(--border-glass); padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.01); display:flex; align-items:center; gap:12px;">
+                                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=100" style="width:40px; height:40px; border-radius:6px; object-fit:cover;">
+                                            <div style="flex-grow:1; min-width:0;">
+                                                <div style="font-size:12px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">thumb-wifi6.png</div>
+                                                <div style="font-size:11px; color:var(--text-muted);">145 KB</div>
+                                            </div>
+                                            <button class="btn btn-icon btn-xs" style="color:var(--danger); background:rgba(239,68,68,0.1); border:none; padding:4px 8px; cursor:pointer;" onclick="alert('Đã xóa thumbnail!')">🗑️</button>
+                                        </div>
+                                    </div>
+                                    <div id="sku-media-banner-head-group" class="form-group">
+                                        <label>Banner đầu trang <span style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 16:9, ≤2MB)</span></label>
+                                        <div style="border:2px dashed var(--border-glass); padding:12px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border-glass)'" onclick="alert('Mở file picker chọn banner đầu trang...')">
+                                            🖼️ <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Kích thước khuyên dùng: 1920x1080</div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Banner đầu trang <span
-                                                style="font-size:11px; color:var(--text-muted);">(≤1MB)</span></label>
-                                        <div
-                                            style="border:2px dashed var(--border-glass); padding:24px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted);">
-                                            🖼️<br><span style="font-size:13px;">+ Upload Banner</span></div>
+                                        <label>Banner giữa trang <span style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 32:9, ≤2MB)</span></label>
+                                        <div style="border:2px dashed var(--border-glass); padding:12px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px; transition:all 0.2s;" onmouseover="this.style.borderColor='var(--warning)'" onmouseout="this.style.borderColor='var(--border-glass)'" onclick="alert('Mở file picker chọn banner giữa trang...')">
+                                            🖼️ <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Kích thước khuyên dùng: 1920x540</div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Banner giữa trang <span
-                                                style="font-size:11px; color:var(--text-muted);">(≤1MB)</span></label>
-                                        <div
-                                            style="border:2px dashed var(--border-glass); padding:24px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted);">
-                                            🖼️<br><span style="font-size:13px;">+ Upload Banner</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Phần 2.2: Quản lý Video (Bổ sung mới) -->
+                            <div class="form-section"
+                                style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                                    <h3 style="margin:0;">▾ Video sản phẩm / Gói cước</h3>
+                                    <span style="font-size:12px; color:var(--text-muted);">Tối đa 3 video</span>
+                                </div>
+
+                                <div style="display:grid; grid-template-columns:1.2fr 1.8fr; gap:20px;">
+                                    <!-- Cột Trái: Upload & Cấu hình Video -->
+                                    <div style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); padding:16px; border-radius:10px;">
+                                        <div style="display:flex; border-bottom:1px solid var(--border-glass); margin-bottom:14px; padding-bottom:6px; gap:8px;">
+                                            <button type="button" id="video-mode-link" onclick="switchVideoMode('link')" style="flex:1; padding:6px; background:var(--warning); color:#000; border:none; border-radius:4px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s;">🔗 Nhúng Link Video</button>
+                                            <button type="button" id="video-mode-upload" onclick="switchVideoMode('upload')" style="flex:1; padding:6px; background:transparent; color:var(--text-muted); border:none; border-radius:4px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s;">📤 Upload File (.mp4)</button>
+                                        </div>
+
+                                        <!-- Nhúng Link Form -->
+                                        <div id="video-link-form">
+                                            <div class="form-group" style="margin-bottom:12px;">
+                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Đường dẫn Video <span style="color:var(--danger)">*</span></label>
+                                                <input type="text" class="form-input" style="padding:8px 10px; font-size:13px;" placeholder="Ví dụ: https://www.youtube.com/watch?v=..." id="video-input-url">
+                                            </div>
+                                        </div>
+
+                                        <!-- Upload File Form (Mặc định ẩn) -->
+                                        <div id="video-upload-form" style="display:none;">
+                                            <div class="form-group" style="margin-bottom:12px;">
+                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Tải file video lên <span style="font-size:11px; color:var(--text-muted);">(Dưới 20MB)</span></label>
+                                                <div style="border:2px dashed var(--border-glass); padding:16px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px;" onclick="alert('Mở file picker chọn video mp4...')">
+                                                    📁 <span style="font-weight:600; color:var(--text-main);">+ Chọn file video</span>
+                                                    <div style="font-size:10px; margin-top:2px;">Hỗ trợ MP4, WebM, MOV</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom:12px;">
+                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Tiêu đề hiển thị của Video</label>
+                                                <input type="text" class="form-input" style="padding:8px 10px; font-size:13px;" placeholder="Nhập tiêu đề giới thiệu video..." id="video-input-title">
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom:16px;">
+                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Ảnh đại diện Video (Thumbnail) <span style="font-size:11px; color:var(--text-muted);">(Tùy chọn)</span></label>
+                                                <div style="border:1.5px dashed var(--border-glass); padding:8px; text-align:center; border-radius:6px; cursor:pointer; color:var(--text-muted); font-size:12px;" onclick="alert('Chọn hình ảnh làm thumbnail cho video...')">
+                                                    🖼️ Chọn ảnh đại diện
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn btn-warning btn-sm" style="width:100%; font-weight:600; padding:8px 0; cursor:pointer;" onclick="addVideoToList()">➕ Thêm Video vào danh sách</button>
+                                    </div>
+
+                                    <!-- Cột Phải: Danh sách Video & Preview -->
+                                    <div style="display:flex; flex-direction:column; gap:12px;">
+                                        <label style="font-size:13px; font-weight:600; color:var(--text-main);">Danh sách video đang hiển thị trên web:</label>
+                                        
+                                        <!-- Video Card 1 -->
+                                        <div class="video-card-wrapper">
+                                            <!-- Video Thumbnail with Play Icon -->
+                                            <div style="position:relative; width:100px; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#000; flex-shrink:0;">
+                                                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=200" style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
+                                                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); cursor:pointer;" onclick="playVideoPreview('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Hướng dẫn lắp đặt và cài đặt Modem Wifi 6 FPT')">
+                                                    <span style="font-size:18px; color:var(--warning);">▶️</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Video Details -->
+                                            <div style="flex-grow:1; min-width:0;">
+                                                <div style="font-size:13px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Hướng dẫn lắp đặt và cài đặt Modem Wifi 6 FPT</div>
+                                                <div style="font-size:11px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px;">
+                                                    <span>Nguồn: <strong>Youtube</strong></span>
+                                                    <span>•</span>
+                                                    <span>Thời lượng: <strong>03:45</strong></span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Actions -->
+                                            <div style="display:flex; flex-direction:column; gap:4px; flex-shrink:0; align-items:center;">
+                                                <button type="button" class="btn btn-icon btn-xs" style="color:var(--danger); background:rgba(239,68,68,0.1); width:24px; height:24px; border-radius:50%; border:none; cursor:pointer;" title="Xóa video" onclick="alert('Đã xóa video!')">🗑️</button>
+                                                <span style="cursor:ns-resize; font-size:14px; color:var(--text-muted); display:flex; align-items:center;" title="Kéo để đổi thứ tự">↕️</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Video Card 2 -->
+                                        <div class="video-card-wrapper">
+                                            <!-- Video Thumbnail with Play Icon -->
+                                            <div style="position:relative; width:100px; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#000; flex-shrink:0;">
+                                                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=200" style="width:100%; height:100%; object-fit:cover; opacity:0.8;">
+                                                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); cursor:pointer;" onclick="playVideoPreview('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Trải nghiệm thực tế tốc độ mạng Wifi 6 FPT')">
+                                                    <span style="font-size:18px; color:var(--warning);">▶️</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Video Details -->
+                                            <div style="flex-grow:1; min-width:0;">
+                                                <div style="font-size:13px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Trải nghiệm thực tế tốc độ mạng Wifi 6 FPT</div>
+                                                <div style="font-size:11px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px;">
+                                                    <span>Nguồn: <strong>Upload (.mp4)</strong></span>
+                                                    <span>•</span>
+                                                    <span>Dung lượng: <strong>14.2 MB</strong></span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Actions -->
+                                            <div style="display:flex; flex-direction:column; gap:4px; flex-shrink:0; align-items:center;">
+                                                <button type="button" class="btn btn-icon btn-xs" style="color:var(--danger); background:rgba(239,68,68,0.1); width:24px; height:24px; border-radius:50%; border:none; cursor:pointer;" title="Xóa video" onclick="alert('Đã xóa video!')">🗑️</button>
+                                                <span style="cursor:ns-resize; font-size:14px; color:var(--text-muted); display:flex; align-items:center;" title="Kéo để đổi thứ tự">↕️</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Empty Video State -->
+                                        <div style="border:1px dashed var(--border-glass); border-radius:8px; padding:12px; text-align:center; color:var(--text-muted); font-size:12px;">
+                                            Slot video trống (Có thể thêm 1 video nữa)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -3226,13 +3483,25 @@
                             <div class="form-section"
                                 style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
                                 <h3>▾ Mô tả sản phẩm</h3>
-                                <div style="display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:16px;">
-                                    <div class="form-group">
-                                        <label>Mô tả ngắn</label>
-                                        <textarea class="form-textarea" style="min-height:80px;"
-                                            placeholder="Tóm tắt điểm nổi bật..."></textarea>
-                                    </div>
-                                </div>
+                                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+                                     <!-- Cột 1: Mô tả gói bán -->
+                                     <div class="form-group" style="margin-bottom:0;">
+                                         <label style="display:flex; justify-content:space-between; align-items:center;">
+                                             <span>Mô tả gói bán <span style="font-size:11px; color:var(--primary); font-weight:normal;">(Hiển thị danh sách ✓ trên Card gói)</span></span>
+                                             <span style="font-size:11px; color:var(--text-muted);">Mỗi ý 1 dòng</span>
+                                         </label>
+                                         <textarea class="form-textarea" style="min-height:90px; line-height:1.6; font-size:13px;" placeholder="Nhập mỗi đặc điểm nổi bật trên một dòng...&#10;VD:&#10;Modem Wi-Fi 6 và FPT Play Box&#10;Kết nối lên đến 10 thiết bị&#10;Gần 120 kênh truyền hình, thể thao độc quyền">Modem Wi-Fi 6 và FPT Play Box
+Kết nối lên đến 10 thiết bị
+Gần 120 kênh truyền hình, thể thao độc quyền</textarea>
+                                     </div>
+
+                                     <!-- Cột 2: Mô tả ngắn -->
+                                     <div class="form-group" style="margin-bottom:0;">
+                                         <label>Mô tả ngắn</label>
+                                         <textarea class="form-textarea" style="min-height:90px; line-height:1.6; font-size:13px;"
+                                             placeholder="Tóm tắt điểm nổi bật tổng quan sản phẩm..."></textarea>
+                                     </div>
+                                 </div>
                                 <div class="form-group">
                                     <label>Mô tả dài <span style="font-size:11px; color:var(--text-muted);">Rich text
                                             editor</span></label>
@@ -3267,50 +3536,35 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Phần 4: Đặc quyền & Ưu đãi + Khuyến mãi PT thanh toán -->
-                            <div class="form-section"
-                                style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <h3>▾ Đặc quyền & Ưu đãi</h3>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
-                                    <div class="form-group">
-                                        <label>Đặc quyền</label>
-                                        <textarea class="form-textarea" style="min-height:80px;"
-                                            placeholder="VD: Hỗ trợ kỹ thuật 24/7, Bảo hành 2 năm..."></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ưu đãi đặc biệt</label>
-                                        <input type="text" class="form-input"
-                                            placeholder="COD: 5% giảm; Online: 10% giảm">
-                                    </div>
-                                </div>
 
-                            </div>
-                            <!-- Phần 5: Thông tin hay & Bài viết liên quan (Chuyển sang Quản lý Tập trung) -->
+                            <!-- Phần 4: Ưu đãi sản phẩm (Quà tặng) -->
                             <div class="form-section"
                                 style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <div
-                                    style="background:rgba(249, 115, 22, 0.05); border:1px solid rgba(249, 115, 22, 0.15); border-radius:8px; padding:16px; display:flex; flex-direction:column; gap:10px;">
-                                    <div
-                                        style="display:flex; align-items:center; gap:8px; color:var(--primary); font-weight:600; font-size:13px;">
-                                        <span>⚡ Quản lý Mapping Tập trung</span>
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                                    <h3 style="margin:0;">▾ Ưu đãi sản phẩm (Quà tặng)</h3>
+                                    <span style="font-size:11px; color:var(--success); background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); padding:3px 8px; border-radius:4px;">
+                                        🎁 Icon Quà tặng Frontend
+                                    </span>
+                                </div>
+                                <div style="display:grid; grid-template-columns: 240px 1fr; gap:16px;">
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label>Icon hiển thị quà tặng</label>
+                                        <select class="form-select" style="font-size:13px;">
+                                            <option value="gift" selected>🎁 Icon Hộp quà (Mặc định)</option>
+                                            <option value="star">⭐ Icon Ngôi sao ưu đãi</option>
+                                            <option value="fire">🔥 Icon Hot Deal</option>
+                                            <option value="check">🟢 Icon Tích xanh quà tặng</option>
+                                        </select>
+                                        <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:4px;">Icon hiển thị đầu mỗi câu ưu đãi ngoài Web</span>
                                     </div>
-                                    <p style="font-size:12px; color:var(--text-muted); margin:0; line-height:1.6;">
-                                        Tính năng cấu hình Tag-based Mapping và Khối "Thông tin hay & Bài viết liên
-                                        quan" hiện đã được chuyển sang mục quản lý tập trung ở menu
-                                        <a href="#"
-                                            onclick="switchModule('news', 'primary'); var _el=document.querySelector('#mod-news .tabs .tab:nth-child(4)'); if(_el) switchNewsTab('tag-mapping', _el); return false;"
-                                            style="color:var(--primary); font-weight:600; text-decoration:underline;">Cấu
-                                            hình Thông tin hay</a>
-                                        trong danh mục CMS. Việc này giúp Vận hành dễ dàng thiết lập ma trận liên kết
-                                        giữa hàng loạt SKU sản phẩm và bài viết tin tức/FAQ thông qua các tag chung.
-                                    </p>
-                                    <div
-                                        style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:6px; font-size:12px; border-top:1px solid rgba(255,255,255,0.05); padding-top:10px;">
-                                        <span style="color:var(--text-muted); font-weight:500;">Tags liên kết SKU hiện
-                                            tại (chế độ chỉ đọc):</span>
-                                        <div id="sku-tag-readonly-list" style="display:flex; gap:6px; flex-wrap:wrap;">
-                                            <!-- Sẽ render các tag dưới dạng read-only badge để Vận hành dễ quan sát -->
-                                        </div>
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <label style="display:flex; justify-content:space-between; align-items:center;">
+                                            <span>Danh sách Ưu đãi & Quà tặng</span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Mỗi ý trên một dòng</span>
+                                        </label>
+                                        <textarea class="form-textarea" style="min-height:90px; line-height:1.6; font-size:13px;" placeholder="Nhập mỗi nội dung ưu đãi trên một dòng...&#10;VD:&#10;Trang bị miễn phí thiết bị phát Wi-Fi 6&#10;Tặng F - Safe Go 3 ngày&#10;Tặng 1 tháng cước">Trang bị miễn phí thiết bị phát Wi-fi 6
+Tặng F - Safe Go 3 ngày
+Tặng 1 tháng cước</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -3786,7 +4040,7 @@
                             <tr>
                                 <th>Mã Gói</th>
                                 <th>Tên Gói Bán</th>
-                                <th>Thành phần SKU</th>
+                                <th>Sản phẩm thành phần</th>
                                 <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
@@ -3795,7 +4049,7 @@
                             <tr>
                                 <td>PKG-SKY-01</td>
                                 <td>Gói Internet Sky 1Gbps</td>
-                                <td>2 SKUs</td>
+                                <td>2 sản phẩm</td>
                                 <td><span class="badge active">Đang hoạt động</span></td>
                                 <td><button class="btn btn-secondary btn-sm"
                                         onclick="toggleForm('pdhpackage', true)">Sửa</button></td>
@@ -4603,7 +4857,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label style="color:#333; font-weight:bold;">Chọn SKU liên quan <span
+                                <label style="color:#333; font-weight:bold;">Chọn gói bán liên quan <span
                                         style="color:red">*</span></label>
                                 <div style="position: relative;">
                                     <select class="form-select"
@@ -9956,18 +10210,18 @@
                                             style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                             <label
                                                 style="font-size:12px; font-weight:600; color:var(--text-muted); margin:0;">Danh
-                                                sách SKUs liên kết <span style="color:var(--danger)">*</span></label>
+                                                sách gói bán liên kết <span style="color:var(--danger)">*</span></label>
                                             <button type="button" class="btn btn-secondary btn-sm"
                                                 onclick="openSkuSelectorModal()"
                                                 style="padding:4px 8px; font-size:11.5px; display:inline-flex; align-items:center; gap:4px; border-color:rgba(255,255,255,0.15);">
-                                                <span>✏️ Quản lý SKUs</span>
+                                                <span>✏️ Quản lý gói bán</span>
                                             </button>
                                         </div>
                                         <div id="tag-selected-skus-preview"
                                             style="display:flex; flex-wrap:wrap; gap:6px; background:rgba(0, 0, 0, 0.25); border:1px solid rgba(255,255,255,0.05); padding:12px; border-radius:8px; min-height:100px; max-height:160px; overflow-y:auto;">
                                             <span
                                                 style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa
-                                                có SKU nào được liên kết</span>
+                                                có gói bán nào được liên kết</span>
                                         </div>
                                     </div>
 
@@ -10259,23 +10513,23 @@
                     <div
                         style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
                         <h3 style="margin:0; color:#fff; display:flex; align-items:center; gap:8px; font-size:16px;">
-                            <span>📦 Bộ chọn SKUs liên kết</span>
+                            <span>📦 Bộ chọn gói bán liên kết</span>
                             <span id="sku-selector-count"
                                 style="font-size:11px; background:var(--primary); color:#fff; padding:2px 8px; border-radius:10px; font-weight:normal;">Đã
-                                chọn 0 SKUs</span>
+                                chọn 0 gói bán</span>
                         </h3>
                         <span style="cursor:pointer; font-size:20px; color:var(--text-muted);"
                             onclick="closeSkuSelectorModal()">✕</span>
                     </div>
 
-                    <!-- Bộ lọc & Tìm kiếm SKU -->
+                    <!-- Bộ lọc & Tìm kiếm gói bán -->
                     <div
                         style="display:grid; grid-template-columns: 2fr 1fr; gap:12px; background:rgba(0,0,0,0.2); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03);">
                         <div style="position:relative; display:flex; align-items:center;">
                             <span
                                 style="position:absolute; left:10px; color:var(--text-muted); font-size:12px;">🔍</span>
                             <input type="text" id="sku-selector-search" class="form-input"
-                                placeholder="Tìm kiếm mã hoặc tên SKU..." oninput="filterSkuSelectorList()"
+                                placeholder="Tìm kiếm mã hoặc tên gói bán..." oninput="filterSkuSelectorList()"
                                 style="padding-left:28px; font-size:13px; width:100%; height:38px;">
                         </div>
                         <div>
@@ -10301,10 +10555,10 @@
                                 chọn tất cả</button>
                         </div>
                         <span id="sku-selector-total-found" style="color:var(--text-muted); font-size:12px;">Tìm thấy 0
-                            SKUs</span>
+                            gói bán</span>
                     </div>
 
-                    <!-- Danh sách SKUs (cuộn) -->
+                    <!-- Danh sách gói bán (cuộn) -->
                     <div id="sku-selector-list"
                         style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; max-height:280px; overflow-y:auto; padding:8px 4px; border:1px solid rgba(255,255,255,0.05); border-radius:6px; background:rgba(0,0,0,0.15);">
                         <!-- Render danh sách checkbox SKU có cuộn và bộ lọc -->
@@ -10800,9 +11054,9 @@
                                 <!-- SKU TABLE -->
                                 <div class="checkout-config-section"
                                     style="margin-bottom:20px; padding-top:0; border-top:none;">
-                                    <div class="checkout-config-title">🏷️ Chọn SKUs Gói cước Áp dụng <span
+                                    <div class="checkout-config-title">🏷️ Chọn Gói bán Áp dụng <span
                                             style="color:var(--danger)">*</span></div>
-                                    <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px 0;">Chọn gói cước
+                                    <p style="font-size:12px;color:var(--text-muted);margin:0 0 10px 0;">Chọn gói bán
                                         hiển thị trên trang Checkout. Dùng bộ lọc loại dịch vụ để tìm nhanh.</p>
                                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
                                         <button class="sku-filter-tab active"
@@ -10818,7 +11072,7 @@
                                             onclick="filterSkuByType('global','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-global"
-                                        placeholder="🔍 Tìm mã hoặc tên SKU..."
+                                        placeholder="🔍 Tìm mã hoặc tên gói bán..."
                                         oninput="filterSkuTable('global',this.value)"
                                         style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
                                     <div
@@ -10827,7 +11081,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:40px;text-align:center;">&#10003;</th>
-                                                    <th style="width:110px;">M&#227; SKU</th>
+                                                    <th style="width:110px;">Mã gói bán</th>
                                                     <th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th>
                                                     <th style="width:95px;">Lo&#7841;i DV</th>
                                                     <th>Thi&#7871;t b&#7883; &#273;i k&#232;m</th>
@@ -10840,7 +11094,7 @@
                                 </div>
                                 <div id="checkout-placeholder-global"
                                     style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">
-                                    ⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.
+                                    ⚠️ Vui lòng chọn ít nhất một Gói bán ở trên để cấu hình các thông tin bên dưới.
                                 </div>
                                 <div id="checkout-details-global">
                                     <!-- Thông điệp truyền thông -->
@@ -10910,6 +11164,12 @@
                                     </div>
                                 </div>
                                 <div style="display:flex; align-items:center; gap:10px;">
+                                    <button onclick="event.stopPropagation(); showLdpToast('Đã sao chép cấu hình từ kênh Website fpt.vn thành công!');" style="background:rgba(255,255,255,0.06); border:1px solid var(--border-glass); color:#e2e8f0; font-size:11px; padding:4px 10px; border-radius:6px; cursor:pointer; display:inline-flex; align-items:center; gap:4px;" title="Sao chép nhanh cấu hình từ kênh khác">
+                                        📋 Sao chép cấu hình
+                                    </button>
+                                    <span style="background:rgba(59,130,246,0.15); color:#60a5fa; padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap;">
+                                        8 gói bán áp dụng
+                                    </span>
                                     <span id="ch-tdw-badge"
                                         style="background:rgba(249,115,22,0.18); color:var(--primary); padding:3px 10px; border-radius:10px; font-size:12px; font-weight:600; white-space:nowrap;">✏️
                                         Tùy chỉnh riêng</span>
@@ -10926,7 +11186,7 @@
                                     Global.</div>
                                 <div class="checkout-config-section"
                                     style="margin-bottom:20px;padding-top:0;border-top:none;">
-                                    <div class="checkout-config-title">🏷️ Chọn SKUs Gói cước Áp dụng</div>
+                                    <div class="checkout-config-title">🏷️ Chọn Gói bán Áp dụng</div>
                                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
                                         <button class="sku-filter-tab active"
                                             onclick="filterSkuByType('tdw','all',this)">Tất cả</button>
@@ -10940,7 +11200,7 @@
                                             onclick="filterSkuByType('tdw','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-tdw"
-                                        placeholder="🔍 Tìm mã hoặc tên SKU..."
+                                        placeholder="🔍 Tìm mã hoặc tên gói bán..."
                                         oninput="filterSkuTable('tdw',this.value)"
                                         style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
                                     <div
@@ -10949,7 +11209,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:40px;text-align:center;">&#10003;</th>
-                                                    <th style="width:110px;">M&#227; SKU</th>
+                                                    <th style="width:110px;">Mã gói bán</th>
                                                     <th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th>
                                                     <th style="width:95px;">Lo&#7841;i DV</th>
                                                     <th>Thi&#7871;t b&#7883; &#273;i k&#232;m</th>
@@ -10962,7 +11222,7 @@
                                 </div>
                                 <div id="checkout-placeholder-tdw"
                                     style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">
-                                    ⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.
+                                    ⚠️ Vui lòng chọn ít nhất một Gói bán ở trên để cấu hình các thông tin bên dưới.
                                 </div>
                                 <div id="checkout-details-tdw">
                                     <div style="margin-bottom:16px;">
@@ -11045,7 +11305,7 @@
                                         style="color:#e2e8f0;">hifpt</strong>.</div>
                                 <div class="checkout-config-section"
                                     style="margin-bottom:20px;padding-top:0;border-top:none;">
-                                    <div class="checkout-config-title">🏷️ Chọn SKUs Gói cước Áp dụng</div>
+                                    <div class="checkout-config-title">🏷️ Chọn các gói bán áp dụng</div>
                                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
                                         <button class="sku-filter-tab active"
                                             onclick="filterSkuByType('hifpt','all',this)">Tất cả</button>
@@ -11060,7 +11320,7 @@
                                             onclick="filterSkuByType('hifpt','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-hifpt"
-                                        placeholder="🔍 Tìm mã hoặc tên SKU..."
+                                        placeholder="🔍 Tìm mã hoặc tên gói bán..."
                                         oninput="filterSkuTable('hifpt',this.value)"
                                         style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
                                     <div
@@ -11069,7 +11329,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:40px;text-align:center;">&#10003;</th>
-                                                    <th style="width:110px;">M&#227; SKU</th>
+                                                    <th style="width:110px;">M&#227; g&#243;i b&#225;n</th>
                                                     <th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th>
                                                     <th style="width:95px;">Lo&#7841;i DV</th>
                                                     <th>Thi&#7871;t b&#7883; &#273;i k&#232;m</th>
@@ -11082,7 +11342,7 @@
                                 </div>
                                 <div id="checkout-placeholder-hifpt"
                                     style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">
-                                    ⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.
+                                    ⚠️ Vui lòng chọn ít nhất một Gói bán ở trên để cấu hình các thông tin bên dưới.
                                 </div>
                                 <div id="checkout-details-hifpt">
                                     <div style="margin-bottom:16px;">
@@ -11166,7 +11426,7 @@
                                         style="color:#e2e8f0;">fpt.vn</strong>.</div>
                                 <div class="checkout-config-section"
                                     style="margin-bottom:20px;padding-top:0;border-top:none;">
-                                    <div class="checkout-config-title">🏷️ Chọn SKUs Gói cước Áp dụng</div>
+                                    <div class="checkout-config-title">🏷️ Chọn các gói bán áp dụng</div>
                                     <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">
                                         <button class="sku-filter-tab active"
                                             onclick="filterSkuByType('fptvn','all',this)">Tất cả</button>
@@ -11181,7 +11441,7 @@
                                             onclick="filterSkuByType('fptvn','Thiết bị',this)">🔧 Thiết bị</button>
                                     </div>
                                     <input type="text" class="form-input" id="sku-search-fptvn"
-                                        placeholder="🔍 Tìm mã hoặc tên SKU..."
+                                        placeholder="🔍 Tìm mã hoặc tên gói bán..."
                                         oninput="filterSkuTable('fptvn',this.value)"
                                         style="font-size:13px;margin-bottom:8px;width:100%;box-sizing:border-box;">
                                     <div
@@ -11190,7 +11450,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width:40px;text-align:center;">&#10003;</th>
-                                                    <th style="width:110px;">M&#227; SKU</th>
+                                                    <th style="width:110px;">M&#227; g&#243;i b&#225;n</th>
                                                     <th style="width:165px;">T&#234;n g&#243;i c&#432;&#7899;c</th>
                                                     <th style="width:95px;">Lo&#7841;i DV</th>
                                                     <th>Thi&#7871;t b&#7883; &#273;i k&#232;m</th>
@@ -11203,7 +11463,7 @@
                                 </div>
                                 <div id="checkout-placeholder-fptvn"
                                     style="display:none;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:8px;padding:20px;text-align:center;color:var(--warning);margin-bottom:16px;">
-                                    ⚠️ Vui lòng chọn ít nhất một SKU Gói cước ở trên để cấu hình các thông tin bên dưới.
+                                    ⚠️ Vui lòng chọn ít nhất một Gói bán ở trên để cấu hình các thông tin bên dưới.
                                 </div>
                                 <div id="checkout-details-fptvn">
                                     <div style="margin-bottom:16px;">
@@ -11287,7 +11547,7 @@
                                     <tr>
                                         <th>Tên Quy tắc</th>
                                         <th>Kênh áp dụng</th>
-                                        <th>SKUs áp dụng</th>
+                                        <th>Gói bán áp dụng</th>
                                         <th>Khoảng thời gian</th>
                                         <th style="text-align:center;">Ưu tiên</th>
                                         <th>Header Banner</th>
@@ -11373,10 +11633,10 @@
                                     <div class="form-group">
                                         <label
                                             style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn
-                                            SKUs gói cước áp dụng <span style="color:var(--danger)">*</span></label>
+                                            gói bán áp dụng <span style="color:var(--danger)">*</span></label>
                                         <div style="max-height:120px; overflow-y:auto; border:1px solid var(--border-glass); border-radius:6px; padding:10px; background:rgba(0,0,0,0.15);"
                                             id="checkout-rule-skus-container">
-                                            <!-- Checkbox SKUs render động -->
+                                            <!-- Checkbox gói bán render động -->
                                         </div>
                                     </div>
                                 </div>
@@ -11875,7 +12135,7 @@
                     currentEditingSku.devices = JSON.parse(JSON.stringify(data.devices || []));
                     currentEditingSku.services = JSON.parse(JSON.stringify(data.services || []));
 
-                    document.getElementById('sku-modal-title-text').innerText = 'Cấu hình chi tiết SKU: ' + skuCode + ' (' + skuName + ')';
+                    document.getElementById('sku-modal-title-text').innerText = 'Cấu hình chi tiết gói bán: ' + skuCode + ' (' + skuName + ')';
 
                     switchSkuModalTab('device');
 
@@ -15162,7 +15422,7 @@
 
         const titles = {
             'dashboards': '📊 Dashboards',
-            'pdh-sku': 'Quản lý SKUs', 'pdh-package': 'Gói bán & Giá & Phí',
+            'pdh-sku': 'Nội dung gói bán', 'pdh-package': 'Gói bán & Giá & Phí',
             'pdh-price': 'Cấu hình giá bán', 'pdh-fee': 'Bảng quản lý phí',
             'pdh-category': 'Danh mục', 'pdh-attribute': 'Đặc tính', 'set-area': 'Khu vực bán',
             'pages': 'Quản lý Trang (CMS)', 'landing': 'Landing Page - LDP (CMS)',
@@ -15493,6 +15753,11 @@
             // FAQ module initialization
             if (modName === 'faq') {
                 renderFaqTable();
+            }
+
+            // SKU / Nội dung gói bán module initialization
+            if (modName === 'pdh-sku') {
+                if (typeof initSkuTable === 'function') initSkuTable();
             }
 
             // Menu module initialization
@@ -17471,6 +17736,28 @@
             ]
         };
 
+        function skuToggleMediaUI() {
+            var typeEl = document.getElementById('sku-bc-type') || document.getElementById('qlcs-loai');
+            var typeStr = typeEl ? (typeEl.innerText || typeEl.value || '').toLowerCase() : '';
+            var qlcsDichvu = document.getElementById('qlcs-dichvu')?.value || '';
+            var skuCode = document.getElementById('sku-hdr-code')?.innerText || '';
+            var codeStr = skuCode.toLowerCase();
+            
+            var galleryGroup = document.getElementById('sku-media-gallery-group');
+            var bannerHeadGroup = document.getElementById('sku-media-banner-head-group');
+            if (galleryGroup && bannerHeadGroup) {
+                // Nếu là thiết bị phần cứng
+                if (typeStr.indexOf('thiết bị') >= 0 || typeStr.indexOf('device') >= 0 || codeStr.indexOf('cam') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+                    galleryGroup.style.display = 'block';
+                    bannerHeadGroup.style.display = 'none';
+                } else {
+                    // Nếu là dịch vụ phi vật lý
+                    galleryGroup.style.display = 'none';
+                    bannerHeadGroup.style.display = 'block';
+                }
+            }
+        }
+
         function skuOpenDetail(code, name, type, category) {
             // Show detail, hide list
             document.getElementById('sku-list').style.display = 'none';
@@ -17482,8 +17769,10 @@
 
             // Fill Breadcrumb
             document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
-            document.getElementById('sku-bc-cat').innerText = category || '—';
-            document.getElementById('sku-bc-code').innerText = code;
+            var bcCatEl = document.getElementById('sku-bc-cat');
+            if (bcCatEl) bcCatEl.innerText = category || '—';
+            var bcCodeEl = document.getElementById('sku-bc-code');
+            if (bcCodeEl) bcCodeEl.innerText = code;
 
             // Fill Tab 1 — QLCS data theo SKU code
             skuFillQlcs(code);
@@ -17507,6 +17796,9 @@
             // Always start on Tab 1
             skuSwitchTab('chung');
             renderSkuTagsReadonly(code);
+
+            // Cập nhật UI hình ảnh / banner
+            skuToggleMediaUI();
         }
 
         function filterPickerItems(type) {
@@ -17756,13 +18048,20 @@
             renderSkuTable(mockSkuData);
         }
 
+        // Tự động khởi tạo dữ liệu bảng SKU khi load trang
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSkuTable);
+        } else {
+            initSkuTable();
+        }
+
         function renderSkuTable(list) {
             var tbody = document.getElementById('sku-tbody');
             if (!tbody) return;
             tbody.innerHTML = '';
 
             if (list.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy sản phẩm nào phù hợp</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy sản phẩm nào phù hợp</td></tr>';
                 var countEl = document.getElementById('sku-count-text');
                 if (countEl) countEl.textContent = 'Hiển thị 0 / 0 kết quả';
                 return;
@@ -17779,11 +18078,8 @@
                 var nameTd = '<td onclick="event.stopPropagation(); skuOpenDetail(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">'
                     + '<a style="color:var(--warning); font-weight:600; text-decoration:underline; cursor:pointer; font-size:13px;">' + item.name + '</a>'
                     + '</td>';
-                var serviceTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.service + '</span></td>';
-                var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.type + '</span></td>';
+                var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + (item.service || item.type) + '</span></td>';
                 var priceTd = '<td style="font-size:13px; color:var(--warning); font-weight:600;">' + item.price + '</td>';
-                var statusBadge = item.status === 'Hoạt động' ? '<span class="badge active">Hoạt động</span>' : '<span class="badge inactive">Ngừng</span>';
-                var statusTd = '<td>' + statusBadge + '</td>';
                 var timeTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.time + '</td>';
                 var userTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.user + '</td>';
 
@@ -17801,7 +18097,7 @@
                     + '<button class="btn btn-sm" style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;" title="Xem nhanh" onclick="skuOpenPreview(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">✏️</button>'
                     + '</td>';
 
-                tr.innerHTML = checkboxTd + nameTd + serviceTd + typeTd + priceTd + statusTd + timeTd + userTd + actionTd;
+                tr.innerHTML = checkboxTd + nameTd + typeTd + priceTd + timeTd + userTd + actionTd;
                 tbody.appendChild(tr);
             });
 
@@ -17810,17 +18106,22 @@
         }
 
         function filterSkuTable() {
-            var searchVal = document.getElementById('sku-filter-search').value.toLowerCase().trim();
-            var typeVal = document.getElementById('sku-filter-type').value;
-            var serviceVal = document.getElementById('sku-filter-service').value;
-            var statusVal = document.getElementById('sku-filter-status').value;
+            var searchEl = document.getElementById('sku-filter-search');
+            var typeEl = document.getElementById('sku-filter-type');
+            var serviceEl = document.getElementById('sku-filter-service');
+            var statusEl = document.getElementById('sku-filter-status');
+
+            var searchVal = searchEl ? searchEl.value.toLowerCase().trim() : '';
+            var typeVal = typeEl ? typeEl.value : '';
+            var serviceVal = serviceEl ? serviceEl.value : '';
+            var statusVal = statusEl ? statusVal.value : '';
 
             var filtered = mockSkuData.filter(function(item) {
                 var matchSearch = !searchVal || 
                                   item.code.toLowerCase().indexOf(searchVal) >= 0 || 
                                   item.name.toLowerCase().indexOf(searchVal) >= 0;
                 
-                var matchType = !typeVal || item.type === typeVal;
+                var matchType = !typeVal || item.type === typeVal || item.service === typeVal;
                 var matchService = !serviceVal || item.service === serviceVal;
                 var matchStatus = !statusVal || item.status === statusVal;
 
@@ -17971,12 +18272,119 @@
                 var list = document.getElementById('dactinh-attr-list');
                 if (list && list.querySelectorAll('.dactinh-row').length === 0) {
                     var skuCode = (document.getElementById('sku-hdr-code')?.innerText || 'CAM-IQ3').toLowerCase();
-                    var skuCat = (document.getElementById('sku-bc-cat')?.innerText || '').toLowerCase();
+                    var skuCat = (document.getElementById('sku-bc-cat')?.innerText || document.getElementById('qlcs-dichvu')?.value || '').toLowerCase();
                     var skuType = (document.getElementById('sku-bc-type')?.innerText || '').toLowerCase();
                     var catLower = skuCat + ' ' + skuType + ' ' + skuCode;
                     var dataKey = catLower.indexOf('camera') >= 0 || catLower.indexOf('cam') >= 0 ? 'camera' : catLower.indexOf('play') >= 0 ? 'play' : catLower.indexOf('modem') >= 0 || catLower.indexOf('ap') >= 0 || catLower.indexOf('wifi') >= 0 ? 'modem' : 'service';
                     if (typeof skuRenderDactinh === 'function') skuRenderDactinh(dataKey);
                 }
+            }
+            if (tabName === 'content') {
+                if (typeof skuToggleMediaUI === 'function') skuToggleMediaUI();
+            }
+        }
+
+        // ===== SKU PRIVILEGES (ĐẶC QUYỀN GÓI CƯỚC) =====
+        function togglePrivilegeCollapse(el) {
+            const body = document.getElementById('sku-privilege-section-body');
+            if (!body) return;
+            const isHidden = body.style.display === 'none';
+            body.style.display = isHidden ? 'block' : 'none';
+            el.textContent = isHidden ? '▾' : '▸';
+        }
+
+        function updatePrivilegeSTT() {
+            const rows = document.querySelectorAll('#sku-privilege-tbody tr');
+            rows.forEach((r, idx) => {
+                const sttCell = r.querySelector('.privilege-stt');
+                if (sttCell) sttCell.textContent = idx + 1;
+            });
+            const counter = document.getElementById('sku-privilege-counter');
+            if (counter) counter.textContent = 'Tối đa 10 đặc quyền (Hiện tại: ' + rows.length + '/10)';
+        }
+
+        function addPrivilegeRow() {
+            const tbody = document.getElementById('sku-privilege-tbody');
+            if (!tbody) return;
+            const rows = tbody.querySelectorAll('tr');
+            if (rows.length >= 10) {
+                if (typeof showLdpToast === 'function') showLdpToast('Đã đạt giới hạn tối đa 10 đặc quyền!');
+                else alert('Đã đạt giới hạn tối đa 10 đặc quyền!');
+                return;
+            }
+            const icons = ['📶', '⚡', '📱', '📞', '🎁', '🛡️', '⭐', '🚀'];
+            const randomIcon = icons[rows.length % icons.length];
+
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid var(--border-glass)';
+            tr.innerHTML = `
+                <td style="text-align:center; color:var(--text-muted); font-size:12px;" class="privilege-stt">${rows.length + 1}</td>
+                <td style="text-align:center;">
+                    <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:16px; color:#60a5fa;" title="Tải/Chọn Icon" onclick="this.nextElementSibling.click()">${randomIcon}</div>
+                    <input type="file" accept="image/*" style="display:none;" onchange="handlePrivilegeIconUpload(this)">
+                </td>
+                <td>
+                    <input type="text" class="form-input" placeholder="Nhập tiêu đề đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                </td>
+                <td>
+                    <input type="text" class="form-input" placeholder="Nhập nội dung đặc quyền..." style="font-size:12.5px; padding:6px 10px;">
+                </td>
+                <td style="text-align:center;">
+                    <button type="button" class="btn btn-sm" style="background:rgba(239,68,68,0.12); color:var(--danger); border:1px solid rgba(239,68,68,0.25); padding:3px 7px;" onclick="removePrivilegeRow(this)" title="Xóa đặc quyền">✕</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            updatePrivilegeSTT();
+        }
+
+        function removePrivilegeRow(btn) {
+            const tr = btn.closest('tr');
+            if (tr) {
+                tr.remove();
+                updatePrivilegeSTT();
+            }
+        }
+
+        function handlePrivilegeIconUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const iconBox = input.previousElementSibling;
+                    if (iconBox) {
+                        iconBox.innerHTML = '<img src="' + e.target.result + '" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function handlePrivilegeBannerUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('privilege-img-preview');
+                    const placeholder = document.getElementById('privilege-img-placeholder');
+                    const removeBtn = document.getElementById('privilege-img-remove-btn');
+                    if (preview && placeholder && removeBtn) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                        placeholder.style.display = 'none';
+                        removeBtn.style.display = 'flex';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removePrivilegeBannerImage() {
+            const preview = document.getElementById('privilege-img-preview');
+            const placeholder = document.getElementById('privilege-img-placeholder');
+            const removeBtn = document.getElementById('privilege-img-remove-btn');
+            if (preview && placeholder && removeBtn) {
+                preview.src = '';
+                preview.style.display = 'none';
+                placeholder.style.display = 'block';
+                removeBtn.style.display = 'none';
             }
         }
         // ===== Light / Dark Mode Toggle =====
@@ -20934,7 +21342,7 @@
 
                     if (remainingCount > 0) {
                         const allSkusString = data.skus.join(', ');
-                        skuBadges += `<span class="badge" style="background:rgba(255,255,255,0.08); color:var(--text-muted); font-size:10px; padding:2px 5px; border-radius:3px; cursor:help;" title="${allSkusString}">+${remainingCount} SKUs...</span>`;
+                        skuBadges += `<span class="badge" style="background:rgba(255,255,255,0.08); color:var(--text-muted); font-size:10px; padding:2px 5px; border-radius:3px; cursor:help;" title="${allSkusString}">+${remainingCount} gói bán...</span>`;
                     }
                 }
 
@@ -21039,7 +21447,7 @@
             previewDiv.innerHTML = '';
 
             if (tempSelectedSkus.length === 0) {
-                previewDiv.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có SKU nào được liên kết</span>';
+                previewDiv.innerHTML = '<span style="color:var(--text-muted); font-style:italic; font-size:11.5px; align-self:center; width:100%; text-align:center;">Chưa có gói bán nào được liên kết</span>';
                 return;
             }
 
@@ -21075,7 +21483,7 @@
         function openSkuSelectorModal() {
             const tag = document.getElementById('selected-tag-name').value;
             if (!tag) {
-                alert('Vui lòng chọn hoặc tạo một Tag trước khi cấu hình SKU liên kết.');
+                alert('Vui lòng chọn hoặc tạo một Tag trước khi cấu hình gói bán liên kết.');
                 return;
             }
             document.getElementById('sku-selector-modal').style.display = 'flex';
@@ -21102,11 +21510,11 @@
                 return matchesSearch && matchesType;
             });
 
-            document.getElementById('sku-selector-total-found').innerText = `Tìm thấy ${filtered.length} SKUs`;
-            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
+            document.getElementById('sku-selector-total-found').innerText = `Tìm thấy ${filtered.length} gói bán`;
+            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} gói bán`;
 
             if (filtered.length === 0) {
-                listDiv.innerHTML = '<div style="grid-column: span 2; color:var(--text-muted); font-style:italic; font-size:12px; text-align:center; padding:20px;">Không tìm thấy SKU nào phù hợp</div>';
+                listDiv.innerHTML = '<div style="grid-column: span 2; color:var(--text-muted); font-style:italic; font-size:12px; text-align:center; padding:20px;">Không tìm thấy gói bán nào phù hợp</div>';
                 return;
             }
 
@@ -21146,7 +21554,7 @@
                     tempSelectedSkus.splice(index, 1);
                 }
             }
-            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} SKUs`;
+            document.getElementById('sku-selector-count').innerText = `Đã chọn ${tempSelectedSkus.length} gói bán`;
 
             const chk = document.getElementById(`sel-sku-${sku}`);
             if (chk) {
@@ -21331,7 +21739,7 @@
         }
 
         function deleteTagMapping(tag) {
-            if (confirm(`Bạn có chắc chắn muốn xóa Tag Mapping #${tag}?\nHành động này sẽ hủy liên kết Tag này khỏi toàn bộ SKUs.`)) {
+            if (confirm(`Bạn có chắc chắn muốn xóa Tag Mapping #${tag}?\nHành động này sẽ hủy liên kết Tag này khỏi toàn bộ gói bán.`)) {
                 delete tagMappingData[tag];
 
                 // Đồng bộ và render
@@ -26999,6 +27407,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             if (typeof initSkuTable === 'function') {
                 initSkuTable();
             }
+            if (typeof skuToggleMediaUI === 'function') {
+                skuToggleMediaUI();
+            }
         });
 
         // Inline FAQ handlers to bypass browser cache
@@ -27094,7 +27505,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                         oninput="filterFaqBankList()">
                 </div>
                 
-                <p style="font-size:12px; color:var(--text-muted); margin:0;">Tích chọn câu hỏi thường gặp dưới đây để liên kết hiển thị vào trang chi tiết SKU hiện tại.</p>
+                <p style="font-size:12px; color:var(--text-muted); margin:0;">Tích chọn câu hỏi thường gặp dưới đây để liên kết hiển thị vào trang chi tiết gói bán hiện tại.</p>
                 
                 <!-- Danh sách câu hỏi hiển thị theo trang -->
                 <div id="faq-bank-list-container" style="max-height:280px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding-right:5px; min-height:180px;">
@@ -27207,6 +27618,87 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
             document.getElementById('faq-bank-modal').remove();
         }
+
+        // ===== VIDEO & GALLERY HELPER FUNCTIONS =====
+        function switchVideoMode(mode) {
+            var btnLink = document.getElementById('video-mode-link');
+            var btnUpload = document.getElementById('video-mode-upload');
+            var formLink = document.getElementById('video-link-form');
+            var formUpload = document.getElementById('video-upload-form');
+            
+            if (mode === 'link') {
+                btnLink.style.background = 'var(--warning)';
+                btnLink.style.color = '#000';
+                btnUpload.style.background = 'transparent';
+                btnUpload.style.color = 'var(--text-muted)';
+                formLink.style.display = 'block';
+                formUpload.style.display = 'none';
+            } else {
+                btnUpload.style.background = 'var(--warning)';
+                btnUpload.style.color = '#000';
+                btnLink.style.background = 'transparent';
+                btnLink.style.color = 'var(--text-muted)';
+                formLink.style.display = 'none';
+                formUpload.style.display = 'block';
+            }
+        }
+
+        function playVideoPreview(url, title) {
+            var modal = document.getElementById('video-preview-modal');
+            var iframe = document.getElementById('video-preview-iframe');
+            var titleEl = document.getElementById('video-preview-title');
+            
+            if (modal && iframe && titleEl) {
+                iframe.src = url;
+                titleEl.innerText = title;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeVideoPreviewModal() {
+            var modal = document.getElementById('video-preview-modal');
+            var iframe = document.getElementById('video-preview-iframe');
+            if (modal && iframe) {
+                iframe.src = '';
+                modal.style.display = 'none';
+            }
+        }
+
+        var activeAltImgId = null;
+        function openAltTextModal(imgId, currentAlt) {
+            activeAltImgId = imgId;
+            var modal = document.getElementById('alt-text-modal');
+            var input = document.getElementById('alt-text-input');
+            if (modal && input) {
+                input.value = currentAlt || '';
+                modal.style.display = 'flex';
+            }
+        }
+
+        function saveAltText() {
+            var input = document.getElementById('alt-text-input');
+            if (input && activeAltImgId) {
+                alert('Đã cập nhật Alt Text (SEO) thành công cho ảnh ' + activeAltImgId + ':\n"' + input.value + '"');
+                closeAltTextModal();
+            }
+        }
+
+        function closeAltTextModal() {
+            var modal = document.getElementById('alt-text-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function addVideoToList() {
+            var url = document.getElementById('video-input-url').value;
+            var title = document.getElementById('video-input-title').value;
+            if (!url && document.getElementById('video-link-form').style.display !== 'none') {
+                alert('Vui lòng nhập đường dẫn video!');
+                return;
+            }
+            alert('Đã thêm video thành công:\nTiêu đề: ' + (title || 'Video không tiêu đề') + '\nĐường dẫn: ' + (url || 'File upload'));
+            document.getElementById('video-input-url').value = '';
+            document.getElementById('video-input-title').value = '';
+        }
     </script>
     <!-- Modal Cấu hình Chi tiết SKU (Thiết bị & Dịch vụ đi kèm) -->
     <div id="sku-details-modal"
@@ -27215,7 +27707,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             style="background:#18181b; border:1px solid rgba(255,255,255,0.1); border-radius:12px; width:700px; max-width:95%; padding:24px; box-shadow:0 20px 40px rgba(0,0,0,0.6); display:flex; flex-direction:column; gap:20px; color:#f4f4f5; font-family:'Inter', sans-serif;">
             <h3
                 style="margin:0; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; color:var(--primary); display:flex; justify-content:space-between; align-items:center; font-size:18px; font-weight:600;">
-                <span id="sku-modal-title-text">✏️ Cấu hình chi tiết SKU</span>
+                <span id="sku-modal-title-text">✏️ Cấu hình chi tiết gói bán</span>
                 <span style="cursor:pointer; font-size:24px; line-height:1; color:#a1a1aa;"
                     onclick="closeSkuDetailsModal()">&times;</span>
             </h3>
@@ -27241,6 +27733,42 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 <button type="button" class="btn btn-primary" onclick="saveSkuModalConfig()"
                     style="font-size:13px; padding:8px 20px; cursor:pointer; background:var(--primary-gradient); font-weight:600;">Lưu
                     cấu hình</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Preview Video -->
+    <div id="video-preview-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(6px);">
+        <div style="background:#18181b; border:1px solid rgba(255,255,255,0.15); border-radius:12px; width:800px; max-width:95%; padding:20px; box-shadow:0 20px 50px rgba(0,0,0,0.8); display:flex; flex-direction:column; gap:16px;">
+            <h3 style="margin:0; color:#fff; display:flex; justify-content:space-between; align-items:center; font-size:16px; font-weight:600;">
+                <span id="video-preview-title">▶️ Xem thử Video</span>
+                <span style="cursor:pointer; font-size:24px; color:#a1a1aa;" onclick="closeVideoPreviewModal()">&times;</span>
+            </h3>
+            <div style="position:relative; padding-bottom:56.25%; height:0; border-radius:6px; overflow:hidden; background:#000;">
+                <iframe id="video-preview-iframe" src="" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div style="display:flex; justify-content:flex-end;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="closeVideoPreviewModal()">Đóng lại</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nhập Alt Text (SEO) -->
+    <div id="alt-text-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(4px);">
+        <div style="background:#18181b; border:1px solid rgba(255,255,255,0.15); border-radius:10px; width:450px; max-width:90%; padding:20px; box-shadow:0 15px 35px rgba(0,0,0,0.7); display:flex; flex-direction:column; gap:16px;">
+            <h3 style="margin:0; color:var(--warning); display:flex; justify-content:space-between; align-items:center; font-size:15px; font-weight:600;">
+                <span>✏️ Nhập Alt Text (Mô tả ảnh cho SEO)</span>
+                <span style="cursor:pointer; font-size:24px; color:#a1a1aa;" onclick="closeAltTextModal()">&times;</span>
+            </h3>
+            <div class="form-group">
+                <label style="font-size:12px; margin-bottom:6px; display:block;">Alt Text giúp cải thiện thứ hạng tìm kiếm hình ảnh trên Google</label>
+                <input type="text" id="alt-text-input" class="form-input" style="width:100%; padding:8px 10px;" placeholder="Ví dụ: Thiết bị Modem Wifi 6 FPT 2 băng tần...">
+            </div>
+            <div style="display:flex; justify-content:flex-end; gap:10px;">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="closeAltTextModal()">Hủy</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="saveAltText()">Cập nhật</button>
             </div>
         </div>
     </div>

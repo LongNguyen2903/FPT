@@ -9,7 +9,7 @@ const modules = [
 
 const titles = {
     'dashboards': '📊 Dashboards',
-    'pdh-sku': 'Quản lý SKUs', 'pdh-package': 'Gói bán & Giá & Phí',
+    'pdh-sku': 'Nội dung gói bán', 'pdh-package': 'Gói bán & Giá & Phí',
     'pdh-price': 'Cấu hình giá bán', 'pdh-fee': 'Bảng quản lý phí',
     'pdh-category': 'Danh mục', 'pdh-attribute': 'Đặc tính', 'set-area': 'Khu vực bán',
     'pages': 'Quản lý Trang (CMS)', 'landing': 'Landing Page - LDP (CMS)',
@@ -2447,7 +2447,7 @@ function toggleSkuActiveStatus(code, isChecked) {
         item.status = isChecked ? 'Hoạt động' : 'Ngừng hoạt động';
         item.time = new Date().toLocaleString('vi-VN', { hour12: false }).replace(/\//g, '-').replace(',', '');
         filterSkuTable();
-        showLdpToast('Đã ' + (isChecked ? 'kích hoạt' : 'ngừng kích hoạt') + ' SKU ' + code + ' thành công!');
+        showLdpToast('Đã ' + (isChecked ? 'kích hoạt' : 'ngừng kích hoạt') + ' gói bán ' + code + ' thành công!');
     }
 }
 
@@ -2568,8 +2568,67 @@ function skuOpenDetail(code, name, type, category) {
 
     // Fill Breadcrumb
     document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
-    document.getElementById('sku-bc-cat').innerText = category || '—';
-    document.getElementById('sku-bc-code').innerText = code;
+    var bcCatEl = document.getElementById('sku-bc-cat');
+    if (bcCatEl) bcCatEl.innerText = category || '—';
+    var bcCodeEl = document.getElementById('sku-bc-code');
+    if (bcCodeEl) bcCodeEl.innerText = code;
+
+    // Fill Tab 1 — QLCS data theo SKU code
+    skuFillQlcs(code);
+
+    // Swap đặc tính data theo category, type, code, name
+    var cat = (category || '').toLowerCase();
+    var typeStr = (type || '').toLowerCase();
+    var codeStr = (code || '').toLowerCase();
+    var nameStr = (name || '').toLowerCase();
+
+    var dataKey = 'service';
+    if (cat.indexOf('camera') >= 0 || typeStr.indexOf('camera') >= 0 || codeStr.indexOf('cam') >= 0 || nameStr.indexOf('camera') >= 0) {
+        dataKey = 'camera';
+    } else if (cat.indexOf('play') >= 0 || typeStr.indexOf('play') >= 0 || codeStr.indexOf('play') >= 0 || nameStr.indexOf('play') >= 0) {
+        dataKey = 'play';
+    } else if (cat.indexOf('modem') >= 0 || typeStr.indexOf('ap') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+        dataKey = 'modem';
+    }
+    skuRenderDactinh(dataKey);
+
+function skuToggleMediaUI() {
+    var typeEl = document.getElementById('sku-bc-type') || document.getElementById('qlcs-loai');
+    var typeStr = typeEl ? (typeEl.innerText || typeEl.value || '').toLowerCase() : '';
+    var qlcsDichvu = document.getElementById('qlcs-dichvu')?.value || '';
+    var skuCode = document.getElementById('sku-hdr-code')?.innerText || '';
+    var codeStr = skuCode.toLowerCase();
+    
+    var galleryGroup = document.getElementById('sku-media-gallery-group');
+    var bannerHeadGroup = document.getElementById('sku-media-banner-head-group');
+    if (galleryGroup && bannerHeadGroup) {
+        // Nếu là thiết bị phần cứng
+        if (typeStr.indexOf('thiết bị') >= 0 || typeStr.indexOf('device') >= 0 || codeStr.indexOf('cam') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+            galleryGroup.style.display = 'block';
+            bannerHeadGroup.style.display = 'none';
+        } else {
+            // Nếu là dịch vụ phi vật lý
+            galleryGroup.style.display = 'none';
+            bannerHeadGroup.style.display = 'block';
+        }
+    }
+}
+
+function skuOpenDetail(code, name, type, category) {
+    // Show detail, hide list
+    document.getElementById('sku-list').style.display = 'none';
+    document.getElementById('sku-form').style.display = 'block';
+
+    // Fill Document Header
+    document.getElementById('sku-hdr-code').innerText = code;
+    document.getElementById('sku-hdr-name').innerText = name;
+
+    // Fill Breadcrumb
+    document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
+    var bcCatEl = document.getElementById('sku-bc-cat');
+    if (bcCatEl) bcCatEl.innerText = category || '—';
+    var bcCodeEl = document.getElementById('sku-bc-code');
+    if (bcCodeEl) bcCodeEl.innerText = code;
 
     // Fill Tab 1 — QLCS data theo SKU code
     skuFillQlcs(code);
@@ -2593,6 +2652,9 @@ function skuOpenDetail(code, name, type, category) {
     // Always start on Tab 1
     skuSwitchTab('chung');
     renderSkuTagsReadonly(code);
+
+    // Cập nhật UI hình ảnh / banner
+    skuToggleMediaUI();
 }
 
 function toggleTreeRow(groupClass, btn) {
@@ -2632,7 +2694,7 @@ function skuSwitchTab(tabName) {
         var list = document.getElementById('dactinh-attr-list');
         if (list && list.querySelectorAll('.dactinh-row').length === 0) {
             var skuCode = (document.getElementById('sku-hdr-code')?.innerText || 'CAM-IQ3').toLowerCase();
-            var skuCat = (document.getElementById('sku-bc-cat')?.innerText || '').toLowerCase();
+            var skuCat = (document.getElementById('sku-bc-cat')?.innerText || document.getElementById('qlcs-dichvu')?.value || '').toLowerCase();
             var skuType = (document.getElementById('sku-bc-type')?.innerText || '').toLowerCase();
             var catLower = skuCat + ' ' + skuType + ' ' + skuCode;
             var dataKey = catLower.indexOf('camera') >= 0 || catLower.indexOf('cam') >= 0 ? 'camera' : catLower.indexOf('play') >= 0 ? 'play' : catLower.indexOf('modem') >= 0 || catLower.indexOf('ap') >= 0 || catLower.indexOf('wifi') >= 0 ? 'modem' : 'service';
