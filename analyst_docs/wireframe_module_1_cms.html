@@ -3669,66 +3669,25 @@
                                 </div>
 
                                 <div style="display:grid; grid-template-columns:1.2fr 1.8fr; gap:20px;">
-                                    <!-- Cột Trái: Upload & Cấu hình Video -->
+                                    <!-- Cột Trái: Cấu hình Video -->
                                     <div
                                         style="background:rgba(255,255,255,0.01); border:1px solid var(--border-glass); padding:16px; border-radius:10px;">
                                         <div
-                                            style="display:flex; border-bottom:1px solid var(--border-glass); margin-bottom:14px; padding-bottom:6px; gap:8px;">
-                                            <button type="button" id="video-mode-link" onclick="switchVideoMode('link')"
-                                                style="flex:1; padding:6px; background:var(--warning); color:#000; border:none; border-radius:4px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s;">🔗
-                                                Nhúng Link Video</button>
-                                            <button type="button" id="video-mode-upload"
-                                                onclick="switchVideoMode('upload')"
-                                                style="flex:1; padding:6px; background:transparent; color:var(--text-muted); border:none; border-radius:4px; font-weight:600; font-size:12px; cursor:pointer; transition:all 0.2s;">📤
-                                                Upload File (.mp4)</button>
+                                            style="border-bottom:1px solid var(--border-glass); margin-bottom:14px; padding-bottom:6px;">
+                                            <span
+                                                style="padding:6px 12px; background:var(--warning); color:#000; border-radius:4px; font-weight:600; font-size:12px; display:inline-block;">🔗
+                                                Nhúng Link Video</span>
                                         </div>
 
                                         <!-- Nhúng Link Form -->
                                         <div id="video-link-form">
-                                            <div class="form-group" style="margin-bottom:12px;">
+                                            <div class="form-group" style="margin-bottom:16px;">
                                                 <label style="font-size:12px; margin-bottom:4px; display:block;">Đường
                                                     dẫn Video <span style="color:var(--danger)">*</span></label>
                                                 <input type="text" class="form-input"
                                                     style="padding:8px 10px; font-size:13px;"
                                                     placeholder="Ví dụ: https://www.youtube.com/watch?v=..."
                                                     id="video-input-url">
-                                            </div>
-                                        </div>
-
-                                        <!-- Upload File Form (Mặc định ẩn) -->
-                                        <div id="video-upload-form" style="display:none;">
-                                            <div class="form-group" style="margin-bottom:12px;">
-                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Tải
-                                                    file video lên <span
-                                                        style="font-size:11px; color:var(--text-muted);">(Dưới
-                                                        20MB)</span></label>
-                                                <div style="border:2px dashed var(--border-glass); padding:16px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px;"
-                                                    onclick="alert('Mở file picker chọn video mp4...')">
-                                                    📁 <span style="font-weight:600; color:var(--text-main);">+ Chọn
-                                                        file video</span>
-                                                    <div style="font-size:10px; margin-top:2px;">Hỗ trợ MP4, WebM, MOV
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group" style="margin-bottom:12px;">
-                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Tiêu đề
-                                                    hiển thị của Video</label>
-                                                <input type="text" class="form-input"
-                                                    style="padding:8px 10px; font-size:13px;"
-                                                    placeholder="Nhập tiêu đề giới thiệu video..."
-                                                    id="video-input-title">
-                                            </div>
-
-                                            <div class="form-group" style="margin-bottom:16px;">
-                                                <label style="font-size:12px; margin-bottom:4px; display:block;">Ảnh đại
-                                                    diện Video (Thumbnail) <span
-                                                        style="font-size:11px; color:var(--text-muted);">(Tùy
-                                                        chọn)</span></label>
-                                                <div style="border:1.5px dashed var(--border-glass); padding:8px; text-align:center; border-radius:6px; cursor:pointer; color:var(--text-muted); font-size:12px;"
-                                                    onclick="alert('Chọn hình ảnh làm thumbnail cho video...')">
-                                                    🖼️ Chọn ảnh đại diện
-                                                </div>
                                             </div>
                                         </div>
 
@@ -3800,9 +3759,9 @@
                                                     Trải nghiệm thực tế tốc độ mạng Wifi 6 FPT</div>
                                                 <div
                                                     style="font-size:11px; color:var(--text-muted); margin-top:2px; display:flex; align-items:center; gap:8px;">
-                                                    <span>Nguồn: <strong>Upload (.mp4)</strong></span>
+                                                    <span>Nguồn: <strong>Youtube</strong></span>
                                                     <span>•</span>
-                                                    <span>Dung lượng: <strong>14.2 MB</strong></span>
+                                                    <span>Thời lượng: <strong>02:15</strong></span>
                                                 </div>
                                             </div>
 
@@ -3826,65 +3785,77 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Phần 3: Mô tả -->
+                            <!-- Phần 3: Mô tả sản phẩm (Tự động hiển thị theo Dịch vụ vs Thiết bị) -->
                             <div class="form-section"
                                 style="border-top:1px solid var(--border-glass); padding-top:20px; margin-top:0;">
-                                <h3>▾ Mô tả sản phẩm</h3>
-                                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
-                                    <!-- Cột 1: Mô tả gói bán -->
-                                    <div class="form-group" style="margin-bottom:0;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                                    <h3 style="margin:0;">▾ Mô tả sản phẩm</h3>
+                                </div>
+
+                                <!-- CASE 1: SẢN PHẨM DỊCH VỤ (Mô tả gói bán + Mô tả thông tin chi tiết) -->
+                                <div id="product-desc-service-mode" style="display:block;">
+                                    <!-- 1. Mô tả gói bán -->
+                                    <div class="form-group" style="margin-bottom:20px;">
                                         <label style="display:flex; justify-content:space-between; align-items:center;">
-                                            <span>Mô tả gói bán <span
-                                                    style="font-size:11px; color:var(--primary); font-weight:normal;">(Hiển
-                                                    thị danh sách ✓ trên Card gói)</span></span>
+                                            <span>Mô tả gói bán <span style="font-size:11px; color:var(--primary); font-weight:normal;">(Hiển thị danh sách ✓ trên Card gói)</span></span>
                                             <span style="font-size:11px; color:var(--text-muted);">Mỗi ý 1 dòng</span>
                                         </label>
-                                        <textarea class="form-textarea"
+                                        <textarea class="form-textarea" id="service-package-desc-input"
                                             style="min-height:90px; line-height:1.6; font-size:13px;"
                                             placeholder="Nhập mỗi đặc điểm nổi bật trên một dòng...&#10;VD:&#10;Modem Wi-Fi 6 và FPT Play Box&#10;Kết nối lên đến 10 thiết bị&#10;Gần 120 kênh truyền hình, thể thao độc quyền">Modem Wi-Fi 6 và FPT Play Box
 Kết nối lên đến 10 thiết bị
 Gần 120 kênh truyền hình, thể thao độc quyền</textarea>
                                     </div>
 
-                                    <!-- Cột 2: Mô tả ngắn -->
-                                    <div class="form-group" style="margin-bottom:0;">
-                                        <label>Mô tả ngắn</label>
-                                        <textarea class="form-textarea"
-                                            style="min-height:90px; line-height:1.6; font-size:13px;"
-                                            placeholder="Tóm tắt điểm nổi bật tổng quan sản phẩm..."></textarea>
+                                    <!-- 2. Mô tả thông tin chi tiết -->
+                                    <div class="form-group" style="margin-bottom:20px;">
+                                        <label style="display:flex; justify-content:space-between; align-items:center;">
+                                            <span>Mô tả thông tin chi tiết <span style="font-size:11px; color:var(--success); font-weight:normal;">(Nội dung chi tiết hiển thị checklist xanh ✓ ngoài Website/App)</span></span>
+                                            <span style="font-size:11px; color:var(--text-muted);">Cú pháp: [Tiêu đề nổi bật]: [Nội dung chi tiết]</span>
+                                        </label>
+                                        <textarea class="form-textarea" id="service-detail-info-input"
+                                            style="min-height:160px; line-height:1.6; font-size:13px; font-family:monospace;"
+                                            oninput="updateServiceDetailPreview(this.value)"
+                                            placeholder="Trang bị sẵn Modem Wi-Fi 6 băng tần kép: Trang bị modem Wi-Fi 6 đời mới nhất giúp kết nối ổn định...&#10;Tốc độ truy cập lên tới 1000/300 Mbps: Tốc độ download 1000Mbps và upload 300Mbps...&#10;Kết nối đồng thời trên 30 thiết bị: Kết nối hơn 30 thiết bị cùng lúc, đảm bảo độ trễ...">Trang bị sẵn Modem Wi-Fi 6 băng tần kép: Trang bị modem Wi-Fi 6 đời mới nhất giúp kết nối ổn định, phủ sóng mạnh khắp nhà và giảm nghẽn mạng khi truy cập nhiều thiết bị.
+Tốc độ truy cập lên tới 1000/300 Mbps: Tốc độ download 1000Mbps và upload 300Mbps đáp ứng mọi nhu cầu học tập, họp trực tuyến, livestream hay xem phim 4K mượt mà, không giật lag.
+Kết nối đồng thời trên 30 thiết bị: Kết nối hơn 30 thiết bị cùng lúc, đảm bảo độ trễ (PING) luôn dưới 20ms – lý tưởng cho gia đình đông người hoặc văn phòng nhỏ.
+Kho truyền hình 130 kênh: Truyền hình VIP không quảng cáo, trải nghiệm phim 4K & nội dung độc quyền trên FPT Play, xem đồng thời tới 5 thiết bị.
+Bảo mật và quản lý truy cập: Bảo vệ người dùng khỏi truy cập lạ, virus và mã độc. Hệ thống cho phép quản lý thiết bị, khóa hoặc giới hạn truy cập đơn giản.
+Dịch vụ hỗ trợ và bảo hành: Đội ngũ kỹ thuật viên của FPT Telecom trực hỗ trợ 24/7. Mọi sự cố sẽ được xử lý nhanh chóng, có chính sách bảo hành – thay thế thiết bị rõ ràng.</textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Mô tả dài <span style="font-size:11px; color:var(--text-muted);">Rich text
-                                            editor</span></label>
-                                    <div
-                                        style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
-                                        <div
-                                            style="background:rgba(255,255,255,0.05); border-bottom:1px solid var(--border-glass); padding:6px 10px; display:flex; gap:8px; flex-wrap:wrap;">
-                                            <button class="btn btn-sm"
-                                                style="font-size:12px; padding:3px 8px; font-weight:700;">B</button>
-                                            <button class="btn btn-sm"
-                                                style="font-size:12px; padding:3px 8px; font-style:italic;">I</button>
-                                            <button class="btn btn-sm"
-                                                style="font-size:12px; padding:3px 8px; text-decoration:underline;">U</button>
-                                            <span
-                                                style="border-left:1px solid var(--border-glass); margin:0 2px;"></span>
-                                            <button class="btn btn-sm"
-                                                style="font-size:12px; padding:3px 8px;">H1</button>
-                                            <button class="btn btn-sm"
-                                                style="font-size:12px; padding:3px 8px;">H2</button>
-                                            <span
-                                                style="border-left:1px solid var(--border-glass); margin:0 2px;"></span>
-                                            <button class="btn btn-sm" style="font-size:12px; padding:3px 8px;">≡
-                                                List</button>
-                                            <button class="btn btn-sm" style="font-size:12px; padding:3px 8px;">🔗
-                                                Link</button>
-                                            <button class="btn btn-sm" style="font-size:12px; padding:3px 8px;">📷
-                                                Ảnh</button>
-                                        </div>
+
+                                <!-- CASE 2: SẢN PHẨM THIẾT BỊ (Mô tả ngắn + Mô tả dài) -->
+                                <div id="product-desc-device-mode" style="display:none;">
+
+                                    <!-- 1. Mô tả ngắn -->
+                                    <div class="form-group" style="margin-bottom:16px;">
+                                        <label>Mô tả ngắn <span style="font-size:11px; color:var(--text-muted);">(Hiển thị dưới giá bán thiết bị)</span></label>
                                         <textarea class="form-textarea"
-                                            style="min-height:180px; border:none; border-radius:0;"
-                                            placeholder="Nhập nội dung mô tả chi tiết sản phẩm..."></textarea>
+                                            style="min-height:90px; line-height:1.6; font-size:13px;"
+                                            placeholder="Tóm tắt điểm nổi bật tổng quan sản phẩm thiết bị...&#10;VD: Camera FPT IQ3 độ phân giải Full HD 1080p, kháng nước IP66, lưu trữ Cloud an toàn, cảnh báo AI thông minh.">Camera FPT IQ3 độ phân giải Full HD 1080p, kháng nước IP66, lưu trữ Cloud an toàn, cảnh báo AI thông minh.</textarea>
+                                    </div>
+
+                                    <!-- 2. Mô tả dài (Rich Text Editor) -->
+                                    <div class="form-group">
+                                        <label>Mô tả dài <span style="font-size:11px; color:var(--text-muted);">Rich text editor bài viết đánh giá / chi tiết kỹ thuật</span></label>
+                                        <div style="border:1px solid var(--border-glass); border-radius:8px; overflow:hidden;">
+                                            <div style="background:rgba(255,255,255,0.05); border-bottom:1px solid var(--border-glass); padding:6px 10px; display:flex; gap:8px; flex-wrap:wrap;">
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px; font-weight:700;">B</button>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px; font-style:italic;">I</button>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px; text-decoration:underline;">U</button>
+                                                <span style="border-left:1px solid var(--border-glass); margin:0 2px;"></span>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px;">H1</button>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px;">H2</button>
+                                                <span style="border-left:1px solid var(--border-glass); margin:0 2px;"></span>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px;">≡ List</button>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px;">🔗 Link</button>
+                                                <button type="button" class="btn btn-sm" style="font-size:12px; padding:3px 8px;">📷 Ảnh</button>
+                                            </div>
+                                            <textarea class="form-textarea"
+                                                style="min-height:180px; border:none; border-radius:0;"
+                                                placeholder="Nhập nội dung mô tả chi tiết sản phẩm thiết bị, tính năng công nghệ, hướng dẫn lắp đặt..."></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -12059,94 +12030,7 @@ Tặng 1 tháng cước</textarea>
                                                     </div>
                                                 </div>
 
-                                                <!-- CHU KỲ 2: Trả sau | 1 tháng | Tag line: Đề xuất -->
-                                                <div
-                                                    style="display: grid; grid-template-columns: 130px 120px 150px 1fr; gap: 12px; align-items: start; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 10px; border-radius: 8px;">
-                                                    <select class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px; background: rgba(0,0,0,0.4);">
-                                                        <option value="trasau" selected>Trả sau</option>
-                                                        <option value="tratruoc">Trả trước</option>
-                                                    </select>
-                                                    <select class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px; background: rgba(0,0,0,0.4);">
-                                                        <option value="1" selected>1 tháng</option>
-                                                        <option value="2">2 tháng</option>
-                                                        <option value="3">3 tháng</option>
-                                                        <option value="6">6 tháng</option>
-                                                        <option value="9">9 tháng</option>
-                                                        <option value="12">12 tháng</option>
-                                                        <option value="18">18 tháng</option>
-                                                        <option value="24">24 tháng</option>
-                                                        <option value="36">36 tháng</option>
-                                                    </select>
-                                                    <input type="text" class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px; font-weight: 600; color: var(--warning);"
-                                                        value="Đề xuất" placeholder="Nhập tag line..."
-                                                        oninput="onUnifiedFormInput()">
-
-                                                    <div style="display: flex; flex-direction: column; gap: 6px;"
-                                                        id="sub-offer-items-1-2">
-                                                        <div style="display: flex; align-items: center; gap: 6px;">
-                                                            <input type="text" class="form-input"
-                                                                style="flex: 1; font-size: 12px; padding: 5px 8px;"
-                                                                value="Ưu đãi 300k Camera"
-                                                                oninput="onUnifiedFormInput()">
-                                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                                style="color: var(--danger); border: 1px solid rgba(239,68,68,0.3); background: transparent; padding: 2px 6px; font-size: 12px;">✕</button>
-                                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                                style="padding: 2px 6px; font-size: 12px;">^</button>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="addOfferSubItem('sub-offer-items-1-2')"
-                                                            style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--primary); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-top: 4px;"
-                                                            title="Thêm dòng ưu đãi">+</button>
-                                                    </div>
-                                                </div>
-
-                                                <!-- CHU KỲ 3: Trả trước | 2 tháng | Tag line: Nhập tag line -->
-                                                <div
-                                                    style="display: grid; grid-template-columns: 130px 120px 150px 1fr; gap: 12px; align-items: start; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 10px; border-radius: 8px;">
-                                                    <select class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px; background: rgba(0,0,0,0.4);">
-                                                        <option value="tratruoc" selected>Trả trước</option>
-                                                        <option value="trasau">Trả sau</option>
-                                                    </select>
-                                                    <select class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px; background: rgba(0,0,0,0.4);">
-                                                        <option value="1">1 tháng</option>
-                                                        <option value="2" selected>2 tháng</option>
-                                                        <option value="3">3 tháng</option>
-                                                        <option value="6">6 tháng</option>
-                                                        <option value="9">9 tháng</option>
-                                                        <option value="12">12 tháng</option>
-                                                        <option value="18">18 tháng</option>
-                                                        <option value="24">24 tháng</option>
-                                                        <option value="36">36 tháng</option>
-                                                    </select>
-                                                    <input type="text" class="form-input"
-                                                        style="font-size: 12px; padding: 5px 8px;" value=""
-                                                        placeholder="Nhập tag line" oninput="onUnifiedFormInput()">
-
-                                                    <div style="display: flex; flex-direction: column; gap: 6px;"
-                                                        id="sub-offer-items-1-3">
-                                                        <div style="display: flex; align-items: center; gap: 6px;">
-                                                            <input type="text" class="form-input"
-                                                                style="flex: 1; font-size: 12px; padding: 5px 8px;"
-                                                                value="" placeholder="Nhập nội dung ưu đãi"
-                                                                oninput="onUnifiedFormInput()">
-                                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                                style="color: var(--danger); border: 1px solid rgba(239,68,68,0.3); background: transparent; padding: 2px 6px; font-size: 12px;">✕</button>
-                                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                                style="padding: 2px 6px; font-size: 12px;">^</button>
-                                                        </div>
-                                                        <button type="button"
-                                                            onclick="addOfferSubItem('sub-offer-items-1-3')"
-                                                            style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border-glass); background: rgba(255,255,255,0.05); color: var(--primary); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; margin-top: 4px;"
-                                                            title="Thêm dòng ưu đãi">+</button>
-                                                    </div>
-                                                </div>
-
-                                                <!-- NÚT + THÊM CHU KỲ (KHOANH ĐỎ GÓC DƯỚI BÊN TRÁI HÌNH 3) -->
+                                                <!-- CHU KỲ 2 & 3 & NÚT THÊM CHU KỲ -->
                                                 <div style="margin-top: 6px;">
                                                     <button type="button"
                                                         onclick="addNewCycleBlock('cycle-rows-product-1')"
@@ -12176,7 +12060,7 @@ Tặng 1 tháng cước</textarea>
 
                                 <!-- 4. PHÍ LẮP ĐẶT & CHÚ THÍCH -->
                                 <div class="checkout-config-section" style="margin-bottom: 24px;">
-                                    <div class="checkout-config-title" style="margin-bottom: 8px;">🛠️ 4. Phí lắp đặt &
+                                    <div class="checkout-config-title" style="margin-bottom: 8px;">🛠️ 4. Phí lắp đặt &amp;
                                         Chú thích phụ</div>
                                     <input type="text" class="form-input" id="txt-unified-install-fee-note"
                                         style="width:100%;"
@@ -12305,10 +12189,18 @@ Tặng 1 tháng cước</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label
-                                            style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn
-                                            gói bán áp dụng <span style="color:var(--danger)">*</span></label>
-                                        <div style="max-height:120px; overflow-y:auto; border:1px solid var(--border-glass); border-radius:6px; padding:10px; background:rgba(0,0,0,0.15);"
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                            <label style="font-size:12px; font-weight:600; margin:0;">Chọn gói bán áp dụng <span style="color:var(--danger)">*</span></label>
+                                            <span id="rule-skus-count-badge" style="font-size:11px; color:var(--warning); font-weight:600;">Đã chọn: 0/0 gói</span>
+                                        </div>
+                                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                            <input type="text" id="rule-sku-search-input" placeholder="🔍 Tìm nhanh mã hoặc tên gói bán..."
+                                                style="padding:5px 10px; font-size:12px; border-radius:6px; flex:1; background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); color:#fff;"
+                                                oninput="window.filterRuleSkusList(this.value)">
+                                            <button type="button" class="btn btn-secondary btn-xs" style="font-size:11px; padding:4px 8px; color:var(--primary);" onclick="window.toggleSelectAllRuleSkus(true)">Chọn tất cả</button>
+                                            <button type="button" class="btn btn-secondary btn-xs" style="font-size:11px; padding:4px 8px; color:var(--text-muted);" onclick="window.toggleSelectAllRuleSkus(false)">Bỏ chọn</button>
+                                        </div>
+                                        <div style="max-height:220px; overflow-y:auto; border:1px solid var(--border-glass); border-radius:6px; padding:10px; background:rgba(0,0,0,0.2); display:grid; grid-template-columns:1fr 1fr; gap:6px;"
                                             id="checkout-rule-skus-container">
                                             <!-- Checkbox gói bán render động -->
                                         </div>
@@ -12316,68 +12208,126 @@ Tặng 1 tháng cước</textarea>
                                 </div>
                             </div>
 
-                            <!-- Nhóm 2: Header Banner -->
-                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
-                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">2.
-                                    Banner Đầu Trang (Header Banner)</h4>
-                                <div style="display:flex; flex-direction:column; gap:12px;">
-                                    <div class="form-group">
-                                        <label
-                                            style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn
-                                            Banner</label>
-                                        <select class="form-select" id="checkout-rule-header-banner"
-                                            style="width:100%;">
-                                            <option value="">— Không hiển thị —</option>
-                                            <option value="banner-1">Banner Combo Thể thao Sky (Giảm 50K)</option>
-                                            <option value="banner-2">Banner Wi-Fi 6 siêu tốc (Tặng 2T cước)</option>
-                                            <option value="banner-3">Banner FPT Camera IQ3 (An tâm mọi góc nhìn)
-                                            </option>
-                                        </select>
+                            <!-- Nhóm 2: Sự kiện khi vừa vào trang Checkout (Page Load Event) -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:18px;">
+                                <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.25); border-radius:8px; padding:16px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                        <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:700; color:var(--warning); margin:0;">
+                                            <input type="checkbox" id="checkout-rule-enable-pageload" checked style="width:16px; height:16px; accent-color:var(--warning); cursor:pointer;">
+                                            <span>⚡ 2. Cấu hình hiển thị khi vừa VÀO TRANG CHECKOUT</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Cấu hình thời gian & tần suất -->
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; background:rgba(0,0,0,0.2); padding:10px; border-radius:6px;">
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Thời gian delay (giây):</label>
+                                            <input type="number" class="form-input" id="checkout-rule-delay" value="3" min="0" style="width:100%; font-size:12px; padding:4px 8px;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Tần suất hiển thị:</label>
+                                            <select class="form-select" id="checkout-rule-freq" style="width:100%; font-size:12px; padding:4px 8px;">
+                                                <option value="once">Chỉ 1 lần / phiên mua hàng</option>
+                                                <option value="always">Mỗi lần truy cập trang</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Lựa chọn Banner & Popup cho sự kiện Vào Trang -->
+                                    <div style="display:flex; flex-direction:column; gap:10px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Banner Đầu Trang (Header Banner):</label>
+                                            <select class="form-select" id="checkout-rule-header-banner" style="width:100%;">
+                                                <option value="">— Không hiển thị —</option>
+                                                <option value="banner-1">Banner Khuyến mãi Hè Combo Sky (Giảm 50K)</option>
+                                                <option value="banner-2">Banner Wi-Fi 6 siêu tốc (Tặng 2T cước)</option>
+                                                <option value="banner-3">Banner FPT Camera IQ3 (An tâm mọi góc nhìn)</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Banner Chân Trang (Footer Banner):</label>
+                                            <select class="form-select" id="checkout-rule-footer-banner" style="width:100%;">
+                                                <option value="">— Không hiển thị —</option>
+                                                <option value="banner-footer-1">Tại sao nên chọn Combo Thể Thao Sky</option>
+                                                <option value="banner-footer-2">Tại sao chọn mạng cáp quang FPT Telecom</option>
+                                                <option value="banner-footer-3">Tại sao nên lắp đặt Camera IQ3 FPT</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Popup Checkout khi vào trang:</label>
+                                            <select class="form-select" id="checkout-rule-popup" style="width:100%;">
+                                                <option value="">— Không hiển thị —</option>
+                                                <option value="popup-1">Popup Ưu đãi Momo Giảm 30K</option>
+                                                <option value="popup-2">Popup Voucher 100K Lắp mạng</option>
+                                                <option value="popup-3">Popup Hỗ trợ Hotline Trực tiếp</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Nhóm 3: Footer Banner -->
-                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
-                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">3.
-                                    Banner Chân Trang (Footer Banner)</h4>
-                                <div style="display:flex; flex-direction:column; gap:12px;">
-                                    <div class="form-group">
-                                        <label
-                                            style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn
-                                            Banner</label>
-                                        <select class="form-select" id="checkout-rule-footer-banner"
-                                            style="width:100%;">
-                                            <option value="">— Không hiển thị —</option>
-                                            <option value="banner-footer-1">Tại sao nên chọn Combo Thể Thao Sky</option>
-                                            <option value="banner-footer-2">Tại sao chọn mạng cáp quang FPT Telecom
-                                            </option>
-                                            <option value="banner-footer-3">Tại sao nên lắp đặt Camera IQ3 FPT</option>
-                                        </select>
+                            <!-- Nhóm 3: Sự kiện sau khi nhập Mã khuyến mãi / Voucher (Voucher Event) -->
+                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:18px;">
+                                <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.25); border-radius:8px; padding:16px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                        <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:700; color:#60a5fa; margin:0;">
+                                            <input type="checkbox" id="checkout-rule-enable-voucher" checked style="width:16px; height:16px; accent-color:#3b82f6; cursor:pointer;">
+                                            <span>🎟️ 3. Cấu hình hiển thị khi NHẬP MÃ KHUYẾN MÃI / VOUCHER</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Cấu hình điều kiện Voucher -->
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; background:rgba(0,0,0,0.2); padding:10px; border-radius:6px;">
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Sự kiện mã khuyến mãi:</label>
+                                            <select class="form-select" id="checkout-rule-voucher-event" style="width:100%; font-size:12px; padding:4px 8px;">
+                                                <option value="success">Khi nhập &amp; áp dụng Voucher thành công</option>
+                                                <option value="any">Khi bấm Áp dụng Voucher (Bất kỳ)</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Mã Voucher áp dụng (Để trống = Tất cả mã):</label>
+                                            <input type="text" class="form-input" id="checkout-rule-voucher-code" placeholder="VD: MOMO30K, FPTHE2026..." style="width:100%; font-size:12px; padding:4px 8px;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Lựa chọn Banner & Popup cho sự kiện Nhập Voucher -->
+                                    <div style="display:flex; flex-direction:column; gap:10px;">
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Banner Đầu Trang khi nhập Voucher:</label>
+                                            <select class="form-select" id="checkout-rule-voucher-header-banner" style="width:100%;">
+                                                <option value="">— Không hiển thị (Giữ nguyên banner cũ) —</option>
+                                                <option value="banner-v-1">Banner Giới thiệu bạn bè (Tặng 100K)</option>
+                                                <option value="banner-1">Banner Khuyến mãi Hè Combo Sky (Giảm 50K)</option>
+                                                <option value="banner-2">Banner Wi-Fi 6 siêu tốc (Tặng 2T cước)</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Banner Chân Trang khi nhập Voucher:</label>
+                                            <select class="form-select" id="checkout-rule-voucher-footer-banner" style="width:100%;">
+                                                <option value="">— Không hiển thị (Giữ nguyên banner cũ) —</option>
+                                                <option value="banner-footer-1">Tại sao nên chọn Combo Thể Thao Sky</option>
+                                                <option value="banner-footer-2">Tại sao chọn mạng cáp quang FPT Telecom</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:#fff;">📍 Popup Checkout khi nhập Voucher:</label>
+                                            <select class="form-select" id="checkout-rule-voucher-popup" style="width:100%;">
+                                                <option value="">— Không hiển thị —</option>
+                                                <option value="popup-1">Popup Ưu đãi Momo Giảm 30K</option>
+                                                <option value="popup-2">Popup Voucher 100K Lắp mạng</option>
+                                                <option value="popup-3">Popup Hỗ trợ Hotline Trực tiếp</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Nhóm 4: Popup -->
-                            <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
-                                <h4 style="color:var(--primary); margin:0 0 12px 0; font-size:14px; font-weight:600;">4.
-                                    Popup trang Checkout</h4>
-                                <div style="display:flex; flex-direction:column; gap:12px;">
-                                    <div class="form-group">
-                                        <label
-                                            style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Chọn
-                                            Popup</label>
-                                        <select class="form-select" id="checkout-rule-popup" style="width:100%;">
-                                            <option value="">— Không hiển thị —</option>
-                                            <option value="popup-1">Popup Ưu đãi Momo Giảm 30K</option>
-                                            <option value="popup-2">Popup Voucher 100K Lắp mạng</option>
-                                            <option value="popup-3">Popup Hỗ trợ Hotline Trực tiếp</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Nhóm 5: Cài đặt khác -->
+                            <!-- Nhóm 4: Cài đặt trạng thái -->
                             <div>
                                 <label
                                     style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:13px; color:#fff;">
@@ -12410,25 +12360,29 @@ Tặng 1 tháng cước</textarea>
                         priority: 10,
                         start: '2026-06-01T00:00',
                         end: '2026-08-31T23:59',
-                        skus: ['INT-SKY'],
+                        skus: ['INT-GIGA', 'INT-SKY', 'SA-SMAX', 'SA-SVIP', 'CAM-IQ3'],
                         headerBanner: 'banner-1',
                         footerBanner: 'banner-footer-1',
                         popup: 'popup-1',
-                        popupTrigger: 'exit-intent',
+                        triggerType: 'page_load',
+                        triggerDelay: 3,
+                        triggerFreq: 'once',
                         status: true
                     },
                     'rule-2': {
                         id: 'rule-2',
-                        name: 'Chiến dịch Wi-Fi 7 Thế hệ mới',
+                        name: 'Chiến dịch Voucher Giảm 30K Momo',
                         channel: 'tdw',
                         priority: 5,
                         start: '',
                         end: '',
-                        skus: ['DEV-WIFI7'],
+                        skus: ['DEV-WIFI7', 'CAM-IQ4S'],
                         headerBanner: 'banner-2',
                         footerBanner: 'banner-footer-2',
                         popup: 'popup-2',
-                        popupTrigger: 'delay-15',
+                        triggerType: 'voucher_input',
+                        voucherEvent: 'success',
+                        voucherCode: 'FPTMOMO30K',
                         status: true
                     }
                 };
@@ -12526,17 +12480,32 @@ Tặng 1 tháng cước</textarea>
                             fptvn: '💻 Website fpt.vn'
                         }[r.channel] || r.channel;
 
-                        var skusBadges = r.skus.map(function (s) {
-                            return '<span class="badge active" style="margin:2px; font-size:10.5px; background:rgba(232,105,9,0.15); color:var(--primary); border:1px solid rgba(232,105,9,0.25);">' + s + '</span>';
-                        }).join('');
+                        // Trình bày danh sách gói bán áp dụng gọn gàng (Nếu > 2 gói thì rút gọn + counter badge)
+                        var skusBadges = '';
+                        if (r.skus && r.skus.length > 0) {
+                            if (r.skus.length <= 2) {
+                                skusBadges = r.skus.map(function (s) {
+                                    return '<span class="badge active" style="margin:2px; font-size:10.5px; background:rgba(232,105,9,0.15); color:var(--primary); border:1px solid rgba(232,105,9,0.25);">' + s + '</span>';
+                                }).join('');
+                            } else {
+                                var firstTwo = r.skus.slice(0, 2).map(function (s) {
+                                    return '<span class="badge active" style="margin:2px; font-size:10.5px; background:rgba(232,105,9,0.15); color:var(--primary); border:1px solid rgba(232,105,9,0.25);">' + s + '</span>';
+                                }).join('');
+                                var remainingCount = r.skus.length - 2;
+                                var allSkusText = r.skus.join(', ');
+                                skusBadges = firstTwo + '<span class="badge" title="Tất cả gói: ' + allSkusText + '" style="margin:2px; font-size:10.5px; background:rgba(255,255,255,0.08); color:var(--text-main); border:1px solid var(--border-glass); cursor:pointer;">+' + remainingCount + ' gói khác</span>';
+                            }
+                        } else {
+                            skusBadges = '<span style="color:var(--text-muted); font-size:11px;">Tất cả gói</span>';
+                        }
 
                         var timeRange = (r.start && r.end)
                             ? '<span style="font-size:12px;">' + r.start.replace('T', ' ') + ' ~ ' + r.end.replace('T', ' ') + '</span>'
                             : '<span style="color:var(--text-muted); font-size:12px; font-style:italic;">Chạy liên tục</span>';
 
                         var statusBadge = r.status
-                            ? '<span class="badge success" style="background:rgba(16,185,129,0.15); color:var(--success);">Active</span>'
-                            : '<span class="badge" style="background:rgba(255,255,255,0.07); color:var(--text-muted);">Draft</span>';
+                            ? '<span class="badge success" style="background:rgba(16,185,129,0.15); color:var(--success); font-weight:600; padding:4px 10px;">Hoạt động</span>'
+                            : '<span class="badge" style="background:rgba(239,68,68,0.15); color:var(--danger); font-weight:600; padding:4px 10px;">Không hoạt động</span>';
 
                         var hbLabel = {
                             'banner-1': 'Combo Sky (Giảm 50K)',
@@ -12581,10 +12550,23 @@ Tặng 1 tháng cước</textarea>
                     document.getElementById('checkout-rule-priority').value = '0';
                     document.getElementById('checkout-rule-start').value = '';
                     document.getElementById('checkout-rule-end').value = '';
-                    document.getElementById('checkout-rule-header-banner').value = '';
-                    document.getElementById('checkout-rule-footer-banner').value = '';
-                    document.getElementById('checkout-rule-popup').value = '';
                     document.getElementById('checkout-rule-status').checked = true;
+
+                    // Sự kiện 1: Khi vào trang
+                    if (document.getElementById('checkout-rule-enable-pageload')) document.getElementById('checkout-rule-enable-pageload').checked = true;
+                    if (document.getElementById('checkout-rule-delay')) document.getElementById('checkout-rule-delay').value = '3';
+                    if (document.getElementById('checkout-rule-freq')) document.getElementById('checkout-rule-freq').value = 'once';
+                    if (document.getElementById('checkout-rule-header-banner')) document.getElementById('checkout-rule-header-banner').value = '';
+                    if (document.getElementById('checkout-rule-footer-banner')) document.getElementById('checkout-rule-footer-banner').value = '';
+                    if (document.getElementById('checkout-rule-popup')) document.getElementById('checkout-rule-popup').value = '';
+
+                    // Sự kiện 2: Khi nhập Voucher
+                    if (document.getElementById('checkout-rule-enable-voucher')) document.getElementById('checkout-rule-enable-voucher').checked = true;
+                    if (document.getElementById('checkout-rule-voucher-event')) document.getElementById('checkout-rule-voucher-event').value = 'success';
+                    if (document.getElementById('checkout-rule-voucher-code')) document.getElementById('checkout-rule-voucher-code').value = '';
+                    if (document.getElementById('checkout-rule-voucher-header-banner')) document.getElementById('checkout-rule-voucher-header-banner').value = '';
+                    if (document.getElementById('checkout-rule-voucher-footer-banner')) document.getElementById('checkout-rule-voucher-footer-banner').value = '';
+                    if (document.getElementById('checkout-rule-voucher-popup')) document.getElementById('checkout-rule-voucher-popup').value = '';
 
                     window.renderCheckoutRuleSkusSelector([]);
 
@@ -12607,10 +12589,23 @@ Tặng 1 tháng cước</textarea>
                     document.getElementById('checkout-rule-priority').value = r.priority;
                     document.getElementById('checkout-rule-start').value = r.start || '';
                     document.getElementById('checkout-rule-end').value = r.end || '';
-                    document.getElementById('checkout-rule-header-banner').value = r.headerBanner || '';
-                    document.getElementById('checkout-rule-footer-banner').value = r.footerBanner || '';
-                    document.getElementById('checkout-rule-popup').value = r.popup || '';
                     document.getElementById('checkout-rule-status').checked = r.status;
+
+                    // Sự kiện 1: Khi vào trang
+                    if (document.getElementById('checkout-rule-enable-pageload')) document.getElementById('checkout-rule-enable-pageload').checked = r.enablePageLoad !== false;
+                    if (document.getElementById('checkout-rule-delay')) document.getElementById('checkout-rule-delay').value = r.triggerDelay !== undefined ? r.triggerDelay : 3;
+                    if (document.getElementById('checkout-rule-freq')) document.getElementById('checkout-rule-freq').value = r.triggerFreq || 'once';
+                    if (document.getElementById('checkout-rule-header-banner')) document.getElementById('checkout-rule-header-banner').value = r.headerBanner || '';
+                    if (document.getElementById('checkout-rule-footer-banner')) document.getElementById('checkout-rule-footer-banner').value = r.footerBanner || '';
+                    if (document.getElementById('checkout-rule-popup')) document.getElementById('checkout-rule-popup').value = r.popup || '';
+
+                    // Sự kiện 2: Khi nhập Voucher
+                    if (document.getElementById('checkout-rule-enable-voucher')) document.getElementById('checkout-rule-enable-voucher').checked = r.enableVoucher !== false;
+                    if (document.getElementById('checkout-rule-voucher-event')) document.getElementById('checkout-rule-voucher-event').value = r.voucherEvent || 'success';
+                    if (document.getElementById('checkout-rule-voucher-code')) document.getElementById('checkout-rule-voucher-code').value = r.voucherCode || '';
+                    if (document.getElementById('checkout-rule-voucher-header-banner')) document.getElementById('checkout-rule-voucher-header-banner').value = r.voucherHeaderBanner || '';
+                    if (document.getElementById('checkout-rule-voucher-footer-banner')) document.getElementById('checkout-rule-voucher-footer-banner').value = r.voucherFooterBanner || '';
+                    if (document.getElementById('checkout-rule-voucher-popup')) document.getElementById('checkout-rule-voucher-popup').value = r.voucherPopup || '';
 
                     window.renderCheckoutRuleSkusSelector(r.skus);
 
@@ -12635,17 +12630,66 @@ Tặng 1 tháng cước</textarea>
                     var container = document.getElementById('checkout-rule-skus-container');
                     if (!container) return;
                     container.innerHTML = '';
+                    selectedSkus = selectedSkus || [];
 
+                    var searchInput = document.getElementById('rule-sku-search-input');
+                    if (searchInput) searchInput.value = '';
+
+                    var checkedCount = 0;
                     checkoutPackageSkus.forEach(function (sku) {
                         var isChecked = selectedSkus.indexOf(sku.code) > -1;
+                        if (isChecked) checkedCount++;
+
+                        var typeBadgeClass = sku.type === 'Camera' ? 'camera' : (sku.type === 'Truyền hình' ? 'truyen-hinh' : 'internet');
+
                         var div = document.createElement('div');
-                        div.style.margin = '4px 0';
-                        div.innerHTML = '<label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:12.5px;">'
-                            + '<input type="checkbox" class="rule-sku-cb" value="' + sku.code + '"' + (isChecked ? ' checked' : '') + ' style="width:15px; height:15px; cursor:pointer;">'
-                            + '<span>' + sku.code + ' - ' + sku.name + '</span>'
+                        div.className = 'rule-sku-item-row';
+                        div.setAttribute('data-sku-code', sku.code.toLowerCase());
+                        div.setAttribute('data-sku-name', sku.name.toLowerCase());
+                        div.style.cssText = 'background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:6px; padding:6px 8px; transition:0.2s;';
+
+                        div.innerHTML = '<label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:12px; width:100%; margin:0;">'
+                            + '<input type="checkbox" class="rule-sku-cb" value="' + sku.code + '"' + (isChecked ? ' checked' : '') + ' style="width:15px; height:15px; cursor:pointer; accent-color:var(--primary);" onchange="window.updateRuleSkusCount()">'
+                            + '<span style="font-weight:600; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + sku.code + '</span>'
+                            + '<span class="badge ' + typeBadgeClass + '" style="font-size:10px; padding:2px 6px; margin-left:auto; flex-shrink:0;">' + sku.type + '</span>'
                             + '</label>';
                         container.appendChild(div);
                     });
+
+                    window.updateRuleSkusCount();
+                };
+
+                window.updateRuleSkusCount = function () {
+                    var checkboxes = document.querySelectorAll('.rule-sku-cb');
+                    var checked = 0;
+                    checkboxes.forEach(function (cb) { if (cb.checked) checked++; });
+                    var countBadge = document.getElementById('rule-skus-count-badge');
+                    if (countBadge) countBadge.innerText = 'Đã chọn: ' + checked + '/' + checkboxes.length + ' gói';
+                };
+
+                window.filterRuleSkusList = function (keyword) {
+                    keyword = (keyword || '').toLowerCase().trim();
+                    var rows = document.querySelectorAll('.rule-sku-item-row');
+                    rows.forEach(function (row) {
+                        var code = row.getAttribute('data-sku-code') || '';
+                        var name = row.getAttribute('data-sku-name') || '';
+                        if (!keyword || code.indexOf(keyword) >= 0 || name.indexOf(keyword) >= 0) {
+                            row.style.display = 'block';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                };
+
+                window.toggleSelectAllRuleSkus = function (selectState) {
+                    var checkboxes = document.querySelectorAll('.rule-sku-cb');
+                    checkboxes.forEach(function (cb) {
+                        var row = cb.closest('.rule-sku-item-row');
+                        if (row && row.style.display !== 'none') {
+                            cb.checked = selectState;
+                        }
+                    });
+                    window.updateRuleSkusCount();
                 };
 
                 window.saveCheckoutRuleAction = function () {
@@ -12655,10 +12699,23 @@ Tặng 1 tháng cước</textarea>
                     var priority = parseInt(document.getElementById('checkout-rule-priority').value) || 0;
                     var start = document.getElementById('checkout-rule-start').value;
                     var end = document.getElementById('checkout-rule-end').value;
-                    var headerBanner = document.getElementById('checkout-rule-header-banner').value;
-                    var footerBanner = document.getElementById('checkout-rule-footer-banner').value;
-                    var popup = document.getElementById('checkout-rule-popup').value;
-                    var popupTrigger = 'exit-intent';
+
+                    // Sự kiện 1: Khi vào trang
+                    var enablePageLoad = document.getElementById('checkout-rule-enable-pageload') ? document.getElementById('checkout-rule-enable-pageload').checked : true;
+                    var triggerDelay = parseInt(document.getElementById('checkout-rule-delay').value) || 0;
+                    var triggerFreq = document.getElementById('checkout-rule-freq').value;
+                    var headerBanner = document.getElementById('checkout-rule-header-banner') ? document.getElementById('checkout-rule-header-banner').value : '';
+                    var footerBanner = document.getElementById('checkout-rule-footer-banner') ? document.getElementById('checkout-rule-footer-banner').value : '';
+                    var popup = document.getElementById('checkout-rule-popup') ? document.getElementById('checkout-rule-popup').value : '';
+
+                    // Sự kiện 2: Khi nhập Voucher
+                    var enableVoucher = document.getElementById('checkout-rule-enable-voucher') ? document.getElementById('checkout-rule-enable-voucher').checked : true;
+                    var voucherEvent = document.getElementById('checkout-rule-voucher-event') ? document.getElementById('checkout-rule-voucher-event').value : 'success';
+                    var voucherCode = document.getElementById('checkout-rule-voucher-code') ? document.getElementById('checkout-rule-voucher-code').value.trim() : '';
+                    var voucherHeaderBanner = document.getElementById('checkout-rule-voucher-header-banner') ? document.getElementById('checkout-rule-voucher-header-banner').value : '';
+                    var voucherFooterBanner = document.getElementById('checkout-rule-voucher-footer-banner') ? document.getElementById('checkout-rule-voucher-footer-banner').value : '';
+                    var voucherPopup = document.getElementById('checkout-rule-voucher-popup') ? document.getElementById('checkout-rule-voucher-popup').value : '';
+
                     var status = document.getElementById('checkout-rule-status').checked;
 
                     if (!name) {
@@ -12690,10 +12747,18 @@ Tặng 1 tháng cước</textarea>
                         start: start,
                         end: end,
                         skus: skus,
+                        enablePageLoad: enablePageLoad,
+                        triggerDelay: triggerDelay,
+                        triggerFreq: triggerFreq,
                         headerBanner: headerBanner,
                         footerBanner: footerBanner,
                         popup: popup,
-                        popupTrigger: popupTrigger,
+                        enableVoucher: enableVoucher,
+                        voucherEvent: voucherEvent,
+                        voucherCode: voucherCode,
+                        voucherHeaderBanner: voucherHeaderBanner,
+                        voucherFooterBanner: voucherFooterBanner,
+                        voucherPopup: voucherPopup,
                         status: status
                     };
 
@@ -18497,7 +18562,9 @@ Tặng 1 tháng cước</textarea>
 
             { id: '19', code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', channel: 'tongdaiwifi', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true },
             { id: '20', code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', channel: 'fptvn', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true },
-            { id: '21', code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', channel: 'hifpt', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true }
+            { id: '21', code: 'SA-SVIP', name: 'FPT Play SVIP (SA)', type: 'SA', service: 'Truyền hình', price: '140.000 đ', channel: 'hifpt', status: 'Hoạt động', time: '20/05/2026 11:15', user: '24092 - Nguyễn', active: true },
+            { id: '22', code: 'TV-SMART55', name: 'Smart Tivi FPT 55 inch 4K Ultra HD', type: 'Thiết bị', service: 'Smart TV', price: '8.990.000 đ', channel: 'tongdaiwifi', status: 'Hoạt động', time: '21/05/2026 08:30', user: 'FI-25128', active: true },
+            { id: '23', code: 'TV-SMART55', name: 'Smart Tivi FPT 55 inch 4K Ultra HD', type: 'Thiết bị', service: 'Smart TV', price: '8.990.000 đ', channel: 'fptvn', status: 'Hoạt động', time: '21/05/2026 08:30', user: 'FI-25128', active: true }
         ];
 
         function initSkuTable() {
@@ -19104,6 +19171,46 @@ Tặng 1 tháng cước</textarea>
             }
         }
 
+        function skuFillQlcs(code, name, type, category) {
+            var qlcsDv = document.getElementById('qlcs-dichvu');
+            var qlcsLoai = document.getElementById('qlcs-loai');
+            var qlcsTen = document.getElementById('qlcs-tensku');
+            if (qlcsDv) qlcsDv.value = category || 'Internet';
+            if (qlcsLoai) qlcsLoai.value = type || (category === 'Camera' || category === 'Smart TV' ? 'Thiết bị' : 'Dịch vụ');
+            if (qlcsTen) qlcsTen.value = name || 'Gói cước / Sản phẩm FPT';
+
+            toggleProductsAttachedByType();
+        }
+
+        function autoSwitchDescModeByProduct(code, name, type, category) {
+            var c = (code || '').toLowerCase();
+            var n = (name || '').toLowerCase();
+            var t = (type || '').toLowerCase();
+            var cat = (category || '').toLowerCase();
+
+            // Nhận diện Sản phẩm Thiết bị (Camera, Tivi, Wifi Mesh, AP, Box hardware...)
+            var isDevice = t.indexOf('thiết bị') >= 0 || 
+                           t.indexOf('device') >= 0 || 
+                           cat.indexOf('camera') >= 0 || 
+                           cat.indexOf('tivi') >= 0 || 
+                           cat.indexOf('smart tv') >= 0 || 
+                           cat.indexOf('ap') >= 0 || 
+                           n.indexOf('camera') >= 0 || 
+                           n.indexOf('tivi') >= 0 || 
+                           n.indexOf('tv') >= 0 || 
+                           c.indexOf('cam') >= 0;
+
+            if (isDevice) {
+                // CASE 2: Sản phẩm Thiết bị (Camera, Tivi, Wifi Mesh...)
+                // Mô tả ngắn + Mô tả dài (Rich Text Editor)
+                switchProductDescMode('device');
+            } else {
+                // CASE 1: Sản phẩm Dịch vụ (Gói Internet, Truyền hình, FPT Play, Combo...)
+                // Mô tả gói bán + Mô tả thông tin chi tiết (Live preview checklist ✓)
+                switchProductDescMode('service');
+            }
+        }
+
         function skuOpenDetail(code, name, type, category) {
             // Show detail, hide list
             document.getElementById('sku-list').style.display = 'none';
@@ -19131,6 +19238,9 @@ Tặng 1 tháng cước</textarea>
 
             // Fill Tab 1 — QLCS data theo SKU code
             skuFillQlcs(code, name, type, category);
+
+            // Tự động chuyển đổi giao diện Mô tả sản phẩm theo loại sản phẩm (Case 1 vs Case 2)
+            autoSwitchDescModeByProduct(code, name, type, category);
 
             // Swap đặc tính data theo category, type, code, name
             var cat = (category || '').toLowerCase();
@@ -28974,26 +29084,10 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
         // ===== VIDEO & GALLERY HELPER FUNCTIONS =====
         function switchVideoMode(mode) {
-            var btnLink = document.getElementById('video-mode-link');
-            var btnUpload = document.getElementById('video-mode-upload');
             var formLink = document.getElementById('video-link-form');
             var formUpload = document.getElementById('video-upload-form');
-
-            if (mode === 'link') {
-                btnLink.style.background = 'var(--warning)';
-                btnLink.style.color = '#000';
-                btnUpload.style.background = 'transparent';
-                btnUpload.style.color = 'var(--text-muted)';
-                formLink.style.display = 'block';
-                formUpload.style.display = 'none';
-            } else {
-                btnUpload.style.background = 'var(--warning)';
-                btnUpload.style.color = '#000';
-                btnLink.style.background = 'transparent';
-                btnLink.style.color = 'var(--text-muted)';
-                formLink.style.display = 'none';
-                formUpload.style.display = 'block';
-            }
+            if (formLink) formLink.style.display = 'block';
+            if (formUpload) formUpload.style.display = 'none';
         }
 
         function playVideoPreview(url, title) {
@@ -29042,15 +29136,69 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
         }
 
         function addVideoToList() {
-            var url = document.getElementById('video-input-url').value;
-            var title = document.getElementById('video-input-title').value;
-            if (!url && document.getElementById('video-link-form').style.display !== 'none') {
+            var urlEl = document.getElementById('video-input-url');
+            var url = urlEl ? urlEl.value : '';
+            if (!url) {
                 alert('Vui lòng nhập đường dẫn video!');
                 return;
             }
-            alert('Đã thêm video thành công:\nTiêu đề: ' + (title || 'Video không tiêu đề') + '\nĐường dẫn: ' + (url || 'File upload'));
-            document.getElementById('video-input-url').value = '';
-            document.getElementById('video-input-title').value = '';
+            alert('Đã thêm video nhúng thành công:\nĐường dẫn: ' + url);
+            if (urlEl) urlEl.value = '';
+        }
+
+        function switchProductDescMode(mode) {
+            var serviceDiv = document.getElementById('product-desc-service-mode');
+            var deviceDiv = document.getElementById('product-desc-device-mode');
+            var btnService = document.getElementById('btn-mode-service');
+            var btnDevice = document.getElementById('btn-mode-device');
+            
+            if (mode === 'service') {
+                if (serviceDiv) serviceDiv.style.display = 'block';
+                if (deviceDiv) deviceDiv.style.display = 'none';
+                if (btnService) {
+                    btnService.style.background = 'var(--warning)';
+                    btnService.style.color = '#000';
+                }
+                if (btnDevice) {
+                    btnDevice.style.background = 'transparent';
+                    btnDevice.style.color = 'var(--text-muted)';
+                }
+            } else {
+                if (serviceDiv) serviceDiv.style.display = 'none';
+                if (deviceDiv) deviceDiv.style.display = 'block';
+                if (btnService) {
+                    btnService.style.background = 'transparent';
+                    btnService.style.color = 'var(--text-muted)';
+                }
+                if (btnDevice) {
+                    btnDevice.style.background = '#3b82f6';
+                    btnDevice.style.color = '#fff';
+                }
+            }
+        }
+
+        function updateServiceDetailPreview(val) {
+            var container = document.getElementById('service-detail-preview-list');
+            if (!container) return;
+            var lines = val.split('\n').filter(function(line) { return line.trim() !== ''; });
+            var html = '';
+            lines.forEach(function(line) {
+                var parts = line.split(':');
+                var title = parts[0] ? parts[0].trim() : '';
+                var content = parts.slice(1).join(':').trim();
+                if (parts.length > 1 && content) {
+                    html += '<div style="display:flex; align-items:flex-start; gap:10px;">' +
+                            '<span style="color:#10b981; font-weight:bold; font-size:16px; flex-shrink:0; margin-top:2px;">✓</span>' +
+                            '<div><strong style="color:#0f172a;">' + title + ':</strong> <span style="color:#475569;">' + content + '</span></div>' +
+                            '</div>';
+                } else {
+                    html += '<div style="display:flex; align-items:flex-start; gap:10px;">' +
+                            '<span style="color:#10b981; font-weight:bold; font-size:16px; flex-shrink:0; margin-top:2px;">✓</span>' +
+                            '<div style="color:#0f172a; font-weight:500;">' + line.trim() + '</div>' +
+                            '</div>';
+                }
+            });
+            container.innerHTML = html || '<div style="color:#94a3b8; font-style:italic;">Chưa có thông tin chi tiết...</div>';
         }
     </script>
     <!-- Modal Cấu hình Chi tiết SKU (Thiết bị & Dịch vụ đi kèm) -->
