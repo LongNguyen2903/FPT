@@ -2737,32 +2737,32 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Loại gói bán</label>
-                                        <input type="text" id="qlcs-loai" class="form-input" value="Thiết bị" readonly>
+                                        <input type="text" id="qlcs-loai" class="form-input" value="Dịch vụ" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Tên gói bán <span style="font-size:11px; color:var(--text-muted);">(tên
                                                 raw
                                                 từ QLCS)</span></label>
                                         <input type="text" id="qlcs-tensku" class="form-input"
-                                            value="Modem Wifi 6 AX1800GZ" readonly>
+                                            value="Gói Internet Super 200" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Giá tối thiểu</label>
-                                        <input type="text" id="qlcs-gia" class="form-input" value="500.000 đ" readonly>
+                                        <input type="text" id="qlcs-gia" class="form-input" value="220.000 đ/tháng" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Hình thức quản lý</label>
-                                        <input type="text" id="qlcs-hinhthuc" class="form-input" value="Thiết bị lẻ"
+                                        <input type="text" id="qlcs-hinhthuc" class="form-input" value="Gói cước"
                                             readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Gói tính cước</label>
-                                        <input type="text" id="qlcs-goicuoc" class="form-input" value="Trả 1 lần"
+                                        <input type="text" id="qlcs-goicuoc" class="form-input" value="Trả hàng tháng"
                                             readonly>
                                     </div>
                                     <div class="form-group">
                                         <label>Đơn vị tính</label>
-                                        <input type="text" id="qlcs-dvt" class="form-input" value="Cái" readonly>
+                                        <input type="text" id="qlcs-dvt" class="form-input" value="Gói" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -2794,7 +2794,8 @@
                                         ⭐ Nổi bật nhóm đặc tính
                                     </label>
 
-                                    <span id="dactinh-hint-dichvu" style="font-size:11px; color:var(--text-muted); display:none;">☆
+                                    <span id="dactinh-hint-dichvu"
+                                        style="font-size:11px; color:var(--text-muted); display:none;">☆
                                         Các thông số đặc tính hiển thị trên website.</span>
 
                                     <span id="dactinh-hint-thietbi" style="font-size:11px; color:var(--text-muted);">☆
@@ -3033,7 +3034,11 @@
                             </div>
 
                             <!-- Sản phẩm đi kèm — Read-only, sync từ QLCS/PDH -->
-                            <div class="form-section"
+                            <!-- ⚠️ BUSINESS RULE: Section này CHỈ hiển thị khi Loại gói bán = 'Dịch vụ' (DV)
+                                 Ví dụ: Internet, Truyền hình → CÓ sản phẩm đi kèm (modem, STB, v.v.)
+                                 Khi Loại gói bán = 'Thiết bị' (TB) như Camera, Tivi → ẨN section này hoàn toàn.
+                                 Dữ liệu mapping sản phẩm đi kèm được đồng bộ từ QLCS/PDH. -->
+                            <div class="form-section" id="sku-products-attached-section"
                                 style="margin-top:20px; border-top:1px solid var(--border-glass); padding-top:20px;">
                                 <div
                                     style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
@@ -3064,16 +3069,19 @@
                                         <thead>
                                             <tr style="background:rgba(0,0,0,0.25);">
                                                 <th
-                                                    style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:45%; border-bottom:1px solid var(--border-glass);">
+                                                    style="padding:10px 14px; text-align:left; color:var(--text-muted); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; width:30%; border-bottom:1px solid var(--border-glass);">
                                                     Sản phẩm / Gói cước (Phân cấp)</th>
                                                 <th
-                                                    style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:30%;">
+                                                    style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:25%;">
                                                     Tên hiển thị web ✏️</th>
                                                 <th
-                                                    style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:15%;">
+                                                    style="padding:10px 14px; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:25%;">
+                                                    Tooltip hi&#7875;n th&#7883; web ✏️</th>
+                                                <th
+                                                    style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:12%;">
                                                     Phương thức hiển thị ✏️</th>
                                                 <th
-                                                    style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:10%;">
+                                                    style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:8%;">
                                                     Nhận trong gói ✏️</th>
                                             </tr>
                                         </thead>
@@ -3091,6 +3099,12 @@
                                                     style="padding:12px 14px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input" value="Gói Giga"
                                                         style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
+                                                </td>
+                                                <td
+                                                    style="padding:12px 14px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input" value=""
+                                                        style="font-size:12px; padding:5px 9px; height:30px;" disabled
+                                                        placeholder="Kh&#244;ng &#225;p d&#7909;ng">
                                                 </td>
                                                 <td
                                                     style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
@@ -3121,6 +3135,12 @@
                                                         value="Modem wifi 6 băng tần kép"
                                                         style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
+                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
+                                                    <input type="text" class="form-input"
+                                                        value="M&#7913;c gi&#225; bao g&#7891;m VAT v&#224; c&#243; th&#7875; &#273;&#432;&#7907;c thay &#273;&#7893;i theo khu v&#7921;c v&#224; th&#7901;i &#273;i&#7875;m. Gi&#225; ch&#432;a bao g&#7891;m ph&#237; thu&#234; thi&#7871;t b&#7883; &#273;&#7847;u cu&#7889;i, ph&#237; thu ti&#7873;n t&#7853;n nh&#224; v&#224; c&#225;c d&#7883;ch v&#7909; gia t&#255;ng kh&#225;c."
+                                                        style="font-size:12px; padding:5px 9px; height:30px;"
+                                                        placeholder="Nh&#7853;p n&#7897;i dung tooltip...">
+                                                </td>
                                                 <td
                                                     style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
                                                     <select class="form-input"
@@ -3148,205 +3168,11 @@
                                                     <input type="text" class="form-input" value="Phí lắp đặt"
                                                         style="font-size:12px; padding:5px 9px; height:30px;">
                                                 </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox" checked
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-
-                                            <!-- NHÓM 2: VIP -->
-                                            <tr style="background:rgba(255,255,255,0.04); font-weight:600;">
-                                                <td
-                                                    style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px; border-top:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;"
-                                                        onclick="toggleTreeRow('vip-group', this)">▼</span>
-                                                    <span>📦 VIP</span>
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input" value="VIP"
-                                                        style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox"
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-                                            <!-- Nhóm 2 - Con 1 -->
-                                            <tr class="vip-group" style="border-bottom:1px solid var(--border-glass);">
-                                                <td
-                                                    style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
-                                                    <span
-                                                        style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
-                                                    <span>📺 FPT Play Box</span>
-                                                </td>
-                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input" value="FPT Play Box"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox" checked
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-                                            <!-- Nhóm 2 - Con 2 -->
-                                            <tr class="vip-group" style="border-bottom:1px solid var(--border-glass);">
-                                                <td
-                                                    style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
-                                                    <span
-                                                        style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
-                                                    <span>📺 FPT Play Box 650</span>
-                                                </td>
-                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input" value="FPT Play Box 650"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox"
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-
-                                            <!-- NHÓM 3: Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng -->
-                                            <tr style="background:rgba(255,255,255,0.04); font-weight:600;">
-                                                <td
-                                                    style="padding:12px 14px; border-bottom:1px solid var(--border-glass); color:#fff; display:flex; align-items:center; gap:8px; border-top:1px solid var(--border-glass);">
-                                                    <span
-                                                        style="color:var(--primary); font-size:12px; cursor:pointer; width:16px; display:inline-block;"
-                                                        onclick="toggleTreeRow('camera-group', this)">▼</span>
-                                                    <span>📦 Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng</span>
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input"
-                                                        value="Tặng Camera FPT Play 4 - Cloud IQ3s - 1 tháng"
-                                                        style="font-size:12px; padding:5px 9px; height:30px; font-weight:600;">
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:12px 14px; text-align:center; border-bottom:1px solid var(--border-glass); border-top:1px solid var(--border-glass); background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox" checked
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-                                            <!-- Nhóm 3 - Con 1 -->
-                                            <tr class="camera-group"
-                                                style="border-bottom:1px solid var(--border-glass);">
-                                                <td
-                                                    style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
-                                                    <span
-                                                        style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
-                                                    <span>📷 FPTCameraPlay4</span>
-                                                </td>
-                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input" value="FPTCameraPlay4"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox" checked
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-                                            <!-- Nhóm 3 - Con 2 -->
-                                            <tr class="camera-group"
-                                                style="border-bottom:1px solid var(--border-glass);">
-                                                <td
-                                                    style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
-                                                    <span
-                                                        style="color:var(--border-glass); font-family:monospace; margin-right:4px;">├─</span>
-                                                    <span>🔗 IQ3+ - combo</span>
-                                                </td>
-                                                <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
-                                                    <input type="text" class="form-input" value="IQ3+ - combo"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <select class="form-input"
-                                                        style="font-size:12px; padding:2px 8px; height:30px; width:100%; max-width:140px; display:inline-block; background:rgba(0,0,0,0.2); color:#fff; border:1px solid var(--border-glass);">
-                                                        <option selected>Hiển thị toàn bộ</option>
-                                                        <option>Chỉ hiện khi click</option>
-                                                        <option>Ẩn</option>
-                                                    </select>
-                                                </td>
-                                                <td
-                                                    style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
-                                                    <input type="checkbox" checked
-                                                        style="accent-color:var(--primary); width:16px; height:16px;">
-                                                </td>
-                                            </tr>
-                                            <!-- Nhóm 3 - Con 3 -->
-                                            <tr class="camera-group"
-                                                style="border-bottom:1px solid var(--border-glass);">
-                                                <td
-                                                    style="padding:10px 14px 10px 32px; color:var(--text-muted); display:flex; align-items:center; gap:6px;">
-                                                    <span
-                                                        style="color:var(--border-glass); font-family:monospace; margin-right:4px;">└─</span>
-                                                    <span>💵 Phí triển khai Camera Combo</span>
-                                                </td>
                                                 <td style="padding:10px 14px; background:rgba(249,115,22,0.02);">
                                                     <input type="text" class="form-input"
-                                                        value="Phí triển khai Camera Combo"
-                                                        style="font-size:12px; padding:5px 9px; height:30px;">
+                                                        value="&#193;p d&#7909;ng khi kh&#225;ch h&#224;ng &#273;&#259;ng k&#253; l&#7855;p &#273;&#7863;t m&#7899;i d&#7883;ch v&#7909; Internet c&#7911;a FPT Telecom."
+                                                        style="font-size:12px; padding:5px 9px; height:30px;"
+                                                        placeholder="Nh&#7853;p n&#7897;i dung tooltip...">
                                                 </td>
                                                 <td
                                                     style="padding:10px 14px; text-align:center; background:rgba(249,115,22,0.02);">
@@ -3369,7 +3195,8 @@
                                 <p
                                     style="font-size:11px; color:var(--text-muted); margin:8px 0 0; display:flex; align-items:center; gap:6px;">
                                     🔒 Danh sách cha-con và Phân loại đồng bộ tự động từ <strong>PDH/QLCS</strong>. VH
-                                    chỉ chỉnh sửa: Tên hiển thị web, Phương thức hiển thị, Nhận trong gói.
+                                    chỉ chỉnh sửa: Tên hiển thị web, Tooltip hiển thị web, Phương thức hiển thị, Nhận
+                                    trong gói.
                                 </p>
                             </div>
 
@@ -11663,7 +11490,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     1</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>INT-GIGA</strong> — Internet Giga (150Mbps)</td>
+                                                    <strong>INT-GIGA</strong> — Internet Giga (150Mbps)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge internet">Internet</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11698,7 +11526,8 @@ Tặng 1 tháng cước</textarea>
                                                             <span
                                                                 style="color:#10b981; margin-right:6px; font-size:10px;">●</span><span
                                                                 style="color:var(--text-main);">Ultra Fast – Chơi
-                                                                game</span></div>
+                                                                game</span>
+                                                        </div>
                                                         <div
                                                             style="display:flex; align-items:center; margin-bottom:4px; font-size:12px;">
                                                             <span
@@ -11721,7 +11550,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     2</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>INT-SKY</strong> — Internet Sky (1Gbps/150Mbps)</td>
+                                                    <strong>INT-SKY</strong> — Internet Sky (1Gbps/150Mbps)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge internet">Internet</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11767,7 +11597,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     3</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>INT-META</strong> — Internet Meta (1Gbps)</td>
+                                                    <strong>INT-META</strong> — Internet Meta (1Gbps)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge internet">Internet</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11796,8 +11627,8 @@ Tặng 1 tháng cước</textarea>
                                                             <span
                                                                 style="color:#10b981; margin-right:6px; font-size:10px;">●</span><span
                                                                 style="color:var(--text-main);">Ultra Fast – Chơi
-                                                                game</span></div><button type="button"
-                                                            class="btn btn-secondary btn-sm"
+                                                                game</span>
+                                                        </div><button type="button" class="btn btn-secondary btn-sm"
                                                             onclick="openSkuDetailsModal('global','INT-META')"
                                                             style="margin-top:6px; padding:2px 8px; font-size:11px; border-color:var(--primary); color:var(--primary); background:transparent; display:flex; align-items:center; gap:4px; border-radius:4px; cursor:pointer;">✏️
                                                             Cấu hình</button>
@@ -11814,7 +11645,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     4</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>INT-LUX500</strong> — Internet LUX 500 (500Mbps)</td>
+                                                    <strong>INT-LUX500</strong> — Internet LUX 500 (500Mbps)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge internet">Internet</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11866,7 +11698,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     5</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>INT-LUX800</strong> — Internet LUX 800 (800Mbps)</td>
+                                                    <strong>INT-LUX800</strong> — Internet LUX 800 (800Mbps)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge internet">Internet</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11901,7 +11734,8 @@ Tặng 1 tháng cước</textarea>
                                                             <span
                                                                 style="color:#10b981; margin-right:6px; font-size:10px;">●</span><span
                                                                 style="color:var(--text-main);">Ultra Fast – Chơi
-                                                                game</span></div>
+                                                                game</span>
+                                                        </div>
                                                         <div
                                                             style="display:flex; align-items:center; margin-bottom:4px; font-size:12px;">
                                                             <span
@@ -11924,7 +11758,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     6</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>CAM-IQ3</strong> — FPT Camera IQ3</td>
+                                                    <strong>CAM-IQ3</strong> — FPT Camera IQ3
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge camera">Camera</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -11933,7 +11768,8 @@ Tặng 1 tháng cước</textarea>
                                                             style="display:flex; align-items:center; margin-bottom:4px; font-size:12px;">
                                                             <span
                                                                 style="color:#10b981; margin-right:6px; font-size:10px;">●</span><span
-                                                                style="color:var(--text-main);">Camera IQ3</span></div>
+                                                                style="color:var(--text-main);">Camera IQ3</span>
+                                                        </div>
                                                         <button type="button" class="btn btn-secondary btn-sm"
                                                             onclick="openSkuDetailsModal('global','CAM-IQ3')"
                                                             style="margin-top:6px; padding:2px 8px; font-size:11px; border-color:var(--primary); color:var(--primary); background:transparent; display:flex; align-items:center; gap:4px; border-radius:4px; cursor:pointer;">✏️
@@ -11964,7 +11800,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     7</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>CAM-IQ4S</strong> — FPT Camera IQ4S (AI)</td>
+                                                    <strong>CAM-IQ4S</strong> — FPT Camera IQ4S (AI)
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge camera">Camera</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -12004,7 +11841,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     8</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>SA-SMAX</strong> — FPT Play SMax</td>
+                                                    <strong>SA-SMAX</strong> — FPT Play SMax
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge truyen-hinh">Truyền hình</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -12040,7 +11878,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     9</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>SA-SVIP</strong> — FPT Play SVip</td>
+                                                    <strong>SA-SVIP</strong> — FPT Play SVip
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge truyen-hinh">Truyền hình</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -12076,7 +11915,8 @@ Tặng 1 tháng cước</textarea>
                                                     style="text-align:center;vertical-align:top;padding-top:12px;font-weight:700;color:#fff;">
                                                     10</td>
                                                 <td style="vertical-align:top;padding-top:12px;">
-                                                    <strong>DEV-WIFI7</strong> — Router Wi-Fi 7</td>
+                                                    <strong>DEV-WIFI7</strong> — Router Wi-Fi 7
+                                                </td>
                                                 <td style="vertical-align:top;padding-top:12px;"><span
                                                         class="sku-type-badge thiet-bi">Thiết bị</span></td>
                                                 <td style="vertical-align:top;padding:8px 10px;min-width:200px;">
@@ -14493,10 +14333,10 @@ Tặng 1 tháng cước</textarea>
                         if (filteredSkus.length > 0) {
                             var pagElement = document.createElement('div');
                             pagElement.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:8px 4px; border-top:1px solid rgba(255,255,255,0.05); margin-top:8px; font-size:11px; color:var(--text-muted);';
-                            
+
                             var disabledPrev = paymentSidebarSkuPage <= 1 ? 'disabled style="opacity:0.4; cursor:not-allowed; padding:2px 6px; font-size:10px;"' : 'style="padding:2px 6px; font-size:10px; cursor:pointer;"';
                             var disabledNext = paymentSidebarSkuPage >= totalPages ? 'disabled style="opacity:0.4; cursor:not-allowed; padding:2px 6px; font-size:10px;"' : 'style="padding:2px 6px; font-size:10px; cursor:pointer;"';
-                            
+
                             pagElement.innerHTML = '<span>Hiển thị ' + (filteredSkus.length === 0 ? 0 : startIndex + 1) + '-' + endIndex + ' / ' + filteredSkus.length + '</span>'
                                 + '<div style="display:flex; align-items:center; gap:8px;">'
                                 + '  <button class="btn btn-secondary btn-sm" ' + disabledPrev + ' onclick="changePaymentSidebarSkuPage(' + (paymentSidebarSkuPage - 1) + ')">◀</button>'
@@ -19290,7 +19130,7 @@ Tặng 1 tháng cước</textarea>
             }
 
             // Fill Tab 1 — QLCS data theo SKU code
-            skuFillQlcs(code);
+            skuFillQlcs(code, name, type, category);
 
             // Swap đặc tính data theo category, type, code, name
             var cat = (category || '').toLowerCase();
@@ -19608,13 +19448,40 @@ Tặng 1 tháng cước</textarea>
             }
         };
 
-        function skuFillQlcs(code) {
-            var d = qlcsData[code] || qlcsData['MODEM-AX1800GZ'];
+        function skuFillQlcs(code, name, type, category) {
+            var d = qlcsData[code];
+            if (!d) {
+                // Tự động generate mockup QLCS nếu chưa khai báo sẵn trong qlcsData
+                var isDV = false;
+                var typeStr = (type || '').toLowerCase();
+                var catStr = (category || '').toLowerCase();
+                var codeStr = (code || '').toLowerCase();
+                
+                if (typeStr.includes('dịch vụ') || typeStr.includes('service') || typeStr.includes('sa') ||
+                    catStr.includes('internet') || catStr.includes('truyền hình') || catStr.includes('play') ||
+                    codeStr.startsWith('int-') || codeStr.startsWith('play-') || codeStr.startsWith('sa-')) {
+                    isDV = true;
+                }
+                
+                d = {
+                    dichvu: category || (isDV ? 'Internet' : 'Camera An Ninh'),
+                    nhom: isDV ? 'Basic Net' : 'Camera Basic',
+                    loai: isDV ? 'Dịch vụ' : 'Thiết bị',
+                    tensku: name || code,
+                    gia: isDV ? '220.000 đ/tháng' : '900.000 đ',
+                    hinhthuc: isDV ? 'Gói cước' : 'Thiết bị lẻ',
+                    goicuoc: isDV ? 'Trả hàng tháng' : 'Trả 1 lần',
+                    dvt: isDV ? 'Gói' : 'Cái'
+                };
+            }
             var fields = ['dichvu', 'nhom', 'loai', 'tensku', 'gia', 'hinhthuc', 'goicuoc', 'dvt'];
             fields.forEach(function (f) {
                 var el = document.getElementById('qlcs-' + f);
                 if (el) el.value = d[f] || '';
             });
+            if (typeof toggleProductsAttachedByType === 'function') {
+                toggleProductsAttachedByType();
+            }
         }
 
         // Data đặc tính theo từng loại SKU
@@ -19695,6 +19562,23 @@ Tặng 1 tháng cước</textarea>
                 row.style.display = isCollapse ? 'none' : '';
             });
         }
+
+        // ===== BUSINESS RULE: Sản phẩm đi kèm chỉ có ở loại DV =====
+        // Loại gói bán = "Dịch vụ" (DV): Internet, Truyền hình → HIỆN section sản phẩm đi kèm
+        // Loại gói bán = "Thiết bị" (TB): Camera, Tivi → ẨN section sản phẩm đi kèm
+        function toggleProductsAttachedByType() {
+            const loaiEl = document.getElementById('qlcs-loai');
+            const section = document.getElementById('sku-products-attached-section');
+            if (!loaiEl || !section) return;
+            const val = loaiEl.value.trim().toLowerCase();
+            // Chỉ hiện khi loại = "dịch vụ" hoặc "dv"
+            const isDV = val.includes('dịch vụ') || val.includes('dich vu') || val === 'dv';
+            section.style.display = isDV ? 'block' : 'none';
+        }
+        // Gọi khi page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleProductsAttachedByType();
+        });
 
         function skuSwitchTab(tabName) {
             const tabs = ['chung', 'dactinh', 'content', 'faq']; // chung kept for hide logic
