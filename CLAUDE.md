@@ -13,7 +13,7 @@
 ## Bộ nhớ & Hội thoại
 - Nếu phát hiện đoạn hội thoại hoặc thông tin không chính xác, xóa khỏi bộ nhớ ngay lập tức và không đọc lại.
 - Không giữ lại context sai để tránh lan truyền lỗi.
-- Luôn đọc file global rule (`C:\Users\Admin\.gemini\GEMINI.md`) khi bắt đầu làm task và khi mở hội thoại mới.
+- Luôn đọc file global rule (`C:\Users\Admin\.gemini\GEMINI.md` hoặc `C:\Users\hoang\.gemini\GEMINI.md`) và file hướng dẫn tối ưu token ([token_optimization.md](file:///c:/Users/hoang/OneDrive/Desktop/FPT/token_optimization.md)) khi bắt đầu làm task và khi mở hội thoại mới.
 
 ## Phân tích & Skills
 - Luôn sử dụng skill **ba-senior** và/hoặc **product-owner** khi phân tích yêu cầu, thiết kế tính năng, hoặc đánh giá giải pháp.
@@ -26,6 +26,7 @@
 - Khi cần view hoặc phân tích website, sử dụng Chrome profile **Long Nguyen**.
 
 ## Tiết kiệm Token & Sửa đổi Code (Quan trọng nhất)
+- **Luôn tuân thủ nghiêm ngặt các nguyên tắc trong file [token_optimization.md](file:///c:/Users/hoang/OneDrive/Desktop/FPT/token_optimization.md).**
 - **Tuyệt đối không rollback hoặc ghi đè code cũ:** Phải luôn dùng tool đọc (`view_file`/`grep_search`) lấy nội dung file thực tế đang chạy trên máy khách trước khi thực hiện replace. Tránh tuyệt đối việc sử dụng code cũ trong lịch sử hội thoại (đặc biệt khi xảy ra history compaction) đè lên các chức năng đã sửa thành công ở lượt trước.
 - **Tuyệt đối không viết lại code cũ:** Chỉ sửa đổi đúng (surgical edit) các dòng code cần thiết cho yêu cầu mới. Không được thay thế/ghi đè/hoàn tác toàn bộ hàm hay file nếu không liên quan.
 - **Không phục hồi các đoạn code cũ** khi người dùng không yêu cầu.
