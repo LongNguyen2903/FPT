@@ -3020,7 +3020,7 @@
                                                     Phương thức hiển thị ✏️</th>
                                                 <th
                                                     style="padding:10px 14px; text-align:center; color:var(--primary); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border-glass); background:rgba(249,115,22,0.05); width:8%;">
-                                                    Nhận trong gói ✏️</th>
+                                                    Hiển thị web ✏️</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -3133,8 +3133,8 @@
                                 <p
                                     style="font-size:11px; color:var(--text-muted); margin:8px 0 0; display:flex; align-items:center; gap:6px;">
                                     🔒 Danh sách cha-con và Phân loại đồng bộ tự động từ <strong>PDH/QLCS</strong>. VH
-                                    chỉ chỉnh sửa: Tên hiển thị web, Tooltip hiển thị web, Phương thức hiển thị, Nhận
-                                    trong gói.
+                                    chỉ chỉnh sửa: Tên hiển thị web, Tooltip hiển thị web, Phương thức hiển thị, Hiển thị
+                                    web.
                                 </p>
                             </div>
 
@@ -3373,9 +3373,61 @@
                                         <input type="text" class="form-input" value="Modem Wifi 6 AX1800GZ" readonly disabled
                                             style="opacity:0.75; cursor:not-allowed; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08);">
                                     </div>
-                                    <div class="form-group" style="grid-column:1 / span 2;">
-                                        <label>Tag nổi bật</label>
-                                        <input type="text" class="form-input" placeholder="HOT, NEW, SALE, ...">
+                                    <div class="form-group" style="grid-column:1 / span 2; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:14px 16px;">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+                                            <label style="margin:0; font-weight:600; font-size:13px; color:var(--text-main, #fff); display:flex; align-items:center; gap:6px;">
+                                                🏷️ Tag nổi bật (gắn trên Banner/Card sản phẩm ngoài Web/App)
+                                            </label>
+                                            <!-- Live Preview Tag Badge -->
+                                            <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-muted);">
+                                                <span>Xem trước Tag:</span>
+                                                <span id="sku-tag-preview" style="padding:4px 12px; border-radius:6px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.35); transition:all 0.2s; display:inline-block;">🔥 HOT</span>
+                                            </div>
+                                        </div>
+
+                                        <div style="display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center;">
+                                            <!-- Input Text Tag -->
+                                            <div>
+                                                <input type="text" id="sku-tag-input" class="form-input" value="HOT" placeholder="Nhập tên Tag (VD: HOT, NEW, BÁN CHẠY, SALE...)"
+                                                    style="width:100%; font-size:13px; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.12);"
+                                                    oninput="var p=document.getElementById('sku-tag-preview'); if(p) p.innerText = this.value.trim() ? this.value.trim() : 'TAG PREVIEW';">
+                                            </div>
+
+                                            <!-- WordPress-style Color Selector -->
+                                            <div style="display:flex; align-items:center; gap:12px; background:rgba(0,0,0,0.25); padding:6px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.08);">
+                                                <span style="font-size:12px; color:var(--text-muted); font-weight:500;">Màu sắc Tag:</span>
+                                                
+                                                <!-- 5 Mặc định Color Swatches -->
+                                                <div style="display:flex; align-items:center; gap:8px;">
+                                                    <button type="button" class="sku-tag-color-swatch" data-color="#ef4444" onclick="setSkuTagColor('#ef4444')"
+                                                        title="Đỏ (Hot Red)" style="width:22px; height:22px; border-radius:50%; background:#ef4444; border:none; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s; box-shadow:0 0 0 2px #1e1e2d, 0 0 0 4px #ef4444; transform:scale(1.15);"></button>
+                                                    
+                                                    <button type="button" class="sku-tag-color-swatch" data-color="#ff6b00" onclick="setSkuTagColor('#ff6b00')"
+                                                        title="Cam (Sale Orange)" style="width:22px; height:22px; border-radius:50%; background:#ff6b00; border:none; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;"></button>
+                                                    
+                                                    <button type="button" class="sku-tag-color-swatch" data-color="#10b981" onclick="setSkuTagColor('#10b981')"
+                                                        title="Xanh lá (New Green)" style="width:22px; height:22px; border-radius:50%; background:#10b981; border:none; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;"></button>
+                                                    
+                                                    <button type="button" class="sku-tag-color-swatch" data-color="#3b82f6" onclick="setSkuTagColor('#3b82f6')"
+                                                        title="Xanh dương (Royal Blue)" style="width:22px; height:22px; border-radius:50%; background:#3b82f6; border:none; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;"></button>
+                                                    
+                                                    <button type="button" class="sku-tag-color-swatch" data-color="#8b5cf6" onclick="setSkuTagColor('#8b5cf6')"
+                                                        title="Tím (Vip Purple)" style="width:22px; height:22px; border-radius:50%; background:#8b5cf6; border:none; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;"></button>
+                                                </div>
+
+                                                <!-- Separator -->
+                                                <div style="width:1px; height:18px; background:rgba(255,255,255,0.15);"></div>
+
+                                                <!-- Custom Color Picker (WordPress style) -->
+                                                <label id="sku-tag-custom-color-wrapper" title="Chọn màu tùy thích (Custom Color Picker)"
+                                                    style="display:flex; align-items:center; gap:6px; cursor:pointer; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); transition:all 0.2s;"
+                                                    onclick="document.getElementById('sku-tag-custom-color').click()">
+                                                    <span style="font-size:13px;">🎨</span>
+                                                    <input type="color" id="sku-tag-custom-color" value="#ef4444" style="opacity:0; width:0; height:0; position:absolute; pointer-events:none;" onchange="setSkuTagColor(this.value, true)" oninput="setSkuTagColor(this.value, true)">
+                                                    <span id="sku-tag-color-hex-text" style="font-size:11px; font-weight:600; font-family:monospace; color:#ccc;">#EF4444</span>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group" style="grid-column:1 / span 2; margin-top:4px;">
                                         <label style="display:flex; justify-content:space-between; align-items:center;">
@@ -3389,45 +3441,7 @@
                                         </label>
                                         <textarea class="form-input" id="sku-tooltip-content" rows="3"
                                             style="width:100%; font-size:13px; line-height:1.5; padding:10px 14px; resize:vertical; background:rgba(0,0,0,0.25); border:1px solid var(--border-glass);"
-                                            placeholder="Ví dụ: Mức giá bao gồm VAT và có thể được thay đổi theo khu vực và thời điểm..."
-                                            oninput="var demo=document.getElementById('demo-tooltip-text'); if(demo) demo.innerText=this.value || 'Chưa nhập nội dung tooltip...';">Mức giá bao gồm VAT và có thể được thay đổi theo khu vực và thời điểm. Giá chưa bao gồm phí thuê thiết bị đầu cuối, phí thu tiền tận nhà và các dịch vụ gia tăng khác.</textarea>
-                                    </div>
-                                    <!-- Live Preview Tooltip ngoài Web -->
-                                    <div class="form-group"
-                                        style="grid-column:1 / span 2; background:rgba(255,255,255,0.02); border:1px dashed rgba(245,158,11,0.3); border-radius:10px; padding:14px 18px;">
-                                        <div
-                                            style="font-size:12px; font-weight:600; color:var(--warning); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-                                            <span>👁️ Demo hiển thị Tooltip ngoài Web/App:</span>
-                                            <span
-                                                style="font-size:11px; color:var(--text-muted); font-weight:normal;">(Rê
-                                                chuột vào icon ⓘ để xem tooltip hiển thị thực tế)</span>
-                                        </div>
-                                        <div
-                                            style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:rgba(0,0,0,0.3); padding:12px 16px; border-radius:8px; border:1px solid var(--border-glass); width:fit-content;">
-                                            <div
-                                                style="font-size:18px; font-weight:700; color:#60a5fa; display:inline-flex; align-items:center; gap:6px;">
-                                                <span>195.000đ</span>
-                                                <span
-                                                    style="font-size:13px; color:var(--text-muted); font-weight:normal;">/tháng</span>
-                                                <span style="position:relative; display:inline-block; cursor:pointer;"
-                                                    onmouseover="document.getElementById('demo-tooltip-pop').style.display='block'"
-                                                    onmouseout="document.getElementById('demo-tooltip-pop').style.display='none'">
-                                                    <span
-                                                        style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); font-size:11px; color:#ccc; font-weight:bold; background:rgba(255,255,255,0.08);">ⓘ</span>
-                                                    <!-- Tooltip Popup Box (Thiết kế y hệt ngoài Web) -->
-                                                    <div id="demo-tooltip-pop"
-                                                        style="display:none; position:absolute; bottom:130%; left:50%; transform:translateX(-50%); width:300px; background:#292929; color:#f1f5f9; padding:12px 14px; border-radius:8px; font-size:11.5px; line-height:1.5; font-weight:normal; box-shadow:0 10px 25px rgba(0,0,0,0.6); z-index:100; border:1px solid rgba(255,255,255,0.15); text-align:left;">
-                                                        <span id="demo-tooltip-text">Mức giá bao gồm VAT và có thể được
-                                                            thay đổi theo khu vực và thời điểm. Giá chưa bao gồm phí
-                                                            thuê thiết bị đầu cuối, phí thu tiền tận nhà và các dịch vụ
-                                                            gia tăng khác.</span>
-                                                        <div
-                                                            style="position:absolute; top:100%; left:50%; margin-left:-6px; border-width:6px; border-style:solid; border-color:#292929 transparent transparent transparent;">
-                                                        </div>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
+                                            placeholder="Ví dụ: Mức giá bao gồm VAT và có thể được thay đổi theo khu vực và thời điểm...">Mức giá bao gồm VAT và có thể được thay đổi theo khu vực và thời điểm. Giá chưa bao gồm phí thuê thiết bị đầu cuối, phí thu tiền tận nhà và các dịch vụ gia tăng khác.</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -3538,53 +3552,103 @@
                                     </div>
                                 </div>
 
-                                <div
-                                    style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; margin-bottom:24px;">
-                                    <div class="form-group">
-                                        <label>Ảnh đại diện (Thumbnail) <span
-                                                style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 1:1,
-                                                ≤1MB)</span></label>
-                                        <div
-                                            style="position:relative; border:1px solid var(--border-glass); padding:10px 12px; border-radius:8px; background:rgba(255,255,255,0.01); display:flex; align-items:center; gap:12px;">
-                                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=100"
-                                                style="width:40px; height:40px; border-radius:6px; object-fit:cover;">
-                                            <div style="flex-grow:1; min-width:0;">
-                                                <div
-                                                    style="font-size:12px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                                    thumb-wifi6.png</div>
-                                                <div style="font-size:11px; color:var(--text-muted);">145 KB</div>
+                                <div id="sku-media-banner-head-group" style="margin-bottom:24px;">
+                                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+                                        <!-- Cột 1: Thumbnail (Desktop + Mobile) -->
+                                        <div class="form-group"
+                                            style="background:rgba(255,255,255,0.015); border:1px solid var(--border-glass); border-radius:10px; padding:12px 14px;">
+                                            <div
+                                                style="font-size:12.5px; font-weight:600; color:var(--text-main); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                                                <span>🖼️ Ảnh đại diện (Thumbnail)</span>
+                                                <span
+                                                    style="font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px; font-weight:normal;">Desktop &amp; Mobile</span>
                                             </div>
-                                            <button class="btn btn-icon btn-xs"
-                                                style="color:var(--danger); background:rgba(239,68,68,0.1); border:none; padding:4px 8px; cursor:pointer;"
-                                                onclick="alert('Đã xóa thumbnail!')">🗑️</button>
+                                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                                <!-- Desktop 1:1 -->
+                                                <div style="border:1px solid var(--border-glass); padding:8px; border-radius:8px; background:rgba(255,255,255,0.01); display:flex; flex-direction:column; justify-content:space-between;">
+                                                    <div style="font-size:11px; font-weight:600; color:#60a5fa; margin-bottom:4px;">💻 Desktop (1:1)</div>
+                                                    <div style="display:flex; align-items:center; gap:8px;">
+                                                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=100"
+                                                            style="width:32px; height:32px; border-radius:4px; object-fit:cover;">
+                                                        <div style="flex-grow:1; min-width:0;">
+                                                            <div style="font-size:11px; font-weight:600; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">thumb-wifi6.png</div>
+                                                            <div style="font-size:10px; color:var(--text-muted);">145 KB</div>
+                                                        </div>
+                                                        <button class="btn btn-icon btn-xs" style="color:var(--danger); background:rgba(239,68,68,0.1); border:none; padding:2px 6px; cursor:pointer;" onclick="alert('Đã xóa thumbnail Desktop!')">🗑️</button>
+                                                    </div>
+                                                </div>
+                                                <!-- Mobile 1:1 -->
+                                                <div style="border:2px dashed var(--border-glass); padding:10px 8px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:11px; transition:all 0.2s;"
+                                                    onmouseover="this.style.borderColor='var(--primary)'"
+                                                    onmouseout="this.style.borderColor='var(--border-glass)'"
+                                                    onclick="alert('Mở file picker chọn Thumbnail Mobile...')">
+                                                    <div style="font-size:11px; font-weight:600; color:#34d399; margin-bottom:2px;">📱 Mobile (1:1)</div>
+                                                    <span style="font-weight:600; color:var(--text-main);">+ Tải lên Ảnh</span>
+                                                    <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Khuyên dùng: 600×600 (≤1MB)</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div id="sku-media-banner-head-group" class="form-group">
-                                        <label>Banner đầu trang <span
-                                                style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 16:9,
-                                                ≤2MB)</span></label>
-                                        <div style="border:2px dashed var(--border-glass); padding:12px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px; transition:all 0.2s;"
-                                            onmouseover="this.style.borderColor='var(--warning)'"
-                                            onmouseout="this.style.borderColor='var(--border-glass)'"
-                                            onclick="alert('Mở file picker chọn banner đầu trang...')">
-                                            🖼️ <span style="font-weight:600; color:var(--text-main);">+ Tải lên
-                                                Banner</span>
-                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Kích
-                                                thước khuyên dùng: 1920x1080</div>
+
+                                        <!-- Cột 2: Banner Đầu Trang (Desktop + Mobile) -->
+                                        <div class="form-group"
+                                            style="background:rgba(255,255,255,0.015); border:1px solid var(--border-glass); border-radius:10px; padding:12px 14px;">
+                                            <div
+                                                style="font-size:12.5px; font-weight:600; color:var(--text-main); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                                                <span>🖼️ Banner đầu trang</span>
+                                                <span
+                                                    style="font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px; font-weight:normal;">Desktop &amp; Mobile</span>
+                                            </div>
+                                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                                <!-- Desktop 16:9 -->
+                                                <div style="border:2px dashed var(--border-glass); padding:10px 8px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:11px; transition:all 0.2s;"
+                                                    onmouseover="this.style.borderColor='var(--warning)'"
+                                                    onmouseout="this.style.borderColor='var(--border-glass)'"
+                                                    onclick="alert('Mở file picker chọn Banner đầu trang Desktop...')">
+                                                    <div style="font-size:11px; font-weight:600; color:#60a5fa; margin-bottom:2px;">💻 Desktop (16:9)</div>
+                                                    <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                                    <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Khuyên dùng: 1920×1080 (≤2MB)</div>
+                                                </div>
+                                                <!-- Mobile 1:1 / 4:3 -->
+                                                <div style="border:2px dashed var(--border-glass); padding:10px 8px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:11px; transition:all 0.2s;"
+                                                    onmouseover="this.style.borderColor='var(--primary)'"
+                                                    onmouseout="this.style.borderColor='var(--border-glass)'"
+                                                    onclick="alert('Mở file picker chọn Banner đầu trang Mobile...')">
+                                                    <div style="font-size:11px; font-weight:600; color:#34d399; margin-bottom:2px;">📱 Mobile (1:1 / 4:3)</div>
+                                                    <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                                    <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Khuyên dùng: 750×750 (≤2MB)</div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Banner giữa trang <span
-                                                style="font-size:11px; color:var(--text-muted);">(Tỷ lệ 32:9,
-                                                ≤2MB)</span></label>
-                                        <div style="border:2px dashed var(--border-glass); padding:12px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:12px; transition:all 0.2s;"
-                                            onmouseover="this.style.borderColor='var(--warning)'"
-                                            onmouseout="this.style.borderColor='var(--border-glass)'"
-                                            onclick="alert('Mở file picker chọn banner giữa trang...')">
-                                            🖼️ <span style="font-weight:600; color:var(--text-main);">+ Tải lên
-                                                Banner</span>
-                                            <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Kích
-                                                thước khuyên dùng: 1920x540</div>
+
+                                        <!-- Cột 3: Banner Giữa Trang (Desktop + Mobile) -->
+                                        <div class="form-group"
+                                            style="background:rgba(255,255,255,0.015); border:1px solid var(--border-glass); border-radius:10px; padding:12px 14px;">
+                                            <div
+                                                style="font-size:12.5px; font-weight:600; color:var(--text-main); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                                                <span>🖼️ Banner giữa trang</span>
+                                                <span
+                                                    style="font-size:11px; color:var(--warning); background:rgba(245,158,11,0.1); padding:2px 8px; border-radius:4px; font-weight:normal;">Desktop &amp; Mobile</span>
+                                            </div>
+                                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                                                <!-- Desktop 32:9 -->
+                                                <div style="border:2px dashed var(--border-glass); padding:10px 8px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:11px; transition:all 0.2s;"
+                                                    onmouseover="this.style.borderColor='var(--warning)'"
+                                                    onmouseout="this.style.borderColor='var(--border-glass)'"
+                                                    onclick="alert('Mở file picker chọn Banner giữa trang Desktop...')">
+                                                    <div style="font-size:11px; font-weight:600; color:#60a5fa; margin-bottom:2px;">💻 Desktop (32:9)</div>
+                                                    <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                                    <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Khuyên dùng: 1920×540 (≤2MB)</div>
+                                                </div>
+                                                <!-- Mobile 16:9 / 4:3 -->
+                                                <div style="border:2px dashed var(--border-glass); padding:10px 8px; text-align:center; border-radius:8px; cursor:pointer; color:var(--text-muted); font-size:11px; transition:all 0.2s;"
+                                                    onmouseover="this.style.borderColor='var(--primary)'"
+                                                    onmouseout="this.style.borderColor='var(--border-glass)'"
+                                                    onclick="alert('Mở file picker chọn Banner giữa trang Mobile...')">
+                                                    <div style="font-size:11px; font-weight:600; color:#34d399; margin-bottom:2px;">📱 Mobile (16:9 / 4:3)</div>
+                                                    <span style="font-weight:600; color:var(--text-main);">+ Tải lên Banner</span>
+                                                    <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Khuyên dùng: 750×422 (≤2MB)</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -3749,10 +3813,10 @@ Kết nối lên đến 10 thiết bị
 Gần 120 kênh truyền hình, thể thao độc quyền</textarea>
                                     </div>
 
-                                    <!-- 2. Mô tả thông tin chi tiết -->
+                                    <!-- 2. Thông tin chi tiết -->
                                     <div class="form-group" style="margin-bottom:20px;">
                                         <label style="display:flex; justify-content:space-between; align-items:center;">
-                                            <span>Mô tả thông tin chi tiết <span
+                                            <span>Thông tin chi tiết <span
                                                     style="font-size:11px; color:var(--success); font-weight:normal;">(Nội
                                                     dung chi tiết hiển thị checklist xanh ✓ ngoài
                                                     Website/App)</span></span>
@@ -12065,10 +12129,8 @@ Tặng 1 tháng cước</textarea>
                                 <thead>
                                     <tr>
                                         <th>Tên Quy tắc</th>
-                                        <th>Kênh áp dụng</th>
                                         <th>Gói bán áp dụng</th>
                                         <th>Khoảng thời gian</th>
-                                        <th style="text-align:center;">Ưu tiên</th>
                                         <th>Header Banner</th>
                                         <th>Footer Banner</th>
                                         <th>Popup Checkout</th>
@@ -12100,6 +12162,7 @@ Tặng 1 tháng cước</textarea>
                         <div class="form-section"
                             style="display:flex; flex-direction:column; gap:20px; padding:24px; max-height:calc(100vh - 130px); overflow-y:auto;">
                             <input type="hidden" id="checkout-rule-id" value="">
+                            <input type="hidden" id="checkout-rule-channel" value="global">
 
                             <!-- Nhóm 1: Thông tin cơ bản -->
                             <div style="border-bottom:1px dashed var(--border-glass); padding-bottom:15px;">
@@ -12112,26 +12175,6 @@ Tặng 1 tháng cước</textarea>
                                             quy tắc <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-input" id="checkout-rule-name"
                                             placeholder="VD: Khuyến mãi Hè Gói LUX" style="width:100%;">
-                                    </div>
-                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-                                        <div class="form-group">
-                                            <label
-                                                style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Kênh
-                                                áp dụng <span style="color:var(--danger)">*</span></label>
-                                            <select class="form-select" id="checkout-rule-channel" style="width:100%;">
-                                                <option value="global">Global (Tất cả)</option>
-                                                <option value="tdw">tongdaiwifi</option>
-                                                <option value="hifpt">App HiFPT</option>
-                                                <option value="fptvn">Website fpt.vn</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label
-                                                style="font-size:12px; font-weight:600; display:block; margin-bottom:4px;">Độ
-                                                ưu tiên <span style="color:var(--danger)">*</span></label>
-                                            <input type="number" class="form-input" id="checkout-rule-priority"
-                                                value="0" style="width:100%;">
-                                        </div>
                                     </div>
                                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                                         <div class="form-group">
@@ -12545,10 +12588,8 @@ Tặng 1 tháng cước</textarea>
                         }[r.popup] || '<span style="color:var(--text-muted); font-style:italic;">— Không —</span>';
 
                         tr.innerHTML = '<td><strong>' + r.name + '</strong></td>'
-                            + '<td>' + channelLabel + '</td>'
                             + '<td><div style="display:flex; flex-wrap:wrap; max-width:200px;">' + skusBadges + '</div></td>'
                             + '<td>' + timeRange + '</td>'
-                            + '<td style="text-align:center;">' + r.priority + '</td>'
                             + '<td>' + hbLabel + '</td>'
                             + '<td>' + fbLabel + '</td>'
                             + '<td>' + popupLabel + '</td>'
@@ -12566,7 +12607,7 @@ Tặng 1 tháng cước</textarea>
                     document.getElementById('checkout-rule-id').value = '';
                     document.getElementById('checkout-rule-name').value = '';
                     document.getElementById('checkout-rule-channel').value = 'global';
-                    document.getElementById('checkout-rule-priority').value = '0';
+                    if (document.getElementById('checkout-rule-priority')) document.getElementById('checkout-rule-priority').value = '0';
                     document.getElementById('checkout-rule-start').value = '';
                     document.getElementById('checkout-rule-end').value = '';
                     document.getElementById('checkout-rule-status').checked = true;
@@ -12605,7 +12646,7 @@ Tặng 1 tháng cước</textarea>
                     document.getElementById('checkout-rule-id').value = r.id;
                     document.getElementById('checkout-rule-name').value = r.name;
                     document.getElementById('checkout-rule-channel').value = r.channel;
-                    document.getElementById('checkout-rule-priority').value = r.priority;
+                    if (document.getElementById('checkout-rule-priority')) document.getElementById('checkout-rule-priority').value = r.priority;
                     document.getElementById('checkout-rule-start').value = r.start || '';
                     document.getElementById('checkout-rule-end').value = r.end || '';
                     document.getElementById('checkout-rule-status').checked = r.status;
@@ -12715,7 +12756,7 @@ Tặng 1 tháng cước</textarea>
                     var id = document.getElementById('checkout-rule-id').value;
                     var name = document.getElementById('checkout-rule-name').value.trim();
                     var channel = document.getElementById('checkout-rule-channel').value;
-                    var priority = parseInt(document.getElementById('checkout-rule-priority').value) || 0;
+                    var priority = document.getElementById('checkout-rule-priority') ? (parseInt(document.getElementById('checkout-rule-priority').value) || 0) : 0;
                     var start = document.getElementById('checkout-rule-start').value;
                     var end = document.getElementById('checkout-rule-end').value;
 

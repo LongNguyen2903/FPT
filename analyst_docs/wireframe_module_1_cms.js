@@ -2654,6 +2654,53 @@ function skuOpenDetail(code, name, type, category) {
     skuToggleMediaUI();
 }
 
+function setSkuTagColor(colorHex, isCustom) {
+    if (!colorHex) colorHex = '#ef4444';
+    var preview = document.getElementById('sku-tag-preview');
+    var customPicker = document.getElementById('sku-tag-custom-color');
+    var hexText = document.getElementById('sku-tag-color-hex-text');
+    var customBtn = document.getElementById('sku-tag-custom-color-wrapper');
+
+    if (customPicker) customPicker.value = colorHex;
+    if (hexText) hexText.innerText = colorHex.toUpperCase();
+
+    // Reset outline ring cho các màu mặc định
+    document.querySelectorAll('.sku-tag-color-swatch').forEach(function (el) {
+        el.style.boxShadow = 'none';
+        el.style.transform = 'scale(1)';
+    });
+
+    if (!isCustom) {
+        var activeSwatch = document.querySelector('.sku-tag-color-swatch[data-color="' + colorHex + '"]');
+        if (activeSwatch) {
+            activeSwatch.style.boxShadow = '0 0 0 2px #1e1e2d, 0 0 0 4px ' + colorHex;
+            activeSwatch.style.transform = 'scale(1.15)';
+        }
+        if (customBtn) {
+            customBtn.style.borderColor = 'rgba(255,255,255,0.15)';
+            customBtn.style.boxShadow = 'none';
+        }
+    } else {
+        if (customBtn) {
+            customBtn.style.borderColor = colorHex;
+            customBtn.style.boxShadow = '0 0 0 2px rgba(255,255,255,0.05), 0 0 0 3px ' + colorHex;
+        }
+    }
+
+    var hexToRgba = function (hex, alpha) {
+        var c = hex.replace('#', '');
+        if (c.length === 3) c = c.split('').map(function (x) { return x + x; }).join('');
+        var num = parseInt(c, 16);
+        return 'rgba(' + (num >> 16 & 255) + ',' + (num >> 8 & 255) + ',' + (num & 255) + ',' + alpha + ')';
+    };
+
+    if (preview) {
+        preview.style.color = colorHex;
+        preview.style.background = hexToRgba(colorHex, 0.15);
+        preview.style.borderColor = hexToRgba(colorHex, 0.35);
+    }
+}
+
     function toggleTreeRow(groupClass, btn) {
         const rows = document.querySelectorAll('.' + groupClass);
         let isCollapse = false;
