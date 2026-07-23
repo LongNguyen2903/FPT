@@ -1595,7 +1595,7 @@ function skuRenderDactinh(dataKey) {
     var sel = document.getElementById('dactinh-nhom-select-dropdown');
     if (!list) return;
 
-    var isService = (dataKey === 'service');
+    var isService = (dataKey === 'service' || dataKey === 'dichvu' || dataKey === 'play' || dataKey === 'truyenhinh');
 
     // Sync nhóm đặc tính dropdown/label
     var nhomLabel = dataKey === 'camera' ? 'Thông số Camera'
@@ -2370,7 +2370,7 @@ function renderSkuTable(list) {
     tbody.innerHTML = '';
 
     if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy sản phẩm nào phù hợp</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy sản phẩm nào phù hợp</td></tr>';
         var countEl = document.getElementById('sku-count-text');
         if (countEl) countEl.textContent = 'Hiển thị 0 / 0 kết quả';
         return;
@@ -2390,13 +2390,6 @@ function renderSkuTable(list) {
         var typeTd = '<td><span style="background:rgba(255,255,255,0.08); padding:3px 8px; border-radius:4px; font-size:12px;">' + item.type + '</span></td>';
         var priceTd = '<td style="font-size:13px; color:var(--warning); font-weight:600;">' + item.price + '</td>';
 
-        var ch = item.channels || { tdw: true, fptvn: true, hifpt: true };
-        var channelBadges = [];
-        if (ch.tdw) channelBadges.push('<span style="background:rgba(245,158,11,0.12); color:#F59E0B; padding:2px 6px; border-radius:4px; font-size:11px; font-weight:600; white-space:nowrap; margin-right:4px;">tongdaiwifi</span>');
-        if (ch.fptvn) channelBadges.push('<span style="background:rgba(59,130,246,0.12); color:#60A5FA; padding:2px 6px; border-radius:4px; font-size:11px; font-weight:600; white-space:nowrap; margin-right:4px;">fptvn</span>');
-        if (ch.hifpt) channelBadges.push('<span style="background:rgba(16,185,129,0.12); color:#34D399; padding:2px 6px; border-radius:4px; font-size:11px; font-weight:600; white-space:nowrap; margin-right:4px;">hifpt</span>');
-        var channelTd = '<td onclick="event.stopPropagation();"><div style="display:flex; gap:4px; flex-wrap:wrap;">' + (channelBadges.join('') || '<span style="color:var(--text-muted); font-size:11px;">-</span>') + '</div></td>';
-
         var timeTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.time + '</td>';
         var userTd = '<td style="font-size:13px; color:var(--text-muted);">' + item.user + '</td>';
 
@@ -2414,7 +2407,7 @@ function renderSkuTable(list) {
             + '<button class="btn btn-sm" style="background:rgba(249,115,22,0.2); color:#FB923C; padding:4px 8px;" title="Xem nhanh" onclick="skuOpenPreview(\'' + item.code + '\',\'' + item.name + '\',\'' + item.type + '\',\'' + item.service + '\')">✏️</button>'
             + '</td>';
 
-        tr.innerHTML = checkboxTd + nameTd + typeTd + priceTd + channelTd + timeTd + userTd + actionTd;
+        tr.innerHTML = checkboxTd + nameTd + typeTd + priceTd + timeTd + userTd + actionTd;
         tbody.appendChild(tr);
     });
 
@@ -2525,44 +2518,98 @@ var dactinhData = {
     ]
 };
 
-function skuRenderDactinh_OLD_FINAL(dataKey) {
+function toggleDactinhNoibat(type) {
+    var isService = (type === 'dichvu' || type === 'service' || type === 'play' || type === 'truyenhinh');
+    var wrapper = document.getElementById('dactinh-nhom-noibat-wrapper');
+    var hintThietbi = document.getElementById('dactinh-hint-thietbi');
+    var hintDichvu = document.getElementById('dactinh-hint-dichvu');
+    var headerRow = document.getElementById('dactinh-header-row');
+
+    if (wrapper) wrapper.style.display = isService ? 'none' : 'inline-flex';
+    if (hintThietbi) hintThietbi.style.display = isService ? 'none' : 'inline';
+    if (hintDichvu) hintDichvu.style.display = isService ? 'inline' : 'none';
+
+    var colsNoibat = document.querySelectorAll('.col-noibat');
+    colsNoibat.forEach(function (el) {
+        el.style.display = isService ? 'none' : (el.tagName === 'LABEL' ? 'flex' : 'block');
+    });
+
+    if (headerRow) {
+        headerRow.style.gridTemplateColumns = isService ? '30px 60px 200px 1fr' : '30px 60px 200px 1fr 110px';
+    }
+
     var list = document.getElementById('dactinh-attr-list');
-    var sel = document.getElementById('dactinh-nhom-select');
+    if (list) {
+        list.querySelectorAll('.dactinh-row').forEach(function (row) {
+            row.style.gridTemplateColumns = isService ? '30px 60px 200px 1fr' : '30px 60px 200px 1fr 110px';
+        });
+    }
+}
+
+function skuRenderDactinh(dataKey) {
+    var list = document.getElementById('dactinh-attr-list');
+    var dropdown = document.getElementById('dactinh-nhom-select-dropdown');
     if (!list) return;
 
-    var isService = (dataKey === 'service');
+    var isService = (dataKey === 'service' || dataKey === 'dichvu' || dataKey === 'play' || dataKey === 'truyenhinh');
 
-    // Sync nhóm đặc tính label
-    var nhomLabel = isService ? 'Thông số Dịch vụ' : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Router/Modem');
-    if (sel) sel.innerText = nhomLabel;
+    var nhomLabel = isService ? (dataKey === 'play' ? 'Thông số Dịch vụ Truyền hình' : 'Thông số Dịch vụ Internet') : (dataKey === 'camera' ? 'Thông số Camera' : 'Thông số Thiết bị');
+    if (dropdown) dropdown.innerText = nhomLabel;
 
-    // Toggle Nổi bật column visibility
     toggleDactinhNoibat(isService ? 'dichvu' : 'thietbi');
 
-    // Render rows (remove old dynamic rows first, keep header)
     var header = document.getElementById('dactinh-header-row');
     list.querySelectorAll('.dactinh-row').forEach(function (el) { el.remove(); });
 
-    var rows = dactinhData[dataKey] || dactinhData['modem'];
+    var rows = dactinhData[dataKey] || dactinhData['service'];
+    var gridCols = isService ? '30px 60px 200px 1fr' : '30px 60px 200px 1fr 110px';
+
     rows.forEach(function (r, i) {
         var div = document.createElement('div');
         div.className = 'dactinh-row';
         var isLast = i === rows.length - 1;
-        // Dùng grid 3 cột cùng template với header để columns thẳng hàng
-        div.style.cssText = 'display:grid;grid-template-columns:200px 1fr 110px;align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
+        div.style.cssText = 'display:grid;grid-template-columns:' + gridCols + ';align-items:center;padding:7px 0;' + (isLast ? '' : 'border-bottom:1px solid rgba(255,255,255,0.04);');
 
-        var valText = r.value + (r.unit ? ' <span style="font-size:11px;color:var(--text-muted);font-weight:400;">' + r.unit + '</span>' : '');
-        var noibatCol = isService ? '<span class="col-noibat"></span>' :
+        var iconText = dataKey === 'camera' ? (i === 0 ? '📷' : (i === 1 ? '🔄' : (i === 2 ? '🌙' : (i === 3 ? '🤖' : (i === 4 ? '🗣️' : (i === 5 ? '☁️' : '🛡️')))))) : (isService ? '⚡' : '📦');
+
+        var noibatCol = isService ? '' :
             '<label class="col-noibat" style="display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;">'
-            + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' style="accent-color:var(--primary);width:15px;height:15px;">'
+            + '<input type="checkbox"' + (r.highlight ? ' checked' : '') + ' class="dactinh-noibat-chk" style="accent-color:var(--primary);width:15px;height:15px;" onchange="updateDactinhNoibatLimit()">'
             + '<span style="font-size:11px;color:' + (r.highlight ? 'var(--primary)' : 'var(--text-muted)') + ';">Nổi bật</span>'
             + '</label>';
 
-        div.innerHTML = '<span style="font-size:13px;color:var(--text-muted);">' + r.name + '</span>'
-            + '<span style="font-size:13px;color:#e0e0e0;font-weight:500;">' + valText + '</span>'
+        div.innerHTML = '<div style="display:flex;justify-content:center;color:var(--text-muted);" title="Vị trí">☰</div>'
+            + '<div style="display:flex;justify-content:center;align-items:center;"><div style="width:32px;height:32px;border-radius:6px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px;">' + iconText + '</div></div>'
+            + '<div><input type="text" class="form-input" readonly style="padding:4px 8px; width:90%; font-size:13px; color:#fff; background:transparent; border:1px solid rgba(255,255,255,0.06); cursor:default;" value="' + r.name + '"></div>'
+            + '<div><input type="text" class="form-input" readonly style="padding:4px 8px; width:95%; font-size:13px; color:#fff; background:transparent; border:1px solid rgba(255,255,255,0.06); cursor:default;" value="' + r.value + (r.unit ? ' ' + r.unit : '') + '"></div>'
             + noibatCol;
+
         list.appendChild(div);
     });
+
+    if (typeof updateDactinhNoibatLimit === 'function') updateDactinhNoibatLimit();
+}
+
+function skuToggleMediaUI() {
+    var typeEl = document.getElementById('sku-bc-type') || document.getElementById('qlcs-loai');
+    var typeStr = typeEl ? (typeEl.innerText || typeEl.value || '').toLowerCase() : '';
+    var qlcsDichvu = document.getElementById('qlcs-dichvu')?.value || '';
+    var skuCode = document.getElementById('sku-hdr-code')?.innerText || '';
+    var codeStr = skuCode.toLowerCase();
+
+    var galleryGroup = document.getElementById('sku-media-gallery-group');
+    var bannerHeadGroup = document.getElementById('sku-media-banner-head-group');
+    if (galleryGroup && bannerHeadGroup) {
+        // Nếu là thiết bị phần cứng
+        if (typeStr.indexOf('thiết bị') >= 0 || typeStr.indexOf('device') >= 0 || codeStr.indexOf('cam') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
+            galleryGroup.style.display = 'block';
+            bannerHeadGroup.style.display = 'none';
+        } else {
+            // Nếu là dịch vụ phi vật lý
+            galleryGroup.style.display = 'none';
+            bannerHeadGroup.style.display = 'block';
+        }
+    }
 }
 
 function skuOpenDetail(code, name, type, category) {
@@ -2600,69 +2647,12 @@ function skuOpenDetail(code, name, type, category) {
     }
     skuRenderDactinh(dataKey);
 
-    function skuToggleMediaUI() {
-        var typeEl = document.getElementById('sku-bc-type') || document.getElementById('qlcs-loai');
-        var typeStr = typeEl ? (typeEl.innerText || typeEl.value || '').toLowerCase() : '';
-        var qlcsDichvu = document.getElementById('qlcs-dichvu')?.value || '';
-        var skuCode = document.getElementById('sku-hdr-code')?.innerText || '';
-        var codeStr = skuCode.toLowerCase();
+    skuSwitchTab('dactinh');
+    if (typeof renderSkuTagsReadonly === 'function') renderSkuTagsReadonly(code);
 
-        var galleryGroup = document.getElementById('sku-media-gallery-group');
-        var bannerHeadGroup = document.getElementById('sku-media-banner-head-group');
-        if (galleryGroup && bannerHeadGroup) {
-            // Nếu là thiết bị phần cứng
-            if (typeStr.indexOf('thiết bị') >= 0 || typeStr.indexOf('device') >= 0 || codeStr.indexOf('cam') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
-                galleryGroup.style.display = 'block';
-                bannerHeadGroup.style.display = 'none';
-            } else {
-                // Nếu là dịch vụ phi vật lý
-                galleryGroup.style.display = 'none';
-                bannerHeadGroup.style.display = 'block';
-            }
-        }
-    }
-
-    function skuOpenDetail(code, name, type, category) {
-        // Show detail, hide list
-        document.getElementById('sku-list').style.display = 'none';
-        document.getElementById('sku-form').style.display = 'block';
-
-        // Fill Document Header
-        document.getElementById('sku-hdr-code').innerText = code;
-        document.getElementById('sku-hdr-name').innerText = name;
-
-        // Fill Breadcrumb
-        document.getElementById('sku-bc-type').innerText = type || 'Thiết bị';
-        var bcCatEl = document.getElementById('sku-bc-cat');
-        if (bcCatEl) bcCatEl.innerText = category || '—';
-        var bcCodeEl = document.getElementById('sku-bc-code');
-        if (bcCodeEl) bcCodeEl.innerText = code;
-
-        // Fill Tab 1 — QLCS data theo SKU code
-        skuFillQlcs(code);
-
-        // Swap đặc tính data theo category, type, code, name
-        var cat = (category || '').toLowerCase();
-        var typeStr = (type || '').toLowerCase();
-        var codeStr = (code || '').toLowerCase();
-        var nameStr = (name || '').toLowerCase();
-
-        var dataKey = 'service';
-        if (cat.indexOf('camera') >= 0 || typeStr.indexOf('camera') >= 0 || codeStr.indexOf('cam') >= 0 || nameStr.indexOf('camera') >= 0) {
-            dataKey = 'camera';
-        } else if (cat.indexOf('play') >= 0 || typeStr.indexOf('play') >= 0 || codeStr.indexOf('play') >= 0 || nameStr.indexOf('play') >= 0) {
-            dataKey = 'play';
-        } else if (cat.indexOf('modem') >= 0 || typeStr.indexOf('ap') >= 0 || codeStr.indexOf('modem') >= 0 || codeStr.indexOf('ax') >= 0) {
-            dataKey = 'modem';
-        }
-        skuRenderDactinh(dataKey);
-
-        skuSwitchTab('dactinh');
-        renderSkuTagsReadonly(code);
-
-        // Cập nhật UI hình ảnh / banner
-        skuToggleMediaUI();
-    }
+    // Cập nhật UI hình ảnh / banner
+    skuToggleMediaUI();
+}
 
     function toggleTreeRow(groupClass, btn) {
         const rows = document.querySelectorAll('.' + groupClass);
@@ -2919,13 +2909,18 @@ function skuOpenDetail(code, name, type, category) {
     }
 
     function toggleDactinhNoibat(val) {
+        var isService = (val === 'dichvu' || val === 'service' || val === 'play' || val === 'truyenhinh');
         document.querySelectorAll('.col-noibat').forEach(function (el) {
-            el.style.display = '';
+            el.style.display = isService ? 'none' : '';
         });
         var hintEl = document.getElementById('dactinh-hint-thietbi');
-        if (hintEl) hintEl.style.display = '';
+        if (hintEl) hintEl.style.display = isService ? 'none' : '';
+        var hintDichvu = document.getElementById('dactinh-hint-dichvu');
+        if (hintDichvu) hintDichvu.style.display = isService ? '' : 'none';
+        var wrapper = document.getElementById('dactinh-nhom-noibat-wrapper');
+        if (wrapper) wrapper.style.display = isService ? 'none' : 'inline-flex';
         var headerEl = document.getElementById('dactinh-header-row');
-        if (headerEl) headerEl.style.display = '';
+        if (headerEl) headerEl.style.gridTemplateColumns = isService ? '30px 60px 200px 1fr' : '30px 60px 200px 1fr 110px';
     }
 
     function addPtttRowDrawer() {

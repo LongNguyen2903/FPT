@@ -137,6 +137,20 @@ Ensure solution works for users, not just business.
 - **Xem trước trực quan và quản lý trực tiếp:** Dữ liệu sau khi chọn xong cần được hiển thị rõ ràng dưới dạng các dòng preview đầy đủ thông tin (kèm badge, trạng thái) và có nút **Xóa nhanh** (`🗑️ Xóa` hoặc `✕`) trên từng dòng thay vì bắt người dùng vào màn hình chỉnh sửa phức tạp.
 - **Thay đổi thứ tự trực quan (Sortable/Draggable):** Hỗ trợ kéo thả hoặc nút chuyển đổi thứ tự hiển thị của các khối cấu hình (như vị trí các câu hỏi FAQ hay slider ảnh) trực tiếp trên giao diện thiết kế.
 
+### Quy tắc chuẩn hóa Giao diện & Nghiệp vụ CMS Quản lý Sản phẩm / SKU (FPT CMS Rules)
+Khi phân tích và thiết kế giao diện cho CMS quản lý SKU/Gói cước:
+1. **Phân biệt rõ ràng giữa Dịch vụ (`DV`) và Thiết bị (`TB`)**:
+   - **Loại gói Dịch vụ (`DV` - Internet, Truyền hình / FPT Play)**:
+     - Dữ liệu thuộc tính đồng bộ hoàn toàn từ QLCS (Read-only).
+     - **ẨN HOÀN TOÀN tính năng Nổi bật**: Không hiển thị checkbox nổi bật, không hiển thị dòng hướng dẫn chọn thông số nổi bật (`#dactinh-hint-thietbi`), không hiển thị cột `NỔI BẬT ☆`. Giao diện tự động dùng dạng 4 cột chuẩn: `Vị trí` | `Icon` | `Đặc tính` | `Giá trị` (`grid-template-columns: 30px 60px 200px 1fr`).
+     - **KHÔNG có nút Xóa/Thùng rác (`🗑️`)**: Do thuộc tính được sync tự động từ hệ thống lõi QLCS.
+   - **Loại gói Thiết bị (`TB` - Camera, Router/Modem, Access Point, Mesh, Box)**:
+     - Hỗ trợ giao diện 5 cột có cột `NỔI BẬT ☆` (`30px 60px 200px 1fr 110px`) cho phép tick chọn tối đa 3 thông số nổi bật hiển thị dưới gallery web.
+     - Loại bỏ nút Xóa/Thùng rác (`🗑️`) đối với các thuộc tính đồng bộ từ QLCS.
+2. **Chuẩn hóa nhãn (Labeling Standards)**:
+   - Giữ nhãn trường ngắn gọn và sạch sẽ (ví dụ: `Giá bán *`, `Tên hiển thị web *`).
+   - KHÔNG đính kèm trực tiếp các thẻ văn bản rườm rà như `(🔒 Đồng bộ)` hoặc `(🔒 Read-only)` vào thẻ `<label>`. Trạng thái Read-only thể hiện qua Badge chung ở Header (ví dụ: `🔒 Dữ liệu đồng bộ từ QLCS · Read-only`) và thuộc tính `readonly disabled` của ô input.
+
 ### BA role
 - Validate UX against business goals
 - Suggest improvements, not just follow design

@@ -141,6 +141,18 @@ Khi định nghĩa sản phẩm hoặc tính năng (scoping & requirement defini
 - Bắt buộc thiết kế cơ chế Chọn hàng loạt (Select All) các bản ghi đang hiển thị để tối giản thời gian thao tác click chuột.
 - Hiển thị trực quan dữ liệu đã chọn ngay trong Form (visual preview) kèm hành động xóa nhanh một chạm.
 
+**Quy tắc chuẩn hóa Giao diện & Nghiệp vụ CMS Quản lý Sản phẩm / SKU (FPT CMS Rules)**:
+1. **Dịch vụ (`DV` - Internet, Truyền hình / FPT Play)**:
+   - Thuộc tính đồng bộ QLCS read-only (`readonly disabled`).
+   - Ẩn hoàn toàn tất cả thành phần Nổi bật (Checkbox nhóm nổi bật, dòng ghi chú hướng dẫn chọn thông số nổi bật, cột header & checkbox `NỔI BẬT ☆`). Bố cục 4 cột cố định (`grid-template-columns: 30px 60px 200px 1fr`).
+   - Bỏ toàn bộ nút Xóa/Thùng rác (`🗑️`).
+2. **Thiết bị (`TB` - Camera, Modem, Access Point, Mesh, Box)**:
+   - Bố cục 5 cột hiển thị cột `NỔI BẬT ☆` (`30px 60px 200px 1fr 110px`) cho phép tick chọn tối đa 3 thông số.
+   - Bỏ toàn bộ nút Xóa/Thùng rác (`🗑️`).
+3. **Chuẩn hóa nhãn (Labeling Standards)**:
+   - Thẻ `<label>` ngắn gọn sạch sẽ (vd: `Giá bán *`, `Tên hiển thị web *`).
+   - Không gắn thẻ văn bản `(🔒 Đồng bộ)` / `(🔒 Read-only)` vào label. Trạng thái read-only quản lý tập trung ở Badge Header.
+
 **Actions**
 - Validate assumptions
 - Incorporate feedback
