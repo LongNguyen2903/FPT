@@ -1719,16 +1719,17 @@
         #checkout-rule-drawer {
             position: fixed !important;
             top: 0;
-            right: 0;
-            width: 680px;
+            left: 0;
+            width: 100vw;
             height: 100vh;
             z-index: 9001;
             overflow-y: auto;
             background: var(--bg-panel) !important;
-            border-left: 1px solid var(--border-glass);
-            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transform: scale(0.97);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
             display: none;
             margin: 0 !important;
@@ -1736,7 +1737,8 @@
         }
 
         #checkout-rule-drawer.open {
-            transform: translateX(0);
+            opacity: 1;
+            transform: scale(1);
             pointer-events: auto;
         }
 
@@ -1747,13 +1749,15 @@
         }
 
         #checkout-rule-drawer .form-section {
-            padding: 20px 24px;
+            padding: 24px 32px;
+            max-width: 1280px;
+            margin: 0 auto;
         }
 
         body.light #checkout-rule-drawer {
-            background: #fff !important;
+            background: #f8fafc !important;
             border-left-color: #e2e8f0;
-            box-shadow: -8px 0 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
         }
 
         body.light #checkout-rule-overlay {
