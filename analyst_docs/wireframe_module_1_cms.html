@@ -13887,12 +13887,12 @@ Tặng 1 tháng cước</textarea>
                             <table class="checkout-table" style="width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th style="width: 170px; padding: 12px 14px;">THỜI GIAN</th>
-                                        <th style="width: 130px; padding: 12px 14px;">NGƯỜI THỰC</th>
+                                        <th style="width: 220px; padding: 12px 16px;">PTTT TÁC ĐỘNG</th>
                                         <th style="width: 130px; padding: 12px 14px;">KÊNH ÁP DỤNG</th>
-                                        <th style="width: 240px; padding: 12px 14px;">PTTT TÁC ĐỘNG</th>
-                                        <th style="padding: 12px 14px;">GÓI CƯỚC (SKU)</th>
-                                        <th style="width: 140px; padding: 12px 14px; text-align: center;">HÀNH ĐỘNG</th>
+                                        <th style="padding: 12px 16px;">GÓI CƯỚC (SKU)</th>
+                                        <th style="width: 140px; padding: 12px 14px;">NGƯỜI THỰC</th>
+                                        <th style="width: 170px; padding: 12px 14px;">THỜI GIAN</th>
+                                        <th style="width: 130px; padding: 12px 14px; text-align: center;">HÀNH ĐỘNG</th>
                                     </tr>
                                 </thead>
                                 <tbody id="payment-history-log-body"></tbody>
@@ -14920,11 +14920,11 @@ Tặng 1 tháng cước</textarea>
                         }
 
                         tr.innerHTML =
-                            '<td style="padding:10px 14px;font-weight:500;color:var(--text-muted);white-space:nowrap;">' + log.time + '</td>'
-                            + '<td style="padding:10px 14px;"><span style="display:inline-flex;align-items:center;gap:5px;background:rgba(168,85,247,0.12);color:#c084fc;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;">👤 ' + log.user + '</span></td>'
+                            '<td style="padding:10px 16px;">' + methodLabel + '</td>'
                             + '<td style="padding:10px 14px;">' + channelBadge + '</td>'
-                            + '<td style="padding:10px 14px;">' + methodLabel + '</td>'
-                            + '<td style="padding:10px 14px;"><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">' + skusLabel + '</div></td>'
+                            + '<td style="padding:10px 16px;"><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">' + skusLabel + '</div></td>'
+                            + '<td style="padding:10px 14px;"><span style="display:inline-flex;align-items:center;gap:5px;background:rgba(168,85,247,0.12);color:#c084fc;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;">👤 ' + log.user + '</span></td>'
+                            + '<td style="padding:10px 14px;font-weight:500;color:var(--text-muted);white-space:nowrap;">' + log.time + '</td>'
                             + '<td style="padding:10px 14px;text-align:center;">' + actionsHtml + '</td>';
                         tbody.appendChild(tr);
                     });
