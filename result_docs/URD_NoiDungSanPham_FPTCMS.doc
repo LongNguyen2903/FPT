@@ -1,0 +1,1239 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>FPT.VN URD - Phân hệ Nội dung sản phẩm V1.1</title>
+<style>
+    body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000000; font-size: 12pt; }
+    .header-table { width: 100%; border: 1px solid #000000; border-collapse: collapse; margin-bottom: 20px; }
+    .header-table td { border: 1px solid #000000; padding: 10px; font-weight: bold; }
+    h1 { font-family: 'Arial', sans-serif; color: #1f4e78; font-size: 18pt; font-weight: bold; text-transform: uppercase; margin-top: 24px; margin-bottom: 12px; }
+    h2 { font-family: 'Arial', sans-serif; color: #2e75b6; font-size: 14pt; font-weight: bold; margin-top: 20px; margin-bottom: 10px; border-bottom: 1px solid #2e75b6; padding-bottom: 3px; }
+    h3 { font-family: 'Arial', sans-serif; color: #5b9bd5; font-size: 12pt; font-weight: bold; margin-top: 16px; margin-bottom: 8px; }
+    h4 { font-family: 'Arial', sans-serif; color: #000; font-size: 12pt; font-weight: bold; margin-top: 12px; margin-bottom: 6px; }
+    table.data-table { border-collapse: collapse; width: 100%; margin-top: 10px; margin-bottom: 15px; }
+    table.data-table th, table.data-table td { border: 1px solid #000000; padding: 8px; text-align: left; vertical-align: top; }
+    table.data-table th { background-color: #d9e1f2; font-weight: bold; color: #1f4e78; }
+    table.usecase-table { border-collapse: collapse; width: 100%; margin-top: 8px; margin-bottom: 12px; }
+    table.usecase-table td { border: 1px solid #000000; padding: 8px; vertical-align: top; }
+    table.usecase-table td.label { background-color: #f2f2f2; font-weight: bold; width: 150px; }
+    ul, ol { margin-top: 5px; margin-bottom: 10px; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    p { margin-top: 0; margin-bottom: 8px; }
+    code { font-family: 'Consolas', 'Courier New', monospace; background-color: #f1f5f9; color: #0f172a; padding: 1px 4px; font-size: 10pt; border-radius: 3px; }
+    .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<!-- TRANG BÌA & HEADER TEMPLATE CHUẨN FPT -->
+<table class="header-table">
+    <tr>
+        <td rowspan="2" style="width: 140px; text-align: center; vertical-align: middle; background-color: #f8fafc;">
+            <div style="font-family: Arial, sans-serif; font-weight: 900; font-size: 22pt; color: #f36523; line-height: 1;">FPT</div>
+            <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #1f4e78; font-weight: bold; margin-top: 2px;">TELECOM</div>
+        </td>
+        <td style="font-size: 15pt; text-align: center; text-transform: uppercase; color: #1f4e78;">FPT.VN URD - USER REQUIREMENTS DOCUMENT</td>
+    </tr>
+    <tr>
+        <td style="font-size: 11pt; color: #1e293b;">
+            <strong>Mã hiệu:</strong> URDCMSPRODUCTCONTENTV1.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>Phiên bản:</strong> 1.1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <strong>Ngày:</strong> 07/08/2026
+        </td>
+    </tr>
+</table>
+
+<h2>REVISION HISTORY</h2>
+<p><em>[A]: Add - Thêm mới | [U]: Update - Cập nhật, thay đổi | [D]: Delete - Xóa</em></p>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Version</th>
+            <th>Author</th>
+            <th>Change Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>30/07/2026</td>
+            <td>V1.0</td>
+            <td>BA Senior &amp; Product Owner Team</td>
+            <td>Tổng hợp và khởi tạo tài liệu URD toàn diện cho Phân hệ NỘI DUNG SẢN PHẨM (pdh-sku, cms-display, payment-methods, badge-tag).</td>
+        </tr>
+        <tr>
+            <td>07/08/2026</td>
+            <td>V1.1</td>
+            <td>BA Senior &amp; Product Owner Team</td>
+            <td><b>Cập nhật BR-TAG-02 Quy tắc Pop-up Cảnh báo Xóa Badge/Tag gỡ liên kết vào Sub-module 4</b>: Bật Modal xác nhận cảnh báo gỡ tag khỏi Card gói / Trang chi tiết / Checkout trước khi xóa khỏi thư viện.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>MỤC LỤC</h1>
+<ol>
+    <li><strong>I. GIỚI THIỆU</strong></li>
+    <li><strong>II. TỔNG QUAN HỆ THỐNG</strong></li>
+    <li><strong>III. ĐẶC TẢ CHI TIẾT CÁC CHỨC NĂNG (USE CASE SPECS)</strong></li>
+    <li><strong>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</strong></li>
+    <li><strong>V. PHỤ LỤC</strong></li>
+</ol>
+
+<div class="page-break"></div>
+
+<h1>I. GIỚI THIỆU</h1>
+
+<h3>1. Mục đích tài liệu</h3>
+<p>Tài liệu này đặc tả toàn bộ các yêu cầu nghiệp vụ, luồng xử lý, ma trận quyền, quy tắc nghiệp vụ và mô tả giao diện màn hình cho nhóm menu <b>NỘI DUNG SẢN PHẨM</b> trên hệ thống FPT CMS Admin. Nhóm menu bao gồm 4 sub-module nghiệp vụ liên kết chặt chẽ:</p>
+<ul>
+    <li><b>1. Nội dung sản phẩm (pdh-sku)</b>: Quản lý thông tin thương mại, hình ảnh, bài viết, đặc tính, phân định Nguồn Hệ thống (ECP / FCP), khác biệt cấu hình DV vs TB, Tiêu đề max 100 ký tự và Mô tả dài max 4000 ký tự, BR-PDH-04 bỏ tiêu đề video và BR-PDH-05 ghi đè FAQ riêng lên FAQ chung của trang.</li>
+    <li><b>2. Thông tin checkout (cms-display)</b>: Vận hành trên duy nhất 1 kênh chuẩn mặc định, bao gồm 2 Tab chức năng chính:
+      <br/>&nbsp;&nbsp;• <b>Tab 1: Cấu hình hiển thị</b>: Phân chia 4 loại sản phẩm (Gói Internet, Camera, Gói SA, Thiết bị khác). Gói Internet chia 2 Sub-tab con (Nội dung ưu đãi &amp; Thiết bị đi kèm - gồm Icon 24x24/32x32 và Nội dung max 100 char). Loại Thiết bị khác bổ sung Khối Thông điệp truyền thông. Cột danh sách bên trái có 2 Tab ECP &amp; FCP cùng công tắc Chọn tất cả.
+      <br/>&nbsp;&nbsp;• <b>Tab 2: Chương trình Banner &amp; Popup</b>: Quản lý chiến dịch tiếp thị Checkout (Mặc định Toggle = Hoạt động, Toggle = Nháp lưu dở dang, BR-CK-05 ưu tiên chương trình mới và tự động ẩn khi hết hạn, Bảng gộp các trường nhập liệu &amp; dropdown select).
+    </li>
+    <li><b>3. Phương thức Thanh toán (payment-methods)</b>: Phân 2 Tab (Tab 1: Cấu hình Ưu đãi &amp; Mô tả; Tab 2: Danh sách cấu hình PTTT / Nhật ký lưu vết). Áp dụng BR-PM-02 Fixed Order Rule, BR-PM-05 Cấu hình Bật/Tắt PTTT Hàng loạt và Master Data 8 loại PTTT chuẩn cho Developer tại Tab 2.</li>
+    <li><b>4. Quản lý Badge/Tag (badge-tag)</b>: Thư viện quản lý các nhãn nổi bật (Tag Nổi Bật / Card Badge) tập trung dùng chung cho Card gói cước, Trang chi tiết và Luồng Checkout. Áp dụng <b>BR-TAG-02 Quy tắc Pop-up Cảnh báo Xóa Badge/Tag</b>.</li>
+</ul>
+
+<h3>2. Thông tin chung</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 180px;">HẠNG MỤC</th>
+            <th>MÔ TẢ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><b>Giới thiệu tổng quan</b></td>
+            <td>Nhóm menu NỘI DUNG SẢN PHẨM quản lý toàn bộ vòng đời hiển thị thương mại của các sản phẩm FPT Telecom từ danh sách niêm yết, trang chi tiết đến luồng đặt hàng Checkout.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><b>Hiện trạng</b></td>
+            <td>Dữ liệu cước gốc và mã SKU được quản lý đồng thời tại 2 hệ thống cốt lõi: ECP (Enterprise Customer Platform) và FCP (Flexible Customer Platform). Hệ thống vận hành trên duy nhất 1 kênh chuẩn mặc định. Cần cập nhật BR-TAG-02 Pop-up Cảnh báo Xóa Badge/Tag gỡ liên kết.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><b>Mục tiêu kỳ vọng</b></td>
+            <td>Hoàn thiện 100% tài liệu URD chuẩn FPT với đầy đủ luồng thao tác, quy tắc nghiệp vụ (Business Rules) và bảng đặc tả trường thông tin chi tiết cho cả 4 sub-module.</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><b>Phạm vi triển khai</b></td>
+            <td>Áp dụng trên hệ thống FPT CMS Admin duy nhất 1 kênh chuẩn và đồng bộ dữ liệu realtime sang luồng đặt hàng Checkout phía khách hàng.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Thuật ngữ và viết tắt</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT</th>
+            <th style="width: 150px;">THUẬT NGỮ</th>
+            <th>MÔ TẢ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><b>URD</b></td>
+            <td>User Requirements Document - Tài liệu yêu cầu người dùng</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><b>SKU</b></td>
+            <td>Stock Keeping Unit - Mã gói cước / sản phẩm thương mại trên hệ thống FPT</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><b>Badge/Tag</b></td>
+            <td>Nhãn thương mại nổi bật hiển thị ở Card gói cước, Trang chi tiết sản phẩm và Luồng Checkout (HOT, MỚI, ĐỀ XUẤT, SALE...).</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><b>ECP / FCP</b></td>
+            <td>Hệ thống quản lý cước Enterprise Customer Platform (ECP) &amp; Flexible Customer Platform (FCP)</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>II. TỔNG QUAN HỆ THỐNG</h1>
+
+<h3>1. Sơ đồ luồng nghiệp vụ tổng quan (Business Flow)</h3>
+<div style="font-family: Consolas, monospace; background-color: #f8fafc; padding: 10px; border: 1px solid #cbd5e1; font-size: 9.5pt; line-height: 1.3;">
+                       ┌─────────────────────────────────────────────────────────┐<br/>
+                       │   Hệ thống Core Billing / Product Hub (ECP &amp; FCP)       │<br/>
+                       └───────────────────────────┬─────────────────────────────┘<br/>
+                                                   │ Đồng bộ SKU gốc + Nhãn nguồn (ECP / FCP)<br/>
+                                                   ▼<br/>
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐<br/>
+│                                       PHÂN HỆ NỘI DUNG SẢN PHẨM                                         │<br/>
+│                                                                                                         │<br/>
+│  ┌──────────────────────────────┐    ┌──────────────────────────────┐    ┌───────────────────────────┐  │<br/>
+│  │ 1. NỘI DUNG SẢN PHẨM         │    │ 2. THÔNG TIN CHECKOUT        │    │ 4. QUẢN LÝ BADGE/TAG      │  │<br/>
+│  │    (pdh-sku)                 │    │    (cms-display)             │    │    (badge-tag)            │  │<br/>
+│  │ ├─ Bảng Danh sách SKU        │    │ ├─ Tab 1: Cấu hình hiển thị  │    │ ├─ Thư viện Tag           │  │
+│  │ ├─ Tab 1: Đặc tính (DV / TB) │    │ │  ├─ 4 Loại SP (Internet...)│    │ ├─ Quản lý Bg/Color       │  │
+│  │ ├─ Tab 2: Content (DV / TB)  │    │ │  └─ Khối Thông điệp       │    │ └─ BR-TAG-02 Popup Warning│  │
+│  │ │  ├─ Hình ảnh sản phẩm &amp; banner│ ├─ Tab 2: Banner &amp; Popup     │    └─────────────┬─────────────┘  │<br/>
+│  │ │  └─ Tiêu đề 100/Mô tả 4000 │    │ └─ BR-CK-05, 06, 07 Rules    │                  │              │<br/>
+│  │ ├─ Tab 3: FAQ đính kèm       │    └──────────────┬───────────────┘                  │              │<br/>
+│  │ └─ BR-PDH-05 FAQ Override    │                   │                                  │ Liên kết     │<br/>
+│  └──────────────┬───────────────┘                   │                                  │ Tagline      │<br/>
+│                 │                                   │                                  │              │<br/>
+│                 └───────────────────────────────────┴──────────────────────────────────┘              │<br/>
+│                                                     │                                                 │<br/>
+│                                                     ▼                                                 │<br/>
+│                                       ┌───────────────────────────┐                                   │<br/>
+│                                       │ 3. PHƯƠNG THỨC THANH TOÁN │                                   │<br/>
+│                                       │ ├─ Tab 1: Cấu hình Ưu đãi │                                   │<br/>
+│                                       │ └─ Tab 2: Danh sách PTTT  │                                   │<br/>
+│                                       └─────────────┬─────────────┘                                   │<br/>
+└─────────────────────────────────────────────┼─────────────────────────────────────────────────┘<br/>
+                                                      │ Đồng bộ Realtime (Duy nhất 1 Kênh)<br/>
+                                                      ▼<br/>
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐<br/>
+│                              KÊNH KHÁCH HÀNG CHECKOUT (fpt.vn / HiFPT)                                  │<br/>
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────┘<br/>
+</div>
+
+<h3>2. Danh sách các chức năng chính</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 40px;">STT</th>
+            <th style="width: 90px;">Mã Chức năng</th>
+            <th style="width: 160px;">Tên Chức năng</th>
+            <th style="width: 90px;">Sub-module</th>
+            <th style="width: 60px;">Version</th>
+            <th style="width: 60px;">Loại</th>
+            <th>Mô tả tóm tắt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><b>UC-PDH-01</b></td>
+            <td>Quản lý Danh sách Sản phẩm SKU</td>
+            <td>pdh-sku</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Bảng danh sách SKU, bổ sung <b>Cột HỆ THỐNG (Badge ECP/FCP)</b>, bộ lọc Nguồn &amp; các nút thao tác Sửa/Xem.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><b>UC-PDH-04</b></td>
+            <td>Cấu hình Chi tiết Gói Dịch vụ (DV)</td>
+            <td>pdh-sku</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Chỉnh sửa Gói Dịch vụ: Ẩn Checkbox Nổi bật, khối "Sản phẩm nhận trong gói", Ảnh Card 4:3, Banner 3:1, Tiêu đề max 100 ký tự.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><b>UC-PDH-05</b></td>
+            <td>Cấu hình Chi tiết Gói Thiết bị (TB)</td>
+            <td>pdh-sku</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Chỉnh sửa Gói Thiết bị: Checkbox [☑ Nổi bật] (Max 3/3), Ảnh Card 1:1, Mô tả ngắn &amp; <b>Mô tả dài Rich Text (Max 4000 ký tự)</b>, Gallery 15 ảnh 1:1 &amp; Video sản phẩm (BR-PDH-04).</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><b>UC-CK-01</b></td>
+            <td>Cấu hình Hiển thị Nội dung Checkout theo 4 Loại SP</td>
+            <td>cms-display</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Cấu hình hiển thị duy nhất 1 kênh cho 4 loại SP (Gói Internet, Camera, Gói SA, Thiết bị khác). Bổ sung khối Thông điệp truyền thông &amp; 2 trường Icon/Nội dung cho thiết bị đi kèm.</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><b>UC-CK-03</b></td>
+            <td>Quản lý Chương trình Banner &amp; Popup Checkout</td>
+            <td>cms-display</td>
+            <td>2.1</td>
+            <td><b>New</b></td>
+            <td>Quản lý chiến dịch Banner &amp; Popup Checkout (Toggle mặc định Hoạt động, Toggle Nháp lưu dở dang, BR-CK-05 ưu tiên chương trình mới &amp; tự động hết hạn, Bảng gộp trường nhập liệu).</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><b>UC-PM-01</b></td>
+            <td>Quản lý Phương thức Thanh toán</td>
+            <td>payment-methods</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Phân 2 Tab (Cấu hình Ưu đãi &amp; Mô tả; Danh sách cấu hình PTTT / Nhật ký lưu vết). Áp dụng BR-PM-02 Fixed Order Rule, BR-PM-05 và Master Data PTTT đính kèm cho Dev.</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><b>UC-TAG-01</b></td>
+            <td>Quản lý Thư viện Badge/Tag Dùng chung</td>
+            <td>badge-tag</td>
+            <td>2.1</td>
+            <td><b>Update</b></td>
+            <td>Quản lý nhãn thương mại (Màu nền, màu chữ, phạm vi) &amp; <b>BR-TAG-02 Pop-up Cảnh báo Xóa gỡ liên kết tag</b>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>III. ĐẶC TẢ CHI TIẾT CÁC CHỨC NĂNG (USE CASE SPECS)</h1>
+
+<h2>I. SUB-MODULE 1: QUẢN LÝ NỘI DUNG SẢN PHẨM (pdh-sku)</h2>
+
+<h3>1. UC-PDH-01: Quản lý Danh sách Sản phẩm SKU (Cập nhật V2.1)</h3>
+<h4>a. Thuộc tính Use Case</h4>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>Hiển thị bảng danh sách các mã SKU sản phẩm thương mại được đồng bộ từ QLCS (ECP &amp; FCP) kèm thông tin cấu hình Web. Cung cấp bộ lọc theo <b>Hệ thống (Tất cả / ECP / FCP)</b>, Loại gói cước (DV, TB, SA), Loại sản phẩm &amp; tìm kiếm. Bảng dữ liệu hiển thị rõ <b>Cột HỆ THỐNG</b> với Badge màu trực quan cùng các nút thao tác Sửa / Xem chi tiết.</td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>Admin CMS, Biên tập viên, Viewer.</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>Người dùng click vào menu Nội dung sản phẩm trên Sidebar.</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>Người dùng đã đăng nhập và được cấp quyền truy cập hệ thống.</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>Bảng danh sách SKU hiển thị đúng theo tiêu chí lọc hệ thống ECP/FCP và loại sản phẩm.</td>
+    </tr>
+</table>
+
+<h4>b. Diễn giải các bước thực hiện (Step-by-step)</h4>
+<ul>
+    <li><strong>Bước 1:</strong> Người dùng truy cập menu <b>NỘI DUNG SẢN PHẨM</b> -&gt; <b>Nội dung sản phẩm</b>.</li>
+    <li><strong>Bước 2:</strong> Thanh bộ lọc (Filter Bar) hiển thị các công cụ: ô tìm kiếm, Dropdown <b>Loại sản phẩm</b> và Dropdown <b>Hệ thống (Tất cả / ECP / FCP)</b>.</li>
+    <li><strong>Bước 3:</strong> Bảng dữ liệu nạp danh sách mã SKU gồm các cột: STT, TÊN HIỂN THỊ, LOẠI SẢN PHẨM, <b>HỆ THỐNG (Badge ECP xanh / Badge FCP vàng)</b>, GIÁ MIN, GIÁ MAX, THỜI GIAN CẬP NHẬT, NGƯỜI CẬP NHẬT, THAO TÁC.</li>
+    <li><strong>Bước 4:</strong> Người dùng chọn Dropdown "Hệ thống" = ECP: Bảng lập tức lọc chỉ hiển thị các sản phẩm ECP.</li>
+    <li><strong>Bước 5:</strong> Click chọn 1 dòng dữ liệu để trượt Right Detail Drawer (Read-only).</li>
+    <li><strong>Bước 6:</strong> Click nút Sửa trên dòng để mở Full-Page Inline Editor.</li>
+</ul>
+
+<h3>2. Business Rules</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 130px;">Code</th>
+            <th>Quy tắc nghiệp vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>BR-PDH-01</b></td>
+            <td>Các trường cước gốc (Mã SKU, Tên QLCS, Danh mục, Giá min/max, Phí hòa mạng, Thiết bị/Dịch vụ đi kèm) từ QLCS là Read-Only, không cho phép sửa trên CMS.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PDH-02</b></td>
+            <td><b>Quy tắc Phân định Cấu hình &amp; Tab [Quản lý Content] khác biệt giữa Gói Dịch vụ (DV) &amp; Gói Thiết bị (TB)</b>:<br/>
+            - <b>GÓI DỊCH VỤ (DV)</b>: Tab Đặc tính có khối "Sản phẩm nhận trong gói này" (Tên Web, Tooltip Web, Switch Hiển thị); Tab Content có Ảnh Card 4:3, Ảnh Banner 3:1, Mid-page Banner 32:9, Block Đặc quyền kèm Ảnh.<br/>
+            - <b>GÓI THIẾT BỊ (TB)</b>: Tab Đặc tính có Checkbox [☑ Nổi bật] (Max 3/3); Tab Content có Ảnh Card 1:1, Mô tả ngắn &amp; <b>Mô tả dài Rich Text (Max 4000 ký tự)</b>, Gallery 15 ảnh 1:1, Video sản phẩm (BR-PDH-04), <b>Tiêu đề ưu đãi (Max 100 ký tự)</b>.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PDH-03</b></td>
+            <td>Mọi mã SKU đồng bộ về CMS bắt buộc mang nhãn nguồn hệ thống ECP hoặc FCP. Bộ lọc và bảng danh sách sản phẩm phải hiển thị trực quan Badge ECP (xanh) hoặc FCP (vàng).</td>
+        </tr>
+        <tr>
+            <td><b>BR-PDH-04</b></td>
+            <td><b>Quy tắc Quản lý Video Sản phẩm &amp; Tối giản Tiêu đề</b>: Link YouTube/Vimeo dùng iFrame nguyên bản và Title/Thumbnail từ YouTube API. File MP4 phát qua HTML5 Video Player, tự động trích xuất First-frame làm Thumbnail nếu không upload Thumbnail tùy chọn. SEO alt/title tự động gán theo <code>[Tên sản phẩm] - Video [STT]</code>.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PDH-05</b></td>
+            <td><b>Quy tắc Ưu tiên hiển thị FAQ sản phẩm (FAQ Override Rule)</b>: FAQ đính kèm tại Tab [FAQ] sản phẩm sẽ GHI ĐÈ toàn bộ FAQ chung của trang. Nếu danh sách FAQ riêng rỗng, hệ thống tự động fallback về FAQ chung của trang.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Mô tả màn hình (Screen Description)</h3>
+
+<h4>a. Màn hình Danh sách Sản phẩm SKU (Bảng tổng quan &amp; Bộ lọc Nguồn ECP/FCP)</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_pdh_sku_ecp_fcp.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 1: Màn hình Quản lý Danh sách Sản phẩm - Cột HỆ THỐNG (Badge ECP/FCP) và Thanh thao tác</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc / Validation</th>
+            <th>Hành vi hệ thống (Màn hình Danh sách SKU)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Search Input</b></td>
+            <td>Input Text</td>
+            <td>Max 100 ký tự</td>
+            <td>Tìm kiếm theo Tên hiển thị, Tên QLCS, Mã SKU.</td>
+        </tr>
+        <tr>
+            <td><b>Select Loại sản phẩm</b></td>
+            <td>Select Dropdown</td>
+            <td>Tất cả, Internet, Camera...</td>
+            <td>Lọc danh sách theo nhóm loại sản phẩm.</td>
+        </tr>
+        <tr>
+            <td><b>Select Hệ thống</b></td>
+            <td>Select Dropdown</td>
+            <td><b>Tất cả, ECP, FCP</b></td>
+            <td>Lọc danh sách sản phẩm theo nguồn hệ thống backend ECP hoặc FCP.</td>
+        </tr>
+        <tr>
+            <td><b>Cột HỆ THỐNG</b></td>
+            <td>Table Column</td>
+            <td>Read-Only</td>
+            <td>Hiển thị Badge ECP (màu xanh dương) hoặc FCP (màu vàng nâu) trên từng dòng dữ liệu.</td>
+        </tr>
+        <tr>
+            <td><b>Nút Sync QLCS</b></td>
+            <td>Button Icon</td>
+            <td>-</td>
+            <td>Kích hoạt gọi API đồng bộ dữ liệu SKU mới nhất từ QLCS (ECP/FCP).</td>
+        </tr>
+        <tr>
+            <td><b>Nút Xem chi tiết (👁️)</b></td>
+            <td>Table Action Icon</td>
+            <td>Right Detail Drawer</td>
+            <td>Trượt Drawer từ cạnh phải hiển thị toàn bộ thông tin chi tiết SKU dạng Read-only.</td>
+        </tr>
+        <tr>
+            <td><b>Nút Sửa (📝)</b></td>
+            <td>Table Action Icon</td>
+            <td>Full-Page Inline Editor</td>
+            <td>Chuyển hướng mở màn hình Chỉnh sửa chi tiết sản phẩm (nơi cấu hình các Tab Đặc tính, Content, FAQ).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>b. Màn hình Gói Thiết bị (TB) - Tab 1 [Đặc tính, Thiết bị] &amp; Tab 2 [Quản lý Content]</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_tb_detail.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 2: Tab 1 [Đặc tính, Thiết bị] - Gói Thiết bị (TB): Checkbox [☑ Nổi bật] (Max 3/3)</p></div>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_tb_content.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 3: Tab 2 [Quản lý Content] - Gói Thiết bị (TB): Tiêu đề (Max 100 char), Mô tả dài Rich Text (Max 4000 char)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Khối thông tin</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc / Validation</th>
+            <th>Hành vi hệ thống (Gói Thiết bị TB)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Ảnh card gói</b></td>
+            <td>Image Upload</td>
+            <td>Tỉ lệ <b>1:1</b> (Desktop ≤ 200KB, Mobile ≤ 150KB)</td>
+            <td>Upload ảnh đại diện dạng vuông (1:1) hiển thị trên Card sản phẩm ngoài Web/App.</td>
+        </tr>
+        <tr>
+            <td><b>Thông tin chi tiết (Mô tả ngắn)</b></td>
+            <td>Input Text Area</td>
+            <td>Max 250 ký tự</td>
+            <td>Hiển thị dòng tóm tắt ngắn dưới giá bán thiết bị.</td>
+        </tr>
+        <tr>
+            <td><b>Tiêu đề đặc quyền / Tiêu đề ưu đãi</b></td>
+            <td>Input Text</td>
+            <td><b>Tối đa 100 ký tự</b></td>
+            <td>Nhập tiêu đề cho đặc quyền hoặc ưu đãi. Giới hạn tối đa 100 ký tự.</td>
+        </tr>
+        <tr>
+            <td><b>Danh sách đặc quyền / Nội dung ưu đãi</b></td>
+            <td>Text Area / Rich Text</td>
+            <td><b>Tối đa 1000 ký tự</b></td>
+            <td>Nhập nội dung đặc quyền hoặc ưu đãi chi tiết. Giới hạn tối đa 1000 ký tự.</td>
+        </tr>
+        <tr>
+            <td><b>Ảnh đặc quyền</b></td>
+            <td>Multi Image Upload</td>
+            <td>Tối đa 15 ảnh (Tỉ lệ 1:1), ≤ 100KB/ảnh</td>
+            <td>Upload hàng loạt và Kéo thả trực tiếp để thay đổi thứ tự hiển thị slide ảnh sản phẩm ngoài Web.</td>
+        </tr>
+        <tr>
+            <td><b>Hình ảnh sản phẩm &amp; banner</b></td>
+            <td>Multi Image Upload &amp; Video Group</td>
+            <td><b>Gallery 15 ảnh (Tỉ lệ 1:1)</b> ≤ 100KB + <b>Video sản phẩm (Max 3 video</b> URL/MP4 &lt; 20MB)</td>
+            <td>Quản lý toàn bộ bộ sưu tập slide ảnh thực tế của thiết bị (15 ảnh 1:1 kéo thả sắp xếp) và các video trải nghiệm/hướng dẫn lắp đặt thiết bị.</td>
+        </tr>
+        <tr>
+            <td><b>Mô tả dài</b></td>
+            <td>Rich Text Editor</td>
+            <td><b>Tối đa 4000 ký tự</b>, Hỗ trợ B, I, U, Bảng, Link, Ảnh</td>
+            <td>Soạn thảo bài viết đánh giá chi tiết, tính năng công nghệ, hướng dẫn lắp đặt thiết bị. Khống chế tối đa 4000 ký tự.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>c. Màn hình Gói Dịch vụ (DV) - Tab 1 [Đặc tính, Thiết bị] &amp; Tab 2 [Quản lý Content]</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_dv_detail.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 4: Tab 1 [Đặc tính, Thiết bị] - Gói Dịch vụ (DV): Khối "Sản phẩm nhận trong gói này"</p></div>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_dv_content.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 5: Tab 2 [Quản lý Content] - Gói Dịch vụ (DV): Ảnh gói cước 4:3, Banner 3:1, Banner giữa trang (Mid-page 32:9 &amp; 1:1)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Khối thông tin</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc / Validation</th>
+            <th>Hành vi hệ thống (Gói Dịch vụ DV)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Sản phẩm nhận trong gói</b></td>
+            <td>Data Table</td>
+            <td>Đồng bộ từ QLCS</td>
+            <td>Nạp danh sách thiết bị/addon đính kèm đường truyền. Cho phép nhập Tên hiển thị Web, Tooltip Web và Switch Hiển thị (On/Off).</td>
+        </tr>
+        <tr>
+            <td><b>Hình ảnh sản phẩm &amp; banner</b></td>
+            <td>Image Upload Group</td>
+            <td><b>Ảnh gói (4:3)</b> ≤ 200KB + <b>Banner đầu trang (3:1)</b> ≤ 300KB + <b>Mid-page (32:9 &amp; 1:1)</b> ≤ 200KB</td>
+            <td>Upload bộ ảnh banner tiếp thị quảng bá đính kèm cho gói cước đường truyền Internet/FPT Play. Đồng bộ hiển thị banner đầu trang và banner chèn giữa nội dung trang.</td>
+        </tr>
+        <tr>
+            <td><b>Thông tin chi tiết</b></td>
+            <td>Text Area</td>
+            <td>Format Checklist (Mỗi dòng 1 mục)</td>
+            <td>Nhập thông tin chi tiết gói cước hiển thị dưới dạng danh sách chọn checklist trên thẻ gói.</td>
+        </tr>
+        <tr>
+            <td><b>Block Đặc quyền</b></td>
+            <td>Block Form</td>
+            <td>Tiêu đề <b>Max 100 ký tự</b> + Nội dung + <b>Ảnh (Max 1 ảnh)</b></td>
+            <td>Cấu hình danh sách các đặc quyền đi kèm gói cước (VD: Tốc độ vượt trội, Lắp đặt nhanh 24h, Hỗ trợ 24/7). Hỗ trợ upload 1 ảnh minh họa cho khối đặc quyền.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>d. Màn hình Cấu hình Tab 3 [FAQ] - Áp dụng Quy tắc BR-PDH-05 (Ghi đè FAQ chung)</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_faq_tab.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 6: Tab 3 [FAQ] - Quản lý FAQ đính kèm sản phẩm (Áp dụng BR-PDH-05 Ghi đè lên FAQ chung của trang)</p></div>
+
+<div class="page-break"></div>
+
+<h2>II. SUB-MODULE 2: THÔNG TIN CHECKOUT &amp; BANNER/POPUP CHECKOUT (cms-display)</h2>
+
+<h3>1. Đặc tả Use Case UC-CK-01 &amp; UC-CK-03 (Use Case Specification)</h3>
+<h4>a. Thuộc tính Use Case</h4>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>Quản lý toàn bộ giao diện đặt hàng Checkout vận hành trên duy nhất 1 kênh chuẩn mặc định. Phân thành 2 Tab chính:
+        <br/>• <b>Tab 1: Cấu hình hiển thị</b>: Phân chia 4 loại sản phẩm (Gói Internet, Camera, Gói SA, Thiết bị khác). Gói Internet chia 2 Sub-tab con (Nội dung ưu đãi &amp; Thiết bị đi kèm). Loại Thiết bị khác bổ sung Khối Thông điệp truyền thông. Cột danh sách bên trái có 2 Tab ECP &amp; FCP cùng công tắc Chọn tất cả.
+        <br/>• <b>Tab 2: Chương trình Banner &amp; Popup</b>: Quản lý danh sách các chiến dịch tiếp thị (Header Banner, Footer Banner, Popup Flash Sale) gắn theo từng gói bán áp dụng và thời gian hiệu lực.
+        </td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>Admin CMS, Biên tập viên.</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>Người dùng truy cập menu Thông tin checkout.</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>Người dùng đã đăng nhập hệ thống CMS Admin.</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>Giao diện Checkout và các chương trình Banner/Popup được đồng bộ hiển thị realtime phía khách hàng.</td>
+    </tr>
+</table>
+
+<h4>b. Diễn giải các bước thực hiện tại Tab 1 [Cấu hình hiển thị] (Step-by-step)</h4>
+<ul>
+    <li><strong>Bước 1:</strong> Truy cập menu <b>NỘI DUNG SẢN PHẨM</b> -&gt; <b>Thông tin checkout</b>.</li>
+    <li><strong>Bước 2:</strong> Mặc định nạp Tab 1 <b>[ ⚙️ Cấu hình hiển thị ]</b> (vận hành duy nhất 1 kênh chuẩn).</li>
+    <li><strong>Bước 3:</strong> Tại mục <b>"1. Cấu hình nội dung"</b>, chọn 1 trong 4 loại sản phẩm: <b>[ Gói Internet ]</b>, <b>[ Camera ]</b>, <b>[ Gói SA ]</b>, hoặc <b>[ Thiết bị khác ]</b>.</li>
+    <li><strong>Bước 4:</strong> <b>Cấu hình chi tiết theo từng Loại sản phẩm</b>:
+      <br/>• <i>Nếu chọn [ Gói Internet ]</i>: Chọn tiếp Sub-tab con <b>[ Nội dung ưu đãi ]</b> (cấu hình Tagline, Offer lines theo chu kỳ cước) hoặc <b>[ Thiết bị đi kèm &amp; Dịch vụ bổ sung ]</b> (cấu hình ONT 1G, Router Wi-Fi 6, Fsafe, Ultra Fast - gồm Icon SVG 24x24/32x32 và Nội dung max 100 char).
+      <br/>• <i>Nếu chọn [ Camera ] hoặc [ Gói SA ]</i>: Nhập trực tiếp Nội dung ưu đãi và chọn Tagline phân chia theo các block Chu kỳ cước (1 tháng, 3 tháng...).
+      <br/>• <i>Nếu chọn [ Thiết bị khác ]</i> (Modem Wi-Fi 6/7, Tivi Box, Mesh...): Nhập trực tiếp Khối Nội dung ưu đãi (không phân chia chu kỳ) và Khối <b>"2. Thông điệp truyền thông"</b> (đoạn ghi chú hiển thị dưới tóm tắt đơn hàng).
+    </li>
+    <li><strong>Bước 5:</strong> Tại dải danh sách sản phẩm bên cột trái, chọn Tab <b>[ ECP ]</b> hoặc <b>[ FCP ]</b> để lọc SKU theo hệ thống nguồn. Bấm công tắc <b>Chọn tất cả</b> (hoặc tích chọn thủ công từng SKU).</li>
+    <li><strong>Bước 6:</strong> Bấm <b>"Lưu cấu hình"</b> để xuất bản ra luồng Checkout.</li>
+</ul>
+
+<h4>c. Diễn giải các bước thực hiện tại Tab 2 [Chương trình Banner &amp; Popup] (Step-by-step)</h4>
+<ul>
+    <li><strong>Bước 1:</strong> Truy cập menu <b>NỘI DUNG SẢN PHẨM</b> -&gt; <b>Thông tin checkout</b> -&gt; chọn Tab 2 <b>[ 🖼️ Chương trình Banner &amp; Popup ]</b>.</li>
+    <li><strong>Bước 2:</strong> Bấm nút <b>"+ Thêm Chương trình mới"</b>.</li>
+    <li><strong>Bước 3:</strong> Mặc định công tắc ở vị trí <b>Toggle = Hoạt động (On)</b>. Nhập Tên chương trình, chọn tệp SKU áp dụng, chọn Header/Footer Banner và Popup Checkout.</li>
+    <li><strong>Bước 4:</strong> Nếu muốn lưu tạm dở dang: Gạt công tắc sang <b>Toggle = Nháp (Off)</b> (chỉ cần nhập Tên chương trình là lưu được Nháp).</li>
+    <li><strong>Bước 5:</strong> Bấm "Lưu", chương trình được nạp vào danh sách với Trạng thái tương ứng (Badge xanh <i>Hoạt động</i> hoặc Badge vàng <i>Nháp</i>).</li>
+</ul>
+
+<h3>2. Business Rules</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 130px;">Code</th>
+            <th>Quy tắc nghiệp vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>BR-CK-01</b></td>
+            <td>Hệ thống vận hành trên duy nhất 1 Kênh chuẩn mặc định trong Phase này. Không phân chia nhiều kênh và không áp dụng quy tắc kế thừa kênh con.</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-02</b></td>
+            <td>Gói cước hình thức Trả sau bắt buộc bị khóa cố định ở chu kỳ 1 tháng. Gói cước Trả trước cho phép cấu hình chu kỳ từ 1 đến 36 tháng.</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-03</b></td>
+            <td>Tất cả nhãn Tagline / Card Badge hiển thị trên thẻ gói cước và Checkout bắt buộc chọn từ Thư viện Badge/Tag (badge-tag). Nghiêm cấm nhập text tự do.</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-04</b></td>
+            <td><b>Quy tắc Cấu trúc Hiển thị Nội dung Checkout theo Loại Sản phẩm</b>:<br/>
+            - <b>Gói Internet</b>: Phân chia 2 Sub-tab con (<i>Nội dung ưu đãi</i> &amp; <i>Thiết bị đi kèm &amp; DV bổ sung</i>). Sub-tab Thiết bị đi kèm bao gồm trường Icon (SVG/PNG 24x24 hoặc 32x32 ≤ 50KB) và Nội dung mô tả (Max 100 char). Cấu hình ưu đãi phân theo các block Chu kỳ cước.<br/>
+            - <b>Camera &amp; Gói SA</b>: Cấu hình trực tiếp Nội dung ưu đãi và Tagline phân chia theo các block Chu kỳ cước (1 tháng, 3 tháng...).<br/>
+            - <b>Thiết bị khác (Modem Wi-Fi 6/7, Tivi Box, Mesh...)</b>: Dữ liệu nạp về không phân chia chu kỳ cước. Cấu hình trực tiếp Khối <b>Nội dung ưu đãi</b> và Khối <b>Thông điệp truyền thông</b> (Văn bản ghi chú hiển thị dưới tóm tắt đơn hàng).</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-05</b></td>
+            <td><b>Quy tắc Ưu tiên &amp; Tự động Hết hạn Chương trình Banner &amp; Popup</b>:<br/>
+            1. <i>Quy tắc Ưu tiên (khi trùng thời gian)</i>: Nếu một gói bán SKU nằm trong nhiều chương trình Banner/Popup cùng ở trạng thái Hoạt động và trùng khoảng thời gian chạy, hệ thống ưu tiên hiển thị chương trình tạo mới nhất.<br/>
+            2. <i>Quy tắc Tự động Hết hạn</i>: Khi chương trình hết hạn, hệ thống tự động ẩn khỏi Checkout; nếu gói SKU vẫn còn chương trình cũ chưa hết hạn, hệ thống tự động hiển thị lại chương trình cũ.</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-06</b></td>
+            <td><b>Quy tắc Lưu tạm Trạng thái Nháp (Draft Mode)</b>: Trạng thái "Nháp" (Toggle = Off / Nháp) cho phép nhân viên Vận hành lưu tạm thông số dở dang của một Chương trình Banner &amp; Popup mà không bắt buộc hoàn thành đầy đủ các trường thông tin. Bản ghi ở trạng thái Nháp hoàn toàn ẩn phía khách hàng.</td>
+        </tr>
+        <tr>
+            <td><b>BR-CK-07</b></td>
+            <td><b>Quy tắc Trạng thái Mặc định khi Khởi tạo</b>: Mặc định khi mở màn hình "Thêm chương trình mới", công tắc chuyển đổi trạng thái tự động được thiết lập sẵn ở vị trí <b>Toggle = Hoạt động (On)</b>.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Mô tả màn hình (Screen Description)</h3>
+
+<h4>a. Màn hình Tab 1 [Cấu hình hiển thị] - Gói Internet (Sub-tab 1 [Nội dung ưu đãi] &amp; Sub-tab 2 [Thiết bị đi kèm &amp; DV bổ sung])</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_checkout_4types.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 7: Màn hình Gói Internet - Sub-tab [Thiết bị đi kèm &amp; Dịch vụ bổ sung] (ONT 1G, Router Wi-Fi 6, Fsafe, Ultra Fast)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống (Gói Internet Checkout)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Nút loại sản phẩm [Gói Internet]</b></td>
+            <td>Segmented Button</td>
+            <td>Selected</td>
+            <td>Nạp danh sách các mã SKU gói cước đường truyền Internet ở cột trái và nạp 2 Sub-tab con ở cột phải.</td>
+        </tr>
+        <tr>
+            <td><b>Sub-tab [Nội dung ưu đãi]</b></td>
+            <td>Sub-tab Header</td>
+            <td>Sub-tab 1</td>
+            <td>Mở giao diện cấu hình Tagline, Offer lines và nội dung khuyến mãi phân chia theo từng block Chu kỳ cước (1 tháng, 3 tháng...).</td>
+        </tr>
+        <tr>
+            <td><b>Sub-tab [Thiết bị đi kèm &amp; DV bổ sung]</b></td>
+            <td>Sub-tab Header</td>
+            <td>Sub-tab 2</td>
+            <td>Mở giao diện cấu hình thông tin hiển thị các thiết bị đi kèm (ONT 1 port 1G, Router Wi-Fi 6) và dịch vụ gia tăng (Fsafe, Ultra Fast).</td>
+        </tr>
+        <tr>
+            <td><b>Icon</b></td>
+            <td>Icon Select / Image SVG</td>
+            <td>SVG/PNG `24x24px` hoặc `32x32px` ≤ 50KB</td>
+            <td>Hiển thị biểu tượng nhỏ minh họa trực quan phía trước tên của từng thiết bị/dịch vụ đi kèm (icon ONT, Wi-Fi 6, Fsafe, Ultra Fast) trên Checkout.</td>
+        </tr>
+        <tr>
+            <td><b>Nội dung (Mô tả tính năng)</b></td>
+            <td>Input Text</td>
+            <td><b>Tối đa 100 ký tự</b></td>
+            <td>Cho phép Vận hành nhập/chỉnh sửa dòng chữ mô tả ngắn tính năng nổi bật hiển thị ngay dưới tên thiết bị/dịch vụ (VD: *"Thiết bị đầu cuối quang 1 cổng 1Gbps"*, *"Router Wi-Fi 6 tốc độ cao, phủ sóng rộng"*).</td>
+        </tr>
+        <tr>
+            <td><b>Tab Nguồn ECP / FCP (Cột trái)</b></td>
+            <td>Segmented Tabs</td>
+            <td><b>ECP | FCP</b></td>
+            <td>Lọc danh sách sản phẩm SKU theo hệ thống nguồn backend ECP hoặc FCP. Nút Công tắc "Chọn tất cả" chỉ chọn các sản phẩm thuộc Tab đang mở.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>b. Màn hình Tab 1 [Cấu hình hiển thị] - Loại sản phẩm Camera (Cấu hình Nội dung Ưu đãi theo Chu kỳ cước)</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_checkout_camera.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 8: Màn hình Loại sản phẩm Camera - Cấu hình Nội dung Ưu đãi phân chia theo các Block Chu kỳ cước (CAM-IQ3, CAM-IQ4S)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống (Loại sản phẩm Camera)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Cấu hình chu kỳ</b></td>
+            <td>Select Dropdown (Disabled)</td>
+            <td>Read-Only / Fixed Value</td>
+            <td>Hiển thị chu kỳ đóng cước áp dụng (1 tháng, 3 tháng, 6 tháng, 12 tháng). Ô bị vô hiệu hóa (Disabled), khóa không cho phép thay đổi do chu kỳ cước được cố định từ dữ liệu gốc QLCS theo BR-CK-02.</td>
+        </tr>
+        <tr>
+            <td><b>Khối Chu kỳ cước</b></td>
+            <td>Block Container</td>
+            <td>Theo từng chu kỳ</td>
+            <td>Khối hiển thị chứa bộ đôi cài đặt nhãn Tagline và dòng văn bản nội dung ưu đãi riêng biệt cho chu kỳ cước đang chọn.</td>
+        </tr>
+        <tr>
+            <td><b>Tag line</b></td>
+            <td>Select Dropdown</td>
+            <td>Select từ Thư viện Badge/Tag (badge-tag)</td>
+            <td>Chọn nhãn Tagline thương mại nổi bật (VD: *"Ưu đãi 300k Camera"*, *"Không có tag"*) hiển thị ở góc card cước/gói lưu trữ Camera.</td>
+        </tr>
+        <tr>
+            <td><b>Nội dung (Nội dung ưu đãi)</b></td>
+            <td>Input Text</td>
+            <td><b>Tối đa 100 ký tự</b></td>
+            <td>Nhập dòng chữ mô tả ưu đãi cụ thể áp dụng cho chu kỳ cước đang chọn (VD: *"Miễn phí lắp đặt Camera AI"*).</td>
+        </tr>
+        <tr>
+            <td><b>Nút "+ Thêm nội dung"</b></td>
+            <td>Button Link</td>
+            <td>Multi lines</td>
+            <td>Cho phép bấm để khởi tạo thêm dòng thông điệp ưu đãi cho chu kỳ cước tương ứng.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>c. Màn hình Tab 1 [Cấu hình hiển thị] - Loại sản phẩm Gói SA (Cấu hình Nội dung Ưu đãi theo Chu kỳ cước)</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_checkout_sa.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 9: Màn hình Loại sản phẩm Gói SA - Cấu hình Nội dung Ưu đãi phân chia theo các Block Chu kỳ cước (SA-SMAX)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống (Loại sản phẩm Gói SA)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Nút loại sản phẩm [Gói SA]</b></td>
+            <td>Segmented Button</td>
+            <td>Selected</td>
+            <td>Nạp danh sách các mã SKU dịch vụ gia tăng / ứng dụng FPT Play (VD: SA-SMAX) ở cột trái.</td>
+        </tr>
+        <tr>
+            <td><b>Cấu hình chu kỳ</b></td>
+            <td>Select Dropdown (Disabled)</td>
+            <td>Read-Only / Fixed Value</td>
+            <td>Hiển thị chu kỳ gói SA cố định (1 tháng, 3 tháng...). Ô bị vô hiệu hóa (Disabled) không cho sửa.</td>
+        </tr>
+        <tr>
+            <td><b>Tag line &amp; Nội dung</b></td>
+            <td>Form Group</td>
+            <td>Select Tag + Input Text (Max 100 char)</td>
+            <td>Cấu hình nhãn Tagline (VD: *"Không có tag"*) và dòng văn bản ưu đãi (VD: *"Miễn phí Đầu thu FPT Play Box"*) cho từng chu kỳ.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>d. Màn hình Tab 1 [Cấu hình hiển thị] - Loại sản phẩm Thiết bị khác (Modem, Tivi Box...) - Cấu hình Ưu đãi &amp; Thông điệp Truyền thông</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_checkout_other_dev.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 10: Màn hình Loại sản phẩm Thiết bị khác - Cấu hình Khối "NỘI DUNG ƯU ĐÃI" và Khối "2. Thông điệp truyền thông" (DEV-WIFI7, MODEM-AX1800GZ)</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống (Loại sản phẩm Thiết bị khác)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Nút loại sản phẩm [Thiết bị khác]</b></td>
+            <td>Segmented Button</td>
+            <td>Selected</td>
+            <td>Nạp danh sách các mã SKU thiết bị bán lẻ / đi kèm (VD: DEV-WIFI7, MODEM-AX1800GZ - Modem Wi-Fi 6, Tivi Box, Mesh...). Dữ liệu nạp về <b>không phân chia chu kỳ cước</b>.</td>
+        </tr>
+        <tr>
+            <td><b>Khối 1: NỘI DUNG ƯU ĐÃI</b></td>
+            <td>Form Container</td>
+            <td>Direct config (No cycle)</td>
+            <td>Cấu hình trực tiếp dòng ưu đãi cho thiết bị mà không phân chia chu kỳ (VD: *"Miễn phí lắp đặt Router Wi-Fi 7"*).</td>
+        </tr>
+        <tr>
+            <td><b>Nút "+ Thêm nội dung"</b></td>
+            <td>Button Link</td>
+            <td>-</td>
+            <td>Bổ sung thêm dòng thông điệp ưu đãi cho thiết bị đang chọn.</td>
+        </tr>
+        <tr>
+            <td><b>Khối 2: Thông điệp truyền thông</b></td>
+            <td>Text Area Group</td>
+            <td>Max 1000 ký tự</td>
+            <td><b>Văn bản hiển thị dưới tóm tắt đơn hàng</b>: Đoạn văn bản ghi chú/chính sách lưu ý khách hàng trên trang Checkout (VD: *"Xin vui lòng kiểm tra kỹ thông tin đơn hàng trước khi thanh toán."*).</td>
+        </tr>
+        <tr>
+            <td><b>Nút "Lưu cấu hình"</b></td>
+            <td>Primary Button</td>
+            <td>Save Action</td>
+            <td>Lưu và áp dụng ngay nội dung ưu đãi + thông điệp truyền thông cho các SKU thiết bị được chọn.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>e. Màn hình Tab 2 [Chương trình Banner &amp; Popup] - Bảng đặc tả Gộp Cấu hình Trường Nhập liệu &amp; Dropdown Select</h4>
+<div style="text-align: center; margin: 12pt 0;"><img src="c:\Users\Admin\OneDrive\Desktop\FPT\result_docs\images\screen_banner_popup_tab.png" style="width: 100%; max-width: 680px; height: auto; border: 1px solid #cbd5e1;"/><p style="font-size: 9.5pt; color: #475569; font-style: italic; margin-top: 4pt;">Hình 11: Màn hình Tab 2 [Chương trình Banner &amp; Popup] - Danh sách chiến dịch tiếp thị Checkout và Form Thêm mới</p></div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Nhóm Trường thông tin / Ô nhập liệu</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc / Validation</th>
+            <th>Hành vi hệ thống áp dụng (Thêm mới Banner &amp; Popup)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>1. THÔNG TIN CHUNG &amp; ĐIỀU KIỆN ÁP DỤNG</b></td>
+            <td><b>Group Panel</b></td>
+            <td>-</td>
+            <td>Khối cài đặt thông số định danh và tệp gói bán áp dụng chiến dịch.</td>
+        </tr>
+        <tr>
+            <td><b>• Tên chương trình hiển thị *</b></td>
+            <td>Input Text</td>
+            <td><b>Bắt buộc nhập</b> (Max 100 ký tự)</td>
+            <td>Nhập tên chương trình tiếp thị định danh (VD: *"Ưu đãi Combo Thể thao Hè 2026"*).</td>
+        </tr>
+        <tr>
+            <td><b>• CHỌN GÓI BÁN ÁP DỤNG (SKU) *</b></td>
+            <td>Multi Checkbox List</td>
+            <td>Bắt buộc chọn <b>≥ 1 SKU</b> khi bật <i>Hoạt động</i></td>
+            <td>Danh sách chọn các mã SKU gói bán (Internet, Camera, TV...). Hỗ trợ ô lọc mã/tên SKU và tab loại sản phẩm.</td>
+        </tr>
+        <tr>
+            <td><b>2. CẤU HÌNH BANNER (Header / Footer / Quảng bá)</b></td>
+            <td><b>Select Dropdown</b></td>
+            <td>Select từ Quản lý Banner/Popup tổng</td>
+            <td><b>Áp dụng chung cho tất cả vị trí Banner</b> (Banner đầu trang, Banner chân trang ở các bước Đăng ký, Thanh toán &amp; Hoàn tất). Mặc định: <code>— Không hiển thị —</code>.</td>
+        </tr>
+        <tr>
+            <td><b>3. CẤU HÌNH POP-UP (Trang Đăng ký, Thanh toán, Voucher, Tri ân)</b></td>
+            <td><b>Form Group</b></td>
+            <td>-</td>
+            <td><b>Áp dụng chung cho tất cả các loại Pop-up</b> (Popup trang đăng ký, Modal Popup thanh toán, Popup áp Voucher, Popup tri ân hoàn tất).</td>
+        </tr>
+        <tr>
+            <td><b>• Pop-up hiển thị</b></td>
+            <td>Select Dropdown</td>
+            <td>Select từ Quản lý Banner/Popup tổng</td>
+            <td>Chọn file/asset Popup hiển thị từ Menu Quản lý Banner &amp; Popup tổng. Mặc định: <code>— Không hiển thị —</code>.</td>
+        </tr>
+        <tr>
+            <td><b>• Tần suất hiển thị Pop-up</b></td>
+            <td>Radio Group</td>
+            <td><code>⚪ 1 lần/phiên</code> hoặc <code>⚪ Mỗi lần vào</code></td>
+            <td>Cấu hình tần suất bật Popup (Hiển thị 1 lần duy nhất trong cả phiên hay bật lại mỗi lần truy cập).</td>
+        </tr>
+        <tr>
+            <td><b>• Delay mở (giây)</b></td>
+            <td>Input Number</td>
+            <td>Số nguyên ≥ 0 (Mặc định = 0)</td>
+            <td>Cấu hình số giây hoãn lại trước khi bật Popup ra màn hình.</td>
+        </tr>
+        <tr>
+            <td><b>• Tự tắt sau (giây)</b></td>
+            <td>Input Number</td>
+            <td>Số nguyên ≥ 0 (Mặc định = 0)</td>
+            <td>Cấu hình số giây tự động đóng Popup.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>III. SUB-MODULE 3: PHƯƠNG THỨC THANH TOÁN (payment-methods)</h2>
+
+<h3>1. Đặc tả Use Case (Use Case Specification)</h3>
+<h4>a. Thuộc tính Use Case</h4>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>Quản lý danh sách các cổng thanh toán, ví điện tử (Momo, VNPay, ZaloPay, Foxpay), ngân hàng liên kết, thanh toán thẻ quốc tế (Visa/Mastercard) và hình thức COD/Thu tiền tại nhà áp dụng trên luồng Checkout. Cung cấp 2 Tab chức năng phân định rõ ràng (Tab 1: Cấu hình Ưu đãi &amp; Mô tả; Tab 2: Danh sách cấu hình PTTT / Nhật ký lưu vết). Áp dụng quy tắc cố định thứ tự cổng thanh toán từ Payment Hub, BR-PM-05 cấu hình bật/tắt PTTT hàng loạt và Bảng Master Data PTTT chuẩn cho Developer.</td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>Super Admin, Admin CMS.</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>Người dùng chọn menu Nội dung sản phẩm -&gt; Phương thức Thanh toán.</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>Người dùng đã đăng nhập hệ thống CMS Admin.</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>Danh sách cổng thanh toán, trạng thái Bật/Tắt, khoảng thời gian áp dụng và các dòng ưu đãi được đồng bộ realtime lên luồng Checkout.</td>
+    </tr>
+</table>
+
+<h4>b. Diễn giải các bước thực hiện (Step-by-step)</h4>
+<ul>
+    <li><strong>TAB 1: Cấu hình Ưu đãi &amp; Mô tả:</strong>
+        <br/>• <b>Bước 1:</b> Truy cập menu <b>NỘI DUNG SẢN PHẨM</b> -&gt; <b>Phương thức Thanh toán</b> -&gt; chọn Tab 1 <b>[ Cấu hình Ưu đãi &amp; Mô tả ]</b>.
+        <br/>• <b>Bước 2:</b> Chọn Tab Nguồn ECP / FCP ở cột trái, tìm kiếm hoặc tích chọn đồng thời nhiều gói cước SKU áp dụng (hoặc bật công tắc <i>Chọn tất cả</i>).
+        <br/>• <b>Bước 3:</b> Khung cấu hình bên phải nạp tự động thông tin cấu hình PTTT của gói cước ĐẦU TIÊN trong danh sách chọn, kèm dòng thông báo: <i>"Hiển thị cấu hình của gói đầu tiên — lưu sẽ áp dụng đồng loạt cho tất cả các gói đã chọn."</i>
+        <br/>• <b>Bước 4:</b> Bật/Tắt công tắc PTTT (VietQR, Ví MoMo, ZaloPay, Foxpay, Visa/Mastercard, COD). Khi Bật: chọn Khoảng thời gian áp dụng (<code>DateRangePicker</code>) và bấm `+ Thêm dòng` để nhập các Mô tả ưu đãi đính kèm.
+        <br/>• <b>Bước 5:</b> Bấm <b>"Lưu cấu hình"</b>. Hệ thống ghi đè áp dụng đồng loạt cấu hình mới cho tất cả các gói cước đã chọn.
+    </li>
+    <li><strong>TAB 2: Danh sách cấu hình PTTT (Nhật ký ghi vết):</strong>
+        <br/>• <b>Bước 1:</b> Click chọn Tab 2 <b>[ Danh sách cấu hình PTTT ]</b>.
+        <br/>• <b>Bước 2:</b> Dải thanh công cụ phía trên gồm <b>Search Input</b> (tìm mã/tên SKU, PTTT, người thực hiện) và <b>Dropdown Lọc PTTT</b> (nạp từ Bảng Master Data 8 loại PTTT).
+        <br/>• <b>Bước 3:</b> Màn hình nạp Bảng Nhật ký lưu vết thay đổi cấu hình PTTT gồm các cột: STT, PTTT TÁC ĐỘNG, THỜI GIAN THỰC HIỆN (DD/MM/YYYY HH:mm:ss), DANH SÁCH GÓI CƯỚC SKU ÁP DỤNG (Badge list +N), NGƯỜI THỰC HIỆN, THAO TÁC (Sửa ✏️ / Xóa 🗑️).
+        <br/>• <b>Bước 4:</b> Bấm `✏️ Sửa` trên dòng PTTT gom nhóm để mở Drawer gỡ bớt/thêm bớt gói cước SKU ra khỏi PTTT đó nhanh chóng.
+    </li>
+</ul>
+
+<h3>2. Business Rules</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 130px;">Code</th>
+            <th>Quy tắc nghiệp vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>BR-PM-01</b></td>
+            <td><b>Phân chia 2 Tab Chức năng PTTT</b>:<br/>
+            - <i>Tab 1 (Cấu hình Ưu đãi &amp; Mô tả)</i>: Cấu hình Bật/Tắt PTTT, khoảng thời gian áp dụng (`DateRangePicker`) và nhập nhiều dòng mô tả ưu đãi đính kèm gói cước SKU.<br/>
+            - <i>Tab 2 (Danh sách cấu hình PTTT)</i>: Bảng Nhật ký ghi vết toàn bộ các thay đổi cấu hình PTTT đã áp dụng trong hệ thống.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PM-02</b></td>
+            <td><b>Không hỗ trợ Sắp xếp Thứ tự PTTT (Fixed Order Rule)</b>:<br/>
+            - Danh sách các Phương thức Thanh toán (VietQR, Ví MoMo, Ví ZaloPay, Foxpay...) được tích hợp cố định từ Payment Hub backend.<br/>
+            - <b>Hệ thống KHÔNG có tính năng sắp xếp thứ tự hiển thị PTTT</b> (nghiêm cấm kéo thả hay nhập số thứ tự cho PTTT). Thứ tự cổng thanh toán hiển thị trên Checkout được quy định mặc định bởi Payment Hub.<br/>
+            - Tính năng Sắp xếp (Sort ⇅) duy nhất trong module này là <b>sắp xếp danh sách Nhật ký tại Tab 2</b> theo <i>Thời gian</i> hoặc <i>Người thực hiện</i>.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PM-03</b></td>
+            <td><b>Ràng buộc Trạng thái PTTT, Thời gian &amp; Ưu đãi</b>:<br/>
+            - Khi Switch PTTT ở trạng thái <code>Bật</code>: Cho phép chọn Khoảng thời gian áp dụng và nhập nhiều dòng Mô tả ưu đãi (`+ Thêm dòng` / 🗑️).<br/>
+            - Khi Switch PTTT ở trạng thái <code>Tắt</code>: Ẩn/Khóa chọn thời gian và mô tả ưu đãi. Gói cước bị tắt tất cả PTTT sẽ hiển thị Badge `Tắt PTTT` màu đỏ trên danh sách. Đính kèm nhãn <code>Nguồn: Payment Hub</code>.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PM-04</b></td>
+            <td><b>Lưu vết Nhật ký, Tra cứu Audit Log &amp; Tự động Gom nhóm PTTT</b>:<br/>
+            - <i>Ghi vết tự động</i>: Mọi thao tác Thêm mới / Chỉnh sửa / Xóa cấu hình PTTT phải được tự động ghi vết vào Tab 2. Thông tin gồm: PTTT tác động, Thời gian (`DD/MM/YYYY HH:mm:ss`), Danh sách SKU áp dụng (Badge +N nếu &gt; 5 SKU), Người thực hiện, Nút Sửa/Xóa.<br/>
+            - <i>Tự động Gom nhóm theo PTTT</i>: Khi cấu hình hàng loạt nhiều gói SKU cho cùng một PTTT (VD: VietQR), hệ thống tự động gom nhóm thành 1 dòng bản ghi duy nhất.<br/>
+            - <i>Chỉnh sửa &amp; Gỡ bỏ SKU nhanh</i>: Bấm `✏️ Sửa` trên dòng PTTT gom nhóm để mở Drawer gỡ bớt/bỏ tích chọn mã SKU ra khỏi PTTT đó một cách nhanh chóng.</td>
+        </tr>
+        <tr>
+            <td><b>BR-PM-05</b></td>
+            <td><b>Quy tắc Cấu hình &amp; Bật/Tắt PTTT Hàng loạt khi Chọn nhiều SKU (Batch Apply Rule)</b>:<br/>
+            - Khi người dùng tích chọn đồng thời N gói cước SKU bên cột trái (Multi-select SKU hoặc bấm công tắc <i>Chọn tất cả</i>), khung bên phải hiển thị dòng thông báo: <i>"Hiển thị cấu hình của gói đầu tiên — lưu sẽ áp dụng đồng loạt cho tất cả các gói đã chọn."</i><br/>
+            - <i>Nạp hiển thị mặc định</i>: Khung bên phải tự động nạp trạng thái cấu hình PTTT của gói cước ĐẦU TIÊN trong danh sách chọn.<br/>
+            - <i>Áp dụng hàng loạt khi Lưu</i>: Khi người dùng Bật/Tắt PTTT hoặc chỉnh sửa thời gian/mô tả ưu đãi và bấm <b>"Lưu cấu hình"</b>, hệ thống sẽ ghi đè áp dụng đồng loạt toàn bộ cấu hình PTTT mới này cho TẤT CẢ các gói SKU đã được tích chọn.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Mô tả màn hình (Screen Description) &amp; Master Data cho Developer</h3>
+
+<h4>a. Bảng Đặc tả Chi tiết các Trường Thông tin Màn hình Sub-module Phương thức Thanh toán</h4>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc / Validation</th>
+            <th>Hành vi hệ thống (Sub-module Phương thức Thanh toán)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Tab Switcher Cấp 1</b></td>
+            <td>Tab Header</td>
+            <td><b>Cấu hình Ưu đãi &amp; Mô tả | Danh sách cấu hình PTTT</b></td>
+            <td>Chuyển đổi giữa giao diện cấu hình ưu đãi/thời gian PTTT cho gói cước và giao diện bảng nhật ký lưu vết lịch sử tác động.</td>
+        </tr>
+        <tr>
+            <td><b>Switch Toggle PTTT (Tab 1)</b></td>
+            <td>Switch Toggle</td>
+            <td>Boolean (On/Off)</td>
+            <td>Bật/Tắt kích hoạt PTTT cho gói cước đang chọn trên luồng Checkout. Khi Tắt, hiển thị Badge `Tắt PTTT` màu đỏ.</td>
+        </tr>
+        <tr>
+            <td><b>Khoảng thời gian áp dụng</b></td>
+            <td>DateRangePicker</td>
+            <td>dd/MM/yyyy - dd/MM/yyyy</td>
+            <td>Xác định khung thời gian PTTT và ưu đãi có hiệu lực trên Checkout. Chỉ sáng khi Switch Toggle = Bật.</td>
+        </tr>
+        <tr>
+            <td><b>Mô tả ưu đãi đính kèm</b></td>
+            <td>Input Text List</td>
+            <td>Max 150 char/dòng (`+ Thêm dòng` / 🗑️)</td>
+            <td>Cho phép nhập nhiều dòng mô tả chương trình khuyến mãi đính kèm khi khách hàng chọn PTTT tương ứng.</td>
+        </tr>
+        <tr>
+            <td><b>Search Input (Tab 2)</b></td>
+            <td>Input Text</td>
+            <td>Max 100 ký tự</td>
+            <td>Tìm kiếm từ khóa theo Mã/Tên gói cước SKU, Phương thức thanh toán tác động, Tên người thực hiện.</td>
+        </tr>
+        <tr>
+            <td><b>Select Dropdown Lọc PTTT (Tab 2)</b></td>
+            <td>Select Dropdown</td>
+            <td>Select từ Bảng Master Data PTTT</td>
+            <td>Dropdown lọc danh sách nhật ký theo từng loại Phương thức thanh toán (VietQR, Momo, ZaloPay, COD, ATM, VISA, Hệ thống...). Mặc định = `Tất cả PTTT`.</td>
+        </tr>
+        <tr>
+            <td><b>Bảng Nhật ký cấu hình (Tab 2)</b></td>
+            <td>Data Table</td>
+            <td>6 cột thông tin nhật ký</td>
+            <td>Nạp toàn bộ lịch sử thay đổi cấu hình PTTT. Hỗ trợ Tìm kiếm từ khóa, Lọc loại PTTT, Sắp xếp (Sort ⇅) theo <b>Thời gian</b> hoặc <b>Người thực hiện</b> <i>(không sắp xếp thứ tự PTTT)</i>. Bấm `✏️ Sửa` trên dòng PTTT để mở Drawer gỡ bớt gói SKU.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>b. BẢNG MASTER DATA CÁC PHƯƠNG THỨC THANH TOÁN (Note dành cho Developer Add Cứng / Sync Backend)</h4>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 50px;">STT / Value ID</th>
+            <th style="width: 130px;">Mã PTTT (Code)</th>
+            <th style="width: 200px;">Tên hiển thị CMS / Filter</th>
+            <th style="width: 220px;">Tên hiển thị Kênh bán Checkout</th>
+            <th>Ghi chú Developer / Nguồn dữ liệu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0</td>
+            <td><code>ALL</code></td>
+            <td><b>Tất cả PTTT</b></td>
+            <td>-</td>
+            <td>Option mặc định dùng cho Dropdown Filter (Lọc tất cả các bản ghi nhật ký).</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td><code>VIETQR</code></td>
+            <td><b>VietQR</b></td>
+            <td>Thanh toán bằng VietQR</td>
+            <td>Cổng thanh toán quét mã QR Ngân hàng (Payment Hub).</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><code>MOMO</code></td>
+            <td><b>Momo</b></td>
+            <td>Ví điện tử Momo</td>
+            <td>Cổng thanh toán Ví điện tử MoMo.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><code>BANK_TRANSFER</code></td>
+            <td><b>Chuyển khoản nhanh</b></td>
+            <td>Chuyển khoản nhanh</td>
+            <td>Chuyển khoản ngân hàng trực tiếp.</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><code>ZALOPAY</code></td>
+            <td><b>ZaloPay</b></td>
+            <td>Ví Zalopay</td>
+            <td>Cổng thanh toán Ví điện tử ZaloPay.</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td><code>COD</code></td>
+            <td><b>COD</b></td>
+            <td>Thanh toán khi triển khai (COD)</td>
+            <td>Thanh toán tiền mặt cho kỹ thuật viên khi triển khai lắp đặt.</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td><code>ATM</code></td>
+            <td><b>ATM</b></td>
+            <td>Thẻ ATM</td>
+            <td>Thẻ ATM nội địa (Cổng Napas / Payment Hub).</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td><code>VISA</code></td>
+            <td><b>VISA / Mastercard</b></td>
+            <td>Thẻ quốc tế</td>
+            <td>Thẻ thanh toán quốc tế (Visa / Mastercard / JCB).</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td><code>SYSTEM</code></td>
+            <td><b>Hệ thống</b></td>
+            <td>-</td>
+            <td>Nhãn ghi vết dành cho các bản ghi nhật ký được tự động tác động bởi hệ thống backend.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h2>IV. SUB-MODULE 4: QUẢN LÝ BADGE/TAG (badge-tag)</h2>
+
+<h3>1. Đặc tả Use Case (Use Case Specification)</h3>
+<h4>a. Thuộc tính Use Case</h4>
+<table class="usecase-table">
+    <tr>
+        <td class="label">Description</td>
+        <td>Thư viện quản lý các nhãn thương mại nổi bật (Tag Nổi Bật / Card Badge / Promotion Tag) tập trung dùng chung cho toàn bộ hệ thống. Cho phép khởi tạo nhãn, thiết lập mã màu nền (Background Color), mã màu chữ (Text Color), Icon đính kèm và phân loại phạm vi hiển thị (Card gói cước, Trang chi tiết sản phẩm, Màn hình Checkout). Dữ liệu Tag này được liên kết trực tiếp để chọn tại các Dropdown cấu hình Tagline/Badge của Sub-module 1 và Sub-module 2. Áp dụng BR-TAG-02 về Pop-up Cảnh báo gỡ liên kết tag khỏi các vị trí khi thực hiện xóa.</td>
+    </tr>
+    <tr>
+        <td class="label">Actor</td>
+        <td>Admin CMS, Biên tập viên.</td>
+    </tr>
+    <tr>
+        <td class="label">Trigger</td>
+        <td>Người dùng chọn menu Nội dung sản phẩm -&gt; Quản lý Badge/Tag.</td>
+    </tr>
+    <tr>
+        <td class="label">Pre-condition</td>
+        <td>Người dùng đã đăng nhập hệ thống CMS Admin.</td>
+    </tr>
+    <tr>
+        <td class="label">Post-condition</td>
+        <td>Mã Badge/Tag mới xuất hiện sẵn sàng trong Thư viện dùng chung hoặc bị xóa gỡ liên kết.</td>
+    </tr>
+</table>
+
+<h4>b. Diễn giải các bước thực hiện (Step-by-step)</h4>
+<ul>
+    <li><strong>Bước 1:</strong> Truy cập menu <b>NỘI DUNG SẢN PHẨM</b> -&gt; <b>Quản lý Badge/Tag</b>.</li>
+    <li><strong>Bước 2:</strong> Bấm nút <b>"+ Tạo mới Tag"</b> (hoặc bấm nút Sửa ✏️ / Xóa 🗑️ trên từng dòng).</li>
+    <li><strong>Bước 3:</strong> Khi bấm Xóa (🗑️) một Badge/Tag: Hệ thống bật Modal Pop-up Cảnh báo xác nhận với tiêu đề `Xóa Badge/Tag?` và thông điệp: <i>`Badge "[Tên Badge/Tag]" sẽ bị xóa khỏi thư viện. Nơi đang dùng badge này (Card gói / Trang chi tiết / Check out) sẽ không còn hiển thị tag.`</i></li>
+    <li><strong>Bước 4:</strong> Người dùng bấm nút <b>"Hủy"</b> (Hủy bỏ xóa) hoặc <b>"Xác nhận"</b> (Đồng ý xóa hẳn khỏi thư viện và gỡ tag khỏi các nơi đang dùng).</li>
+</ul>
+
+<h3>2. Business Rules</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th style="width: 130px;">Code</th>
+            <th>Quy tắc nghiệp vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>BR-TAG-01</b></td>
+            <td>Mã Tag và Tên Tag không được trùng lặp trong cơ sở dữ liệu thư viện dùng chung.</td>
+        </tr>
+        <tr>
+            <td><b>BR-TAG-02</b></td>
+            <td><b>Quy tắc Xóa &amp; Pop-up Cảnh báo Gỡ liên kết Badge/Tag</b>:<br/>
+            - Khi người dùng thực hiện thao tác Xóa (🗑️) một Badge/Tag đang gắn với bất kỳ gói cước hoặc vị trí hiển thị nào (Card gói / Trang chi tiết / Checkout), hệ thống bắt buộc bật Modal Pop-up Cảnh báo xác nhận:<br/>
+            &nbsp;&nbsp;• <i>Tiêu đề Pop-up</i>: <code>Xóa Badge/Tag?</code><br/>
+            &nbsp;&nbsp;• <i>Thông điệp Cảnh báo</i>: <code>Badge "[Tên Badge/Tag]" sẽ bị xóa khỏi thư viện. Nơi đang dùng badge này (Card gói / Trang chi tiết / Check out) sẽ không còn hiển thị tag.</code><br/>
+            &nbsp;&nbsp;• <i>Nút hành động</i>: <code>Hủy</code> (Hủy bỏ thao tác xóa) và <code>Xác nhận</code> (Đồng ý xóa hẳn khỏi thư viện đồng thời tự động gỡ nhãn tag tại toàn bộ các vị trí/gói cước đang liên kết).</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>3. Mô tả màn hình (Screen Description)</h3>
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Field / Nút Thao tác</th>
+            <th>Kiểu dữ liệu</th>
+            <th>Ràng buộc</th>
+            <th>Hành vi hệ thống</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>Input Tên Badge/Tag</b></td>
+            <td>Input Text</td>
+            <td>Max 50 ký tự</td>
+            <td>Tên nhãn hiển thị trên thẻ gói cước và Checkout.</td>
+        </tr>
+        <tr>
+            <td><b>Color Picker Màu nền (Background)</b></td>
+            <td>Color Input</td>
+            <td>Hex code (#HEX)</td>
+            <td>Thiết lập màu nền hiển thị của Tag.</td>
+        </tr>
+        <tr>
+            <td><b>Color Picker Màu chữ (Text Color)</b></td>
+            <td>Color Input</td>
+            <td>Hex code (#HEX)</td>
+            <td>Thiết lập màu chữ hiển thị của Tag.</td>
+        </tr>
+        <tr>
+            <td><b>Checkbox Phạm vi áp dụng</b></td>
+            <td>Multi Checkbox</td>
+            <td>Card, Detail, Checkout</td>
+            <td>Phân loại danh sách Tag xuất hiện tại các Dropdown cấu hình tương ứng.</td>
+        </tr>
+        <tr>
+            <td><b>Nút Xóa (🗑️) trên dòng</b></td>
+            <td>Table Action Icon</td>
+            <td><b>Trigger Pop-up Cảnh báo BR-TAG-02</b></td>
+            <td>Bật Modal Pop-up xác nhận xóa kèm thông điệp cảnh báo gỡ tag khỏi Card gói / Trang chi tiết / Checkout.</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<h1>IV. CÁC YÊU CẦU PHI CHỨC NĂNG</h1>
+
+<h3>1. Hiệu năng &amp; Khả năng tải (Performance)</h3>
+<ul>
+    <li>Thời gian phản hồi API CMS Admin: Thời gian lưu và nạp dữ liệu cấu hình danh sách sản phẩm ECP/FCP &lt; 500ms.</li>
+    <li>Thời gian đồng bộ Kênh bán: Dữ liệu cấu hình mới được cache và đồng bộ realtime sang Luồng Checkout trong vòng &lt; 2 giây.</li>
+</ul>
+
+<h3>2. Bảo mật (Security)</h3>
+<ul>
+    <li>Kiểm soát truy cập (RBAC): Bắt buộc kiểm tra token xác thực và phân quyền tài khoản trước khi thực thi các tác vụ Sửa/Lưu/Xóa.</li>
+    <li>Audit Log: Ghi log chi tiết lịch sử thay đổi thông tin sản phẩm ECP/FCP, cấu hình Checkout và thư viện Tag.</li>
+</ul>
+
+<h3>3. Trải nghiệm người dùng (UI/UX)</h3>
+<ul>
+    <li>Giao diện chuẩn FPT Design System (Light Mode): Primary Hex #f36523 (FPT Orange), Secondary Hex #1565C0, Neutral Hex #1E293B, Font Inter/SF Pro Display.</li>
+    <li>Badge ECP màu xanh dương (#1d4ed8 / info), Badge FCP màu vàng nâu (#ca8a04 / warning).</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h1>V. PHỤ LỤC</h1>
+<ul>
+    <li>Tài liệu quy chuẩn FPT Design System V4.0.</li>
+    <li>Tài liệu tích hợp API QLCS Product Hub (ECP / FCP Integration Specs).</li>
+</ul>
+
+</body>
+</html>

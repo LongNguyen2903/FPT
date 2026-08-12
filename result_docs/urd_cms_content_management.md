@@ -1,4 +1,4 @@
-﻿| ![FPT Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg) | FPT.VN URD – User requirements document |
+| ![FPT Logo](https://upload.wikimedia.org/wikipedia/commons/1/11/FPT_logo.svg) | FPT.VN URD – User requirements document |
 | ----------------------------------------------------------------------------- | --------------------------------------- |
 | **Mã hiệu:** URD-CMS-01 **Phiên bản:** 1.3 **Ngày:** 27/05/2026               |
 
@@ -10,6 +10,7 @@
 | 26/05/2026 | 1.1     | BA Team | QA Team  | PM       | [U] Cập nhật thiết kế Cấu hình Thông tin hay (Tag Mapping) gộp vào module Tin tức dạng Tab và đổi giao diện cấu hình sang cơ chế Slide-over Drawer. |
 | 27/05/2026 | 1.2     | BA Team | QA Team  | PM       | [U] Tách biệt Cấu hình Thông tin hay thành 2 Tab trong Tin tức: Tab Quản lý Tags (CRUD tag) và Tab Tags Mapping (Thiết lập mapping qua Drawer bằng cách chọn Tag có sẵn từ dropdown). |
 | 27/05/2026 | 1.3     | BA Team | QA Team  | PM       | [A] Bổ sung Phụ lục VI đặc tả cấu trúc & sections chi tiết cho 5 LDP template tiêu chuẩn (Camera AI, Campaign Wi-Fi 7, Internet, SA, Thu Lead) và cơ chế tìm kiếm/phân loại. |
+| 11/08/2026 | 1.4     | BA Team | QA Team  | PM       | [U] Cập nhật quy tắc tương tác Loại Popup (UC-PP-01): Khi chọn "Trang Checkout", tự động vô hiệu hóa (disable) trường "Trang áp dụng hiển thị" và toàn bộ khối "Hành vi hiển thị". |
 
 ---
 
@@ -303,46 +304,48 @@
 
 ---
 
-## 7. Quản lý Popup
+## 7. Quản lý Popup (UC-PP-01)
 
-| Description    | Chức năng cho phép người dùng thiết lập và cấu hình các Popup quảng cáo nổi (Modal popup), cài đặt thời gian chạy, kênh bán áp dụng, tải ảnh và cấu hình link điều hướng kèm UTM Tracking. |
+| Description    | Chức năng cho phép người dùng khởi tạo, cấu hình nội dung và điều kiện hiển thị của các thông báo nổi (Pop-up Modal / Bottom Sheet tiếp thị/khuyến mãi) ngoài Website/App. Hỗ trợ chọn Vị trí hiển thị (Trang thường - Menu trang, Trang Checkout), cấu hình Kiểu kích hoạt, Tần suất hiển thị và Thời gian tự đóng. Tích hợp cơ chế tự động vô hiệu hóa Trang áp dụng hiển thị và khối Hành vi hiển thị khi chọn Vị trí Checkout. |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Actor          | Quản trị viên hệ thống, Biên tập viên.                                                                                                                                             |
-| Trigger        | Người dùng chọn menu "Quản lý Popup" và chọn "+ Tạo Popup mới" hoặc nút "Sửa" trên danh sách popup.                                                                                 |
-| Pre-condition  | Người dùng đã đăng nhập thành công vào hệ thống.                                                                                                                                   |
-| Post-condition | Cấu hình popup được lưu thành công, tự động hiển thị ngoài website đúng kênh bán và thời gian chỉ định.                                                                            |
+| Actor          | Super Admin, Admin, Biên tập viên, Viewer.                                                                                                                                         |
+| Trigger        | Người dùng chọn menu "Quản lý Popup" trên Sidebar và nhấp chọn "+ Tạo Popup mới" hoặc nút "Sửa" trên danh sách popup.                                                              |
+| Pre-condition  | Người dùng đã đăng nhập thành công vào hệ thống CMS Admin.                                                                                                                         |
+| Post-condition | Cấu hình Popup được lưu thành công, tự động trigger hiển thị ngoài website/app theo đúng vị trí và quy tắc hành vi đã thiết lập.                                                   |
 
 *   **Bước 1:** Người dùng truy cập CMS -> chọn menu "Quản lý Popup".
-*   **Bước 2:** Hệ thống hiển thị danh sách Popup (Tên popup, Vị trí hiển thị, Kênh áp dụng, Thời gian chạy, Trạng thái) kèm bộ lọc và phân trang.
+*   **Bước 2:** Hệ thống hiển thị danh sách Popup (Tên popup, Loại popup, Vị trí hiển thị, Kênh áp dụng, Thời gian chạy, Trạng thái) kèm bộ lọc và phân trang.
 *   **Bước 3:** Người dùng nhấn nút "+ Tạo Popup mới" hoặc chọn "Sửa" một popup.
 *   **Bước 4:** Hệ thống hiển thị Form cấu hình Popup, góc trên bên phải có nút Toggle để Bật/Tắt trạng thái hoạt động nhanh.
-*   **Bước 5:** Người dùng nhập các thông tin: Tên popup, Vị trí hiển thị, Thời gian bắt đầu, Thời gian kết thúc, chọn các Kênh áp dụng (Checkboxes), tải lên Ảnh Desktop, tải lên Ảnh Mobile, nhập URL đích khi click, nhập các tham số UTM (Source, Medium, Campaign).
-*   **Bước 6:** Hệ thống hiển thị trực quan liên kết URL cuối cùng có chứa các tham số UTM tracking (Live Preview URL).
+*   **Bước 5:** Người dùng chọn **Loại popup**:
+    *   *Trang thường (Menu Trang):* Mở khóa trường **Trang áp dụng hiển thị** (Multi-select) để chọn các trang sẽ xuất hiện popup, đồng thời mở khóa khối **HÀNH VI HIỂN THỊ** (Kiểu kích hoạt, Thời gian tự đóng, Tần suất hiển thị).
+    *   *Trang Checkout:* Hệ thống tự động **vô hiệu hóa (Disable - mờ đi 40% & ngắt tương tác)** trường **Trang áp dụng hiển thị** (do áp dụng riêng theo Quy tắc Checkout) đồng thời tự động **vô hiệu hóa (Disable)** toàn bộ khối **HÀNH VI HIỂN THỊ** (kế thừa cơ chế trigger & tần suất từ Quy tắc Checkout).
+*   **Bước 6:** Người dùng tải lên Ảnh Desktop (tỷ lệ 16:9, tối đa 1MB) và Ảnh Mobile/Bottom Sheet (tỷ lệ 1:1 hoặc dọc, tối đa 1MB).
 *   **Bước 7:** Người dùng nhấn nút "Lưu Popup".
-*   **Bước 8:** Hệ thống thực hiện validate dữ liệu, lưu thông tin vào database và cập nhật hiển thị.
+*   **Bước 8:** Hệ thống thực hiện validate dữ liệu, lưu thông tin vào database và cập nhật danh sách.
 
 ### Quy tắc nghiệp vụ (Business Rules)
-*   **Trải nghiệm người dùng (UX)**: Tại một thời điểm, trên một trang chỉ cho phép kích hoạt tối đa **01 Popup hoạt động** để tránh gây phiền hà cho khách hàng.
-*   Tên Popup, Vị trí hiển thị, Thời gian bắt đầu/kết thúc, Kênh áp dụng, Ảnh Desktop, Ảnh Mobile, URL đích là bắt buộc nhập.
-*   Hệ thống tự động ghép các tham số UTM (Source, Medium, Campaign) vào URL đích để tạo liên kết tracking đồng bộ khi người dùng click vào popup.
+*   **BR-PP-01 (Cơ chế Vô hiệu hóa theo Loại Popup)**:
+    *   Khi chọn `Loại popup` = `Trang Checkout`: Hệ thống tự động khóa/vô hiệu hóa (`opacity: 0.4`, `pointer-events: none`) trường **Trang áp dụng hiển thị** và toàn bộ khu vực **HÀNH VI HIỂN THỊ**.
+    *   Khi chọn `Loại popup` = `Trang thường (Menu Trang)`: Hệ thống kích hoạt lại trạng thái cho phép tương tác (Enable) trường **Trang áp dụng hiển thị** và khối **HÀNH VI HIỂN THỊ**.
+*   **BR-PP-02 (Tách biệt Link & Tracking)**: Màn hình Quản lý Popup CHỈ quản lý nội dung ảnh và thuộc tính hiển thị mặc định. Các tham số **Link đích** và **UTM Tracking** được quản lý linh hoạt tại màn hình **Cấu hình Quy tắc Banner/Popup** hoặc Quy tắc áp dụng theo chiến dịch.
+*   **BR-PP-03 (Hành vi hiển thị mặc định)**: Thông số Kiểu kích hoạt, Thời gian tự đóng và Tần suất tại màn hình này là **Quy tắc Mặc định (Default Baseline Rule)**. Khi Popup được chọn gán vào luồng Checkout hoặc trang cụ thể, hệ thống sẽ tự động kế thừa các thông số này và cho phép tùy chọn Ghi đè (Override) nếu cần.
+*   Tên Popup, Ảnh Desktop, Ảnh Mobile là bắt buộc tải lên/nhập.
 *   Hình ảnh Desktop bắt buộc tỷ lệ 16:9 (tối đa 1MB), hình ảnh Mobile bắt buộc tỷ lệ 1:1 hoặc dạng đứng (tối đa 1MB).
 
 ### Bảng mô tả trường thông tin (Screen Description)
 
-| STT | Tên trường        | Bắt buộc? (Y/N) | Format         | Mô tả                                                                                                        |
-| --- | ----------------- | --------------- | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| 1   | Trạng thái        | Y               | Toggle Switch  | Bật/Tắt trạng thái hoạt động của popup (Bật/Tắt).                                                            |
-| 2   | Tên Popup         | Y               | Text           | Tên popup dùng quản trị nội bộ (VD: "Flash Sale T5").                                                        |
-| 3   | Vị trí hiển thị   | Y               | Select         | Nơi hiển thị popup: **Trang chủ**, **Theo URL chỉ định**, **Theo Gói bán cụ thể (Trang Checkout)**, **Global**. |
-| 4   | Thời gian bắt đầu | Y               | DateTime       | Ngày và giờ bắt đầu cho phép popup xuất hiện ngoài website.                                                 |
-| 5   | Thời gian kết thúc| Y               | DateTime       | Ngày và giờ kết thúc chương trình popup.                                                                     |
-| 6   | Kênh áp dụng      | Y               | Checkbox List  | Tick chọn các kênh bán áp dụng (VD: tongdaiwifi, hifpt, fpt.vn, fptshop).                                    |
-| 7   | Ảnh Desktop       | Y               | File           | Tải lên ảnh popup định dạng JPG/PNG cho máy tính (tỷ lệ 16:9, tối đa 1MB).                                    |
-| 8   | Ảnh Mobile        | Y               | File           | Tải lên ảnh popup định dạng JPG/PNG cho điện thoại/bottom sheet (tỷ lệ 1:1 hoặc dọc, tối đa 1MB).            |
-| 9   | URL đích          | Y               | Text           | Đường dẫn chuyển hướng khi khách hàng nhấp vào popup.                                                        |
-| 10  | UTM Source        | N               | Text           | Tham số nguồn quảng cáo (VD: popup_banner).                                                                   |
-| 11  | UTM Medium        | N               | Text           | Tham số phương tiện quảng cáo (VD: homepage).                                                                |
-| 12  | UTM Campaign      | N               | Text           | Tham số tên chiến dịch quảng cáo (VD: flashsale_t5).                                                          |
+| STT | Tên trường           | Bắt buộc? (Y/N) | Format         | Mô tả                                                                                                                                                         |
+| --- | -------------------- | --------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Trạng thái           | Y               | Toggle Switch  | Bật/Tắt trạng thái hoạt động của popup (Bật/Tắt).                                                                                                             |
+| 2   | Tên Popup            | Y               | Text           | Tên popup dùng quản trị nội bộ (VD: "Flash Sale T5").                                                                                                         |
+| 3   | Loại popup           | Y               | Select         | Loại vị trí hiển thị: **Trang thường (Menu Trang)** hoặc **Trang Checkout**. Khi chọn Trang Checkout thì tự động vô hiệu hóa ô Trang áp dụng hiển thị và khối Hành vi hiển thị. |
+| 4   | Trang áp dụng        | N               | Multi-select   | Chọn các trang sẽ xuất hiện popup này (VD: Chi tiết thiết bị, Medicare). **Bị vô hiệu hóa tự động nếu chọn Loại popup = Trang Checkout**.                        |
+| 5   | Ảnh Desktop          | Y               | File           | Tải lên ảnh popup định dạng JPG/PNG cho máy tính (tỷ lệ 16:9, tối đa 1MB).                                                                                      |
+| 6   | Ảnh Mobile           | Y               | File           | Tải lên ảnh popup định dạng JPG/PNG cho điện thoại/bottom sheet (tỷ lệ 1:1 hoặc dọc, tối đa 1MB).                                                             |
+| 7   | Kiểu kích hoạt       | Y               | Select         | Kiểu kích hoạt: **Tức thì (Immediate)**, **Thời gian trễ (Delay)**, **Cuộn trang (Scroll)**, **Ý định rời trang (Exit Intent)**. **Bị vô hiệu hóa nếu chọn Trang Checkout**. |
+| 8   | Thời gian tự đóng    | N               | Number (giây)  | Thời gian tự động đóng Popup (tính bằng giây, mặc định: 10 giây). **Bị vô hiệu hóa nếu chọn Trang Checkout**.                                                   |
+| 9   | Tần suất hiển thị    | Y               | Select         | Cấu hình tần suất xuất hiện: **Mỗi phiên truy cập (Session)**, **1 lần/phiên**, **Mỗi lần mở trang**. **Bị vô hiệu hóa nếu chọn Trang Checkout**.               |
 
 ---
 
