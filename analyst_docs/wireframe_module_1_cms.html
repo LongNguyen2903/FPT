@@ -243,6 +243,21 @@
             font-family: inherit;
         }
 
+        .cms-tag-select-wrapper.disabled {
+            opacity: 0.4;
+            pointer-events: none !important;
+            cursor: not-allowed !important;
+            user-select: none;
+            filter: grayscale(0.5);
+        }
+
+        .cms-tag-select-wrapper.disabled .cms-tag-select-box {
+            background: rgba(255, 255, 255, 0.02) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+        }
+
         .cms-tag-select-box {
             min-height: 44px;
             padding: 6px 45px 6px 10px;
@@ -17469,7 +17484,7 @@ Tặng 1 tháng cước</textarea>
                                         <span id="popup-applied-pages-status" style="font-size:12px; color:#38bdf8; font-weight:500;">(Đã chọn: 2 trang)</span>
                                     </div>
                                     <div id="popup-applied-pages-box" class="form-input" style="min-height:42px; height:auto; padding:6px 12px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; cursor:pointer;">
-                                        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                                        <div id="popup-tags-container" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
                                             <span style="display:inline-flex; align-items:center; gap:6px; padding:3px 10px; background:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3); border-radius:6px; font-size:12px; font-weight:500;">
                                                 Chi tiết thiết bị <span style="cursor:pointer; font-weight:bold; opacity:0.8;">✕</span>
                                             </span>
@@ -17487,6 +17502,7 @@ Tặng 1 tháng cước</textarea>
                                 var appliedPagesGroup = document.getElementById('popup-applied-pages-group');
                                 var statusText = document.getElementById('popup-applied-pages-status');
                                 var behaviorWrapper = document.getElementById('popup-behavior-wrapper');
+                                var tagsContainer = document.getElementById('popup-tags-container');
                                 
                                 if (val === 'checkout') {
                                     if (appliedPagesGroup) {
@@ -17501,6 +17517,12 @@ Tặng 1 tháng cước</textarea>
                                         behaviorWrapper.style.opacity = '0.4';
                                         behaviorWrapper.style.pointerEvents = 'none';
                                     }
+                                    if (tagsContainer) {
+                                        tagsContainer.innerHTML = '<span style="color:var(--text-muted); font-size:12px; font-style:italic;">— Chọn trang áp dụng —</span>';
+                                    }
+                                    if (typeof showLdpToast === 'function') {
+                                        showLdpToast('Đã chọn Loại popup: Trang Checkout (Trang áp dụng hiển thị đã được vô hiệu hóa)');
+                                    }
                                 } else {
                                     if (appliedPagesGroup) {
                                         appliedPagesGroup.style.opacity = '1';
@@ -17513,6 +17535,19 @@ Tặng 1 tháng cước</textarea>
                                     if (behaviorWrapper) {
                                         behaviorWrapper.style.opacity = '1';
                                         behaviorWrapper.style.pointerEvents = 'auto';
+                                    }
+                                    if (tagsContainer) {
+                                        tagsContainer.innerHTML = `
+                                            <span style="display:inline-flex; align-items:center; gap:6px; padding:3px 10px; background:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3); border-radius:6px; font-size:12px; font-weight:500;">
+                                                Chi tiết thiết bị <span style="cursor:pointer; font-weight:bold; opacity:0.8;">✕</span>
+                                            </span>
+                                            <span style="display:inline-flex; align-items:center; gap:6px; padding:3px 10px; background:rgba(59, 130, 246, 0.15); color:#60a5fa; border:1px solid rgba(59, 130, 246, 0.3); border-radius:6px; font-size:12px; font-weight:500;">
+                                                Thiết bị Medicare <span style="cursor:pointer; font-weight:bold; opacity:0.8;">✕</span>
+                                            </span>
+                                        `;
+                                    }
+                                    if (typeof showLdpToast === 'function') {
+                                        showLdpToast('Đã chọn Loại popup: Trang thường (Menu Trang)');
                                     }
                                 }
                             }
@@ -21218,10 +21253,10 @@ Tặng 1 tháng cước</textarea>
         function onBannerTypeChange() {
             const typeSelect = document.getElementById('banner-type-select');
             const selectPages = document.getElementById('banner-applied-pages');
-            const noticeEl = document.getElementById('banner-checkout-page-notice');
+            const customWrapper = document.getElementById('custom-page-select-wrapper');
+            const countEl = document.getElementById('selected-pages-count');
             const desktopText = document.getElementById('banner-desktop-upload-text');
             const mobileText = document.getElementById('banner-mobile-upload-text');
-            const hintText = document.getElementById('banner-size-hint-text');
             const badgeEl = document.getElementById('banner-size-badge');
 
             if (!typeSelect) return;
@@ -21231,27 +21266,52 @@ Tặng 1 tháng cước</textarea>
                 if (badgeEl) badgeEl.style.display = 'none';
                 if (desktopText) desktopText.innerText = '+ Upload Ảnh Desktop Checkout (1200x160 hoặc 1200x300px)';
                 if (mobileText) mobileText.innerText = '+ Upload Ảnh Mobile Checkout (768x200 hoặc 768x400px)';
-                if (selectPages) {
-                    selectPages.disabled = true;
-                    selectPages.style.opacity = '0.4';
+                
+                // Clear selected page tags when switching to Checkout
+                if (typeof clearAllSelectedPages === 'function') {
+                    clearAllSelectedPages();
+                } else if (typeof selectedPageValues !== 'undefined') {
+                    selectedPageValues = [];
+                    if (typeof renderCustomPageSelect === 'function') renderCustomPageSelect();
                 }
-                const customWrapper = document.getElementById('custom-page-select-wrapper');
+
+                if (selectPages) selectPages.disabled = true;
                 if (customWrapper) {
+                    customWrapper.classList.remove('open');
+                    customWrapper.classList.add('disabled');
                     customWrapper.style.opacity = '0.4';
                     customWrapper.style.pointerEvents = 'none';
+                    customWrapper.style.cursor = 'not-allowed';
+                }
+                if (countEl) {
+                    countEl.textContent = '(Vô hiệu hóa - Áp dụng tự động luồng Checkout)';
+                    countEl.style.color = 'var(--text-muted, #94a3b8)';
+                }
+                if (typeof showLdpToast === 'function') {
+                    showLdpToast('Đã chọn Loại banner: Trang Checkout (Trang áp dụng hiển thị đã được vô hiệu hóa)');
                 }
             } else {
                 if (badgeEl) badgeEl.style.display = 'none';
                 if (desktopText) desktopText.innerText = '+ Upload Ảnh Desktop (1920xauto)';
                 if (mobileText) mobileText.innerText = '+ Upload Ảnh Mobile (768xauto)';
-                if (selectPages) {
-                    selectPages.disabled = false;
-                    selectPages.style.opacity = '1';
-                }
-                const customWrapper = document.getElementById('custom-page-select-wrapper');
+                
+                if (selectPages) selectPages.disabled = false;
                 if (customWrapper) {
+                    customWrapper.classList.remove('disabled');
                     customWrapper.style.opacity = '1';
                     customWrapper.style.pointerEvents = 'auto';
+                    customWrapper.style.cursor = 'default';
+                }
+                if (countEl) {
+                    countEl.style.color = '#38bdf8';
+                    if (typeof selectedPageValues !== 'undefined') {
+                        countEl.textContent = selectedPageValues.length === 0 ? '(Chưa chọn trang nào)' : `(Đã chọn: ${selectedPageValues.length} trang)`;
+                    } else {
+                        countEl.textContent = '(Đã chọn: 2 trang)';
+                    }
+                }
+                if (typeof showLdpToast === 'function') {
+                    showLdpToast('Đã chọn Loại banner: Trang thường (Menu Trang)');
                 }
             }
         }
@@ -31740,7 +31800,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
         function togglePageDropdown(event) {
             if (event) event.stopPropagation();
             const wrapper = document.getElementById('custom-page-select-wrapper');
-            if (!wrapper) return;
+            if (!wrapper || wrapper.classList.contains('disabled')) return;
             const isOpen = wrapper.classList.contains('open');
             if (isOpen) {
                 wrapper.classList.remove('open');
@@ -31913,19 +31973,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             if (document.getElementById('live-preview-mobile-img')) document.getElementById('live-preview-mobile-img').src = 'https://placehold.co/768x400/1e293b/10b981?text=Mobile+Banner+768x400';
         }
 
-        function onBannerTypeChange() {
-            const select = document.getElementById('banner-type-select');
-            if (!select) return;
-            if (select.value === 'checkout') {
-                if (typeof showLdpToast === 'function') {
-                    showLdpToast('Đã chọn Loại banner: Trang Checkout (Banner sẽ hiển thị theo cấu hình vị trí tại Cài đặt Hiển thị & Checkout)');
-                }
-            } else {
-                if (typeof showLdpToast === 'function') {
-                    showLdpToast('Đã chọn Loại banner: Trang thường (Menu Trang)');
-                }
-            }
-        }
+
 
         function handleDragOver(e) {
             e.preventDefault();
