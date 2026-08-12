@@ -138,6 +138,8 @@
             const authListEl = document.getElementById('news-author-list'); if (authListEl) authListEl.style.display = 'none';
             const authFormEl = document.getElementById('news-author-form'); if (authFormEl) authFormEl.style.display = 'none';
             const catFormEl = document.getElementById('news-cat-form'); if (catFormEl) catFormEl.style.display = 'none';
+            const ctListEl = document.getElementById('news-contenttype-list'); if (ctListEl) ctListEl.style.display = 'none';
+            const ctFormEl = document.getElementById('news-contenttype-form'); if (ctFormEl) ctFormEl.style.display = 'none';
             
             // Ẩn page-header và tabs
             const pageHeader = document.querySelector('#mod-news .page-header'); if (pageHeader) pageHeader.style.display = 'none';
@@ -179,6 +181,8 @@
                 const el = document.getElementById('news-cat-list'); if (el) el.style.display = 'block';
             } else if (tabText.includes('Tác giả')) {
                 const el = document.getElementById('news-author-list'); if (el) el.style.display = 'block';
+            } else if (tabText.includes('Loại nội dung')) {
+                const el = document.getElementById('news-contenttype-list'); if (el) el.style.display = 'block';
             } else if (tabText.includes('Tags Mapping') || tabText.includes('Cấu hình Thông tin hay')) {
                 const el = document.getElementById('news-tag-mapping'); if (el) el.style.display = 'block';
             } else {
@@ -292,6 +296,8 @@
         document.getElementById('news-tag-mapping').style.display = 'none';
         document.getElementById('news-author-list').style.display = 'none';
         document.getElementById('news-author-form').style.display = 'none';
+        const ctListEl = document.getElementById('news-contenttype-list'); if (ctListEl) ctListEl.style.display = 'none';
+        const ctFormEl = document.getElementById('news-contenttype-form'); if (ctFormEl) ctFormEl.style.display = 'none';
         window.closeNewsArticleDrawer();
         document.getElementById('news-cat-form').style.display = 'none';
 
@@ -301,6 +307,9 @@
         } else if (tab === 'category') {
             document.getElementById('news-cat-list').style.display = 'block';
             window.renderNewsCategoriesTable();
+        } else if (tab === 'contenttype') {
+            if (ctListEl) ctListEl.style.display = 'block';
+            window.renderNewsContentTypesTable();
         } else if (tab === 'tag-list') {
             document.getElementById('news-tag-list').style.display = 'block';
             window.renderNewsTagsTable();
@@ -700,6 +709,284 @@
         document.getElementById('news-author-form').style.display = 'none';
         document.getElementById('news-author-list').style.display = 'block';
         showLdpToast('Đã lưu thông tin tác giả thành công!');
+    };
+
+    // =========================================================================
+    //                    MANAGEMENT: LOẠI NỘI DUNG (CONTENT TYPES)
+    // =========================================================================
+    window.newsContentTypesData = {
+        'ct-1': { id: 'ct-1', name: 'Bài viết', code: 'article', order: 1, status: 'Active', creator: '--', date: '25/05/2026 14:44' },
+        'ct-2': { id: 'ct-2', name: 'Video', code: 'video', order: 2, status: 'Active', creator: '--', date: '25/05/2026 14:44' },
+        'ct-3': { id: 'ct-3', name: 'Báo chí', code: 'press', order: 3, status: 'Active', creator: '--', date: '25/05/2026 14:44' }
+    };
+
+    window.initNewsContentTypeDOM = function () {
+        const modNews = document.getElementById('mod-news');
+        if (!modNews) return;
+
+        // 1. Tự động thêm Nút Tab "Loại nội dung" vào Tab Bar nếu chưa có
+        const tabsBar = modNews.querySelector('.tabs');
+        if (tabsBar && !document.getElementById('news-tab-contenttype')) {
+            const catTab = tabsBar.children[1]; // Đặt cạnh Tab Chuyên mục
+            const newTabBtn = document.createElement('div');
+            newTabBtn.id = 'news-tab-contenttype';
+            newTabBtn.className = 'tab';
+            newTabBtn.style.cssText = 'font-size: 13.5px; font-weight: 600; padding: 10px 18px; cursor: pointer;';
+            newTabBtn.innerText = 'Loại nội dung (ContentTypes)';
+            newTabBtn.onclick = function () { window.switchNewsTab('contenttype', this); };
+            
+            if (catTab && catTab.nextSibling) {
+                tabsBar.insertBefore(newTabBtn, catTab.nextSibling);
+            } else {
+                tabsBar.appendChild(newTabBtn);
+            }
+        }
+
+        const cardContainer = modNews.querySelector('.card') || modNews.querySelector('.content-area') || modNews;
+
+        // 2. Inject Container HTML: Danh sách Loại nội dung (Chuẩn Ảnh 2)
+        if (!document.getElementById('news-contenttype-list')) {
+            const listDiv = document.createElement('div');
+            listDiv.id = 'news-contenttype-list';
+            listDiv.style.display = 'none';
+            listDiv.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+                    <div>
+                        <h3 style="margin:0 0 4px 0; font-size:18px; font-weight:700; color:#fff;">Loại nội dung tin tức</h3>
+                        <div style="font-size:12.5px; color:var(--text-muted);">Tổng quan / Loại nội dung</div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="window.openNewsContentTypeForm('')" style="padding:8px 18px; font-weight:600; font-size:13px; background:var(--pdh-gradient); border-radius:8px;">
+                        + Thêm mới
+                    </button>
+                </div>
+
+                <div class="glass" style="border-radius:12px; overflow:hidden; border:1px solid var(--border-glass);">
+                    <table style="width:100%; border-collapse:collapse; font-size:13.5px;">
+                        <thead>
+                            <tr style="border-bottom:1px solid var(--border-glass); background:rgba(255,255,255,0.02);">
+                                <th style="padding:12px 16px; text-align:center; color:var(--text-muted); font-size:11.5px; font-weight:700; width:50px;">#</th>
+                                <th style="padding:12px 16px; text-align:left; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase;">LOẠI NỘI DUNG</th>
+                                <th style="padding:12px 16px; text-align:center; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase; width:100px;">THỨ TỰ</th>
+                                <th style="padding:12px 16px; text-align:center; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase; width:130px;">TRẠNG THÁI</th>
+                                <th style="padding:12px 16px; text-align:left; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase; width:160px;">NGƯỜI TẠO</th>
+                                <th style="padding:12px 16px; text-align:left; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase; width:180px;">NGÀY TẠO</th>
+                                <th style="padding:12px 16px; text-align:center; color:var(--text-muted); font-size:11.5px; font-weight:700; text-transform:uppercase; width:120px;">THAO TÁC</th>
+                            </tr>
+                        </thead>
+                        <tbody id="news-contenttype-tbody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Bottom -->
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; font-size:12.5px; color:var(--text-muted);">
+                    <span id="news-contenttype-pagination-info">1 - 3 trên tổng 3</span>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span>Hiển thị:</span>
+                        <select class="form-input" style="width:100px; padding:4px 8px; font-size:12px; background:rgba(0,0,0,0.3); border-color:var(--border-glass);">
+                            <option>20/Trang</option>
+                            <option>50/Trang</option>
+                        </select>
+                        <div style="display:flex; gap:4px;">
+                            <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4; padding:3px 10px;">«</button>
+                            <button class="btn btn-primary btn-sm" style="padding:3px 10px;">1</button>
+                            <button class="btn btn-secondary btn-sm" disabled style="opacity:0.4; padding:3px 10px;">»</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            cardContainer.appendChild(listDiv);
+        }
+
+        // 3. Inject Container HTML: Form Thêm / Sửa Loại nội dung (Chuẩn Ảnh 3)
+        if (!document.getElementById('news-contenttype-form')) {
+            const formDiv = document.createElement('div');
+            formDiv.id = 'news-contenttype-form';
+            formDiv.style.display = 'none';
+            formDiv.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; border-bottom:1px solid var(--border-glass); padding-bottom:14px;">
+                    <div>
+                        <h3 id="news-contenttype-form-title" style="margin:0 0 4px 0; font-size:18px; font-weight:700; color:#fff;">Thêm loại nội dung</h3>
+                        <div style="font-size:12.5px; color:var(--text-muted);">Tổng quan / Loại nội dung / <span id="news-contenttype-form-sub" style="color:var(--primary);">Tạo mới</span></div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.closeNewsContentTypeForm()" style="padding:6px 14px; font-size:12.5px; font-weight:600;">
+                        ← Quay lại
+                    </button>
+                </div>
+
+                <div class="glass" style="padding:24px; border-radius:12px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.015); margin-bottom:20px;">
+                    <input type="hidden" id="news-contenttype-edit-id">
+                    
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:20px;">
+                        <div class="form-group" style="margin:0;">
+                            <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px;">Mã <span style="color:var(--primary);">*</span></label>
+                            <input type="text" id="news-contenttype-input-code" class="form-input" placeholder="VD: blog" style="font-size:13px; padding:9px 12px; background:rgba(0,0,0,0.3);">
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px;">Tên <span style="color:var(--primary);">*</span></label>
+                            <input type="text" id="news-contenttype-input-name" class="form-input" placeholder="Tên loại nội dung" style="font-size:13px; padding:9px 12px; background:rgba(0,0,0,0.3);">
+                        </div>
+                        <div class="form-group" style="margin:0;">
+                            <label style="display:block; font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:6px;">Thứ tự</label>
+                            <input type="number" id="news-contenttype-input-order" class="form-input" value="0" style="font-size:13px; padding:9px 12px; background:rgba(0,0,0,0.3);">
+                        </div>
+                    </div>
+
+                    <!-- TOGGLE HOẠT ĐỘNG (CHUẨN ẢNH 3) -->
+                    <div style="display:flex; align-items:center; gap:12px; margin-top:10px;">
+                        <label style="position:relative; display:inline-block; width:46px; height:24px; cursor:pointer;">
+                            <input type="checkbox" id="news-contenttype-input-status" checked style="opacity:0; width:0; height:0;" onchange="document.getElementById('news-contenttype-status-text').innerText=this.checked?'Hoạt động':'Tắt'">
+                            <span style="position:absolute; inset:0; background:rgba(255,255,255,0.1); border-radius:24px; transition:0.3s;" id="news-contenttype-switch-bg"></span>
+                            <span style="position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s;" id="news-contenttype-switch-dot"></span>
+                        </label>
+                        <span id="news-contenttype-status-text" style="font-size:13px; font-weight:600; color:#34d399;">Hoạt động</span>
+                    </div>
+                </div>
+
+                <!-- BOTTOM BUTTONS -->
+                <div style="display:flex; justify-content:flex-end; gap:12px;">
+                    <button type="button" class="btn btn-secondary" onclick="window.closeNewsContentTypeForm()" style="padding:8px 20px; font-size:13px;">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="window.saveNewsContentTypeAction()" style="padding:8px 24px; font-size:13px; background:var(--pdh-gradient); font-weight:700; border-radius:20px;">✓ Đồng ý</button>
+                </div>
+            `;
+            cardContainer.appendChild(formDiv);
+        }
+    };
+
+    window.renderNewsContentTypesTable = function () {
+        window.initNewsContentTypeDOM();
+        const tbody = document.getElementById('news-contenttype-tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+
+        let index = 1;
+        const keys = Object.keys(window.newsContentTypesData);
+
+        keys.forEach(function (id) {
+            const item = window.newsContentTypesData[id];
+            const tr = document.createElement('tr');
+            tr.style.cssText = 'border-bottom: 1px solid var(--border-glass); transition: 0.2s;';
+            tr.onmouseover = function () { this.style.background = 'rgba(255,255,255,0.03)'; };
+            tr.onmouseout = function () { this.style.background = ''; };
+
+            const statusBadge = item.status === 'Active'
+                ? '<span class="badge" style="background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25); padding:3px 10px; border-radius:12px; font-size:11.5px; font-weight:600;">Hoạt động</span>'
+                : '<span class="badge" style="background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.25); padding:3px 10px; border-radius:12px; font-size:11.5px; font-weight:600;">Tạm tắt</span>';
+
+            tr.innerHTML = `
+                <td style="padding:14px 16px; text-align:center; color:var(--text-muted); font-size:12.5px;">${index++}</td>
+                <td style="padding:14px 16px;">
+                    <div style="font-weight:700; color:#fff; font-size:13.5px;">${item.name}</div>
+                    <div style="font-size:11.5px; color:#ef4444; font-family:monospace; margin-top:2px;">${item.code}</div>
+                </td>
+                <td style="padding:14px 16px; text-align:center; font-weight:600; color:#fff;">${item.order}</td>
+                <td style="padding:14px 16px; text-align:center;">${statusBadge}</td>
+                <td style="padding:14px 16px; color:var(--text-muted); font-size:12.5px;">${item.creator || '--'}</td>
+                <td style="padding:14px 16px; color:var(--text-muted); font-size:12.5px;">${item.date || '25/05/2026 14:44'}</td>
+                <td style="padding:14px 16px; text-align:center;">
+                    <div style="display:flex; gap:6px; justify-content:center;">
+                        <button type="button" class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); padding:3px 10px; font-size:11px;" onclick="window.openNewsContentTypeForm('${item.id}')">✏️ Sửa</button>
+                        <button type="button" class="btn btn-secondary btn-sm" style="color:var(--danger); border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.08); padding:3px 10px; font-size:11px;" onclick="window.deleteNewsContentType('${item.id}')">🗑️ Xóa</button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        const pagInfo = document.getElementById('news-contenttype-pagination-info');
+        if (pagInfo) pagInfo.innerText = `1 - ${keys.length} trên tổng ${keys.length}`;
+    };
+
+    window.openNewsContentTypeForm = function (id) {
+        window.initNewsContentTypeDOM();
+        const listDiv = document.getElementById('news-contenttype-list');
+        const formDiv = document.getElementById('news-contenttype-form');
+        if (!formDiv) return;
+
+        if (listDiv) listDiv.style.display = 'none';
+        formDiv.style.display = 'block';
+
+        const titleEl = document.getElementById('news-contenttype-form-title');
+        const subEl = document.getElementById('news-contenttype-form-sub');
+        const editIdEl = document.getElementById('news-contenttype-edit-id');
+        const codeEl = document.getElementById('news-contenttype-input-code');
+        const nameEl = document.getElementById('news-contenttype-input-name');
+        const orderEl = document.getElementById('news-contenttype-input-order');
+        const statusEl = document.getElementById('news-contenttype-input-status');
+
+        if (id && window.newsContentTypesData[id]) {
+            const item = window.newsContentTypesData[id];
+            if (titleEl) titleEl.innerText = 'Chỉnh sửa loại nội dung';
+            if (subEl) subEl.innerText = 'Chỉnh sửa';
+            if (editIdEl) editIdEl.value = item.id;
+            if (codeEl) codeEl.value = item.code;
+            if (nameEl) nameEl.value = item.name;
+            if (orderEl) orderEl.value = item.order;
+            if (statusEl) {
+                statusEl.checked = item.status === 'Active';
+                document.getElementById('news-contenttype-status-text').innerText = item.status === 'Active' ? 'Hoạt động' : 'Tắt';
+            }
+        } else {
+            if (titleEl) titleEl.innerText = 'Thêm loại nội dung';
+            if (subEl) subEl.innerText = 'Tạo mới';
+            if (editIdEl) editIdEl.value = '';
+            if (codeEl) codeEl.value = '';
+            if (nameEl) nameEl.value = '';
+            if (orderEl) orderEl.value = Object.keys(window.newsContentTypesData).length + 1;
+            if (statusEl) {
+                statusEl.checked = true;
+                document.getElementById('news-contenttype-status-text').innerText = 'Hoạt động';
+            }
+        }
+    };
+
+    window.closeNewsContentTypeForm = function () {
+        const listDiv = document.getElementById('news-contenttype-list');
+        const formDiv = document.getElementById('news-contenttype-form');
+        if (formDiv) formDiv.style.display = 'none';
+        if (listDiv) listDiv.style.display = 'block';
+    };
+
+    window.saveNewsContentTypeAction = function () {
+        const editId = document.getElementById('news-contenttype-edit-id').value;
+        const code = document.getElementById('news-contenttype-input-code').value.trim();
+        const name = document.getElementById('news-contenttype-input-name').value.trim();
+        const order = parseInt(document.getElementById('news-contenttype-input-order').value) || 0;
+        const isChecked = document.getElementById('news-contenttype-input-status').checked;
+
+        if (!code || !name) {
+            alert('Vui lòng điền đầy đủ Mã và Tên loại nội dung!');
+            return;
+        }
+
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN').substring(0, 5);
+
+        const id = editId || 'ct-' + (Object.keys(window.newsContentTypesData).length + 1);
+
+        window.newsContentTypesData[id] = {
+            id: id,
+            name: name,
+            code: code,
+            order: order,
+            status: isChecked ? 'Active' : 'Inactive',
+            creator: 'Admin User',
+            date: dateStr
+        };
+
+        window.closeNewsContentTypeForm();
+        window.renderNewsContentTypesTable();
+        showLdpToast(editId ? '✅ Cập nhật loại nội dung thành công!' : '✅ Thêm loại nội dung mới thành công!');
+    };
+
+    window.deleteNewsContentType = function (id) {
+        const item = window.newsContentTypesData[id];
+        if (!item) return;
+
+        if (confirm(`Bạn có chắc chắn muốn xóa loại nội dung "${item.name}" (${item.code}) không?`)) {
+            delete window.newsContentTypesData[id];
+            window.renderNewsContentTypesTable();
+            showLdpToast('🗑️ Đã xóa loại nội dung thành công!');
+        }
     };
 
 
@@ -1871,6 +2158,7 @@
             window.updateArticleCategoryOptions();
             window.renderNewsAuthorsTable();
             window.updateArticleAuthorOptions();
+            window.initNewsContentTypeDOM();
 
             // Đồng bộ master checkbox
             const masterCb = document.getElementById('news-check-all');

@@ -2455,6 +2455,16 @@ function toggleSkuActiveStatus(code, isChecked) {
 // ===== -Style SKU Detail Functions =====
 // Data QLCS (Tab 1) theo từng SKU code
 var qlcsData = {
+    'INT-GIGA-150': {
+        dichvu: 'Internet', nhom: 'Basic Net', loai: 'Dịch vụ',
+        tensku: 'InternetGiga150Mbps', gia: '215.000đ',
+        hinhthuc: 'Gói cước', goicuoc: 'Trả hàng tháng', dvt: 'Gói cước'
+    },
+    'GIGA': {
+        dichvu: 'Internet', nhom: 'Basic Net', loai: 'Dịch vụ',
+        tensku: 'InternetGiga150Mbps', gia: '215.000đ',
+        hinhthuc: 'Gói cước', goicuoc: 'Trả hàng tháng', dvt: 'Gói cước'
+    },
     'MODEM-AX1800GZ': {
         dichvu: 'Internet', nhom: 'Basic Net', loai: 'Thiết bị',
         tensku: 'ModemWifi6AX1800GZ', gia: '500.000 đ',
