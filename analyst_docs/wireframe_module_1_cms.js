@@ -2,7 +2,7 @@ const modules = [
     'dashboards',
     'pdh-category', 'pdh-attribute', 'pdh-sku', 'pdh-package', 'pdh-price', 'pdh-fee', // PDH
     'set-area', // Settings
-    'pages', 'landing', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-payment', 'cms-popup', // CMS
+    'pages', 'landing', 'ldp-approval', 'sections', 'blocks', 'cms-menu', 'banner', 'news', 'faq', 'cms-package', 'cms-display', 'cms-payment', 'cms-popup', // CMS
     'sys-roles', 'sys-users', 'sys-permissions', // Hệ thống
     'user-profile' // Trang cá nhân (gộp cả đổi mật khẩu)
 ];
@@ -13,6 +13,7 @@ const titles = {
     'pdh-price': 'Cấu hình giá bán', 'pdh-fee': 'Bảng quản lý phí',
     'pdh-category': 'Danh mục', 'pdh-attribute': 'Đặc tính', 'set-area': 'Khu vực bán',
     'pages': 'Quản lý Trang (CMS)', 'landing': 'Landing Page - LDP (CMS)',
+    'ldp-approval': '🛡️ Gửi duyệt LDP (CMS)',
     'sections': 'Quản lý Sections (CMS)', 'blocks': 'Quản lý Blocks (CMS)',
     'banner': 'Quản lý Banner (CMS)',
     'news': 'Quản lý Tin tức (CMS)',
@@ -317,8 +318,9 @@ function switchModule(modName, theme) {
     else if (theme === 'purple') document.getElementById('topbar-title').style.color = '#a855f7';
     else document.getElementById('topbar-title').style.color = '#fff';
 
-    // Show appropriate module view
-    modules.forEach(m => document.getElementById('mod-' + m).classList.remove('active'));
+    // Show appropriate module view (dò theo class thực tế trên trang, không phụ thuộc mảng modules
+    // — tránh trường hợp browser cache bản JS cũ chưa có module mới, khiến màn cũ không bị ẩn đi)
+    document.querySelectorAll('.module-view.active').forEach(el => el.classList.remove('active'));
     document.getElementById('mod-' + modName).classList.add('active');
 
     // News module initialization
@@ -5403,6 +5405,80 @@ function setSkuTagColor(colorHex, isCustom) {
                 toast.remove();
             }, 300);
         }, 3000);
+    }
+
+    // ===== GỬI DUYỆT LDP / DUYỆT LDP (Super Admin) =====
+    function ldpOpenSubmitModal() {
+        document.getElementById('modal-ldp-submit').style.display = 'flex';
+    }
+
+    function ldpConfirmSubmit() {
+        var chk = document.getElementById('ldp-submit-confirm-chk');
+        if (!chk.checked) {
+            chk.parentElement.style.color = 'var(--danger)';
+            return;
+        }
+        document.getElementById('modal-ldp-submit').style.display = 'none';
+        document.getElementById('ldp-form').style.display = 'none';
+        document.getElementById('ldp-list').style.display = 'block';
+        showLdpToast('✅ Đã gửi duyệt thành công. Trang chuyển sang trạng thái "Chờ duyệt".');
+    }
+
+    function ldpApprovalOpenDetail() {
+        document.getElementById('modal-ldp-approval-detail').style.display = 'flex';
+    }
+
+    function ldpApprovalOpenReject() {
+        document.getElementById('modal-ldp-approval-detail').style.display = 'none';
+        document.getElementById('modal-ldp-reject').style.display = 'flex';
+    }
+
+    function ldpApprovalRemovePendingRow() {
+        var row = document.getElementById('ldp-approval-row-demo');
+        if (row) row.remove();
+        var emptyHint = document.getElementById('ldp-approval-empty-hint');
+        if (emptyHint) emptyHint.style.display = 'block';
+        var badge = document.getElementById('ldp-approval-count-badge');
+        if (badge) badge.outerHTML = '<span class="badge active" id="ldp-approval-count-badge">✅ 0 trang đang chờ duyệt</span>';
+        var chip = document.getElementById('ldp-approval-count-chip');
+        if (chip) chip.remove();
+    }
+
+    function ldpApprovalApprove() {
+        document.getElementById('modal-ldp-approval-detail').style.display = 'none';
+
+        var listRow = document.getElementById('ldp-row-pending-demo');
+        if (listRow) {
+            listRow.children[5].innerHTML = '<span class="badge active">🟢 Đang chạy</span>';
+            listRow.children[6].innerHTML = '<span style="color:var(--text-muted);">—</span>';
+            listRow.children[7].innerHTML =
+                '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">✏ Sửa</button>' +
+                '<button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Xem trước">👁</button>';
+        }
+
+        ldpApprovalRemovePendingRow();
+        showLdpToast('✅ Đã duyệt và kích hoạt Landing Page thành công!');
+    }
+
+    function ldpApprovalConfirmReject() {
+        var reasonInput = document.getElementById('ldp-reject-reason-input');
+        var reason = (reasonInput.value || '').trim();
+        if (!reason) {
+            reasonInput.style.borderColor = 'var(--danger)';
+            return;
+        }
+        document.getElementById('modal-ldp-reject').style.display = 'none';
+
+        var listRow = document.getElementById('ldp-row-pending-demo');
+        if (listRow) {
+            listRow.children[5].innerHTML = '<span class="badge inactive">✕ Từ chối</span>';
+            listRow.children[6].innerHTML = '<span style="font-size:12px; color:#fca5a5; line-height:1.4;">' + reason + '</span>';
+            listRow.children[7].innerHTML =
+                '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">✏ Sửa &amp; Gửi lại</button>';
+        }
+
+        ldpApprovalRemovePendingRow();
+        showLdpToast('🔴 Đã từ chối duyệt. Lý do đã được gửi tới Biên tập viên.');
     }
 
     // Save LDP Section changes back to list row summary
