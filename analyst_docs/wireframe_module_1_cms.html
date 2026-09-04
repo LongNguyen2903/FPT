@@ -2631,7 +2631,7 @@
                 <div class="menu-child" onclick="switchModule('ldp-approval', 'primary')" id="menu-ldp-approval"><span
                         class="mc-icon">🛡️</span>Gửi duyệt LDP
                     <span id="ldp-approval-count-chip"
-                        style="margin-left:auto; background:rgba(245,158,11,0.2); color:#fbbf24; font-size:10px; font-weight:700; padding:1px 6px; border-radius:8px;">1</span>
+                        style="margin-left:auto; background:rgba(245,158,11,0.2); color:#fbbf24; font-size:10px; font-weight:700; padding:1px 6px; border-radius:8px;">2</span>
                 </div>
             </div>
 
@@ -6309,6 +6309,9 @@ Tặng 1 tháng cước</textarea>
                                     class="form-select">
                                     <option>Tất cả trạng thái</option>
                                     <option>Đang chạy</option>
+                                    <option>Chờ duyệt</option>
+                                    <option>Tạm ẩn</option>
+                                    <option>Từ chối</option>
                                     <option>Hết hạn</option>
                                     <option>Nháp</option>
                                 </select></div>
@@ -6383,8 +6386,9 @@ Tặng 1 tháng cước</textarea>
                                             <button class="btn btn-secondary btn-sm" disabled
                                                 style="opacity:.45; cursor:not-allowed;"
                                                 title="Đang chờ duyệt, không thể sửa">🔒 Đang khoá</button>
-                                            <button class="btn btn-secondary btn-sm" style="color:var(--text-muted);"
-                                                title="Xem trước">👁</button>
+                                            <button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.3);"
+                                                title="Xem trước nội dung LDP"
+                                                onclick="ldpOpenPreview('uu-dai-camera-ai-q3', 'Ưu đãi Camera AI Quý 3');">👁</button>
                                         </td>
                                     </tr>
                                     <tr id="ldp-row-rejected-demo">
@@ -6489,15 +6493,60 @@ Tặng 1 tháng cước</textarea>
                                         <input type="text" id="ldp-campaign-name" class="form-input"
                                             value="Khuyến mãi Internet Tháng 5">
                                     </div>
-                                    <div class="form-group">
-                                        <label>URL Slug <span style="color:var(--danger)">*</span></label>
-                                        <div style="display:flex; align-items:center;">
-                                            <span
-                                                style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); border-right:none; padding:8px 12px; color:var(--text-muted); border-radius:8px 0 0 8px; font-size:13px; white-space:nowrap;">fpt.vn/</span>
-                                            <input type="text" id="ldp-url-slug" class="form-input"
-                                                value="km-internet-t5" style="border-radius:0 8px 8px 0; flex:1;"
-                                                oninput="updateLdpSeoPreview(); updateLdpUtmPreview();">
+                                    <div class="form-group" style="grid-column: span 2; background: rgba(0,0,0,0.25); border: 1px solid var(--border-glass); border-radius: 10px; padding: 14px 16px; margin-top: 4px;">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+                                            <div>
+                                                <label style="font-weight:700; font-size:13px; color:#fff; display:flex; align-items:center; gap:6px; margin:0;">
+                                                    <span>🌐</span> Cấu hình URL Slug Định tuyến (3 Cấp) <span style="color:var(--danger)">*</span>
+                                                </label>
+                                                <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px;">
+                                                    Quy tắc: Chọn LV1 có sẵn từ Trang &rarr; Nhập LV2 (Miễn duyệt) | Tự nhập LV1 mới &rarr; Bắt buộc Gửi duyệt Super Admin
+                                                </div>
+                                            </div>
+                                            <!-- Toggle Chế độ LV1 -->
+                                            <div style="display:inline-flex; background:rgba(15,23,42,0.6); border:1px solid var(--border-glass); border-radius:8px; padding:3px; gap:2px;">
+                                                <button type="button" id="ldp-slug-mode-select-btn" class="btn btn-sm btn-primary" style="padding:4px 12px; font-size:11.5px;" onclick="ldpSetSlugMode('select')">
+                                                    📂 Chọn LV1 từ Trang có sẵn (Miễn duyệt)
+                                                </button>
+                                                <button type="button" id="ldp-slug-mode-custom-btn" class="btn btn-sm btn-secondary" style="padding:4px 12px; font-size:11.5px;" onclick="ldpSetSlugMode('custom')">
+                                                    ✏️ Tự nhập LV1 mới (Cần duyệt)
+                                                </button>
+                                            </div>
                                         </div>
+
+                                        <!-- 3 Levels Input Row -->
+                                        <div style="display:flex; align-items:center; flex-wrap:wrap; gap:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:8px 12px;">
+                                            <!-- Cấp 0: Domain chính -->
+                                            <div style="display:flex; align-items:center; gap:4px; font-family:ui-monospace,Consolas,monospace; font-size:13px; color:var(--text-muted); font-weight:700; white-space:nowrap;">
+                                                <span style="color:#60a5fa;">fpt.vn</span>/
+                                            </div>
+
+                                            <!-- Cấp 1 (LV1): Dropdown hoặc Input -->
+                                            <div style="flex:1; min-width:210px;">
+                                                <select id="ldp-slug-lv1-select" class="form-select" style="font-size:12.5px; padding:6px 10px; font-family:ui-monospace,Consolas,monospace;" onchange="ldpOnSlugChange()">
+                                                    <option value="internet" selected>internet (Trang Internet FPT)</option>
+                                                    <option value="camera">camera (Trang FPT Camera AI)</option>
+                                                    <option value="truyen-hinh">truyen-hinh (Trang FPT Play)</option>
+                                                    <option value="dich-vu-so">dich-vu-so (Trang Dịch vụ số)</option>
+                                                    <option value="khuyen-mai">khuyen-mai (Trang Khuyến mãi)</option>
+                                                    <option value="tin-tuc">tin-tuc (Trang Tin tức)</option>
+                                                </select>
+                                                <input type="text" id="ldp-slug-lv1-input" class="form-input" style="display:none; font-size:12.5px; padding:6px 10px; font-family:ui-monospace,Consolas,monospace;" placeholder="Nhập slug LV1 mới, VD: uu-dai-camera..." value="uu-dai-camera-ai-q3" oninput="ldpOnSlugChange()">
+                                            </div>
+
+                                            <span style="font-family:ui-monospace,Consolas,monospace; font-size:14px; color:var(--text-muted); font-weight:700;">/</span>
+
+                                            <!-- Cấp 2 (LV2): Input tự do -->
+                                            <div style="flex:1.2; min-width:220px;">
+                                                <input type="text" id="ldp-slug-lv2-input" class="form-input" style="font-size:12.5px; padding:6px 10px; font-family:ui-monospace,Consolas,monospace;" value="km-internet-t5" placeholder="Nhập slug LV2 tự do (Bắt buộc khi chọn LV1)..." oninput="ldpOnSlugChange()">
+                                            </div>
+                                        </div>
+
+                                        <!-- Hidden input to keep old id for backwards compatibility -->
+                                        <input type="hidden" id="ldp-url-slug" value="internet/km-internet-t5">
+
+                                        <!-- Realtime Policy & Approval Status Box -->
+                                        <div id="ldp-slug-policy-box" style="margin-top:10px;"></div>
                                     </div>
                                     <div class="form-group">
                                         <label>Mục tiêu trang <span style="color:var(--danger)">*</span></label>
@@ -8558,16 +8607,12 @@ Tặng 1 tháng cước</textarea>
                                 </div>
 
 
-                                <div
-                                    style="display:flex; gap:10px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.35); border-radius:10px; padding:12px 14px; margin-top:20px; font-size:12.5px; color:#fde68a; line-height:1.5;">
-                                    ⚠️
-                                    <div>
-                                        <strong>Lưu ý bảo mật Slug:</strong> URL Slug Level 1/2 của trang sẽ được
-                                        <strong>BA/PO phối hợp cùng ISC kiểm tra routing</strong> trước khi kích hoạt.
-                                        Sau khi bấm <strong>Gửi duyệt</strong>, trang chuyển sang trạng thái
-                                        <span class="badge warning" style="padding:1px 6px;">Chờ duyệt</span> và
-                                        <strong>khoá chỉnh sửa</strong> cho đến khi Super Admin xử lý xong tại màn
-                                        "Gửi duyệt LDP".
+                                <div id="ldp-step3-security-box" style="margin-top:20px;">
+                                    <div style="display:flex; gap:10px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 14px; font-size:12.5px; color:#6ee7b7; line-height:1.5;">
+                                        <span style="font-size:16px;">🟢</span>
+                                        <div>
+                                            <strong>Tuyến đường an toàn:</strong> Trang sử dụng Slug LV1 có sẵn (<code>fpt.vn/internet/km-internet-t5</code>) nên <strong>không cần chuyển qua luồng duyệt</strong>. Bạn có thể xuất bản ngay khi hoàn tất.
+                                        </div>
                                     </div>
                                 </div>
                                 <div
@@ -8577,8 +8622,9 @@ Tặng 1 tháng cước</textarea>
                                         <button class="btn btn-secondary"
                                             onclick="document.getElementById('ldp-form').style.display='none'; document.getElementById('ldp-list').style.display='block';">💾
                                             Lưu nháp</button>
-                                        <button class="btn btn-primary" onclick="ldpOpenSubmitModal();">Gửi duyệt
-                                            →</button>
+                                        <button id="ldp-step3-submit-btn" class="btn btn-primary" style="background:var(--success-gradient, linear-gradient(135deg, #10b981 0%, #059669 100%)); border-color:transparent;" onclick="ldpHandleStep3Submit();">
+                                            🚀 Xuất bản &amp; Kích hoạt ngay (Không cần duyệt)
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -8629,26 +8675,66 @@ Tặng 1 tháng cước</textarea>
                 <div class="card">
                     <div class="page-header">
                         <h2>Gửi duyệt Landing Page (LDP)</h2>
-                        <span class="badge warning" id="ldp-approval-count-badge">🕒 1 trang đang chờ duyệt</span>
+                        <span class="badge warning" id="ldp-approval-count-badge">🕒 2 trang đang chờ duyệt</span>
                     </div>
                     <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 16px;">
                         Theo quy định bảo mật, mọi LDP mới đều phải qua bước duyệt Slug Level 1/2 trước khi kích
                         hoạt. Chỉ tài khoản vai trò <strong>Super Admin</strong> mới thao tác được màn hình này.
                     </p>
+                    <div
+                        style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px; background:rgba(255,255,255,0.02); padding:10px 14px; border:1px solid var(--border-glass); border-radius:8px;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="text" id="ldp-approval-search-campaign"
+                                placeholder="🔍 Tìm theo tên chiến dịch..." oninput="onLdpApprovalFilterChange()"
+                                class="form-input" style="font-size:12px; padding:6px 10px; width:210px; height:32px;">
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="text" id="ldp-approval-search-submitter"
+                                placeholder="👤 Người gửi duyệt..." oninput="onLdpApprovalFilterChange()"
+                                class="form-input" style="font-size:12px; padding:6px 10px; width:160px; height:32px;">
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="text" id="ldp-approval-search-approver" placeholder="🛡️ Người duyệt..."
+                                oninput="onLdpApprovalFilterChange()" class="form-input"
+                                style="font-size:12px; padding:6px 10px; width:160px; height:32px;">
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <label
+                                style="font-size:12px; color:var(--text-muted); white-space:nowrap; margin:0;">Ngày
+                                gửi:</label>
+                            <input type="date" id="ldp-approval-search-date" onchange="onLdpApprovalFilterChange()"
+                                class="form-input" style="font-size:12px; padding:6px 10px; width:150px; height:32px;">
+                        </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <select id="ldp-approval-search-status" onchange="onLdpApprovalFilterChange()"
+                                class="form-input"
+                                style="font-size:12px; padding:6px 10px; width:150px; height:32px; background:rgba(0,0,0,0.3); color:#fff; border-color:var(--border-glass);">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="pending">🕒 Chờ duyệt</option>
+                                <option value="approved">✅ Đã duyệt</option>
+                                <option value="rejected">✕ Từ chối</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-left:auto; height:32px;"
+                            onclick="onLdpApprovalFilterChange();">🔍 Tìm kiếm</button>
+                    </div>
                     <div style="overflow-x:auto;">
-                        <table class="data-table" style="min-width:1000px;">
+                        <table class="data-table" style="min-width:1100px;">
                             <thead>
                                 <tr>
                                     <th>Tên chiến dịch</th>
                                     <th>URL Slug (Lv1/Lv2)</th>
                                     <th>Người gửi duyệt</th>
+                                    <th>Người duyệt</th>
                                     <th>Thời gian gửi</th>
                                     <th>Trạng thái</th>
                                     <th style="text-align:center;">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody id="ldp-approval-tbody">
-                                <tr id="ldp-approval-row-demo">
+                                <tr id="ldp-approval-row-demo" data-campaign="Ưu đãi Camera AI Quý 3"
+                                    data-submitter="Minh Tú" data-approver="Admin User" data-date="2026-09-02"
+                                    data-status="pending">
                                     <td>
                                         <strong>Ưu đãi Camera AI Quý 3</strong>
                                         <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
@@ -8661,12 +8747,170 @@ Tặng 1 tháng cước</textarea>
                                         </span>
                                     </td>
                                     <td>Minh Tú</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
                                     <td style="color:var(--text-muted); font-size:12px;">02/09/26 14:22</td>
                                     <td><span class="badge warning">🕒 Chờ duyệt</span></td>
                                     <td style="text-align:center; white-space:nowrap;">
                                         <button class="btn btn-secondary btn-sm"
-                                            style="color:var(--primary); border-color:var(--primary);"
-                                            onclick="ldpApprovalOpenDetail();">🔍 Xem chi tiết &amp; Duyệt</button>
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('uu-dai-camera-ai-q3', 'Ưu đãi Camera AI Quý 3');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
+                                    </td>
+                                </tr>
+                                <tr data-campaign="Khuyến mãi Internet Tốc độ cao Tháng 9" data-submitter="Thu Hằng"
+                                    data-approver="Admin User" data-date="2026-09-03" data-status="pending">
+                                    <td>
+                                        <strong>Khuyến mãi Internet Tốc độ cao Tháng 9</strong>
+                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
+                                            Internet · Bán gói cước</div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">
+                                            fpt.vn/<b style="color:var(--primary);">khuyen-mai-internet-t9</b>
+                                        </span>
+                                    </td>
+                                    <td>Thu Hằng</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
+                                    <td style="color:var(--text-muted); font-size:12px;">03/09/26 09:15</td>
+                                    <td><span class="badge warning">🕒 Chờ duyệt</span></td>
+                                    <td style="text-align:center; white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('khuyen-mai-internet-t9', 'Khuyến mãi Internet Tốc độ cao Tháng 9');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
+                                    </td>
+                                </tr>
+                                <tr data-campaign="Combo Truyền hình + Internet" data-submitter="Quốc Bảo"
+                                    data-approver="Admin User" data-date="2026-08-28" data-status="approved">
+                                    <td>
+                                        <strong>Combo Truyền hình + Internet</strong>
+                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
+                                            Combo · Bán gói cước</div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">
+                                            fpt.vn/<b style="color:var(--primary);">combo-truyen-hinh-internet</b>
+                                        </span>
+                                    </td>
+                                    <td>Quốc Bảo</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
+                                    <td style="color:var(--text-muted); font-size:12px;">28/08/26 16:40</td>
+                                    <td><span class="badge active">✅ Đã duyệt</span></td>
+                                    <td style="text-align:center; white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('combo-truyen-hinh-internet', 'Combo Truyền hình + Internet');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
+                                    </td>
+                                </tr>
+                                <tr data-campaign="Gói Camera AI Học đường" data-submitter="Minh Tú"
+                                    data-approver="Admin User" data-date="2026-08-25" data-status="approved">
+                                    <td>
+                                        <strong>Gói Camera AI Học đường</strong>
+                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
+                                            Camera · Bán gói cước</div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">
+                                            fpt.vn/<b style="color:var(--primary);">camera-ai-hoc-duong</b>
+                                        </span>
+                                    </td>
+                                    <td>Minh Tú</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
+                                    <td style="color:var(--text-muted); font-size:12px;">25/08/26 11:05</td>
+                                    <td><span class="badge active">✅ Đã duyệt</span></td>
+                                    <td style="text-align:center; white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('camera-ai-hoc-duong', 'Gói Camera AI Học đường');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
+                                    </td>
+                                </tr>
+                                <tr data-campaign="LDP Fiber Gia đình" data-submitter="Thu Hằng"
+                                    data-approver="Admin User" data-date="2026-08-20" data-status="rejected">
+                                    <td>
+                                        <strong>LDP Fiber Gia đình</strong>
+                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
+                                            Custom · Landing Page sự kiện</div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">
+                                            fpt.vn/<b style="color:var(--primary);">fiber-gia-dinh-uu-dai</b>
+                                        </span>
+                                    </td>
+                                    <td>Thu Hằng</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
+                                    <td style="color:var(--text-muted); font-size:12px;">20/08/26 14:50</td>
+                                    <td><span class="badge inactive">✕ Từ chối</span></td>
+                                    <td style="text-align:center; white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('fiber-gia-dinh-uu-dai', 'LDP Fiber Gia đình');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
+                                    </td>
+                                </tr>
+                                <tr data-campaign="Ưu đãi Sinh viên FPT Play" data-submitter="Quốc Bảo"
+                                    data-approver="Admin User" data-date="2026-08-15" data-status="approved">
+                                    <td>
+                                        <strong>Ưu đãi Sinh viên FPT Play</strong>
+                                        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">LDP
+                                            FPT Play · Bán gói cước</div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">
+                                            fpt.vn/<b style="color:var(--primary);">uu-dai-sinh-vien-fpt-play</b>
+                                        </span>
+                                    </td>
+                                    <td>Quốc Bảo</td>
+                                    <td>
+                                        <div style="font-size:13px; color:#fff;">Admin User</div>
+                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
+                                    </td>
+                                    <td style="color:var(--text-muted); font-size:12px;">15/08/26 10:20</td>
+                                    <td><span class="badge active">✅ Đã duyệt</span></td>
+                                    <td style="text-align:center; white-space:nowrap;">
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpOpenPreview('uu-dai-sinh-vien-fpt-play', 'Ưu đãi Sinh viên FPT Play');"
+                                            title="Xem trước nội dung Landing Page">👁️</button>
+                                        <button class="btn btn-secondary btn-sm"
+                                            style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;"
+                                            onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -8674,6 +8918,10 @@ Tặng 1 tháng cước</textarea>
                         <div id="ldp-approval-empty-hint"
                             style="display:none; text-align:center; padding:40px 20px; color:var(--text-muted); font-size:13px;">
                             ✅ Không còn Landing Page nào đang chờ duyệt.
+                        </div>
+                        <div id="ldp-approval-filter-empty-hint"
+                            style="display:none; text-align:center; padding:40px 20px; color:var(--text-muted); font-size:13px;">
+                            🔍 Không tìm thấy kết quả phù hợp với bộ lọc.
                         </div>
                     </div>
                 </div>
@@ -8702,6 +8950,12 @@ Tặng 1 tháng cước</textarea>
                                 </div>
                                 <div>
                                     <label
+                                        style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Người
+                                        duyệt</label>
+                                    <div style="font-size:13px; color:#fff;">Admin User — Super Admin</div>
+                                </div>
+                                <div>
+                                    <label
                                         style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Mục
                                         tiêu trang</label>
                                     <div style="font-size:13px; color:#fff;">Bán gói cước trực tiếp</div>
@@ -8717,12 +8971,18 @@ Tặng 1 tháng cước</textarea>
                             <label
                                 style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:6px;">URL
                                 Slug cần kiểm tra routing</label>
-                            <div style="display:flex; gap:8px; align-items:center; margin-bottom:16px;">
+                            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:16px;">
                                 <span
                                     style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:5px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">fpt.vn/<b
                                         style="color:var(--primary);">uu-dai-camera-ai-q3</b></span>
                                 <span style="font-size:11px; color:var(--text-muted);">— Level 1:
-                                    <code>uu-dai-camera-ai-q3</code> (chưa có Level 2 con)</span>
+                                    <code>uu-dai-camera-ai-q3</code></span>
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                    style="margin-left:auto; color:#60a5fa; border-color:rgba(96,165,250,0.4); font-size:12px; padding:4px 12px; display:inline-flex; align-items:center; gap:5px;"
+                                    onclick="ldpOpenPreview('uu-dai-camera-ai-q3', 'Ưu đãi Camera AI Quý 3');"
+                                    title="Mở giao diện xem trước trang LDP">
+                                    👁️ Xem trước trang LDP (Live Preview)
+                                </button>
                             </div>
 
                             <label
@@ -8786,6 +9046,210 @@ Tặng 1 tháng cước</textarea>
                             <button class="btn btn-primary"
                                 style="background:var(--danger); border-color:var(--danger);"
                                 onclick="ldpApprovalConfirmReject();">Xác nhận từ chối</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal: Xem trước (Live Preview) Landing Page -->
+                <div id="modal-ldp-preview" class="modal" style="display:none; align-items:center; justify-content:center; z-index:9999;">
+                    <div class="modal-content" style="max-width:1100px; width:95%; max-height:92vh; display:flex; flex-direction:column; padding:0; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.15); background:#0f172a; box-shadow:0 25px 50px -12px rgba(0,0,0,0.7);">
+                        <!-- Header Preview -->
+                        <div style="padding:14px 20px; background:rgba(15,23,42,0.95); border-bottom:1px solid var(--border-glass); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-size:18px;">👁️</span>
+                                <div>
+                                    <div style="font-weight:700; color:#fff; font-size:15px; display:flex; align-items:center; gap:8px;">
+                                        Xem trước Landing Page: <span id="ldp-preview-title" style="color:var(--primary);">Ưu đãi Camera AI Quý 3</span>
+                                    </div>
+                                    <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px;">
+                                        Mô phỏng hiển thị thực tế trên hệ thống fpt.vn dành cho Super Admin thẩm định nội dung
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Device Switcher -->
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <div style="display:inline-flex; background:rgba(0,0,0,0.4); border:1px solid var(--border-glass); border-radius:8px; padding:3px;">
+                                    <button type="button" id="ldp-prev-btn-desk" class="btn btn-sm btn-primary" style="padding:4px 12px; font-size:12px;" onclick="ldpSetPreviewDevice('desktop');">🖥️ Desktop</button>
+                                    <button type="button" id="ldp-prev-btn-mob" class="btn btn-sm btn-secondary" style="padding:4px 12px; font-size:12px;" onclick="ldpSetPreviewDevice('mobile');">📱 Mobile (390px)</button>
+                                </div>
+                                <span class="close" style="font-size:22px; cursor:pointer; padding:4px 8px; color:var(--text-muted);" onclick="document.getElementById('modal-ldp-preview').style.display='none';">✕</span>
+                            </div>
+                        </div>
+
+                        <!-- URL Address bar -->
+                        <div style="padding:8px 20px; background:rgba(0,0,0,0.35); border-bottom:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px;">
+                            <div style="display:flex; align-items:center; gap:8px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                                <span style="color:#10b981;">🔒</span>
+                                <span style="color:var(--text-muted);">URL Staging:</span>
+                                <code id="ldp-preview-slug-url" style="color:#38bdf8; background:rgba(56,189,248,0.1); padding:2px 8px; border-radius:5px; font-family:ui-monospace,Consolas,monospace;">https://fpt.vn/uu-dai-camera-ai-q3</code>
+                            </div>
+                            <span class="badge warning" style="font-size:11px; padding:2px 8px; flex-shrink:0;">🟡 Môi trường Staging (Chờ duyệt)</span>
+                        </div>
+
+                        <!-- Preview Frame Body (Scrollable Container) -->
+                        <div style="padding:20px; background:#080d1a; overflow-y:auto; flex:1; min-height:460px; max-height:64vh; transition:all .3s ease;">
+                            <div id="ldp-preview-frame" style="max-width:100%; margin:0 auto; background:#0a0f1d; border:1px solid rgba(255,255,255,0.08); border-radius:8px; overflow:hidden; transition:all .3s ease; color:#e2e8f0; font-family:'Inter',sans-serif;">
+                                <!-- Top Navigation fpt.vn -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 24px; background:#050811; border-bottom:1px solid rgba(255,255,255,0.08);">
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <div style="font-size:20px; font-weight:900; background:linear-gradient(90deg, #ff6b00, #ff8c42); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:0.5px;">FPT Telecom</div>
+                                        <span style="font-size:11px; background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 6px; border-radius:4px; font-weight:600;">fpt.vn</span>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:18px; font-size:13px; color:#cbd5e1;">
+                                        <span style="cursor:pointer; color:#fff; font-weight:600;">FPT Camera AI</span>
+                                        <span style="cursor:pointer;">Internet Wi-Fi 6</span>
+                                        <span style="cursor:pointer;">FPT Play</span>
+                                        <span style="color:#f59e0b; font-weight:600;">📞 1900 6600</span>
+                                        <button style="background:var(--primary); color:#fff; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer;">Tư vấn ngay</button>
+                                    </div>
+                                </div>
+
+                                <!-- Hero Section -->
+                                <div style="background:linear-gradient(135deg, #0b1329 0%, #1e1b4b 60%, #0f172a 100%); padding:46px 28px; text-align:center; position:relative; border-bottom:1px solid rgba(255,255,255,0.08);">
+                                    <div style="display:inline-block; background:rgba(255,107,0,0.18); border:1px solid rgba(255,107,0,0.4); color:#ff8c42; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:14px; letter-spacing:0.5px;">
+                                        🔥 ƯU ĐÃI ĐỘC QUYỀN QUÝ 3/2026 — GIẢM ĐẾN 30%
+                                    </div>
+                                    <h1 style="font-size:28px; font-weight:800; color:#fff; margin:0 0 12px; line-height:1.3;">
+                                        FPT CAMERA AI — BẢO VỆ THÔNG MINH, AN TÂM TUYỆT ĐỐI
+                                    </h1>
+                                    <p style="font-size:14px; color:#94a3b8; max-width:680px; margin:0 auto 24px; line-height:1.6;">
+                                        Công nghệ nhận diện khuôn mặt Cloud AI tiên tiến · Cảnh báo chủ động qua ứng dụng Hi FPT · Lưu trữ dữ liệu bảo mật 100% tại Data Center chuẩn Quốc tế Tier 3 của FPT.
+                                    </p>
+                                    <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+                                        <button style="background:linear-gradient(135deg, #ff6b00, #ea580c); color:#fff; border:none; padding:10px 22px; border-radius:8px; font-weight:700; font-size:13px; cursor:pointer; box-shadow:0 8px 20px rgba(255,107,0,0.35);">
+                                            Đăng ký lắp đặt ngay (Tặng 1 tháng Cloud) →
+                                        </button>
+                                        <button style="background:rgba(255,255,255,0.06); color:#fff; border:1px solid rgba(255,255,255,0.2); padding:10px 18px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer;">
+                                            Xem chi tiết bảng giá ↓
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Product Cards Section -->
+                                <div style="padding:32px 24px; background:#070b16;">
+                                    <div style="text-align:center; margin-bottom:24px;">
+                                        <h2 style="font-size:20px; font-weight:700; color:#fff; margin:0 0 6px;">Gói cước &amp; Thiết bị FPT Camera AI</h2>
+                                        <p style="font-size:12.5px; color:#94a3b8; margin:0;">Bảo hành tại nhà 24 tháng · Hỗ trợ kỹ thuật 24/7 toàn quốc</p>
+                                    </div>
+
+                                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+                                        <!-- Card 1 -->
+                                        <div style="background:#0f172a; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+                                            <div>
+                                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                                    <span style="font-size:11px; background:rgba(96,165,250,0.15); color:#60a5fa; padding:2px 8px; border-radius:4px; font-weight:600;">Trong nhà</span>
+                                                    <span style="font-size:11px; color:#94a3b8;">SKU: CAM-PLAY</span>
+                                                </div>
+                                                <h3 style="font-size:16px; font-weight:700; color:#fff; margin:0 0 8px;">FPT Camera Play</h3>
+                                                <div style="font-size:22px; font-weight:800; color:#ff8c42; margin-bottom:12px;">
+                                                    350.000đ <span style="font-size:12px; color:#94a3b8; font-weight:400;">/thiết bị</span>
+                                                </div>
+                                                <ul style="font-size:12px; color:#cbd5e1; padding-left:18px; line-height:1.7; margin:0 0 16px;">
+                                                    <li>Độ phân giải Full HD 1080p sắc nét</li>
+                                                    <li>Xoay ngang 355°, góc nhìn bao quát</li>
+                                                    <li>Đàm thoại 2 chiều thời gian thực</li>
+                                                    <li>Lưu trữ Cloud xem lại mượt mà</li>
+                                                </ul>
+                                            </div>
+                                            <button style="background:rgba(255,107,0,0.15); color:#ff8c42; border:1px solid rgba(255,107,0,0.4); padding:8px 14px; border-radius:6px; font-weight:600; font-size:12px; cursor:pointer; width:100%;">Chọn mua</button>
+                                        </div>
+
+                                        <!-- Card 2 (Best Seller) -->
+                                        <div style="background:#111c38; border:2px solid #ff6b00; border-radius:10px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; position:relative; box-shadow:0 10px 25px rgba(255,107,0,0.15);">
+                                            <div style="position:absolute; top:-10px; right:16px; background:linear-gradient(135deg, #ff6b00, #ea580c); color:#fff; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:0.5px;">BÁN CHẠY NHẤT ⭐</div>
+                                            <div>
+                                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                                    <span style="font-size:11px; background:rgba(245,158,11,0.2); color:#fbbf24; padding:2px 8px; border-radius:4px; font-weight:600;">Ngoài trời</span>
+                                                    <span style="font-size:11px; color:#94a3b8;">SKU: CAM-IQ3</span>
+                                                </div>
+                                                <h3 style="font-size:16px; font-weight:700; color:#fff; margin:0 0 8px;">FPT Camera IQ3</h3>
+                                                <div style="font-size:22px; font-weight:800; color:#ff8c42; margin-bottom:12px;">
+                                                    550.000đ <span style="font-size:12px; color:#94a3b8; font-weight:400;">/thiết bị</span>
+                                                </div>
+                                                <ul style="font-size:12px; color:#cbd5e1; padding-left:18px; line-height:1.7; margin:0 0 16px;">
+                                                    <li>Kháng nước kháng bụi chuẩn IP66 cao cấp</li>
+                                                    <li>AI nhận diện chính xác người và chuyển động</li>
+                                                    <li>Đèn rọi Spotlight + còi báo động chủ động</li>
+                                                    <li>Hình ảnh ban đêm có màu sắc nét</li>
+                                                </ul>
+                                            </div>
+                                            <button style="background:linear-gradient(135deg, #ff6b00, #ea580c); color:#fff; border:none; padding:8px 14px; border-radius:6px; font-weight:700; font-size:12px; cursor:pointer; width:100%;">Chọn mua ngay</button>
+                                        </div>
+
+                                        <!-- Card 3 (Combo) -->
+                                        <div style="background:#0f172a; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:20px; display:flex; flex-direction:column; justify-content:space-between;">
+                                            <div>
+                                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                                    <span style="font-size:11px; background:rgba(16,185,129,0.15); color:#10b981; padding:2px 8px; border-radius:4px; font-weight:600;">Gói Combo Tiết Kiệm</span>
+                                                    <span style="font-size:11px; color:#94a3b8;">SKU: COMBO-NET-CAM</span>
+                                                </div>
+                                                <h3 style="font-size:16px; font-weight:700; color:#fff; margin:0 0 8px;">Internet Giga + Camera AI</h3>
+                                                <div style="font-size:22px; font-weight:800; color:#ff8c42; margin-bottom:12px;">
+                                                    299.000đ <span style="font-size:12px; color:#94a3b8; font-weight:400;">/tháng</span>
+                                                </div>
+                                                <ul style="font-size:12px; color:#cbd5e1; padding-left:18px; line-height:1.7; margin:0 0 16px;">
+                                                    <li>Internet Wi-Fi 6 tốc độ 150 Mbps không giới hạn</li>
+                                                    <li>Trang bị 01 Camera IQ3 ngoài trời miễn phí</li>
+                                                    <li>Tặng kèm gói Cloud 7 ngày lưu trữ</li>
+                                                    <li>Miễn phí hoàn toàn công lắp đặt</li>
+                                                </ul>
+                                            </div>
+                                            <button style="background:rgba(255,107,0,0.15); color:#ff8c42; border:1px solid rgba(255,107,0,0.4); padding:8px 14px; border-radius:6px; font-weight:600; font-size:12px; cursor:pointer; width:100%;">Chọn gói combo</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Features Highlight -->
+                                <div style="padding:28px 24px; background:#0b1120; border-top:1px solid rgba(255,255,255,0.06);">
+                                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; text-align:center;">
+                                        <div style="padding:12px;">
+                                            <div style="font-size:24px; margin-bottom:6px;">🧠</div>
+                                            <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:4px;">Trí tuệ nhân tạo Cloud AI</div>
+                                            <div style="font-size:11.5px; color:#94a3b8;">Phân biệt chính xác người và chuyển động, loại bỏ 99% báo động giả.</div>
+                                        </div>
+                                        <div style="padding:12px;">
+                                            <div style="font-size:24px; margin-bottom:6px;">☁️</div>
+                                            <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:4px;">Dữ liệu Cloud bảo mật</div>
+                                            <div style="font-size:11.5px; color:#94a3b8;">100% dữ liệu lưu trữ tại Data Center FPT chuẩn Tier 3 quốc tế tại Việt Nam.</div>
+                                        </div>
+                                        <div style="padding:12px;">
+                                            <div style="font-size:24px; margin-bottom:6px;">🛠️</div>
+                                            <div style="font-weight:700; font-size:13px; color:#fff; margin-bottom:4px;">Chăm sóc tận tâm 24/7</div>
+                                            <div style="font-size:11.5px; color:#94a3b8;">Bảo trì trọn đời, kỹ thuật viên FPT có mặt hỗ trợ nhanh chóng tại nhà.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Consultation Form Section -->
+                                <div style="padding:28px 24px; background:#080e1b; border-top:1px solid rgba(255,255,255,0.06); text-align:center;">
+                                    <h3 style="font-size:17px; font-weight:700; color:#fff; margin:0 0 6px;">Đăng ký nhận tư vấn và khảo sát miễn phí</h3>
+                                    <p style="font-size:12px; color:#94a3b8; margin:0 0 16px;">Chuyên viên FPT Telecom sẽ liên hệ tư vấn vị trí lắp đặt và gói cước tối ưu nhất trong 15 phút.</p>
+                                    <div style="max-width:540px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+                                        <input type="text" placeholder="Họ và tên khách hàng" style="background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; padding:8px 14px; border-radius:6px; font-size:12.5px; flex:1; min-width:160px;" readonly value="Nguyễn Văn A">
+                                        <input type="text" placeholder="Số điện thoại" style="background:#0f172a; border:1px solid rgba(255,255,255,0.15); color:#fff; padding:8px 14px; border-radius:6px; font-size:12.5px; flex:1; min-width:140px;" readonly value="0987 654 321">
+                                        <button style="background:var(--primary); color:#fff; border:none; padding:8px 18px; border-radius:6px; font-weight:700; font-size:12.5px; cursor:pointer;">Gửi yêu cầu</button>
+                                    </div>
+                                </div>
+
+                                <!-- Footer -->
+                                <div style="padding:14px 24px; background:#040711; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748b;">
+                                    <div>© 2026 FPT Telecom. Tất cả quyền được bảo lưu.</div>
+                                    <div>Giấy phép số 363/GP-BTTTT do Bộ TT&amp;TT cấp ngày 30/06/2016.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Actions of Preview Modal -->
+                        <div style="padding:12px 20px; background:rgba(15,23,42,0.95); border-top:1px solid var(--border-glass); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                            <button class="btn btn-secondary" onclick="document.getElementById('modal-ldp-preview').style.display='none';">✕ Đóng xem trước</button>
+                            <div style="display:flex; gap:10px;">
+                                <button class="btn btn-secondary" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('modal-ldp-preview').style.display='none'; ldpApprovalOpenDetail();">
+                                    🔍 Mở hộp thoại Thẩm định &amp; Duyệt
+                                </button>
+                                <button class="btn btn-primary" style="background:var(--success-gradient); border-color:transparent;" onclick="document.getElementById('modal-ldp-preview').style.display='none'; ldpApprovalApprove();">
+                                    ✓ Duyệt &amp; Kích hoạt ngay
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -23212,11 +23676,38 @@ Tặng 1 tháng cước</textarea>
             document.getElementById('ldp-list').style.display = 'none';
             var nameInput = document.getElementById('ldp-campaign-name');
             if (nameInput) nameInput.value = campaignName;
-            var slugInput = document.getElementById('ldp-url-slug');
-            if (slugInput) {
-                slugInput.value = slug;
-                if (typeof updateLdpSeoPreview === 'function') updateLdpSeoPreview();
+
+            if (slug) {
+                slug = slug.replace(/^\//, '');
+                var parts = slug.split('/');
+                var lv1 = parts[0] || '';
+                var lv2 = parts.slice(1).join('/') || '';
+
+                var selectEl = document.getElementById('ldp-slug-lv1-select');
+                var isAvailableInPages = false;
+                if (selectEl) {
+                    for (var i = 0; i < selectEl.options.length; i++) {
+                        if (selectEl.options[i].value === lv1) {
+                            isAvailableInPages = true;
+                            selectEl.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (isAvailableInPages) {
+                    ldpSetSlugMode('select');
+                    var lv2Input = document.getElementById('ldp-slug-lv2-input');
+                    if (lv2Input) lv2Input.value = lv2 || '';
+                } else {
+                    ldpSetSlugMode('custom');
+                    var lv1Input = document.getElementById('ldp-slug-lv1-input');
+                    if (lv1Input) lv1Input.value = lv1;
+                    var lv2Input = document.getElementById('ldp-slug-lv2-input');
+                    if (lv2Input) lv2Input.value = lv2;
+                }
             }
+            if (typeof ldpOnSlugChange === 'function') ldpOnSlugChange();
             ldpChooseTemplate(tplId);
         }
 
@@ -25318,8 +25809,186 @@ Tặng 1 tháng cước</textarea>
             }, 3000);
         }
 
+        // ===== CẤU HÌNH URL SLUG 3 CẤP & PHÂN LUỒNG PHÊ DUYỆT =====
+        var ldpSlugMode = 'select'; // 'select' (Từ trang có sẵn) hoặc 'custom' (Tự nhập LV1)
+
+        function ldpSetSlugMode(mode) {
+            ldpSlugMode = mode;
+            var btnSelect = document.getElementById('ldp-slug-mode-select-btn');
+            var btnCustom = document.getElementById('ldp-slug-mode-custom-btn');
+            var selectEl = document.getElementById('ldp-slug-lv1-select');
+            var inputEl = document.getElementById('ldp-slug-lv1-input');
+
+            if (mode === 'select') {
+                if (btnSelect) { btnSelect.className = 'btn btn-sm btn-primary'; }
+                if (btnCustom) { btnCustom.className = 'btn btn-sm btn-secondary'; }
+                if (selectEl) selectEl.style.display = 'block';
+                if (inputEl) inputEl.style.display = 'none';
+            } else {
+                if (btnSelect) { btnSelect.className = 'btn btn-sm btn-secondary'; }
+                if (btnCustom) { btnCustom.className = 'btn btn-sm btn-primary'; }
+                if (selectEl) selectEl.style.display = 'none';
+                if (inputEl) inputEl.style.display = 'block';
+            }
+            ldpOnSlugChange();
+        }
+
+        function ldpGetFullSlugInfo() {
+            var isCustom = (ldpSlugMode === 'custom');
+            var lv1 = '';
+            if (isCustom) {
+                var input1 = document.getElementById('ldp-slug-lv1-input');
+                lv1 = (input1 ? input1.value : '').trim();
+            } else {
+                var select1 = document.getElementById('ldp-slug-lv1-select');
+                lv1 = (select1 ? select1.value : 'internet').trim();
+            }
+            var input2 = document.getElementById('ldp-slug-lv2-input');
+            var lv2 = (input2 ? input2.value : '').trim();
+
+            var fullSlug = '';
+            if (lv1 && lv2) fullSlug = lv1 + '/' + lv2;
+            else if (lv1) fullSlug = lv1;
+            else fullSlug = lv2;
+
+            var isLv2Empty = !lv2;
+            var requiresApproval = isCustom; // Khi tự nhập LV1 -> Bắt buộc duyệt! Khi chọn LV1 từ trang có sẵn -> Miễn duyệt!
+
+            return {
+                mode: ldpSlugMode,
+                isCustom: isCustom,
+                lv1: lv1,
+                lv2: lv2,
+                fullSlug: fullSlug,
+                isLv2Empty: isLv2Empty,
+                requiresApproval: requiresApproval
+            };
+        }
+
+        function ldpOnSlugChange() {
+            var info = ldpGetFullSlugInfo();
+
+            var hiddenSlug = document.getElementById('ldp-url-slug');
+            if (hiddenSlug) hiddenSlug.value = info.fullSlug;
+
+            var prevSlug = document.getElementById('ldp-seo-prev-slug');
+            if (prevSlug) prevSlug.textContent = info.fullSlug || 'duong-dan-trang';
+
+            var policyBox = document.getElementById('ldp-slug-policy-box');
+            if (policyBox) {
+                if (info.mode === 'select') {
+                    if (info.isLv2Empty) {
+                        policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#fca5a5; line-height:1.5;">'
+                            + '<span style="font-size:16px;">❌</span>'
+                            + '<div><strong>Bắt buộc nhập Slug Level 2:</strong> Khi chọn Level 1 từ Trang có sẵn (<code>/' + (info.lv1 || '...') + '</code>), bạn <strong>bắt buộc phải nhập Slug Level 2</strong> để tránh ghi đè trực tiếp lên route trang chính.</div>'
+                            + '</div>';
+                    } else {
+                        policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#6ee7b7; line-height:1.5;">'
+                            + '<span style="font-size:16px;">🟢</span>'
+                            + '<div><strong style="color:#10b981;">ĐỦ ĐIỀU KIỆN XUẤT BẢN NGAY (MIỄN DUYỆT):</strong> '
+                            + 'URL hoàn chỉnh: <code style="background:rgba(0,0,0,0.4); padding:2px 8px; border-radius:4px; color:#fff; font-family:monospace;">fpt.vn/' + info.fullSlug + '</code>.'
+                            + '<div style="font-size:11.5px; color:#cbd5e1; margin-top:3px;">Tuyến đường cấp 1 <code>/' + info.lv1 + '</code> đã được ISC xác thực từ Quản lý Trang. Sau khi hoàn thiện, bạn có thể <strong>Xuất bản &amp; Kích hoạt ngay</strong> mà không cần gửi duyệt qua Super Admin.</div>'
+                            + '</div></div>';
+                    }
+                } else {
+                    policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#fde68a; line-height:1.5;">'
+                        + '<span style="font-size:16px;">⚠️</span>'
+                        + '<div><strong style="color:#f59e0b;">BẮT BUỘC CHUYỂN QUA LUỒNG DUYỆT (Super Admin &amp; ISC):</strong> '
+                        + 'URL dự kiến: <code style="background:rgba(0,0,0,0.4); padding:2px 8px; border-radius:4px; color:#fff; font-family:monospace;">fpt.vn/' + (info.fullSlug || '[slug-lv1]') + '</code>.'
+                        + '<div style="font-size:11.5px; color:#cbd5e1; margin-top:3px;">Bạn đang tự nhập Route Cấp 1 mới trực tiếp dưới Root Domain. Theo chính sách bảo mật, trang bắt buộc phải gửi duyệt để BA/PO phối hợp ISC thẩm định routing trước khi kích hoạt.</div>'
+                        + '</div></div>';
+                }
+            }
+
+            var step3Box = document.getElementById('ldp-step3-security-box');
+            var step3Btn = document.getElementById('ldp-step3-submit-btn');
+            if (step3Box && step3Btn) {
+                if (!info.requiresApproval) {
+                    step3Box.innerHTML = '<div style="display:flex; gap:10px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 14px; font-size:12.5px; color:#6ee7b7; line-height:1.5;">'
+                        + '<span style="font-size:16px;">🟢</span>'
+                        + '<div><strong>Tuyến đường an toàn:</strong> Trang sử dụng Slug LV1 có sẵn (<code>fpt.vn/' + info.fullSlug + '</code>) nên <strong>không cần chuyển qua luồng duyệt</strong>. Bạn có thể xuất bản ngay khi hoàn tất.</div>'
+                        + '</div>';
+                    step3Btn.className = 'btn btn-primary';
+                    step3Btn.style.background = 'var(--success-gradient, linear-gradient(135deg, #10b981 0%, #059669 100%))';
+                    step3Btn.style.borderColor = 'transparent';
+                    step3Btn.innerHTML = '🚀 Xuất bản &amp; Kích hoạt ngay (Không cần duyệt)';
+                } else {
+                    step3Box.innerHTML = '<div style="display:flex; gap:10px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.35); border-radius:10px; padding:12px 14px; font-size:12.5px; color:#fde68a; line-height:1.5;">'
+                        + '<span style="font-size:16px;">⚠️</span>'
+                        + '<div><strong>Lưu ý bảo mật Slug LV1 mới:</strong> URL Slug Level 1 (<code>fpt.vn/' + (info.fullSlug || '[slug-lv1]') + '</code>) sẽ được <strong>BA/PO phối hợp cùng ISC kiểm tra routing</strong> trước khi kích hoạt. Sau khi bấm <strong>Gửi duyệt</strong>, trang chuyển sang trạng thái <span class="badge warning" style="padding:1px 6px;">Chờ duyệt</span> và khoá chỉnh sửa.</div>'
+                        + '</div>';
+                    step3Btn.className = 'btn btn-primary';
+                    step3Btn.style.background = 'var(--primary-gradient)';
+                    step3Btn.style.borderColor = '';
+                    step3Btn.innerHTML = 'Gửi duyệt LDP (Bắt buộc LV1 mới) →';
+                }
+            }
+        }
+
+        function ldpHandleStep3Submit() {
+            var info = ldpGetFullSlugInfo();
+            if (info.mode === 'select' && info.isLv2Empty) {
+                showLdpToast('❌ Lỗi: Khi chọn LV1 từ trang có sẵn, bắt buộc phải nhập Slug Level 2!');
+                ldpStep(2);
+                var input2 = document.getElementById('ldp-slug-lv2-input');
+                if (input2) {
+                    input2.focus();
+                    input2.style.borderColor = 'var(--danger)';
+                }
+                return;
+            }
+
+            if (!info.requiresApproval) {
+                ldpDirectPublish(info);
+            } else {
+                var namePreview = document.getElementById('ldp-submit-name-preview');
+                var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+                if (namePreview) namePreview.textContent = campaignName;
+
+                var slugPreview = document.getElementById('ldp-submit-slug-preview');
+                if (slugPreview) slugPreview.textContent = info.fullSlug;
+
+                document.getElementById('modal-ldp-submit').style.display = 'flex';
+            }
+        }
+
+        function ldpDirectPublish(info) {
+            info = info || ldpGetFullSlugInfo();
+            var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+
+            var tbody = document.getElementById('ldp-list-tbody');
+            if (tbody) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = '<td><strong>' + campaignName + '</strong>'
+                    + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Xuất bản trực tiếp · Miễn duyệt</div></td>'
+                    + '<td><span style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP ' + (info.lv1 || 'PAGES').toUpperCase() + '</span></td>'
+                    + '<td><a href="#" style="color:var(--primary);">/' + info.fullSlug + '</a></td>'
+                    + '<td style="white-space:nowrap;">Hôm nay – 31/12/26</td>'
+                    + '<td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">Vừa xong — Admin</td>'
+                    + '<td><span class="badge active">🟢 Đang chạy</span></td>'
+                    + '<td style="color:var(--text-muted);">—</td>'
+                    + '<td style="text-align:center; white-space:nowrap;">'
+                    + '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="ldpEditPage(\'internet\', \'' + campaignName + '\', \'' + info.fullSlug + '\');">✏ Sửa</button>'
+                    + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.3); margin-left:4px;" title="Xem trước" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');">👁</button>'
+                    + '</td>';
+                tbody.insertBefore(newRow, tbody.firstChild);
+            }
+
+            document.getElementById('ldp-form').style.display = 'none';
+            document.getElementById('ldp-list').style.display = 'block';
+            showLdpToast('✅ Đã xuất bản LDP thành công! Trang đang hoạt động (Miễn duyệt do dùng Slug LV1 từ Quản lý Trang).');
+        }
+
         // ===== GỬI DUYỆT LDP / DUYỆT LDP (Super Admin) =====
         function ldpOpenSubmitModal() {
+            var info = ldpGetFullSlugInfo();
+            var namePreview = document.getElementById('ldp-submit-name-preview');
+            var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+            if (namePreview) namePreview.textContent = campaignName;
+
+            var slugPreview = document.getElementById('ldp-submit-slug-preview');
+            if (slugPreview) slugPreview.textContent = info.fullSlug;
+
             document.getElementById('modal-ldp-submit').style.display = 'flex';
         }
 
@@ -25329,10 +25998,170 @@ Tặng 1 tháng cước</textarea>
                 chk.parentElement.style.color = 'var(--danger)';
                 return;
             }
+            var info = ldpGetFullSlugInfo();
+            var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+
             document.getElementById('modal-ldp-submit').style.display = 'none';
             document.getElementById('ldp-form').style.display = 'none';
             document.getElementById('ldp-list').style.display = 'block';
-            showLdpToast('✅ Đã gửi duyệt thành công. Trang chuyển sang trạng thái "Chờ duyệt".');
+
+            var tbody = document.getElementById('ldp-list-tbody');
+            if (tbody) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = '<td><strong>' + campaignName + '</strong>'
+                    + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Tạo mới LV1 · Chờ ISC &amp; Super Admin duyệt</div></td>'
+                    + '<td><span style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP CUSTOM</span></td>'
+                    + '<td><a href="#" style="color:var(--primary);">/' + info.fullSlug + '</a></td>'
+                    + '<td style="white-space:nowrap;">Hôm nay – 31/12/26</td>'
+                    + '<td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">Vừa xong — Biên tập viên</td>'
+                    + '<td><span class="badge warning">🕒 Chờ duyệt</span></td>'
+                    + '<td style="color:var(--text-muted);">—</td>'
+                    + '<td style="text-align:center; white-space:nowrap;">'
+                    + '<button class="btn btn-secondary btn-sm" disabled style="opacity:.45; cursor:not-allowed;" title="Đang chờ duyệt, không thể sửa">🔒 Đang khoá</button>'
+                    + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.3); margin-left:4px;" title="Xem trước" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');">👁</button>'
+                    + '</td>';
+                tbody.insertBefore(newRow, tbody.firstChild);
+            }
+
+            var approvalTbody = document.getElementById('ldp-approval-tbody');
+            if (approvalTbody) {
+                var emptyHint = document.getElementById('ldp-approval-empty-hint');
+                if (emptyHint) emptyHint.style.display = 'none';
+                var apprRow = document.createElement('tr');
+                var apprToday = new Date().toISOString().slice(0, 10);
+                apprRow.dataset.campaign = campaignName;
+                apprRow.dataset.submitter = 'Biên tập viên';
+                apprRow.dataset.approver = 'Admin User';
+                apprRow.dataset.date = apprToday;
+                apprRow.dataset.status = 'pending';
+                apprRow.innerHTML = '<td><strong>' + campaignName + '</strong><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Tạo mới LV1 · Cần duyệt routing</div></td>'
+                    + '<td><span style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">fpt.vn/<b style="color:var(--primary);">' + info.fullSlug + '</b></span></td>'
+                    + '<td>Biên tập viên</td>'
+                    + '<td><div style="font-size:13px; color:#fff;">Admin User</div><div style="font-size:11px; color:var(--text-muted);">Super Admin</div></td>'
+                    + '<td style="color:var(--text-muted); font-size:12px;">Vừa xong</td>'
+                    + '<td><span class="badge warning">🕒 Chờ duyệt</span></td>'
+                    + '<td style="text-align:center; white-space:nowrap;">'
+                    + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px; width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');" title="Xem trước LDP">👁️</button>'
+                    + '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary); width:34px; height:32px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="ldpApprovalOpenDetail();" title="Xem chi tiết &amp; Duyệt">🔍</button>'
+                    + '</td>';
+                approvalTbody.insertBefore(apprRow, approvalTbody.firstChild);
+                ldpApprovalSortRows();
+                ldpApprovalUpdatePendingCountBadge();
+                onLdpApprovalFilterChange();
+            }
+
+            showLdpToast('✅ Đã gửi duyệt thành công do tạo mới Slug LV1! Trang chuyển sang trạng thái "Chờ duyệt".');
+        }
+
+        function ldpOpenPreview(slug, title) {
+            slug = slug || 'uu-dai-camera-ai-q3';
+            title = title || 'Ưu đãi Camera AI Quý 3';
+            var modal = document.getElementById('modal-ldp-preview');
+            if (!modal) return;
+            var titleEl = document.getElementById('ldp-preview-title');
+            if (titleEl) titleEl.textContent = title;
+            var slugEl = document.getElementById('ldp-preview-slug-url');
+            if (slugEl) slugEl.textContent = 'https://fpt.vn/' + slug;
+            ldpSetPreviewDevice('desktop');
+            modal.style.display = 'flex';
+        }
+
+        function ldpSetPreviewDevice(mode) {
+            var frame = document.getElementById('ldp-preview-frame');
+            var btnDesk = document.getElementById('ldp-prev-btn-desk');
+            var btnMob = document.getElementById('ldp-prev-btn-mob');
+            if (!frame) return;
+            if (mode === 'mobile') {
+                frame.style.maxWidth = '390px';
+                frame.style.margin = '0 auto';
+                frame.style.borderRadius = '28px';
+                frame.style.boxShadow = '0 0 0 8px #1e293b, 0 20px 40px rgba(0,0,0,0.6)';
+                if (btnDesk) { btnDesk.classList.remove('btn-primary'); btnDesk.classList.add('btn-secondary'); }
+                if (btnMob) { btnMob.classList.remove('btn-secondary'); btnMob.classList.add('btn-primary'); }
+            } else {
+                frame.style.maxWidth = '100%';
+                frame.style.margin = '0 auto';
+                frame.style.borderRadius = '8px';
+                frame.style.boxShadow = 'none';
+                if (btnDesk) { btnDesk.classList.remove('btn-secondary'); btnDesk.classList.add('btn-primary'); }
+                if (btnMob) { btnMob.classList.remove('btn-primary'); btnMob.classList.add('btn-secondary'); }
+            }
+        }
+
+        var ldpApprovalFilters = { campaign: '', submitter: '', approver: '', date: '', status: '' };
+
+        function onLdpApprovalFilterChange() {
+            var campaignEl = document.getElementById('ldp-approval-search-campaign');
+            var submitterEl = document.getElementById('ldp-approval-search-submitter');
+            var approverEl = document.getElementById('ldp-approval-search-approver');
+            var dateEl = document.getElementById('ldp-approval-search-date');
+            var statusEl = document.getElementById('ldp-approval-search-status');
+            ldpApprovalFilters.campaign = campaignEl ? campaignEl.value.toLowerCase().trim() : '';
+            ldpApprovalFilters.submitter = submitterEl ? submitterEl.value.toLowerCase().trim() : '';
+            ldpApprovalFilters.approver = approverEl ? approverEl.value.toLowerCase().trim() : '';
+            ldpApprovalFilters.date = dateEl ? dateEl.value : '';
+            ldpApprovalFilters.status = statusEl ? statusEl.value : '';
+            ldpApprovalApplyFilters();
+        }
+
+        function ldpApprovalApplyFilters() {
+            var tbody = document.getElementById('ldp-approval-tbody');
+            if (!tbody) return;
+            var rows = tbody.querySelectorAll('tr');
+            var visibleCount = 0;
+            rows.forEach(function (row) {
+                var campaign = (row.dataset.campaign || '').toLowerCase();
+                var submitter = (row.dataset.submitter || '').toLowerCase();
+                var approver = (row.dataset.approver || '').toLowerCase();
+                var date = row.dataset.date || '';
+                var status = row.dataset.status || 'pending';
+                var match = true;
+                if (ldpApprovalFilters.campaign && campaign.indexOf(ldpApprovalFilters.campaign) === -1) match = false;
+                if (ldpApprovalFilters.submitter && submitter.indexOf(ldpApprovalFilters.submitter) === -1) match = false;
+                if (ldpApprovalFilters.approver && approver.indexOf(ldpApprovalFilters.approver) === -1) match = false;
+                if (ldpApprovalFilters.date && date !== ldpApprovalFilters.date) match = false;
+                if (ldpApprovalFilters.status && status !== ldpApprovalFilters.status) match = false;
+                row.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
+            });
+            var filterEmptyHint = document.getElementById('ldp-approval-filter-empty-hint');
+            if (filterEmptyHint) filterEmptyHint.style.display = (rows.length > 0 && visibleCount === 0) ? 'block' : 'none';
+        }
+
+        function ldpApprovalSortRows() {
+            var tbody = document.getElementById('ldp-approval-tbody');
+            if (!tbody) return;
+            var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+            var statusPriority = { pending: 0, approved: 1, rejected: 1 };
+            rows.sort(function (a, b) {
+                var pa = statusPriority[a.dataset.status || 'pending'];
+                var pb = statusPriority[b.dataset.status || 'pending'];
+                return pa - pb;
+            });
+            rows.forEach(function (row) { tbody.appendChild(row); });
+        }
+
+        function ldpApprovalUpdatePendingCountBadge() {
+            var tbody = document.getElementById('ldp-approval-tbody');
+            var badge = document.getElementById('ldp-approval-count-badge');
+            if (!tbody || !badge) return;
+            var rows = tbody.querySelectorAll('tr');
+            var pendingCount = 0;
+            rows.forEach(function (row) {
+                if ((row.dataset.status || 'pending') === 'pending') pendingCount++;
+            });
+            if (pendingCount > 0) {
+                badge.className = 'badge warning';
+                badge.textContent = '🕒 ' + pendingCount + ' trang đang chờ duyệt';
+            } else {
+                badge.className = 'badge active';
+                badge.textContent = '✅ 0 trang đang chờ duyệt';
+            }
+            var chip = document.getElementById('ldp-approval-count-chip');
+            if (chip) {
+                if (pendingCount > 0) { chip.style.display = ''; chip.textContent = pendingCount; }
+                else { chip.style.display = 'none'; }
+            }
         }
 
         function ldpApprovalOpenDetail() {
@@ -25344,15 +26173,20 @@ Tặng 1 tháng cước</textarea>
             document.getElementById('modal-ldp-reject').style.display = 'flex';
         }
 
-        function ldpApprovalRemovePendingRow() {
+        function ldpApprovalMarkRowStatus(status) {
             var row = document.getElementById('ldp-approval-row-demo');
-            if (row) row.remove();
-            var emptyHint = document.getElementById('ldp-approval-empty-hint');
-            if (emptyHint) emptyHint.style.display = 'block';
-            var badge = document.getElementById('ldp-approval-count-badge');
-            if (badge) badge.outerHTML = '<span class="badge active" id="ldp-approval-count-badge">✅ 0 trang đang chờ duyệt</span>';
-            var chip = document.getElementById('ldp-approval-count-chip');
-            if (chip) chip.remove();
+            if (row) {
+                row.dataset.status = status;
+                var statusCell = row.children[5];
+                if (statusCell) {
+                    statusCell.innerHTML = status === 'approved'
+                        ? '<span class="badge active">✅ Đã duyệt</span>'
+                        : '<span class="badge inactive">✕ Từ chối</span>';
+                }
+            }
+            ldpApprovalUpdatePendingCountBadge();
+            ldpApprovalSortRows();
+            ldpApprovalApplyFilters();
         }
 
         function ldpApprovalApprove() {
@@ -25367,7 +26201,7 @@ Tặng 1 tháng cước</textarea>
                     '<button class="btn btn-secondary btn-sm" style="color:var(--text-muted);" title="Xem trước">👁</button>';
             }
 
-            ldpApprovalRemovePendingRow();
+            ldpApprovalMarkRowStatus('approved');
             showLdpToast('✅ Đã duyệt và kích hoạt Landing Page thành công!');
         }
 
@@ -25388,7 +26222,7 @@ Tặng 1 tháng cước</textarea>
                     '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);">✏ Sửa &amp; Gửi lại</button>';
             }
 
-            ldpApprovalRemovePendingRow();
+            ldpApprovalMarkRowStatus('rejected');
             showLdpToast('🔴 Đã từ chối duyệt. Lý do đã được gửi tới Biên tập viên.');
         }
 
@@ -32834,10 +33668,14 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
             document.addEventListener('DOMContentLoaded', function () {
                 renderCustomPageSelect();
+                if (typeof ldpOnSlugChange === 'function') ldpOnSlugChange();
             });
 
             if (document.readyState === 'complete' || document.readyState === 'interactive') {
-                setTimeout(renderCustomPageSelect, 100);
+                setTimeout(function () {
+                    if (typeof renderCustomPageSelect === 'function') renderCustomPageSelect();
+                    if (typeof ldpOnSlugChange === 'function') ldpOnSlugChange();
+                }, 100);
             }
 
             // ==========================================

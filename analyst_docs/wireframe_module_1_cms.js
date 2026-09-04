@@ -3019,11 +3019,38 @@ function setSkuTagColor(colorHex, isCustom) {
         document.getElementById('ldp-list').style.display = 'none';
         var nameInput = document.getElementById('ldp-campaign-name');
         if (nameInput) nameInput.value = campaignName;
-        var slugInput = document.getElementById('ldp-url-slug');
-        if (slugInput) {
-            slugInput.value = slug;
-            if (typeof updateLdpSeoPreview === 'function') updateLdpSeoPreview();
+
+        if (slug) {
+            slug = slug.replace(/^\//, '');
+            var parts = slug.split('/');
+            var lv1 = parts[0] || '';
+            var lv2 = parts.slice(1).join('/') || '';
+
+            var selectEl = document.getElementById('ldp-slug-lv1-select');
+            var isAvailableInPages = false;
+            if (selectEl) {
+                for (var i = 0; i < selectEl.options.length; i++) {
+                    if (selectEl.options[i].value === lv1) {
+                        isAvailableInPages = true;
+                        selectEl.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (isAvailableInPages) {
+                ldpSetSlugMode('select');
+                var lv2Input = document.getElementById('ldp-slug-lv2-input');
+                if (lv2Input) lv2Input.value = lv2 || '';
+            } else {
+                ldpSetSlugMode('custom');
+                var lv1Input = document.getElementById('ldp-slug-lv1-input');
+                if (lv1Input) lv1Input.value = lv1;
+                var lv2Input = document.getElementById('ldp-slug-lv2-input');
+                if (lv2Input) lv2Input.value = lv2;
+            }
         }
+        if (typeof ldpOnSlugChange === 'function') ldpOnSlugChange();
         ldpChooseTemplate(tplId);
     }
 
@@ -5407,8 +5434,186 @@ function setSkuTagColor(colorHex, isCustom) {
         }, 3000);
     }
 
+    // ===== CẤU HÌNH URL SLUG 3 CẤP & PHÂN LUỒNG PHÊ DUYỆT =====
+    var ldpSlugMode = 'select';
+
+    function ldpSetSlugMode(mode) {
+        ldpSlugMode = mode;
+        var btnSelect = document.getElementById('ldp-slug-mode-select-btn');
+        var btnCustom = document.getElementById('ldp-slug-mode-custom-btn');
+        var selectEl = document.getElementById('ldp-slug-lv1-select');
+        var inputEl = document.getElementById('ldp-slug-lv1-input');
+
+        if (mode === 'select') {
+            if (btnSelect) { btnSelect.className = 'btn btn-sm btn-primary'; }
+            if (btnCustom) { btnCustom.className = 'btn btn-sm btn-secondary'; }
+            if (selectEl) selectEl.style.display = 'block';
+            if (inputEl) inputEl.style.display = 'none';
+        } else {
+            if (btnSelect) { btnSelect.className = 'btn btn-sm btn-secondary'; }
+            if (btnCustom) { btnCustom.className = 'btn btn-sm btn-primary'; }
+            if (selectEl) selectEl.style.display = 'none';
+            if (inputEl) inputEl.style.display = 'block';
+        }
+        ldpOnSlugChange();
+    }
+
+    function ldpGetFullSlugInfo() {
+        var isCustom = (ldpSlugMode === 'custom');
+        var lv1 = '';
+        if (isCustom) {
+            var input1 = document.getElementById('ldp-slug-lv1-input');
+            lv1 = (input1 ? input1.value : '').trim();
+        } else {
+            var select1 = document.getElementById('ldp-slug-lv1-select');
+            lv1 = (select1 ? select1.value : 'internet').trim();
+        }
+        var input2 = document.getElementById('ldp-slug-lv2-input');
+        var lv2 = (input2 ? input2.value : '').trim();
+
+        var fullSlug = '';
+        if (lv1 && lv2) fullSlug = lv1 + '/' + lv2;
+        else if (lv1) fullSlug = lv1;
+        else fullSlug = lv2;
+
+        var isLv2Empty = !lv2;
+        var requiresApproval = isCustom;
+
+        return {
+            mode: ldpSlugMode,
+            isCustom: isCustom,
+            lv1: lv1,
+            lv2: lv2,
+            fullSlug: fullSlug,
+            isLv2Empty: isLv2Empty,
+            requiresApproval: requiresApproval
+        };
+    }
+
+    function ldpOnSlugChange() {
+        var info = ldpGetFullSlugInfo();
+
+        var hiddenSlug = document.getElementById('ldp-url-slug');
+        if (hiddenSlug) hiddenSlug.value = info.fullSlug;
+
+        var prevSlug = document.getElementById('ldp-seo-prev-slug');
+        if (prevSlug) prevSlug.textContent = info.fullSlug || 'duong-dan-trang';
+
+        var policyBox = document.getElementById('ldp-slug-policy-box');
+        if (policyBox) {
+            if (info.mode === 'select') {
+                if (info.isLv2Empty) {
+                    policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#fca5a5; line-height:1.5;">'
+                        + '<span style="font-size:16px;">❌</span>'
+                        + '<div><strong>Bắt buộc nhập Slug Level 2:</strong> Khi chọn Level 1 từ Trang có sẵn (<code>/' + (info.lv1 || '...') + '</code>), bạn <strong>bắt buộc phải nhập Slug Level 2</strong> để tránh ghi đè trực tiếp lên route trang chính.</div>'
+                        + '</div>';
+                } else {
+                    policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#6ee7b7; line-height:1.5;">'
+                        + '<span style="font-size:16px;">🟢</span>'
+                        + '<div><strong style="color:#10b981;">ĐỦ ĐIỀU KIỆN XUẤT BẢN NGAY (MIỄN DUYỆT):</strong> '
+                        + 'URL hoàn chỉnh: <code style="background:rgba(0,0,0,0.4); padding:2px 8px; border-radius:4px; color:#fff; font-family:monospace;">fpt.vn/' + info.fullSlug + '</code>.'
+                        + '<div style="font-size:11.5px; color:#cbd5e1; margin-top:3px;">Tuyến đường cấp 1 <code>/' + info.lv1 + '</code> đã được ISC xác thực từ Quản lý Trang. Sau khi hoàn thiện, bạn có thể <strong>Xuất bản &amp; Kích hoạt ngay</strong> mà không cần gửi duyệt qua Super Admin.</div>'
+                        + '</div></div>';
+                }
+            } else {
+                policyBox.innerHTML = '<div style="display:flex; gap:10px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.35); border-radius:8px; padding:10px 14px; font-size:12.5px; color:#fde68a; line-height:1.5;">'
+                    + '<span style="font-size:16px;">⚠️</span>'
+                    + '<div><strong style="color:#f59e0b;">BẮT BUỘC CHUYỂN QUA LUỒNG DUYỆT (Super Admin &amp; ISC):</strong> '
+                    + 'URL dự kiến: <code style="background:rgba(0,0,0,0.4); padding:2px 8px; border-radius:4px; color:#fff; font-family:monospace;">fpt.vn/' + (info.fullSlug || '[slug-lv1]') + '</code>.'
+                    + '<div style="font-size:11.5px; color:#cbd5e1; margin-top:3px;">Bạn đang tự nhập Route Cấp 1 mới trực tiếp dưới Root Domain. Theo chính sách bảo mật, trang bắt buộc phải gửi duyệt để BA/PO phối hợp ISC thẩm định routing trước khi kích hoạt.</div>'
+                    + '</div></div>';
+            }
+        }
+
+        var step3Box = document.getElementById('ldp-step3-security-box');
+        var step3Btn = document.getElementById('ldp-step3-submit-btn');
+        if (step3Box && step3Btn) {
+            if (!info.requiresApproval) {
+                step3Box.innerHTML = '<div style="display:flex; gap:10px; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:12px 14px; font-size:12.5px; color:#6ee7b7; line-height:1.5;">'
+                    + '<span style="font-size:16px;">🟢</span>'
+                    + '<div><strong>Tuyến đường an toàn:</strong> Trang sử dụng Slug LV1 có sẵn (<code>fpt.vn/' + info.fullSlug + '</code>) nên <strong>không cần chuyển qua luồng duyệt</strong>. Bạn có thể xuất bản ngay khi hoàn tất.</div>'
+                    + '</div>';
+                step3Btn.className = 'btn btn-primary';
+                step3Btn.style.background = 'var(--success-gradient, linear-gradient(135deg, #10b981 0%, #059669 100%))';
+                step3Btn.style.borderColor = 'transparent';
+                step3Btn.innerHTML = '🚀 Xuất bản &amp; Kích hoạt ngay (Không cần duyệt)';
+            } else {
+                step3Box.innerHTML = '<div style="display:flex; gap:10px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.35); border-radius:10px; padding:12px 14px; font-size:12.5px; color:#fde68a; line-height:1.5;">'
+                    + '<span style="font-size:16px;">⚠️</span>'
+                    + '<div><strong>Lưu ý bảo mật Slug LV1 mới:</strong> URL Slug Level 1 (<code>fpt.vn/' + (info.fullSlug || '[slug-lv1]') + '</code>) sẽ được <strong>BA/PO phối hợp cùng ISC kiểm tra routing</strong> trước khi kích hoạt. Sau khi bấm <strong>Gửi duyệt</strong>, trang chuyển sang trạng thái <span class="badge warning" style="padding:1px 6px;">Chờ duyệt</span> và khoá chỉnh sửa.</div>'
+                    + '</div>';
+                step3Btn.className = 'btn btn-primary';
+                step3Btn.style.background = 'var(--primary-gradient)';
+                step3Btn.style.borderColor = '';
+                step3Btn.innerHTML = 'Gửi duyệt LDP (Bắt buộc LV1 mới) →';
+            }
+        }
+    }
+
+    function ldpHandleStep3Submit() {
+        var info = ldpGetFullSlugInfo();
+        if (info.mode === 'select' && info.isLv2Empty) {
+            showLdpToast('❌ Lỗi: Khi chọn LV1 từ trang có sẵn, bắt buộc phải nhập Slug Level 2!');
+            ldpStep(2);
+            var input2 = document.getElementById('ldp-slug-lv2-input');
+            if (input2) {
+                input2.focus();
+                input2.style.borderColor = 'var(--danger)';
+            }
+            return;
+        }
+
+        if (!info.requiresApproval) {
+            ldpDirectPublish(info);
+        } else {
+            var namePreview = document.getElementById('ldp-submit-name-preview');
+            var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+            if (namePreview) namePreview.textContent = campaignName;
+
+            var slugPreview = document.getElementById('ldp-submit-slug-preview');
+            if (slugPreview) slugPreview.textContent = info.fullSlug;
+
+            document.getElementById('modal-ldp-submit').style.display = 'flex';
+        }
+    }
+
+    function ldpDirectPublish(info) {
+        info = info || ldpGetFullSlugInfo();
+        var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+
+        var tbody = document.getElementById('ldp-list-tbody');
+        if (tbody) {
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = '<td><strong>' + campaignName + '</strong>'
+                + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Xuất bản trực tiếp · Miễn duyệt</div></td>'
+                + '<td><span style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP ' + (info.lv1 || 'PAGES').toUpperCase() + '</span></td>'
+                + '<td><a href="#" style="color:var(--primary);">/' + info.fullSlug + '</a></td>'
+                + '<td style="white-space:nowrap;">Hôm nay – 31/12/26</td>'
+                + '<td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">Vừa xong — Admin</td>'
+                + '<td><span class="badge active">🟢 Đang chạy</span></td>'
+                + '<td style="color:var(--text-muted);">—</td>'
+                + '<td style="text-align:center; white-space:nowrap;">'
+                + '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="ldpEditPage(\'internet\', \'' + campaignName + '\', \'' + info.fullSlug + '\');">✏ Sửa</button>'
+                + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.3); margin-left:4px;" title="Xem trước" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');">👁</button>'
+                + '</td>';
+            tbody.insertBefore(newRow, tbody.firstChild);
+        }
+
+        document.getElementById('ldp-form').style.display = 'none';
+        document.getElementById('ldp-list').style.display = 'block';
+        showLdpToast('✅ Đã xuất bản LDP thành công! Trang đang hoạt động (Miễn duyệt do dùng Slug LV1 từ Quản lý Trang).');
+    }
+
     // ===== GỬI DUYỆT LDP / DUYỆT LDP (Super Admin) =====
     function ldpOpenSubmitModal() {
+        var info = ldpGetFullSlugInfo();
+        var namePreview = document.getElementById('ldp-submit-name-preview');
+        var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+        if (namePreview) namePreview.textContent = campaignName;
+
+        var slugPreview = document.getElementById('ldp-submit-slug-preview');
+        if (slugPreview) slugPreview.textContent = info.fullSlug;
+
         document.getElementById('modal-ldp-submit').style.display = 'flex';
     }
 
@@ -5418,10 +5623,84 @@ function setSkuTagColor(colorHex, isCustom) {
             chk.parentElement.style.color = 'var(--danger)';
             return;
         }
+        var info = ldpGetFullSlugInfo();
+        var campaignName = (document.getElementById('ldp-campaign-name') ? document.getElementById('ldp-campaign-name').value : '') || 'Landing Page mới';
+
         document.getElementById('modal-ldp-submit').style.display = 'none';
         document.getElementById('ldp-form').style.display = 'none';
         document.getElementById('ldp-list').style.display = 'block';
-        showLdpToast('✅ Đã gửi duyệt thành công. Trang chuyển sang trạng thái "Chờ duyệt".');
+
+        var tbody = document.getElementById('ldp-list-tbody');
+        if (tbody) {
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = '<td><strong>' + campaignName + '</strong>'
+                + '<div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Tạo mới LV1 · Chờ ISC &amp; Super Admin duyệt</div></td>'
+                + '<td><span style="background:rgba(255,107,0,0.15); color:#ff8c42; padding:2px 10px; border-radius:10px; font-size:12px; white-space:nowrap;">LDP CUSTOM</span></td>'
+                + '<td><a href="#" style="color:var(--primary);">/' + info.fullSlug + '</a></td>'
+                + '<td style="white-space:nowrap;">Hôm nay – 31/12/26</td>'
+                + '<td style="color:var(--text-muted); font-size:12px; white-space:nowrap;">Vừa xong — Biên tập viên</td>'
+                + '<td><span class="badge warning">🕒 Chờ duyệt</span></td>'
+                + '<td style="color:var(--text-muted);">—</td>'
+                + '<td style="text-align:center; white-space:nowrap;">'
+                + '<button class="btn btn-secondary btn-sm" disabled style="opacity:.45; cursor:not-allowed;" title="Đang chờ duyệt, không thể sửa">🔒 Đang khoá</button>'
+                + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.3); margin-left:4px;" title="Xem trước" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');">👁</button>'
+                + '</td>';
+            tbody.insertBefore(newRow, tbody.firstChild);
+        }
+
+        var approvalTbody = document.getElementById('ldp-approval-tbody');
+        if (approvalTbody) {
+            var emptyHint = document.getElementById('ldp-approval-empty-hint');
+            if (emptyHint) emptyHint.style.display = 'none';
+            var apprRow = document.createElement('tr');
+            apprRow.innerHTML = '<td><strong>' + campaignName + '</strong><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Tạo mới LV1 · Cần duyệt routing</div></td>'
+                + '<td><span style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">fpt.vn/<b style="color:var(--primary);">' + info.fullSlug + '</b></span></td>'
+                + '<td>Biên tập viên</td>'
+                + '<td style="color:var(--text-muted); font-size:12px;">Vừa xong</td>'
+                + '<td><span class="badge warning">🕒 Chờ duyệt</span></td>'
+                + '<td style="text-align:center; white-space:nowrap;">'
+                + '<button class="btn btn-secondary btn-sm" style="color:#60a5fa; border-color:rgba(96,165,250,0.4); margin-right:6px;" onclick="ldpOpenPreview(\'' + info.fullSlug + '\', \'' + campaignName + '\');">👁️ Xem trước LDP</button>'
+                + '<button class="btn btn-secondary btn-sm" style="color:var(--primary); border-color:var(--primary);" onclick="ldpApprovalOpenDetail();">🔍 Xem chi tiết &amp; Duyệt</button>'
+                + '</td>';
+            approvalTbody.insertBefore(apprRow, approvalTbody.firstChild);
+        }
+
+        showLdpToast('✅ Đã gửi duyệt thành công do tạo mới Slug LV1! Trang chuyển sang trạng thái "Chờ duyệt".');
+    }
+
+    function ldpOpenPreview(slug, title) {
+        slug = slug || 'uu-dai-camera-ai-q3';
+        title = title || 'Ưu đãi Camera AI Quý 3';
+        var modal = document.getElementById('modal-ldp-preview');
+        if (!modal) return;
+        var titleEl = document.getElementById('ldp-preview-title');
+        if (titleEl) titleEl.textContent = title;
+        var slugEl = document.getElementById('ldp-preview-slug-url');
+        if (slugEl) slugEl.textContent = 'https://fpt.vn/' + slug;
+        ldpSetPreviewDevice('desktop');
+        modal.style.display = 'flex';
+    }
+
+    function ldpSetPreviewDevice(mode) {
+        var frame = document.getElementById('ldp-preview-frame');
+        var btnDesk = document.getElementById('ldp-prev-btn-desk');
+        var btnMob = document.getElementById('ldp-prev-btn-mob');
+        if (!frame) return;
+        if (mode === 'mobile') {
+            frame.style.maxWidth = '390px';
+            frame.style.margin = '0 auto';
+            frame.style.borderRadius = '28px';
+            frame.style.boxShadow = '0 0 0 8px #1e293b, 0 20px 40px rgba(0,0,0,0.6)';
+            if (btnDesk) { btnDesk.classList.remove('btn-primary'); btnDesk.classList.add('btn-secondary'); }
+            if (btnMob) { btnMob.classList.remove('btn-secondary'); btnMob.classList.add('btn-primary'); }
+        } else {
+            frame.style.maxWidth = '100%';
+            frame.style.margin = '0 auto';
+            frame.style.borderRadius = '8px';
+            frame.style.boxShadow = 'none';
+            if (btnDesk) { btnDesk.classList.remove('btn-secondary'); btnDesk.classList.add('btn-primary'); }
+            if (btnMob) { btnMob.classList.remove('btn-primary'); btnMob.classList.add('btn-secondary'); }
+        }
     }
 
     function ldpApprovalOpenDetail() {
