@@ -8747,10 +8747,7 @@ Tặng 1 tháng cước</textarea>
                                         </span>
                                     </td>
                                     <td>Minh Tú</td>
-                                    <td>
-                                        <div style="font-size:13px; color:#fff;">Admin User</div>
-                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
-                                    </td>
+                                    <td><span style="color:var(--text-muted);">—</span></td>
                                     <td style="color:var(--text-muted); font-size:12px;">02/09/26 14:22</td>
                                     <td><span class="badge warning">🕒 Chờ duyệt</span></td>
                                     <td style="text-align:center; white-space:nowrap;">
@@ -8777,10 +8774,7 @@ Tặng 1 tháng cước</textarea>
                                         </span>
                                     </td>
                                     <td>Thu Hằng</td>
-                                    <td>
-                                        <div style="font-size:13px; color:#fff;">Admin User</div>
-                                        <div style="font-size:11px; color:var(--text-muted);">Super Admin</div>
-                                    </td>
+                                    <td><span style="color:var(--text-muted);">—</span></td>
                                     <td style="color:var(--text-muted); font-size:12px;">03/09/26 09:15</td>
                                     <td><span class="badge warning">🕒 Chờ duyệt</span></td>
                                     <td style="text-align:center; white-space:nowrap;">
@@ -8928,7 +8922,7 @@ Tặng 1 tháng cước</textarea>
 
                 <!-- Modal: Chi tiết duyệt LDP -->
                 <div id="modal-ldp-approval-detail" class="modal">
-                    <div class="modal-content" style="max-width:620px;">
+                    <div class="modal-content" style="max-width:620px; align-self:flex-start;">
                         <div class="modal-header">
                             <h3>🔍 Chi tiết yêu cầu duyệt — Ưu đãi Camera AI Quý 3</h3>
                             <span class="close"
@@ -8952,7 +8946,7 @@ Tặng 1 tháng cước</textarea>
                                     <label
                                         style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Người
                                         duyệt</label>
-                                    <div style="font-size:13px; color:#fff;">Admin User — Super Admin</div>
+                                    <div id="ldp-approval-detail-reviewer" style="font-size:13px; color:var(--text-muted);">— (Chưa xử lý)</div>
                                 </div>
                                 <div>
                                     <label
@@ -8975,8 +8969,6 @@ Tặng 1 tháng cước</textarea>
                                 <span
                                     style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:5px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">fpt.vn/<b
                                         style="color:var(--primary);">uu-dai-camera-ai-q3</b></span>
-                                <span style="font-size:11px; color:var(--text-muted);">— Level 1:
-                                    <code>uu-dai-camera-ai-q3</code></span>
                                 <button type="button" class="btn btn-secondary btn-sm"
                                     style="margin-left:auto; color:#60a5fa; border-color:rgba(96,165,250,0.4); font-size:12px; padding:4px 12px; display:inline-flex; align-items:center; gap:5px;"
                                     onclick="ldpOpenPreview('uu-dai-camera-ai-q3', 'Ưu đãi Camera AI Quý 3');"
@@ -8984,31 +8976,6 @@ Tặng 1 tháng cước</textarea>
                                     👁️ Xem trước trang LDP (Live Preview)
                                 </button>
                             </div>
-
-                            <label
-                                style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:6px;">Checklist
-                                kiểm tra (BA/PO phối hợp ISC)</label>
-                            <div
-                                style="border:1px solid var(--border-glass); border-radius:8px; padding:4px 14px; margin-bottom:16px;">
-                                <div
-                                    style="display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed var(--border-glass); font-size:13px; color:#e2e8f0;">
-                                    <input type="checkbox" style="margin-top:2px; accent-color:var(--primary);">
-                                    Slug không trùng lặp / không đè lên route đang chạy trên fpt.vn</div>
-                                <div
-                                    style="display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed var(--border-glass); font-size:13px; color:#e2e8f0;">
-                                    <input type="checkbox" style="margin-top:2px; accent-color:var(--primary);">
-                                    Slug không chứa pattern nhạy cảm (path traversal, ký tự đặc biệt, trùng route hệ
-                                    thống nội bộ)</div>
-                                <div style="display:flex; gap:10px; padding:9px 0; font-size:13px; color:#e2e8f0;">
-                                    <input type="checkbox" style="margin-top:2px; accent-color:var(--primary);"> Đã
-                                    xác nhận cấu hình routing với ISC</div>
-                            </div>
-
-                            <label
-                                style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:6px;">Ghi
-                                chú của người duyệt (tuỳ chọn)</label>
-                            <textarea class="form-textarea" rows="2"
-                                placeholder="Ghi chú nội bộ, ví dụ: đã xác nhận với ISC lúc 15h00..."></textarea>
                         </div>
                         <div class="modal-footer" style="justify-content:space-between;">
                             <button class="btn btn-secondary"
@@ -9241,13 +9208,13 @@ Tặng 1 tháng cước</textarea>
 
                         <!-- Footer Actions of Preview Modal -->
                         <div style="padding:12px 20px; background:rgba(15,23,42,0.95); border-top:1px solid var(--border-glass); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                            <button class="btn btn-secondary" onclick="document.getElementById('modal-ldp-preview').style.display='none';">✕ Đóng xem trước</button>
+                            <button class="btn btn-secondary" onclick="document.getElementById('modal-ldp-preview').style.display='none';">✕ Đóng</button>
                             <div style="display:flex; gap:10px;">
                                 <button class="btn btn-secondary" style="color:var(--primary); border-color:var(--primary);" onclick="document.getElementById('modal-ldp-preview').style.display='none'; ldpApprovalOpenDetail();">
-                                    🔍 Mở hộp thoại Thẩm định &amp; Duyệt
+                                    🔍 Thẩm định &amp; Duyệt
                                 </button>
                                 <button class="btn btn-primary" style="background:var(--success-gradient); border-color:transparent;" onclick="document.getElementById('modal-ldp-preview').style.display='none'; ldpApprovalApprove();">
-                                    ✓ Duyệt &amp; Kích hoạt ngay
+                                    ✓ Duyệt &amp; Kích hoạt
                                 </button>
                             </div>
                         </div>
@@ -26037,7 +26004,7 @@ Tặng 1 tháng cước</textarea>
                 apprRow.innerHTML = '<td><strong>' + campaignName + '</strong><div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Tạo mới LV1 · Cần duyệt routing</div></td>'
                     + '<td><span style="background:rgba(0,0,0,0.3); border:1px solid var(--border-glass); padding:4px 10px; border-radius:7px; font-family:ui-monospace,Consolas,monospace; font-size:12.5px; color:#fff;">fpt.vn/<b style="color:var(--primary);">' + info.fullSlug + '</b></span></td>'
                     + '<td>Biên tập viên</td>'
-                    + '<td><div style="font-size:13px; color:#fff;">Admin User</div><div style="font-size:11px; color:var(--text-muted);">Super Admin</div></td>'
+                    + '<td><span style="color:var(--text-muted);">—</span></td>'
                     + '<td style="color:var(--text-muted); font-size:12px;">Vừa xong</td>'
                     + '<td><span class="badge warning">🕒 Chờ duyệt</span></td>'
                     + '<td style="text-align:center; white-space:nowrap;">'
@@ -26183,6 +26150,15 @@ Tặng 1 tháng cước</textarea>
                         ? '<span class="badge active">✅ Đã duyệt</span>'
                         : '<span class="badge inactive">✕ Từ chối</span>';
                 }
+                var reviewerCell = row.children[3];
+                if (reviewerCell) {
+                    reviewerCell.innerHTML = '<div style="font-size:13px; color:#fff;">Admin User</div><div style="font-size:11px; color:var(--text-muted);">Super Admin</div>';
+                }
+            }
+            var reviewerField = document.getElementById('ldp-approval-detail-reviewer');
+            if (reviewerField) {
+                reviewerField.style.color = '#fff';
+                reviewerField.textContent = 'Admin User — Super Admin';
             }
             ldpApprovalUpdatePendingCountBadge();
             ldpApprovalSortRows();
