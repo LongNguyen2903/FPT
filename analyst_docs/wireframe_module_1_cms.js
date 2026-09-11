@@ -1349,16 +1349,6 @@ function saveNewsArticleAction() {
     else if (category === 'Sự kiện') catColor = 'rgba(245,158,11,0.15); color:#fbbf24;';
     else if (category === 'Thông báo') catColor = 'rgba(16,185,129,0.15); color:#34d399;';
 
-    let channelName = 'FPT Telecom';
-    let channelBg = 'rgba(255,107,0,0.15); color:#ff8c42;';
-    if (channel === 'fpt-play') {
-        channelName = 'FPT Play';
-        channelBg = 'rgba(167,139,250,0.15); color:#a78bfa;';
-    } else if (channel === 'fpt-camera') {
-        channelName = 'FPT Camera';
-        channelBg = 'rgba(245,158,11,0.15); color:#fbbf24;';
-    }
-
     let statusBadge = `<span class="badge active news-art-status-badge">Published</span>`;
     if (status === 'Draft') statusBadge = `<span class="badge warning news-art-status-badge">Draft</span>`;
     else if (status === 'Scheduled') statusBadge = `<span class="badge info news-art-status-badge" style="background:rgba(56,189,248,0.15); color:#38bdf8;">Scheduled</span>`;
@@ -1373,9 +1363,8 @@ function saveNewsArticleAction() {
                     <div style="font-size:11px; color:var(--text-muted);" class="news-art-slug">/tin-tuc/${slug}</div>
                 </td>
                 <td style="text-align:center;"><span class="news-featured-toggle" style="cursor:pointer;font-size:15px;opacity:0.4;" title="Bật/tắt nổi bật" onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1';this.closest('tr').dataset.featured=this.style.opacity==='1'?'1':'0'">⭐</span></td>
-                <td><span class="badge" style="background:${channelBg}">${channelName}</span></td>
                 <td><span class="badge news-art-cat" style="background:${catColor}">${category}</span></td>
-                <td class="news-art-author">${author}</td>
+                <td class="news-art-author" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${author || 'Admin'}</span></td>
                 <td class="news-art-date">${isNew ? '22/05/2026' : newsArticlesData[id].date}</td>
                 <td style="text-align:center;" class="news-art-views">${newsArticlesData[id].views || 0}</td>
                 <td>${statusBadge}</td>
