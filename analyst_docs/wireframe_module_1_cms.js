@@ -1231,6 +1231,24 @@ const newsArticlesData = {
         seoKeywords: 'aston villa, europa league, c2, fpt play, xem bong da',
         thumbUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=150&q=80',
         views: 0
+    },
+    'news-4': {
+        id: 'news-4',
+        title: 'Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam',
+        slug: 'trai-nghiem-thuc-te-cong-nghe-wifi-7',
+        category: 'Tin công nghệ',
+        author: 'Admin',
+        date: '28/05/2026',
+        status: 'Scheduled',
+        channel: 'fpt-telecom',
+        sapo: 'FPT Telecom là đơn vị viễn thông tiên phong thử nghiệm thành công công nghệ Wi-Fi 7 với tốc độ đột phá lên tới 10 Gbps, độ trễ cực thấp dưới 5ms.',
+        content: 'FPT Telecom chính thức công bố thử nghiệm thành công tiêu chuẩn Wi-Fi 7 (IEEE 802.11be) đầu tiên tại Việt Nam với tốc độ kỷ lục. Dự kiến triển khai thương mại trong tháng 6/2026.',
+        tags: 'wifi7, cong nghe, fpt telecom',
+        seoTitle: 'Trải Nghiệm Thực Tế Công Nghệ Wi-Fi 7 Đầu Tiên Tại Việt Nam - FPT',
+        seoDesc: 'FPT Telecom tiên phong thử nghiệm thành công Wi-Fi 7 với tốc độ đột phá 10 Gbps, mở ra kỷ nguyên Internet siêu tốc.',
+        seoKeywords: 'wifi7, wifi 7 fpt, cong nghe moi',
+        thumbUrl: 'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=150&q=80',
+        views: 0
     }
 };
 
@@ -1243,23 +1261,28 @@ function skuRenderDactinh_OLD2(dataKey) {
 
 // Reset form tin tức
 function resetNewsForm() {
-    document.getElementById('article-form-title').innerText = 'Tạo mới Bài viết Tin tức';
-    document.getElementById('article-id').value = '';
-    document.getElementById('art-title').value = '';
-    document.getElementById('art-slug').value = '';
-    document.getElementById('art-sapo').value = '';
-    document.getElementById('art-content').value = '';
-    document.getElementById('art-tags').value = '';
-    document.getElementById('art-category').value = 'Tin khuyến mãi';
-    document.getElementById('art-channel').value = 'fpt-telecom';
-    document.getElementById('art-author').value = 'Admin';
-    document.getElementById('art-status').value = 'Active';
-    document.getElementById('art-thumbnail-url').value = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
-    document.getElementById('art-thumb-preview').src = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80';
-    document.getElementById('art-thumb-filename').innerText = 'img_thumbnail_default.png';
-    document.getElementById('art-seo-title').value = '';
-    document.getElementById('art-seo-desc').value = '';
-    document.getElementById('art-seo-keywords').value = '';
+    if (window.resetNewsForm && window.resetNewsForm !== resetNewsForm) {
+        window.resetNewsForm();
+        return;
+    }
+    const setTitle = document.getElementById('article-form-title'); if (setTitle) setTitle.innerText = 'Tạo mới Bài viết Tin tức';
+    const setId = document.getElementById('article-id'); if (setId) setId.value = '';
+    const setTitleVal = document.getElementById('art-title'); if (setTitleVal) setTitleVal.value = '';
+    const setSlug = document.getElementById('art-slug'); if (setSlug) setSlug.value = '';
+    const setSapo = document.getElementById('art-sapo'); if (setSapo) setSapo.value = '';
+    const setContent = document.getElementById('art-content'); if (setContent) setContent.value = '';
+    const setTags = document.getElementById('art-tags'); if (setTags) setTags.value = '';
+    const setCat = document.getElementById('art-category'); if (setCat) setCat.value = 'Tin khuyến mãi';
+    const setChan = document.getElementById('art-channel'); if (setChan) setChan.value = 'fpt-telecom';
+    const setAuth = document.getElementById('art-author'); if (setAuth) setAuth.value = 'Admin';
+    const setStat = document.getElementById('art-status'); if (setStat) setStat.value = 'Published';
+    const setThumb = document.getElementById('art-thumbnail-url'); if (setThumb) setThumb.value = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';
+    const setThumbPrev = document.getElementById('art-thumb-preview'); if (setThumbPrev) setThumbPrev.src = 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';
+    const setThumbFn = document.getElementById('art-thumb-filename'); if (setThumbFn) setThumbFn.innerText = 'img_thumbnail_default.png';
+    const setSeoTitle = document.getElementById('art-seo-title'); if (setSeoTitle) setSeoTitle.value = '';
+    const setSeoDesc = document.getElementById('art-seo-desc'); if (setSeoDesc) setSeoDesc.value = '';
+    const setSeoKey = document.getElementById('art-seo-keywords'); if (setSeoKey) setSeoKey.value = '';
+    if (window.setNewsPrimaryCategory) window.setNewsPrimaryCategory('Tin khuyến mãi');
 }
 
 // Mở / đóng News Edit Drawer
@@ -1284,33 +1307,41 @@ function closeNewsDrawer() {
 
 // Tải thông tin bài viết lên form để Sửa
 function editNewsArticle(id) {
-    const art = newsArticlesData[id];
+    if (window.editNewsArticle && window.editNewsArticle !== editNewsArticle) {
+        window.editNewsArticle(id);
+        return;
+    }
+    const art = (window.newsArticlesData && window.newsArticlesData[id]) || newsArticlesData[id];
     if (!art) return;
 
-    document.getElementById('article-form-title').innerText = 'Chỉnh sửa Bài viết #' + id;
-    document.getElementById('article-form-title-bar').innerText = 'Chỉnh sửa Bài viết #' + id;
-    document.getElementById('article-id').value = art.id;
-    document.getElementById('art-title').value = art.title;
-    document.getElementById('art-slug').value = art.slug;
-    document.getElementById('art-sapo').value = art.sapo || '';
-    document.getElementById('art-content').value = art.content || '';
-    document.getElementById('art-tags').value = art.tags || '';
-    document.getElementById('art-category').value = art.category;
-    document.getElementById('art-channel').value = art.channel || 'fpt-telecom';
-    document.getElementById('art-author').value = art.author || 'Admin';
-    document.getElementById('art-status').value = art.status;
-    document.getElementById('art-thumbnail-url').value = art.thumbUrl;
-    document.getElementById('art-thumb-preview').src = art.thumbUrl;
-    document.getElementById('art-thumb-filename').innerText = art.thumbUrl.substring(art.thumbUrl.lastIndexOf('/') + 1);
-    document.getElementById('art-seo-title').value = art.seoTitle || '';
-    document.getElementById('art-seo-desc').value = art.seoDesc || '';
-    document.getElementById('art-seo-keywords').value = art.seoKeywords || '';
+    const setFormTitle = document.getElementById('article-form-title'); if (setFormTitle) setFormTitle.innerText = 'Chỉnh sửa Bài viết #' + id;
+    const setTitleBar = document.getElementById('article-form-title-bar'); if (setTitleBar) setTitleBar.innerText = 'Chỉnh sửa Bài viết #' + id;
+    const setId = document.getElementById('article-id'); if (setId) setId.value = art.id;
+    const setTitle = document.getElementById('art-title'); if (setTitle) setTitle.value = art.title;
+    const setSlug = document.getElementById('art-slug'); if (setSlug) setSlug.value = art.slug;
+    const setSapo = document.getElementById('art-sapo'); if (setSapo) setSapo.value = art.sapo || '';
+    const setContent = document.getElementById('art-content'); if (setContent) setContent.value = art.content || '';
+    const setTags = document.getElementById('art-tags'); if (setTags) setTags.value = art.tags || '';
+    const setCat = document.getElementById('art-category'); if (setCat) setCat.value = art.category;
+    const setChan = document.getElementById('art-channel'); if (setChan) setChan.value = art.channel || 'fpt-telecom';
+    const setAuth = document.getElementById('art-author'); if (setAuth) setAuth.value = art.author || 'Admin';
+    const setStat = document.getElementById('art-status'); if (setStat) setStat.value = art.status;
+    const setThumb = document.getElementById('art-thumbnail-url'); if (setThumb) setThumb.value = art.thumbUrl;
+    const setThumbPrev = document.getElementById('art-thumb-preview'); if (setThumbPrev) setThumbPrev.src = art.thumbUrl;
+    const setThumbFn = document.getElementById('art-thumb-filename'); if (setThumbFn) setThumbFn.innerText = art.thumbUrl.substring(art.thumbUrl.lastIndexOf('/') + 1);
+    const setSeoTitle = document.getElementById('art-seo-title'); if (setSeoTitle) setSeoTitle.value = art.seoTitle || '';
+    const setSeoDesc = document.getElementById('art-seo-desc'); if (setSeoDesc) setSeoDesc.value = art.seoDesc || '';
+    const setSeoKey = document.getElementById('art-seo-keywords'); if (setSeoKey) setSeoKey.value = art.seoKeywords || '';
 
     openNewsDrawer();
 }
 
 // Lưu bài viết (mô phỏng)
 function saveNewsArticleAction() {
+    if (window.saveNewsArticleAction && window.saveNewsArticleAction !== saveNewsArticleAction) {
+        window.saveNewsArticleAction();
+        return;
+    }
     const id = document.getElementById('article-id').value || 'news-' + (Object.keys(newsArticlesData).length + 1);
     const title = document.getElementById('art-title').value;
     const slug = document.getElementById('art-slug').value;
@@ -1412,13 +1443,16 @@ function updateNewsStats() {
     let total = Object.keys(newsArticlesData).length;
     let active = 0;
     let draft = 0;
+    let sched = 0;
     for (let key in newsArticlesData) {
-        if (newsArticlesData[key].status === 'Active') active++;
+        if (newsArticlesData[key].status === 'Active' || newsArticlesData[key].status === 'Published') active++;
+        else if (newsArticlesData[key].status === 'Scheduled') sched++;
         else draft++;
     }
-    document.getElementById('stats-total-news').innerText = total;
-    document.getElementById('stats-active-news').innerText = active;
-    document.getElementById('stats-draft-news').innerText = draft;
+    if (document.getElementById('stats-total-news')) document.getElementById('stats-total-news').innerText = total;
+    if (document.getElementById('stats-active-news')) document.getElementById('stats-active-news').innerText = active;
+    if (document.getElementById('stats-draft-news')) document.getElementById('stats-draft-news').innerText = draft;
+    if (document.getElementById('stats-sched-news')) document.getElementById('stats-sched-news').innerText = sched;
 }
 
 // Tìm kiếm và Lọc bảng tin tức
@@ -1437,10 +1471,10 @@ function updateNewsBulkBar() {
 window.onNewsRowCheck = updateNewsBulkBar;
 
 function filterNewsTable() {
-    const kw = (document.getElementById('news-search-keyword').value || '').toLowerCase();
-    const cat = document.getElementById('news-search-cat').value;
-    const status = document.getElementById('news-search-status').value;
-    const featured = document.getElementById('news-search-featured').value;
+    const kw = (document.getElementById('news-search-keyword')?.value || '').toLowerCase().trim();
+    const cat = document.getElementById('news-search-cat')?.value || '';
+    const status = document.getElementById('news-search-status')?.value || '';
+    const featured = document.getElementById('news-search-featured')?.value || '';
 
     const rows = document.querySelectorAll('#news-table tbody tr');
     let visible = 0;
@@ -1448,21 +1482,29 @@ function filterNewsTable() {
         const titleEl = row.querySelector('.news-art-title');
         const slugEl = row.querySelector('.news-art-slug');
         const catEl = row.querySelector('.news-art-cat');
-        const statusEl = row.querySelector('.news-art-status-badge');
-        const featuredToggle = row.querySelector('.news-featured-toggle');
-        if (!titleEl || !catEl || !statusEl) return;
+        const statusEl = row.querySelector('.status-pill') || row.querySelector('.news-art-status-badge');
+        const featuredToggle = row.querySelector('.cms-switch input') || row.querySelector('.news-featured-toggle');
+        if (!titleEl || !catEl) return;
 
-        const isFeatured = featuredToggle && featuredToggle.style.opacity === '1';
+        const isFeatured = featuredToggle && (featuredToggle.checked || featuredToggle.style?.opacity === '1');
 
         let matchKw = !kw || titleEl.innerText.toLowerCase().includes(kw) || (slugEl && slugEl.innerText.toLowerCase().includes(kw));
         let matchCat = !cat || catEl.innerText.trim() === cat;
-        let matchStatus = !status || statusEl.innerText.trim() === status;
+        let matchStatus = true;
+        if (status) {
+            const sText = statusEl ? statusEl.innerText.trim() : '';
+            if (status === 'Published') matchStatus = sText.includes('Đã xuất bản') || sText.includes('Published');
+            else if (status === 'Draft') matchStatus = sText.includes('Bản nháp') || sText.includes('Draft');
+            else if (status === 'Scheduled') matchStatus = sText.includes('Lên lịch') || sText.includes('Scheduled');
+            else if (status === 'Hidden') matchStatus = sText.includes('Tạm ẩn') || sText.includes('Hidden');
+            else matchStatus = sText === status;
+        }
         let matchFeatured = !featured || (featured === 'featured' && isFeatured);
 
         row.style.display = (matchKw && matchCat && matchStatus && matchFeatured) ? '' : 'none';
         if (row.style.display === '') visible++;
     });
-    showLdpToast(`Lọc xong — ${visible} bài phù hợp`);
+    if (typeof showLdpToast === 'function') showLdpToast(`Lọc xong — ${visible} bài phù hợp`);
 }
 
 

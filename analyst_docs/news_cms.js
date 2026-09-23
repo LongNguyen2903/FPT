@@ -201,8 +201,11 @@
             title: 'Lắp đặt mạng FPT khuyến mãi hè 2026 cực sốc',
             slug: 'lap-mang-fpt-khuyen-mai-he-2026',
             category: 'Tin khuyến mãi',
+            categoryPrimary: 'Tin khuyến mãi',
+            categories: ['Tin khuyến mãi'],
             author: 'Admin',
             date: '22/05/2026',
+            updatedAt: '22/05/2026',
             status: 'Published',
             channel: 'fpt-telecom',
             sapo: 'Chào hè rực rỡ với chương trình khuyến mãi lắp đặt mạng cáp quang FPT Telecom cực lớn trong năm 2026. Tặng đến 2 tháng cước sử dụng, miễn phí modem Wi-Fi 6 thế hệ mới.',
@@ -222,8 +225,11 @@
             title: 'FPT Camera ra mắt tính năng nhận diện AI thông minh mới',
             slug: 'fpt-camera-ra-mat-tinh-nang-nhan-dien-ai',
             category: 'Tin công nghệ',
+            categoryPrimary: 'Tin công nghệ',
+            categories: ['Tin công nghệ', 'Trí tuệ nhân tạo AI'],
             author: 'Phương Nam',
             date: '20/05/2026',
+            updatedAt: '21/05/2026',
             status: 'Published',
             channel: 'fpt-camera',
             sapo: 'Công nghệ AI mới tích hợp trên FPT Camera giúp nâng cao khả năng cảnh báo thông minh, phát hiện chuyển động của người và vật nuôi, giảm thiểu báo động giả tới 95%.',
@@ -242,9 +248,12 @@
             id: 'news-3',
             title: 'ASTON VILLA CHÍNH THỨC ĐĂNG QUANG CHAMPION UEFA EUROPA LEAGUE',
             slug: 'aston-villa-dang-quang-champion-europa-league',
-            category: 'Tin công nghệ',
+            category: 'Sự kiện',
+            categoryPrimary: 'Sự kiện',
+            categories: ['Sự kiện'],
             author: 'Đức Nguyễn',
             date: '21/05/2026',
+            updatedAt: '21/05/2026',
             status: 'Draft',
             channel: 'fpt-play',
             sapo: 'Thầy trò HLV Unai Emery đã tạo nên lịch sử sau chiến thắng kịch tính ở trận chung kết Europa League vừa qua. Chiếc cúp vô địch châu Âu danh giá này mang lại vinh quang lớn.',
@@ -258,6 +267,32 @@
             seoTitle: 'Aston Villa Vô Địch UEFA Europa League 2026 Trực Tiếp FPT Play',
             seoDesc: 'Thầy trò HLV Unai Emery đăng quang ngôi vô địch Europa League 2026 đầy kịch tính. Đón xem lại trọn vẹn trận đấu độc quyền trên FPT Play.',
             views: 0
+        },
+        'news-4': {
+            id: 'news-4',
+            title: 'Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam',
+            slug: 'trai-nghiem-thuc-te-cong-nghe-wifi-7',
+            category: 'Tin công nghệ',
+            categoryPrimary: 'Tin công nghệ',
+            categories: ['Tin công nghệ', 'Wi-Fi 7 & Thiết bị'],
+            author: 'Admin',
+            date: '28/05/2026',
+            updatedAt: '23/05/2026',
+            status: 'Scheduled',
+            channel: 'fpt-telecom',
+            sapo: 'FPT Telecom là đơn vị viễn thông tiên phong thử nghiệm thành công công nghệ Wi-Fi 7 với tốc độ đột phá lên tới 10 Gbps, độ trễ cực thấp dưới 5ms.',
+            content: '## Đột phá công nghệ Wi-Fi 7\nFPT Telecom chính thức công bố thử nghiệm thành công tiêu chuẩn Wi-Fi 7 (IEEE 802.11be) đầu tiên tại Việt Nam với tốc độ kỷ lục.\n\n## Kế hoạch thương mại hóa\nDự kiến các gói cước và thiết bị modem Wi-Fi 7 sẽ chính thức mở bán tới khách hàng toàn quốc trong tháng 6/2026.',
+            tags: 'wifi7, congnghe, fpt-telecom',
+            featured: false,
+            thumbUrl: 'https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=150&q=80',
+            thumbAlt: 'Thiết bị công nghệ Wi-Fi 7 FPT Telecom',
+            thumbCaption: 'Thiết bị Wi-Fi 7 thế hệ mới thử nghiệm tại FPT Telecom',
+            cropRatio: '3:2',
+            seoTitle: 'Trải Nghiệm Thực Tế Công Nghệ Wi-Fi 7 Đầu Tiên Tại Việt Nam - FPT',
+            seoDesc: 'FPT Telecom tiên phong thử nghiệm thành công Wi-Fi 7 với tốc độ đột phá 10 Gbps, mở ra kỷ nguyên Internet siêu tốc.',
+            views: 0,
+            scheduledTime: '2026-05-28T09:00',
+            publishDate: '2026-05-28T09:00'
         }
     };
 
@@ -1239,14 +1274,14 @@
         const elTotal = document.getElementById('stats-total-news') || document.querySelector('.news-stat-total');
         const elPub = document.getElementById('stats-active-news') || document.querySelector('.news-stat-pub');
         const elDraft = document.getElementById('stats-draft-news') || document.querySelector('.news-stat-draft');
+        const elSched = document.getElementById('stats-sched-news') || document.querySelector('.news-stat-sched');
         const elViews = document.getElementById('stats-views-news') || document.querySelector('.news-stat-views');
-        const elSched = document.querySelector('.news-stat-sched');
 
         if (elTotal) elTotal.innerText = total;
         if (elPub) elPub.innerText = pub;
         if (elDraft) elDraft.innerText = draft;
-        if (elViews) elViews.innerText = totalViews.toLocaleString();
         if (elSched) elSched.innerText = sched;
+        if (elViews) elViews.innerText = totalViews.toLocaleString();
     };
 
     // Render article table (Chuẩn UI mới: Bỏ cột Tác giả, có Nổi bật ⭐, Sửa nhanh, Xem thử)
@@ -1312,8 +1347,11 @@
             } else if (art.status === 'Draft') {
                 statusBadge = '<span class="status-pill draft"><span class="status-dot"></span>Bản nháp</span>';
                 visibilitySwitchHtml = '<span style="color:var(--text-muted); font-size:14px; font-weight:700;" title="Bài nháp chưa xuất bản — Không thể bật hiển thị ngoài bảng">—</span>';
+            } else if (art.status === 'Scheduled') {
+                statusBadge = '<span class="status-pill scheduled"><span class="status-dot"></span>Lên lịch</span>';
+                visibilitySwitchHtml = '<span style="color:var(--text-muted); font-size:14px; font-weight:700;" title="Bài viết đã lên lịch — Sẽ tự động xuất bản khi đến giờ">—</span>';
             } else {
-                statusBadge = '<span class="status-pill" style="background:rgba(56,189,248,0.15); color:#38bdf8;"><span class="status-dot" style="background:#38bdf8;"></span>Lên lịch</span>';
+                statusBadge = '<span class="status-pill scheduled"><span class="status-dot"></span>Lên lịch</span>';
                 visibilitySwitchHtml = '<span style="color:var(--text-muted); font-size:14px; font-weight:700;">—</span>';
             }
 
@@ -1358,7 +1396,10 @@
                 </td>
                 <td>${catBadge}</td>
                 <td class="news-art-author" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${art.author || 'Admin'}</span></td>
-                <td class="news-art-date" style="font-size:12px; color:var(--text-muted);">${art.date}</td>
+                <td>
+                    <div class="news-art-date" style="font-size:12px; color:#e2e8f0; font-weight:500;">${art.date || '22/05/2026'}</div>
+                    <div style="font-size:10.5px; color:#94a3b8; margin-top:2px;">Sửa: ${art.updatedAt || art.date || '22/05/2026'}</div>
+                </td>
                 <td style="text-align:center;" class="news-art-views"><strong>${(art.views || 0).toLocaleString()}</strong></td>
                 <td>${statusBadge}</td>
                 <td style="text-align:center;">${visibilitySwitchHtml}</td>
@@ -2017,7 +2058,16 @@
         document.getElementById('art-sapo').value = '';
         document.getElementById('art-content').value = '';
         document.getElementById('art-tags').value = '';
-        document.getElementById('art-category').value = 'Tin khuyến mãi';
+        const oldCatEl = document.getElementById('art-category'); if (oldCatEl) oldCatEl.value = 'Tin khuyến mãi';
+
+        // Reset Cây Danh mục (STT 7.0)
+        document.querySelectorAll('#news-cat-tree-container .cat-check').forEach(chk => {
+            chk.checked = chk.value === 'Tin khuyến mãi';
+        });
+        if (typeof window.setNewsPrimaryCategory === 'function') {
+            window.setNewsPrimaryCategory('Tin khuyến mãi');
+        }
+
         const elChan = document.getElementById('art-channel'); if (elChan) elChan.value = 'fpt-telecom';
         const elStat = document.getElementById('art-status'); if (elStat) elStat.value = 'Published';
         window.currentEditingArticleChannel = 'fpt-telecom';
@@ -2082,6 +2132,182 @@
         }
     };
 
+    // =========================================================================
+    // XỬ LÝ XEM TRÊN WEBSITE (STT 16.0)
+    // =========================================================================
+    window.viewNewsArticleOnWeb = function (id) {
+        const art = window.newsArticlesData[id];
+        if (!art) {
+            showLdpToast('Không tìm thấy thông tin bài viết!');
+            return;
+        }
+
+        const slug = art.slug || ('bai-viet-' + id);
+        let previewUrl = `https://fpt.vn/tin-tuc/${slug}`;
+
+        if (art.status === 'Draft' || art.status === 'Scheduled') {
+            previewUrl += `?preview=true&token=fpt_cms_preview_token_secure&status=${art.status.toLowerCase()}`;
+            showLdpToast(`Đang mở chế độ Xem trước (Preview) cho bài viết ${art.status === 'Draft' ? 'Bản nháp' : 'Lên lịch'}...`);
+        } else {
+            showLdpToast('Đang mở trang bài viết công khai trên website...');
+        }
+
+        window.open(previewUrl, '_blank');
+    };
+
+    // =========================================================================
+    // XỬ LÝ GỢI Ý TAGS NHANH & CHỐNG TRÙNG LẶP (STT 8.0)
+    // =========================================================================
+    window.addTagToInput = function (newTag) {
+        const input = document.getElementById('art-tags');
+        if (!input) return;
+
+        const currentVal = input.value.trim();
+        let tags = currentVal ? currentVal.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+        // Kiểm tra trùng lặp không phân biệt hoa thường (STT 8.0)
+        const isExist = tags.some(t => t.toLowerCase() === newTag.toLowerCase());
+        if (isExist) {
+            showLdpToast(`Thẻ "${newTag}" đã có trong danh sách!`);
+            input.focus();
+            return;
+        }
+
+        tags.push(newTag);
+        input.value = tags.join(', ');
+        showLdpToast(`Đã thêm thẻ: ${newTag}`);
+        input.focus();
+    };
+
+    // =========================================================================
+    // XỬ LÝ BỘ CHỌN CÂY DANH MỤC ĐA TẦNG (CATEGORY TREE - STT 7.0)
+    // =========================================================================
+    window.filterNewsCategoryTree = function (query) {
+        const q = (query || '').toLowerCase().trim();
+        const nodes = document.querySelectorAll('#news-cat-tree-container .cat-tree-node');
+        nodes.forEach(node => {
+            const name = (node.getAttribute('data-name') || '').toLowerCase();
+            if (!q || name.includes(q)) {
+                node.style.display = 'flex';
+            } else {
+                node.style.display = 'none';
+            }
+        });
+    };
+
+    window.toggleCatTreeNode = function (childrenId, toggleBtn) {
+        const childContainer = document.getElementById(childrenId);
+        if (!childContainer) return;
+        if (childContainer.style.display === 'none') {
+            childContainer.style.display = 'flex';
+            if (toggleBtn) toggleBtn.innerText = '▼';
+        } else {
+            childContainer.style.display = 'none';
+            if (toggleBtn) toggleBtn.innerText = '▶';
+        }
+    };
+
+    window._isCatTreeExpanded = true;
+    window.expandAllNewsCatTree = function () {
+        window._isCatTreeExpanded = !window._isCatTreeExpanded;
+        const subContainers = document.querySelectorAll('#news-cat-tree-container [id$="-children"]');
+        const toggles = document.querySelectorAll('#news-cat-tree-container .cat-toggle');
+        subContainers.forEach(el => el.style.display = window._isCatTreeExpanded ? 'flex' : 'none');
+        toggles.forEach(t => t.innerText = window._isCatTreeExpanded ? '▼' : '▶');
+    };
+
+    window.setNewsPrimaryCategory = function (catName) {
+        if (!catName) return;
+        const primaryInput = document.getElementById('art-primary-category');
+        const primaryLabel = document.getElementById('news-primary-cat-label');
+        if (primaryInput) primaryInput.value = catName;
+        if (primaryLabel) primaryLabel.innerText = catName;
+
+        // Cập nhật class active cho badge Chính
+        document.querySelectorAll('#news-cat-tree-container .cat-primary-badge').forEach(badge => {
+            const node = badge.closest('.cat-tree-node');
+            const nodeName = node ? (node.getAttribute('data-name') || node.querySelector('.cat-check')?.value) : '';
+            if (nodeName === catName) {
+                badge.classList.add('active');
+                // Tự động tick checkbox nếu chưa tick
+                const chk = node.querySelector('.cat-check');
+                if (chk && !chk.checked) chk.checked = true;
+            } else {
+                badge.classList.remove('active');
+            }
+        });
+
+        // Tự động đồng bộ vào select chuyên mục chính cũ nếu còn tồn tại
+        const oldCatSelect = document.getElementById('art-category');
+        if (oldCatSelect) oldCatSelect.value = catName;
+    };
+
+    window.onNewsCategoryCheckChange = function (chk) {
+        const catName = chk.value;
+        const primaryInput = document.getElementById('art-primary-category');
+        const currentPrimary = primaryInput ? primaryInput.value : '';
+
+        if (chk.checked) {
+            // Nếu chưa có danh mục chính nào, chọn mục vừa tick làm chính
+            if (!currentPrimary) {
+                window.setNewsPrimaryCategory(catName);
+            }
+        } else {
+            // Nếu bỏ tick danh mục đang là chính, chuyển sang mục đã tick khác
+            if (currentPrimary === catName) {
+                const otherChecked = document.querySelector('#news-cat-tree-container .cat-check:checked');
+                if (otherChecked) {
+                    window.setNewsPrimaryCategory(otherChecked.value);
+                } else {
+                    if (primaryInput) primaryInput.value = '';
+                    const primaryLabel = document.getElementById('news-primary-cat-label');
+                    if (primaryLabel) primaryLabel.innerText = 'Chưa chọn';
+                    document.querySelectorAll('#news-cat-tree-container .cat-primary-badge').forEach(b => b.classList.remove('active'));
+                }
+            }
+        }
+    };
+
+    window.promptQuickAddCategory = function () {
+        const newCatName = prompt('Nhập tên Chuyên mục mới muốn thêm nhanh:');
+        if (!newCatName || !newCatName.trim()) return;
+
+        const name = newCatName.trim();
+        const container = document.getElementById('news-cat-tree-container');
+        if (!container) return;
+
+        const catId = 'cat-custom-' + Date.now();
+        const newNode = document.createElement('div');
+        newNode.className = 'cat-tree-node';
+        newNode.setAttribute('data-id', catId);
+        newNode.setAttribute('data-name', name);
+        newNode.style.cssText = 'display:flex; align-items:center; justify-content:space-between; padding:4px 6px; border-radius:4px; font-size:12px;';
+        newNode.innerHTML = `
+            <label style="display:flex; align-items:center; gap:6px; margin:0; cursor:pointer; color:#e2e8f0; flex:1;">
+                <input type="checkbox" class="cat-check" value="${name}" checked onchange="window.onNewsCategoryCheckChange(this)" style="accent-color:var(--primary); cursor:pointer;">
+                <span>📁 ${name}</span>
+            </label>
+            <span class="cat-primary-badge" onclick="window.setNewsPrimaryCategory('${name}')" title="Đặt làm danh mục đại diện">Chính</span>
+        `;
+        container.appendChild(newNode);
+        window.setNewsPrimaryCategory(name);
+        showLdpToast(`Đã thêm nhanh chuyên mục: "${name}"`);
+    };
+
+    // Thêm thẻ gợi ý nhanh vào trường Tags (STT 8.0)
+    window.addTagToInput = function (tag) {
+        const input = document.getElementById('art-tags');
+        if (!input) return;
+        const current = input.value.split(',').map(t => t.trim()).filter(Boolean);
+        if (!current.includes(tag)) {
+            current.push(tag);
+            input.value = current.join(', ');
+            showLdpToast(`Đã gắn thẻ: #${tag}`);
+        } else {
+            showLdpToast(`Thẻ #${tag} đã được chọn!`);
+        }
+    };
+
     window.editNewsArticle = function (id) {
         const art = window.newsArticlesData[id];
         if (!art) return;
@@ -2096,7 +2322,18 @@
         document.getElementById('art-sapo').value = art.sapo || '';
         document.getElementById('art-content').value = art.content || '';
         document.getElementById('art-tags').value = art.tags || '';
-        document.getElementById('art-category').value = art.category;
+
+        // Đổ dữ liệu Cây Danh mục (STT 7.0)
+        const primaryCat = art.categoryPrimary || art.category || 'Tin khuyến mãi';
+        const allCats = art.categories || [art.category, art.categorySub].filter(Boolean);
+
+        // Reset check các node
+        document.querySelectorAll('#news-cat-tree-container .cat-check').forEach(chk => {
+            chk.checked = allCats.includes(chk.value) || chk.value === primaryCat;
+        });
+        window.setNewsPrimaryCategory(primaryCat);
+
+        const oldCatEl = document.getElementById('art-category'); if (oldCatEl) oldCatEl.value = primaryCat;
         const elChan = document.getElementById('art-channel'); if (elChan) elChan.value = art.channel || 'fpt-telecom';
         const elStat = document.getElementById('art-status'); if (elStat) elStat.value = art.status;
         window.currentEditingArticleChannel = art.channel || 'fpt-telecom';
@@ -2195,7 +2432,16 @@
         const sapo = document.getElementById('art-sapo').value.trim();
         const content = document.getElementById('art-content').value.trim();
         const tags = document.getElementById('art-tags').value.trim();
-        const category = document.getElementById('art-category').value;
+
+        // Thu thập danh mục từ Cây Danh mục (STT 7.0)
+        const checkedCats = Array.from(document.querySelectorAll('#news-cat-tree-container .cat-check:checked')).map(cb => cb.value);
+        let primaryCat = document.getElementById('art-primary-category')?.value;
+        if (!primaryCat && checkedCats.length > 0) {
+            primaryCat = checkedCats[0];
+            window.setNewsPrimaryCategory(primaryCat);
+        }
+        const category = primaryCat || 'Tin khuyến mãi';
+
         const elChan = document.getElementById('art-channel');
         const channel = elChan ? elChan.value : (window.currentEditingArticleChannel || 'fpt-telecom');
         const elStat = document.getElementById('art-status');
@@ -2233,6 +2479,11 @@
 
         if (!title || !slug || !content || !sapo) {
             showLdpToast('Vui lòng nhập đầy đủ các thông tin bắt buộc (*): Tiêu đề, Slug, Sapo, Nội dung!');
+            return;
+        }
+
+        if (checkedCats.length === 0) {
+            showLdpToast('Vui lòng chọn ít nhất một chuyên mục trong Cây Danh mục!');
             return;
         }
 
@@ -2290,6 +2541,8 @@
             content: content,
             tags: tags,
             category: category,
+            categoryPrimary: primaryCat,
+            categories: checkedCats,
             channel: channel,
             status: status,
             thumbUrl: thumbUrl,
@@ -2864,7 +3117,7 @@
 
         // Cập nhật classes active
         document.querySelectorAll('.news-stat-card').forEach((card) => {
-            card.classList.remove('active-total', 'active-pub', 'active-draft');
+            card.classList.remove('active-total', 'active-pub', 'active-draft', 'active-sched');
         });
 
         const cards = document.querySelectorAll('.news-stat-card');
@@ -2875,6 +3128,8 @@
                 cardElement.classList.add('active-pub');
             } else if (statusValue === 'Draft') {
                 cardElement.classList.add('active-draft');
+            } else if (statusValue === 'Scheduled') {
+                cardElement.classList.add('active-sched');
             }
         } else {
             // Trường hợp đồng bộ từ dropdown select
@@ -2884,6 +3139,8 @@
                 cards[1]?.classList.add('active-pub');
             } else if (statusValue === 'Draft') {
                 cards[2]?.classList.add('active-draft');
+            } else if (statusValue === 'Scheduled') {
+                cards[3]?.classList.add('active-sched');
             }
         }
 
