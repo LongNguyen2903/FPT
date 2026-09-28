@@ -20333,7 +20333,7 @@ Tặng 1 tháng cước</textarea>
                                     </button>
                                 </div>
                                 <h2 style="margin: 0; font-size: 20px; font-weight: 700;">
-                                    Danh sách quảng cáo con - <span id="ads-item-list-group-name"
+                                    Danh sách quảng cáo - <span id="ads-item-list-group-name"
                                         style="color: var(--primary, #3b82f6);">Scrolling Announcement Bar</span>
                                 </h2>
                             </div>
@@ -35915,7 +35915,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                             <td style="text-align: center;">
                                 <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
                                     <button class="btn btn-secondary btn-sm" onclick="openAdsItemList('${g.id}')"
-                                        title="Xem chi tiết danh sách quảng cáo con" style="width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; color: #60a5fa; border-color: rgba(59,130,246,0.3); font-size: 14px;">
+                                        title="Xem danh sách quảng cáo" style="width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; color: #60a5fa; border-color: rgba(59,130,246,0.3); font-size: 14px;">
                                         👁️
                                     </button>
                                     <button class="btn btn-secondary btn-sm" onclick="openAdsEditGroupModal('${g.id}')"
@@ -36060,7 +36060,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
             function deleteAdsGroup(groupId) {
                 const childCount = adsItemsData.filter(a => a.groupId === groupId).length;
                 const msg = childCount > 0
-                    ? `Nhóm này hiện có ${childCount} quảng cáo con bên trong. Bạn có chắc chắn muốn xóa nhóm này cùng toàn bộ quảng cáo con không?`
+                    ? `Nhóm này hiện có ${childCount} quảng cáo bên trong. Bạn có chắc chắn muốn xóa nhóm này cùng toàn bộ quảng cáo không?`
                     : 'Bạn có chắc chắn muốn xóa nhóm quảng cáo này không?';
 
                 if (confirm(msg)) {
