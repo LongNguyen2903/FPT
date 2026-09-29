@@ -20171,65 +20171,109 @@ Tặng 1 tháng cước</textarea>
                     <div id="modal-ads-group" class="modal-backdrop"
                         style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
                         <div class="modal-content"
-                            style="background: var(--bg-card, #131d38); border: 1px solid var(--border-glass, rgba(255,255,255,0.1)); border-radius: 14px; width: 560px; max-width: 95vw; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+                            style="background: var(--bg-card, #131d38); border: 1px solid var(--border-glass, rgba(255,255,255,0.1)); border-radius: 14px; width: 750px; max-width: 95vw; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
                             <div
-                                style="padding: 18px 24px; border-bottom: 1px solid var(--border-glass, rgba(255,255,255,0.08)); display: flex; justify-content: space-between; align-items: center;">
+                                style="padding: 18px 24px; border-bottom: 1px solid var(--border-glass, rgba(255,255,255,0.08)); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
                                 <h3 id="ads-group-modal-title"
-                                    style="margin: 0; font-size: 17px; font-weight: 700; color: #fff;">Thêm nhóm quảng
-                                    cáo mới</h3>
+                                    style="margin: 0; font-size: 17px; font-weight: 700; color: #fff;">Thêm nhóm quảng cáo mới</h3>
                                 <button type="button" onclick="closeAdsGroupModal()"
                                     style="background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; line-height: 1;">✕</button>
                             </div>
-                            <div style="padding: 24px;">
+                            <div style="padding: 20px 24px; overflow-y: auto; flex-grow: 1;">
                                 <input type="hidden" id="ads-modal-group-is-edit" value="0">
-                                <div class="form-group" style="margin-bottom: 16px;">
-                                    <label
-                                        style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
-                                        Tên nhóm quảng cáo <span style="color: var(--danger, #ef4444);">*</span>
-                                    </label>
-                                    <input type="text" id="ads-modal-group-name" class="form-input"
-                                        placeholder="VD: Scrolling Announcement Bar, Sticky Footer Bar..."
-                                        style="width: 100%; height: 38px; border-radius: 8px;"
-                                        oninput="onAdsGroupNameInput(this.value)">
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group">
+                                        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
+                                            Tên nhóm quảng cáo <span style="color: var(--danger, #ef4444);">*</span>
+                                        </label>
+                                        <input type="text" id="ads-modal-group-name" class="form-input"
+                                            placeholder="VD: Scrolling Announcement Bar, Sticky Footer Bar..."
+                                            style="width: 100%; height: 38px; border-radius: 8px;"
+                                            oninput="onAdsGroupNameInput(this.value)">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
+                                            Mã nhóm (Định danh hệ thống) <span style="color: var(--danger, #ef4444);">*</span>
+                                        </label>
+                                        <input type="text" id="ads-modal-group-id" class="form-input"
+                                            placeholder="VD: scrolling_top_bar, sticky_footer_bar..."
+                                            style="width: 100%; height: 38px; border-radius: 8px; font-family: monospace;">
+                                    </div>
                                 </div>
-                                <div class="form-group" style="margin-bottom: 16px;">
-                                    <label
-                                        style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">
-                                        Mã nhóm (Định danh hệ thống) <span
-                                            style="color: var(--danger, #ef4444);">*</span>
-                                    </label>
-                                    <input type="text" id="ads-modal-group-id" class="form-input"
-                                        placeholder="VD: scrolling_top_bar, sticky_footer_bar..."
-                                        style="width: 100%; height: 38px; border-radius: 8px; font-family: monospace;">
-                                    <span
-                                        style="font-size: 11.5px; color: var(--text-muted); margin-top: 4px; display: block;">Mã
-                                        duy nhất dùng để gán các quảng cáo con vào nhóm</span>
+
+                                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                    <div class="form-group">
+                                        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">Mô tả nhóm</label>
+                                        <input type="text" id="ads-modal-group-desc" class="form-input"
+                                            placeholder="Mô tả vị trí hoặc mục đích sử dụng nhóm quảng cáo này..."
+                                            style="width: 100%; height: 38px; border-radius: 8px;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">Trạng thái</label>
+                                        <select id="ads-modal-group-status" class="form-select"
+                                            style="width: 100%; height: 38px; border-radius: 8px;">
+                                            <option value="active">Hoạt động</option>
+                                            <option value="paused">Tạm dừng</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group" style="margin-bottom: 16px;">
-                                    <label
-                                        style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">Mô
-                                        tả nhóm</label>
-                                    <textarea id="ads-modal-group-desc" class="form-input" rows="2"
-                                        placeholder="Mô tả vị trí hoặc mục đích sử dụng nhóm quảng cáo này..."
-                                        style="width: 100%; border-radius: 8px; resize: vertical;"></textarea>
-                                </div>
-                                <div class="form-group" style="margin-bottom: 8px;">
-                                    <label
-                                        style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-main);">Trạng
-                                        thái</label>
-                                    <select id="ads-modal-group-status" class="form-select"
-                                        style="width: 100%; height: 38px; border-radius: 8px;">
-                                        <option value="active">Hoạt động</option>
-                                        <option value="paused">Tạm dừng</option>
-                                    </select>
+
+                                <!-- Cấu hình trang hiển thị áp dụng (Tích hợp tại cấp Nhóm Cha) -->
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: 10px; padding: 16px; margin-top: 10px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                                        <div>
+                                            <label style="font-weight: 700; font-size: 13px; color: #fff; display: flex; align-items: center; gap: 6px; margin: 0;">
+                                                <span>📍</span> Cấu hình trang hiển thị áp dụng
+                                            </label>
+                                            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">
+                                                Mọi quảng cáo thuộc nhóm này sẽ tự động xuất hiện trên các trang được chọn dưới đây
+                                            </div>
+                                        </div>
+                                        <span style="font-size: 12px; background: rgba(59,130,246,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 12px; font-weight: 600;"
+                                            id="ads-modal-group-pages-count">
+                                            Đã chọn 0 trang
+                                        </span>
+                                    </div>
+
+                                    <div style="display: flex; gap: 20px; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 8px; margin-bottom: 12px;">
+                                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-main);">
+                                            <input type="radio" name="ads-group-page-scope" id="ads-group-scope-all" value="all"
+                                                onchange="toggleAdsGroupPageScope(this.value)" style="accent-color: var(--primary); width: 15px; height: 15px;">
+                                            Toàn bộ website (Tất cả trang)
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-main);">
+                                            <input type="radio" name="ads-group-page-scope" id="ads-group-scope-custom" value="custom" checked
+                                                onchange="toggleAdsGroupPageScope(this.value)" style="accent-color: var(--primary); width: 15px; height: 15px;">
+                                            Tùy chọn danh sách trang cụ thể
+                                        </label>
+                                    </div>
+
+                                    <div id="ads-group-custom-pages-wrapper">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px;">
+                                            <input type="text" id="ads-group-page-search" class="form-input"
+                                                placeholder="🔍 Tìm kiếm trang theo tên hoặc slug..."
+                                                oninput="filterAdsGroupModalPages(this.value)"
+                                                style="height: 34px; font-size: 12.5px; border-radius: 6px; flex-grow: 1; max-width: 280px;">
+                                            <div style="display: flex; gap: 6px;">
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="selectAllAdsGroupModalPages(true)"
+                                                    style="color: #3b82f6; font-size: 11.5px; padding: 4px 10px; border-radius: 5px;">Chọn tất cả</button>
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="selectAllAdsGroupModalPages(false)"
+                                                    style="color: #ef4444; font-size: 11.5px; padding: 4px 10px; border-radius: 5px;">Bỏ chọn</button>
+                                            </div>
+                                        </div>
+                                        <div id="ads-group-pages-grid"
+                                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-height: 220px; overflow-y: auto; padding: 10px; border: 1px solid var(--border-glass); border-radius: 8px; background: rgba(0,0,0,0.2);">
+                                            <!-- Rendered dynamically via JS -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div
-                                style="padding: 14px 24px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border-glass, rgba(255,255,255,0.08)); display: flex; justify-content: flex-end; gap: 10px;">
-                                <button type="button" class="btn btn-secondary" onclick="closeAdsGroupModal()">Hủy
-                                    bỏ</button>
+                                style="padding: 14px 24px; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border-glass, rgba(255,255,255,0.08)); display: flex; justify-content: flex-end; gap: 10px; flex-shrink: 0;">
+                                <button type="button" class="btn btn-secondary" onclick="closeAdsGroupModal()">Hủy bỏ</button>
                                 <button type="button" class="btn btn-primary" onclick="saveAdsGroupModal()"
-                                    style="padding: 0 20px; font-weight: 600; background: var(--primary);">
+                                    style="padding: 0 24px; height: 38px; font-weight: 600; background: var(--primary); border-radius: 8px;">
                                     💾 Lưu nhóm
                                 </button>
                             </div>
@@ -20282,13 +20326,14 @@ Tặng 1 tháng cước</textarea>
                                 <thead>
                                     <tr>
                                         <th style="width: 50px; text-align: center;">STT</th>
-                                        <th style="min-width: 240px;">TÊN NHÓM QUẢNG CÁO</th>
-                                        <th style="min-width: 160px;">MÃ NHÓM</th>
-                                        <th style="min-width: 150px;">NGƯỜI TẠO</th>
-                                        <th style="min-width: 140px; text-align: center;">NGÀY TẠO</th>
-                                        <th style="width: 150px; text-align: center;">SỐ LƯỢNG QUẢNG CÁO</th>
+                                        <th style="min-width: 220px;">TÊN NHÓM QUẢNG CÁO</th>
+                                        <th style="min-width: 150px;">MÃ NHÓM</th>
+                                        <th style="min-width: 150px; text-align: center;">TRANG ÁP DỤNG</th>
+                                        <th style="min-width: 140px;">NGƯỜI TẠO</th>
+                                        <th style="min-width: 130px; text-align: center;">NGÀY TẠO</th>
+                                        <th style="width: 140px; text-align: center;">SỐ LƯỢNG QUẢNG CÁO</th>
                                         <th style="width: 130px; text-align: center;">TRẠNG THÁI</th>
-                                        <th style="width: 240px; text-align: center;">THAO TÁC</th>
+                                        <th style="width: 120px; text-align: center;">THAO TÁC</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ads-group-table-body">
@@ -20375,14 +20420,13 @@ Tặng 1 tháng cước</textarea>
                                     <tr>
                                         <th style="width: 50px; text-align: center;">STT</th>
                                         <th style="width: 70px; text-align: center;">ICON</th>
-                                        <th style="min-width: 250px;">TIÊU ĐỀ QUẢNG CÁO</th>
-                                        <th style="min-width: 160px;">TRANG HIỂN THỊ</th>
-                                        <th style="min-width: 200px;">URL LIÊN KẾT</th>
-                                        <th style="min-width: 140px;">NGƯỜI TẠO</th>
+                                        <th style="min-width: 280px;">TIÊU ĐỀ QUẢNG CÁO</th>
+                                        <th style="min-width: 220px;">URL LIÊN KẾT</th>
+                                        <th style="min-width: 150px;">NGƯỜI TẠO</th>
                                         <th style="min-width: 130px; text-align: center;">NGÀY TẠO</th>
                                         <th style="width: 70px; text-align: center;">THỨ TỰ</th>
                                         <th style="width: 120px; text-align: center;">TRẠNG THÁI</th>
-                                        <th style="width: 140px; text-align: center;">THAO TÁC</th>
+                                        <th style="width: 110px; text-align: center;">THAO TÁC</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ads-items-table-body">
@@ -20622,78 +20666,6 @@ Tặng 1 tháng cước</textarea>
                                     </div>
                                     <div id="ads-form-content-editor" contenteditable="true"
                                         style="min-height: 80px; padding: 12px 14px; background: rgba(0,0,0,0.25); color: #ffffff; border: 1px solid var(--border-glass); border-radius: 0 0 8px 8px; font-size: 13.5px; outline: none;">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- KHỐI 2: CHỌN TRANG HIỂN THỊ (TÍCH HỢP TRỰC TIẾP TẠI MÀN HÌNH NÀY) -->
-                            <div
-                                style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: 12px; padding: 24px;">
-                                <div
-                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-                                    <div>
-                                        <h3
-                                            style="margin: 0; font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px;">
-                                            <span>📍</span> Cấu hình trang hiển thị áp dụng
-                                        </h3>
-                                        <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
-                                            Chọn các trang trên website FPT mà quảng cáo này sẽ được phép xuất hiện
-                                        </div>
-                                    </div>
-                                    <span
-                                        style="font-size: 12.5px; background: rgba(59,130,246,0.15); color: #60a5fa; padding: 4px 12px; border-radius: 12px; font-weight: 600;"
-                                        id="ads-form-selected-pages-count">
-                                        Đã chọn 0 trang
-                                    </span>
-                                </div>
-
-                                <!-- Lựa chọn phạm vi: Tất cả hay Tùy chọn -->
-                                <div
-                                    style="display: flex; gap: 24px; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 8px; margin-bottom: 16px;">
-                                    <label
-                                        style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--text-main);">
-                                        <input type="radio" name="ads-form-page-scope" id="ads-form-scope-all"
-                                            value="all" onchange="toggleAdsPageScope(this.value)"
-                                            style="accent-color: var(--primary); width: 16px; height: 16px;">
-                                        Hiển thị trên toàn bộ các trang (Tất cả trang)
-                                    </label>
-                                    <label
-                                        style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--text-main);">
-                                        <input type="radio" name="ads-form-page-scope" id="ads-form-scope-custom"
-                                            value="custom" checked onchange="toggleAdsPageScope(this.value)"
-                                            style="accent-color: var(--primary); width: 16px; height: 16px;">
-                                        Tùy chọn danh sách trang cụ thể bên dưới
-                                    </label>
-                                </div>
-
-                                <!-- Khu vực Grid danh sách trang -->
-                                <div id="ads-form-custom-pages-wrapper">
-                                    <div
-                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 12px;">
-                                        <div style="position: relative; flex-grow: 1; max-width: 320px;">
-                                            <input type="text" id="ads-form-page-search" class="form-input"
-                                                placeholder="🔍 Tìm kiếm trang theo tên hoặc slug..."
-                                                oninput="filterAdsFormPages(this.value)"
-                                                style="height: 36px; font-size: 13px; border-radius: 8px; width: 100%;">
-                                        </div>
-                                        <div style="display: flex; gap: 8px;">
-                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                onclick="selectAllAdsFormPages(true)"
-                                                style="color: #3b82f6; font-weight: 600; padding: 6px 14px; border-radius: 6px;">
-                                                Chọn tất cả
-                                            </button>
-                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                onclick="selectAllAdsFormPages(false)"
-                                                style="color: #ef4444; font-weight: 600; padding: 6px 14px; border-radius: 6px;">
-                                                Bỏ chọn tất cả
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <!-- Grid danh sách trang -->
-                                    <div id="ads-form-pages-grid"
-                                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-height: 360px; overflow-y: auto; padding-right: 6px; border: 1px solid var(--border-glass); border-radius: 8px; padding: 12px; background: rgba(0,0,0,0.15);">
-                                        <!-- Rendered dynamically via JS -->
                                     </div>
                                 </div>
                             </div>
@@ -35605,7 +35577,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Thanh chạy chữ thông báo khuyến mãi cố định đầu website',
                     createdBy: 'NguyenVanDev (Kỹ thuật)',
                     createdAt: '14:20 12/08/2026',
-                    status: 'active'
+                    status: 'active',
+                    scope: 'custom',
+                    pages: ['homepage', 'internet', 'khuyen-mai-net', 'internet-ca-nhan', 'lap-internet-wifi-hcm', 'lap-internet-wifi-ha-noi']
                 },
                 {
                     id: 'sticky_footer_bar',
@@ -35613,7 +35587,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Thanh thông báo ghim cố định dưới chân màn hình website',
                     createdBy: 'TranDev (Kỹ thuật)',
                     createdAt: '09:45 15/08/2026',
-                    status: 'active'
+                    status: 'active',
+                    scope: 'custom',
+                    pages: ['homepage', 'thanh-toan']
                 },
                 {
                     id: 'popup_promo_modal',
@@ -35621,7 +35597,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Hộp thoại popup tự động bật khi khách hàng truy cập website',
                     createdBy: 'NguyenVanDev (Kỹ thuật)',
                     createdAt: '16:30 18/08/2026',
-                    status: 'paused'
+                    status: 'paused',
+                    scope: 'all',
+                    pages: []
                 },
                 {
                     id: 'sidebar_floating_banner',
@@ -35629,7 +35607,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Banner nổi trượt hai bên sườn website (áp dụng Desktop)',
                     createdBy: 'LeHoangDev (Kỹ thuật)',
                     createdAt: '08:15 22/08/2026',
-                    status: 'active'
+                    status: 'active',
+                    scope: 'custom',
+                    pages: ['homepage', 'internet']
                 },
                 {
                     id: 'in_page_interstitial_promo',
@@ -35637,7 +35617,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Khối banner quảng cáo xen kẽ giữa các block nội dung trang',
                     createdBy: 'PhamDev (Kỹ thuật)',
                     createdAt: '11:00 28/08/2026',
-                    status: 'active'
+                    status: 'active',
+                    scope: 'custom',
+                    pages: ['internet-game-thu']
                 },
                 {
                     id: 'exit_intent_lead_box',
@@ -35645,7 +35627,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     description: 'Hộp ưu đãi giữ chân khách hàng khi chuẩn bị rê chuột rời trang',
                     createdBy: 'TranDev (Kỹ thuật)',
                     createdAt: '17:25 02/09/2026',
-                    status: 'paused'
+                    status: 'paused',
+                    scope: 'all',
+                    pages: []
                 }
             ];
 
@@ -35825,7 +35809,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
             let currentViewingGroupId = 'scrolling_top_bar';
             let currentEditingAdId = null;
-            let currentFormSelectedPages = new Set();
+            let currentGroupModalSelectedPages = new Set();
 
             function initAdsModule() {
                 openAdsGroupList();
@@ -35865,13 +35849,18 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 if (countEl) countEl.innerText = `Hiển thị 1 - ${filtered.length} của ${adsGroupsData.length}`;
 
                 if (filtered.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:36px; color:var(--text-muted);">Không tìm thấy nhóm quảng cáo nào phù hợp.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:36px; color:var(--text-muted);">Không tìm thấy nhóm quảng cáo nào phù hợp.</td></tr>`;
                     return;
                 }
 
                 tbody.innerHTML = filtered.map((g, idx) => {
                     const itemCount = adsItemsData.filter(a => a.groupId === g.id).length;
                     const isActive = g.status === 'active';
+                    const isAll = (g.scope === 'all');
+                    const pageBadge = isAll
+                        ? `<span class="badge" style="background: rgba(59,130,246,0.18); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">🌐 Toàn bộ trang</span>`
+                        : `<span class="badge" style="background: rgba(168,85,247,0.18); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;" title="${(g.pages || []).join(', ')}">📄 ${(g.pages || []).length} trang áp dụng</span>`;
+
                     return `
                         <tr>
                             <td style="text-align: center; font-weight: 600; color: var(--text-muted);">${idx + 1}</td>
@@ -35887,6 +35876,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                                     <code style="background: rgba(255,255,255,0.06); color: #f59e0b; padding: 4px 8px; border-radius: 5px; font-size: 12.5px; font-family: monospace;">${g.id}</code>
                                     <button type="button" class="btn btn-secondary btn-sm" style="padding: 2px 6px; font-size: 11px;" onclick="copyAdsGroupCode('${g.id}')" title="Sao chép mã vị trí">📋</button>
                                 </div>
+                            </td>
+                            <td style="text-align: center;">
+                                ${pageBadge}
                             </td>
                             <td>
                                 <span style="font-size: 13px; font-weight: 600; color: var(--text-main);">${g.createdBy || 'Admin User'}</span>
@@ -35968,6 +35960,13 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 document.getElementById('ads-modal-group-id').readOnly = false;
                 document.getElementById('ads-modal-group-desc').value = '';
                 document.getElementById('ads-modal-group-status').value = 'active';
+
+                currentGroupModalSelectedPages.clear();
+                ['homepage', 'internet', 'khuyen-mai-net', 'internet-ca-nhan'].forEach(p => currentGroupModalSelectedPages.add(p));
+                const customRadio = document.getElementById('ads-group-scope-custom');
+                if (customRadio) customRadio.checked = true;
+                toggleAdsGroupPageScope('custom');
+                renderAdsGroupModalPagesGrid('');
                 document.getElementById('modal-ads-group').style.display = 'flex';
             }
 
@@ -35981,6 +35980,19 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 document.getElementById('ads-modal-group-id').readOnly = true;
                 document.getElementById('ads-modal-group-desc').value = group.description || '';
                 document.getElementById('ads-modal-group-status').value = group.status;
+
+                currentGroupModalSelectedPages.clear();
+                const isAll = (group.scope === 'all');
+                if (isAll) {
+                    const allRadio = document.getElementById('ads-group-scope-all');
+                    if (allRadio) allRadio.checked = true;
+                } else {
+                    const customRadio = document.getElementById('ads-group-scope-custom');
+                    if (customRadio) customRadio.checked = true;
+                    (group.pages || []).forEach(p => currentGroupModalSelectedPages.add(p));
+                }
+                toggleAdsGroupPageScope(isAll ? 'all' : 'custom');
+                renderAdsGroupModalPagesGrid('');
                 document.getElementById('modal-ads-group').style.display = 'flex';
             }
 
@@ -36000,6 +36012,86 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 }
             }
 
+            function toggleAdsGroupPageScope(scope) {
+                const wrapper = document.getElementById('ads-group-custom-pages-wrapper');
+                const badge = document.getElementById('ads-modal-group-pages-count');
+                if (scope === 'all') {
+                    if (wrapper) wrapper.style.display = 'none';
+                    if (badge) {
+                        badge.innerText = 'Toàn bộ website';
+                        badge.style.color = '#60a5fa';
+                    }
+                } else {
+                    if (wrapper) wrapper.style.display = 'block';
+                    updateAdsGroupModalPageBadge();
+                }
+            }
+
+            function updateAdsGroupModalPageBadge() {
+                const badge = document.getElementById('ads-modal-group-pages-count');
+                if (badge) {
+                    badge.innerText = `Đã chọn ${currentGroupModalSelectedPages.size} / ${adsPagesData.length} trang`;
+                    badge.style.color = currentGroupModalSelectedPages.size > 0 ? '#60a5fa' : '#ef4444';
+                }
+            }
+
+            function renderAdsGroupModalPagesGrid(filterText = '') {
+                const grid = document.getElementById('ads-group-pages-grid');
+                if (!grid) return;
+                const q = filterText.toLowerCase().trim();
+                const filtered = q
+                    ? adsPagesData.filter(p => p.name.toLowerCase().includes(q) || p.slug.toLowerCase().includes(q))
+                    : adsPagesData;
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:16px; color:var(--text-muted);">Không tìm thấy trang phù hợp.</div>`;
+                    return;
+                }
+
+                grid.innerHTML = filtered.map(page => {
+                    const isChecked = currentGroupModalSelectedPages.has(page.slug);
+                    return `
+                        <div class="ads-page-card ${isChecked ? 'checked' : ''}" onclick="toggleAdsGroupModalPageSelection('${page.slug}', event)"
+                            style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; border: 1px solid ${isChecked ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}; background: ${isChecked ? 'rgba(59,130,246,0.14)' : 'rgba(255,255,255,0.02)'}; cursor: pointer; transition: all 0.2s;">
+                            <input type="checkbox" ${isChecked ? 'checked' : ''} style="accent-color: var(--primary); width: 15px; height: 15px; cursor: pointer;"
+                                onclick="event.stopPropagation(); toggleAdsGroupModalPageSelection('${page.slug}', event)">
+                            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;">
+                                <div style="font-size: 12px; font-weight: 600; color: ${isChecked ? '#fff' : 'var(--text-main)'}; overflow: hidden; text-overflow: ellipsis;">${page.name}</div>
+                                <div style="font-size: 10px; color: var(--text-muted); font-family: monospace;">/${page.slug}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                updateAdsGroupModalPageBadge();
+            }
+
+            function toggleAdsGroupModalPageSelection(slug, event) {
+                if (event) event.stopPropagation();
+                if (currentGroupModalSelectedPages.has(slug)) {
+                    currentGroupModalSelectedPages.delete(slug);
+                } else {
+                    currentGroupModalSelectedPages.add(slug);
+                }
+                const searchVal = document.getElementById('ads-group-page-search')?.value || '';
+                renderAdsGroupModalPagesGrid(searchVal);
+            }
+
+            function selectAllAdsGroupModalPages(checkAll) {
+                if (checkAll) {
+                    adsPagesData.forEach(p => currentGroupModalSelectedPages.add(p.slug));
+                    showLdpToast('Đã chọn tất cả các trang cho nhóm quảng cáo!');
+                } else {
+                    currentGroupModalSelectedPages.clear();
+                    showLdpToast('Đã bỏ chọn tất cả các trang!');
+                }
+                const searchVal = document.getElementById('ads-group-page-search')?.value || '';
+                renderAdsGroupModalPagesGrid(searchVal);
+            }
+
+            function filterAdsGroupModalPages(val) {
+                renderAdsGroupModalPagesGrid(val);
+            }
+
             function saveAdsGroupModal() {
                 const name = document.getElementById('ads-modal-group-name').value.trim();
                 const id = document.getElementById('ads-modal-group-id').value.trim();
@@ -36016,12 +36108,17 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     return;
                 }
 
+                const isAll = document.getElementById('ads-group-scope-all')?.checked;
+                const pages = isAll ? [] : Array.from(currentGroupModalSelectedPages);
+
                 if (isEdit) {
                     const grp = adsGroupsData.find(g => g.id === id);
                     if (grp) {
                         grp.name = name;
                         grp.description = desc;
                         grp.status = status;
+                        grp.scope = isAll ? 'all' : 'custom';
+                        grp.pages = pages;
                     }
                     showLdpToast('Đã cập nhật nhóm quảng cáo thành công!');
                 } else {
@@ -36034,6 +36131,8 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                         name: name,
                         description: desc,
                         status: status,
+                        scope: isAll ? 'all' : 'custom',
+                        pages: pages,
                         createdBy: 'Admin User',
                         createdAt: new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) + ' ' + new Date().toLocaleDateString('vi-VN')
                     });
@@ -36128,9 +36227,9 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 if (items.length === 0) {
                     tbody.innerHTML = `
                         <tr>
-                            <td colspan="10" style="text-align:center; padding:45px 20px; color:var(--text-muted);">
+                            <td colspan="9" style="text-align:center; padding:45px 20px; color:var(--text-muted);">
                                 <div style="font-size: 32px; margin-bottom: 8px;">📭</div>
-                                <div style="font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Không tìm thấy quảng cáo con nào phù hợp</div>
+                                <div style="font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 6px;">Không tìm thấy quảng cáo nào phù hợp</div>
                                 <p style="font-size: 13px; margin: 0 0 16px 0;">Hãy thử thay đổi từ khóa lọc hoặc tạo mẩu quảng cáo mới.</p>
                                 <button class="btn btn-primary" onclick="openAdsItemForm(null)" style="padding: 6px 18px; font-size: 13px;">
                                     + Thêm mới quảng cáo
@@ -36142,11 +36241,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 }
 
                 tbody.innerHTML = items.map((item, idx) => {
-                    const isAll = item.scope === 'all';
-                    const pageText = isAll
-                        ? `<span class="badge" style="background: rgba(59,130,246,0.18); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;">🌐 Toàn bộ trang</span>`
-                        : `<span class="badge" style="background: rgba(168,85,247,0.18); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); padding: 3px 10px; border-radius: 12px; font-size: 11.5px; font-weight: 600;" title="${(item.pages || []).join(', ')}">📄 ${(item.pages || []).length} trang cụ thể</span>`;
-
                     const isActive = item.status === 'active';
 
                     return `
@@ -36163,7 +36257,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                                     ${item.title}
                                 </a>
                             </td>
-                            <td>${pageText}</td>
                             <td>
                                 <span style="font-size: 12px; color: var(--text-muted); word-break: break-all; font-family: monospace; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" title="${item.targetUrl}">
                                     ${item.targetUrl || '-'}
@@ -36206,21 +36299,19 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 }).join('');
             }
 
-            // VIEW 3: FORM THÊM / CẬP NHẬT QUẢNG CÁO CON
+            // VIEW 3: FORM THÊM / CẬP NHẬT QUẢNG CÁO
             function openAdsItemForm(adId) {
                 currentEditingAdId = adId;
                 showAdsSubView('ads-view-item-form');
 
                 const group = adsGroupsData.find(g => g.id === currentViewingGroupId) || adsGroupsData[0];
-                const groupLabel = document.getElementById('ads-form-group-label');
-                if (groupLabel && group) groupLabel.innerText = `${group.name} (${group.id})`;
+                const groupNameEl = document.getElementById('ads-form-group-name');
+                if (groupNameEl && group) groupNameEl.innerText = `${group.name} (${group.id})`;
 
-                const headingEl = document.getElementById('ads-form-heading');
+                const headingEl = document.getElementById('ads-item-form-title');
                 if (headingEl) {
                     headingEl.innerText = adId ? 'Cập nhật quảng cáo' : 'Thêm mới quảng cáo';
                 }
-
-                currentFormSelectedPages.clear();
 
                 if (adId) {
                     const item = adsItemsData.find(a => a.id === adId);
@@ -36243,18 +36334,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                         const iconUrl = item.iconUrl || '';
                         document.getElementById('ads-form-icon-url').value = iconUrl;
                         onAdsIconUrlInput(iconUrl);
-
-                        // Pages scope
-                        const isAll = item.scope === 'all';
-                        const scopeAllRadio = document.getElementById('ads-form-scope-all');
-                        const scopeCustomRadio = document.getElementById('ads-form-scope-custom');
-                        if (isAll) {
-                            if (scopeAllRadio) scopeAllRadio.checked = true;
-                        } else {
-                            if (scopeCustomRadio) scopeCustomRadio.checked = true;
-                            (item.pages || []).forEach(p => currentFormSelectedPages.add(p));
-                        }
-                        toggleAdsPageScope(isAll ? 'all' : 'custom');
                     }
                 } else {
                     // Reset form for create
@@ -36273,101 +36352,11 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     document.getElementById('ads-form-status').value = 'active';
                     document.getElementById('ads-form-content-editor').innerHTML = '';
                     setPresetIcon('🎁');
-
-                    // Default select top 4 pages
-                    ['homepage', 'internet', 'khuyen-mai-net', 'internet-ca-nhan'].forEach(p => currentFormSelectedPages.add(p));
-                    const scopeCustomRadio = document.getElementById('ads-form-scope-custom');
-                    if (scopeCustomRadio) scopeCustomRadio.checked = true;
-                    toggleAdsPageScope('custom');
                 }
-
-                renderAdsFormPagesGrid();
             }
 
             function cancelAdsItemForm() {
                 openAdsItemList(currentViewingGroupId);
-            }
-
-            function toggleAdsPageScope(scope) {
-                const wrapper = document.getElementById('ads-form-custom-pages-wrapper');
-                const badge = document.getElementById('ads-form-selected-pages-count');
-                if (scope === 'all') {
-                    if (wrapper) wrapper.style.display = 'none';
-                    if (badge) {
-                        badge.innerText = 'Áp dụng: Toàn bộ website';
-                        badge.style.color = '#60a5fa';
-                    }
-                } else {
-                    if (wrapper) wrapper.style.display = 'block';
-                    updateAdsFormPageBadge();
-                }
-            }
-
-            function updateAdsFormPageBadge() {
-                const badge = document.getElementById('ads-form-selected-pages-count');
-                if (badge) {
-                    badge.innerText = `Đã chọn ${currentFormSelectedPages.size} / ${adsPagesData.length} trang`;
-                    badge.style.color = currentFormSelectedPages.size > 0 ? '#60a5fa' : '#ef4444';
-                }
-            }
-
-            function renderAdsFormPagesGrid(filterText = '') {
-                const grid = document.getElementById('ads-form-pages-grid');
-                if (!grid) return;
-
-                const q = filterText.toLowerCase().trim();
-                const filtered = q
-                    ? adsPagesData.filter(p => p.name.toLowerCase().includes(q) || p.slug.toLowerCase().includes(q))
-                    : adsPagesData;
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:20px; color:var(--text-muted);">Không tìm thấy trang phù hợp.</div>`;
-                    return;
-                }
-
-                grid.innerHTML = filtered.map(page => {
-                    const isChecked = currentFormSelectedPages.has(page.slug);
-                    return `
-                        <div class="ads-page-card ${isChecked ? 'checked' : ''}" onclick="toggleAdsFormPageSelection('${page.slug}', event)"
-                            style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 6px; border: 1px solid ${isChecked ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}; background: ${isChecked ? 'rgba(59,130,246,0.12)' : 'rgba(255,255,255,0.02)'}; cursor: pointer; transition: all 0.2s;">
-                            <input type="checkbox" ${isChecked ? 'checked' : ''} style="accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer;"
-                                onclick="event.stopPropagation(); toggleAdsFormPageSelection('${page.slug}', event)">
-                            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;">
-                                <div style="font-size: 12.5px; font-weight: 600; color: ${isChecked ? '#fff' : 'var(--text-main)'}; overflow: hidden; text-overflow: ellipsis;">${page.name}</div>
-                                <div style="font-size: 10.5px; color: var(--text-muted); font-family: monospace;">/${page.slug}</div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                updateAdsFormPageBadge();
-            }
-
-            function toggleAdsFormPageSelection(slug, event) {
-                if (event) event.stopPropagation();
-                if (currentFormSelectedPages.has(slug)) {
-                    currentFormSelectedPages.delete(slug);
-                } else {
-                    currentFormSelectedPages.add(slug);
-                }
-                const searchVal = document.getElementById('ads-form-page-search')?.value || '';
-                renderAdsFormPagesGrid(searchVal);
-            }
-
-            function selectAllAdsFormPages(checkAll) {
-                if (checkAll) {
-                    adsPagesData.forEach(p => currentFormSelectedPages.add(p.slug));
-                    showLdpToast('Đã chọn tất cả các trang!');
-                } else {
-                    currentFormSelectedPages.clear();
-                    showLdpToast('Đã bỏ chọn tất cả các trang!');
-                }
-                const searchVal = document.getElementById('ads-form-page-search')?.value || '';
-                renderAdsFormPagesGrid(searchVal);
-            }
-
-            function filterAdsFormPages(val) {
-                renderAdsFormPagesGrid(val);
             }
 
             function setPresetColor(colorHex) {
@@ -36467,15 +36456,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
 
                 const emojiEl = document.getElementById('ads-icon-preview-emoji');
                 const isEmoji = emojiEl && emojiEl.style.display !== 'none';
-                const isAllScope = document.getElementById('ads-form-scope-all')?.checked;
-
-                const pagesArray = isAllScope ? [] : Array.from(currentFormSelectedPages);
-
-                if (!isAllScope && pagesArray.length === 0) {
-                    if (!confirm('Bạn chưa chọn trang nào để hiển thị quảng cáo này. Bạn có muốn lưu quảng cáo ở trạng thái chưa gán trang không?')) {
-                        return;
-                    }
-                }
 
                 const existingItem = currentEditingAdId ? adsItemsData.find(a => a.id === currentEditingAdId) : null;
                 const updatedItem = {
@@ -36492,8 +36472,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     targetBlank: document.getElementById('ads-form-target-blank').value,
                     order: parseInt(document.getElementById('ads-form-order').value) || 1,
                     status: document.getElementById('ads-form-status').value,
-                    scope: isAllScope ? 'all' : 'custom',
-                    pages: pagesArray,
                     createdBy: existingItem ? (existingItem.createdBy || 'Admin User') : 'Admin User',
                     createdAt: existingItem ? (existingItem.createdAt || '10:15 20/08/2026') : (new Date().toLocaleTimeString('vi-VN', {hour: '2-digit', minute: '2-digit'}) + ' ' + new Date().toLocaleDateString('vi-VN'))
                 };
@@ -36505,7 +36483,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     adsItemsData.push(updatedItem);
                 }
 
-                showLdpToast('Đã lưu thông tin quảng cáo con thành công!');
+                showLdpToast('Đã lưu thông tin quảng cáo thành công!');
                 openAdsItemList(currentViewingGroupId);
             }
 
