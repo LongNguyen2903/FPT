@@ -13352,12 +13352,6 @@ Tặng 1 tháng cước</textarea>
                                                     onclick="window.openBannerPickerModal()"
                                                     title="Chèn mã shortcode banner quảng cáo động">📢 Chèn
                                                     Banner</button>
-                                                <!-- Nút Chèn Bảng giá Dịch vụ Gói cước -->
-                                                <button type="button" class="btn btn-secondary btn-sm"
-                                                    style="padding:4px 9px;color:#34d399;border-color:rgba(52,211,153,0.4);font-size:11.5px;font-weight:600;background:rgba(52,211,153,0.08);"
-                                                    onclick="window.openServicePriceModal()"
-                                                    title="Chèn bảng giá gói cước tự động cập nhật theo ID">📊 Bảng
-                                                    giá</button>
                                                 <div style="flex:1;"></div>
                                                 <!-- Chế độ Visual & HTML/Source (STT 10) -->
                                                 <button type="button" class="btn btn-secondary btn-sm"
@@ -13708,6 +13702,79 @@ Tặng 1 tháng cước</textarea>
                                                 </div>
                                             </div>
 
+                                        </div>
+                                    </div>
+
+                                    <!-- Card Mới: 📦 GÓI BÁN ÁP DỤNG (Tách riêng khỏi Text Editor theo chuẩn CMS FPT) -->
+                                    <div class="form-section-card" id="card-applied-packages"
+                                        style="border:1px solid rgba(255,255,255,0.12);border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+                                        <div
+                                            style="padding:10px 14px;border-bottom:1px solid var(--border-glass);background:rgba(0,0,0,0.2);display:flex;justify-content:space-between;align-items:center;">
+                                            <div>
+                                                <div style="font-size:12.5px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px;">
+                                                    <span>📦 Gói bán áp dụng</span>
+                                                </div>
+                                                <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">
+                                                    Chọn phạm vi gói cước được áp dụng liên kết bên dưới.
+                                                </div>
+                                            </div>
+                                            <span id="art-pkg-badge-count" class="badge"
+                                                style="background:rgba(249,115,22,0.18);color:#f97316;font-size:11px;font-weight:700;padding:2px 7px;">2 gói</span>
+                                        </div>
+
+                                        <div style="padding:12px;display:flex;flex-direction:column;gap:10px;">
+                                            <!-- Sub-header: DANH SÁCH SẢN PHẨM -->
+                                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                                <span style="font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;">Danh sách sản phẩm</span>
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="window.clearAllSelectedPkgs()"
+                                                    style="padding:1px 6px;font-size:10.5px;color:var(--text-muted);border:none;background:transparent;text-decoration:underline;cursor:pointer;">Bỏ chọn hết</button>
+                                            </div>
+
+                                            <!-- Tabs ECP / FCP (Segmented Control chuẩn ảnh) -->
+                                            <div style="display:flex;background:rgba(0,0,0,0.3);border:1px solid var(--border-glass);border-radius:24px;padding:3px;gap:2px;">
+                                                <button type="button" id="pkg-tab-ecp" class="pkg-sys-tab active" onclick="window.switchPkgTab('ECP')"
+                                                    style="flex:1;padding:5px 0;font-size:12px;font-weight:700;border:none;border-radius:20px;background:rgba(255,255,255,0.12);color:#fff;cursor:pointer;transition:all 0.2s;">
+                                                    ECP
+                                                </button>
+                                                <button type="button" id="pkg-tab-fcp" class="pkg-sys-tab" onclick="window.switchPkgTab('FCP')"
+                                                    style="flex:1;padding:5px 0;font-size:12px;font-weight:700;border:none;border-radius:20px;background:transparent;color:var(--text-muted);cursor:pointer;transition:all 0.2s;">
+                                                    FCP
+                                                </button>
+                                            </div>
+
+                                            <!-- Ô tìm kiếm gói cước -->
+                                            <div style="position:relative;">
+                                                <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text-muted);">🔍</span>
+                                                <input type="text" id="art-pkg-search" class="form-input" placeholder="Lọc tên hiển thị/route name..."
+                                                    oninput="window.searchPkgKeyword(this.value)"
+                                                    style="padding-left:30px;font-size:12px;height:32px;border-radius:8px;background:rgba(0,0,0,0.25);">
+                                            </div>
+
+                                            <!-- Nhãn & Bộ lọc DANH MỤC Pills -->
+                                            <div>
+                                                <div style="font-size:10.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;letter-spacing:0.5px;">Danh mục</div>
+                                                <div style="display:flex;gap:5px;flex-wrap:wrap;" id="pkg-cat-pills-bar">
+                                                    <span class="pkg-cat-pill active" data-cat="all" onclick="window.filterPkgCategory('all')"
+                                                        style="cursor:pointer;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;background:#ea580c;color:#fff;transition:0.2s;">Tất cả</span>
+                                                    <span class="pkg-cat-pill" data-cat="internet" onclick="window.filterPkgCategory('internet')"
+                                                        style="cursor:pointer;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border-glass);transition:0.2s;">Gói internet</span>
+                                                    <span class="pkg-cat-pill" data-cat="camera" onclick="window.filterPkgCategory('camera')"
+                                                        style="cursor:pointer;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border-glass);transition:0.2s;">Camera</span>
+                                                    <span class="pkg-cat-pill" data-cat="sa" onclick="window.filterPkgCategory('sa')"
+                                                        style="cursor:pointer;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border-glass);transition:0.2s;">Gói SA</span>
+                                                    <span class="pkg-cat-pill" data-cat="other" onclick="window.filterPkgCategory('other')"
+                                                        style="cursor:pointer;padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid var(--border-glass);transition:0.2s;">Thiết bị khác</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Danh sách gói cước (Container cuộn) -->
+                                            <div id="pkg-items-list-box"
+                                                style="max-height:220px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding-right:2px;margin-top:2px;">
+                                                <!-- Dynamic Package Items rendered by JS -->
+                                            </div>
+
+                                            <!-- Input ẩn lưu danh sách ID gói đã chọn -->
+                                            <input type="hidden" id="art-applied-packages" value="int-giga-fptvn,int-meta-fptvn">
                                         </div>
                                     </div>
 

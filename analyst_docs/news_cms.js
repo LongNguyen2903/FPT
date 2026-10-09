@@ -213,6 +213,7 @@
             content: '## Khuyến mãi lắp mạng FPT hè 2026\nFPT Telecom trân trọng gửi tới quý khách hàng chương trình khuyến mãi lắp mạng FPT hè 2026 vô cùng hấp dẫn.\n\n## Ưu đãi đặc quyền của khách hàng\nTheo đó, khách hàng đăng ký mới dịch vụ Internet cáp quang hoặc combo Internet & Truyền hình FPT sẽ được hưởng các ưu đãi đặc quyền:\n1. Trang bị miễn phí Modem Wi-Fi 6 2 băng tần công nghệ mới.\n2. Tặng từ 1 đến 2 tháng cước khi tham gia trả trước từ 6-12 tháng.\n3. Miễn phí hòa mạng và lắp đặt siêu tốc trong 12 giờ.\n\n## Đăng ký online nhanh chóng\nVui lòng liên hệ hotline hoặc đăng ký trực tuyến để nhận ưu đãi ngay hôm nay!',
             tags: 'khuyenmai, lap-mang-fpt, wifi6',
             featured: false,
+            appliedPackages: ['int-giga-fptvn', 'int-meta-fptvn'],
             thumbUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80',
             thumbAlt: 'Băng rôn lắp mạng FPT khuyến mãi hè 2026 cực lớn',
             thumbCaption: 'Chương trình ưu đãi hè áp dụng trên toàn quốc',
@@ -2022,6 +2023,139 @@
     };
 
     // =========================================================================
+    //        HỆ THỐNG GÓI BÁN ÁP DỤNG (TÁCH RIÊNG KHỎI TEXT EDITOR)
+    // =========================================================================
+    window.appliedPackagesCatalog = [
+        { id: 'int-giga-fptvn', name: 'Internet Giga - Siêu tốc độ cho gia đình', route: 'int-giga-fptvn', category: 'internet', catLabel: 'Internet', tab: 'ECP' },
+        { id: 'int-meta-fptvn', name: 'Internet Meta - Chuẩn Wi-Fi 6E', route: 'int-meta-fptvn', category: 'internet', catLabel: 'Internet', tab: 'ECP' },
+        { id: 'int-lux800-fptvn', name: 'Internet LUX 800 - Tốc độ cao cho gia đình đông người', route: 'int-lux800-fptvn', category: 'internet', catLabel: 'Internet', tab: 'ECP' },
+        { id: 'int-lux1000-fptvn', name: 'Internet LUX 1000 - Siêu tốc 1Gbps', route: 'int-lux1000-fptvn', category: 'internet', catLabel: 'Internet', tab: 'ECP' },
+        { id: 'int-dn-500', name: 'Internet Doanh Nghiệp 500Mbps', route: '-', category: 'internet', catLabel: 'Internet', tab: 'ECP' },
+        { id: 'cam-iq3-fptvn', name: 'FPT Camera IQ3 - An ninh thông minh', route: 'cam-iq3-fptvn', category: 'camera', catLabel: 'Camera', tab: 'ECP' },
+        { id: 'cam-se-fptvn', name: 'FPT Camera SE - Lưu trữ Cloud bảo mật', route: 'cam-se-fptvn', category: 'camera', catLabel: 'Camera', tab: 'ECP' },
+        { id: 'play-smax-fptvn', name: 'FPT Play SMAX - Giải trí không giới hạn', route: 'play-smax-fptvn', category: 'sa', catLabel: 'Gói SA', tab: 'ECP' },
+        { id: 'play-svip-fptvn', name: 'FPT Play SVIP - Độc quyền thể thao C1', route: 'play-svip-fptvn', category: 'sa', catLabel: 'Gói SA', tab: 'ECP' },
+        { id: 'dev-wifi7-fptvn', name: 'Thiết bị Router Wi-Fi 7 thế hệ mới', route: 'dev-wifi7-fptvn', category: 'other', catLabel: 'Thiết bị khác', tab: 'ECP' },
+        // Tab FCP
+        { id: 'fcp-giga-corp', name: 'FCP Internet Giga Doanh Nghiệp', route: 'fcp-giga-corp', category: 'internet', catLabel: 'Internet', tab: 'FCP' },
+        { id: 'fcp-meta-lease', name: 'FCP Internet Meta Leased Line', route: 'fcp-meta-lease', category: 'internet', catLabel: 'Internet', tab: 'FCP' },
+        { id: 'fcp-cam-ai-biz', name: 'FCP Camera AI Doanh Nghiệp & Nhà Xưởng', route: 'fcp-cam-ai-biz', category: 'camera', catLabel: 'Camera', tab: 'FCP' },
+        { id: 'fcp-sa-smart-office', name: 'FCP Gói SA Smart Office FPT', route: 'fcp-sa-smart-office', category: 'sa', catLabel: 'Gói SA', tab: 'FCP' }
+    ];
+
+    window.appliedPackagesState = {
+        tab: 'ECP',
+        category: 'all',
+        keyword: '',
+        selectedIds: new Set(['int-giga-fptvn', 'int-meta-fptvn'])
+    };
+
+    window.switchPkgTab = function (tabName) {
+        window.appliedPackagesState.tab = tabName;
+        document.querySelectorAll('.pkg-sys-tab').forEach(btn => {
+            const isMatch = btn.id === ('pkg-tab-' + tabName.toLowerCase());
+            btn.classList.toggle('active', isMatch);
+            btn.style.background = isMatch ? 'rgba(255,255,255,0.14)' : 'transparent';
+            btn.style.color = isMatch ? '#fff' : 'var(--text-muted)';
+        });
+        window.renderPkgList();
+    };
+
+    window.filterPkgCategory = function (catKey) {
+        window.appliedPackagesState.category = catKey;
+        document.querySelectorAll('.pkg-cat-pill').forEach(pill => {
+            const isMatch = pill.getAttribute('data-cat') === catKey;
+            pill.classList.toggle('active', isMatch);
+            pill.style.background = isMatch ? '#ea580c' : 'rgba(255,255,255,0.06)';
+            pill.style.color = isMatch ? '#fff' : 'var(--text-muted)';
+            pill.style.border = isMatch ? 'none' : '1px solid var(--border-glass)';
+        });
+        window.renderPkgList();
+    };
+
+    window.searchPkgKeyword = function (val) {
+        window.appliedPackagesState.keyword = (val || '').trim().toLowerCase();
+        window.renderPkgList();
+    };
+
+    window.togglePkgSelect = function (pkgId) {
+        if (window.appliedPackagesState.selectedIds.has(pkgId)) {
+            window.appliedPackagesState.selectedIds.delete(pkgId);
+        } else {
+            window.appliedPackagesState.selectedIds.add(pkgId);
+        }
+        window.syncAppliedPackagesState();
+    };
+
+    window.clearAllSelectedPkgs = function () {
+        window.appliedPackagesState.selectedIds.clear();
+        window.syncAppliedPackagesState();
+        showLdpToast('Đã bỏ chọn toàn bộ gói bán áp dụng!');
+    };
+
+    window.setAppliedPackages = function (idList) {
+        window.appliedPackagesState.selectedIds = new Set(Array.isArray(idList) ? idList : (idList || '').split(',').map(s => s.trim()).filter(Boolean));
+        window.syncAppliedPackagesState();
+    };
+
+    window.syncAppliedPackagesState = function () {
+        const arr = Array.from(window.appliedPackagesState.selectedIds);
+        const inputHidden = document.getElementById('art-applied-packages');
+        if (inputHidden) inputHidden.value = arr.join(',');
+
+        const badgeCount = document.getElementById('art-pkg-badge-count');
+        if (badgeCount) badgeCount.innerText = `${arr.length} gói`;
+
+        window.renderPkgList();
+    };
+
+    window.renderPkgList = function () {
+        const container = document.getElementById('pkg-items-list-box');
+        if (!container) return;
+
+        const currentTab = window.appliedPackagesState.tab;
+        const currentCat = window.appliedPackagesState.category;
+        const keyword = window.appliedPackagesState.keyword;
+
+        const filtered = window.appliedPackagesCatalog.filter(item => {
+            if (item.tab !== currentTab) return false;
+            if (currentCat !== 'all' && item.category !== currentCat) return false;
+            if (keyword) {
+                const matchName = item.name.toLowerCase().includes(keyword);
+                const matchRoute = item.route.toLowerCase().includes(keyword);
+                if (!matchName && !matchRoute) return false;
+            }
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<div style="text-align:center;padding:16px 8px;font-size:11.5px;color:var(--text-muted);">Không tìm thấy gói cước nào phù hợp</div>';
+            return;
+        }
+
+        container.innerHTML = filtered.map(item => {
+            const isChecked = window.appliedPackagesState.selectedIds.has(item.id);
+            return `
+                <label style="display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;background:${isChecked ? 'rgba(234,88,12,0.1)' : 'rgba(255,255,255,0.02)'};border:1px solid ${isChecked ? 'rgba(234,88,12,0.4)' : 'rgba(255,255,255,0.06)'};cursor:pointer;transition:all 0.15s ease;">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="window.togglePkgSelect('${item.id}')"
+                        style="width:15px;height:15px;accent-color:#ea580c;cursor:pointer;flex-shrink:0;">
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-size:12px;font-weight:700;color:${isChecked ? '#ff8c42' : '#fff'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                            ${item.name}
+                        </div>
+                        <div style="font-size:10.5px;font-family:monospace;color:var(--text-muted);margin-top:1px;">
+                            ${item.route}
+                        </div>
+                    </div>
+                    <span style="font-size:10.5px;color:var(--text-muted);background:rgba(255,255,255,0.05);padding:1px 6px;border-radius:4px;flex-shrink:0;">
+                        ${item.catLabel}
+                    </span>
+                </label>
+            `;
+        }).join('');
+    };
+
+    // =========================================================================
     //        HỖ TRỢ SOẠN THẢO WYSIWYG & CHÈN ẢNH ĐƠN (PROMPT INSERT IMAGE)
     // =========================================================================
     window.promptInsertLink = function () {
@@ -2551,6 +2685,7 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         document.getElementById('art-content').value = '';
         document.getElementById('art-tags').value = '';
         if (typeof window.setSelectedTagsFromValue === 'function') window.setSelectedTagsFromValue('');
+        if (typeof window.setAppliedPackages === 'function') window.setAppliedPackages(['int-giga-fptvn', 'int-meta-fptvn']);
         const oldCatEl = document.getElementById('art-category'); if (oldCatEl) oldCatEl.value = 'Tin khuyến mãi';
 
         // Reset Cây Danh mục (STT 7.0)
@@ -3012,6 +3147,7 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         document.getElementById('art-content').value = art.content || '';
         document.getElementById('art-tags').value = art.tags || '';
         if (typeof window.setSelectedTagsFromValue === 'function') window.setSelectedTagsFromValue(art.tags || '');
+        if (typeof window.setAppliedPackages === 'function') window.setAppliedPackages(art.appliedPackages || ['int-giga-fptvn']);
 
         // Đổ dữ liệu Cây Danh mục (STT 7.0)
         const primaryCat = art.categoryPrimary || art.category || 'Tin khuyến mãi';
@@ -3253,6 +3389,7 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
             seoKeywords: seoKeywords,
             seoRobot: seoRobot,
             bannerId: bannerId,
+            appliedPackages: (document.getElementById('art-applied-packages')?.value || '').split(',').filter(Boolean),
             showHome: showHome,
             homeOrder: homeOrder,
             enableLeadForm: enableLeadForm,
@@ -4333,4 +4470,11 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
             }
         }, 5000);
     }
+
+    // Khởi tạo hiển thị danh sách gói bán áp dụng
+    setTimeout(function () {
+        if (typeof window.renderPkgList === 'function') {
+            window.renderPkgList();
+        }
+    }, 300);
 })();
