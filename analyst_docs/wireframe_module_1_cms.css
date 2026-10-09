@@ -1791,6 +1791,11 @@
             background: rgba(245, 158, 11, 0.08) !important;
         }
 
+        .news-stat-card.active-sched {
+            border-color: #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.08) !important;
+        }
+
         body.light .news-stat-card:hover {
             background: #f1f5f9 !important;
         }
@@ -1805,6 +1810,10 @@
 
         body.light .news-stat-card.active-draft {
             background: rgba(245, 158, 11, 0.05) !important;
+        }
+
+        body.light .news-stat-card.active-sched {
+            background: rgba(56, 189, 248, 0.05) !important;
         }
 
         /* ===== LIGHT MODE — SKU DETAILS MODAL =====
@@ -2081,4 +2090,66 @@
 
         .remove-payment-btn:hover {
             background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* ===== CMS Tin Tức Tối Ưu UI/UX Mới (FPT Telecom) ===== */
+        .quick-edit-row {
+            animation: fadeInQuickEdit 0.25s ease-in-out;
+        }
+
+        @keyframes fadeInQuickEdit {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .banner-picker-item:hover {
+            background: rgba(255, 107, 0, 0.08) !important;
+            border-color: rgba(255, 107, 0, 0.4) !important;
+            transform: translateX(4px);
+        }
+
+        .news-stat-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .news-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
+
+        .news-stat-card.active-total {
+            border-color: var(--primary) !important;
+            background: rgba(255, 107, 0, 0.1) !important;
+        }
+
+        .news-stat-card.active-pub {
+            border-color: var(--success) !important;
+            background: rgba(16, 185, 129, 0.12) !important;
+        }
+
+        .news-stat-card.active-draft {
+            border-color: var(--warning) !important;
+            background: rgba(245, 158, 11, 0.12) !important;
+        }
+
+        .news-stat-card.active-sched {
+            border-color: #38bdf8 !important;
+            background: rgba(56, 189, 248, 0.12) !important;
+        }
+
+        .status-pill.scheduled {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+        }
+        .status-pill.scheduled .status-dot {
+            background: #38bdf8;
+            box-shadow: 0 0 6px #38bdf8;
         }

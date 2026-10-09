@@ -1396,7 +1396,9 @@ function saveNewsArticleAction() {
                 <td style="text-align:center;"><span class="news-featured-toggle" style="cursor:pointer;font-size:15px;opacity:0.4;" title="Bật/tắt nổi bật" onclick="this.style.opacity=this.style.opacity==='1'?'0.4':'1';this.closest('tr').dataset.featured=this.style.opacity==='1'?'1':'0'">⭐</span></td>
                 <td><span class="badge news-art-cat" style="background:${catColor}">${category}</span></td>
                 <td class="news-art-author" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${author || 'Admin'}</span></td>
-                <td class="news-art-date">${isNew ? '22/05/2026' : newsArticlesData[id].date}</td>
+                <td><div class="news-art-date" style="font-weight:500; font-size:12.5px; color:#e2e8f0;">${isNew ? '22/05/2026' : (newsArticlesData[id].date || '22/05/2026')}</div></td>
+                <td><div class="news-art-updated" style="font-size:12px; color:#94a3b8;">${newsArticlesData[id].updatedAt || (isNew ? '22/05/2026' : (newsArticlesData[id].date || '22/05/2026'))}</div></td>
+                <td class="news-art-updater" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${newsArticlesData[id].updatedBy || author || 'Admin'}</span></td>
                 <td style="text-align:center;" class="news-art-views">${newsArticlesData[id].views || 0}</td>
                 <td>${statusBadge}</td>
                 <td>
@@ -3995,6 +3997,72 @@ function setSkuTagColor(colorHex, isCustom) {
             card.innerHTML = html;
             container.appendChild(card);
         });
+    }
+
+    var cardTypePackagePresets = {
+        card1: [
+            { code: 'WIFI7-X2', name: 'Speed X2', price: '999.000đ/tháng', download: '2 Gbps', upload: '2 Gbps', badge: 'Flagship Siêu Tốc', desktopImg: '', mobileImg: '', tags: ['Flagship Siêu Tốc', 'Wi-Fi 7', 'XGS-PON'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dang-ky-x2', ctaSubEnable: true, ctaSubText: 'Tư vấn nhanh', ctaSubUrl: '#tu-van-x2', features: 'Tốc độ 2 Gbps đối xứng\nTrang bị modem Wi-Fi 7 BE6500\nKết nối cùng lúc > 100 thiết bị\nTặng 01 Mesh Wi-Fi 7 mở rộng sóng' },
+            { code: 'WIFI7-X2PRO', name: 'Speed X2 Pro', price: '1.099.000đ/tháng', download: '2 Gbps', upload: '2 Gbps', badge: 'Khuyên Dùng', desktopImg: '', mobileImg: '', tags: ['Khuyên Dùng', 'Wi-Fi 7', 'Mesh Cao Cấp'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dang-ky-x2pro', ctaSubEnable: true, ctaSubText: 'Tư vấn nhanh', ctaSubUrl: '#tu-van-x2pro', features: 'Tốc độ 2 Gbps đối xứng\nTrang bị 02 thiết bị Wi-Fi 7 Mesh\nBăng thông ưu tiên Gaming & Stream\nHỗ trợ kỹ thuật 24/7 trong 15 phút' },
+            { code: 'WIFI7-X10', name: 'Speed X10', price: '1.499.000đ/tháng', download: '10 Gbps', upload: '10 Gbps', badge: 'Cực Đỉnh', desktopImg: '', mobileImg: '', tags: ['10 Gbps', 'Doanh Nghiệp / Streamer'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dang-ky-x10', ctaSubEnable: true, ctaSubText: 'Tư vấn nhanh', ctaSubUrl: '#tu-van-x10', features: 'Băng thông đối xứng 10 Gbps\nChuẩn công nghệ 10G-EPON hiện đại nhất\nChuyên biệt phòng studio, Render, AI\nCam kết SLA đường truyền quốc tế' },
+            { code: 'WIFI7-X10PRO', name: 'Speed X10 Pro', price: '1.999.000đ/tháng', download: '10 Gbps', upload: '10 Gbps', badge: 'V.VIP', desktopImg: '', mobileImg: '', tags: ['V.VIP Enterprise', 'Ultra Mesh'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dang-ky-x10pro', ctaSubEnable: true, ctaSubText: 'Tư vấn nhanh', ctaSubUrl: '#tu-van-x10pro', features: 'Băng thông 10 Gbps không giới hạn\nHệ thống 03 AP Wi-Fi 7 cao cấp phủ 500m2\nIP Tĩnh miễn phí trọn đời hợp đồng\nChăm sóc khách hàng VIP Dedicated' }
+        ],
+        card2: [
+            { code: 'G-GIGA', name: 'Gói Giga', price: '175.000đ/tháng', download: '150 Mbps', upload: '150 Mbps', badge: 'Tiết kiệm', desktopImg: '', mobileImg: '', tags: ['Tiết kiệm', 'Cá nhân / Học sinh'], ctaMainEnable: true, ctaMainText: 'Mua ngay', ctaMainUrl: '#mua-giga', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: 'Tốc độ Download/Upload: 150 Mbps\nPhù hợp nhu cầu học tập, lướt web\nTrang bị Modem Wi-Fi băng tần kép\nMiễn phí lắp đặt khi trả trước' },
+            { code: 'G-SKY', name: 'Gói Sky', price: '190.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Bán chạy nhất', desktopImg: '', mobileImg: '', tags: ['Bán chạy nhất', 'Gia đình 3-5 người'], ctaMainEnable: true, ctaMainText: 'Mua ngay', ctaMainUrl: '#mua-sky', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: 'Download lên đến 1 Gbps, Upload 300 Mbps\nPhù hợp gia đình 3-5 người dùng đồng thời\nTrang bị modem Wi-Fi 6 thế hệ mới\nXem video 4K/8K mượt mà' },
+            { code: 'G-META', name: 'Gói Meta', price: '320.000đ/tháng', download: '1 Gbps', upload: '1 Gbps', badge: 'Cao cấp', desktopImg: '', mobileImg: '', tags: ['Cao cấp', 'Streamer / Content Creator'], ctaMainEnable: true, ctaMainText: 'Mua ngay', ctaMainUrl: '#mua-meta', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: 'Download 1 Gbps, Upload 1 Gbps (Đối xứng)\nLivestream bán hàng, họp Zoom không giật lag\nTrang bị 02 thiết bị Wi-Fi 6 Mesh phủ rộng\nƯu tiên băng thông giờ cao điểm' }
+        ],
+        card3: [
+            { code: 'FGAME-BASIC', name: 'F-Game Basic', price: '265.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Ultra Low Ping', desktopImg: '', mobileImg: '', tags: ['Ultra Low Ping', 'Gamer Quốc Dân'], ctaMainEnable: true, ctaMainText: 'Đăng ký gói', ctaMainUrl: '#dk-fgame-basic', ctaSubEnable: true, ctaSubText: 'Tư vấn gói', ctaSubUrl: '#tv-fgame-basic', ctaDetailText: 'Xem chi tiết tính năng Ultra Fast >', ctaDetailUrl: '#chi-tiet-fgame', features: 'Tích hợp tính năng Ultra Fast giảm giật lag\nTối ưu ping cho hơn 50 tựa game hot\nDownload 1 Gbps, Upload 300 Mbps\nTrang bị modem Wi-Fi 6 chuẩn chuyên game' },
+            { code: 'FGAME-PRO', name: 'F-Game Pro (Mesh)', price: '335.000đ/tháng', download: '1 Gbps', upload: '1 Gbps', badge: 'Đề xuất', desktopImg: '', mobileImg: '', tags: ['Đề xuất', 'Phòng Game Gia Đình'], ctaMainEnable: true, ctaMainText: 'Đăng ký gói', ctaMainUrl: '#dk-fgame-pro', ctaSubEnable: true, ctaSubText: 'Tư vấn gói', ctaSubUrl: '#tv-fgame-pro', ctaDetailText: 'Xem chi tiết cấu hình Mesh >', ctaDetailUrl: '#chi-tiet-fgame-pro', features: 'Download 1 Gbps, Upload 1 Gbps đối xứng\nBao gồm 01 Modem Wi-Fi 6 + 01 Mesh Wi-Fi 6\nTự động chuyển vùng thông minh không ngắt quãng\nUltra Fast vĩnh viễn theo gói' }
+        ],
+        card4: [
+            { code: 'COL-GIGA', name: 'GIGA - Cá Nhân', price: '175.000đ/tháng', download: '150 Mbps', upload: '150 Mbps', badge: 'Cơ bản', desktopImg: '', mobileImg: '', tags: ['Cơ bản', 'Phổ thông'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dk-giga', ctaSubEnable: true, ctaSubText: 'Xem chi tiết', ctaSubUrl: '#ct-giga', features: 'Tốc độ đối xứng 150 Mbps\nModem Wi-Fi 5/6 2 băng tần\nThích hợp 1-3 người dùng' },
+            { code: 'COL-SKY', name: 'SKY - Gia Đình', price: '190.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Gia đình', desktopImg: '', mobileImg: '', tags: ['Gia đình', 'Tối ưu chi phí'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dk-sky', ctaSubEnable: true, ctaSubText: 'Xem chi tiết', ctaSubUrl: '#ct-sky', features: 'Tải xuống cực nhanh 1 Gbps\nTrang bị Wi-Fi 6 công nghệ mới\nThích hợp Smart Home, TV 4K' },
+            { code: 'COL-FGAME', name: 'F-GAME - Esport', price: '265.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Gamer', desktopImg: '', mobileImg: '', tags: ['Gamer', 'Ultra Fast'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dk-fgame', ctaSubEnable: true, ctaSubText: 'Xem chi tiết', ctaSubUrl: '#ct-fgame', features: 'Trang bị công nghệ AI Ultra Fast\nGiảm ping tới 50% cho Liên Quân, Tốc Chiến, LOL\nModem gaming chuyên dụng' },
+            { code: 'COL-META', name: 'META - Doanh Nghiệp', price: '320.000đ/tháng', download: '1 Gbps', upload: '1 Gbps', badge: 'Cao cấp', desktopImg: '', mobileImg: '', tags: ['Cao cấp', 'Băng thông đối xứng'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#dk-meta', ctaSubEnable: true, ctaSubText: 'Xem chi tiết', ctaSubUrl: '#ct-meta', features: 'Băng thông đối xứng 1 Gbps/1 Gbps\nTặng kèm 01 AP mở rộng sóng Wi-Fi 6\nƯu tiên xử lý sự cố trong 2 giờ' }
+        ],
+        card5: [
+            { code: 'COMBO-GIGA', name: 'Combo Giga + FPT Play', price: '215.000đ/tháng', download: '150 Mbps', upload: '150 Mbps', badge: 'Tiết kiệm 850.000đ', desktopImg: '', mobileImg: '', tags: ['Tiết kiệm 850.000đ', 'Internet + TV'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#combo-giga', ctaSubEnable: true, ctaSubText: 'Xem kênh', ctaSubUrl: '#kenh-giga', features: 'Internet tốc độ cao 150 Mbps\nGói truyền hình FPT Play gần 140 kênh\nBao gồm 01 Box điều khiển giọng nói 4K\nXem trên 3 thiết bị đồng thời' },
+            { code: 'COMBO-SKY', name: 'Combo Sky + V.VIP Play', price: '250.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Tiết kiệm 1.200.000đ', desktopImg: '', mobileImg: '', tags: ['Tiết kiệm 1.200.000đ', 'Được chuộng nhất'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#combo-sky', ctaSubEnable: true, ctaSubText: 'Xem kênh', ctaSubUrl: '#kenh-sky', features: 'Internet siêu tốc 1 Gbps\nFPT Play gói VIP đầy đủ HBO GO\nĐộc quyền Cúp C1 Châu Âu (UEFA Champions League)\nTrang bị Modem Wi-Fi 6 + Box FPT Play T650' }
+        ],
+        card6: [
+            { code: 'EPL-SPORT-SKY', name: 'Gói Sky Thể Thao EPL', price: '299.000đ/tháng', download: '1 Gbps', upload: '300 Mbps', badge: 'Trọn vẹn Ngoại Hạng Anh', desktopImg: '', mobileImg: '', tags: ['Trọn vẹn Ngoại Hạng Anh', 'Sân Cỏ Sôi Động'], ctaMainEnable: true, ctaMainText: 'ĐĂNG KÝ NGAY', ctaMainUrl: '#epl-sky', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: 'Internet tốc độ 1 Gbps xem livestream bóng đá 4K không trễ\nXem trọn vẹn 380 trận Ngoại Hạng Anh bản quyền đỉnh cao\nTrực tiếp độc quyền Cúp C1, C2, FA Cup, V-League\nTrang bị Modem Wi-Fi 6 thế hệ mới nhất' },
+            { code: 'EPL-SPORT-META', name: 'Gói Meta Siêu Sao Bóng Đá', price: '389.000đ/tháng', download: '1 Gbps', upload: '1 Gbps', badge: 'Gói VIP Sân Cỏ 4K', desktopImg: '', mobileImg: '', tags: ['Gói VIP Sân Cỏ 4K', 'Chuyên Quán Cafe / Đa Màn Hình'], ctaMainEnable: true, ctaMainText: 'ĐĂNG KÝ NGAY', ctaMainUrl: '#epl-meta', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: 'Internet đối xứng 1 Gbps cực mạnh cho quán cafe, tụ họp đông người\nĐăng nhập và phát đồng thời trên 5 thiết bị Smart TV, điện thoại\nÂm thanh vòm vòm Dolby 5.1 sống động như tại cầu trường Anh\nTặng kèm 01 Mesh Wi-Fi 6 phủ sóng toàn bộ diện tích' }
+        ],
+        card7: [
+            { code: 'MTX-GIGA', name: 'Gói Giga', price: '175.000đ', download: '150 Mbps', upload: '150 Mbps', badge: 'Cơ bản', desktopImg: '', mobileImg: '', tags: ['Cơ bản'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#giga', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: '150 Mbps\n150 Mbps\nModem Wi-Fi 5\n1 - 3 thiết bị\nChuẩn SD/HD\nCơ bản' },
+            { code: 'MTX-SKY', name: 'Gói Sky (VIP)', price: '190.000đ', download: '1 Gbps', upload: '300 Mbps', badge: 'Combo Tiết Kiệm Nhất ✨', desktopImg: '', mobileImg: '', tags: ['Combo Tiết Kiệm Nhất ✨', 'Khuyên dùng'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#sky', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: '1 Gbps (Không giới hạn)\n300 Mbps\nModem Wi-Fi 6 2 băng tần\n5 - 15 thiết bị\nChuẩn 4K mượt mà\nƯu tiên giờ cao điểm' },
+            { code: 'MTX-META', name: 'Gói Meta', price: '320.000đ', download: '1 Gbps', upload: '1 Gbps', badge: 'Cao cấp', desktopImg: '', mobileImg: '', tags: ['Cao cấp'], ctaMainEnable: true, ctaMainText: 'Đăng ký ngay', ctaMainUrl: '#meta', ctaSubEnable: false, ctaSubText: '', ctaSubUrl: '', features: '1 Gbps đối xứng\n1 Gbps đối xứng\nModem Wi-Fi 6 + Mesh\n> 20 thiết bị\nChuẩn 4K/8K HDR\nĐường truyền ưu tiên VIP' }
+        ]
+    };
+
+    function campChangeCardStyle(styleVal) {
+        var hintEl = document.getElementById('camp-card-style-desc');
+        var descMap = {
+            card1: 'Thiết kế card flagship công nghệ cao (Tốc độ nổi bật, headline lớn, 2 nút CTA).',
+            card2: 'Thiết kế tinh giản, tối ưu tỷ lệ chuyển đổi, ribbon badge nằm góc thẻ nổi bật.',
+            card3: 'Độ tương phản cao, tập trung thông số game thủ (Download/Upload to, Ping thấp).',
+            card4: 'Đồng bộ màu sắc theo phân khúc (Giga Navy, Sky Blue, F-Game Orange, Meta Green).',
+            card5: 'Gói cước combo Internet + Truyền hình, badge tiết kiệm chi phí và quà tặng.',
+            card6: 'Giao diện tối huyền bí, cúp vàng thể thao, giá nổi bật màu vàng neon.',
+            card7: 'Dạng bảng so sánh đa cột, trực quan đối chiếu thông số giữa các gói cước.'
+        };
+        if (hintEl && descMap[styleVal]) {
+            hintEl.textContent = descMap[styleVal];
+        }
+
+        if (cardTypePackagePresets && cardTypePackagePresets[styleVal]) {
+            campProductsData = JSON.parse(JSON.stringify(cardTypePackagePresets[styleVal]));
+            campCurrentPage = 1;
+            campActiveIndex = 0;
+            campRenderProductsList();
+            if (campProductsData.length > 0) {
+                campSelectProduct(0);
+            }
+            if (typeof showLdpToast === 'function') {
+                showLdpToast('Đã đổi dữ liệu sang ' + (descMap[styleVal] ? descMap[styleVal].split(' (')[0] : styleVal));
+            }
+        }
     }
 
     // --- TAB-BASED SPLIT VIEW & PAGINATION FOR INTERNET & THU LEAD ---

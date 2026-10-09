@@ -206,6 +206,7 @@
             author: 'Admin',
             date: '22/05/2026',
             updatedAt: '22/05/2026',
+            updatedBy: 'Admin',
             status: 'Published',
             channel: 'fpt-telecom',
             sapo: 'Chào hè rực rỡ với chương trình khuyến mãi lắp đặt mạng cáp quang FPT Telecom cực lớn trong năm 2026. Tặng đến 2 tháng cước sử dụng, miễn phí modem Wi-Fi 6 thế hệ mới.',
@@ -230,6 +231,7 @@
             author: 'Phương Nam',
             date: '20/05/2026',
             updatedAt: '21/05/2026',
+            updatedBy: 'Admin',
             status: 'Published',
             channel: 'fpt-camera',
             sapo: 'Công nghệ AI mới tích hợp trên FPT Camera giúp nâng cao khả năng cảnh báo thông minh, phát hiện chuyển động của người và vật nuôi, giảm thiểu báo động giả tới 95%.',
@@ -254,6 +256,7 @@
             author: 'Đức Nguyễn',
             date: '21/05/2026',
             updatedAt: '21/05/2026',
+            updatedBy: 'Đức Nguyễn',
             status: 'Draft',
             channel: 'fpt-play',
             sapo: 'Thầy trò HLV Unai Emery đã tạo nên lịch sử sau chiến thắng kịch tính ở trận chung kết Europa League vừa qua. Chiếc cúp vô địch châu Âu danh giá này mang lại vinh quang lớn.',
@@ -278,6 +281,7 @@
             author: 'Admin',
             date: '28/05/2026',
             updatedAt: '23/05/2026',
+            updatedBy: 'Phương Nam',
             status: 'Scheduled',
             channel: 'fpt-telecom',
             sapo: 'FPT Telecom là đơn vị viễn thông tiên phong thử nghiệm thành công công nghệ Wi-Fi 7 với tốc độ đột phá lên tới 10 Gbps, độ trễ cực thấp dưới 5ms.',
@@ -454,6 +458,7 @@
         };
 
         window.renderNewsTagsTable();
+        if (typeof window.renderArticleTagsDropdown === 'function') window.renderArticleTagsDropdown();
         window.closeNewsTagForm();
         showLdpToast('Đã lưu Tag thành công!');
     };
@@ -462,6 +467,7 @@
         if (confirm('Bạn có chắc chắn muốn xóa Tag này không?')) {
             delete window.newsTagsData[id];
             window.renderNewsTagsTable();
+            if (typeof window.renderArticleTagsDropdown === 'function') window.renderArticleTagsDropdown();
             showLdpToast('Đã xóa Tag thành công!');
         }
     };
@@ -753,30 +759,17 @@
     };
 
     window.initNewsContentTypeDOM = function () {
-        const modNews = document.getElementById('mod-news');
-        if (!modNews) return;
+        // Người dùng yêu cầu BỎ TAB Loại nội dung (ContentTypes)
+        const tabEl = document.getElementById('news-tab-contenttype');
+        if (tabEl) tabEl.remove();
+        const listDiv = document.getElementById('news-contenttype-list');
+        if (listDiv) listDiv.remove();
+        const formDiv = document.getElementById('news-contenttype-form');
+        if (formDiv) formDiv.remove();
+    };
 
-        // 1. Tự động thêm Nút Tab "Loại nội dung" vào Tab Bar nếu chưa có
-        const tabsBar = modNews.querySelector('.tabs');
-        if (tabsBar && !document.getElementById('news-tab-contenttype')) {
-            const catTab = tabsBar.children[1]; // Đặt cạnh Tab Chuyên mục
-            const newTabBtn = document.createElement('div');
-            newTabBtn.id = 'news-tab-contenttype';
-            newTabBtn.className = 'tab';
-            newTabBtn.style.cssText = 'font-size: 13.5px; font-weight: 600; padding: 10px 18px; cursor: pointer;';
-            newTabBtn.innerText = 'Loại nội dung (ContentTypes)';
-            newTabBtn.onclick = function () { window.switchNewsTab('contenttype', this); };
-            
-            if (catTab && catTab.nextSibling) {
-                tabsBar.insertBefore(newTabBtn, catTab.nextSibling);
-            } else {
-                tabsBar.appendChild(newTabBtn);
-            }
-        }
-
-        const cardContainer = modNews.querySelector('.card') || modNews.querySelector('.content-area') || modNews;
-
-        // 2. Inject Container HTML: Danh sách Loại nội dung (Chuẩn Ảnh 2)
+    // Vô hiệu hóa việc tự tạo Container Loại nội dung
+    if (false) {
         if (!document.getElementById('news-contenttype-list')) {
             const listDiv = document.createElement('div');
             listDiv.id = 'news-contenttype-list';
@@ -1397,9 +1390,12 @@
                 <td>${catBadge}</td>
                 <td class="news-art-author" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${art.author || 'Admin'}</span></td>
                 <td>
-                    <div class="news-art-date" style="font-size:12px; color:#e2e8f0; font-weight:500;">${art.date || '22/05/2026'}</div>
-                    <div style="font-size:10.5px; color:#94a3b8; margin-top:2px;">Sửa: ${art.updatedAt || art.date || '22/05/2026'}</div>
+                    <div class="news-art-date" style="font-size:12.5px; color:#e2e8f0; font-weight:500;">${art.date || '22/05/2026'}</div>
                 </td>
+                <td>
+                    <div class="news-art-updated" style="font-size:12px; color:#94a3b8;">${art.updatedAt || art.date || '22/05/2026'}</div>
+                </td>
+                <td class="news-art-updater" style="font-size:13px; color:var(--text-muted);"><span style="color:#e2e8f0; font-weight:500;">${art.updatedBy || art.author || 'Admin'}</span></td>
                 <td style="text-align:center;" class="news-art-views"><strong>${(art.views || 0).toLocaleString()}</strong></td>
                 <td>${statusBadge}</td>
                 <td style="text-align:center;">${visibilitySwitchHtml}</td>
@@ -1505,7 +1501,7 @@
         quickEditTr.id = `quick-edit-row-${id}`;
         quickEditTr.className = 'quick-edit-row';
         quickEditTr.innerHTML = `
-            <td colspan="11" style="padding:16px 20px; background:rgba(255,107,0,0.06); border-top:1px dashed var(--primary); border-bottom:1px solid rgba(255,107,0,0.3);">
+            <td colspan="13" style="padding:16px 20px; background:rgba(255,107,0,0.06); border-top:1px dashed var(--primary); border-bottom:1px solid rgba(255,107,0,0.3);">
                 <div style="font-weight:700; color:#fbbf24; font-size:13px; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
                     <span>⚡ SỬA NHANH BÀI VIẾT #${art.id}</span>
                 </div>
@@ -1571,6 +1567,7 @@
         art.featured = newFeatured;
         const now = new Date();
         art.updatedAt = now.getDate().toString().padStart(2, '0') + '/' + (now.getMonth() + 1).toString().padStart(2, '0') + '/' + now.getFullYear() + ' ' + now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        art.updatedBy = 'Admin User';
 
         showLdpToast(`Đã lưu nhanh bài viết #${id} thành công!`);
         window.renderNewsTableHTML();
@@ -2024,6 +2021,501 @@
         showLdpToast(`Đã chèn Bảng so sánh giá cho [${selectedIds.join(', ')}] vào nội dung!`);
     };
 
+    // =========================================================================
+    //        HỖ TRỢ SOẠN THẢO WYSIWYG & CHÈN ẢNH ĐƠN (PROMPT INSERT IMAGE)
+    // =========================================================================
+    window.promptInsertLink = function () {
+        const url = prompt('Nhập đường dẫn liên kết (URL):', 'https://fpt.vn/');
+        if (!url) return;
+        const text = prompt('Nhập văn bản hiển thị cho liên kết:', 'Tìm hiểu thêm tại đây');
+        const linkHtml = `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:var(--primary);text-decoration:underline;">${text || url}</a>`;
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            const startPos = contentEl.selectionStart || contentEl.value.length;
+            const endPos = contentEl.selectionEnd || contentEl.value.length;
+            contentEl.value = contentEl.value.substring(0, startPos) + linkHtml + contentEl.value.substring(endPos);
+            contentEl.focus();
+            window.updateWordAndReadingStats();
+            window.triggerAutoSave();
+            showLdpToast('Đã chèn liên kết vào nội dung bài viết!');
+        }
+    };
+
+    window.promptInsertImage = function () {
+        const choice = confirm('Bạn muốn chèn ẢNH ĐƠN LẺ hay muốn mở CHÈN GALLERY NHIỀU ẢNH (Đa layout 50/50, 33/33/33)?\n\n- Nhấn [OK] để chèn Ảnh Đơn Lẻ\n- Nhấn [Cancel] để mở Modal Gallery Đa Ảnh');
+        if (!choice) {
+            window.openGalleryModal();
+            return;
+        }
+
+        const url = prompt('Nhập đường dẫn URL hình ảnh:', 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80');
+        if (!url) return;
+        const alt = prompt('Nhập Alt text (Mô tả ảnh cho SEO Google):', 'Hạ tầng viễn thông FPT Telecom') || '';
+        const caption = prompt('Nhập Chú thích ảnh (Caption hiển thị dưới ảnh):', 'Hình ảnh minh họa') || '';
+
+        const imgHtml = `\n\n<figure style="margin:20px 0; text-align:center;"><img src="${url}" alt="${alt}" style="max-width:100%; height:auto; border-radius:8px; display:inline-block; box-shadow:0 4px 15px rgba(0,0,0,0.15);">${caption ? `<figcaption style="font-size:12px; color:#94a3b8; font-style:italic; margin-top:6px;">${caption}</figcaption>` : ''}</figure>\n\n`;
+
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            const startPos = contentEl.selectionStart || contentEl.value.length;
+            const endPos = contentEl.selectionEnd || contentEl.value.length;
+            contentEl.value = contentEl.value.substring(0, startPos) + imgHtml + contentEl.value.substring(endPos);
+            contentEl.focus();
+            window.updateWordAndReadingStats();
+            window.triggerAutoSave();
+            showLdpToast('Đã chèn hình ảnh đơn vào nội dung bài viết!');
+        }
+    };
+
+    window.insertEditorHeading = function (tag) {
+        if (!tag) return;
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        const selected = contentEl.value.substring(startPos, endPos) || 'Tiêu đề bài viết';
+        let snippet = '';
+        if (tag === 'quote') {
+            snippet = `\n> ${selected}\n`;
+        } else if (tag === 'code') {
+            snippet = `\n\`\`\`\n${selected}\n\`\`\`\n`;
+        } else {
+            const prefix = tag === 'h2' ? '## ' : (tag === 'h3' ? '### ' : '#### ');
+            snippet = `\n${prefix}${selected}\n`;
+        }
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+    };
+
+    window.wrapEditorText = function (before, after) {
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        const selected = contentEl.value.substring(startPos, endPos);
+        const snippet = before + (selected || 'văn bản') + after;
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        contentEl.setSelectionRange(startPos + before.length, startPos + snippet.length - after.length);
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+    };
+
+    window.insertEditorList = function (type) {
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const prefix = type === 'ol' ? '1. ' : '- ';
+        const startPos = contentEl.selectionStart || contentEl.value.length;
+        const endPos = contentEl.selectionEnd || contentEl.value.length;
+        const snippet = `\n${prefix}Mục danh sách 1\n${prefix}Mục danh sách 2\n`;
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+    };
+
+    // =========================================================================
+    //   CHỨC NĂNG CHÈN GALLERY ĐA HÌNH ẢNH (STT 19 CHECKLIST CMS TIN TỨC)
+    //   - Upload nhiều ảnh cùng lúc
+    //   - Kéo thả / Đổi thứ tự ảnh trước khi chèn
+    //   - Hỗ trợ layout cột: 50/50, 33/33/33, 25/25/25/25, 33/67, 67/33, Grid 2x2
+    //   - Chỉnh Alt text, Caption cho từng ảnh
+    //   - Responsive trên Desktop / Mobile
+    //   - Thay đổi layout sau khi đã chèn vào bài
+    // =========================================================================
+    window.articleGalleriesData = window.articleGalleriesData || {};
+
+    // Kho ảnh mẫu demo chất lượng cao của FPT Telecom
+    window.galleryDemoPresets = [
+        {
+            url: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80',
+            alt: 'Hạ tầng mạng cáp quang siêu tốc FPT Telecom',
+            caption: 'Hạ tầng mạng cáp quang băng rộng thế hệ mới'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+            alt: 'Thiết bị Modem Wi-Fi 6 AX3000GZ 2 băng tần chuẩn Gigabit',
+            caption: 'Modem Wi-Fi 6 AX3000GZ phát đồng thời băng tần 5GHz'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80',
+            alt: 'Camera An Ninh Thông Minh FPT Camera IQ3 Cloud',
+            caption: 'FPT Camera IQ3 lưu trữ dữ liệu an toàn trên đám mây'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80',
+            alt: 'Kỹ thuật viên FPT Telecom hỗ trợ lắp đặt tại nhà 24/7',
+            caption: 'Đội ngũ kỹ thuật viên tận tâm hỗ trợ khách hàng'
+        }
+    ];
+
+    window.galleryState = {
+        items: [],
+        layout: '50-50',
+        editingId: null,
+        previewDevice: 'desktop'
+    };
+
+    window.openGalleryModal = function (galleryId = null) {
+        const modal = document.getElementById('gallery-picker-modal');
+        if (!modal) return;
+
+        if (galleryId && window.articleGalleriesData[galleryId]) {
+            // Chế độ chỉnh sửa gallery đã có
+            const data = window.articleGalleriesData[galleryId];
+            window.galleryState.editingId = galleryId;
+            window.galleryState.layout = data.layout || '50-50';
+            window.galleryState.items = JSON.parse(JSON.stringify(data.items || []));
+            window.galleryState.previewDevice = 'desktop';
+        } else {
+            // Chế độ tạo mới
+            window.galleryState.editingId = null;
+            if (window.galleryState.items.length === 0) {
+                // Nạp sẵn 2 ảnh demo mẫu nếu danh sách đang trống để trải nghiệm ngay
+                window.galleryState.items = [
+                    { ...window.galleryDemoPresets[0] },
+                    { ...window.galleryDemoPresets[1] }
+                ];
+                window.galleryState.layout = '50-50';
+            }
+        }
+
+        modal.style.display = 'flex';
+        window.renderGalleryModalUI();
+    };
+
+    window.closeGalleryModal = function () {
+        const modal = document.getElementById('gallery-picker-modal');
+        if (modal) modal.style.display = 'none';
+        window.galleryState.editingId = null;
+    };
+
+    window.addGalleryDemoPreset = function (count) {
+        window.galleryState.items = [];
+        const limit = Math.min(count, window.galleryDemoPresets.length);
+        for (let i = 0; i < limit; i++) {
+            window.galleryState.items.push({ ...window.galleryDemoPresets[i] });
+        }
+        if (count === 2) window.galleryState.layout = '50-50';
+        else if (count === 3) window.galleryState.layout = '33-33-33';
+        else if (count === 4) window.galleryState.layout = '25-25-25-25';
+        window.renderGalleryModalUI();
+        showLdpToast(`Đã nạp ${limit} ảnh FPT mẫu cho bố cục ${window.galleryState.layout}!`);
+    };
+
+    window.clearAllGalleryItems = function () {
+        window.galleryState.items = [];
+        window.renderGalleryModalUI();
+        showLdpToast('Đã xóa toàn bộ hình ảnh trong Gallery!');
+    };
+
+    window.handleGalleryUpload = function (event) {
+        const files = event.target.files;
+        if (!files || files.length === 0) return;
+
+        let processed = 0;
+        Array.from(files).forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const cleanName = file.name.replace(/\.[^/.]+$/, "");
+                window.galleryState.items.push({
+                    url: e.target.result,
+                    alt: `Hình ảnh: ${cleanName}`,
+                    caption: cleanName
+                });
+                processed++;
+                if (processed === files.length) {
+                    // Tự động gợi ý layout phù hợp
+                    const total = window.galleryState.items.length;
+                    if (total === 2 && window.galleryState.layout !== '33-67' && window.galleryState.layout !== '67-33') {
+                        window.galleryState.layout = '50-50';
+                    } else if (total === 3) {
+                        window.galleryState.layout = '33-33-33';
+                    } else if (total >= 4) {
+                        window.galleryState.layout = total === 4 ? '25-25-25-25' : 'grid-2x2';
+                    }
+                    window.renderGalleryModalUI();
+                    showLdpToast(`Đã tải lên ${processed} hình ảnh vào Gallery thành công!`);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+        event.target.value = ''; // Reset input
+    };
+
+    window.removeGalleryItem = function (index) {
+        if (index >= 0 && index < window.galleryState.items.length) {
+            window.galleryState.items.splice(index, 1);
+            window.renderGalleryModalUI();
+            showLdpToast('Đã xóa hình ảnh khỏi Gallery!');
+        }
+    };
+
+    window.moveGalleryItem = function (fromIndex, toIndex) {
+        if (toIndex < 0 || toIndex >= window.galleryState.items.length) return;
+        const item = window.galleryState.items.splice(fromIndex, 1)[0];
+        window.galleryState.items.splice(toIndex, 0, item);
+        window.renderGalleryModalUI();
+    };
+
+    window.selectGalleryLayout = function (layoutKey) {
+        window.galleryState.layout = layoutKey;
+        const names = {
+            '50-50': '50 / 50 (2 cột đều)',
+            '33-33-33': '33 / 33 / 33 (3 cột đều)',
+            '25-25-25-25': '25 / 25 / 25 / 25 (4 cột đều)',
+            '33-67': '33 / 67 (Cột trái 1/3, Cột phải 2/3)',
+            '67-33': '67 / 33 (Cột trái 2/3, Cột phải 1/3)',
+            'grid-2x2': 'Lưới 2x2 (4 ảnh ma trận)'
+        };
+        const hintEl = document.getElementById('gallery-layout-curr-name');
+        if (hintEl) hintEl.innerText = names[layoutKey] || layoutKey;
+
+        // Cập nhật class active cho các nút layout
+        document.querySelectorAll('.gallery-layout-btn').forEach(btn => {
+            const isMatch = btn.getAttribute('data-layout') === layoutKey;
+            btn.classList.toggle('active', isMatch);
+            btn.style.border = isMatch ? '2px solid var(--primary)' : '1px solid var(--border-glass)';
+            btn.style.background = isMatch ? 'rgba(255,107,0,0.1)' : 'rgba(255,255,255,0.03)';
+        });
+
+        window.renderGalleryPreview();
+    };
+
+    window.updateGalleryItemAlt = function (index, value) {
+        if (window.galleryState.items[index]) {
+            window.galleryState.items[index].alt = value;
+            window.renderGalleryPreview();
+        }
+    };
+
+    window.updateGalleryItemCaption = function (index, value) {
+        if (window.galleryState.items[index]) {
+            window.galleryState.items[index].caption = value;
+            window.renderGalleryPreview();
+        }
+    };
+
+    window.setGalleryPreviewDevice = function (device) {
+        window.galleryState.previewDevice = device;
+        const btnDesk = document.getElementById('gal-prev-btn-desktop');
+        const btnMob = document.getElementById('gal-prev-btn-mobile');
+        const wrapper = document.getElementById('gallery-preview-container');
+
+        if (device === 'mobile') {
+            if (btnDesk) { btnDesk.style.background = 'transparent'; btnDesk.style.color = 'var(--text-muted)'; }
+            if (btnMob) { btnMob.style.background = 'rgba(255,255,255,0.1)'; btnMob.style.color = '#fff'; }
+            if (wrapper) {
+                wrapper.style.maxWidth = '375px';
+                wrapper.style.boxShadow = '0 0 20px rgba(0,0,0,0.6)';
+                wrapper.style.border = '2px solid rgba(255,255,255,0.15)';
+                wrapper.style.borderRadius = '16px';
+                wrapper.style.padding = '12px';
+                wrapper.style.background = '#0e121a';
+            }
+        } else {
+            if (btnDesk) { btnDesk.style.background = 'rgba(255,255,255,0.1)'; btnDesk.style.color = '#fff'; }
+            if (btnMob) { btnMob.style.background = 'transparent'; btnMob.style.color = 'var(--text-muted)'; }
+            if (wrapper) {
+                wrapper.style.maxWidth = '100%';
+                wrapper.style.boxShadow = 'none';
+                wrapper.style.border = 'none';
+                wrapper.style.borderRadius = '0';
+                wrapper.style.padding = '0';
+                wrapper.style.background = 'transparent';
+            }
+        }
+
+        window.renderGalleryPreview();
+    };
+
+    window.renderGalleryModalUI = function () {
+        const count = window.galleryState.items.length;
+        const countBadge = document.getElementById('gallery-count-badge');
+        if (countBadge) countBadge.innerText = `${count} ảnh`;
+
+        const emptyTip = document.getElementById('gallery-empty-tip');
+        if (emptyTip) emptyTip.style.display = count === 0 ? 'block' : 'none';
+
+        const container = document.getElementById('gallery-items-container');
+        if (!container) return;
+
+        container.innerHTML = '';
+        window.galleryState.items.forEach((item, idx) => {
+            const row = document.createElement('div');
+            row.className = 'gallery-item-row';
+            row.draggable = true;
+            row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px; cursor:move; transition:0.2s;';
+
+            // Drag and drop event listeners
+            row.ondragstart = (e) => {
+                e.dataTransfer.setData('text/plain', idx);
+                row.style.opacity = '0.5';
+            };
+            row.ondragend = () => {
+                row.style.opacity = '1';
+            };
+            row.ondragover = (e) => {
+                e.preventDefault();
+                row.style.borderColor = 'var(--primary)';
+            };
+            row.ondragleave = () => {
+                row.style.borderColor = 'var(--border-glass)';
+            };
+            row.ondrop = (e) => {
+                e.preventDefault();
+                row.style.borderColor = 'var(--border-glass)';
+                const fromIdx = parseInt(e.dataTransfer.getData('text/plain'), 10);
+                if (!isNaN(fromIdx) && fromIdx !== idx) {
+                    window.moveGalleryItem(fromIdx, idx);
+                }
+            };
+
+            row.innerHTML = `
+                <div style="font-size:12px; font-weight:800; color:var(--primary); width:24px; text-align:center;">#${idx + 1}</div>
+                <div style="width:64px; height:48px; border-radius:6px; overflow:hidden; background:#000; flex-shrink:0; border:1px solid var(--border-glass);">
+                    <img src="${item.url}" alt="${item.alt || ''}" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="flex:1; display:grid; grid-template-columns:1fr 1.2fr; gap:8px;">
+                    <div>
+                        <label style="font-size:10.5px; color:var(--text-muted); display:block; margin-bottom:2px;">Alt text (SEO):</label>
+                        <input type="text" class="form-input" value="${item.alt || ''}" placeholder="Mô tả ảnh cho Google..."
+                            oninput="window.updateGalleryItemAlt(${idx}, this.value)" style="font-size:11.5px; padding:4px 8px; height:28px;">
+                    </div>
+                    <div>
+                        <label style="font-size:10.5px; color:var(--text-muted); display:block; margin-bottom:2px;">Chú thích (Caption):</label>
+                        <input type="text" class="form-input" value="${item.caption || ''}" placeholder="Chú thích ảnh dưới..."
+                            oninput="window.updateGalleryItemCaption(${idx}, this.value)" style="font-size:11.5px; padding:4px 8px; height:28px;">
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:4px; margin-left:auto;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.moveGalleryItem(${idx}, ${idx - 1})"
+                        ${idx === 0 ? 'disabled style="opacity:0.3; padding:4px 7px;"' : 'style="padding:4px 7px;"'} title="Di chuyển lên trước">◀</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.moveGalleryItem(${idx}, ${idx + 1})"
+                        ${idx === count - 1 ? 'disabled style="opacity:0.3; padding:4px 7px;"' : 'style="padding:4px 7px;"'} title="Di chuyển về sau">▶</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.removeGalleryItem(${idx})"
+                        style="color:var(--danger); border-color:rgba(239,68,68,0.3); padding:4px 7px; margin-left:4px;" title="Xóa ảnh này">🗑️</button>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+
+        window.selectGalleryLayout(window.galleryState.layout);
+    };
+
+    window.getGalleryGridTemplateColumns = function (layoutKey, isMobile = false) {
+        if (isMobile) {
+            return '1fr'; // Mobile responsive tự động căn 1 cột
+        }
+        switch (layoutKey) {
+            case '50-50': return 'repeat(2, 1fr)';
+            case '33-33-33': return 'repeat(3, 1fr)';
+            case '25-25-25-25': return 'repeat(4, 1fr)';
+            case '33-67': return '1fr 2fr';
+            case '67-33': return '2fr 1fr';
+            case 'grid-2x2': return 'repeat(2, 1fr)';
+            default: return 'repeat(2, 1fr)';
+        }
+    };
+
+    window.renderGalleryPreview = function () {
+        const previewEl = document.getElementById('gallery-preview-container');
+        if (!previewEl) return;
+
+        const items = window.galleryState.items;
+        if (items.length === 0) {
+            previewEl.innerHTML = `<div style="text-align:center; color:var(--text-muted); font-size:12px; padding:20px;">Chưa có ảnh để hiển thị xem trước.</div>`;
+            return;
+        }
+
+        const isMobile = window.galleryState.previewDevice === 'mobile';
+        const gridCols = window.getGalleryGridTemplateColumns(window.galleryState.layout, isMobile);
+
+        let html = `
+            <div style="font-size:11px; color:#c084fc; font-weight:700; margin-bottom:8px; display:flex; justify-content:space-between;">
+                <span>✨ Bố cục Gallery: ${window.galleryState.layout} (${items.length} ảnh)</span>
+                <span>${isMobile ? '📱 Mobile: Tự động xếp chồng 100% responsive' : '💻 Desktop: Căn theo tỷ lệ cột'}</span>
+            </div>
+            <div class="gallery-grid" style="display:grid; grid-template-columns:${gridCols}; gap:12px; width:100%;">
+        `;
+
+        items.forEach((item, idx) => {
+            html += `
+                <figure style="margin:0; text-align:center; overflow:hidden; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); padding:4px;">
+                    <img src="${item.url}" alt="${item.alt || ''}"
+                        style="width:100%; height:auto; aspect-ratio:16/10; object-fit:cover; border-radius:6px; display:block;">
+                    ${item.caption ? `<figcaption style="font-size:11.5px; color:#cbd5e1; font-style:italic; padding:6px 4px 2px; line-height:1.4;">${item.caption}</figcaption>` : ''}
+                </figure>
+            `;
+        });
+
+        html += `</div>`;
+        previewEl.innerHTML = html;
+    };
+
+    window.confirmInsertGallery = function () {
+        const items = window.galleryState.items;
+        if (!items || items.length === 0) {
+            showLdpToast('Vui lòng thêm ít nhất một hình ảnh vào Gallery!');
+            return;
+        }
+
+        const layout = window.galleryState.layout;
+        const galId = window.galleryState.editingId || ('gal-' + Date.now().toString(36));
+
+        // Lưu vào kho data để có thể chỉnh sửa sau này
+        window.articleGalleriesData[galId] = {
+            id: galId,
+            layout: layout,
+            items: JSON.parse(JSON.stringify(items))
+        };
+
+        const gridCols = window.getGalleryGridTemplateColumns(layout, false);
+
+        // Sinh mã HTML chuẩn responsive và shortcode
+        const gallerySnippet = `\n\n<!-- GALLERY_START: id="${galId}" layout="${layout}" -->
+<div class="article-gallery" data-gallery-id="${galId}" data-layout="${layout}" style="margin:24px 0; padding:12px; border:1px dashed rgba(192,132,252,0.35); border-radius:10px; background:rgba(192,132,252,0.03);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.06); font-size:11.5px; color:#c084fc;">
+        <span>🖼️ <strong>Gallery (${layout})</strong> &mdash; ${items.length} hình ảnh</span>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="window.openGalleryModal('${galId}')" style="font-size:10.5px; padding:2px 8px; color:var(--primary); border-color:var(--primary);">✏️ Đổi layout / Chỉnh sửa</button>
+    </div>
+    <div class="gallery-grid" style="display:grid; grid-template-columns:${gridCols}; gap:12px;">
+${items.map(item => `        <figure style="margin:0; text-align:center;">
+            <img src="${item.url}" alt="${item.alt || ''}" style="width:100%; height:auto; border-radius:6px; object-fit:cover; aspect-ratio:16/10; border:1px solid rgba(255,255,255,0.08);">
+            ${item.caption ? `<figcaption style="font-size:11.5px; color:#94a3b8; font-style:italic; margin-top:5px;">${item.caption}</figcaption>` : ''}
+        </figure>`).join('\n')}
+    </div>
+</div>
+<!-- GALLERY_END -->\n\n`;
+
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            if (window.galleryState.editingId) {
+                // Thay thế khối cũ nếu đang sửa
+                const regex = new RegExp(`<!-- GALLERY_START: id="${galId}"[\\s\\S]*?<!-- GALLERY_END -->`, 'g');
+                if (regex.test(contentEl.value)) {
+                    contentEl.value = contentEl.value.replace(regex, gallerySnippet.trim());
+                } else {
+                    contentEl.value += gallerySnippet;
+                }
+            } else {
+                // Chèn mới tại vị trí con trỏ chuột
+                const startPos = contentEl.selectionStart || contentEl.value.length;
+                const endPos = contentEl.selectionEnd || contentEl.value.length;
+                contentEl.value = contentEl.value.substring(0, startPos) + gallerySnippet + contentEl.value.substring(endPos);
+                contentEl.focus();
+                contentEl.setSelectionRange(startPos + gallerySnippet.length, startPos + gallerySnippet.length);
+            }
+        }
+
+        window.closeGalleryModal();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`Đã chèn Gallery (${layout}) gồm ${items.length} hình ảnh vào bài viết!`);
+    };
+
     // Google SERP Snippet Preview realtime (STT 11)
     window.updateSerpPreview = function () {
         const seoTitle = document.getElementById('art-seo-title')?.value.trim();
@@ -2058,6 +2550,7 @@
         document.getElementById('art-sapo').value = '';
         document.getElementById('art-content').value = '';
         document.getElementById('art-tags').value = '';
+        if (typeof window.setSelectedTagsFromValue === 'function') window.setSelectedTagsFromValue('');
         const oldCatEl = document.getElementById('art-category'); if (oldCatEl) oldCatEl.value = 'Tin khuyến mãi';
 
         // Reset Cây Danh mục (STT 7.0)
@@ -2156,28 +2649,224 @@
     };
 
     // =========================================================================
-    // XỬ LÝ GỢI Ý TAGS NHANH & CHỐNG TRÙNG LẶP (STT 8.0)
+    // XỬ LÝ DROPDOWN MULTI-SELECT CHỌN THẺ TAGS TỪ HỆ THỐNG QUẢN LÝ TAGS
     // =========================================================================
+    window.toggleNewsTagsDropdown = function (event) {
+        if (event) event.stopPropagation();
+        const menu = document.getElementById('art-tags-dropdown-menu');
+        const arrow = document.getElementById('art-tags-arrow');
+        if (!menu) return;
+
+        const isOpen = menu.style.display === 'block';
+        if (isOpen) {
+            window.closeNewsTagsDropdown();
+        } else {
+            window.renderArticleTagsDropdown();
+            menu.style.display = 'block';
+            if (arrow) arrow.style.transform = 'rotate(180deg)';
+            const searchInput = document.getElementById('art-tags-search-filter');
+            if (searchInput) {
+                searchInput.value = '';
+                setTimeout(() => searchInput.focus(), 50);
+            }
+        }
+    };
+
+    window.closeNewsTagsDropdown = function () {
+        const menu = document.getElementById('art-tags-dropdown-menu');
+        const arrow = document.getElementById('art-tags-arrow');
+        if (menu) menu.style.display = 'none';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+    };
+
+    window.goToNewsTagsTab = function (event) {
+        if (event) event.stopPropagation();
+        window.closeNewsTagsDropdown();
+        window.closeNewsArticleDrawer();
+        const tabsBar = document.querySelector('#mod-news .tabs');
+        if (tabsBar) {
+            const tagTab = Array.from(tabsBar.querySelectorAll('.tab')).find(t => t.innerText.includes('Quản lý Tags') || t.innerText.includes('Tags'));
+            if (tagTab) {
+                window.switchNewsTab('tag-list', tagTab);
+            }
+        }
+    };
+
+    window.getSelectedTagsArray = function () {
+        const input = document.getElementById('art-tags');
+        if (!input) return [];
+        const val = input.value.trim();
+        return val ? val.split(',').map(t => t.trim()).filter(Boolean) : [];
+    };
+
+    window.renderArticleTagsDropdown = function () {
+        const listContainer = document.getElementById('art-tags-options-list');
+        const chipsContainer = document.getElementById('art-tags-selected-chips');
+        const badgeCount = document.getElementById('art-tags-badge-count');
+        const selectedTags = window.getSelectedTagsArray();
+
+        // 1. Render Chips đã chọn ở Trigger Box
+        if (chipsContainer) {
+            chipsContainer.innerHTML = '';
+            if (selectedTags.length === 0) {
+                chipsContainer.innerHTML = '<span style="color:var(--text-muted); font-size:12.5px;" id="art-tags-placeholder">-- Chọn thẻ Tags từ hệ thống Quản lý Tags --</span>';
+                if (badgeCount) badgeCount.style.display = 'none';
+            } else {
+                selectedTags.forEach(tag => {
+                    const chip = document.createElement('span');
+                    chip.className = 'badge';
+                    chip.style.cssText = 'background:rgba(249,115,22,0.18); color:#f97316; border:1px solid rgba(249,115,22,0.35); padding:3px 9px; border-radius:14px; font-size:12px; display:inline-flex; align-items:center; gap:6px; margin:2px 3px 2px 0; font-weight:500;';
+                    chip.innerHTML = `<span>#${tag}</span><span onclick="window.removeSelectedTag('${tag}', event)" style="cursor:pointer; font-weight:700; opacity:0.8; font-size:12px; padding:0 2px;" title="Xóa thẻ">&times;</span>`;
+                    chipsContainer.appendChild(chip);
+                });
+                if (badgeCount) {
+                    badgeCount.innerText = selectedTags.length;
+                    badgeCount.style.display = 'inline-block';
+                }
+            }
+        }
+
+        // 2. Render danh sách Options từ window.newsTagsData
+        if (listContainer) {
+            listContainer.innerHTML = '';
+            const allTagsMap = {};
+
+            for (let id in window.newsTagsData) {
+                const tagObj = window.newsTagsData[id];
+                const tagName = tagObj.name || tagObj.slug;
+                allTagsMap[tagName.toLowerCase()] = {
+                    name: tagName,
+                    slug: tagObj.slug || tagName,
+                    count: tagObj.count || 0,
+                    status: tagObj.status || 'Active'
+                };
+            }
+
+            selectedTags.forEach(t => {
+                const lower = t.toLowerCase();
+                if (!allTagsMap[lower]) {
+                    allTagsMap[lower] = {
+                        name: t,
+                        slug: t,
+                        count: 0,
+                        status: 'Active'
+                    };
+                }
+            });
+
+            const tagKeys = Object.keys(allTagsMap);
+            if (tagKeys.length === 0) {
+                listContainer.innerHTML = '<div style="color:var(--text-muted); font-size:12px; padding:10px; text-align:center;">Chưa có thẻ tag nào trong hệ thống!</div>';
+                return;
+            }
+
+            tagKeys.forEach(key => {
+                const item = allTagsMap[key];
+                const isChecked = selectedTags.some(t => t.toLowerCase() === item.name.toLowerCase());
+
+                const row = document.createElement('div');
+                row.className = 'art-tag-option-item';
+                row.setAttribute('data-name', item.name.toLowerCase());
+                row.style.cssText = `display:flex; align-items:center; justify-content:space-between; padding:7px 10px; border-radius:6px; cursor:pointer; background:${isChecked ? 'rgba(249,115,22,0.12)' : 'transparent'}; border:1px solid ${isChecked ? 'rgba(249,115,22,0.3)' : 'transparent'}; transition:all 0.15s;`;
+                row.onclick = function (e) {
+                    window.toggleSelectTag(item.name, e);
+                };
+
+                row.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <input type="checkbox" ${isChecked ? 'checked' : ''} style="accent-color:var(--primary); width:15px; height:15px; cursor:pointer;" onclick="event.stopPropagation(); window.toggleSelectTag('${item.name}', event);">
+                        <span style="font-weight:600; color:${isChecked ? '#fb923c' : '#fff'}; font-size:12.5px;">${item.name}</span>
+                        <span style="font-size:11px; color:#94a3b8; font-family:monospace;">(${item.slug})</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        ${item.count > 0 ? `<span style="font-size:10.5px; color:#94a3b8;">${item.count} bài</span>` : ''}
+                        <span class="badge" style="font-size:10px; padding:1px 6px; background:${item.status === 'Active' ? 'rgba(16,185,129,0.15)' : 'rgba(148,163,184,0.15)'}; color:${item.status === 'Active' ? '#10b981' : '#94a3b8'};">${item.status === 'Active' ? 'Hoạt động' : 'Nháp'}</span>
+                    </div>
+                `;
+                listContainer.appendChild(row);
+            });
+        }
+    };
+
+    window.filterArticleTagsDropdown = function (query) {
+        const q = (query || '').toLowerCase().trim();
+        const items = document.querySelectorAll('#art-tags-options-list .art-tag-option-item');
+        items.forEach(item => {
+            const name = item.getAttribute('data-name') || '';
+            if (!q || name.includes(q)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    };
+
+    window.toggleSelectTag = function (tagName, event) {
+        if (event) event.stopPropagation();
+        const input = document.getElementById('art-tags');
+        if (!input) return;
+
+        let selected = window.getSelectedTagsArray();
+        const index = selected.findIndex(t => t.toLowerCase() === tagName.toLowerCase());
+
+        if (index > -1) {
+            selected.splice(index, 1);
+        } else {
+            selected.push(tagName);
+        }
+
+        input.value = selected.join(', ');
+        window.renderArticleTagsDropdown();
+    };
+
+    window.removeSelectedTag = function (tagName, event) {
+        if (event) event.stopPropagation();
+        const input = document.getElementById('art-tags');
+        if (!input) return;
+
+        let selected = window.getSelectedTagsArray();
+        selected = selected.filter(t => t.toLowerCase() !== tagName.toLowerCase());
+        input.value = selected.join(', ');
+        window.renderArticleTagsDropdown();
+    };
+
+    window.clearAllSelectedTags = function (event) {
+        if (event) event.stopPropagation();
+        const input = document.getElementById('art-tags');
+        if (input) input.value = '';
+        window.renderArticleTagsDropdown();
+    };
+
+    window.setSelectedTagsFromValue = function (tagsStr) {
+        const input = document.getElementById('art-tags');
+        if (input) input.value = tagsStr || '';
+        window.renderArticleTagsDropdown();
+    };
+
     window.addTagToInput = function (newTag) {
         const input = document.getElementById('art-tags');
         if (!input) return;
 
-        const currentVal = input.value.trim();
-        let tags = currentVal ? currentVal.split(',').map(t => t.trim()).filter(Boolean) : [];
-
-        // Kiểm tra trùng lặp không phân biệt hoa thường (STT 8.0)
+        let tags = window.getSelectedTagsArray();
         const isExist = tags.some(t => t.toLowerCase() === newTag.toLowerCase());
         if (isExist) {
-            showLdpToast(`Thẻ "${newTag}" đã có trong danh sách!`);
-            input.focus();
+            showLdpToast(`Thẻ "${newTag}" đã được chọn!`);
             return;
         }
 
         tags.push(newTag);
         input.value = tags.join(', ');
-        showLdpToast(`Đã thêm thẻ: ${newTag}`);
-        input.focus();
+        window.renderArticleTagsDropdown();
+        showLdpToast(`Đã chọn thẻ: ${newTag}`);
     };
+
+    // Đóng dropdown tags khi click ra ngoài
+    document.addEventListener('click', function (e) {
+        const wrapper = document.getElementById('art-tags-wrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+            window.closeNewsTagsDropdown();
+        }
+    });
 
     // =========================================================================
     // XỬ LÝ BỘ CHỌN CÂY DANH MỤC ĐA TẦNG (CATEGORY TREE - STT 7.0)
@@ -2322,6 +3011,7 @@
         document.getElementById('art-sapo').value = art.sapo || '';
         document.getElementById('art-content').value = art.content || '';
         document.getElementById('art-tags').value = art.tags || '';
+        if (typeof window.setSelectedTagsFromValue === 'function') window.setSelectedTagsFromValue(art.tags || '');
 
         // Đổ dữ liệu Cây Danh mục (STT 7.0)
         const primaryCat = art.categoryPrimary || art.category || 'Tin khuyến mãi';
@@ -2987,12 +3677,45 @@
         const mainContentEl = document.getElementById('prev-art-content-area');
         mainContentEl.innerHTML = '';
 
-        const lines = content.split('\n');
+        // Đính kèm CSS Responsive cho Gallery trong khung Preview
+        let responsiveGalleryCss = `
+            <style>
+                .article-gallery { margin: 22px 0; }
+                .article-gallery .gallery-grid { display: grid; gap: 12px; }
+                @media (max-width: 640px) {
+                    .article-gallery .gallery-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                    .article-gallery figure img {
+                        aspect-ratio: 16/9 !important;
+                    }
+                }
+            </style>
+        `;
+
+        // Trích xuất các block Gallery ra placeholder tạm để tránh bị ngắt dòng thành thẻ <p>
+        let processedContent = content;
+        const galleryBlocks = [];
+        processedContent = processedContent.replace(/<!-- GALLERY_START:[\s\S]*?<!-- GALLERY_END -->/g, (match) => {
+            const placeholder = `__GALLERY_BLOCK_${galleryBlocks.length}__`;
+            // Trên giao diện độc giả xem trước, ẩn nút sửa của CMS
+            const readerGalleryHtml = match.replace(/<button[^>]*>✏️ Đổi layout[\s\S]*?<\/button>/gi, '');
+            galleryBlocks.push(readerGalleryHtml);
+            return '\n' + placeholder + '\n';
+        });
+
+        const lines = processedContent.split('\n');
         let tocIndex = 1;
-        let finalHtml = '';
+        let finalHtml = responsiveGalleryCss;
 
         lines.forEach(line => {
-            if (line.startsWith('## ')) {
+            const trimmed = line.trim();
+            if (trimmed.startsWith('__GALLERY_BLOCK_') && trimmed.endsWith('__')) {
+                const bIdx = parseInt(trimmed.replace('__GALLERY_BLOCK_', '').replace('__', ''), 10);
+                if (galleryBlocks[bIdx] !== undefined) {
+                    finalHtml += galleryBlocks[bIdx];
+                }
+            } else if (line.startsWith('## ')) {
                 const headingText = line.substring(3).trim();
                 const headingId = 'heading-section-' + tocIndex;
 
@@ -3001,14 +3724,14 @@
                 li.innerHTML = `<a href="#${headingId}" style="color:var(--primary); font-size:12.5px; text-decoration:none;" onclick="document.getElementById('${headingId}').scrollIntoView({behavior:'smooth'}); return false;">${tocIndex}. ${headingText}</a>`;
                 tocContainer.appendChild(li);
 
-                finalHtml += `<h3 id="${headingId}" style="color:#fff; font-size:16px; margin-top:20px; margin-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:5px;">${headingText}</h3>`;
+                finalHtml += `<h3 id="${headingId}" style="color:#0f172a; font-size:17px; margin-top:22px; margin-bottom:10px; border-bottom:1px solid #e2e8f0; padding-bottom:5px; font-weight:700;">${headingText}</h3>`;
                 tocIndex++;
             } else if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-                finalHtml += `<ul><li style="margin-left:20px; list-style-type:disc; margin-bottom:4px; font-size:13px; color:#ccc;">${line.trim().substring(2)}</li></ul>`;
+                finalHtml += `<ul><li style="margin-left:20px; list-style-type:disc; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().substring(2)}</li></ul>`;
             } else if (line.trim().match(/^\d+\.\s/)) {
-                finalHtml += `<ol><li style="margin-left:20px; list-style-type:decimal; margin-bottom:4px; font-size:13px; color:#ccc;">${line.trim().replace(/^\d+\.\s/, '')}</li></ol>`;
+                finalHtml += `<ol><li style="margin-left:20px; list-style-type:decimal; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().replace(/^\d+\.\s/, '')}</li></ol>`;
             } else if (line.trim().length > 0) {
-                finalHtml += `<p style="font-size:13px; color:#ccc; line-height:1.6; margin-bottom:12px;">${line}</p>`;
+                finalHtml += `<p style="font-size:14px; color:#334155; line-height:1.75; margin-bottom:14px;">${line}</p>`;
             }
         });
 
@@ -3087,6 +3810,7 @@
             window.renderNewsCategoriesTable();
             window.updateArticleCategoryOptions();
             window.initNewsContentTypeDOM();
+            if (typeof window.renderArticleTagsDropdown === 'function') window.renderArticleTagsDropdown();
 
             // Đồng bộ master checkbox
             const masterCb = document.getElementById('news-check-all');
