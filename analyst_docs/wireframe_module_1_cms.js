@@ -3771,8 +3771,8 @@ function setSkuTagColor(colorHex, isCustom) {
         document.getElementById('camp-edit-banner').value = pkg.banner || '';
         document.getElementById('camp-edit-name').value = pkg.name || '';
         document.getElementById('camp-edit-price').value = pkg.price || '';
-        document.getElementById('camp-edit-download').value = pkg.download || '';
-        document.getElementById('camp-edit-upload').value = pkg.upload || '';
+        var dlEl = document.getElementById('camp-edit-download'); if (dlEl) dlEl.value = pkg.download || '';
+        var ulEl = document.getElementById('camp-edit-upload'); if (ulEl) ulEl.value = pkg.upload || '';
         document.getElementById('camp-edit-features').value = pkg.features || '';
         document.getElementById('camp-edit-cta-sub-text').value = pkg.ctaSubText || '';
         document.getElementById('camp-edit-cta-sub-url').value = pkg.ctaSubUrl || '';
@@ -3800,8 +3800,8 @@ function setSkuTagColor(colorHex, isCustom) {
             }
         }
         else if (fieldName === 'price') pkg.price = document.getElementById('camp-edit-price').value;
-        else if (fieldName === 'download') pkg.download = document.getElementById('camp-edit-download').value;
-        else if (fieldName === 'upload') pkg.upload = document.getElementById('camp-edit-upload').value;
+        else if (fieldName === 'download') { var dl = document.getElementById('camp-edit-download'); if (dl) pkg.download = dl.value; }
+        else if (fieldName === 'upload') { var ul = document.getElementById('camp-edit-upload'); if (ul) pkg.upload = ul.value; }
         else if (fieldName === 'features') pkg.features = document.getElementById('camp-edit-features').value;
         else if (fieldName === 'ctaSubText') pkg.ctaSubText = document.getElementById('camp-edit-cta-sub-text').value;
         else if (fieldName === 'ctaSubUrl') pkg.ctaSubUrl = document.getElementById('camp-edit-cta-sub-url').value;
