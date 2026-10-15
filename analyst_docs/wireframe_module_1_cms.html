@@ -13863,52 +13863,7 @@ Tặng 1 tháng cước</textarea>
                                         </div>
                                         <div style="padding:14px;display:flex;flex-direction:column;gap:13px;">
 
-                                            <!-- 1. Form thu Leads cuối bài (STT 20) -->
-                                            <div
-                                                style="border:1px solid var(--border-glass); border-radius:8px; padding:10px 12px; background:rgba(0,0,0,0.18);">
-                                                <label
-                                                    style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-size:12.5px; font-weight:600; color:#fff; margin:0;">
-                                                    <span style="display:flex; align-items:center; gap:7px;">
-                                                        <span>📋 Form thu Leads</span>
-                                                    </span>
-                                                    <input type="checkbox" id="art-enable-lead-form" checked
-                                                        onchange="document.getElementById('lead-form-config-box').style.display = this.checked ? 'flex' : 'none';"
-                                                        style="width:16px; height:16px; accent-color:var(--primary);">
-                                                </label>
-                                                <div id="lead-form-config-box"
-                                                    style="display:flex; flex-direction:column; gap:8px; margin-top:10px; padding-top:8px; border-top:1px dashed var(--border-glass);">
-                                                    <div>
-                                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                                            <label style="font-size:11px; color:var(--text-muted); margin:0;">Mẫu Form mặc định:</label>
-                                                            <a href="javascript:void(0)" onclick="window.openLeadFormsManagerModal&&window.openLeadFormsManagerModal()" style="font-size:10.5px; color:var(--primary); text-decoration:none; font-weight:700;">⚙️ Quản lý Kho Form</a>
-                                                        </div>
-                                                        <select class="form-select" id="art-lead-form-id"
-                                                            style="font-size:12px; padding:5px 8px;">
-                                                            <option value="form-register" selected>Form Đăng ký Lắp mạng & FPT Play (#form-register)</option>
-                                                            <option value="form-camera">Form Camera AI Cloud (#form-camera)</option>
-                                                            <option value="form-voucher">Form Nhận Voucher Ưu đãi (#form-voucher)</option>
-                                                            <option value="form-enterprise">Form Doanh nghiệp & Kênh riêng (#form-enterprise)</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px; font-weight:600;">Vị
-                                                            trí hiển thị Form:</label>
-                                                        <select class="form-select" id="art-lead-form-pos" onchange="window.onLeadFormPosChange&&window.onLeadFormPosChange(this.value)"
-                                                            style="font-size:12px; padding:5px 8px;">
-                                                            <option value="after-content" selected>1. Cuối bài viết (After-content - Khuyên dùng)</option>
-                                                            <option value="shortcode">2. Theo vị trí mã #form-... hoặc [lead_form] (Chủ động 100%)</option>
-                                                            <option value="after-p2">3. Sau đoạn văn thứ 2 (Đầu bài viết)</option>
-                                                            <option value="after-p3">4. Sau đoạn văn thứ 3 / sau mục H2 đầu tiên</option>
-                                                            <option value="in-content-center">5. Tự động giữa bài (Chia đôi 50% nội dung)</option>
-                                                        </select>
-                                                        <div id="lead-form-pos-hint"
-                                                            style="font-size:11px; color:#38bdf8; margin-top:5px; line-height:1.4; background:rgba(56,189,248,0.08); padding:6px 8px; border-radius:6px; border:1px solid rgba(56,189,248,0.2);">
-                                                            💡 <strong>Cực kỳ linh hoạt:</strong> Chỉ cần gõ mã định danh <code>#form-register</code> hoặc bấm <strong>[📋 Chèn Form]</strong> để đặt Form vào bất kỳ vị trí nào trong bài viết!
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
 
                                             <!-- 2. Bóng Chat trực tuyến (STT 21) -->
                                             <div
