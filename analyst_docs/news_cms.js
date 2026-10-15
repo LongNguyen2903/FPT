@@ -183,6 +183,9 @@
                 const el = document.getElementById('news-author-list'); if (el) el.style.display = 'block';
             } else if (tabText.includes('Loại nội dung')) {
                 const el = document.getElementById('news-contenttype-list'); if (el) el.style.display = 'block';
+            } else if (tabText.includes('Form thu Leads') || tabText.includes('lead-forms')) {
+                const el = document.getElementById('news-lead-forms'); if (el) el.style.display = 'block';
+                if (typeof window.renderLeadFormsMainTable === 'function') window.renderLeadFormsMainTable();
             } else if (tabText.includes('Tags Mapping') || tabText.includes('Cấu hình Thông tin hay')) {
                 const el = document.getElementById('news-tag-mapping'); if (el) el.style.display = 'block';
             } else {
@@ -334,6 +337,7 @@
         const catListEl = document.getElementById('news-cat-list'); if (catListEl) catListEl.style.display = 'none';
         const tagListEl = document.getElementById('news-tag-list'); if (tagListEl) tagListEl.style.display = 'none';
         const tagMapEl = document.getElementById('news-tag-mapping'); if (tagMapEl) tagMapEl.style.display = 'none';
+        const leadFormEl = document.getElementById('news-lead-forms'); if (leadFormEl) leadFormEl.style.display = 'none';
         const authListEl = document.getElementById('news-author-list'); if (authListEl) authListEl.style.display = 'none';
         const authFormEl = document.getElementById('news-author-form'); if (authFormEl) authFormEl.style.display = 'none';
         const ctListEl = document.getElementById('news-contenttype-list'); if (ctListEl) ctListEl.style.display = 'none';
@@ -354,6 +358,9 @@
             if (tagListEl) tagListEl.style.display = 'block';
             window.renderNewsTagsTable();
             window.closeNewsTagForm();
+        } else if (tab === 'lead-forms') {
+            if (leadFormEl) leadFormEl.style.display = 'block';
+            window.renderLeadFormsMainTable();
         } else if (tab === 'tag-mapping') {
             if (tagMapEl) tagMapEl.style.display = 'block';
             window.syncTagMappingToSku();
@@ -1402,6 +1409,9 @@
                 <td style="text-align:center;">${visibilitySwitchHtml}</td>
                 <td style="text-align:right; white-space:nowrap;">
                     <div class="news-action-group">
+                        <button class="news-icon-btn preview-btn" onclick="window.previewNewsArticleById('${art.id}')" title="Xem trước bài viết" style="color:#c084fc;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
                         <button class="news-icon-btn edit-btn" onclick="window.editNewsArticle('${art.id}')" title="Chỉnh sửa bài viết">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                         </button>
@@ -2175,19 +2185,1005 @@
         }
     };
 
-    window.promptInsertImage = function () {
-        const choice = confirm('Bạn muốn chèn ẢNH ĐƠN LẺ hay muốn mở CHÈN GALLERY NHIỀU ẢNH (Đa layout 50/50, 33/33/33)?\n\n- Nhấn [OK] để chèn Ảnh Đơn Lẻ\n- Nhấn [Cancel] để mở Modal Gallery Đa Ảnh');
-        if (!choice) {
-            window.openGalleryModal();
+    // 1. Áp dụng Cỡ chữ (Font size - Feedback MKT)
+    window.applyEditorFontSize = function (size) {
+        if (!size) return;
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        const selected = contentEl.value.substring(startPos, endPos) || 'văn bản';
+        const snippet = `<span style="font-size:${size};">${selected}</span>`;
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        contentEl.setSelectionRange(startPos + snippet.length, startPos + snippet.length);
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`Đã áp dụng cỡ chữ ${size} cho đoạn văn bản!`);
+    };
+
+    // 2. Bảng Màu Chữ (Text Color - Feedback MKT)
+    window.toggleTextColorPalette = function (e) {
+        if (e) e.stopPropagation();
+        const pop = document.getElementById('text-color-palette-pop');
+        const popHl = document.getElementById('text-highlight-palette-pop');
+        if (popHl) popHl.style.display = 'none';
+        if (pop) {
+            pop.style.display = pop.style.display === 'block' ? 'none' : 'block';
+        }
+    };
+
+    window.applyEditorTextColor = function (color) {
+        const pop = document.getElementById('text-color-palette-pop');
+        if (pop) pop.style.display = 'none';
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        const selected = contentEl.value.substring(startPos, endPos) || 'văn bản';
+        const snippet = color === 'inherit' ? selected : `<span style="color:${color};font-weight:600;">${selected}</span>`;
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        contentEl.setSelectionRange(startPos + snippet.length, startPos + snippet.length);
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`Đã đổi màu chữ thành [${color}]!`);
+    };
+
+    // 3. Highlight Text (Tô màu nền - Feedback MKT)
+    window.toggleHighlightPalette = function (e) {
+        if (e) e.stopPropagation();
+        const popHl = document.getElementById('text-highlight-palette-pop');
+        const popColor = document.getElementById('text-color-palette-pop');
+        if (popColor) popColor.style.display = 'none';
+        if (popHl) {
+            popHl.style.display = popHl.style.display === 'block' ? 'none' : 'block';
+        }
+    };
+
+    window.applyEditorHighlight = function (color) {
+        const popHl = document.getElementById('text-highlight-palette-pop');
+        if (popHl) popHl.style.display = 'none';
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        const selected = contentEl.value.substring(startPos, endPos) || 'văn bản nổi bật';
+        const snippet = color === 'transparent' ? selected : `<mark style="background-color:${color};padding:2px 5px;border-radius:4px;color:#0f172a;">${selected}</mark>`;
+        contentEl.value = contentEl.value.substring(0, startPos) + snippet + contentEl.value.substring(endPos);
+        contentEl.focus();
+        contentEl.setSelectionRange(startPos + snippet.length, startPos + snippet.length);
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast('Đã highlight văn bản thành công!');
+    };
+
+    // Tự động đóng popover màu khi click ra ngoài
+    document.addEventListener('click', function () {
+        const popColor = document.getElementById('text-color-palette-pop');
+        const popHl = document.getElementById('text-highlight-palette-pop');
+        if (popColor) popColor.style.display = 'none';
+        if (popHl) popHl.style.display = 'none';
+    });
+
+    // 4. Chèn Bảng Dữ Liệu (Table - Feedback MKT)
+    window.openInsertTableModal = function () {
+        let modal = document.getElementById('table-insert-modal');
+        if (!modal) {
+            const html = `
+            <div id="table-insert-modal" style="display:flex;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);justify-content:center;align-items:center;">
+                <div style="background:#18181b;border:1px solid rgba(56,189,248,0.3);border-radius:12px;width:480px;max-width:92%;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.85);color:#fff;font-family:'Inter',sans-serif;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-glass);padding-bottom:10px;margin-bottom:14px;">
+                        <h3 style="margin:0;font-size:16px;color:#38bdf8;font-weight:700;">📊 Chèn Bảng Dữ Liệu / So Sánh</h3>
+                        <span style="cursor:pointer;font-size:22px;color:#a1a1aa;" onclick="window.closeInsertTableModal()">&times;</span>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                        <div>
+                            <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Số dòng (Rows):</label>
+                            <input type="number" id="tbl-input-rows" class="form-input" value="3" min="1" max="20" style="font-size:13px;padding:6px 10px;">
+                        </div>
+                        <div>
+                            <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Số cột (Columns):</label>
+                            <input type="number" id="tbl-input-cols" class="form-input" value="3" min="1" max="8" style="font-size:13px;padding:6px 10px;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom:16px;">
+                        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Kiểu giao diện Bảng:</label>
+                        <select class="form-select" id="tbl-input-style" style="font-size:12.5px;padding:6px 10px;">
+                            <option value="fpt-orange" selected>Cam FPT nổi bật (Header cam #ea580c, viền gọn)</option>
+                            <option value="modern-slate">Xám sang trọng (Header Slate, zebra striping)</option>
+                            <option value="minimal">Tối giản (Minimal border, nền trong suốt)</option>
+                        </select>
+                    </div>
+                    <div style="display:flex;justify-content:flex-end;gap:8px;">
+                        <button type="button" class="btn btn-secondary" onclick="window.closeInsertTableModal()" style="font-size:12px;padding:6px 14px;">Hủy</button>
+                        <button type="button" class="btn btn-primary" onclick="window.confirmInsertTable()" style="font-size:12px;padding:6px 16px;background:var(--primary-gradient);">➕ Chèn Bảng vào bài</button>
+                    </div>
+                </div>
+            </div>`;
+            document.body.insertAdjacentHTML('beforeend', html);
+        } else {
+            modal.style.display = 'flex';
+        }
+    };
+
+    window.closeInsertTableModal = function () {
+        const modal = document.getElementById('table-insert-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.confirmInsertTable = function () {
+        const rows = Math.max(1, parseInt(document.getElementById('tbl-input-rows')?.value || 3, 10));
+        const cols = Math.max(1, parseInt(document.getElementById('tbl-input-cols')?.value || 3, 10));
+        const style = document.getElementById('tbl-input-style')?.value || 'fpt-orange';
+
+        let headerBg = '#ea580c';
+        let headerColor = '#ffffff';
+        if (style === 'modern-slate') {
+            headerBg = '#1e293b';
+        } else if (style === 'minimal') {
+            headerBg = '#f1f5f9';
+            headerColor = '#0f172a';
+        }
+
+        let tableHtml = `\n\n<div class="table-responsive" style="overflow-x:auto;margin:20px 0;border-radius:8px;border:1px solid #e2e8f0;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><table style="width:100%;border-collapse:collapse;font-size:13.5px;text-align:left;">\n<thead>\n<tr style="background:${headerBg};color:${headerColor};">\n`;
+
+        for (let c = 1; c <= cols; c++) {
+            tableHtml += `  <th style="padding:10px 14px;border:1px solid rgba(255,255,255,0.15);font-weight:700;">Tiêu đề cột ${c}</th>\n`;
+        }
+        tableHtml += `</tr>\n</thead>\n<tbody>\n`;
+
+        for (let r = 1; r <= rows; r++) {
+            const rowBg = r % 2 === 0 ? '#f8fafc' : '#ffffff';
+            tableHtml += `<tr style="background:${rowBg};color:#334155;">\n`;
+            for (let c = 1; c <= cols; c++) {
+                tableHtml += `  <td style="padding:9px 14px;border:1px solid #e2e8f0;">Dữ liệu ${r}.${c}</td>\n`;
+            }
+            tableHtml += `</tr>\n`;
+        }
+        tableHtml += `</tbody>\n</table></div>\n\n`;
+
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            const startPos = contentEl.selectionStart || contentEl.value.length;
+            const endPos = contentEl.selectionEnd || contentEl.value.length;
+            contentEl.value = contentEl.value.substring(0, startPos) + tableHtml + contentEl.value.substring(endPos);
+            contentEl.focus();
+            contentEl.setSelectionRange(startPos + tableHtml.length, startPos + tableHtml.length);
+        }
+
+        window.closeInsertTableModal();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`Đã chèn Bảng dữ liệu (${rows} dòng x ${cols} cột) vào bài viết!`);
+    };
+
+    // 5. Chèn Wordcount & Reading Time Badge trực tiếp vào bài viết (Feedback MKT)
+    window.insertReadingTimeBadge = function () {
+        const content = document.getElementById('art-content')?.value || '';
+        const trimmed = content.trim();
+        const wordCount = trimmed ? trimmed.split(/\s+/).filter(Boolean).length : 0;
+        const readingMins = Math.max(1, Math.ceil(wordCount / 200));
+
+        const badgeHtml = `\n\n<div class="fpt-reading-badge" style="display:inline-flex;align-items:center;gap:10px;padding:6px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;font-size:12.5px;color:#475569;margin:12px 0 16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);"><span>⏱️ <strong>${readingMins} phút</strong> đọc</span><span style="color:#cbd5e1;">•</span><span>📝 <strong>${wordCount.toLocaleString()}</strong> từ</span></div>\n\n`;
+
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+
+        const startPos = contentEl.selectionStart || 0;
+        const endPos = contentEl.selectionEnd || 0;
+        if (startPos > 0) {
+            contentEl.value = contentEl.value.substring(0, startPos) + badgeHtml + contentEl.value.substring(endPos);
+        } else {
+            contentEl.value = badgeHtml + contentEl.value;
+        }
+
+        contentEl.focus();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`⏱️ Đã chèn Thống kê đọc bài (${readingMins} phút • ${wordCount} từ) vào nội dung!`);
+    };
+
+    // ==========================================
+    // QUẢN LÝ KHO FORM THU LEADS TẬP TRUNG (LEAD FORM MANAGER)
+    // Hỗ trợ chèn linh hoạt theo mã tag #form-register hoặc shortcode [lead_form id="..."]
+    // ==========================================
+    window.leadFormsData = {
+        'form-register': {
+            id: 'form-register',
+            tag: '#form-register',
+            name: 'Form Đăng ký Lắp mạng & FPT Play',
+            category: 'Internet & TV',
+            title: 'Đăng Ký Tư Vấn Gói Cước Internet FPT & FPT Play',
+            desc: 'Để lại thông tin để chuyên viên FPT liên hệ khảo sát hạ tầng & tư vấn gói cước trong vòng 10 phút!',
+            fields: [
+                { id: 'name', label: 'Họ và tên của bạn *', type: 'text', placeholder: 'Nguyễn Văn A' },
+                { id: 'phone', label: 'Số điện thoại liên hệ *', type: 'tel', placeholder: '0988 123 456' },
+                { id: 'address', label: 'Địa chỉ lắp đặt...', type: 'text', placeholder: 'Số 10 Phạm Văn Bạch, Cầu Giấy, Hà Nội' }
+            ],
+            btnText: 'Gửi yêu cầu tư vấn',
+            btnColor: '#ff6b00',
+            leads: 142,
+            active: true
+        },
+        'form-camera': {
+            id: 'form-camera',
+            tag: '#form-camera',
+            name: 'Form Trải nghiệm Camera AI & Cloud',
+            category: 'FPT Camera',
+            title: 'Đăng Ký Trải Nghiệm Thử Camera An Ninh AI FPT',
+            desc: 'Miễn phí lắp đặt trải nghiệm 7 ngày tại nhà cùng giải pháp lưu trữ đám mây chuẩn Tier III!',
+            fields: [
+                { id: 'name', label: 'Họ và tên *', type: 'text', placeholder: 'Trần Thị B' },
+                { id: 'phone', label: 'Số điện thoại *', type: 'tel', placeholder: '0912 345 678' },
+                { id: 'address', label: 'Địa chỉ nhận lắp thử...', type: 'text', placeholder: 'Số nhà, Phường/Xã, Quận/Huyện' }
+            ],
+            btnText: 'Nhận trải nghiệm 7 ngày',
+            btnColor: '#10b981',
+            leads: 89,
+            active: true
+        },
+        'form-voucher': {
+            id: 'form-voucher',
+            tag: '#form-voucher',
+            name: 'Form Nhận Voucher Ưu Đãi 2026',
+            category: 'Khuyến mãi',
+            title: 'Nhận Ngay Voucher Giảm 200.000đ Phí Hòa Mạng',
+            desc: 'Ưu đãi dành riêng cho 100 khách hàng đăng ký trực tuyến đầu tiên trong tháng!',
+            fields: [
+                { id: 'name', label: 'Họ và tên *', type: 'text', placeholder: 'Lê Hoàng C' },
+                { id: 'phone', label: 'Số điện thoại nhận mã SMS *', type: 'tel', placeholder: '0903 888 999' }
+            ],
+            btnText: 'Lấy mã Voucher ngay',
+            btnColor: '#f59e0b',
+            leads: 315,
+            active: true
+        },
+        'form-enterprise': {
+            id: 'form-enterprise',
+            tag: '#form-enterprise',
+            name: 'Form Doanh Nghiệp & Kênh Thuê Riêng',
+            category: 'Doanh nghiệp',
+            title: 'Tư Vấn Giải Pháp Băng Thông Doanh Nghiệp & Kênh Thuê Riêng',
+            desc: 'Cam kết băng thông quốc tế lên đến 100Mbps, hỗ trợ kỹ thuật tận nơi 24/7!',
+            fields: [
+                { id: 'company', label: 'Tên Doanh nghiệp / Tổ chức *', type: 'text', placeholder: 'Công ty Cổ phần Công nghệ ABC' },
+                { id: 'name', label: 'Người liên hệ đại diện *', type: 'text', placeholder: 'Phạm Đức D' },
+                { id: 'phone', label: 'Số điện thoại *', type: 'tel', placeholder: '0936 789 999' }
+            ],
+            btnText: 'Gửi yêu cầu khảo sát',
+            btnColor: '#2563eb',
+            leads: 45,
+            active: true
+        }
+    };
+
+    // Modal Quản Lý Kho Form Riêng (Lead Forms Center / Form Builder)
+    window.openLeadFormsManagerModal = function () {
+        let modal = document.getElementById('lead-forms-manager-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'lead-forms-manager-modal';
+            modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;';
+            document.body.appendChild(modal);
+        }
+
+        let tableRowsHtml = '';
+        for (let key in window.leadFormsData) {
+            const f = window.leadFormsData[key];
+            tableRowsHtml += `
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <td style="padding:12px 14px;">
+                        <div style="font-weight:700;color:#fff;font-size:13px;">${f.name}</div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">${f.title}</div>
+                    </td>
+                    <td style="padding:12px 14px;">
+                        <span style="background:rgba(255,255,255,0.08);padding:3px 8px;border-radius:4px;font-size:11px;color:#cbd5e1;">${f.category}</span>
+                    </td>
+                    <td style="padding:12px 14px;">
+                        <div style="display:flex;align-items:center;gap:6px;">
+                            <code style="background:rgba(52,211,153,0.12);color:#34d399;padding:3px 7px;border-radius:4px;font-weight:700;font-size:12px;">${f.tag}</code>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.copyToClipboardText('${f.tag}', 'Đã sao chép mã ${f.tag}!')" style="font-size:10.5px;padding:2px 6px;" title="Sao chép mã tag để dán vào bài viết">📋 Copy</button>
+                        </div>
+                        <div style="font-size:10px;color:var(--text-muted);margin-top:3px;">hoặc shortcode: <code>[lead_form id="${f.id}"]</code></div>
+                    </td>
+                    <td style="padding:12px 14px;text-align:center;">
+                        <span style="font-weight:800;color:var(--primary);font-size:13px;">${f.leads}</span>
+                        <span style="font-size:10px;color:var(--text-muted);display:block;">leads</span>
+                    </td>
+                    <td style="padding:12px 14px;text-align:center;">
+                        <span style="background:rgba(16,185,129,0.15);color:#10b981;font-size:10.5px;padding:2px 8px;border-radius:12px;font-weight:700;">Đang chạy</span>
+                    </td>
+                    <td style="padding:12px 14px;text-align:right;">
+                        <div style="display:inline-flex;gap:6px;">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="window.insertFormTagDirectly('${f.tag}'); window.closeLeadFormsManagerModal();" style="font-size:11.5px;padding:4px 10px;background:var(--primary-gradient);">➕ Chèn vào bài</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        modal.innerHTML = `
+            <div style="background:#131822;border:1px solid rgba(255,255,255,0.12);border-radius:14px;width:950px;max-width:96%;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.85);font-family:'Inter',sans-serif;">
+                <div style="padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <span style="font-size:18px;">📋</span>
+                        <div>
+                            <h3 style="margin:0;font-size:16px;color:#fff;font-weight:800;">Quản Lý Kho Form Thu Leads (Lead Forms Center)</h3>
+                            <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Quản lý form độc lập, có thể gọi ra ở bất kỳ vị trí nào trong bài viết bằng mã tag (như <code>#form-register</code>)</div>
+                        </div>
+                    </div>
+                    <button type="button" onclick="window.closeLeadFormsManagerModal()" style="background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;">&times;</button>
+                </div>
+
+                <div style="padding:14px 20px;background:rgba(56,189,248,0.06);border-bottom:1px solid rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                    <div style="font-size:12px;color:#38bdf8;line-height:1.5;">
+                        💡 <strong>Tính năng Siêu linh hoạt (Flexible Embedding):</strong> Chỉ cần gõ mã định danh <code>#form-register</code> vào bất kỳ dòng nào trong nội dung bài viết, hệ thống sẽ tự động bắt mã và nhúng đúng giao diện Form tương ứng! Khi sửa nội dung form tại đây, tất cả bài viết sẽ tự động cập nhật ngay lập tức.
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="showLdpToast('Đang phát triển trình tạo Form động (Form Builder drag & drop)!')" style="font-size:11.5px;padding:6px 12px;color:var(--primary);border-color:rgba(255,107,0,0.4);font-weight:700;white-space:nowrap;">+ Tạo Form mới</button>
+                </div>
+
+                <div style="flex:1;overflow-y:auto;padding:16px 20px;">
+                    <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                        <thead>
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.1);color:var(--text-muted);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">
+                                <th style="padding:8px 14px;">Tên Form / Mô tả</th>
+                                <th style="padding:8px 14px;">Danh mục</th>
+                                <th style="padding:8px 14px;">Mã Gọi / Shortcode</th>
+                                <th style="padding:8px 14px;text-align:center;">Leads thu về</th>
+                                <th style="padding:8px 14px;text-align:center;">Trạng thái</th>
+                                <th style="padding:8px 14px;text-align:right;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRowsHtml}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding:12px 20px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.02);">
+                    <div style="font-size:11.5px;color:var(--text-muted);">
+                        Tổng cộng: <strong>4 mẫu form</strong> đang hoạt động trên hệ thống CMS
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="window.closeLeadFormsManagerModal()" style="font-size:12px;padding:6px 16px;">Đóng</button>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    };
+
+    window.closeLeadFormsManagerModal = function () {
+        const modal = document.getElementById('lead-forms-manager-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    // ==========================================
+    // RENDER BẢNG QUẢN LÝ KHO FORM THU LEADS CHÍNH
+    // ==========================================
+    window.renderLeadFormsMainTable = function () {
+        const tbody = document.getElementById('leadforms-table-tbody');
+        if (!tbody) return;
+
+        const keyword = (document.getElementById('leadforms-search-keyword')?.value || '').toLowerCase().trim();
+        const typeFilter = (document.getElementById('leadforms-type-filter')?.value || '').toLowerCase().trim();
+        const statusFilter = (document.getElementById('leadforms-status-filter')?.value || '').toLowerCase().trim();
+
+        let html = '';
+        let stt = 1;
+
+        for (let key in window.leadFormsData) {
+            const f = window.leadFormsData[key];
+            const fType = (f.category || '').toLowerCase();
+            const fStatus = f.active ? 'active' : 'paused';
+
+            // Filter
+            if (keyword) {
+                const matchName = (f.name || '').toLowerCase().includes(keyword);
+                const matchTag = (f.tag || '').toLowerCase().includes(keyword);
+                const matchTitle = (f.title || '').toLowerCase().includes(keyword);
+                if (!matchName && !matchTag && !matchTitle) continue;
+            }
+            if (typeFilter) {
+                if (typeFilter === 'b2b' && !fType.includes('doanh nghiệp') && f.id !== 'form-enterprise') continue;
+                if (typeFilter === 'b2c' && !fType.includes('internet') && !fType.includes('camera')) continue;
+                if (typeFilter === 'survey' && !fType.includes('khảo sát') && f.id !== 'form-voucher') continue;
+            }
+            if (statusFilter && fStatus !== statusFilter) continue;
+
+            const fieldsList = (f.fields || []).map(field => {
+                const label = typeof field === 'object' ? field.label.replace('*', '').trim() : field;
+                return `<span style="background:rgba(255,255,255,0.06); color:#cbd5e1; padding:2px 7px; border-radius:4px; font-size:11px; margin:2px 3px 2px 0; display:inline-block;">${label}</span>`;
+            }).join('');
+
+            const articleCount = f.id === 'form-register' ? 24 : f.id === 'form-camera' ? 12 : f.id === 'form-voucher' ? 38 : 9;
+
+            html += `
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                    <td style="text-align:center; padding:12px 8px; color:var(--text-muted); font-size:12px;">${stt++}</td>
+                    <td style="padding:12px 10px;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <code style="background:rgba(52,211,153,0.12); color:#34d399; padding:3px 7px; border-radius:4px; font-weight:700; font-size:12px;">${f.tag}</code>
+                            <button type="button" class="btn btn-secondary btn-xs" onclick="window.copyToClipboardText('${f.tag}', 'Đã sao chép mã tag ${f.tag}!')" style="font-size:10px; padding:2px 5px;" title="Copy mã tag">📋</button>
+                        </div>
+                        <div style="font-size:10px; color:var(--text-muted); margin-top:3px;">Shortcode: <code>[lead_form id="${f.id}"]</code></div>
+                    </td>
+                    <td style="padding:12px 10px;">
+                        <div style="font-weight:700; color:#fff; font-size:13px;">${f.name}</div>
+                        <div style="font-size:11.5px; color:var(--text-muted); margin-top:2px;">${f.title}</div>
+                    </td>
+                    <td style="padding:12px 10px;">
+                        <span style="background:rgba(59,130,246,0.12); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); padding:3px 8px; border-radius:6px; font-size:11px; font-weight:600;">
+                            ${f.category}
+                        </span>
+                    </td>
+                    <td style="padding:12px 10px; max-width:260px;">
+                        ${fieldsList}
+                    </td>
+                    <td style="padding:12px 10px; text-align:center;">
+                        <span style="font-weight:700; color:#fff; font-size:13px;">${articleCount}</span>
+                        <span style="font-size:10.5px; color:var(--text-muted); display:block;">bài viết</span>
+                    </td>
+                    <td style="padding:12px 10px; text-align:center;">
+                        <span style="font-weight:800; color:var(--primary); font-size:14px;">${f.leads || 0}</span>
+                        <span style="font-size:10.5px; color:var(--text-muted); display:block;">leads</span>
+                    </td>
+                    <td style="padding:12px 10px; text-align:center;">
+                        <span onclick="window.toggleLeadFormStatus('${f.id}')" style="cursor:pointer; background:${f.active ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color:${f.active ? '#10b981' : 'var(--danger)'}; border:1px solid ${f.active ? 'rgba(16,185,129,0.3)' : 'rgba(239,68,68,0.3)'}; font-size:10.5px; padding:3px 8px; border-radius:12px; font-weight:700; display:inline-block;" title="Bấm để bật/tắt">
+                            ${f.active ? '● Hoạt động' : '○ Tạm dừng'}
+                        </span>
+                    </td>
+                    <td style="padding:12px 10px; text-align:right;">
+                        <div style="display:inline-flex; gap:5px;">
+                            <button type="button" class="btn btn-secondary btn-xs" onclick="window.previewLeadFormModal('${f.id}')" style="padding:4px 8px; font-size:11px;" title="Xem trước giao diện">👁️</button>
+                            <button type="button" class="btn btn-secondary btn-xs" onclick="window.openCreateLeadFormModal('${f.id}')" style="padding:4px 8px; font-size:11px;" title="Chỉnh sửa Form">✏️</button>
+                            <button type="button" class="btn btn-secondary btn-xs" onclick="showLdpToast('Đang xuất ${f.leads || 0} Leads định dạng CSV/Excel...')" style="padding:4px 8px; font-size:11px; color:var(--success);" title="Xuất dữ liệu Leads">📥</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        tbody.innerHTML = html || '<tr><td colspan="9" style="text-align:center; padding:24px; color:var(--text-muted); font-size:12.5px;">Không tìm thấy form thu leads nào phù hợp với bộ lọc.</td></tr>';
+    };
+
+    window.filterLeadFormsTable = function () {
+        window.renderLeadFormsMainTable();
+    };
+
+    window.toggleLeadFormStatus = function (id) {
+        if (window.leadFormsData && window.leadFormsData[id]) {
+            window.leadFormsData[id].active = !window.leadFormsData[id].active;
+            window.renderLeadFormsMainTable();
+            showLdpToast(`Đã ${window.leadFormsData[id].active ? 'kích hoạt' : 'tạm dừng'} form: ${window.leadFormsData[id].name}`);
+        }
+    };
+
+    window.previewLeadFormModal = function (id) {
+        const f = window.leadFormsData ? window.leadFormsData[id] : null;
+        if (!f) return;
+
+        let modal = document.getElementById('lead-form-preview-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'lead-form-preview-modal';
+            modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;';
+            document.body.appendChild(modal);
+        }
+
+        const fieldsHtml = (f.fields || []).map(field => {
+            return `
+                <div style="margin-bottom:12px;">
+                    <label style="display:block; font-size:12px; color:var(--text-muted); margin-bottom:4px;">${field.label}</label>
+                    <input type="${field.type || 'text'}" class="form-input" placeholder="${field.placeholder || ''}" style="width:100%; font-size:13px; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid var(--border-glass);" readonly>
+                </div>
+            `;
+        }).join('');
+
+        modal.innerHTML = `
+            <div style="background:#131822; border:1px solid rgba(52,211,153,0.35); border-radius:14px; width:520px; max-width:94%; padding:22px; box-shadow:0 24px 70px rgba(0,0,0,0.9); color:#fff; font-family:'Inter',sans-serif;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:18px;">👁️</span>
+                        <h3 style="margin:0; font-size:15px; color:#fff; font-weight:700;">Xem Trước Form Thu Leads Ngoài Website</h3>
+                    </div>
+                    <span style="cursor:pointer; font-size:22px; color:#a1a1aa;" onclick="document.getElementById('lead-form-preview-modal').style.display='none'">&times;</span>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(52,211,153,0.2); border-radius:10px; padding:18px; margin-bottom:16px;">
+                    <h4 style="margin:0 0 6px 0; font-size:15px; color:#fff; font-weight:800;">${f.title}</h4>
+                    <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px 0; line-height:1.5;">${f.desc}</p>
+                    ${fieldsHtml}
+                    <button type="button" class="btn btn-primary" style="width:100%; background:${f.btnColor || 'var(--primary-gradient)'}; padding:10px; font-weight:700; border:none; margin-top:6px; cursor:default;">
+                        ${f.btnText || 'Gửi thông tin'}
+                    </button>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px; color:var(--text-muted);">
+                    <span>Mã nhúng: <code style="color:#34d399;">${f.tag}</code></span>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('lead-form-preview-modal').style.display='none'">Đóng</button>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    };
+
+    window.openCreateLeadFormModal = function (editId = null) {
+        let modal = document.getElementById('lead-form-create-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'lead-form-create-modal';
+            modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px;';
+            document.body.appendChild(modal);
+        }
+
+        const isEdit = editId && window.leadFormsData && window.leadFormsData[editId];
+        const f = isEdit ? window.leadFormsData[editId] : {
+            id: 'form-custom-' + Date.now().toString().slice(-4),
+            tag: '#form-custom',
+            name: '',
+            category: 'Internet & TV',
+            title: '',
+            desc: '',
+            btnText: 'Gửi yêu cầu',
+            btnColor: '#ff6b00',
+            fields: [
+                { id: 'name', label: 'Họ và tên *', type: 'text', placeholder: 'Nhập họ và tên...' },
+                { id: 'phone', label: 'Số điện thoại *', type: 'tel', placeholder: 'Nhập số điện thoại...' }
+            ],
+            leads: 0,
+            active: true
+        };
+
+        modal.innerHTML = `
+            <div style="background:#131822; border:1px solid rgba(255,255,255,0.15); border-radius:14px; width:640px; max-width:94%; max-height:90vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 70px rgba(0,0,0,0.9); color:#fff; font-family:'Inter',sans-serif;">
+                <div style="padding:16px 20px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02);">
+                    <h3 style="margin:0; font-size:16px; color:#fff; font-weight:700;">${isEdit ? '✏️ Chỉnh Sửa Form Thu Leads' : '➕ Tạo Mới Mẫu Form Thu Leads'}</h3>
+                    <span style="cursor:pointer; font-size:22px; color:#a1a1aa;" onclick="document.getElementById('lead-form-create-modal').style.display='none'">&times;</span>
+                </div>
+
+                <div style="padding:20px; overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:14px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Tên Form quản trị <span style="color:var(--danger)">*</span></label>
+                            <input type="text" id="lf-input-name" class="form-input" value="${f.name || ''}" placeholder="VD: Form Đăng ký Lắp Wi-Fi 7..." style="width:100%;">
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Mã Shortcode / Tag <span style="color:var(--danger)">*</span></label>
+                            <input type="text" id="lf-input-tag" class="form-input" value="${f.tag || '#form-new'}" placeholder="#form-..." style="width:100%;">
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Danh mục Form</label>
+                            <select id="lf-input-cat" class="form-select" style="width:100%;">
+                                <option value="Internet & TV" ${f.category === 'Internet & TV' ? 'selected' : ''}>Internet & TV</option>
+                                <option value="FPT Camera" ${f.category === 'FPT Camera' ? 'selected' : ''}>FPT Camera</option>
+                                <option value="Khuyến mãi" ${f.category === 'Khuyến mãi' ? 'selected' : ''}>Khuyến mãi</option>
+                                <option value="Doanh nghiệp" ${f.category === 'Doanh nghiệp' ? 'selected' : ''}>Doanh nghiệp</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Màu sắc nút bấm</label>
+                            <select id="lf-input-color" class="form-select" style="width:100%;">
+                                <option value="#ff6b00" ${f.btnColor === '#ff6b00' ? 'selected' : ''}>Cam FPT (#ff6b00)</option>
+                                <option value="#10b981" ${f.btnColor === '#10b981' ? 'selected' : ''}>Xanh lá (#10b981)</option>
+                                <option value="#2563eb" ${f.btnColor === '#2563eb' ? 'selected' : ''}>Xanh dương (#2563eb)</option>
+                                <option value="#f59e0b" ${f.btnColor === '#f59e0b' ? 'selected' : ''}>Vàng hổ phách (#f59e0b)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Tiêu đề hiển thị ngoài Web <span style="color:var(--danger)">*</span></label>
+                        <input type="text" id="lf-input-title" class="form-input" value="${f.title || ''}" placeholder="VD: Đăng Ký Tư Vấn Gói Cước Internet..." style="width:100%;">
+                    </div>
+
+                    <div>
+                        <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Lời dẫn / Mô tả ưu đãi</label>
+                        <textarea id="lf-input-desc" class="form-textarea" rows="2" placeholder="Để lại thông tin để chuyên viên liên hệ..." style="width:100%; min-height:60px;">${f.desc || ''}</textarea>
+                    </div>
+
+                    <div>
+                        <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:4px;">Chữ trên nút gửi (Submit button text)</label>
+                        <input type="text" id="lf-input-btntext" class="form-input" value="${f.btnText || 'Gửi yêu cầu'}" style="width:100%;">
+                    </div>
+                </div>
+
+                <div style="padding:14px 20px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:flex-end; gap:10px; background:rgba(255,255,255,0.02);">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('lead-form-create-modal').style.display='none'">Hủy</button>
+                    <button type="button" class="btn btn-primary" onclick="window.saveNewLeadForm('${isEdit ? editId : ''}')" style="background:var(--primary-gradient); font-weight:700; padding:6px 20px;">
+                        💾 Lưu Mẫu Form
+                    </button>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    };
+
+    window.saveNewLeadForm = function (editId) {
+        const name = document.getElementById('lf-input-name')?.value.trim();
+        const tag = document.getElementById('lf-input-tag')?.value.trim();
+        const cat = document.getElementById('lf-input-cat')?.value;
+        const color = document.getElementById('lf-input-color')?.value;
+        const title = document.getElementById('lf-input-title')?.value.trim();
+        const desc = document.getElementById('lf-input-desc')?.value.trim();
+        const btnText = document.getElementById('lf-input-btntext')?.value.trim() || 'Gửi yêu cầu';
+
+        if (!name || !tag) {
+            alert('Vui lòng nhập tên form và mã tag shortcode!');
             return;
         }
 
-        const url = prompt('Nhập đường dẫn URL hình ảnh:', 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80');
-        if (!url) return;
-        const alt = prompt('Nhập Alt text (Mô tả ảnh cho SEO Google):', 'Hạ tầng viễn thông FPT Telecom') || '';
-        const caption = prompt('Nhập Chú thích ảnh (Caption hiển thị dưới ảnh):', 'Hình ảnh minh họa') || '';
+        const id = editId || ('form-' + Date.now().toString().slice(-4));
+        if (!window.leadFormsData) window.leadFormsData = {};
 
-        const imgHtml = `\n\n<figure style="margin:20px 0; text-align:center;"><img src="${url}" alt="${alt}" style="max-width:100%; height:auto; border-radius:8px; display:inline-block; box-shadow:0 4px 15px rgba(0,0,0,0.15);">${caption ? `<figcaption style="font-size:12px; color:#94a3b8; font-style:italic; margin-top:6px;">${caption}</figcaption>` : ''}</figure>\n\n`;
+        window.leadFormsData[id] = {
+            id: id,
+            tag: tag.startsWith('#') ? tag : '#' + tag,
+            name: name,
+            category: cat,
+            title: title || name,
+            desc: desc,
+            btnText: btnText,
+            btnColor: color,
+            fields: [
+                { id: 'name', label: 'Họ và tên *', type: 'text', placeholder: 'Nhập họ và tên...' },
+                { id: 'phone', label: 'Số điện thoại *', type: 'tel', placeholder: 'Nhập số điện thoại...' },
+                { id: 'note', label: 'Ghi chú nhu cầu', type: 'text', placeholder: 'Nội dung chi tiết...' }
+            ],
+            leads: editId && window.leadFormsData[editId] ? window.leadFormsData[editId].leads : 0,
+            active: true
+        };
+
+        const modal = document.getElementById('lead-form-create-modal');
+        if (modal) modal.style.display = 'none';
+
+        window.renderLeadFormsMainTable();
+        showLdpToast(`🎉 Đã lưu thành công mẫu Form [${name}]! Mã gọi: ${tag}`);
+    };
+
+    // Hàm chèn trực tiếp mã tag form vào vị trí con trỏ chuột
+    window.insertFormTagDirectly = function (tag) {
+        const contentEl = document.getElementById('art-content');
+        if (!contentEl) return;
+
+        const codeToInsert = `\n\n${tag}\n\n`;
+        const startPos = contentEl.selectionStart || contentEl.value.length;
+        const endPos = contentEl.selectionEnd || contentEl.value.length;
+
+        contentEl.value = contentEl.value.substring(0, startPos) + codeToInsert + contentEl.value.substring(endPos);
+        contentEl.focus();
+        contentEl.setSelectionRange(startPos + codeToInsert.length, startPos + codeToInsert.length);
+
+        const posEl = document.getElementById('art-lead-form-pos');
+        if (posEl) posEl.value = 'shortcode';
+
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`📋 Đã chèn mã Form [${tag}] vào nội dung bài viết!`);
+    };
+
+    window.copyToClipboardText = function (text, successMsg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                showLdpToast(successMsg || `Đã sao chép: ${text}`);
+            });
+        } else {
+            showLdpToast(`Mã chèn: ${text}`);
+        }
+    };
+
+    // 6. Modal Chèn Form Thu Leads Tại Vị Trí Con Trỏ (Hỗ trợ chọn form & tag linh hoạt)
+    window.openInsertFormModal = function () {
+        let modal = document.getElementById('lead-form-insert-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'lead-form-insert-modal';
+            modal.style.cssText = 'display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);justify-content:center;align-items:center;padding:16px;';
+            document.body.appendChild(modal);
+        }
+
+        let optionsHtml = '';
+        let isFirst = true;
+        for (let key in window.leadFormsData) {
+            const f = window.leadFormsData[key];
+            optionsHtml += `
+                <label style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;cursor:pointer;transition:border-color 0.2s ease;">
+                    <input type="radio" name="lead-form-pick-type" value="${f.id}" ${isFirst ? 'checked' : ''} style="accent-color:var(--primary);width:16px;height:16px;">
+                    <div style="flex:1;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;">
+                            <div style="font-weight:700;font-size:13px;color:#fff;">${f.name}</div>
+                            <code style="background:rgba(52,211,153,0.12);color:#34d399;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:700;">${f.tag}</code>
+                        </div>
+                        <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">${f.desc}</div>
+                    </div>
+                </label>
+            `;
+            isFirst = false;
+        }
+
+        modal.innerHTML = `
+            <div style="background:#131822;border:1px solid rgba(52,211,153,0.35);border-radius:14px;width:560px;max-width:94%;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,0.85);color:#fff;font-family:'Inter',sans-serif;">
+                <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:12px;margin-bottom:14px;">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:18px;">📋</span>
+                        <h3 style="margin:0;font-size:16px;color:#34d399;font-weight:700;">Chèn Form Thu Leads Tại Vị Trí Con Trỏ</h3>
+                    </div>
+                    <span style="cursor:pointer;font-size:22px;color:#a1a1aa;" onclick="window.closeInsertFormModal()">&times;</span>
+                </div>
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;line-height:1.5;">
+                    Chọn mẫu Form muốn hiển thị tại vị trí con trỏ chuột. Form sẽ xuất hiện chính xác tại vị trí này khi độc giả đọc bài viết:
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:18px;">
+                    ${optionsHtml}
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);">
+                    <a href="javascript:void(0)" onclick="window.closeInsertFormModal(); window.openLeadFormsManagerModal();" style="font-size:11.5px;color:var(--primary);text-decoration:none;font-weight:600;">⚙️ Quản lý & Tạo form mới</a>
+                    <div style="display:flex;gap:8px;">
+                        <button type="button" class="btn btn-secondary" onclick="window.closeInsertFormModal()" style="font-size:12px;padding:6px 14px;">Hủy</button>
+                        <button type="button" class="btn btn-primary" onclick="window.confirmInsertLeadForm()" style="font-size:12px;padding:6px 18px;background:var(--primary-gradient);font-weight:700;">➕ Chèn Form vào bài viết</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    };
+
+    window.closeInsertFormModal = function () {
+        const modal = document.getElementById('lead-form-insert-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.confirmInsertLeadForm = function () {
+        const checked = document.querySelector('input[name="lead-form-pick-type"]:checked');
+        const formId = checked ? checked.value : 'form-register';
+        const formData = window.leadFormsData[formId] || window.leadFormsData['form-register'];
+
+        // Ưu tiên chèn định dạng tag ngắn gọn #form-... theo đúng feedback của Marketing
+        const codeToInsert = `\n\n${formData.tag}\n\n`;
+
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            const startPos = contentEl.selectionStart || contentEl.value.length;
+            const endPos = contentEl.selectionEnd || contentEl.value.length;
+            contentEl.value = contentEl.value.substring(0, startPos) + codeToInsert + contentEl.value.substring(endPos);
+            contentEl.focus();
+            contentEl.setSelectionRange(startPos + codeToInsert.length, startPos + codeToInsert.length);
+        }
+
+        const posEl = document.getElementById('art-lead-form-pos');
+        if (posEl) posEl.value = 'shortcode';
+
+        window.closeInsertFormModal();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`📋 Đã chèn mã ${formData.tag} (${formData.name}) đúng vị trí con trỏ!`);
+    };
+
+    // 7. Modal Chèn Ảnh Đơn Hiện Đại (Upload từ thiết bị + Kho Media FPT + URL - Feedback MKT)
+    window.singleImageState = {
+        tab: 'upload',
+        url: '',
+        alt: '',
+        caption: '',
+        align: 'center',
+        width: '100%'
+    };
+
+    window.openSingleImageModal = function () {
+        let modal = document.getElementById('single-image-modal');
+        if (!modal) {
+            const html = `
+            <div id="single-image-modal" style="display:flex;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);justify-content:center;align-items:center;">
+                <div style="background:#131722;border:1px solid rgba(16,185,129,0.35);border-radius:14px;width:720px;max-width:95%;padding:22px;box-shadow:0 24px 70px rgba(0,0,0,0.85);color:#fff;font-family:'Inter',sans-serif;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-glass);padding-bottom:12px;margin-bottom:14px;">
+                        <h3 style="margin:0;font-size:17px;color:#10b981;font-weight:700;display:flex;align-items:center;gap:8px;">
+                            <span>🖼️ Chèn Hình Ảnh Vào Bài Viết</span>
+                        </h3>
+                        <span style="cursor:pointer;font-size:22px;color:#a1a1aa;" onclick="window.closeSingleImageModal()">&times;</span>
+                    </div>
+
+                    <div style="display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:8px;">
+                        <button type="button" class="btn btn-secondary btn-sm single-img-tab active" id="sim-tab-btn-upload" onclick="window.switchSingleImageTab('upload')"
+                            style="font-size:12px;padding:6px 14px;border-radius:6px;background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.4);">
+                            📤 Tải từ thiết bị / máy tính
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm single-img-tab" id="sim-tab-btn-media" onclick="window.switchSingleImageTab('media')"
+                            style="font-size:12px;padding:6px 14px;border-radius:6px;background:transparent;color:var(--text-muted);border-color:var(--border-glass);">
+                            📚 Kho ảnh Media FPT
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-sm single-img-tab" id="sim-tab-btn-url" onclick="window.switchSingleImageTab('url')"
+                            style="font-size:12px;padding:6px 14px;border-radius:6px;background:transparent;color:var(--text-muted);border-color:var(--border-glass);">
+                            🔗 Nhập URL trực tiếp
+                        </button>
+                    </div>
+
+                    <div id="sim-panel-upload" style="margin-bottom:14px;">
+                        <div id="sim-drop-zone" onclick="document.getElementById('sim-file-input').click()"
+                            style="border:2px dashed rgba(16,185,129,0.4);border-radius:10px;padding:26px 16px;text-align:center;cursor:pointer;background:rgba(16,185,129,0.04);transition:0.2s;">
+                            <input type="file" id="sim-file-input" accept="image/*" style="display:none;" onchange="window.handleSingleImageUpload(event)">
+                            <div style="font-size:32px;margin-bottom:6px;">📤</div>
+                            <div style="font-size:13.5px;font-weight:700;color:#fff;">Nhấn để chọn ảnh hoặc kéo thả file từ máy tính vào đây</div>
+                            <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;">Hỗ trợ PNG, JPG, WEBP, GIF tối đa 10MB</div>
+                        </div>
+                    </div>
+
+                    <div id="sim-panel-media" style="display:none;margin-bottom:14px;">
+                        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Chọn nhanh hình ảnh FPT Telecom có sẵn trong thư viện:</div>
+                        <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:10px;max-height:160px;overflow-y:auto;padding-right:4px;">
+                            <div onclick="window.selectSingleImagePreset('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80', 'Hạ tầng cáp quang FPT Telecom', 'Hạ tầng viễn thông FPT')"
+                                style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;">
+                                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=200&q=80" style="width:100%;height:70px;object-fit:cover;display:block;">
+                                <div style="font-size:10.5px;padding:4px;color:#fff;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Hạ tầng cáp quang</div>
+                            </div>
+                            <div onclick="window.selectSingleImagePreset('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80', 'Modem Wi-Fi 6 FPT Telecom', 'Modem Wi-Fi 6 AX3000GZ')"
+                                style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=200&q=80" style="width:100%;height:70px;object-fit:cover;display:block;">
+                                <div style="font-size:10.5px;padding:4px;color:#fff;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Modem Wi-Fi 6</div>
+                            </div>
+                            <div onclick="window.selectSingleImagePreset('https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80', 'FPT Camera IQ3 Cloud', 'FPT Camera thông minh IQ3')"
+                                style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;">
+                                <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=200&q=80" style="width:100%;height:70px;object-fit:cover;display:block;">
+                                <div style="font-size:10.5px;padding:4px;color:#fff;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Camera IQ3 Cloud</div>
+                            </div>
+                            <div onclick="window.selectSingleImagePreset('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80', 'Kỹ thuật viên FPT lắp đặt', 'Đội ngũ kỹ thuật viên FPT 24/7')"
+                                style="border:1px solid var(--border-glass);border-radius:8px;overflow:hidden;cursor:pointer;background:#000;">
+                                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=200&q=80" style="width:100%;height:70px;object-fit:cover;display:block;">
+                                <div style="font-size:10.5px;padding:4px;color:#fff;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kỹ thuật viên FPT</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sim-panel-url" style="display:none;margin-bottom:14px;">
+                        <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Đường dẫn URL hình ảnh:</label>
+                        <input type="text" id="sim-input-url" class="form-input" placeholder="https://..." oninput="window.previewSingleImageUrl(this.value)" style="font-size:13px;padding:7px 10px;">
+                    </div>
+
+                    <div id="sim-preview-box" style="display:none;margin-bottom:14px;padding:10px;background:rgba(0,0,0,0.3);border-radius:8px;border:1px solid var(--border-glass);align-items:center;gap:14px;">
+                        <img id="sim-preview-img" src="" style="width:110px;height:75px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.1);">
+                        <div style="flex:1;">
+                            <div style="font-size:12px;color:#10b981;font-weight:700;">✅ Đã chọn hình ảnh thành công</div>
+                            <div id="sim-preview-name" style="font-size:11px;color:var(--text-muted);margin-top:2px;word-break:break-all;"></div>
+                        </div>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                        <div>
+                            <label style="font-size:11.5px;color:var(--text-muted);display:block;margin-bottom:3px;">Alt text (SEO Google):</label>
+                            <input type="text" id="sim-input-alt" class="form-input" placeholder="Mô tả ảnh cho SEO..." style="font-size:12px;padding:6px 10px;">
+                        </div>
+                        <div>
+                            <label style="font-size:11.5px;color:var(--text-muted);display:block;margin-bottom:3px;">Chú thích (Caption dưới ảnh):</label>
+                            <input type="text" id="sim-input-caption" class="form-input" placeholder="Chú thích ảnh..." style="font-size:12px;padding:6px 10px;">
+                        </div>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;">
+                        <div>
+                            <label style="font-size:11.5px;color:var(--text-muted);display:block;margin-bottom:3px;">Căn lề hiển thị:</label>
+                            <select class="form-select" id="sim-input-align" style="font-size:12px;padding:5px 8px;">
+                                <option value="center" selected>Căn giữa (Toàn hàng 100%)</option>
+                                <option value="left">Căn trái (Chữ bọc quanh)</option>
+                                <option value="right">Căn phải (Chữ bọc quanh)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:11.5px;color:var(--text-muted);display:block;margin-bottom:3px;">Kích thước hiển thị:</label>
+                            <select class="form-select" id="sim-input-size" style="font-size:12px;padding:5px 8px;">
+                                <option value="100%" selected>Rộng 100% (Tiêu chuẩn)</option>
+                                <option value="75%">Rộng 75% (Vừa phải)</option>
+                                <option value="50%">Rộng 50% (Nhỏ gọn)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content:flex-end;gap:8px;">
+                        <button type="button" class="btn btn-secondary" onclick="window.closeSingleImageModal()" style="font-size:12px;padding:6px 14px;">Hủy bỏ</button>
+                        <button type="button" class="btn btn-primary" onclick="window.confirmInsertSingleImage()" style="font-size:12px;padding:6px 18px;background:var(--primary-gradient);">➕ Chèn hình ảnh vào bài</button>
+                    </div>
+                </div>
+            </div>`;
+            document.body.insertAdjacentHTML('beforeend', html);
+        } else {
+            modal.style.display = 'flex';
+        }
+    };
+
+    window.closeSingleImageModal = function () {
+        const modal = document.getElementById('single-image-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.switchSingleImageTab = function (tab) {
+        window.singleImageState.tab = tab;
+        ['upload', 'media', 'url'].forEach(t => {
+            const btn = document.getElementById('sim-tab-btn-' + t);
+            const panel = document.getElementById('sim-panel-' + t);
+            const isActive = t === tab;
+            if (btn) {
+                btn.style.background = isActive ? 'rgba(16,185,129,0.15)' : 'transparent';
+                btn.style.color = isActive ? '#10b981' : 'var(--text-muted)';
+                btn.style.borderColor = isActive ? 'rgba(16,185,129,0.4)' : 'var(--border-glass)';
+            }
+            if (panel) panel.style.display = isActive ? 'block' : 'none';
+        });
+    };
+
+    window.handleSingleImageUpload = function (e) {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (evt) {
+            const dataUrl = evt.target.result;
+            window.singleImageState.url = dataUrl;
+            const cleanName = file.name.replace(/\.[^/.]+$/, "");
+            const altEl = document.getElementById('sim-input-alt');
+            const capEl = document.getElementById('sim-input-caption');
+            if (altEl && !altEl.value) altEl.value = cleanName;
+            if (capEl && !capEl.value) capEl.value = cleanName;
+
+            const prevBox = document.getElementById('sim-preview-box');
+            const prevImg = document.getElementById('sim-preview-img');
+            const prevName = document.getElementById('sim-preview-name');
+            if (prevBox) prevBox.style.display = 'flex';
+            if (prevImg) prevImg.src = dataUrl;
+            if (prevName) prevName.innerText = `File: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            showLdpToast('Đã tải hình ảnh từ thiết bị thành công!');
+        };
+        reader.readAsDataURL(file);
+    };
+
+    window.selectSingleImagePreset = function (url, alt, caption) {
+        window.singleImageState.url = url;
+        const altEl = document.getElementById('sim-input-alt');
+        const capEl = document.getElementById('sim-input-caption');
+        if (altEl) altEl.value = alt || '';
+        if (capEl) capEl.value = caption || '';
+
+        const prevBox = document.getElementById('sim-preview-box');
+        const prevImg = document.getElementById('sim-preview-img');
+        const prevName = document.getElementById('sim-preview-name');
+        if (prevBox) prevBox.style.display = 'flex';
+        if (prevImg) prevImg.src = url;
+        if (prevName) prevName.innerText = `Thư viện: ${caption || alt}`;
+        showLdpToast('Đã chọn hình ảnh từ Kho Media FPT!');
+    };
+
+    window.previewSingleImageUrl = function (url) {
+        if (!url || !url.trim()) return;
+        window.singleImageState.url = url.trim();
+        const prevBox = document.getElementById('sim-preview-box');
+        const prevImg = document.getElementById('sim-preview-img');
+        const prevName = document.getElementById('sim-preview-name');
+        if (prevBox) prevBox.style.display = 'flex';
+        if (prevImg) prevImg.src = url.trim();
+        if (prevName) prevName.innerText = url.trim();
+    };
+
+    window.confirmInsertSingleImage = function () {
+        const urlInput = document.getElementById('sim-input-url');
+        const url = window.singleImageState.url || (urlInput ? urlInput.value.trim() : '');
+        if (!url) {
+            showLdpToast('Vui lòng tải ảnh lên từ thiết bị, chọn từ kho hoặc nhập URL!');
+            return;
+        }
+
+        const alt = document.getElementById('sim-input-alt')?.value.trim() || 'Hình ảnh FPT Telecom';
+        const caption = document.getElementById('sim-input-caption')?.value.trim() || '';
+        const align = document.getElementById('sim-input-align')?.value || 'center';
+        const size = document.getElementById('sim-input-size')?.value || '100%';
+
+        let figureStyle = 'margin:20px 0;';
+        if (align === 'center') {
+            figureStyle += 'text-align:center;width:100%;';
+        } else if (align === 'left') {
+            figureStyle += 'float:left;margin:10px 20px 15px 0;max-width:50%;';
+        } else if (align === 'right') {
+            figureStyle += 'float:right;margin:10px 0 15px 20px;max-width:50%;';
+        }
+
+        const imgHtml = `\n\n<figure style="${figureStyle}"><img src="${url}" alt="${alt}" style="width:${size};max-width:100%;height:auto;border-radius:8px;display:inline-block;box-shadow:0 4px 15px rgba(0,0,0,0.12);">${caption ? `<figcaption style="font-size:12px;color:#94a3b8;font-style:italic;margin-top:6px;line-height:1.4;">${caption}</figcaption>` : ''}</figure>\n\n`;
 
         const contentEl = document.getElementById('art-content');
         if (contentEl) {
@@ -2195,11 +3191,17 @@
             const endPos = contentEl.selectionEnd || contentEl.value.length;
             contentEl.value = contentEl.value.substring(0, startPos) + imgHtml + contentEl.value.substring(endPos);
             contentEl.focus();
-            window.updateWordAndReadingStats();
-            window.triggerAutoSave();
-            showLdpToast('Đã chèn hình ảnh đơn vào nội dung bài viết!');
+            contentEl.setSelectionRange(startPos + imgHtml.length, startPos + imgHtml.length);
         }
+
+        window.closeSingleImageModal();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast('Đã chèn hình ảnh vào nội dung bài viết!');
     };
+
+    // Luôn map promptInsertImage trỏ về modal hiện đại
+    window.promptInsertImage = window.openSingleImageModal;
 
     window.insertEditorHeading = function (tag) {
         if (!tag) return;
@@ -2261,29 +3263,79 @@
     // =========================================================================
     window.articleGalleriesData = window.articleGalleriesData || {};
 
-    // Kho ảnh mẫu demo chất lượng cao của FPT Telecom
-    window.galleryDemoPresets = [
+    // Kho ảnh Media Library phong cách WordPress của FPT Telecom
+    window.mediaLibraryItems = [
         {
+            id: 'med-1',
+            category: 'internet',
             url: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80',
+            name: 'ha-tang-cap-quang-fpt.jpg',
             alt: 'Hạ tầng mạng cáp quang siêu tốc FPT Telecom',
-            caption: 'Hạ tầng mạng cáp quang băng rộng thế hệ mới'
+            caption: 'Hạ tầng mạng cáp quang băng rộng thế hệ mới phủ sóng toàn quốc'
         },
         {
+            id: 'med-2',
+            category: 'internet',
             url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+            name: 'modem-wifi-6-ax3000gz.jpg',
             alt: 'Thiết bị Modem Wi-Fi 6 AX3000GZ 2 băng tần chuẩn Gigabit',
-            caption: 'Modem Wi-Fi 6 AX3000GZ phát đồng thời băng tần 5GHz'
+            caption: 'Modem Wi-Fi 6 AX3000GZ phát đồng thời băng tần 5GHz giảm độ trễ'
         },
         {
+            id: 'med-3',
+            category: 'camera',
             url: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80',
+            name: 'fpt-camera-iq3-cloud.jpg',
             alt: 'Camera An Ninh Thông Minh FPT Camera IQ3 Cloud',
-            caption: 'FPT Camera IQ3 lưu trữ dữ liệu an toàn trên đám mây'
+            caption: 'FPT Camera IQ3 lưu trữ dữ liệu an toàn trên đám mây chuẩn Tier III'
         },
         {
+            id: 'med-4',
+            category: 'tech',
             url: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80',
+            name: 'ky-thuat-vien-fpt-lap-dat.jpg',
             alt: 'Kỹ thuật viên FPT Telecom hỗ trợ lắp đặt tại nhà 24/7',
-            caption: 'Đội ngũ kỹ thuật viên tận tâm hỗ trợ khách hàng'
+            caption: 'Đội ngũ kỹ thuật viên tận tâm hỗ trợ khách hàng bảo trì tận nơi'
+        },
+        {
+            id: 'med-5',
+            category: 'fptplay',
+            url: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80',
+            name: 'fpt-play-truyen-hinh-bong-da.jpg',
+            alt: 'Truyền hình FPT Play phát sóng trực tiếp cúp C1 UEFA',
+            caption: 'FPT Play độc quyền bản quyền các giải thể thao đỉnh cao châu Âu'
+        },
+        {
+            id: 'med-6',
+            category: 'internet',
+            url: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=800&q=80',
+            name: 'goi-cuoc-meta-fpt-1gbps.jpg',
+            alt: 'Gói cước Internet FPT Meta tốc độ 1Gbps không giới hạn băng thông',
+            caption: 'Gói cước FPT Meta bứt phá trải nghiệm livestream và gaming'
+        },
+        {
+            id: 'med-7',
+            category: 'camera',
+            url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+            name: 'ai-nhan-dien-khuon-mat-camera.jpg',
+            alt: 'Trí tuệ nhân tạo AI nhận diện khuôn mặt người lạ FPT Camera',
+            caption: 'Tính năng AI phân biệt người và vật cảnh báo chuyển động tức thì'
+        },
+        {
+            id: 'med-8',
+            category: 'tech',
+            url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+            name: 'trung-tam-du-lieu-data-center.jpg',
+            alt: 'Trung tâm dữ liệu FPT Data Center đạt chuẩn Uptime Tier III',
+            caption: 'Data Center hiện đại đảm bảo tính bảo mật và uptime 99.99%'
         }
     ];
+
+    // Mảng ID của các ảnh đang được tick chọn trong Kho Media Library
+    window.selectedMediaIds = ['med-1', 'med-2'];
+    window.activeDetailMediaId = 'med-1';
+    window.mediaCurrentCategory = 'all';
+    window.mediaSearchKeyword = '';
 
     window.galleryState = {
         items: [],
@@ -2292,32 +3344,433 @@
         previewDevice: 'desktop'
     };
 
+    // Chuyển đổi tab trong modal Gallery: 'library' hoặc 'layout'
+    window.switchGalleryModalTab = function (tabName) {
+        const tabLibBtn = document.getElementById('tab-btn-media-library');
+        const tabLayoutBtn = document.getElementById('tab-btn-media-layout');
+        const contentLib = document.getElementById('gallery-tab-library-content');
+        const contentLayout = document.getElementById('gallery-tab-layout-content');
+
+        if (tabName === 'layout') {
+            if (tabLibBtn) { tabLibBtn.style.background = 'transparent'; tabLibBtn.style.color = 'var(--text-muted)'; }
+            if (tabLayoutBtn) { tabLayoutBtn.style.background = 'var(--primary-gradient)'; tabLayoutBtn.style.color = '#fff'; }
+            if (contentLib) contentLib.style.display = 'none';
+            if (contentLayout) contentLayout.style.display = 'flex';
+            window.syncSelectedMediaToGalleryItems();
+            window.renderGalleryModalUI();
+        } else {
+            if (tabLibBtn) { tabLibBtn.style.background = 'var(--primary-gradient)'; tabLibBtn.style.color = '#fff'; }
+            if (tabLayoutBtn) { tabLayoutBtn.style.background = 'transparent'; tabLayoutBtn.style.color = 'var(--text-muted)'; }
+            if (contentLib) contentLib.style.display = 'flex';
+            if (contentLayout) contentLayout.style.display = 'none';
+            window.renderMediaLibraryGrid();
+        }
+    };
+
+    // Đồng bộ các ảnh đã chọn từ Kho Media Library sang cấu trúc Gallery Items
+    window.syncSelectedMediaToGalleryItems = function () {
+        const selectedObjs = window.mediaLibraryItems.filter(item => window.selectedMediaIds.includes(item.id));
+        window.galleryState.items = selectedObjs.map(item => ({
+            id: item.id,
+            url: item.url,
+            alt: item.alt || '',
+            caption: item.caption || ''
+        }));
+
+        // Tự động gợi ý layout phù hợp với số lượng ảnh
+        const total = window.galleryState.items.length;
+        if (total === 1) {
+            window.galleryState.layout = '1-col';
+        } else if (total === 2 && window.galleryState.layout !== '33-67' && window.galleryState.layout !== '67-33') {
+            window.galleryState.layout = '50-50';
+        } else if (total === 3) {
+            window.galleryState.layout = '33-33-33';
+        } else if (total >= 4) {
+            window.galleryState.layout = total === 4 ? '25-25-25-25' : 'grid-2x2';
+        }
+    };
+
+    // Render lưới ảnh WordPress Media Library
+    window.renderMediaLibraryGrid = function () {
+        const grid = document.getElementById('media-library-grid');
+        if (!grid) return;
+
+        let filtered = window.mediaLibraryItems;
+        if (window.mediaCurrentCategory !== 'all') {
+            filtered = filtered.filter(item => item.category === window.mediaCurrentCategory);
+        }
+        if (window.mediaSearchKeyword) {
+            const kw = window.mediaSearchKeyword.toLowerCase();
+            filtered = filtered.filter(item =>
+                (item.name && item.name.toLowerCase().includes(kw)) ||
+                (item.alt && item.alt.toLowerCase().includes(kw)) ||
+                (item.caption && item.caption.toLowerCase().includes(kw))
+            );
+        }
+
+        grid.innerHTML = '';
+        if (filtered.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:30px; color:var(--text-muted); font-size:12px;">Không tìm thấy hình ảnh phù hợp trong kho!</div>`;
+            return;
+        }
+
+        filtered.forEach(item => {
+            const isSelected = window.selectedMediaIds.includes(item.id);
+            const selectIndex = window.selectedMediaIds.indexOf(item.id) + 1;
+            const isActive = window.activeDetailMediaId === item.id;
+
+            const card = document.createElement('div');
+            card.className = 'media-library-thumb-card';
+            card.style.cssText = `
+                position: relative;
+                aspect-ratio: 1;
+                border-radius: 6px;
+                overflow: hidden;
+                cursor: pointer;
+                background: #000;
+                border: 2px solid ${isSelected ? 'var(--primary)' : isActive ? '#38bdf8' : 'rgba(255,255,255,0.08)'};
+                box-shadow: ${isSelected ? '0 0 10px rgba(255,107,0,0.5)' : 'none'};
+                transition: transform 0.15s ease, border-color 0.15s ease;
+            `;
+
+            card.innerHTML = `
+                <img src="${item.url}" alt="${item.alt || ''}" style="width:100%; height:100%; object-fit:cover; display:block;">
+                <!-- Checkbox tick chọn kiểu WordPress -->
+                <div style="position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:4px; background:${isSelected ? 'var(--primary)' : 'rgba(0,0,0,0.6)'}; border:1px solid ${isSelected ? 'var(--primary)' : 'rgba(255,255,255,0.4)'}; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:800;">
+                    ${isSelected ? `✓` : ''}
+                </div>
+                ${isSelected ? `<div style="position:absolute; top:4px; left:4px; background:rgba(0,0,0,0.75); color:#ff8c42; border-radius:3px; padding:1px 5px; font-size:10px; font-weight:800; border:1px solid rgba(255,107,0,0.3);">#${selectIndex}</div>` : ''}
+                <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent); padding:4px 6px; font-size:9.5px; color:#cbd5e1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                    ${item.name || 'image.jpg'}
+                </div>
+            `;
+
+            card.onclick = (e) => {
+                window.toggleSelectMediaItem(item.id);
+            };
+
+            grid.appendChild(card);
+        });
+
+        // Cập nhật badge số lượng đã chọn
+        const badgeCount = document.getElementById('gallery-selected-counter-badge');
+        if (badgeCount) badgeCount.innerText = `${window.selectedMediaIds.length} ảnh`;
+        const libBadge = document.getElementById('tab-badge-lib-count');
+        if (libBadge) libBadge.innerText = window.mediaLibraryItems.length;
+        const layoutBadge = document.getElementById('tab-badge-layout-count');
+        if (layoutBadge) layoutBadge.innerText = window.selectedMediaIds.length;
+
+        // Render chi tiết ảnh
+        window.renderActiveMediaDetail();
+    };
+
+    // Toggle tick chọn 1 ảnh trong Media Library
+    window.toggleSelectMediaItem = function (itemId) {
+        window.activeDetailMediaId = itemId;
+        const idx = window.selectedMediaIds.indexOf(itemId);
+        if (idx > -1) {
+            window.selectedMediaIds.splice(idx, 1);
+        } else {
+            window.selectedMediaIds.push(itemId);
+        }
+        window.renderMediaLibraryGrid();
+    };
+
+    // Hiển thị chi tiết ảnh được chọn trong panel bên phải (WordPress Attachment Details)
+    window.renderActiveMediaDetail = function () {
+        const item = window.mediaLibraryItems.find(m => m.id === window.activeDetailMediaId) ||
+            (window.selectedMediaIds.length > 0 ? window.mediaLibraryItems.find(m => m.id === window.selectedMediaIds[0]) : null);
+
+        const previewBox = document.getElementById('media-detail-preview-box');
+        const altInput = document.getElementById('media-detail-alt-input');
+        const captionInput = document.getElementById('media-detail-caption-input');
+
+        if (!item) {
+            if (previewBox) previewBox.innerHTML = `<span style="color:var(--text-muted); font-size:11px;">Chưa chọn ảnh nào</span>`;
+            if (altInput) { altInput.value = ''; altInput.disabled = true; }
+            if (captionInput) { captionInput.value = ''; captionInput.disabled = true; }
+            return;
+        }
+
+        if (previewBox) {
+            previewBox.innerHTML = `<img src="${item.url}" alt="${item.alt || ''}" style="width:100%; height:100%; object-fit:contain;">`;
+        }
+        if (altInput) {
+            altInput.value = item.alt || '';
+            altInput.disabled = false;
+        }
+        if (captionInput) {
+            captionInput.value = item.caption || '';
+            captionInput.disabled = false;
+        }
+    };
+
+    window.updateCurrentActiveMediaAlt = function (val) {
+        const item = window.mediaLibraryItems.find(m => m.id === window.activeDetailMediaId);
+        if (item) item.alt = val;
+    };
+
+    window.updateCurrentActiveMediaCaption = function (val) {
+        const item = window.mediaLibraryItems.find(m => m.id === window.activeDetailMediaId);
+        if (item) item.caption = val;
+    };
+
+    window.filterMediaLibrary = function (cat) {
+        window.mediaCurrentCategory = cat;
+        window.renderMediaLibraryGrid();
+    };
+
+    window.searchMediaLibrary = function (val) {
+        window.mediaSearchKeyword = val;
+        window.renderMediaLibraryGrid();
+    };
+
+    window.selectAllMediaLibrary = function (bool) {
+        if (bool) {
+            window.selectedMediaIds = window.mediaLibraryItems.map(item => item.id);
+        } else {
+            window.selectedMediaIds = [];
+        }
+        window.renderMediaLibraryGrid();
+    };
+
+    window.clearMediaLibrarySelection = function () {
+        window.selectedMediaIds = [];
+        window.renderMediaLibraryGrid();
+    };
+
+    // Chèn nhanh các ảnh đã tick chọn vào bài viết dạng ảnh đơn lẻ (Feedback Marketing)
+    window.confirmInsertSelectedAsStandaloneImages = function () {
+        if (window.selectedMediaIds.length === 0) {
+            showLdpToast('Vui lòng chọn ít nhất 1 hình ảnh từ Thư viện!');
+            return;
+        }
+
+        const selectedObjs = window.mediaLibraryItems.filter(item => window.selectedMediaIds.includes(item.id));
+        let htmlSnippet = '\n';
+        selectedObjs.forEach(item => {
+            htmlSnippet += `<p><img src="${item.url}" alt="${item.alt || ''}" style="max-width:100%; border-radius:6px; margin:12px 0; display:block;"></p>\n`;
+            if (item.caption) {
+                htmlSnippet += `<p style="font-size:12px; color:#94a3b8; font-style:italic; margin-top:-6px; text-align:center;">${item.caption}</p>\n`;
+            }
+        });
+
+        const contentEl = document.getElementById('art-content');
+        if (contentEl) {
+            const startPos = contentEl.selectionStart || contentEl.value.length;
+            const endPos = contentEl.selectionEnd || contentEl.value.length;
+            contentEl.value = contentEl.value.substring(0, startPos) + htmlSnippet + contentEl.value.substring(endPos);
+            contentEl.focus();
+        }
+
+        window.closeGalleryModal();
+        window.updateWordAndReadingStats();
+        window.triggerAutoSave();
+        showLdpToast(`Đã chèn nhanh ${selectedObjs.length} hình ảnh vào nội dung bài viết!`);
+    };
+
+    // Chuyển sang bước chọn bố cục cột Gallery
+    window.goToGalleryLayoutStep = function () {
+        if (window.selectedMediaIds.length === 0) {
+            showLdpToast('Vui lòng tick chọn ít nhất 1 hình ảnh từ Kho Media Library!');
+            return;
+        }
+        window.switchGalleryModalTab('layout');
+    };
+
+    // Tự động kiểm tra và khởi tạo Modal WordPress Media Library & Gallery
+    window.ensureGalleryModalInDOM = function () {
+        let modal = document.getElementById('gallery-picker-modal');
+        if (modal) return modal;
+
+        modal = document.createElement('div');
+        modal.id = 'gallery-picker-modal';
+        modal.style.cssText = 'display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:16px;';
+
+        modal.innerHTML = `
+            <div style="background:#131822; border:1px solid rgba(255,255,255,0.12); border-radius:14px; max-width:1150px; width:100%; height:88vh; max-height:760px; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.8);">
+                <!-- Header Modal với Tab chuyển đổi -->
+                <div style="padding:12px 20px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.02);">
+                    <div style="display:flex; align-items:center; gap:16px;">
+                        <div style="font-size:15px; font-weight:800; color:#fff; display:flex; align-items:center; gap:8px;">
+                            <span>🖼️</span> <span>Quản Lý Media Library & Gallery</span>
+                        </div>
+                        <!-- Tab Bar phong cách WordPress Media Manager -->
+                        <div style="display:flex; background:rgba(0,0,0,0.35); padding:3px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); gap:4px;">
+                            <button type="button" id="tab-btn-media-library" onclick="window.switchGalleryModalTab('library')"
+                                style="padding:5px 14px; font-size:12px; font-weight:700; border-radius:6px; border:none; background:var(--primary-gradient); color:#fff; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                                <span>📁 Thư viện Media</span>
+                                <span id="tab-badge-lib-count" style="background:rgba(0,0,0,0.3); padding:1px 6px; border-radius:10px; font-size:10.5px;">8</span>
+                            </button>
+                            <button type="button" id="tab-btn-media-layout" onclick="window.switchGalleryModalTab('layout')"
+                                style="padding:5px 14px; font-size:12px; font-weight:700; border-radius:6px; border:none; background:transparent; color:var(--text-muted); cursor:pointer; display:flex; align-items:center; gap:6px;">
+                                <span>🔲 Bố cục Cột Gallery</span>
+                                <span id="tab-badge-layout-count" style="background:rgba(255,255,255,0.1); padding:1px 6px; border-radius:10px; font-size:10.5px;">2</span>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" onclick="window.closeGalleryModal()"
+                        style="background:none; border:none; color:var(--text-muted); font-size:22px; cursor:pointer; line-height:1;" title="Đóng">&times;</button>
+                </div>
+
+                <!-- TAB 1: KHO ẢNH (WORDPRESS MEDIA LIBRARY) -->
+                <div id="gallery-tab-library-content" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+                    <!-- Toolbar lọc & tìm kiếm -->
+                    <div style="padding:10px 20px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; align-items:center; justify-content:space-between; gap:12px; background:rgba(0,0,0,0.2); flex-wrap:wrap;">
+                        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                            <select onchange="window.filterMediaLibrary(this.value)" class="form-select" style="font-size:12px; padding:5px 10px; height:32px; border-radius:6px; background:#181f2c; color:#fff; border:1px solid var(--border-glass);">
+                                <option value="all">📂 Tất cả danh mục media</option>
+                                <option value="internet">🌐 Cáp quang Internet FPT</option>
+                                <option value="camera">📹 FPT Camera Cloud</option>
+                                <option value="fptplay">📺 Truyền hình FPT Play</option>
+                                <option value="tech">⚙️ Kỹ thuật & Data Center</option>
+                            </select>
+                            <div style="position:relative;">
+                                <input type="text" placeholder="🔍 Tìm tên file, alt text..." oninput="window.searchMediaLibrary(this.value)"
+                                    style="padding:5px 10px 5px 28px; font-size:12px; border-radius:6px; background:#181f2c; border:1px solid var(--border-glass); color:#fff; width:190px; height:32px; box-sizing:border-box;">
+                                <span style="position:absolute; left:8px; top:7px; font-size:12px; opacity:0.6;">🔍</span>
+                            </div>
+                            <button type="button" onclick="window.selectAllMediaLibrary(true)" class="btn btn-secondary btn-sm" style="font-size:11.5px; padding:4px 8px; height:32px;">Chọn tất cả</button>
+                            <button type="button" onclick="window.clearMediaLibrarySelection()" class="btn btn-secondary btn-sm" style="font-size:11.5px; padding:4px 8px; height:32px;">Bỏ chọn</button>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <div style="font-size:12px; color:var(--text-muted);">
+                                Đã chọn: <span id="gallery-selected-counter-badge" style="color:var(--primary); font-weight:800; font-size:13px;">2 ảnh</span>
+                            </div>
+                            <label class="btn btn-primary btn-sm" style="cursor:pointer; font-size:12px; padding:6px 14px; background:var(--primary-gradient); display:inline-flex; align-items:center; gap:6px; border-radius:6px; font-weight:700;">
+                                <span>📤 Tải ảnh từ thiết bị</span>
+                                <input type="file" multiple accept="image/*" onchange="window.handleGalleryUpload(event)" style="display:none;">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Vùng thân Media Library chia 2 cột -->
+                    <div style="flex:1; display:flex; overflow:hidden;">
+                        <!-- Lưới ảnh WordPress (Grid Thumbnail) -->
+                        <div style="flex:1; padding:16px 20px; overflow-y:auto;">
+                            <div id="media-library-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:12px;"></div>
+                        </div>
+
+                        <!-- Cột phải: Attachment Details (Chi tiết ảnh đã chọn) -->
+                        <div style="width:310px; border-left:1px solid rgba(255,255,255,0.08); background:rgba(0,0,0,0.25); padding:16px; display:flex; flex-direction:column; gap:12px; overflow-y:auto;">
+                            <div style="font-size:12.5px; font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:8px;">
+                                📋 Chi tiết ảnh được chọn
+                            </div>
+                            <!-- Box preview ảnh đang focus -->
+                            <div id="media-detail-preview-box" style="width:100%; height:140px; background:#000; border-radius:8px; border:1px solid var(--border-glass); display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                <span style="color:var(--text-muted); font-size:11px;">Chọn ảnh để xem</span>
+                            </div>
+                            <div>
+                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px; font-weight:600;">Văn bản thay thế (Alt text SEO):</label>
+                                <input type="text" id="media-detail-alt-input" oninput="window.updateCurrentActiveMediaAlt(this.value)"
+                                    class="form-input" placeholder="Mô tả ảnh cho công cụ tìm kiếm..." style="font-size:11.5px; padding:6px 10px; width:100%; box-sizing:border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px; font-weight:600;">Chú thích ảnh (Caption):</label>
+                                <textarea id="media-detail-caption-input" oninput="window.updateCurrentActiveMediaCaption(this.value)"
+                                    class="form-input" placeholder="Chú thích hiển thị dưới chân ảnh..." style="font-size:11.5px; padding:6px 10px; width:100%; height:55px; resize:none; box-sizing:border-box;"></textarea>
+                            </div>
+
+                            <!-- 2 Lựa chọn hành động theo đúng feedback Marketing -->
+                            <div style="margin-top:auto; display:flex; flex-direction:column; gap:8px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.08);">
+                                <button type="button" class="btn btn-secondary" onclick="window.confirmInsertSelectedAsStandaloneImages()"
+                                    style="font-size:12px; font-weight:700; padding:9px 12px; border-color:rgba(52,211,153,0.4); color:#34d399; background:rgba(52,211,153,0.08);"
+                                    title="Chèn ngay các ảnh đã tick chọn vào nội dung dưới dạng từng ảnh đơn lẻ, không cần ghép cột layout">
+                                    ⚡ Chèn ảnh lẻ trực tiếp vào bài
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="window.goToGalleryLayoutStep()"
+                                    style="font-size:12.5px; font-weight:800; padding:10px 12px; background:var(--primary-gradient);"
+                                    title="Chuyển sang bước chọn bố cục cột (50/50, 33/33/33, 4 cột...)">
+                                    🔲 Ghép Bố cục Cột (Gallery) ➔
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: BỐ CỤC CỘT GALLERY & TỶ LỆ CẮT -->
+                <div id="gallery-tab-layout-content" style="flex:1; display:none; overflow:hidden;">
+                    <!-- Cột trái: Danh sách sắp xếp thứ tự ảnh trong Gallery -->
+                    <div style="width:450px; border-right:1px solid rgba(255,255,255,0.08); background:rgba(0,0,0,0.2); padding:16px; display:flex; flex-direction:column; overflow:hidden;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                            <div style="font-size:13px; font-weight:700; color:#fff;">Sắp xếp thứ tự ảnh (Kéo thả)</div>
+                            <button type="button" onclick="window.switchGalleryModalTab('library')" class="btn btn-secondary btn-sm" style="font-size:11px; padding:3px 8px; color:var(--primary);">+ Thêm/Bỏ ảnh</button>
+                        </div>
+                        <div id="gallery-empty-tip" style="display:none; text-align:center; padding:20px; color:var(--text-muted); font-size:12px;">Chưa chọn ảnh nào!</div>
+                        <div id="gallery-items-container" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding-right:4px;"></div>
+                    </div>
+
+                    <!-- Cột phải: Chọn layout & Xem trước Responsive -->
+                    <div style="flex:1; padding:16px 20px; display:flex; flex-direction:column; overflow-y:auto; gap:14px;">
+                        <div>
+                            <div style="font-size:12.5px; font-weight:700; color:#cbd5e1; margin-bottom:8px;">
+                                Chọn Bố cục Cột: <span id="gallery-layout-curr-name" style="color:var(--primary); font-weight:800;">50 / 50 (2 cột đều)</span>
+                            </div>
+                            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;">
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="1-col" onclick="window.selectGalleryLayout('1-col')" style="font-size:11px; padding:8px 4px; font-weight:700;">1 Cột (Banner)</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="50-50" onclick="window.selectGalleryLayout('50-50')" style="font-size:11px; padding:8px 4px; font-weight:700;">50 / 50 (2 cột)</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="33-33-33" onclick="window.selectGalleryLayout('33-33-33')" style="font-size:11px; padding:8px 4px; font-weight:700;">33/33/33 (3 cột)</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="25-25-25-25" onclick="window.selectGalleryLayout('25-25-25-25')" style="font-size:11px; padding:8px 4px; font-weight:700;">4 Cột đều</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="33-67" onclick="window.selectGalleryLayout('33-67')" style="font-size:11px; padding:8px 4px; font-weight:700;">33 / 67 (Lệch)</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="67-33" onclick="window.selectGalleryLayout('67-33')" style="font-size:11px; padding:8px 4px; font-weight:700;">67 / 33 (Lệch)</button>
+                                <button type="button" class="btn btn-secondary gallery-layout-btn" data-layout="grid-2x2" onclick="window.selectGalleryLayout('grid-2x2')" style="font-size:11px; padding:8px 4px; font-weight:700;">Lưới 2x2</button>
+                            </div>
+                        </div>
+
+                        <!-- Thiết bị xem trước -->
+                        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.06); padding-top:10px;">
+                            <span style="font-size:12px; color:var(--text-muted); font-weight:600;">Xem trước hiển thị bài viết:</span>
+                            <div style="display:flex; gap:4px; background:rgba(0,0,0,0.4); padding:2px; border-radius:6px;">
+                                <button type="button" id="gal-prev-btn-desktop" onclick="window.setGalleryPreviewDevice('desktop')" style="padding:4px 10px; font-size:11px; border:none; background:rgba(255,255,255,0.1); color:#fff; border-radius:4px; cursor:pointer; font-weight:700;">💻 Desktop</button>
+                                <button type="button" id="gal-prev-btn-mobile" onclick="window.setGalleryPreviewDevice('mobile')" style="padding:4px 10px; font-size:11px; border:none; background:transparent; color:var(--text-muted); border-radius:4px; cursor:pointer; font-weight:700;">📱 Mobile</button>
+                            </div>
+                        </div>
+
+                        <!-- Khung xem trước trực tiếp -->
+                        <div id="gallery-preview-container" style="flex:1; min-height:220px; overflow-y:auto; border-radius:8px; border:1px solid rgba(255,255,255,0.06); padding:12px; background:rgba(0,0,0,0.25);"></div>
+                    </div>
+                </div>
+
+                <!-- Footer Modal -->
+                <div style="padding:12px 20px; border-top:1px solid rgba(255,255,255,0.08); display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.02);">
+                    <div style="font-size:11.5px; color:var(--text-muted);">
+                        💡 Có thể chèn từ 1 ảnh trở lên và dễ dàng thay đổi layout bất cứ lúc nào.
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button type="button" class="btn btn-secondary" onclick="window.closeGalleryModal()" style="font-size:12.5px; padding:7px 16px;">Đóng</button>
+                        <button type="button" class="btn btn-primary" onclick="window.confirmInsertGallery()" style="font-size:12.5px; padding:7px 20px; background:var(--primary-gradient); font-weight:700;">
+                            ✨ Chèn Gallery vào bài viết
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        return modal;
+    };
+
+    // Mở Modal Gallery & Kho ảnh
     window.openGalleryModal = function (galleryId = null) {
-        const modal = document.getElementById('gallery-picker-modal');
+        const modal = window.ensureGalleryModalInDOM();
         if (!modal) return;
 
         if (galleryId && window.articleGalleriesData[galleryId]) {
-            // Chế độ chỉnh sửa gallery đã có
+            // Chế độ chỉnh sửa gallery đã có sẵn
             const data = window.articleGalleriesData[galleryId];
             window.galleryState.editingId = galleryId;
             window.galleryState.layout = data.layout || '50-50';
             window.galleryState.items = JSON.parse(JSON.stringify(data.items || []));
             window.galleryState.previewDevice = 'desktop';
+            window.selectedMediaIds = window.galleryState.items.map(it => it.id || '').filter(Boolean);
+            modal.style.display = 'flex';
+            window.switchGalleryModalTab('layout');
         } else {
-            // Chế độ tạo mới
+            // Chế độ tạo mới từ Thư viện Media
             window.galleryState.editingId = null;
-            if (window.galleryState.items.length === 0) {
-                // Nạp sẵn 2 ảnh demo mẫu nếu danh sách đang trống để trải nghiệm ngay
-                window.galleryState.items = [
-                    { ...window.galleryDemoPresets[0] },
-                    { ...window.galleryDemoPresets[1] }
-                ];
-                window.galleryState.layout = '50-50';
-            }
+            modal.style.display = 'flex';
+            window.switchGalleryModalTab('library');
         }
-
-        modal.style.display = 'flex';
-        window.renderGalleryModalUI();
     };
 
     window.closeGalleryModal = function () {
@@ -2326,64 +3779,49 @@
         window.galleryState.editingId = null;
     };
 
-    window.addGalleryDemoPreset = function (count) {
-        window.galleryState.items = [];
-        const limit = Math.min(count, window.galleryDemoPresets.length);
-        for (let i = 0; i < limit; i++) {
-            window.galleryState.items.push({ ...window.galleryDemoPresets[i] });
-        }
-        if (count === 2) window.galleryState.layout = '50-50';
-        else if (count === 3) window.galleryState.layout = '33-33-33';
-        else if (count === 4) window.galleryState.layout = '25-25-25-25';
-        window.renderGalleryModalUI();
-        showLdpToast(`Đã nạp ${limit} ảnh FPT mẫu cho bố cục ${window.galleryState.layout}!`);
-    };
-
-    window.clearAllGalleryItems = function () {
-        window.galleryState.items = [];
-        window.renderGalleryModalUI();
-        showLdpToast('Đã xóa toàn bộ hình ảnh trong Gallery!');
-    };
-
+    // Upload thêm ảnh mới vào Media Library và chọn ngay
     window.handleGalleryUpload = function (event) {
         const files = event.target.files;
         if (!files || files.length === 0) return;
 
         let processed = 0;
-        Array.from(files).forEach((file, index) => {
+        Array.from(files).forEach((file) => {
             const reader = new FileReader();
             reader.onload = function (e) {
                 const cleanName = file.name.replace(/\.[^/.]+$/, "");
-                window.galleryState.items.push({
+                const newId = 'med-upload-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4);
+                const newMedia = {
+                    id: newId,
+                    category: 'all',
                     url: e.target.result,
+                    name: file.name,
                     alt: `Hình ảnh: ${cleanName}`,
                     caption: cleanName
-                });
+                };
+                window.mediaLibraryItems.unshift(newMedia);
+                window.selectedMediaIds.push(newId);
+                window.activeDetailMediaId = newId;
+
                 processed++;
                 if (processed === files.length) {
-                    // Tự động gợi ý layout phù hợp
-                    const total = window.galleryState.items.length;
-                    if (total === 2 && window.galleryState.layout !== '33-67' && window.galleryState.layout !== '67-33') {
-                        window.galleryState.layout = '50-50';
-                    } else if (total === 3) {
-                        window.galleryState.layout = '33-33-33';
-                    } else if (total >= 4) {
-                        window.galleryState.layout = total === 4 ? '25-25-25-25' : 'grid-2x2';
-                    }
-                    window.renderGalleryModalUI();
-                    showLdpToast(`Đã tải lên ${processed} hình ảnh vào Gallery thành công!`);
+                    window.renderMediaLibraryGrid();
+                    showLdpToast(`Đã tải lên ${processed} hình ảnh vào Thư viện thành công!`);
                 }
             };
             reader.readAsDataURL(file);
         });
-        event.target.value = ''; // Reset input
+        event.target.value = '';
     };
 
     window.removeGalleryItem = function (index) {
         if (index >= 0 && index < window.galleryState.items.length) {
-            window.galleryState.items.splice(index, 1);
+            const removed = window.galleryState.items.splice(index, 1)[0];
+            if (removed && removed.id) {
+                const sIdx = window.selectedMediaIds.indexOf(removed.id);
+                if (sIdx > -1) window.selectedMediaIds.splice(sIdx, 1);
+            }
             window.renderGalleryModalUI();
-            showLdpToast('Đã xóa hình ảnh khỏi Gallery!');
+            showLdpToast('Đã bỏ ảnh khỏi Gallery!');
         }
     };
 
@@ -2397,6 +3835,7 @@
     window.selectGalleryLayout = function (layoutKey) {
         window.galleryState.layout = layoutKey;
         const names = {
+            '1-col': '1 Cột (Banner ảnh lớn)',
             '50-50': '50 / 50 (2 cột đều)',
             '33-33-33': '33 / 33 / 33 (3 cột đều)',
             '25-25-25-25': '25 / 25 / 25 / 25 (4 cột đều)',
@@ -2467,9 +3906,6 @@
 
     window.renderGalleryModalUI = function () {
         const count = window.galleryState.items.length;
-        const countBadge = document.getElementById('gallery-count-badge');
-        if (countBadge) countBadge.innerText = `${count} ảnh`;
-
         const emptyTip = document.getElementById('gallery-empty-tip');
         if (emptyTip) emptyTip.style.display = count === 0 ? 'block' : 'none';
 
@@ -2481,9 +3917,8 @@
             const row = document.createElement('div');
             row.className = 'gallery-item-row';
             row.draggable = true;
-            row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:8px 12px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:8px; cursor:move; transition:0.2s;';
+            row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:6px 10px; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); border-radius:6px; cursor:move; transition:0.2s;';
 
-            // Drag and drop event listeners
             row.ondragstart = (e) => {
                 e.dataTransfer.setData('text/plain', idx);
                 row.style.opacity = '0.5';
@@ -2509,28 +3944,26 @@
 
             row.innerHTML = `
                 <div style="font-size:12px; font-weight:800; color:var(--primary); width:24px; text-align:center;">#${idx + 1}</div>
-                <div style="width:64px; height:48px; border-radius:6px; overflow:hidden; background:#000; flex-shrink:0; border:1px solid var(--border-glass);">
+                <div style="width:50px; height:38px; border-radius:4px; overflow:hidden; background:#000; flex-shrink:0; border:1px solid var(--border-glass);">
                     <img src="${item.url}" alt="${item.alt || ''}" style="width:100%; height:100%; object-fit:cover;">
                 </div>
-                <div style="flex:1; display:grid; grid-template-columns:1fr 1.2fr; gap:8px;">
+                <div style="flex:1; display:grid; grid-template-columns:1fr 1.2fr; gap:6px;">
                     <div>
-                        <label style="font-size:10.5px; color:var(--text-muted); display:block; margin-bottom:2px;">Alt text (SEO):</label>
-                        <input type="text" class="form-input" value="${item.alt || ''}" placeholder="Mô tả ảnh cho Google..."
-                            oninput="window.updateGalleryItemAlt(${idx}, this.value)" style="font-size:11.5px; padding:4px 8px; height:28px;">
+                        <input type="text" class="form-input" value="${item.alt || ''}" placeholder="Alt text (SEO)..."
+                            oninput="window.updateGalleryItemAlt(${idx}, this.value)" style="font-size:11px; padding:3px 6px; height:26px;">
                     </div>
                     <div>
-                        <label style="font-size:10.5px; color:var(--text-muted); display:block; margin-bottom:2px;">Chú thích (Caption):</label>
-                        <input type="text" class="form-input" value="${item.caption || ''}" placeholder="Chú thích ảnh dưới..."
-                            oninput="window.updateGalleryItemCaption(${idx}, this.value)" style="font-size:11.5px; padding:4px 8px; height:28px;">
+                        <input type="text" class="form-input" value="${item.caption || ''}" placeholder="Chú thích..."
+                            oninput="window.updateGalleryItemCaption(${idx}, this.value)" style="font-size:11px; padding:3px 6px; height:26px;">
                     </div>
                 </div>
-                <div style="display:flex; align-items:center; gap:4px; margin-left:auto;">
+                <div style="display:flex; align-items:center; gap:3px; margin-left:auto;">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.moveGalleryItem(${idx}, ${idx - 1})"
-                        ${idx === 0 ? 'disabled style="opacity:0.3; padding:4px 7px;"' : 'style="padding:4px 7px;"'} title="Di chuyển lên trước">◀</button>
+                        ${idx === 0 ? 'disabled style="opacity:0.3; padding:2px 6px;"' : 'style="padding:2px 6px;"'} title="Lên trên">◀</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.moveGalleryItem(${idx}, ${idx + 1})"
-                        ${idx === count - 1 ? 'disabled style="opacity:0.3; padding:4px 7px;"' : 'style="padding:4px 7px;"'} title="Di chuyển về sau">▶</button>
+                        ${idx === count - 1 ? 'disabled style="opacity:0.3; padding:2px 6px;"' : 'style="padding:2px 6px;"'} title="Xuống dưới">▶</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="window.removeGalleryItem(${idx})"
-                        style="color:var(--danger); border-color:rgba(239,68,68,0.3); padding:4px 7px; margin-left:4px;" title="Xóa ảnh này">🗑️</button>
+                        style="color:var(--danger); border-color:rgba(239,68,68,0.3); padding:2px 6px; margin-left:2px;" title="Xóa">🗑️</button>
                 </div>
             `;
             container.appendChild(row);
@@ -2544,6 +3977,7 @@
             return '1fr'; // Mobile responsive tự động căn 1 cột
         }
         switch (layoutKey) {
+            case '1-col': return '1fr';
             case '50-50': return 'repeat(2, 1fr)';
             case '33-33-33': return 'repeat(3, 1fr)';
             case '25-25-25-25': return 'repeat(4, 1fr)';
@@ -2575,7 +4009,7 @@
             <div class="gallery-grid" style="display:grid; grid-template-columns:${gridCols}; gap:12px; width:100%;">
         `;
 
-        items.forEach((item, idx) => {
+        items.forEach((item) => {
             html += `
                 <figure style="margin:0; text-align:center; overflow:hidden; border-radius:8px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.08); padding:4px;">
                     <img src="${item.url}" alt="${item.alt || ''}"
@@ -2589,10 +4023,11 @@
         previewEl.innerHTML = html;
     };
 
+    // Chèn Gallery vào bài viết (Hỗ trợ từ 1 ảnh trở lên, không ép buộc >= 2 ảnh)
     window.confirmInsertGallery = function () {
         const items = window.galleryState.items;
         if (!items || items.length === 0) {
-            showLdpToast('Vui lòng thêm ít nhất một hình ảnh vào Gallery!');
+            showLdpToast('Vui lòng chọn ít nhất 1 hình ảnh vào Gallery!');
             return;
         }
 
@@ -2744,6 +4179,9 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         // Reset Tiện ích Chuyển đổi & Trang chủ
         const showHomeEl = document.getElementById('art-show-home'); if (showHomeEl) showHomeEl.checked = true;
         const homeOrderEl = document.getElementById('art-home-order'); if (homeOrderEl) homeOrderEl.value = '1';
+        const showCatEl = document.getElementById('art-show-cat'); if (showCatEl) showCatEl.checked = true;
+        const catOrderEl = document.getElementById('art-cat-order'); if (catOrderEl) catOrderEl.value = '1';
+        const catOrderWrap = document.getElementById('art-cat-order-wrap'); if (catOrderWrap) catOrderWrap.style.display = 'flex';
         const leadFormEl = document.getElementById('art-enable-lead-form'); if (leadFormEl) leadFormEl.checked = false;
         const leadFormBox = document.getElementById('box-lead-form-options'); if (leadFormBox) leadFormBox.style.display = 'none';
         const chatEl = document.getElementById('art-enable-chat'); if (chatEl) chatEl.checked = false;
@@ -3189,6 +4627,12 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         if (showHomeEl) showHomeEl.checked = art.showHome !== false;
         const homeOrderEl = document.getElementById('art-home-order');
         if (homeOrderEl) homeOrderEl.value = art.homeOrder || 1;
+        const showCatEl = document.getElementById('art-show-cat');
+        if (showCatEl) showCatEl.checked = art.showCat !== false;
+        const catOrderEl = document.getElementById('art-cat-order');
+        if (catOrderEl) catOrderEl.value = art.catOrder || 1;
+        const catOrderWrap = document.getElementById('art-cat-order-wrap');
+        if (catOrderWrap) catOrderWrap.style.display = (art.showCat !== false) ? 'flex' : 'none';
 
         const leadFormEl = document.getElementById('art-enable-lead-form');
         const leadFormBox = document.getElementById('box-lead-form-options');
@@ -3294,6 +4738,8 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         // Tiện ích Chuyển đổi & Trang chủ
         const showHomeEl = document.getElementById('art-show-home'); const showHome = showHomeEl ? showHomeEl.checked : true;
         const homeOrderEl = document.getElementById('art-home-order'); const homeOrder = homeOrderEl ? parseInt(homeOrderEl.value) || 1 : 1;
+        const showCatEl = document.getElementById('art-show-cat'); const showCat = showCatEl ? showCatEl.checked : true;
+        const catOrderEl = document.getElementById('art-cat-order'); const catOrder = catOrderEl ? parseInt(catOrderEl.value) || 1 : 1;
         const leadFormEl = document.getElementById('art-enable-lead-form'); const enableLeadForm = leadFormEl ? leadFormEl.checked : false;
         const leadFormIdEl = document.getElementById('art-lead-form-id'); const leadFormId = leadFormIdEl ? leadFormIdEl.value : 'form-tu-van-fpt';
         const leadFormPosEl = document.getElementById('art-lead-form-pos'); const leadFormPos = leadFormPosEl ? leadFormPosEl.value : 'bottom';
@@ -3392,6 +4838,8 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
             appliedPackages: (document.getElementById('art-applied-packages')?.value || '').split(',').filter(Boolean),
             showHome: showHome,
             homeOrder: homeOrder,
+            showCat: showCat,
+            catOrder: catOrder,
             enableLeadForm: enableLeadForm,
             leadFormId: leadFormId,
             leadFormPos: leadFormPos,
@@ -3780,19 +5228,102 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         showLdpToast('Đã chuyển sang Đặt lịch. Hãy thiết lập Ngày đăng!');
     };
 
-    // Preview
-    window.previewNewsArticle = function () {
-        const title = document.getElementById('art-title').value.trim() || 'Tiêu đề bài viết chưa nhập';
-        const sapo = document.getElementById('art-sapo').value.trim() || 'Sa-po bài viết đang bỏ trống...';
-        const content = document.getElementById('art-content').value.trim() || 'Nội dung chi tiết bài viết chưa nhập...';
-        const channel = document.getElementById('art-channel').value;
-        const category = document.getElementById('art-category').value;
-        const author = document.getElementById('art-author').value.trim() || 'Admin';
-        const thumbUrl = document.getElementById('art-thumbnail-url').value;
-        const thumbAlt = document.getElementById('art-thumbnail-alt').value.trim();
-        const thumbCaption = document.getElementById('art-thumbnail-caption').value.trim();
+    // Chuyển đổi thiết bị xem trước bài viết (Desktop / Mobile)
+    window.setNewsPreviewDevice = function (device) {
+        const btnDesk = document.getElementById('prev-device-btn-desktop');
+        const btnMob = document.getElementById('prev-device-btn-mobile');
+        const containerBox = document.getElementById('news-preview-container-box');
+        const bodyLayout = document.getElementById('prev-art-body-layout');
+        const tocSidebar = document.getElementById('prev-art-toc-sidebar');
 
-        document.getElementById('news-preview-modal').style.display = 'flex';
+        if (device === 'mobile') {
+            if (btnDesk) { btnDesk.style.background = 'transparent'; btnDesk.style.color = 'var(--text-muted)'; }
+            if (btnMob) { btnMob.style.background = 'rgba(255,255,255,0.18)'; btnMob.style.color = '#fff'; }
+            if (containerBox) {
+                containerBox.style.maxWidth = '390px';
+                containerBox.style.border = '10px solid #1e293b';
+                containerBox.style.borderRadius = '38px';
+                containerBox.style.boxShadow = '0 25px 60px -15px rgba(0,0,0,0.85)';
+            }
+            if (bodyLayout) {
+                bodyLayout.style.flexDirection = 'column';
+                bodyLayout.style.padding = '18px 14px 30px';
+                bodyLayout.style.gap = '20px';
+            }
+            if (tocSidebar) {
+                tocSidebar.style.width = '100%';
+                tocSidebar.style.position = 'static';
+            }
+        } else {
+            if (btnDesk) { btnDesk.style.background = 'rgba(255,255,255,0.18)'; btnDesk.style.color = '#fff'; }
+            if (btnMob) { btnMob.style.background = 'transparent'; btnMob.style.color = 'var(--text-muted)'; }
+            if (containerBox) {
+                containerBox.style.maxWidth = '900px';
+                containerBox.style.border = 'none';
+                containerBox.style.borderRadius = '14px';
+                containerBox.style.boxShadow = '0 24px 80px rgba(0,0,0,0.6)';
+            }
+            if (bodyLayout) {
+                bodyLayout.style.flexDirection = 'row';
+                bodyLayout.style.padding = '32px 24px 48px';
+                bodyLayout.style.gap = '32px';
+            }
+            if (tocSidebar) {
+                tocSidebar.style.width = '220px';
+                tocSidebar.style.position = 'sticky';
+            }
+        }
+    };
+
+    // Xem trước bài viết theo ID từ bảng danh sách (Feedback Marketing)
+    window.previewNewsArticleById = function (articleId) {
+        const art = (window.newsArticlesData && window.newsArticlesData[articleId]) ||
+            (typeof newsArticlesData !== 'undefined' ? newsArticlesData[articleId] : null);
+
+        if (!art) {
+            showLdpToast('Không tìm thấy dữ liệu bài viết để xem trước!');
+            return;
+        }
+
+        // Đổ thông tin vào các trường form để hàm preview đồng bộ
+        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+        setVal('article-id', art.id);
+        setVal('art-title', art.title);
+        setVal('art-slug', art.slug);
+        setVal('art-sapo', art.sapo || '');
+        setVal('art-content', art.content || '');
+        setVal('art-channel', art.channel || 'fpt-telecom');
+        setVal('art-category', art.category || 'Tin tức');
+        setVal('art-author', art.author || 'Admin');
+        setVal('art-thumbnail-url', art.thumbUrl || '');
+        setVal('art-thumbnail-alt', art.thumbAlt || '');
+        setVal('art-thumbnail-caption', art.thumbCaption || '');
+
+        window.previewNewsArticle();
+    };
+
+    // Hàm Preview bài viết chính (Nâng cấp Form Lead, Table, Gallery, Mark Highlight)
+    window.previewNewsArticle = function () {
+        const title = document.getElementById('art-title')?.value.trim() || 'Tiêu đề bài viết chưa nhập';
+        const sapo = document.getElementById('art-sapo')?.value.trim() || 'Sa-po bài viết đang bỏ trống...';
+        const content = document.getElementById('art-content')?.value.trim() || 'Nội dung chi tiết bài viết chưa nhập...';
+        const channel = document.getElementById('art-channel')?.value || 'fpt-telecom';
+        const category = document.getElementById('art-category')?.value || 'Tin tức';
+        const author = document.getElementById('art-author')?.value.trim() || 'Admin';
+        const thumbUrl = document.getElementById('art-thumbnail-url')?.value || '';
+        const thumbAlt = document.getElementById('art-thumbnail-alt')?.value.trim() || '';
+        const thumbCaption = document.getElementById('art-thumbnail-caption')?.value.trim() || '';
+        const slug = document.getElementById('art-slug')?.value.trim() || 'url-slug';
+        const leadFormPos = document.getElementById('art-lead-form-pos')?.value || 'after-content';
+
+        const modal = document.getElementById('news-preview-modal');
+        if (modal) modal.style.display = 'flex';
+
+        // Đồng bộ Chrome bar & Breadcrumb
+        const slugBar = document.getElementById('preview-slug-bar');
+        if (slugBar) slugBar.innerText = slug;
+        const titleBc = document.getElementById('prev-art-title-breadcrumb');
+        if (titleBc) titleBc.innerText = title;
 
         document.getElementById('prev-art-title').innerText = title;
         document.getElementById('prev-art-meta').innerText = `Tác giả: ${author} · Chuyên mục: ${category} · Kênh: ${channel}`;
@@ -3801,24 +5332,29 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
         const prevImg = document.getElementById('prev-art-thumb');
         const prevCaption = document.getElementById('prev-art-caption');
         if (prevImg) {
-            prevImg.src = thumbUrl;
+            prevImg.src = thumbUrl || 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=720&q=80';
             prevImg.alt = thumbAlt || title;
         }
         if (prevCaption) {
-            prevCaption.innerText = thumbCaption || 'Hình ảnh bài viết';
+            prevCaption.innerText = thumbCaption || 'Hình ảnh đại diện bài viết';
         }
 
         const tocContainer = document.getElementById('prev-art-toc-list');
-        tocContainer.innerHTML = '';
+        if (tocContainer) tocContainer.innerHTML = '';
 
         const mainContentEl = document.getElementById('prev-art-content-area');
+        if (!mainContentEl) return;
         mainContentEl.innerHTML = '';
 
-        // Đính kèm CSS Responsive cho Gallery trong khung Preview
-        let responsiveGalleryCss = `
+        // Đính kèm CSS cho Gallery, Table và Mark Highlight trong khung Preview
+        let previewCustomCss = `
             <style>
                 .article-gallery { margin: 22px 0; }
                 .article-gallery .gallery-grid { display: grid; gap: 12px; }
+                mark { background-color: #fef08a; color: #1e293b; padding: 2px 4px; border-radius: 3px; font-weight: 600; }
+                .preview-table-wrapper { width: 100%; overflow-x: auto; margin: 20px 0; border: 1px solid #e2e8f0; border-radius: 8px; }
+                .preview-table-wrapper table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+                .preview-table-wrapper th, .preview-table-wrapper td { padding: 10px 14px; text-align: left; }
                 @media (max-width: 640px) {
                     .article-gallery .gallery-grid {
                         grid-template-columns: 1fr !important;
@@ -3830,62 +5366,198 @@ ${items.map(item => `        <figure style="margin:0; text-align:center;">
             </style>
         `;
 
-        // Trích xuất các block Gallery ra placeholder tạm để tránh bị ngắt dòng thành thẻ <p>
+        // Hàm sinh card HTML Form thu Leads hiển thị trong preview theo formId cụ thể
+        const generateLeadFormCardHtml = function (formId) {
+            const f = (window.leadFormsData && window.leadFormsData[formId]) 
+                ? window.leadFormsData[formId] 
+                : (window.leadFormsData ? window.leadFormsData['form-register'] : null);
+            
+            const title = f ? f.title : 'Đăng ký nhận tư vấn ưu đãi FPT Telecom';
+            const desc = f ? f.desc : 'Để lại thông tin để chuyên viên FPT liên hệ khảo sát hạ tầng & tư vấn gói cước phù hợp nhất trong vòng 10 phút!';
+            const btnText = f ? f.btnText : 'Gửi yêu cầu tư vấn';
+            const btnColor = f ? (f.btnColor || '#ff6b00') : '#ff6b00';
+            const tag = f ? f.tag : '#form-register';
+
+            let fieldsHtml = '';
+            if (f && f.fields) {
+                if (f.fields.length === 2) {
+                    fieldsHtml = `
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+                            ${f.fields.map(field => `<input type="${field.type}" placeholder="${field.label}" style="padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:6px; font-size:13px; background:#fff; outline:none;" readonly value="${field.placeholder}">`).join('')}
+                        </div>
+                    `;
+                } else if (f.fields.length >= 3) {
+                    const row1 = f.fields.slice(0, 2);
+                    const row2 = f.fields.slice(2);
+                    fieldsHtml = `
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+                            ${row1.map(field => `<input type="${field.type}" placeholder="${field.label}" style="padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:6px; font-size:13px; background:#fff; outline:none;" readonly value="${field.placeholder}">`).join('')}
+                        </div>
+                        <div style="margin-bottom:12px; display:flex; flex-direction:column; gap:8px;">
+                            ${row2.map(field => `<input type="${field.type}" placeholder="${field.label}" style="width:100%; box-sizing:border-box; padding:9px 12px; border:1px solid rgba(0,0,0,0.15); border-radius:6px; font-size:13px; background:#fff; outline:none;" readonly value="${field.placeholder}">`).join('')}
+                        </div>
+                    `;
+                }
+            } else {
+                fieldsHtml = `
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+                        <input type="text" placeholder="Họ và tên của bạn *" style="padding:9px 12px; border:1px solid #fed7aa; border-radius:6px; font-size:13px; background:#fff; outline:none;" readonly value="Nguyễn Văn A">
+                        <input type="tel" placeholder="Số điện thoại liên hệ *" style="padding:9px 12px; border:1px solid #fed7aa; border-radius:6px; font-size:13px; background:#fff; outline:none;" readonly value="0988 123 456">
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="lead-form-preview-card" style="margin:26px 0; background:linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border:2px solid ${btnColor}; border-radius:12px; padding:22px 20px; box-shadow:0 8px 24px rgba(0,0,0,0.08); position:relative;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            <span style="font-size:22px;">📋</span>
+                            <h4 style="margin:0; font-size:16px; font-weight:800; color:#c2410c;">${title}</h4>
+                        </div>
+                        <code style="font-size:10.5px; background:rgba(0,0,0,0.06); padding:3px 7px; border-radius:4px; color:#9a3412; font-weight:700;">Nhúng: ${tag}</code>
+                    </div>
+                    <p style="font-size:12.5px; color:#7c2d12; margin:0 0 14px; line-height:1.5;">${desc}</p>
+                    ${fieldsHtml}
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                        <span style="font-size:11px; color:#9a3412;">🔒 Thông tin được bảo mật 100% theo quy chuẩn FPT Telecom</span>
+                        <button type="button" style="background:${btnColor}; color:#fff; border:none; padding:10px 22px; border-radius:6px; font-weight:700; font-size:13px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.2);">${btnText}</button>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Form mặc định nếu bài không chèn shortcode mà chọn theo vị trí ở sidebar
+        const defaultSelectedFormId = document.getElementById('art-lead-form-id')?.value || 'form-register';
+        const leadFormCardHtml = generateLeadFormCardHtml(defaultSelectedFormId);
+
+        // 1. Trích xuất các block Gallery ra placeholder tạm để tránh bị ngắt dòng thành thẻ <p>
         let processedContent = content;
         const galleryBlocks = [];
         processedContent = processedContent.replace(/<!-- GALLERY_START:[\s\S]*?<!-- GALLERY_END -->/g, (match) => {
             const placeholder = `__GALLERY_BLOCK_${galleryBlocks.length}__`;
-            // Trên giao diện độc giả xem trước, ẩn nút sửa của CMS
             const readerGalleryHtml = match.replace(/<button[^>]*>✏️ Đổi layout[\s\S]*?<\/button>/gi, '');
             galleryBlocks.push(readerGalleryHtml);
             return '\n' + placeholder + '\n';
         });
 
+        // 2. Trích xuất các block Bảng <table> ra placeholder tạm
+        const tableBlocks = [];
+        processedContent = processedContent.replace(/<table[\s\S]*?<\/table>/gi, (match) => {
+            const placeholder = `__TABLE_BLOCK_${tableBlocks.length}__`;
+            tableBlocks.push(`<div class="preview-table-wrapper">${match}</div>`);
+            return '\n' + placeholder + '\n';
+        });
+
+        // 3. Xử lý Shortcode / Tag Form thu Leads (#form-... hoặc [lead_form id="..."]) tại vị trí con trỏ
+        let hasInjectedShortcodeForm = false;
+        const leadFormBlocks = [];
+
+        // Bắt mã tag dạng #form-register, #form-camera, #form-voucher, #form-enterprise
+        processedContent = processedContent.replace(/(?:^|\n|\s)(#(form-[a-zA-Z0-9_-]+))(?:\s|\n|$)/gi, (match, fullTag, formId) => {
+            hasInjectedShortcodeForm = true;
+            const placeholder = `__LEAD_FORM_BLOCK_${leadFormBlocks.length}__`;
+            leadFormBlocks.push(generateLeadFormCardHtml(formId));
+            return '\n' + placeholder + '\n';
+        });
+
+        // Bắt shortcode [lead_form id="..."]
+        processedContent = processedContent.replace(/\[lead_form\s+id="([^"]+)"[^\]]*\]/gi, (match, formId) => {
+            hasInjectedShortcodeForm = true;
+            const placeholder = `__LEAD_FORM_BLOCK_${leadFormBlocks.length}__`;
+            leadFormBlocks.push(generateLeadFormCardHtml(formId));
+            return '\n' + placeholder + '\n';
+        });
+
+        // Fallback cho cú pháp [lead_form] không có id
+        processedContent = processedContent.replace(/\[lead_form\]/gi, () => {
+            hasInjectedShortcodeForm = true;
+            const placeholder = `__LEAD_FORM_BLOCK_${leadFormBlocks.length}__`;
+            leadFormBlocks.push(leadFormCardHtml);
+            return '\n' + placeholder + '\n';
+        });
+
         const lines = processedContent.split('\n');
         let tocIndex = 1;
-        let finalHtml = responsiveGalleryCss;
+        let paragraphs = [];
+        let tocItems = [];
 
         lines.forEach(line => {
             const trimmed = line.trim();
+            if (!trimmed) return;
+
             if (trimmed.startsWith('__GALLERY_BLOCK_') && trimmed.endsWith('__')) {
                 const bIdx = parseInt(trimmed.replace('__GALLERY_BLOCK_', '').replace('__', ''), 10);
-                if (galleryBlocks[bIdx] !== undefined) {
-                    finalHtml += galleryBlocks[bIdx];
-                }
+                if (galleryBlocks[bIdx] !== undefined) paragraphs.push(galleryBlocks[bIdx]);
+            } else if (trimmed.startsWith('__TABLE_BLOCK_') && trimmed.endsWith('__')) {
+                const tIdx = parseInt(trimmed.replace('__TABLE_BLOCK_', '').replace('__', ''), 10);
+                if (tableBlocks[tIdx] !== undefined) paragraphs.push(tableBlocks[tIdx]);
+            } else if (trimmed.startsWith('__LEAD_FORM_BLOCK_') && trimmed.endsWith('__')) {
+                const fIdx = parseInt(trimmed.replace('__LEAD_FORM_BLOCK_', '').replace('__', ''), 10);
+                if (leadFormBlocks[fIdx] !== undefined) paragraphs.push(leadFormBlocks[fIdx]);
+            } else if (trimmed === '__LEAD_FORM_BLOCK__') {
+                paragraphs.push(leadFormCardHtml);
             } else if (line.startsWith('## ')) {
                 const headingText = line.substring(3).trim();
                 const headingId = 'heading-section-' + tocIndex;
-
-                const li = document.createElement('li');
-                li.style.marginBottom = '6px';
-                li.innerHTML = `<a href="#${headingId}" style="color:var(--primary); font-size:12.5px; text-decoration:none;" onclick="document.getElementById('${headingId}').scrollIntoView({behavior:'smooth'}); return false;">${tocIndex}. ${headingText}</a>`;
-                tocContainer.appendChild(li);
-
-                finalHtml += `<h3 id="${headingId}" style="color:#0f172a; font-size:17px; margin-top:22px; margin-bottom:10px; border-bottom:1px solid #e2e8f0; padding-bottom:5px; font-weight:700;">${headingText}</h3>`;
+                tocItems.push({ id: headingId, index: tocIndex, text: headingText });
+                paragraphs.push(`<h3 id="${headingId}" style="color:#0f172a; font-size:17px; margin-top:24px; margin-bottom:10px; border-bottom:1px solid #e2e8f0; padding-bottom:5px; font-weight:700;">${headingText}</h3>`);
                 tocIndex++;
             } else if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-                finalHtml += `<ul><li style="margin-left:20px; list-style-type:disc; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().substring(2)}</li></ul>`;
+                paragraphs.push(`<ul><li style="margin-left:20px; list-style-type:disc; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().substring(2)}</li></ul>`);
             } else if (line.trim().match(/^\d+\.\s/)) {
-                finalHtml += `<ol><li style="margin-left:20px; list-style-type:decimal; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().replace(/^\d+\.\s/, '')}</li></ol>`;
-            } else if (line.trim().length > 0) {
-                finalHtml += `<p style="font-size:14px; color:#334155; line-height:1.75; margin-bottom:14px;">${line}</p>`;
+                paragraphs.push(`<ol><li style="margin-left:20px; list-style-type:decimal; margin-bottom:4px; font-size:14px; color:#334155;">${line.trim().replace(/^\d+\.\s/, '')}</li></ol>`);
+            } else {
+                paragraphs.push(`<p style="font-size:14px; color:#334155; line-height:1.75; margin-bottom:14px;">${line}</p>`);
             }
         });
 
-        mainContentEl.innerHTML = finalHtml;
+        // 4. Chèn Form Thu Leads theo cấu hình vị trí nếu chưa có shortcode
+        if (!hasInjectedShortcodeForm && leadFormPos !== 'none' && leadFormPos !== 'shortcode') {
+            const pIndices = [];
+            paragraphs.forEach((p, idx) => {
+                if (p.startsWith('<p') || p.startsWith('<h3')) pIndices.push(idx);
+            });
 
-        if (tocContainer.children.length === 0) {
-            const li = document.createElement('li');
-            li.style.color = 'var(--text-muted)';
-            li.style.fontSize = '12px';
-            li.style.fontStyle = 'italic';
-            li.innerText = 'Không phát hiện tiêu đề ## để tạo mục lục.';
-            tocContainer.appendChild(li);
+            if (leadFormPos === 'after-p2' && pIndices.length >= 2) {
+                paragraphs.splice(pIndices[1] + 1, 0, leadFormCardHtml);
+            } else if (leadFormPos === 'after-p3' && pIndices.length >= 3) {
+                paragraphs.splice(pIndices[2] + 1, 0, leadFormCardHtml);
+            } else if (leadFormPos === 'in-content-center' && pIndices.length >= 2) {
+                const mid = Math.floor(pIndices.length / 2);
+                paragraphs.splice(pIndices[mid] + 1, 0, leadFormCardHtml);
+            } else {
+                // Mặc định hoặc 'after-content'
+                paragraphs.push(leadFormCardHtml);
+            }
+        }
+
+        // Render toàn bộ nội dung
+        mainContentEl.innerHTML = previewCustomCss + paragraphs.join('\n');
+
+        // Render Mục lục TOC
+        if (tocContainer) {
+            tocContainer.innerHTML = '';
+            if (tocItems.length > 0) {
+                tocItems.forEach(item => {
+                    const li = document.createElement('li');
+                    li.style.marginBottom = '6px';
+                    li.innerHTML = `<a href="#${item.id}" style="color:var(--primary); font-size:12.5px; text-decoration:none;" onclick="document.getElementById('${item.id}').scrollIntoView({behavior:'smooth'}); return false;">${item.index}. ${item.text}</a>`;
+                    tocContainer.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.style.color = 'var(--text-muted)';
+                li.style.fontSize = '12px';
+                li.style.fontStyle = 'italic';
+                li.innerText = 'Không phát hiện tiêu đề ## để tạo mục lục.';
+                tocContainer.appendChild(li);
+            }
         }
     };
 
     window.closeNewsPreviewModal = function () {
-        document.getElementById('news-preview-modal').style.display = 'none';
+        const modal = document.getElementById('news-preview-modal');
+        if (modal) modal.style.display = 'none';
     };
 
     // Google Snippet Preview live update

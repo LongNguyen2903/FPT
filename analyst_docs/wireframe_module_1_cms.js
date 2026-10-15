@@ -709,32 +709,38 @@ function switchNewsTab(tab, element) {
     for (let i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
     element.classList.add('active');
 
-    document.getElementById('news-list').style.display = 'none';
-    document.getElementById('news-cat-list').style.display = 'none';
-    document.getElementById('news-tag-list').style.display = 'none';
-    document.getElementById('news-tag-mapping').style.display = 'none';
-    document.getElementById('news-item-form').style.display = 'none';
-    document.getElementById('news-cat-form').style.display = 'none';
-    document.getElementById('news-author-list').style.display = 'none';
-    document.getElementById('news-author-form').style.display = 'none';
+    const hideEl = (id) => { const el = document.getElementById(id); if (el) el.style.display = 'none'; };
+    hideEl('news-list');
+    hideEl('news-cat-list');
+    hideEl('news-tag-list');
+    hideEl('news-tag-mapping');
+    hideEl('news-lead-forms');
+    hideEl('news-item-form');
+    hideEl('news-cat-form');
+    hideEl('news-author-list');
+    hideEl('news-author-form');
 
     if (tab === 'list') {
-        document.getElementById('news-list').style.display = 'block';
-        filterNewsTable();
+        const el = document.getElementById('news-list'); if (el) el.style.display = 'block';
+        if (typeof filterNewsTable === 'function') filterNewsTable();
     } else if (tab === 'category') {
-        document.getElementById('news-cat-list').style.display = 'block';
+        const el = document.getElementById('news-cat-list'); if (el) el.style.display = 'block';
     } else if (tab === 'tag-list') {
-        document.getElementById('news-tag-list').style.display = 'block';
-        renderNewsTagsTable();
-        closeNewsTagForm();
+        const el = document.getElementById('news-tag-list'); if (el) el.style.display = 'block';
+        if (typeof renderNewsTagsTable === 'function') renderNewsTagsTable();
+        if (typeof closeNewsTagForm === 'function') closeNewsTagForm();
+    } else if (tab === 'lead-forms') {
+        const el = document.getElementById('news-lead-forms'); if (el) el.style.display = 'block';
+        if (typeof renderLeadFormsMainTable === 'function') renderLeadFormsMainTable();
+        else if (typeof window.renderLeadFormsMainTable === 'function') window.renderLeadFormsMainTable();
     } else if (tab === 'tag-mapping') {
-        document.getElementById('news-tag-mapping').style.display = 'block';
-        syncTagMappingToSku();
-        renderTagMappingTable();
-        resetTagConfig();
+        const el = document.getElementById('news-tag-mapping'); if (el) el.style.display = 'block';
+        if (typeof syncTagMappingToSku === 'function') syncTagMappingToSku();
+        if (typeof renderTagMappingTable === 'function') renderTagMappingTable();
+        if (typeof resetTagConfig === 'function') resetTagConfig();
     } else if (tab === 'author-list') {
-        document.getElementById('news-author-list').style.display = 'block';
-        renderNewsAuthorsTable();
+        const el = document.getElementById('news-author-list'); if (el) el.style.display = 'block';
+        if (typeof renderNewsAuthorsTable === 'function') renderNewsAuthorsTable();
     }
 }
 
@@ -2762,7 +2768,7 @@ function setSkuTagColor(colorHex, isCustom) {
     }
 
     function skuSwitchTab(tabName) {
-        const tabs = ['chung', 'dactinh', 'content', 'faq']; // chung kept for hide logic
+        const tabs = ['chung', 'dactinh', 'content', 'faq', 'news']; // chung kept for hide logic
         tabs.forEach(t => {
             const content = document.getElementById('sku-tab-' + t);
             const btn = document.getElementById('sku-tab-btn-' + t);
@@ -2789,8 +2795,239 @@ function setSkuTagColor(colorHex, isCustom) {
                 var dataKey = catLower.indexOf('camera') >= 0 || catLower.indexOf('cam') >= 0 ? 'camera' : catLower.indexOf('play') >= 0 ? 'play' : catLower.indexOf('modem') >= 0 || catLower.indexOf('ap') >= 0 || catLower.indexOf('wifi') >= 0 ? 'modem' : 'service';
                 if (typeof skuRenderDactinh === 'function') skuRenderDactinh(dataKey);
             }
+        } else if (tabName === 'news') {
+            if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
         }
     }
+
+    // ===== SKU NEWS / THÔNG TIN HAY HANDLERS =====
+    window.openSkuNewsPickerModal = function() {
+        const modal = document.getElementById('sku-news-picker-modal');
+        if (!modal) return;
+        modal.style.display = 'flex';
+        renderSkuNewsPickerItems();
+    };
+
+    window.closeSkuNewsPickerModal = function() {
+        const modal = document.getElementById('sku-news-picker-modal');
+        if (modal) modal.style.display = 'none';
+    };
+
+    window.renderSkuNewsPickerItems = function() {
+        const container = document.getElementById('sku-news-picker-items');
+        if (!container) return;
+        const search = (document.getElementById('sku-news-picker-search')?.value || '').toLowerCase();
+        const cat = (document.getElementById('sku-news-picker-cat')?.value || '').toLowerCase();
+
+        // Sample pool from news CMS or fallback
+        const articles = [
+            { id: 'art-101', title: 'Hướng dẫn đổi mật khẩu Wi-Fi FPT nhanh chóng qua ứng dụng Hi FPT', category: 'Hướng dẫn', date: '12/10/2026', tags: ['#internet', '#wifi6', '#hifpt'] },
+            { id: 'art-102', title: 'Đại tiệc nâng băng thông Internet FPT: Tốc độ không giới hạn lên tới 1Gbps', category: 'Khuyến mãi', date: '08/10/2026', tags: ['#khuyenmai', '#internet'] },
+            { id: 'art-103', title: 'Wi-Fi 6 là gì? 5 Lý do bạn nên nâng cấp lên Wi-Fi 6 ngay hôm nay', category: 'Tin công nghệ', date: '04/10/2026', tags: ['#wifi6', '#congnghe'] },
+            { id: 'art-104', title: 'FPT Telecom ra mắt gói cước F-Game tối ưu độ trễ cho game thủ', category: 'Tin tức', date: '01/10/2026', tags: ['#internet', '#fgame'] },
+            { id: 'art-105', title: 'Top 3 dòng FPT Camera AI thông minh đáng mua nhất cho gia đình', category: 'Tin công nghệ', date: '28/09/2026', tags: ['#camera', '#smarthome'] },
+            { id: 'art-106', title: 'Chính sách bảo hành và đổi trả thiết bị Modem FPT Telecom toàn quốc', category: 'Hướng dẫn', date: '25/09/2026', tags: ['#huongdan', '#baohanh'] },
+            { id: 'art-107', title: 'Khuyến mãi tặng 2 tháng cước khi đăng ký combo Internet và FPT Play', category: 'Khuyến mãi', date: '20/09/2026', tags: ['#khuyenmai', '#fptplay'] }
+        ];
+
+        let html = '';
+        articles.forEach(art => {
+            if (search && !art.title.toLowerCase().includes(search)) return;
+            if (cat && art.category.toLowerCase() !== cat) return;
+
+            html += `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:8px; gap:12px;">
+                    <div style="flex:1; min-width:0;">
+                        <div style="font-size:13px; font-weight:600; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${art.title}</div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:3px; display:flex; align-items:center; gap:8px;">
+                            <span style="background:rgba(255,255,255,0.08); padding:1px 6px; border-radius:3px;">${art.category}</span>
+                            <span>${art.date}</span>
+                            <span style="color:#60a5fa;">${art.tags.join(' ')}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="addSkuPinnedNews('${art.id}', '${art.title.replace(/'/g, "\\'")}', '${art.category}', '${art.date}')" style="background:var(--primary-gradient); white-space:nowrap; padding:4px 10px; font-size:11.5px;">
+                        📌 Ghim vào SKU
+                    </button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html || '<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:12px;">Không tìm thấy bài viết phù hợp.</div>';
+    };
+
+    window.filterSkuNewsPickerList = function() {
+        renderSkuNewsPickerItems();
+    };
+
+    window.addSkuPinnedNews = function(id, title, category, date) {
+        const tbody = document.getElementById('sku-pinned-news-tbody');
+        if (!tbody) return;
+        const count = tbody.querySelectorAll('tr').length + 1;
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--border-glass)';
+        tr.innerHTML = `
+            <td style="padding:8px; text-align:center; color:var(--text-muted); cursor:move;">☰ ${count}</td>
+            <td style="padding:8px; font-weight:600; color:#fff;">
+                <span style="color:#ef4444; font-size:11px; margin-right:4px;">[Ghim]</span>
+                ${title}
+            </td>
+            <td style="padding:8px; color:var(--text-muted); font-size:11.5px;">${category}</td>
+            <td style="padding:8px; text-align:center;">
+                <button type="button" class="btn btn-xs" onclick="removeSkuPinnedNewsRow(this)"
+                    style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid rgba(239,68,68,0.3); padding:2px 6px;">✕</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+        closeSkuNewsPickerModal();
+        updateSkuNewsPreview();
+        if (typeof showLdpToast === 'function') showLdpToast(`📌 Đã ghim bài viết vào SKU: ${title.substring(0, 35)}...`);
+    };
+
+    window.removeSkuPinnedNewsRow = function(btn) {
+        const row = btn.closest('tr');
+        if (row) {
+            row.remove();
+            // Re-index
+            const tbody = document.getElementById('sku-pinned-news-tbody');
+            if (tbody) {
+                tbody.querySelectorAll('tr').forEach((r, idx) => {
+                    const firstTd = r.querySelector('td');
+                    if (firstTd) firstTd.innerHTML = `☰ ${idx + 1}`;
+                });
+            }
+            updateSkuNewsPreview();
+            if (typeof showLdpToast === 'function') showLdpToast('Đã bỏ ghim bài viết khỏi SKU');
+        }
+    };
+
+    window.addSelectedTagToSkuNews = function() {
+        const select = document.getElementById('sku-news-add-tag-select');
+        if (!select || !select.value) return;
+        const tag = select.value;
+        const badgeContainer = document.getElementById('sku-news-tag-badges');
+        if (!badgeContainer) return;
+
+        // Check exists
+        const exists = Array.from(badgeContainer.querySelectorAll('.badge')).some(b => b.innerText.includes('#' + tag));
+        if (exists) {
+            if (typeof showLdpToast === 'function') showLdpToast(`Tag #${tag} đã có trong danh sách!`);
+            select.value = '';
+            return;
+        }
+
+        const tagColors = {
+            'wifi7': { bg: 'rgba(168,85,247,0.15)', color: '#c084fc', border: 'rgba(168,85,247,0.3)' },
+            'fpttelecom': { bg: 'rgba(234,179,8,0.15)', color: '#facc15', border: 'rgba(234,179,8,0.3)' },
+            'camera_ai': { bg: 'rgba(236,72,153,0.15)', color: '#f472b6', border: 'rgba(236,72,153,0.3)' },
+            'fptplay': { bg: 'rgba(239,68,68,0.15)', color: '#f87171', border: 'rgba(239,68,68,0.3)' },
+            'modem': { bg: 'rgba(14,165,233,0.15)', color: '#38bdf8', border: 'rgba(14,165,233,0.3)' },
+            'doanhnghiep': { bg: 'rgba(16,185,129,0.15)', color: '#34d399', border: 'rgba(16,185,129,0.3)' },
+            'banggia': { bg: 'rgba(249,115,22,0.15)', color: '#ff8c42', border: 'rgba(249,115,22,0.3)' },
+            'uudai': { bg: 'rgba(244,63,94,0.15)', color: '#fb7185', border: 'rgba(244,63,94,0.3)' },
+            'huongdan': { bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.3)' }
+        };
+        const c = tagColors[tag] || { bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.3)' };
+
+        const span = document.createElement('span');
+        span.className = 'badge';
+        span.style.cssText = `background:${c.bg}; color:${c.color}; border:1px solid ${c.border}; padding:4px 10px; font-size:12px; border-radius:6px; display:inline-flex; align-items:center; gap:6px;`;
+        span.innerHTML = `#${tag} <span style="cursor:pointer; font-weight:bold; margin-left:2px;" onclick="removeSkuNewsTag(this)" title="Xóa tag">✕</span>`;
+        badgeContainer.appendChild(span);
+        select.value = '';
+        if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
+        if (typeof showLdpToast === 'function') showLdpToast(`🏷️ Đã gắn tag #${tag} cho SKU`);
+    };
+
+    window.removeSkuNewsTag = function(btn) {
+        const badge = btn.closest('.badge');
+        if (badge) {
+            badge.remove();
+            if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
+            if (typeof showLdpToast === 'function') showLdpToast('Đã gỡ tag khỏi SKU');
+        }
+    };
+
+    window.updateSkuNewsPreview = function() {
+        const previewCards = document.getElementById('sku-news-preview-cards');
+        if (!previewCards) return;
+        const pinnedTbody = document.getElementById('sku-pinned-news-tbody');
+        const maxArticles = parseInt(document.getElementById('sku-news-max-articles')?.value || '4', 10);
+        const allowFallback = document.getElementById('sku-news-fallback-toggle')?.checked ?? true;
+
+        let cardsHtml = '';
+        let count = 0;
+
+        // 1. Add pinned
+        if (pinnedTbody) {
+            pinnedTbody.querySelectorAll('tr').forEach(r => {
+                if (count >= maxArticles) return;
+                const title = r.children[1]?.innerText.replace('[Ghim]', '').trim() || '';
+                const cat = r.children[2]?.innerText.trim() || 'Tin tức';
+                cardsHtml += `
+                    <div style="display:flex; gap:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:8px; align-items:center;">
+                        <div style="width:60px; height:45px; border-radius:4px; overflow:hidden; background:#1e293b; flex-shrink:0;">
+                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=120" style="width:100%; height:100%; object-fit:cover;" alt="thumb">
+                        </div>
+                        <div style="flex:1; min-width:0;">
+                            <div style="font-size:12px; font-weight:600; color:#fff; line-height:1.3; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                                ${title}
+                            </div>
+                            <div style="font-size:10.5px; color:var(--text-muted); margin-top:3px; display:flex; align-items:center; gap:6px;">
+                                <span style="color:#ef4444; font-weight:700;">★ Ghim</span>
+                                <span>•</span>
+                                <span>${cat}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                count++;
+            });
+        }
+
+        // 2. Fallback tag articles
+        if (allowFallback && count < maxArticles) {
+            const fallbackPool = [
+                { title: 'Wi-Fi 6 là gì? 5 Lý do bạn nên nâng cấp lên Wi-Fi 6 ngay hôm nay', tag: '#wifi6' },
+                { title: 'FPT Telecom ra mắt gói cước F-Game tối ưu độ trễ cho game thủ', tag: '#internet' },
+                { title: 'Cách khắc phục sự cố mạng chậm giờ cao điểm cực kỳ đơn giản', tag: '#huongdan' },
+                { title: 'Trải nghiệm tốc độ 1Gbps với công nghệ Wi-Fi 6 mới nhất', tag: '#khuyenmai' }
+            ];
+
+            for (let i = 0; i < fallbackPool.length && count < maxArticles; i++) {
+                const item = fallbackPool[i];
+                cardsHtml += `
+                    <div style="display:flex; gap:10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:8px; align-items:center;">
+                        <div style="width:60px; height:45px; border-radius:4px; overflow:hidden; background:#1e293b; flex-shrink:0;">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=120" style="width:100%; height:100%; object-fit:cover;" alt="thumb">
+                        </div>
+                        <div style="flex:1; min-width:0;">
+                            <div style="font-size:12px; font-weight:600; color:#fff; line-height:1.3; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                                ${item.title}
+                            </div>
+                            <div style="font-size:10.5px; color:var(--text-muted); margin-top:3px; display:flex; align-items:center; gap:6px;">
+                                <span style="color:#3b82f6;">${item.tag}</span>
+                                <span>•</span>
+                                <span>Tự động theo Tag</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                count++;
+            }
+        }
+
+        previewCards.innerHTML = cardsHtml || '<div style="color:var(--text-muted); font-size:11px; text-align:center; padding:16px;">Chưa có bài viết nào được hiển thị.</div>';
+    };
+
+    window.saveSkuNewsConfig = function() {
+        const isEnabled = document.getElementById('sku-news-enable-toggle')?.checked ?? true;
+        const maxArticles = document.getElementById('sku-news-max-articles')?.value || '4';
+        if (typeof showLdpToast === 'function') {
+            showLdpToast(`💾 Đã lưu cấu hình Thông tin hay cho SKU! (${isEnabled ? 'Hiển thị ' + maxArticles + ' bài' : 'Đang tắt'})`);
+        } else {
+            alert('Đã lưu cấu hình Thông tin hay cho SKU thành công!');
+        }
+    };
 
     function addLinkedFaqRow(question, answer) {
         var tbody = document.getElementById('custom-faq-tbody');
@@ -3768,7 +4005,7 @@ function setSkuTagColor(colorHex, isCustom) {
         document.getElementById('camp-product-detail-form').style.display = 'block';
 
         document.getElementById('camp-edit-idx').value = idx;
-        document.getElementById('camp-edit-banner').value = pkg.banner || '';
+        var bImg = document.getElementById('camp-edit-banner'); if (bImg) bImg.value = pkg.banner || '';
         document.getElementById('camp-edit-name').value = pkg.name || '';
         document.getElementById('camp-edit-price').value = pkg.price || '';
         var dlEl = document.getElementById('camp-edit-download'); if (dlEl) dlEl.value = pkg.download || '';
@@ -3787,7 +4024,7 @@ function setSkuTagColor(colorHex, isCustom) {
         var pkg = campProductsData[idx];
         if (!pkg) return;
 
-        if (fieldName === 'banner') pkg.banner = document.getElementById('camp-edit-banner').value;
+        if (fieldName === 'banner') { var b = document.getElementById('camp-edit-banner'); if (b) pkg.banner = b.value; }
         else if (fieldName === 'name') {
             pkg.name = document.getElementById('camp-edit-name').value;
             var items = document.querySelectorAll('#camp-products-nav-list .camp-product-list-item');

@@ -3454,6 +3454,9 @@
                             <div onclick="skuSwitchTab('faq')" id="sku-tab-btn-faq"
                                 style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
                                 FAQ</div>
+                            <div onclick="skuSwitchTab('news')" id="sku-tab-btn-news"
+                                style="padding:11px 22px; cursor:pointer; font-weight:600; font-size:14px; color:var(--text-muted); border-bottom:3px solid transparent; margin-bottom:-2px;">
+                                Tin tức / Thông tin hay</div>
                         </div>
 
                         <!-- Breadcrumb -->
@@ -5290,6 +5293,186 @@ Tặng 1 tháng cước</textarea>
                                             <button class="btn btn-primary"
                                                 onclick="document.getElementById('faq-picker-modal').style.display='none';">Thêm
                                                 vào SKU →</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 6: Tin tức / Thông tin hay hiển thị cho SKU -->
+                        <div id="sku-tab-news" style="display:none;">
+                            <!-- Header Cấu hình -->
+                            <div class="form-section">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                                    <h3 style="margin:0;">▾ Cấu hình Tin tức / Thông tin hay hiển thị cho SKU</h3>
+                                    <span style="display:inline-flex; align-items:center; gap:6px; font-size:11px; color:#38bdf8; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.25); border-radius:6px; padding:4px 10px;">
+                                        📰 Liên kết từ Kho Tin tức · Read-only nội dung
+                                    </span>
+                                </div>
+                                <p style="font-size:12px; color:var(--text-muted); margin:0 0 16px; line-height:1.6;">
+                                    Cấu hình các bài viết tin tức liên quan xuất hiện tại khối <strong>"Thông tin hay"</strong> trên trang chi tiết sản phẩm ngoài Website và ứng dụng Hi FPT. Giúp tăng chuyển đổi và cung cấp đầy đủ thông tin hướng dẫn, khuyến mại cho khách hàng.
+                                </p>
+
+                                <!-- Phần 1: Tự động hiển thị theo Tag tin tức -->
+                                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:16px; margin-bottom:18px;">
+                                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                                        <div style="font-size:13px; font-weight:700; color:var(--text-main); display:flex; align-items:center; gap:6px;">
+                                            <span>🏷️ 1. Ánh xạ tự động theo Tag Tin tức</span>
+                                            <span style="font-size:11px; font-weight:normal; color:var(--text-muted);">(Hệ thống tự động gom bài viết có chứa các tag được chọn)</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+                                        <div id="sku-news-tag-badges" style="display:inline-flex; flex-wrap:wrap; gap:8px; align-items:center;">
+                                            <span class="badge" style="background:rgba(249,115,22,0.15); color:#ff8c42; border:1px solid rgba(249,115,22,0.3); padding:4px 10px; border-radius:6px; font-size:12px; display:inline-flex; align-items:center; gap:6px;">
+                                                #internet <span style="cursor:pointer; font-weight:bold; margin-left:2px;" onclick="removeSkuNewsTag(this)" title="Xóa tag">✕</span>
+                                            </span>
+                                            <span class="badge" style="background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3); padding:4px 10px; border-radius:6px; font-size:12px; display:inline-flex; align-items:center; gap:6px;">
+                                                #wifi6 <span style="cursor:pointer; font-weight:bold; margin-left:2px;" onclick="removeSkuNewsTag(this)" title="Xóa tag">✕</span>
+                                            </span>
+                                            <span class="badge" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3); padding:4px 10px; border-radius:6px; font-size:12px; display:inline-flex; align-items:center; gap:6px;">
+                                                #khuyenmai <span style="cursor:pointer; font-weight:bold; margin-left:2px;" onclick="removeSkuNewsTag(this)" title="Xóa tag">✕</span>
+                                            </span>
+                                        </div>
+                                        <div style="display:inline-flex; align-items:center;">
+                                            <select class="form-select" id="sku-news-add-tag-select" onchange="addSelectedTagToSkuNews()" style="height:32px; font-size:12px; padding:3px 12px; background:rgba(255,255,255,0.05); border:1px dashed var(--primary); border-radius:6px; color:#fff; cursor:pointer;">
+                                                <option value="">➕ Chọn Tag từ danh sách...</option>
+                                                <option value="wifi7">#wifi7 (Công nghệ Wi-Fi 7)</option>
+                                                <option value="fpttelecom">#fpttelecom (FPT Telecom)</option>
+                                                <option value="fptplay">#fptplay (Truyền hình FPT Play)</option>
+                                                <option value="camera_ai">#camera_ai (FPT Cloud Camera)</option>
+                                                <option value="modem">#modem (Modem & Bộ phát)</option>
+                                                <option value="doanhnghiep">#doanhnghiep (Doanh nghiệp B2B)</option>
+                                                <option value="banggia">#banggia (Bảng giá cước)</option>
+                                                <option value="uudai">#uudai (Ưu đãi đặc quyền)</option>
+                                                <option value="huongdan">#huongdan (Hướng dẫn & Cài đặt)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Phần 2: Danh sách bài viết ghim đích danh -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                                    <div style="font-size:13px; font-weight:700; color:var(--text-main);">📌 2. Danh sách bài viết Ghim cố định cho SKU này</div>
+                                    <span style="font-size:11.5px; color:var(--text-muted);">Hiển thị ưu tiên hàng đầu ngoài Web</span>
+                                </div>
+
+                                <div style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden; margin-bottom:14px;">
+                                    <table style="width:100%; border-collapse:collapse; font-size:13px;">
+                                        <thead>
+                                            <tr style="background:rgba(0,0,0,0.3); border-bottom:1px solid var(--border-glass);">
+                                                <th style="padding:10px; width:70px; text-align:center;">Thứ tự</th>
+                                                <th style="padding:10px; width:80px; text-align:center;">Ảnh</th>
+                                                <th style="padding:10px;">Tiêu đề bài viết</th>
+                                                <th style="padding:10px; width:150px;">Chuyên mục</th>
+                                                <th style="padding:10px; width:120px;">Ngày đăng</th>
+                                                <th style="padding:10px; width:110px; text-align:center;">Nguồn gán</th>
+                                                <th style="padding:10px; width:80px; text-align:center;">Xóa</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="sku-linked-news-tbody">
+                                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(255,255,255,0.01);">
+                                                <td style="text-align:center; cursor:move;" title="Kéo để đổi thứ tự">☰ 1</td>
+                                                <td style="text-align:center;">
+                                                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" style="width:50px; height:32px; border-radius:4px; object-fit:cover;">
+                                                </td>
+                                                <td>
+                                                    <div style="font-weight:600; color:#fff;">Lắp đặt mạng FPT khuyến mãi hè 2026 cực sốc</div>
+                                                    <div style="font-size:11px; color:var(--text-muted);">/tin-tuc/lap-mang-fpt-khuyen-mai-he-2026</div>
+                                                </td>
+                                                <td><span class="badge" style="background:rgba(249,115,22,0.15); color:#ff8c42;">Tin khuyến mãi</span></td>
+                                                <td style="color:var(--text-muted); font-size:12px;">22/05/2026</td>
+                                                <td style="text-align:center;"><span style="font-size:11px; color:#38bdf8; background:rgba(56,189,248,0.1); padding:2px 8px; border-radius:10px;">Ghim thủ công</span></td>
+                                                <td style="text-align:center;">
+                                                    <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:3px 6px;">🗑️</button>
+                                                </td>
+                                            </tr>
+                                            <tr style="border-bottom:1px solid rgba(255,255,255,0.05); background:rgba(255,255,255,0.01);">
+                                                <td style="text-align:center; cursor:move;" title="Kéo để đổi thứ tự">☰ 2</td>
+                                                <td style="text-align:center;">
+                                                    <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=150&q=80" style="width:50px; height:32px; border-radius:4px; object-fit:cover;">
+                                                </td>
+                                                <td>
+                                                    <div style="font-weight:600; color:#fff;">Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam</div>
+                                                    <div style="font-size:11px; color:var(--text-muted);">/tin-tuc/trai-nghiem-thuc-te-cong-nghe-wifi-7</div>
+                                                </td>
+                                                <td><span class="badge" style="background:rgba(168,85,247,0.15); color:#c084fc;">Tin công nghệ</span></td>
+                                                <td style="color:var(--text-muted); font-size:12px;">28/05/2026</td>
+                                                <td style="text-align:center;"><span style="font-size:11px; color:#34d399; background:rgba(16,185,129,0.1); padding:2px 8px; border-radius:10px;">Khớp #wifi6</span></td>
+                                                <td style="text-align:center;">
+                                                    <button type="button" class="btn btn-sm" onclick="this.closest('tr').remove()" style="background:rgba(239,68,68,0.15); color:var(--danger); border:1px solid var(--danger); padding:3px 6px;">🗑️</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Action buttons & Fallback -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                                    <div style="display:flex; gap:10px;">
+                                        <button type="button" class="btn btn-secondary btn-sm"
+                                            onclick="document.getElementById('sku-news-picker-modal').style.display='flex';"
+                                            style="border:1px dashed var(--primary); color:var(--primary); background:transparent;">
+                                            + Chọn bài viết từ Kho Tin tức
+                                        </button>
+                                    </div>
+                                    <label style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-muted); cursor:pointer;">
+                                        <input type="checkbox" checked style="accent-color:var(--primary);">
+                                        <span>Tự động lấy 3 bài viết mới nhất thuộc danh mục <strong>Internet</strong> nếu bài ghim bị ẩn</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- ===== MODAL: News Article Picker cho SKU ===== -->
+                            <div id="sku-news-picker-modal"
+                                style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+                                <div style="background:var(--bg-panel); border:1px solid var(--border-glass); border-radius:14px; width:100%; max-width:680px; max-height:80vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border-glass);">
+                                        <div>
+                                            <div style="font-size:16px; font-weight:700;">Chọn bài viết từ Kho Tin tức</div>
+                                            <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Tích chọn các bài viết để liên kết ghim vào mục Thông tin hay của SKU này</div>
+                                        </div>
+                                        <button onclick="document.getElementById('sku-news-picker-modal').style.display='none';"
+                                            style="background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer; line-height:1;">✕</button>
+                                    </div>
+                                    <div style="padding:14px 20px; border-bottom:1px solid var(--border-glass); display:flex; gap:10px;">
+                                        <input type="text" class="form-input" placeholder="🔍 Tìm theo tiêu đề hoặc từ khóa..." style="flex:1;">
+                                        <select class="form-select" style="width:160px;">
+                                            <option value="">Tất cả chuyên mục</option>
+                                            <option value="khuyenmai">Tin khuyến mãi</option>
+                                            <option value="congnghe">Tin công nghệ</option>
+                                        </select>
+                                    </div>
+                                    <div style="overflow-y:auto; flex:1; padding:14px 20px; display:flex; flex-direction:column; gap:10px;">
+                                        <label style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                            <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=150&q=80" style="width:48px; height:32px; border-radius:4px; object-fit:cover;">
+                                            <div style="flex:1;">
+                                                <div style="font-size:13px; font-weight:600; color:#fff;">Lắp đặt mạng FPT khuyến mãi hè 2026 cực sốc</div>
+                                                <div style="font-size:11px; color:var(--text-muted);">Tin khuyến mãi · 22/05/2026</div>
+                                            </div>
+                                        </label>
+                                        <label style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                            <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                            <img src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=150&q=80" style="width:48px; height:32px; border-radius:4px; object-fit:cover;">
+                                            <div style="flex:1;">
+                                                <div style="font-size:13px; font-weight:600; color:#fff;">Trải nghiệm thực tế công nghệ Wi-Fi 7 đầu tiên tại Việt Nam</div>
+                                                <div style="font-size:11px; color:var(--text-muted);">Tin công nghệ · 28/05/2026</div>
+                                            </div>
+                                        </label>
+                                        <label style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:8px; border:1px solid var(--border-glass); cursor:pointer; background:rgba(255,255,255,0.02);">
+                                            <input type="checkbox" style="accent-color:var(--primary); width:16px; height:16px;">
+                                            <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=150&q=80" style="width:48px; height:32px; border-radius:4px; object-fit:cover;">
+                                            <div style="flex:1;">
+                                                <div style="font-size:13px; font-weight:600; color:#fff;">FPT Camera ra mắt tính năng nhận diện AI thông minh mới</div>
+                                                <div style="font-size:11px; color:var(--text-muted);">Tin công nghệ · 20/05/2026</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px; border-top:1px solid var(--border-glass);">
+                                        <span style="font-size:12px; color:var(--text-muted);">Đã chọn bài viết</span>
+                                        <div style="display:flex; gap:10px;">
+                                            <button class="btn btn-secondary" onclick="document.getElementById('sku-news-picker-modal').style.display='none';">Hủy</button>
+                                            <button class="btn btn-primary" onclick="document.getElementById('sku-news-picker-modal').style.display='none'; showLdpToast('Đã thêm bài viết vào mục Thông tin hay của SKU!');">Thêm vào SKU →</button>
                                         </div>
                                     </div>
                                 </div>
@@ -12224,8 +12407,7 @@ Tặng 1 tháng cước</textarea>
                         <div class="tab active" onclick="switchNewsTab('list', this)">Danh sách Bài viết</div>
                         <div class="tab" onclick="switchNewsTab('category', this)">Chuyên mục (Categories)</div>
                         <div class="tab" onclick="switchNewsTab('tag-list', this)">Quản lý Tags</div>
-                        <div class="tab" onclick="switchNewsTab('tag-mapping', this)">Cấu hình Thông tin hay (Tags
-                            Mapping)</div>
+                        <div class="tab" onclick="switchNewsTab('lead-forms', this)">Quản lý Form thu Leads</div>
                     </div>
 
                     <!-- Tin tức Stats & List -->
@@ -13155,6 +13337,12 @@ Tặng 1 tháng cước</textarea>
                                     tập bài viết</h3>
                             </div>
                             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                                <button type="button" class="btn btn-secondary" onclick="window.previewNewsArticle()"
+                                    style="font-size:12.5px;padding:6px 14px;color:#c084fc;border-color:rgba(192,132,252,0.4);font-weight:600;display:inline-flex;align-items:center;gap:6px;"
+                                    title="Xem trước bài viết trên giao diện website fpt.vn (Desktop / Mobile)">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                    <span>👁️ Xem trước</span>
+                                </button>
                                 <button type="button" class="btn btn-secondary" onclick="window.saveNewsDraftAction()"
                                     style="font-size:12.5px;padding:6px 14px;">💾 Lưu nháp</button>
                                 <button type="button" class="btn btn-secondary" onclick="window.onScheduleButtonClick()"
@@ -13304,6 +13492,17 @@ Tặng 1 tháng cước</textarea>
                                                     <option value="quote">Trích dẫn</option>
                                                     <option value="code">Đoạn code</option>
                                                 </select>
+                                                <select class="form-select"
+                                                    onchange="window.applyEditorFontSize(this.value); this.value='';"
+                                                    style="width:84px; padding:3px 6px; font-size:11.5px; height:28px;" title="Cỡ chữ">
+                                                    <option value="">Cỡ chữ</option>
+                                                    <option value="12px">12px (Nhỏ)</option>
+                                                    <option value="14px">14px (Chuẩn)</option>
+                                                    <option value="16px">16px (Vừa)</option>
+                                                    <option value="18px">18px (Lớn)</option>
+                                                    <option value="20px">20px (Tiêu đề)</option>
+                                                    <option value="24px">24px (Nổi bật)</option>
+                                                </select>
                                                 <div
                                                     style="width:1px;height:16px;background:var(--border-glass);margin:0 2px;">
                                                 </div>
@@ -13316,6 +13515,60 @@ Tặng 1 tháng cước</textarea>
                                                 <button type="button" class="btn btn-secondary btn-sm"
                                                     style="padding:4px 9px;text-decoration:underline;"
                                                     onclick="window.wrapEditorText('<u>', '</u>')">U</button>
+                                                <!-- Màu chữ (Text Color Picker - Feedback MKT) -->
+                                                <div style="position:relative;display:inline-block;">
+                                                    <button type="button" class="btn btn-secondary btn-sm" id="btn-text-color-trigger"
+                                                        onclick="window.toggleTextColorPalette(event)"
+                                                        style="padding:4px 8px;font-size:11px;display:inline-flex;align-items:center;gap:3px;"
+                                                        title="Chọn màu chữ (FPT Orange, Primary, Success, Danger...)">
+                                                        <span style="font-weight:800;border-bottom:3px solid #ea580c;line-height:1;display:inline-block;padding:0 1px;">A</span>
+                                                        <span style="font-size:9px;color:var(--text-muted);">▼</span>
+                                                    </button>
+                                                    <div id="text-color-palette-pop"
+                                                        style="display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:9999;background:#181d28;border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,0.8);width:170px;">
+                                                        <div style="font-size:10.5px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Màu chữ nhận diện:</div>
+                                                        <div style="display:grid;grid-template-columns:repeat(5, 1fr);gap:6px;margin-bottom:8px;">
+                                                            <button type="button" onclick="window.applyEditorTextColor('#ea580c')" style="width:24px;height:24px;border-radius:4px;border:none;background:#ea580c;cursor:pointer;" title="Cam FPT"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#0284c7')" style="width:24px;height:24px;border-radius:4px;border:none;background:#0284c7;cursor:pointer;" title="Xanh FPT Telecom"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#10b981')" style="width:24px;height:24px;border-radius:4px;border:none;background:#10b981;cursor:pointer;" title="Xanh lá Success"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#ef4444')" style="width:24px;height:24px;border-radius:4px;border:none;background:#ef4444;cursor:pointer;" title="Đỏ Khuyến mãi"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#8b5cf6')" style="width:24px;height:24px;border-radius:4px;border:none;background:#8b5cf6;cursor:pointer;" title="Tím FPT Play"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#0f172a')" style="width:24px;height:24px;border-radius:4px;border:1px solid #475569;background:#0f172a;cursor:pointer;" title="Đen đậm"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#475569')" style="width:24px;height:24px;border-radius:4px;border:none;background:#475569;cursor:pointer;" title="Xám Slate"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#f59e0b')" style="width:24px;height:24px;border-radius:4px;border:none;background:#f59e0b;cursor:pointer;" title="Vàng Gold"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('#06b6d4')" style="width:24px;height:24px;border-radius:4px;border:none;background:#06b6d4;cursor:pointer;" title="Cyan Công nghệ"></button>
+                                                            <button type="button" onclick="window.applyEditorTextColor('inherit')" style="width:24px;height:24px;border-radius:4px;border:1px dashed #94a3b8;background:transparent;color:#fff;font-size:10px;cursor:pointer;" title="Xóa màu">✕</button>
+                                                        </div>
+                                                        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:6px;display:flex;align-items:center;gap:6px;">
+                                                            <label style="font-size:10px;color:var(--text-muted);margin:0;">Màu khác:</label>
+                                                            <input type="color" id="editor-custom-color-input" onchange="window.applyEditorTextColor(this.value)" style="width:26px;height:22px;border:none;border-radius:3px;cursor:pointer;background:transparent;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Highlight Text (Tô màu nền - Feedback MKT) -->
+                                                <div style="position:relative;display:inline-block;">
+                                                    <button type="button" class="btn btn-secondary btn-sm" id="btn-text-highlight-trigger"
+                                                        onclick="window.toggleHighlightPalette(event)"
+                                                        style="padding:4px 8px;font-size:11px;display:inline-flex;align-items:center;gap:3px;"
+                                                        title="Highlight chữ / Đánh dấu màu nền (Vàng, Cam, Xanh...)">
+                                                        <span>🖍️</span>
+                                                        <span style="font-size:9px;color:var(--text-muted);">▼</span>
+                                                    </button>
+                                                    <div id="text-highlight-palette-pop"
+                                                        style="display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:9999;background:#181d28;border:1px solid rgba(255,255,255,0.18);border-radius:8px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,0.8);width:170px;">
+                                                        <div style="font-size:10.5px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Màu Highlight nền:</div>
+                                                        <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:6px;margin-bottom:6px;">
+                                                            <button type="button" onclick="window.applyEditorHighlight('#fef08a')" style="width:28px;height:24px;border-radius:4px;border:none;background:#fef08a;cursor:pointer;" title="Vàng nhạt"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#fed7aa')" style="width:28px;height:24px;border-radius:4px;border:none;background:#fed7aa;cursor:pointer;" title="Cam nhạt FPT"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#bbf7d0')" style="width:28px;height:24px;border-radius:4px;border:none;background:#bbf7d0;cursor:pointer;" title="Xanh lá nhạt"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#bae6fd')" style="width:28px;height:24px;border-radius:4px;border:none;background:#bae6fd;cursor:pointer;" title="Xanh dương nhạt"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#fbcfe8')" style="width:28px;height:24px;border-radius:4px;border:none;background:#fbcfe8;cursor:pointer;" title="Hồng pastel"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#e9d5ff')" style="width:28px;height:24px;border-radius:4px;border:none;background:#e9d5ff;cursor:pointer;" title="Tím nhạt"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('#e2e8f0')" style="width:28px;height:24px;border-radius:4px;border:none;background:#e2e8f0;cursor:pointer;" title="Xám nhạt"></button>
+                                                            <button type="button" onclick="window.applyEditorHighlight('transparent')" style="width:28px;height:24px;border-radius:4px;border:1px dashed #94a3b8;background:transparent;color:#fff;font-size:10px;cursor:pointer;" title="Bỏ Highlight">✕</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div
                                                     style="width:1px;height:16px;background:var(--border-glass);margin:0 2px;">
                                                 </div>
@@ -13343,6 +13596,20 @@ Tặng 1 tháng cước</textarea>
                                                 <button type="button" class="btn btn-secondary btn-sm"
                                                     style="padding:4px 8px;color:#38bdf8;font-size:11px;"
                                                     onclick="window.openYoutubeModal()">🎥 YouTube</button>
+                                                <!-- Chèn Bảng dữ liệu (Table - Feedback MKT) -->
+                                                <button type="button" class="btn btn-secondary btn-sm"
+                                                    style="padding:4px 8px;font-size:11px;color:#38bdf8;border-color:rgba(56,189,248,0.3);display:inline-flex;align-items:center;gap:4px;"
+                                                    onclick="window.openInsertTableModal()" title="Chèn Bảng dữ liệu / So sánh chuẩn responsive">
+                                                    <span>📊 Bảng</span>
+                                                </button>
+                                                <!-- Nút Chèn Form thu Leads vào vị trí con trỏ (Feedback MKT) -->
+                                                <button type="button" class="btn btn-secondary btn-sm"
+                                                    id="btn-insert-lead-form-shortcode"
+                                                    style="padding:4px 8px;color:#34d399;border-color:rgba(52,211,153,0.4);font-size:11px;font-weight:600;background:rgba(52,211,153,0.08);display:inline-flex;align-items:center;gap:4px;"
+                                                    onclick="window.openInsertFormModal()"
+                                                    title="Chèn Form thu Leads trực tiếp vào bất kỳ vị trí nào trong bài viết">
+                                                    <span>📋 Chèn Form</span>
+                                                </button>
                                                 <div
                                                     style="width:1px;height:16px;background:var(--border-glass);margin:0 2px;">
                                                 </div>
@@ -13561,12 +13828,25 @@ Tặng 1 tháng cước</textarea>
                                                             đầu tiên)</span>
                                                     </div>
                                                 </div>
-                                                <label
-                                                    style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:12.5px; color:#fff;">
-                                                    <input type="checkbox" id="art-allow-comment" checked
-                                                        style="width:16px; height:16px; accent-color:var(--primary);">
-                                                    <span>💬 Cho phép bình luận</span>
-                                                </label>
+                                                <div style="display:flex; flex-direction:column; gap:6px;">
+                                                    <label
+                                                        style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:12.5px; color:#fff;">
+                                                        <input type="checkbox" id="art-show-cat" checked
+                                                            onchange="document.getElementById('art-cat-order-wrap').style.display = this.checked ? 'flex' : 'none';"
+                                                            style="width:16px; height:16px; accent-color:var(--primary);">
+                                                        <span>📂 Hiển thị trong danh mục</span>
+                                                    </label>
+                                                    <div id="art-cat-order-wrap"
+                                                        style="display:flex; align-items:center; gap:8px; padding-left:24px;">
+                                                        <span style="font-size:11.5px; color:var(--text-muted);">Thứ tự
+                                                            ưu tiên:</span>
+                                                        <input type="number" id="art-cat-order" class="form-input"
+                                                            min="1" max="99" value="1"
+                                                            style="width:60px; padding:3px 6px; font-size:12px; height:26px;">
+                                                        <span style="font-size:10.5px; color:var(--text-muted);">(1 =
+                                                            đầu tiên)</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -13598,32 +13878,34 @@ Tặng 1 tháng cước</textarea>
                                                 <div id="lead-form-config-box"
                                                     style="display:flex; flex-direction:column; gap:8px; margin-top:10px; padding-top:8px; border-top:1px dashed var(--border-glass);">
                                                     <div>
-                                                        <label
-                                                            style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Chọn
-                                                            mẫu Form:</label>
+                                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                                            <label style="font-size:11px; color:var(--text-muted); margin:0;">Mẫu Form mặc định:</label>
+                                                            <a href="javascript:void(0)" onclick="window.openLeadFormsManagerModal&&window.openLeadFormsManagerModal()" style="font-size:10.5px; color:var(--primary); text-decoration:none; font-weight:700;">⚙️ Quản lý Kho Form</a>
+                                                        </div>
                                                         <select class="form-select" id="art-lead-form-id"
                                                             style="font-size:12px; padding:5px 8px;">
-                                                            <option value="form-internet" selected>Form Đăng ký Lắp mạng
-                                                                & FPT Play</option>
-                                                            <option value="form-camera">Form Trải nghiệm Camera AI &
-                                                                Cloud</option>
-                                                            <option value="form-voucher">Form Nhận Voucher Ưu đãi 2026
-                                                            </option>
-                                                            <option value="form-enterprise">Form Doanh nghiệp & Kênh
-                                                                riêng</option>
+                                                            <option value="form-register" selected>Form Đăng ký Lắp mạng & FPT Play (#form-register)</option>
+                                                            <option value="form-camera">Form Camera AI Cloud (#form-camera)</option>
+                                                            <option value="form-voucher">Form Nhận Voucher Ưu đãi (#form-voucher)</option>
+                                                            <option value="form-enterprise">Form Doanh nghiệp & Kênh riêng (#form-enterprise)</option>
                                                         </select>
                                                     </div>
                                                     <div>
                                                         <label
-                                                            style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px;">Vị
-                                                            trí hiển thị:</label>
-                                                        <select class="form-select" id="art-lead-form-pos"
+                                                            style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:4px; font-weight:600;">Vị
+                                                            trí hiển thị Form:</label>
+                                                        <select class="form-select" id="art-lead-form-pos" onchange="window.onLeadFormPosChange&&window.onLeadFormPosChange(this.value)"
                                                             style="font-size:12px; padding:5px 8px;">
-                                                            <option value="after-content" selected>Cuối bài viết (Khuyên
-                                                                dùng)</option>
-                                                            <option value="in-content">Nhúng giữa bài viết (In-content)
-                                                            </option>
+                                                            <option value="after-content" selected>1. Cuối bài viết (After-content - Khuyên dùng)</option>
+                                                            <option value="shortcode">2. Theo vị trí mã #form-... hoặc [lead_form] (Chủ động 100%)</option>
+                                                            <option value="after-p2">3. Sau đoạn văn thứ 2 (Đầu bài viết)</option>
+                                                            <option value="after-p3">4. Sau đoạn văn thứ 3 / sau mục H2 đầu tiên</option>
+                                                            <option value="in-content-center">5. Tự động giữa bài (Chia đôi 50% nội dung)</option>
                                                         </select>
+                                                        <div id="lead-form-pos-hint"
+                                                            style="font-size:11px; color:#38bdf8; margin-top:5px; line-height:1.4; background:rgba(56,189,248,0.08); padding:6px 8px; border-radius:6px; border:1px solid rgba(56,189,248,0.2);">
+                                                            💡 <strong>Cực kỳ linh hoạt:</strong> Chỉ cần gõ mã định danh <code>#form-register</code> hoặc bấm <strong>[📋 Chèn Form]</strong> để đặt Form vào bất kỳ vị trí nào trong bài viết!
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -14130,178 +14412,266 @@ Tặng 1 tháng cước</textarea>
                         </div>
                     </div>
 
-                    <!-- Modal 4: Chèn Gallery Nhiều Hình Ảnh (STT 19 Checklist Tin tức) -->
+                    <!-- Modal 4: Chèn Gallery & Kho Media Library phong cách WordPress (Feedback MKT) -->
                     <div id="gallery-picker-modal"
-                        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(6px); overflow-y:auto; padding:20px 10px;">
+                        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; justify-content:center; align-items:center; backdrop-filter:blur(6px); overflow-y:auto; padding:20px 10px;">
                         <div
-                            style="background:#131722; border:1px solid rgba(192,132,252,0.35); border-radius:14px; width:920px; max-width:96%; padding:22px; box-shadow:0 24px 70px rgba(0,0,0,0.85); display:flex; flex-direction:column; gap:16px; color:#f8fafc; font-family:'Inter', sans-serif;">
+                            style="background:#131722; border:1px solid rgba(192,132,252,0.4); border-radius:14px; width:980px; max-width:96%; padding:22px; box-shadow:0 24px 80px rgba(0,0,0,0.9); display:flex; flex-direction:column; gap:14px; color:#f8fafc; font-family:'Inter', sans-serif;">
                             
-                            <!-- Header Modal -->
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--border-glass); padding-bottom:12px;">
-                                <div>
+                            <!-- Header Modal & Tabs WordPress -->
+                            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-glass); padding-bottom:12px;">
+                                <div style="display:flex; align-items:center; gap:16px;">
                                     <h3 style="margin:0; font-size:17px; font-weight:700; color:#c084fc; display:flex; align-items:center; gap:8px;">
-                                        <span>🖼️ Chèn Bộ Sưu Tập Hình Ảnh (Gallery Đa Layout)</span>
-                                        <span class="badge" style="background:rgba(192,132,252,0.15); color:#c084fc; border:1px solid rgba(192,132,252,0.3); font-size:11px; padding:2px 8px;">STT 19 Checklist</span>
+                                        <span>🖼️ Quản lý Thư viện Ảnh &amp; Gallery</span>
                                     </h3>
-                                    <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">
-                                        Tải lên &amp; chèn nhiều hình cùng lúc, hỗ trợ chia cột theo tỷ lệ (50/50, 33/33/33, 25/25/25/25, 33/67, 67/33), kéo thả đổi thứ tự, cấu hình Alt text &amp; Caption từng ảnh, tự căn responsive Mobile/Desktop.
+                                    <!-- Tabs phong cách WordPress Media Library -->
+                                    <div style="display:flex; gap:6px; background:rgba(0,0,0,0.35); padding:3px; border-radius:8px; border:1px solid var(--border-glass);">
+                                        <button type="button" id="tab-btn-media-library" onclick="window.switchGalleryModalTab('library')"
+                                            style="padding:5px 14px; font-size:12px; font-weight:700; border-radius:6px; border:none; background:var(--primary-gradient); color:#fff; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                                            <span>📁 Kho Media Library (WordPress)</span>
+                                            <span id="tab-badge-lib-count" style="background:rgba(255,255,255,0.25); border-radius:10px; padding:1px 6px; font-size:10px;">0</span>
+                                        </button>
+                                        <button type="button" id="tab-btn-media-layout" onclick="window.switchGalleryModalTab('layout')"
+                                            style="padding:5px 14px; font-size:12px; font-weight:600; border-radius:6px; border:none; background:transparent; color:var(--text-muted); cursor:pointer; display:flex; align-items:center; gap:6px;">
+                                            <span>⚙️ Bố cục Cột &amp; Thứ tự</span>
+                                            <span id="tab-badge-layout-count" style="background:rgba(255,255,255,0.1); border-radius:10px; padding:1px 6px; font-size:10px;">0</span>
+                                        </button>
                                     </div>
                                 </div>
                                 <span style="cursor:pointer; font-size:24px; color:#a1a1aa; line-height:1; padding:2px 6px;"
                                     onclick="window.closeGalleryModal()">&times;</span>
                             </div>
 
-                            <!-- BƯỚC 1: Tải lên & Quản lý danh sách hình ảnh -->
-                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-                                    <div style="font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;">
-                                        <span>1️⃣ Danh sách hình ảnh trong Gallery</span>
-                                        <span id="gallery-count-badge" style="background:rgba(255,107,0,0.15); color:#ff8c42; border:1px solid rgba(255,107,0,0.3); border-radius:12px; font-size:11px; padding:1px 7px; font-weight:700;">0 ảnh</span>
-                                    </div>
-                                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                                        <!-- Input file ẩn -->
+                            <!-- TAB CONTENT 1: KHO ẢNH MEDIA LIBRARY PHONG CÁCH WORDPRESS -->
+                            <div id="gallery-tab-library-content" style="display:flex; flex-direction:column; gap:12px;">
+                                <!-- Thanh Toolbar lọc & tải ảnh -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:8px; border:1px solid var(--border-glass);">
+                                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                                         <input type="file" id="gallery-file-input" multiple accept="image/*" style="display:none;" onchange="window.handleGalleryUpload(event)">
                                         <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('gallery-file-input').click()"
-                                            style="font-size:11.5px; padding:5px 12px; background:var(--primary-gradient); display:flex; align-items:center; gap:5px;">
-                                            <span>📤 Tải ảnh từ máy tính</span>
+                                            style="font-size:12px; padding:6px 14px; background:var(--primary-gradient); display:flex; align-items:center; gap:6px; font-weight:700;">
+                                            <span>📤 Tải ảnh mới từ máy tính</span>
                                         </button>
-                                        <div style="display:inline-flex; gap:4px; align-items:center;">
-                                            <span style="font-size:11px; color:var(--text-muted); margin-left:4px;">Demo nhanh:</span>
-                                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.addGalleryDemoPreset(2)" style="font-size:11px; padding:4px 8px;">+ 2 ảnh FPT</button>
-                                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.addGalleryDemoPreset(3)" style="font-size:11px; padding:4px 8px;">+ 3 ảnh FPT</button>
-                                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.addGalleryDemoPreset(4)" style="font-size:11px; padding:4px 8px;">+ 4 ảnh FPT</button>
-                                            <button type="button" class="btn btn-secondary btn-sm" onclick="window.clearAllGalleryItems()" style="font-size:11px; padding:4px 8px; color:var(--danger);" title="Xóa tất cả ảnh">🗑️ Xóa hết</button>
+                                        <select id="gallery-filter-category" class="form-select" onchange="window.filterMediaLibrary(this.value)"
+                                            style="font-size:12px; padding:5px 10px; height:32px; background:#1e2330; border:1px solid var(--border-glass); border-radius:6px; color:#fff;">
+                                            <option value="all">📂 Tất cả hình ảnh trong Thư viện</option>
+                                            <option value="internet">🌐 Internet &amp; Wi-Fi 6</option>
+                                            <option value="camera">📹 FPT Camera &amp; AI Cloud</option>
+                                            <option value="fptplay">📺 FPT Play &amp; Truyền hình</option>
+                                            <option value="tech">👨‍🔧 Kỹ thuật viên &amp; Hạ tầng</option>
+                                        </select>
+                                    </div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <input type="text" id="gallery-search-input" placeholder="🔍 Tìm kiếm ảnh theo tên / alt..."
+                                            oninput="window.searchMediaLibrary(this.value)"
+                                            style="font-size:12px; padding:5px 12px; height:32px; background:#1e2330; border:1px solid var(--border-glass); border-radius:6px; color:#fff; width:220px;">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.selectAllMediaLibrary(true)" style="font-size:11px; padding:5px 9px;">Chọn hết</button>
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.clearMediaLibrarySelection()" style="font-size:11px; padding:5px 9px; color:var(--text-muted);">Bỏ chọn</button>
+                                    </div>
+                                </div>
+
+                                <!-- Lưới Grid ảnh WordPress + Cột chi tiết ảnh -->
+                                <div style="display:grid; grid-template-columns:1fr 280px; gap:14px; min-height:360px;">
+                                    <!-- Cột trái: Lưới kho ảnh -->
+                                    <div style="background:rgba(0,0,0,0.25); border:1px solid var(--border-glass); border-radius:8px; padding:12px; max-height:380px; overflow-y:auto;">
+                                        <div id="media-library-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:10px;">
+                                            <!-- Rendered dynamically by window.renderMediaLibraryGrid() -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Cột phải: Chi tiết hình ảnh đã chọn (WordPress Attachment Details) -->
+                                    <div id="media-library-details-panel"
+                                        style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:8px; padding:14px; display:flex; flex-direction:column; gap:10px; font-size:12px;">
+                                        <div style="font-size:12.5px; font-weight:700; color:#fff; border-bottom:1px solid var(--border-glass); padding-bottom:6px;">
+                                            🖼️ Chi tiết tệp hình ảnh
+                                        </div>
+                                        <div id="media-detail-preview-box" style="height:120px; border-radius:6px; background:#000; overflow:hidden; display:flex; align-items:center; justify-content:center; border:1px solid var(--border-glass);">
+                                            <span style="color:var(--text-muted); font-size:11px;">Chọn 1 ảnh để xem chi tiết</span>
+                                        </div>
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Alt Text (SEO Google):</label>
+                                            <input type="text" id="media-detail-alt-input" class="form-input" placeholder="Mô tả ảnh cho SEO..."
+                                                oninput="window.updateCurrentActiveMediaAlt(this.value)" style="font-size:11.5px; padding:5px 8px; height:28px;">
+                                        </div>
+                                        <div>
+                                            <label style="font-size:11px; color:var(--text-muted); display:block; margin-bottom:3px;">Chú thích hiển thị (Caption):</label>
+                                            <input type="text" id="media-detail-caption-input" class="form-input" placeholder="Chú thích chân ảnh..."
+                                                oninput="window.updateCurrentActiveMediaCaption(this.value)" style="font-size:11.5px; padding:5px 8px; height:28px;">
+                                        </div>
+                                        <div style="font-size:11px; color:var(--text-muted); line-height:1.5; margin-top:auto; background:rgba(0,0,0,0.3); padding:8px; border-radius:6px;">
+                                            💡 <strong>Mẹo:</strong> Nhấp vào ảnh để chọn nhanh (hỗ trợ chọn 1 hoặc nhiều ảnh). Chọn xong bấm nút bên dưới để chèn hoặc cấu hình bố cục cột!
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Container danh sách ảnh -->
-                                <div id="gallery-items-container" style="display:flex; flex-direction:column; gap:8px; max-height:220px; overflow-y:auto; padding-right:4px;">
-                                    <!-- Rendered dynamically by window.renderGalleryModalUI() -->
-                                </div>
-                                <div id="gallery-empty-tip" style="text-align:center; padding:24px 10px; color:var(--text-muted); font-size:12.5px; border:1px dashed var(--border-glass); border-radius:8px; background:rgba(0,0,0,0.15); margin-top:4px;">
-                                    Chưa có hình ảnh nào trong Gallery. Vui lòng nhấn <strong>"📤 Tải ảnh từ máy tính"</strong> hoặc chọn các nút <strong>"Demo nhanh"</strong> ở trên để bắt đầu!
-                                </div>
-                            </div>
-
-                            <!-- BƯỚC 2: Chọn Tỷ lệ & Layout hiển thị cột -->
-                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div style="font-size:13px; font-weight:700; color:#fff;">
-                                        2️⃣ Chọn Tỷ lệ &amp; Bố cục hiển thị (Columns / Tỷ lệ)
+                                <!-- Footer Tab 1: Thanh trạng thái & Nút chèn nhanh -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:12px; flex-wrap:wrap; gap:10px;">
+                                    <div style="font-size:12.5px; color:#e2e8f0; display:flex; align-items:center; gap:8px;">
+                                        <span>Đã chọn:</span>
+                                        <span id="gallery-selected-counter-badge" style="background:rgba(255,107,0,0.15); color:#ff8c42; border:1px solid rgba(255,107,0,0.3); border-radius:12px; font-size:11.5px; padding:2px 10px; font-weight:800;">0 ảnh</span>
                                     </div>
-                                    <div id="gallery-layout-hint" style="font-size:11.5px; color:#38bdf8;">
-                                        💡 Đang chọn: <strong id="gallery-layout-curr-name">50 / 50 (2 cột đều)</strong>
-                                    </div>
-                                </div>
-
-                                <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px;" id="gallery-layout-options-grid">
-                                    <!-- Option 1: 50 / 50 -->
-                                    <div class="gallery-layout-btn active" data-layout="50-50" onclick="window.selectGalleryLayout('50-50')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:2px solid var(--primary); background:rgba(255,107,0,0.1); text-align:center; transition:0.2s;">
-                                        <div style="display:flex; gap:3px; height:24px; margin-bottom:6px;">
-                                            <div style="flex:1; background:var(--primary); border-radius:3px; opacity:0.85;"></div>
-                                            <div style="flex:1; background:var(--primary); border-radius:3px; opacity:0.85;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">50 / 50</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">2 ảnh đều nhau</div>
-                                    </div>
-
-                                    <!-- Option 2: 33 / 33 / 33 -->
-                                    <div class="gallery-layout-btn" data-layout="33-33-33" onclick="window.selectGalleryLayout('33-33-33')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
-                                        <div style="display:flex; gap:3px; height:24px; margin-bottom:6px;">
-                                            <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">33 / 33 / 33</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">3 ảnh đều nhau</div>
-                                    </div>
-
-                                    <!-- Option 3: 25 / 25 / 25 / 25 -->
-                                    <div class="gallery-layout-btn" data-layout="25-25-25-25" onclick="window.selectGalleryLayout('25-25-25-25')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
-                                        <div style="display:flex; gap:2px; height:24px; margin-bottom:6px;">
-                                            <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">25 / 25 / 25 / 25</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">4 ảnh đều nhau</div>
-                                    </div>
-
-                                    <!-- Option 4: 33 / 67 -->
-                                    <div class="gallery-layout-btn" data-layout="33-67" onclick="window.selectGalleryLayout('33-67')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
-                                        <div style="display:flex; gap:3px; height:24px; margin-bottom:6px;">
-                                            <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                            <div style="flex:2; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">33 / 67</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Cột nhỏ + Cột lớn</div>
-                                    </div>
-
-                                    <!-- Option 5: 67 / 33 -->
-                                    <div class="gallery-layout-btn" data-layout="67-33" onclick="window.selectGalleryLayout('67-33')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
-                                        <div style="display:flex; gap:3px; height:24px; margin-bottom:6px;">
-                                            <div style="flex:2; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                            <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">67 / 33</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">Cột lớn + Cột nhỏ</div>
-                                    </div>
-
-                                    <!-- Option 6: Grid 2x2 -->
-                                    <div class="gallery-layout-btn" data-layout="grid-2x2" onclick="window.selectGalleryLayout('grid-2x2')"
-                                        style="cursor:pointer; padding:10px 8px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
-                                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; height:24px; margin-bottom:6px;">
-                                            <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                            <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
-                                        </div>
-                                        <div style="font-size:12px; font-weight:700; color:#fff;">Lưới 2x2</div>
-                                        <div style="font-size:10px; color:var(--text-muted); margin-top:2px;">4 ảnh ma trận</div>
+                                    <div style="display:flex; gap:10px;">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.closeGalleryModal()">Đóng</button>
+                                        <!-- Nút Chèn Nhanh Ngay (dành cho 1 hoặc nhiều ảnh lẻ không cần chia cột) -->
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.confirmInsertSelectedAsStandaloneImages()"
+                                            id="btn-quick-insert-images"
+                                            style="color:#38bdf8; border-color:rgba(56,189,248,0.4); font-weight:700; padding:6px 14px;">
+                                            🖼️ Chèn nhanh ảnh vào bài
+                                        </button>
+                                        <!-- Nút Sang Bước Bố Cục Cột (Gallery Layout) -->
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="window.goToGalleryLayoutStep()"
+                                            style="background:var(--primary-gradient); font-weight:700; padding:6px 18px; font-size:13px; display:flex; align-items:center; gap:6px;">
+                                            <span>⚙️ Chọn Bố cục Cột &amp; Tỷ lệ ➔</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- BƯỚC 3: Khung Xem Trước Trực Quan (Live Responsive Preview) -->
-                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                                    <div style="font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;">
-                                        <span>3️⃣ Xem trước trực quan (Live Responsive Preview)</span>
+                            <!-- TAB CONTENT 2: TÙY CHỈNH BỐ CỤC CỘT & THỨ TỰ (LAYOUT & ORDER) -->
+                            <div id="gallery-tab-layout-content" style="display:none; flex-direction:column; gap:14px;">
+                                <!-- Bước 1: Danh sách ảnh đã chọn & sắp xếp -->
+                                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:12px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                        <div style="font-size:12.5px; font-weight:700; color:#fff;">
+                                            1️⃣ Thứ tự ảnh trong Gallery (Kéo thả hoặc bấm ◀ ▶ để đổi vị trí)
+                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.switchGalleryModalTab('library')" style="font-size:11px; padding:3px 9px;">+ Thêm ảnh từ Thư viện</button>
                                     </div>
-                                    <div style="display:flex; gap:6px; background:rgba(0,0,0,0.3); padding:2px; border-radius:6px; border:1px solid var(--border-glass);">
-                                        <button type="button" id="gal-prev-btn-desktop" class="btn btn-secondary btn-sm" onclick="window.setGalleryPreviewDevice('desktop')"
-                                            style="font-size:11px; padding:3px 10px; background:rgba(255,255,255,0.1); color:#fff; border:none;">💻 Desktop View</button>
-                                        <button type="button" id="gal-prev-btn-mobile" class="btn btn-secondary btn-sm" onclick="window.setGalleryPreviewDevice('mobile')"
-                                            style="font-size:11px; padding:3px 10px; background:transparent; color:var(--text-muted); border:none;">📱 Mobile View (Responsive)</button>
+                                    <div id="gallery-items-container" style="display:flex; flex-direction:column; gap:6px; max-height:160px; overflow-y:auto; padding-right:4px;">
+                                        <!-- Rendered dynamically -->
+                                    </div>
+                                    <div id="gallery-empty-tip" style="display:none; text-align:center; padding:16px; color:var(--text-muted); font-size:12px;">
+                                        Chưa có ảnh nào được chọn. Vui lòng quay lại tab Kho Media Library để tick chọn ảnh!
                                     </div>
                                 </div>
 
-                                <!-- Box Preview -->
-                                <div id="gallery-preview-wrapper" style="background:#090d16; border:1px solid var(--border-glass); border-radius:8px; padding:16px; min-height:140px; display:flex; justify-content:center; align-items:center; overflow-x:auto;">
-                                    <div id="gallery-preview-container" style="width:100%; max-width:100%; transition:max-width 0.3s ease;">
-                                        <!-- Rendered dynamically by window.renderGalleryPreview() -->
+                                <!-- Bước 2: Chọn tỷ lệ & bố cục cột (Hỗ trợ từ 1 ảnh trở lên) -->
+                                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:12px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                        <div style="font-size:12.5px; font-weight:700; color:#fff;">
+                                            2️⃣ Chọn Tỷ lệ &amp; Bố cục hiển thị (Hỗ trợ từ 1 ảnh trở lên)
+                                        </div>
+                                        <div id="gallery-layout-hint" style="font-size:11.5px; color:#38bdf8;">
+                                            💡 Đang chọn: <strong id="gallery-layout-curr-name">50 / 50 (2 cột đều)</strong>
+                                        </div>
+                                    </div>
+
+                                    <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:8px;" id="gallery-layout-options-grid">
+                                        <!-- Option 0: 1 Cột Banner Full-width -->
+                                        <div class="gallery-layout-btn" data-layout="1-col" onclick="window.selectGalleryLayout('1-col')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; height:20px; margin-bottom:4px;">
+                                                <div style="flex:1; background:var(--primary); border-radius:3px; opacity:0.85;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">1 Cột</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">Ảnh lớn Full</div>
+                                        </div>
+
+                                        <!-- Option 1: 50 / 50 -->
+                                        <div class="gallery-layout-btn active" data-layout="50-50" onclick="window.selectGalleryLayout('50-50')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:2px solid var(--primary); background:rgba(255,107,0,0.1); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="flex:1; background:var(--primary); border-radius:3px; opacity:0.85;"></div>
+                                                <div style="flex:1; background:var(--primary); border-radius:3px; opacity:0.85;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">50 / 50</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">2 cột đều</div>
+                                        </div>
+
+                                        <!-- Option 2: 33 / 33 / 33 -->
+                                        <div class="gallery-layout-btn" data-layout="33-33-33" onclick="window.selectGalleryLayout('33-33-33')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:3px; opacity:0.6;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">3 Cột Đều</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">33/33/33</div>
+                                        </div>
+
+                                        <!-- Option 3: 25 / 25 / 25 / 25 -->
+                                        <div class="gallery-layout-btn" data-layout="25-25-25-25" onclick="window.selectGalleryLayout('25-25-25-25')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">4 Cột Đều</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">25% mỗi ảnh</div>
+                                        </div>
+
+                                        <!-- Option 4: 33 / 67 -->
+                                        <div class="gallery-layout-btn" data-layout="33-67" onclick="window.selectGalleryLayout('33-67')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="flex:2; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">33 / 67</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">Nhỏ + Lớn</div>
+                                        </div>
+
+                                        <!-- Option 5: 67 / 33 -->
+                                        <div class="gallery-layout-btn" data-layout="67-33" onclick="window.selectGalleryLayout('67-33')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:flex; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="flex:2; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="flex:1; background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">67 / 33</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">Lớn + Nhỏ</div>
+                                        </div>
+
+                                        <!-- Option 6: Lưới 2x2 -->
+                                        <div class="gallery-layout-btn" data-layout="grid-2x2" onclick="window.selectGalleryLayout('grid-2x2')"
+                                            style="cursor:pointer; padding:8px 6px; border-radius:8px; border:1px solid var(--border-glass); background:rgba(255,255,255,0.03); text-align:center; transition:0.2s;">
+                                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; height:20px; margin-bottom:4px;">
+                                                <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                                <div style="background:#94a3b8; border-radius:2px; opacity:0.6;"></div>
+                                            </div>
+                                            <div style="font-size:11px; font-weight:700; color:#fff;">Lưới 2x2</div>
+                                            <div style="font-size:9.5px; color:var(--text-muted);">4 ảnh ma trận</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Chân Modal -->
-                            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:14px; margin-top:2px; flex-wrap:wrap; gap:10px;">
-                                <div style="font-size:11.5px; color:var(--text-muted);">
-                                    💡 <em>Sau khi chèn, bạn có thể nhấp đúp hoặc bấm nút sửa trên khối Gallery trong bài viết để thay đổi lại layout bất kỳ lúc nào.</em>
+                                <!-- Bước 3: Xem trước trực quan (Live Responsive Preview) -->
+                                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:12px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                        <div style="font-size:12.5px; font-weight:700; color:#fff;">
+                                            3️⃣ Xem trước trực quan (Live Responsive Preview)
+                                        </div>
+                                        <div style="display:flex; gap:4px; background:rgba(0,0,0,0.3); padding:2px; border-radius:6px; border:1px solid var(--border-glass);">
+                                            <button type="button" id="gal-prev-btn-desktop" class="btn btn-secondary btn-sm" onclick="window.setGalleryPreviewDevice('desktop')"
+                                                style="font-size:11px; padding:2px 8px; background:rgba(255,255,255,0.1); color:#fff; border:none;">💻 Desktop</button>
+                                            <button type="button" id="gal-prev-btn-mobile" class="btn btn-secondary btn-sm" onclick="window.setGalleryPreviewDevice('mobile')"
+                                                style="font-size:11px; padding:2px 8px; background:transparent; color:var(--text-muted); border:none;">📱 Mobile</button>
+                                        </div>
+                                    </div>
+                                    <div id="gallery-preview-wrapper" style="background:#090d16; border:1px solid var(--border-glass); border-radius:8px; padding:12px; min-height:120px; display:flex; justify-content:center; align-items:center; overflow-x:auto;">
+                                        <div id="gallery-preview-container" style="width:100%; max-width:100%; transition:max-width 0.3s ease;">
+                                            <!-- Rendered dynamically -->
+                                        </div>
+                                    </div>
                                 </div>
-                                <div style="display:flex; gap:10px;">
-                                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.closeGalleryModal()">Hủy bỏ</button>
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="window.confirmInsertGallery()"
-                                        style="background:var(--primary-gradient); font-weight:700; padding:6px 18px; font-size:13px;">
-                                        🚀 Chèn Gallery vào bài viết
+
+                                <!-- Footer Tab 2: Nút chèn Gallery -->
+                                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-glass); padding-top:12px;">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="window.switchGalleryModalTab('library')" style="display:flex; align-items:center; gap:5px;">
+                                        <span>⬅ Quay lại Thư viện Media</span>
                                     </button>
+                                    <div style="display:flex; gap:10px;">
+                                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.closeGalleryModal()">Hủy bỏ</button>
+                                        <button type="button" class="btn btn-primary btn-sm" onclick="window.confirmInsertGallery()"
+                                            style="background:var(--primary-gradient); font-weight:700; padding:6px 20px; font-size:13px;">
+                                            🚀 Chèn Gallery vào bài viết
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -14394,7 +14764,88 @@ Tặng 1 tháng cước</textarea>
                         </div>
                     </div>
 
-                    <!-- News Tags Mapping View (Tab Content 4 - Cấu hình Thông tin hay) -->
+                    <!-- Quản lý Form thu Leads (Lead Generation Forms - Kho Form) -->
+                    <div id="news-lead-forms" style="display:none; margin-top:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                            <div>
+                                <h3 style="margin:0; color:#fff; font-size:17px; display:flex; align-items:center; gap:8px;">
+                                    <span>📋 Quản lý Form thu Leads (Lead Generation Forms)</span>
+                                </h3>
+                                <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">
+                                    Kho mẫu Form thu thập thông tin khách hàng, tư vấn & đăng ký dịch vụ để nhúng linh hoạt vào bài viết tin tức hoặc Landing page qua mã Shortcode (VD: <code>#form-enterprise</code> hoặc <code>[lead_form id="..."]</code>).
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="openCreateLeadFormModal()" style="display:inline-flex; align-items:center; gap:6px; padding:7px 16px; font-weight:600; background:var(--primary-gradient);">
+                                <span>➕ Tạo Form Mới</span>
+                            </button>
+                        </div>
+
+                        <!-- Thống kê nhanh Lead Gen -->
+                        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-bottom:20px;">
+                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px 16px;">
+                                <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:600; letter-spacing:0.5px;">Tổng số Form</div>
+                                <div style="font-size:24px; font-weight:700; color:#fff; margin-top:4px;">4 <span style="font-size:12px; font-weight:normal; color:var(--success);">Mẫu chuẩn</span></div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px 16px;">
+                                <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:600; letter-spacing:0.5px;">Đang hoạt động</div>
+                                <div style="font-size:24px; font-weight:700; color:#10b981; margin-top:4px;">4 <span style="font-size:12px; font-weight:normal; color:var(--text-muted);">/ 4 Form</span></div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px 16px;">
+                                <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:600; letter-spacing:0.5px;">Lượt gửi Lead (Tháng này)</div>
+                                <div style="font-size:24px; font-weight:700; color:#f97316; margin-top:4px;">1,428 <span style="font-size:12px; font-weight:normal; color:var(--success);">↑ 18.5%</span></div>
+                            </div>
+                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:10px; padding:14px 16px;">
+                                <div style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:600; letter-spacing:0.5px;">Tỷ lệ Chuyển đổi TB</div>
+                                <div style="font-size:24px; font-weight:700; color:#60a5fa; margin-top:4px;">14.6% <span style="font-size:12px; font-weight:normal; color:var(--text-muted);">CR</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Bộ lọc danh sách Form -->
+                        <div class="form-grid filters" style="display:flex; gap:12px; align-items:center; background:rgba(0,0,0,0.2); padding:14px; border-radius:8px; margin-bottom:16px;">
+                            <div class="form-group" style="flex:1; margin:0;">
+                                <input type="text" class="form-input" id="leadforms-search-keyword" placeholder="Tìm theo tên form, mã shortcode..." oninput="filterLeadFormsTable()">
+                            </div>
+                            <div class="form-group" style="width:200px; margin:0;">
+                                <select class="form-select" id="leadforms-type-filter" onchange="filterLeadFormsTable()">
+                                    <option value="">Tất cả loại form</option>
+                                    <option value="b2b">Doanh nghiệp B2B</option>
+                                    <option value="b2c">Đăng ký dịch vụ B2C</option>
+                                    <option value="survey">Khảo sát nhu cầu</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="width:160px; margin:0;">
+                                <select class="form-select" id="leadforms-status-filter" onchange="filterLeadFormsTable()">
+                                    <option value="">Tất cả trạng thái</option>
+                                    <option value="active">Đang kích hoạt</option>
+                                    <option value="paused">Tạm dừng</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Bảng dữ liệu Form -->
+                        <div style="overflow-x:auto; border: 1px solid var(--border-glass); border-radius: 8px;">
+                            <table class="data-table" id="leadforms-table" style="margin:0; width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px; text-align:center;">STT</th>
+                                        <th style="width:170px;">Mã Shortcode</th>
+                                        <th>Tên Form & Tiêu đề</th>
+                                        <th style="width:130px;">Danh mục</th>
+                                        <th>Các trường thông tin</th>
+                                        <th style="width:95px; text-align:center;">Bài nhúng</th>
+                                        <th style="width:95px; text-align:center;">Leads</th>
+                                        <th style="width:110px; text-align:center;">Trạng thái</th>
+                                        <th style="width:130px; text-align:right;">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leadforms-table-tbody">
+                                    <!-- Rendered qua JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- News Tags Mapping View (Tab Content 4 - Cấu hình Thông tin hay - Ẩn chuyển sang SKU) -->
                     <div id="news-tag-mapping" style="display:none; margin-top:20px;">
                         <div
                             style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
@@ -22868,6 +23319,7 @@ Tặng 1 tháng cước</textarea>
             document.getElementById('news-cat-list').style.display = 'none';
             document.getElementById('news-tag-list').style.display = 'none';
             document.getElementById('news-tag-mapping').style.display = 'none';
+            if (document.getElementById('news-lead-forms')) document.getElementById('news-lead-forms').style.display = 'none';
             document.getElementById('news-item-form').style.display = 'none';
             document.getElementById('news-cat-form').style.display = 'none';
             document.getElementById('news-author-list').style.display = 'none';
@@ -22882,6 +23334,13 @@ Tặng 1 tháng cước</textarea>
                 document.getElementById('news-tag-list').style.display = 'block';
                 renderNewsTagsTable();
                 closeNewsTagForm();
+            } else if (tab === 'lead-forms') {
+                if (document.getElementById('news-lead-forms')) {
+                    document.getElementById('news-lead-forms').style.display = 'block';
+                    if (typeof window.renderLeadFormsMainTable === 'function') window.renderLeadFormsMainTable();
+                    else if (typeof renderLeadFormsTable === 'function') renderLeadFormsTable();
+                    else if (typeof window.renderLeadFormsTable === 'function') window.renderLeadFormsTable();
+                }
             } else if (tab === 'tag-mapping') {
                 document.getElementById('news-tag-mapping').style.display = 'block';
                 syncTagMappingToSku();
@@ -25634,7 +26093,7 @@ Tặng 1 tháng cước</textarea>
         });
 
         function skuSwitchTab(tabName) {
-            const tabs = ['chung', 'dactinh', 'content', 'faq']; // chung kept for hide logic
+            const tabs = ['chung', 'dactinh', 'content', 'faq', 'news']; // chung kept for hide logic
             tabs.forEach(t => {
                 const content = document.getElementById('sku-tab-' + t);
                 const btn = document.getElementById('sku-tab-btn-' + t);
@@ -25664,6 +26123,55 @@ Tặng 1 tháng cước</textarea>
             }
             if (tabName === 'content') {
                 if (typeof skuToggleMediaUI === 'function') skuToggleMediaUI();
+            }
+            if (tabName === 'news') {
+                if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
+            }
+        }
+
+        function addSelectedTagToSkuNews() {
+            const select = document.getElementById('sku-news-add-tag-select');
+            if (!select || !select.value) return;
+            const tag = select.value;
+            const badgeContainer = document.getElementById('sku-news-tag-badges');
+            if (!badgeContainer) return;
+
+            const exists = Array.from(badgeContainer.querySelectorAll('.badge')).some(b => b.innerText.includes('#' + tag));
+            if (exists) {
+                if (typeof showLdpToast === 'function') showLdpToast(`Tag #${tag} đã có trong danh sách!`);
+                select.value = '';
+                return;
+            }
+
+            const tagColors = {
+                'wifi7': { bg: 'rgba(168,85,247,0.15)', color: '#c084fc', border: 'rgba(168,85,247,0.3)' },
+                'fpttelecom': { bg: 'rgba(234,179,8,0.15)', color: '#facc15', border: 'rgba(234,179,8,0.3)' },
+                'camera_ai': { bg: 'rgba(236,72,153,0.15)', color: '#f472b6', border: 'rgba(236,72,153,0.3)' },
+                'fptplay': { bg: 'rgba(239,68,68,0.15)', color: '#f87171', border: 'rgba(239,68,68,0.3)' },
+                'modem': { bg: 'rgba(14,165,233,0.15)', color: '#38bdf8', border: 'rgba(14,165,233,0.3)' },
+                'doanhnghiep': { bg: 'rgba(16,185,129,0.15)', color: '#34d399', border: 'rgba(16,185,129,0.3)' },
+                'banggia': { bg: 'rgba(249,115,22,0.15)', color: '#ff8c42', border: 'rgba(249,115,22,0.3)' },
+                'uudai': { bg: 'rgba(244,63,94,0.15)', color: '#fb7185', border: 'rgba(244,63,94,0.3)' },
+                'huongdan': { bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.3)' }
+            };
+            const c = tagColors[tag] || { bg: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: 'rgba(59,130,246,0.3)' };
+
+            const span = document.createElement('span');
+            span.className = 'badge';
+            span.style.cssText = `background:${c.bg}; color:${c.color}; border:1px solid ${c.border}; padding:4px 10px; font-size:12px; border-radius:6px; display:inline-flex; align-items:center; gap:6px;`;
+            span.innerHTML = `#${tag} <span style="cursor:pointer; font-weight:bold; margin-left:2px;" onclick="removeSkuNewsTag(this)" title="Xóa tag">✕</span>`;
+            badgeContainer.appendChild(span);
+            select.value = '';
+            if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
+            if (typeof showLdpToast === 'function') showLdpToast(`🏷️ Đã gắn tag #${tag} cho SKU`);
+        }
+
+        function removeSkuNewsTag(btn) {
+            const badge = btn.closest('.badge');
+            if (badge) {
+                badge.remove();
+                if (typeof updateSkuNewsPreview === 'function') updateSkuNewsPreview();
+                if (typeof showLdpToast === 'function') showLdpToast('Đã gỡ tag khỏi SKU');
             }
         }
 
@@ -26780,16 +27288,26 @@ Tặng 1 tháng cước</textarea>
                 campRenderProductsList();
             }
             else if (fieldName === 'code') {
-                pkg.code = document.getElementById('camp-edit-code').value;
+                var cEl = document.getElementById('camp-edit-code');
+                if (cEl) pkg.code = cEl.value;
                 campRenderProductsList();
             }
-            else if (fieldName === 'download') pkg.download = document.getElementById('camp-edit-download').value;
-            else if (fieldName === 'upload') pkg.upload = document.getElementById('camp-edit-upload').value;
+            else if (fieldName === 'download') {
+                var dl = document.getElementById('camp-edit-download');
+                if (dl) pkg.download = dl.value;
+            }
+            else if (fieldName === 'upload') {
+                var ul = document.getElementById('camp-edit-upload');
+                if (ul) pkg.upload = ul.value;
+            }
             else if (fieldName === 'badge') {
-                pkg.badge = document.getElementById('camp-edit-badge').value;
-                if (!pkg.tags || pkg.tags.length === 0) pkg.tags = [pkg.badge];
-                else pkg.tags[0] = pkg.badge;
-                campRenderTags(pkg.tags);
+                var bEl = document.getElementById('camp-edit-badge');
+                if (bEl) {
+                    pkg.badge = bEl.value;
+                    if (!pkg.tags || pkg.tags.length === 0) pkg.tags = [pkg.badge];
+                    else pkg.tags[0] = pkg.badge;
+                    campRenderTags(pkg.tags);
+                }
             }
             else if (fieldName === 'desktopImg') pkg.desktopImg = document.getElementById('camp-edit-desktop-img').value;
             else if (fieldName === 'mobileImg') pkg.mobileImg = document.getElementById('camp-edit-mobile-img').value;
@@ -33150,20 +33668,11 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                             </button>
                         </div>
 
-                        <!-- Hàng: Tên gói cước (Đã loại bỏ Mã gói và Tốc độ Download/Upload ở tất cả các Card theo yêu cầu) -->
+                        <!-- Hàng: Tên gói cước (Đã loại bỏ Mã gói, Tốc độ Download/Upload và Nhãn/Ribbon Badge theo yêu cầu) -->
                         <div class="form-group" style="margin-bottom: 14px;">
                             <label style="font-size: 11.5px; font-weight: 600;">Tên gói cước</label>
                             <input type="text" id="camp-edit-name" class="form-input" placeholder="vd: FPT Speed X2..."
                                 oninput="campSaveDetailField('name')">
-                        </div>
-
-                        <!-- Hàng: Badge / Nhãn phân loại đặc thù theo Card (Card 1 ẩn do đã có Tag gói cước bên dưới) -->
-                        <div id="group-camp-edit-badge" class="form-group" style="margin-bottom: 14px; background: rgba(255, 122, 0, 0.04); border: 1px solid rgba(255, 122, 0, 0.2); border-radius: 8px; padding: 10px 12px; display: none;">
-                            <label id="camp-badge-label" style="font-size: 11.5px; font-weight: 700; color: #ff8c42; margin-bottom: 4px; display: block;">
-                                Nhãn / Ribbon Badge đặc thù
-                            </label>
-                            <input type="text" id="camp-edit-badge" class="form-input" placeholder="vd: Flagship Wi-Fi 7, Bán chạy, Combo Tiết Kiệm..."
-                                oninput="campSaveDetailField('badge')" style="background: rgba(0,0,0,0.25);">
                         </div>
 
                         <!-- Hàng 1: Ảnh Desktop & Ảnh Mobile -->
@@ -35461,8 +35970,8 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
     <!-- ===== MODAL PREVIEW BÀI VIẾT (IDs khớp news_cms.js) ===== -->
     <div id="news-preview-modal"
         style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);overflow-y:auto;padding:24px 16px;flex-direction:column;align-items:center;">
-        <div
-            style="max-width:900px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);">
+        <div id="news-preview-container-box"
+            style="max-width:900px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6);transition:max-width 0.3s ease, border 0.3s ease, border-radius 0.3s ease;">
 
             <!-- Browser chrome bar -->
             <div
@@ -35478,6 +35987,13 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     <span>fpt.vn/tin-tuc/<span id="preview-slug-bar">url-slug</span></span>
                     <span
                         style="margin-left:auto;font-size:10px;background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);border-radius:4px;padding:1px 7px;font-weight:600;">PREVIEW</span>
+                </div>
+                <!-- Device Preview Switcher (Desktop / Mobile) -->
+                <div style="display:flex;align-items:center;gap:3px;background:rgba(0,0,0,0.3);padding:2px 4px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);">
+                    <button type="button" id="prev-device-btn-desktop" onclick="window.setNewsPreviewDevice('desktop')"
+                        style="padding:3px 8px;font-size:11px;border-radius:4px;border:none;background:rgba(255,255,255,0.18);color:#fff;cursor:pointer;font-weight:600;">💻 Desktop</button>
+                    <button type="button" id="prev-device-btn-mobile" onclick="window.setNewsPreviewDevice('mobile')"
+                        style="padding:3px 8px;font-size:11px;border-radius:4px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;font-weight:600;">📱 Mobile</button>
                 </div>
                 <button onclick="closeNewsPreviewModal()"
                     style="background:none;border:none;color:#94a3b8;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;"
@@ -35510,7 +36026,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 </div>
 
                 <!-- 2 cột: sidebar TOC + article content -->
-                <div
+                <div id="prev-art-body-layout"
                     style="display:flex;gap:0;max-width:1100px;margin:0 auto;padding:32px 24px 48px;align-items:start;gap:32px;">
 
                     <!-- Cột chính: Article -->
@@ -35542,7 +36058,7 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     </div>
 
                     <!-- Sidebar: Mục lục -->
-                    <div style="width:220px;flex-shrink:0;position:sticky;top:20px;">
+                    <div id="prev-art-toc-sidebar" style="width:220px;flex-shrink:0;position:sticky;top:20px;">
                         <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;">
                             <div
                                 style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">
@@ -36121,7 +36637,8 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                 <button type="button" class="btn btn-warning btn-sm" onclick="saveAltText()">Cập nhật</button>
             </div>
         </div>
-        <!-- Script điều khiển Tag-based Multi-Select cho Trang áp dụng Banner -->
+    </div>
+    <!-- Script điều khiển Tag-based Multi-Select cho Trang áp dụng Banner -->
         <script>
             const PAGE_OPTIONS_DATA = [
                 { value: 'device-detail', label: 'Chi tiết thiết bị' },
@@ -37968,36 +38485,6 @@ Thông báo đẩy cảnh báo tức thì ngay khi phát hiện chuyển động
                     tooltipGroup.style.display = (styleVal === 'card1' || styleVal === 'card4' || styleVal === 'card6') ? 'block' : 'none';
                 }
 
-                var badgeGroup = document.getElementById('group-camp-edit-badge');
-                if (badgeGroup) {
-                    // Card 1 bỏ trường Nhãn / Ribbon Badge do bị trùng với Tag gói cước (Thẻ nhãn nổi bật / Badge) ở bên dưới
-                    badgeGroup.style.display = (styleVal === 'card1') ? 'none' : 'block';
-                }
-
-                if (badgeLabel && badgeInput) {
-                    if (styleVal === 'card2') {
-                        badgeLabel.textContent = 'Ribbon Badge cong (Góc phải)';
-                        badgeInput.placeholder = 'vd: Bán chạy, Cơ bản, Gia đình';
-                    } else if (styleVal === 'card3') {
-                        badgeLabel.textContent = 'Badge Đề xuất / Nổi bật';
-                        badgeInput.placeholder = 'vd: Đề xuất, Khuyên dùng';
-                    } else if (styleVal === 'card4') {
-                        badgeLabel.textContent = 'Phân khúc gói';
-                        badgeInput.placeholder = 'vd: GIGA - Tiết Kiệm, SKY - Phổ Thông, F-GAME - Gamer';
-                    } else if (styleVal === 'card5') {
-                        badgeLabel.textContent = 'Badge Khuyến mãi tiết kiệm';
-                        badgeInput.placeholder = 'vd: Tiết kiệm ngay 1tr ✨, Tặng 1 tháng';
-                    } else if (styleVal === 'card6') {
-                        badgeLabel.textContent = 'Badge Thể Thao / Giải Đấu';
-                        badgeInput.placeholder = 'vd: Trọn Vẹn Ngoại Hạng Anh 🏆, VIP Sport Edition ⚽';
-                    } else if (styleVal === 'card7') {
-                        badgeLabel.textContent = 'Danh hiệu cột / Highlight';
-                        badgeInput.placeholder = 'vd: Combo Tiết Kiệm Nhất ✨, Tiêu chuẩn';
-                    } else {
-                        badgeLabel.textContent = 'Nhãn / Ribbon Badge';
-                        badgeInput.placeholder = 'vd: Flagship Wi-Fi 7';
-                    }
-                }
 
                 if (featLabel) {
                     if (styleVal === 'card7') {
