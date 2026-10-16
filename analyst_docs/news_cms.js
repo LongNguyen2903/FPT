@@ -366,6 +366,10 @@
             window.syncTagMappingToSku();
             window.renderTagMappingTable();
             window.resetTagConfig();
+        } else if (tab === 'author-list') {
+            if (authListEl) authListEl.style.display = 'block';
+            if (typeof window.renderNewsAuthorsTable === 'function') window.renderNewsAuthorsTable();
+            else if (typeof renderNewsAuthorsTable === 'function') renderNewsAuthorsTable();
         }
     };
 
